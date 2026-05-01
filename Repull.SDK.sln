@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{93C2E3DD-F047-43B4-A189-2FA4BCF50D90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repull.SDK", "src\Repull.SDK\Repull.SDK.csproj", "{11A531A4-EE7A-4B40-B034-56B256DF216C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{83FDA800-05AA-4ABB-8D12-3E43FE18F917}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickstart", "examples\Quickstart\Quickstart.csproj", "{55928EF9-FD7F-464F-BF00-53147C097692}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectAirbnb", "examples\ConnectAirbnb\ConnectAirbnb.csproj", "{051A5437-5FCE-4732-9063-0FF4C2F8936D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11A531A4-EE7A-4B40-B034-56B256DF216C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A531A4-EE7A-4B40-B034-56B256DF216C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A531A4-EE7A-4B40-B034-56B256DF216C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A531A4-EE7A-4B40-B034-56B256DF216C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55928EF9-FD7F-464F-BF00-53147C097692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55928EF9-FD7F-464F-BF00-53147C097692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55928EF9-FD7F-464F-BF00-53147C097692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55928EF9-FD7F-464F-BF00-53147C097692}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051A5437-5FCE-4732-9063-0FF4C2F8936D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051A5437-5FCE-4732-9063-0FF4C2F8936D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051A5437-5FCE-4732-9063-0FF4C2F8936D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051A5437-5FCE-4732-9063-0FF4C2F8936D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{11A531A4-EE7A-4B40-B034-56B256DF216C} = {93C2E3DD-F047-43B4-A189-2FA4BCF50D90}
+		{55928EF9-FD7F-464F-BF00-53147C097692} = {83FDA800-05AA-4ABB-8D12-3E43FE18F917}
+		{051A5437-5FCE-4732-9063-0FF4C2F8936D} = {83FDA800-05AA-4ABB-8D12-3E43FE18F917}
+	EndGlobalSection
+EndGlobal
