@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.Models;
 using Repull.SDK.V1.Conversations.Item;
 using System.Collections.Generic;
 using System.IO;
@@ -18,9 +19,9 @@ namespace Repull.SDK.V1.Conversations
     public partial class ConversationsRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Repull.SDK.v1.conversations.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Internal Repull thread id.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.ConversationsItemRequestBuilder"/></returns>
-        public global::Repull.SDK.V1.Conversations.Item.ConversationsItemRequestBuilder this[string position]
+        public global::Repull.SDK.V1.Conversations.Item.ConversationsItemRequestBuilder this[int position]
         {
             get
             {
@@ -29,12 +30,25 @@ namespace Repull.SDK.V1.Conversations
                 return new global::Repull.SDK.V1.Conversations.Item.ConversationsItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
+        /// <summary>Gets an item from the Repull.SDK.v1.conversations.item collection</summary>
+        /// <param name="position">Internal Repull thread id.</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.ConversationsItemRequestBuilder"/></returns>
+        [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
+        public global::Repull.SDK.V1.Conversations.Item.ConversationsItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                if (!string.IsNullOrWhiteSpace(position)) urlTplParams.Add("id", position);
+                return new global::Repull.SDK.V1.Conversations.Item.ConversationsItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations", pathParameters)
+        public ConversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?cursor*,limit*,platform*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -42,58 +56,50 @@ namespace Repull.SDK.V1.Conversations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations", rawUrl)
+        public ConversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?cursor*,limit*,platform*,status*}", rawUrl)
         {
         }
         /// <summary>
-        /// List conversations
+        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.ConversationsGetResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ConversationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Conversations.ConversationsGetResponse?> GetAsConversationsGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ConversationListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder.ConversationsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Conversations.ConversationsGetResponse> GetAsConversationsGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ConversationListResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder.ConversationsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.ConversationsGetResponse>(requestInfo, global::Repull.SDK.V1.Conversations.ConversationsGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ConversationListResponse>(requestInfo, global::Repull.SDK.Models.ConversationListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List conversations
-        /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.ConversationsResponse"/></returns>
-        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
-        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        [Obsolete("This method is obsolete. Use GetAsConversationsGetResponseAsync instead.")]
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public async Task<global::Repull.SDK.V1.Conversations.ConversationsResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#nullable restore
-#else
-        public async Task<global::Repull.SDK.V1.Conversations.ConversationsResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#endif
-            var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.ConversationsResponse>(requestInfo, global::Repull.SDK.V1.Conversations.ConversationsResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
-        }
-        /// <summary>
-        /// List conversations
+        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder.ConversationsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder.ConversationsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -111,11 +117,59 @@ namespace Repull.SDK.V1.Conversations
             return new global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ConversationsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.next_cursor`. Omit to fetch the first page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("cursor")]
+            public string? Cursor { get; set; }
+#nullable restore
+#else
+            [QueryParameter("cursor")]
+            public string Cursor { get; set; }
+#endif
+            /// <summary>Max items per page. Hard cap is 100.</summary>
+            [QueryParameter("limit")]
+            public int? Limit { get; set; }
+            /// <summary>Restrict to threads on a single channel.</summary>
+            [Obsolete("This property is deprecated, use PlatformAsGetPlatformQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("platform")]
+            public string? Platform { get; set; }
+#nullable restore
+#else
+            [QueryParameter("platform")]
+            public string Platform { get; set; }
+#endif
+            /// <summary>Restrict to threads on a single channel.</summary>
+            [QueryParameter("platform")]
+            public global::Repull.SDK.V1.Conversations.GetPlatformQueryParameterType? PlatformAsGetPlatformQueryParameterType { get; set; }
+            /// <summary>Filter by archive status. `archived` currently always returns an empty page — kept for forward-compat.</summary>
+            [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("status")]
+            public string? Status { get; set; }
+#nullable restore
+#else
+            [QueryParameter("status")]
+            public string Status { get; set; }
+#endif
+            /// <summary>Filter by archive status. `archived` currently always returns an empty page — kept for forward-compat.</summary>
+            [QueryParameter("status")]
+            public global::Repull.SDK.V1.Conversations.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ConversationsRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class ConversationsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder.ConversationsRequestBuilderGetQueryParameters>
         {
         }
     }

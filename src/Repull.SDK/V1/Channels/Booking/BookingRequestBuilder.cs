@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Channels.Booking.Availability;
 using Repull.SDK.V1.Channels.Booking.Content;
+using Repull.SDK.V1.Channels.Booking.Listings;
 using Repull.SDK.V1.Channels.Booking.Messaging;
 using Repull.SDK.V1.Channels.Booking.Properties;
 using Repull.SDK.V1.Channels.Booking.Sync;
@@ -28,6 +29,11 @@ namespace Repull.SDK.V1.Channels.Booking
         public global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder Content
         {
             get => new global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The listings property</summary>
+        public global::Repull.SDK.V1.Channels.Booking.Listings.ListingsRequestBuilder Listings
+        {
+            get => new global::Repull.SDK.V1.Channels.Booking.Listings.ListingsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The messaging property</summary>
         public global::Repull.SDK.V1.Channels.Booking.Messaging.MessagingRequestBuilder Messaging

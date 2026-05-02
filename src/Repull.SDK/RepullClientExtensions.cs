@@ -10,29 +10,23 @@ namespace Repull.SDK;
 public static class RepullClientExtensions
 {
     /// <summary>
-    /// List reservations with a strongly typed response. Prefer this over
-    /// <c>client.V1.Reservations.GetAsReservationsGetResponseAsync()</c> when
-    /// you want to iterate <see cref="Reservation"/> directly without the
-    /// untyped-array round-trip imposed by the OpenAPI <c>allOf</c> shape.
+    /// List reservations with a strongly typed response. Thin wrapper around
+    /// the Kiota-generated <c>client.V1.Reservations.GetAsync()</c> for
+    /// callers that prefer the extension-method shape.
     /// </summary>
-    public static async Task<ReservationsPage?> ListReservationsAsync(
+    public static Task<ReservationListResponse?> ListReservationsAsync(
         this RepullClient client,
         Action<ReservationsRequestBuilder.ReservationsRequestBuilderGetQueryParameters>? configureQuery = null,
         CancellationToken cancellationToken = default)
     {
         if (client == null) throw new ArgumentNullException(nameof(client));
 
-        var requestInfo = client.V1.Reservations.ToGetRequestInformation(rc =>
+        return client.V1.Reservations.GetAsync(rc =>
         {
             if (configureQuery != null)
             {
                 configureQuery(rc.QueryParameters);
             }
-        });
-        return await client.Adapter.SendAsync<ReservationsPage>(
-            requestInfo,
-            ReservationsPage.CreateFromDiscriminatorValue,
-            errorMapping: null,
-            cancellationToken: cancellationToken).ConfigureAwait(false);
+        }, cancellationToken);
     }
 }

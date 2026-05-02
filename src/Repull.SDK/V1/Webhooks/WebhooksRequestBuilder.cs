@@ -4,6 +4,8 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Webhooks.EventTypes;
+using Repull.SDK.V1.Webhooks.Item;
 using Repull.SDK.V1.Webhooks.Test;
 using System.Collections.Generic;
 using System.IO;
@@ -18,10 +20,40 @@ namespace Repull.SDK.V1.Webhooks
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WebhooksRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The eventTypes property</summary>
+        public global::Repull.SDK.V1.Webhooks.EventTypes.EventTypesRequestBuilder EventTypes
+        {
+            get => new global::Repull.SDK.V1.Webhooks.EventTypes.EventTypesRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The test property</summary>
         public global::Repull.SDK.V1.Webhooks.Test.TestRequestBuilder Test
         {
             get => new global::Repull.SDK.V1.Webhooks.Test.TestRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>Gets an item from the Repull.SDK.v1.webhooks.item collection</summary>
+        /// <param name="position">Unique identifier of the item</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Webhooks.Item.WebhooksItemRequestBuilder"/></returns>
+        public global::Repull.SDK.V1.Webhooks.Item.WebhooksItemRequestBuilder this[Guid position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                urlTplParams.Add("id", position);
+                return new global::Repull.SDK.V1.Webhooks.Item.WebhooksItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
+        /// <summary>Gets an item from the Repull.SDK.v1.webhooks.item collection</summary>
+        /// <param name="position">Unique identifier of the item</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Webhooks.Item.WebhooksItemRequestBuilder"/></returns>
+        [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
+        public global::Repull.SDK.V1.Webhooks.Item.WebhooksItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                if (!string.IsNullOrWhiteSpace(position)) urlTplParams.Add("id", position);
+                return new global::Repull.SDK.V1.Webhooks.Item.WebhooksItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Webhooks.WebhooksRequestBuilder"/> and sets the default values.
@@ -42,42 +74,23 @@ namespace Repull.SDK.V1.Webhooks
         /// <summary>
         /// List webhook subscriptions
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Webhooks.WebhooksGetResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.WebhookListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Webhooks.WebhooksGetResponse?> GetAsWebhooksGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.WebhookListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Webhooks.WebhooksGetResponse> GetAsWebhooksGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.WebhookListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Webhooks.WebhooksGetResponse>(requestInfo, global::Repull.SDK.V1.Webhooks.WebhooksGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.WebhookListResponse>(requestInfo, global::Repull.SDK.Models.WebhookListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List webhook subscriptions
-        /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Webhooks.WebhooksResponse"/></returns>
-        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
-        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        [Obsolete("This method is obsolete. Use GetAsWebhooksGetResponseAsync instead.")]
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public async Task<global::Repull.SDK.V1.Webhooks.WebhooksResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#nullable restore
-#else
-        public async Task<global::Repull.SDK.V1.Webhooks.WebhooksResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#endif
-            var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Webhooks.WebhooksResponse>(requestInfo, global::Repull.SDK.V1.Webhooks.WebhooksResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
-        }
-        /// <summary>
-        /// Subscribe to events. Supported events: reservation.created, reservation.updated, reservation.cancelled, message.received, listing.updated, calendar.updated, guest.created, payment.received
+        /// Register a new endpoint. Returns the plaintext signing secret ONCE — capture it from the response and store it securely. After this call the secret is masked everywhere; mint a new one with `POST /v1/webhooks/{id}/rotate-secret` if you lose it. See `GET /v1/webhooks/event-types` for the full list of subscribable events.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.WebhookSubscription"/></returns>
         /// <param name="body">The request body</param>
@@ -116,7 +129,7 @@ namespace Repull.SDK.V1.Webhooks
             return requestInfo;
         }
         /// <summary>
-        /// Subscribe to events. Supported events: reservation.created, reservation.updated, reservation.cancelled, message.received, listing.updated, calendar.updated, guest.created, payment.received
+        /// Register a new endpoint. Returns the plaintext signing secret ONCE — capture it from the response and store it securely. After this call the secret is masked everywhere; mint a new one with `POST /v1/webhooks/{id}/rotate-secret` if you lose it. See `GET /v1/webhooks/event-types` for the full list of subscribable events.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

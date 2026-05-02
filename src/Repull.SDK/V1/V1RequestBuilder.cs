@@ -10,8 +10,11 @@ using Repull.SDK.V1.Connect;
 using Repull.SDK.V1.Conversations;
 using Repull.SDK.V1.Guests;
 using Repull.SDK.V1.Health;
+using Repull.SDK.V1.Listings;
+using Repull.SDK.V1.Markets;
 using Repull.SDK.V1.Properties;
 using Repull.SDK.V1.Reservations;
+using Repull.SDK.V1.Reviews;
 using Repull.SDK.V1.Webhooks;
 using System.Collections.Generic;
 using System.IO;
@@ -65,6 +68,16 @@ namespace Repull.SDK.V1
         {
             get => new global::Repull.SDK.V1.Health.HealthRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The listings property</summary>
+        public global::Repull.SDK.V1.Listings.ListingsRequestBuilder Listings
+        {
+            get => new global::Repull.SDK.V1.Listings.ListingsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The markets property</summary>
+        public global::Repull.SDK.V1.Markets.MarketsRequestBuilder Markets
+        {
+            get => new global::Repull.SDK.V1.Markets.MarketsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The properties property</summary>
         public global::Repull.SDK.V1.Properties.PropertiesRequestBuilder Properties
         {
@@ -74,6 +87,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder Reservations
         {
             get => new global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The reviews property</summary>
+        public global::Repull.SDK.V1.Reviews.ReviewsRequestBuilder Reviews
+        {
+            get => new global::Repull.SDK.V1.Reviews.ReviewsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The webhooks property</summary>
         public global::Repull.SDK.V1.Webhooks.WebhooksRequestBuilder Webhooks

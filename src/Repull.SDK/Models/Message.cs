@@ -7,38 +7,67 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// A single message inside a conversation thread. Returned by `GET /v1/conversations/{id}/messages`. `direction` is normalized to `inbound` (from the guest) / `outbound` (from the host or an automation).
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class Message : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The conversationId property</summary>
+        /// <summary>`true` when the body was authored by Vanio AI (autopilot, draft).</summary>
+        public bool? AiGenerated { get; set; }
+        /// <summary>The attachments property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get; set; }
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments { get; set; }
 #nullable restore
 #else
-        public string ConversationId { get; set; }
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment> Attachments { get; set; }
+#endif
+        /// <summary>Message body in the original language.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Body { get; set; }
+#nullable restore
+#else
+        public string Body { get; set; }
+#endif
+        /// <summary>Delivery channel — `airbnb`, `booking`, `sms`, `email`, etc.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Channel { get; set; }
+#nullable restore
+#else
+        public string Channel { get; set; }
+#endif
+        /// <summary>The delivered_at property</summary>
+        public DateTimeOffset? DeliveredAt { get; set; }
+        /// <summary>The direction property</summary>
+        public global::Repull.SDK.Models.Message_direction? Direction { get; set; }
+        /// <summary>ID assigned by the source channel (Airbnb message id, Booking message id, etc.). Stable across syncs.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExternalMessageId { get; set; }
+#nullable restore
+#else
+        public string ExternalMessageId { get; set; }
 #endif
         /// <summary>The id property</summary>
+        public int? Id { get; set; }
+        /// <summary>`true` when the message was sent by a Vanio automation (template, schedule, etc.).</summary>
+        public bool? IsAutomated { get; set; }
+        /// <summary>The read_at property</summary>
+        public DateTimeOffset? ReadAt { get; set; }
+        /// <summary>The sender_avatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? SenderAvatar { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string SenderAvatar { get; set; }
 #endif
-        /// <summary>The message property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? MessageProp { get; set; }
-#nullable restore
-#else
-        public string MessageProp { get; set; }
-#endif
-        /// <summary>The senderName property</summary>
+        /// <summary>The sender_name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SenderName { get; set; }
@@ -46,10 +75,24 @@ namespace Repull.SDK.Models
 #else
         public string SenderName { get; set; }
 #endif
-        /// <summary>The senderType property</summary>
-        public global::Repull.SDK.Models.Message_senderType? SenderType { get; set; }
-        /// <summary>The sentAt property</summary>
+        /// <summary>Free-form sender role from the channel (e.g. `guest`, `host`, `system`, `airbnb`). Use `direction` for binary inbound/outbound logic.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SenderType { get; set; }
+#nullable restore
+#else
+        public string SenderType { get; set; }
+#endif
+        /// <summary>The sent_at property</summary>
         public DateTimeOffset? SentAt { get; set; }
+        /// <summary>English translation when the original language is non-English and a translation has been computed.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TranslatedBody { get; set; }
+#nullable restore
+#else
+        public string TranslatedBody { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Message"/> and sets the default values.
         /// </summary>
@@ -75,12 +118,21 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "conversationId", n => { ConversationId = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "message", n => { MessageProp = n.GetStringValue(); } },
-                { "senderName", n => { SenderName = n.GetStringValue(); } },
-                { "senderType", n => { SenderType = n.GetEnumValue<global::Repull.SDK.Models.Message_senderType>(); } },
-                { "sentAt", n => { SentAt = n.GetDateTimeOffsetValue(); } },
+                { "ai_generated", n => { AiGenerated = n.GetBoolValue(); } },
+                { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>(global::Repull.SDK.Models.ConversationMessageAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "body", n => { Body = n.GetStringValue(); } },
+                { "channel", n => { Channel = n.GetStringValue(); } },
+                { "delivered_at", n => { DeliveredAt = n.GetDateTimeOffsetValue(); } },
+                { "direction", n => { Direction = n.GetEnumValue<global::Repull.SDK.Models.Message_direction>(); } },
+                { "external_message_id", n => { ExternalMessageId = n.GetStringValue(); } },
+                { "id", n => { Id = n.GetIntValue(); } },
+                { "is_automated", n => { IsAutomated = n.GetBoolValue(); } },
+                { "read_at", n => { ReadAt = n.GetDateTimeOffsetValue(); } },
+                { "sender_avatar", n => { SenderAvatar = n.GetStringValue(); } },
+                { "sender_name", n => { SenderName = n.GetStringValue(); } },
+                { "sender_type", n => { SenderType = n.GetStringValue(); } },
+                { "sent_at", n => { SentAt = n.GetDateTimeOffsetValue(); } },
+                { "translated_body", n => { TranslatedBody = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -90,12 +142,21 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("conversationId", ConversationId);
-            writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("message", MessageProp);
-            writer.WriteStringValue("senderName", SenderName);
-            writer.WriteEnumValue<global::Repull.SDK.Models.Message_senderType>("senderType", SenderType);
-            writer.WriteDateTimeOffsetValue("sentAt", SentAt);
+            writer.WriteBoolValue("ai_generated", AiGenerated);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>("attachments", Attachments);
+            writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("channel", Channel);
+            writer.WriteDateTimeOffsetValue("delivered_at", DeliveredAt);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Message_direction>("direction", Direction);
+            writer.WriteStringValue("external_message_id", ExternalMessageId);
+            writer.WriteIntValue("id", Id);
+            writer.WriteBoolValue("is_automated", IsAutomated);
+            writer.WriteDateTimeOffsetValue("read_at", ReadAt);
+            writer.WriteStringValue("sender_avatar", SenderAvatar);
+            writer.WriteStringValue("sender_name", SenderName);
+            writer.WriteStringValue("sender_type", SenderType);
+            writer.WriteDateTimeOffsetValue("sent_at", SentAt);
+            writer.WriteStringValue("translated_body", TranslatedBody);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

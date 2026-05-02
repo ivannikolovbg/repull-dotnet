@@ -33,7 +33,7 @@ namespace Repull.SDK.V1.Webhooks.Test
         {
         }
         /// <summary>
-        /// Delivers a test payload to your webhook URL.
+        /// Deprecated: prefer creating a subscription then calling `POST /v1/webhooks/{id}/ping`. Kept for back-compat.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="body">The request body</param>
@@ -53,7 +53,7 @@ namespace Repull.SDK.V1.Webhooks.Test
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Delivers a test payload to your webhook URL.
+        /// Deprecated: prefer creating a subscription then calling `POST /v1/webhooks/{id}/ping`. Kept for back-compat.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

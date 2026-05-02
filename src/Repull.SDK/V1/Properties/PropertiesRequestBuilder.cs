@@ -62,17 +62,17 @@ namespace Repull.SDK.V1.Properties
         /// <summary>
         /// Returns all properties across connected PMS platforms. Supports pagination and filtering by provider.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Properties.PropertiesGetResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.PropertyListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Properties.PropertiesGetResponse?> GetAsPropertiesGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.PropertyListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Properties.PropertiesGetResponse> GetAsPropertiesGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.PropertyListResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -80,31 +80,7 @@ namespace Repull.SDK.V1.Properties
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Properties.PropertiesGetResponse>(requestInfo, global::Repull.SDK.V1.Properties.PropertiesGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
-        }
-        /// <summary>
-        /// Returns all properties across connected PMS platforms. Supports pagination and filtering by provider.
-        /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Properties.PropertiesResponse"/></returns>
-        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
-        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
-        [Obsolete("This method is obsolete. Use GetAsPropertiesGetResponseAsync instead.")]
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public async Task<global::Repull.SDK.V1.Properties.PropertiesResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#nullable restore
-#else
-        public async Task<global::Repull.SDK.V1.Properties.PropertiesResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#endif
-            var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
-            {
-                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-            };
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Properties.PropertiesResponse>(requestInfo, global::Repull.SDK.V1.Properties.PropertiesResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.PropertyListResponse>(requestInfo, global::Repull.SDK.Models.PropertyListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Returns all properties across connected PMS platforms. Supports pagination and filtering by provider.

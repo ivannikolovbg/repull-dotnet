@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -35,39 +36,20 @@ namespace Repull.SDK.V1.Availability.Item
         /// <summary>
         /// Returns day-by-day availability, pricing, and minimum stay for a property.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Availability.Item.WithPropertyGetResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.CalendarResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Availability.Item.WithPropertyGetResponse?> GetAsWithPropertyGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder.WithPropertyItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.CalendarResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder.WithPropertyItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Availability.Item.WithPropertyGetResponse> GetAsWithPropertyGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder.WithPropertyItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.CalendarResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder.WithPropertyItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Availability.Item.WithPropertyGetResponse>(requestInfo, global::Repull.SDK.V1.Availability.Item.WithPropertyGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
-        }
-        /// <summary>
-        /// Returns day-by-day availability, pricing, and minimum stay for a property.
-        /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Availability.Item.WithPropertyResponse"/></returns>
-        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
-        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        [Obsolete("This method is obsolete. Use GetAsWithPropertyGetResponseAsync instead.")]
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public async Task<global::Repull.SDK.V1.Availability.Item.WithPropertyResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder.WithPropertyItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#nullable restore
-#else
-        public async Task<global::Repull.SDK.V1.Availability.Item.WithPropertyResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder.WithPropertyItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#endif
-            var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Availability.Item.WithPropertyResponse>(requestInfo, global::Repull.SDK.V1.Availability.Item.WithPropertyResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.CalendarResponse>(requestInfo, global::Repull.SDK.Models.CalendarResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Update pricing, availability, and minimum stay for specific dates.

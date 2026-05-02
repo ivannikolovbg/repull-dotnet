@@ -7,43 +7,50 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Channel-agnostic message thread between the host workspace and a guest. Returned by `GET /v1/conversations`. The `id` is the internal Repull thread id (integer) — pass it back as the `{id}` path param on detail / messages calls.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class Conversation : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The guestName property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? GuestName { get; set; }
-#nullable restore
-#else
-        public string GuestName { get; set; }
-#endif
+        /// <summary>The created_at property</summary>
+        public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>The guest_id property</summary>
+        public int? GuestId { get; set; }
         /// <summary>The id property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
-        /// <summary>The lastMessage property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? LastMessage { get; set; }
-#nullable restore
-#else
-        public string LastMessage { get; set; }
-#endif
-        /// <summary>The lastMessageAt property</summary>
+        public int? Id { get; set; }
+        /// <summary>The last_message_at property</summary>
         public DateTimeOffset? LastMessageAt { get; set; }
-        /// <summary>The reservationId property</summary>
+        /// <summary>Short preview of the most recent message body for list-UI rendering.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LastMessagePreview { get; set; }
+#nullable restore
+#else
+        public string LastMessagePreview { get; set; }
+#endif
+        /// <summary>The listing_id property</summary>
+        public int? ListingId { get; set; }
+        /// <summary>The platform property</summary>
+        public global::Repull.SDK.Models.Conversation_platform? Platform { get; set; }
+        /// <summary>The reservation_id property</summary>
         public int? ReservationId { get; set; }
-        /// <summary>The unreadCount property</summary>
+        /// <summary>`archived` is reserved for a future bit on `message_threads` — currently always `open`.</summary>
+        public global::Repull.SDK.Models.Conversation_status? Status { get; set; }
+        /// <summary>Thread subject (email/website channels) or null when not applicable.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Subject { get; set; }
+#nullable restore
+#else
+        public string Subject { get; set; }
+#endif
+        /// <summary>The unread_count property</summary>
         public int? UnreadCount { get; set; }
+        /// <summary>The updated_at property</summary>
+        public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Conversation"/> and sets the default values.
         /// </summary>
@@ -69,12 +76,18 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "guestName", n => { GuestName = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "lastMessage", n => { LastMessage = n.GetStringValue(); } },
-                { "lastMessageAt", n => { LastMessageAt = n.GetDateTimeOffsetValue(); } },
-                { "reservationId", n => { ReservationId = n.GetIntValue(); } },
-                { "unreadCount", n => { UnreadCount = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "guest_id", n => { GuestId = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetIntValue(); } },
+                { "last_message_at", n => { LastMessageAt = n.GetDateTimeOffsetValue(); } },
+                { "last_message_preview", n => { LastMessagePreview = n.GetStringValue(); } },
+                { "listing_id", n => { ListingId = n.GetIntValue(); } },
+                { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Conversation_platform>(); } },
+                { "reservation_id", n => { ReservationId = n.GetIntValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Conversation_status>(); } },
+                { "subject", n => { Subject = n.GetStringValue(); } },
+                { "unread_count", n => { UnreadCount = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -84,12 +97,18 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("guestName", GuestName);
-            writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("lastMessage", LastMessage);
-            writer.WriteDateTimeOffsetValue("lastMessageAt", LastMessageAt);
-            writer.WriteIntValue("reservationId", ReservationId);
-            writer.WriteIntValue("unreadCount", UnreadCount);
+            writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
+            writer.WriteIntValue("guest_id", GuestId);
+            writer.WriteIntValue("id", Id);
+            writer.WriteDateTimeOffsetValue("last_message_at", LastMessageAt);
+            writer.WriteStringValue("last_message_preview", LastMessagePreview);
+            writer.WriteIntValue("listing_id", ListingId);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Conversation_platform>("platform", Platform);
+            writer.WriteIntValue("reservation_id", ReservationId);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Conversation_status>("status", Status);
+            writer.WriteStringValue("subject", Subject);
+            writer.WriteIntValue("unread_count", UnreadCount);
+            writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

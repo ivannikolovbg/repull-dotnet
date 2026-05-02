@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.Models;
 using Repull.SDK.V1.Guests.Item;
 using System.Collections.Generic;
 using System.IO;
@@ -47,7 +48,7 @@ namespace Repull.SDK.V1.Guests
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public GuestsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/guests{?limit*,offset*,search*}", pathParameters)
+        public GuestsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/guests{?cursor*,has_reservation*,limit*,listing_id*,q*}", pathParameters)
         {
         }
         /// <summary>
@@ -55,48 +56,40 @@ namespace Repull.SDK.V1.Guests
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public GuestsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/guests{?limit*,offset*,search*}", rawUrl)
+        public GuestsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/guests{?cursor*,has_reservation*,limit*,listing_id*,q*}", rawUrl)
         {
         }
         /// <summary>
-        /// List guests
+        /// Cursor-paginated list of guests in the workspace. Walks `guests.id ASC` keyset for constant per-page cost regardless of how many guests the customer has. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `q` (substring on name/email/phone), `has_reservation` (`true`|`false`), `listing_id` (restrict to guests with at least one reservation on that listing).
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Guests.GuestsGetResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.GuestListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Guests.GuestsGetResponse?> GetAsGuestsGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Guests.GuestsRequestBuilder.GuestsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.GuestListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Guests.GuestsRequestBuilder.GuestsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Guests.GuestsGetResponse> GetAsGuestsGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Guests.GuestsRequestBuilder.GuestsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.GuestListResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Guests.GuestsRequestBuilder.GuestsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Guests.GuestsGetResponse>(requestInfo, global::Repull.SDK.V1.Guests.GuestsGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.GuestListResponse>(requestInfo, global::Repull.SDK.Models.GuestListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List guests
-        /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Guests.GuestsResponse"/></returns>
-        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
-        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        [Obsolete("This method is obsolete. Use GetAsGuestsGetResponseAsync instead.")]
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public async Task<global::Repull.SDK.V1.Guests.GuestsResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Guests.GuestsRequestBuilder.GuestsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#nullable restore
-#else
-        public async Task<global::Repull.SDK.V1.Guests.GuestsResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Guests.GuestsRequestBuilder.GuestsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#endif
-            var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Guests.GuestsResponse>(requestInfo, global::Repull.SDK.V1.Guests.GuestsResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
-        }
-        /// <summary>
-        /// List guests
+        /// Cursor-paginated list of guests in the workspace. Walks `guests.id ASC` keyset for constant per-page cost regardless of how many guests the customer has. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `q` (substring on name/email/phone), `has_reservation` (`true`|`false`), `listing_id` (restrict to guests with at least one reservation on that listing).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -124,26 +117,39 @@ namespace Repull.SDK.V1.Guests
             return new global::Repull.SDK.V1.Guests.GuestsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// List guests
+        /// Cursor-paginated list of guests in the workspace. Walks `guests.id ASC` keyset for constant per-page cost regardless of how many guests the customer has. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `q` (substring on name/email/phone), `has_reservation` (`true`|`false`), `listing_id` (restrict to guests with at least one reservation on that listing).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class GuestsRequestBuilderGetQueryParameters 
         {
-            /// <summary>Max items per page</summary>
-            [QueryParameter("limit")]
-            public int? Limit { get; set; }
-            /// <summary>Pagination offset</summary>
-            [QueryParameter("offset")]
-            public int? Offset { get; set; }
-            /// <summary>Search by name, email, or phone</summary>
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.next_cursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            [QueryParameter("search")]
-            public string? Search { get; set; }
+            [QueryParameter("cursor")]
+            public string? Cursor { get; set; }
 #nullable restore
 #else
-            [QueryParameter("search")]
-            public string Search { get; set; }
+            [QueryParameter("cursor")]
+            public string Cursor { get; set; }
+#endif
+            /// <summary>Restrict to guests that do (`true`) or do not (`false`) have any reservation on file.</summary>
+            [QueryParameter("has_reservation")]
+            public bool? HasReservation { get; set; }
+            /// <summary>Max items per page. Hard cap is 100.</summary>
+            [QueryParameter("limit")]
+            public int? Limit { get; set; }
+            /// <summary>Restrict to guests with at least one reservation on the given internal Repull listing id.</summary>
+            [QueryParameter("listing_id")]
+            public int? ListingId { get; set; }
+            /// <summary>Case-insensitive substring search on name, email, or phone.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("q")]
+            public string? Q { get; set; }
+#nullable restore
+#else
+            [QueryParameter("q")]
+            public string Q { get; set; }
 #endif
         }
         /// <summary>

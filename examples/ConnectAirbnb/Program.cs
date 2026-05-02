@@ -7,7 +7,7 @@ var apiKey = Environment.GetEnvironmentVariable("REPULL_API_KEY")
 var client = RepullClientFactory.Create(apiKey);
 
 // 1. List currently connected providers.
-var connections = await client.V1.Connect.GetAsConnectGetResponseAsync();
+var connections = await client.V1.Connect.GetAsync();
 foreach (var c in connections?.Data ?? new())
 {
     Console.WriteLine($"Connection {c.Id}\t{c.Provider}\t{c.Status}");

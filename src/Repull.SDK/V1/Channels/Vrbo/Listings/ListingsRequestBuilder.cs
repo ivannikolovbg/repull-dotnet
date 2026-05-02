@@ -3,6 +3,8 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.Models;
+using Repull.SDK.V1.Channels.Vrbo.Listings.Item;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,6 +18,31 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ListingsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>Gets an item from the Repull.SDK.v1.channels.vrbo.listings.item collection</summary>
+        /// <param name="position">Vanio listing ID — resolved to a VRBO listing/unit via the workspace mapping.</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.ListingsItemRequestBuilder"/></returns>
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.ListingsItemRequestBuilder this[int position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                urlTplParams.Add("id", position);
+                return new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.ListingsItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
+        /// <summary>Gets an item from the Repull.SDK.v1.channels.vrbo.listings.item collection</summary>
+        /// <param name="position">Vanio listing ID — resolved to a VRBO listing/unit via the workspace mapping.</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.ListingsItemRequestBuilder"/></returns>
+        [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.ListingsItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                if (!string.IsNullOrWhiteSpace(position)) urlTplParams.Add("id", position);
+                return new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.ListingsItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.ListingsRequestBuilder"/> and sets the default values.
         /// </summary>
@@ -35,20 +62,20 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
         /// <summary>
         /// List VRBO listings
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.VrboListingListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.VrboListingListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.VrboListingListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.VrboListingListResponse>(requestInfo, global::Repull.SDK.Models.VrboListingListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// List VRBO listings
@@ -66,6 +93,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
         }
         /// <summary>

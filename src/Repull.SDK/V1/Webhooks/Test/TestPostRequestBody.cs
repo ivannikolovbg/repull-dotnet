@@ -14,21 +14,29 @@ namespace Repull.SDK.V1.Webhooks.Test
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The event property</summary>
+        /// <summary>The event_type property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Event { get; set; }
+        public string? EventType { get; set; }
 #nullable restore
 #else
-        public string Event { get; set; }
+        public string EventType { get; set; }
 #endif
-        /// <summary>The webhookId property</summary>
+        /// <summary>The signing_secret property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WebhookId { get; set; }
+        public string? SigningSecret { get; set; }
 #nullable restore
 #else
-        public string WebhookId { get; set; }
+        public string SigningSecret { get; set; }
+#endif
+        /// <summary>The url property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Url { get; set; }
+#nullable restore
+#else
+        public string Url { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Webhooks.Test.TestPostRequestBody"/> and sets the default values.
@@ -55,8 +63,9 @@ namespace Repull.SDK.V1.Webhooks.Test
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "event", n => { Event = n.GetStringValue(); } },
-                { "webhookId", n => { WebhookId = n.GetStringValue(); } },
+                { "event_type", n => { EventType = n.GetStringValue(); } },
+                { "signing_secret", n => { SigningSecret = n.GetStringValue(); } },
+                { "url", n => { Url = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -66,8 +75,9 @@ namespace Repull.SDK.V1.Webhooks.Test
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("event", Event);
-            writer.WriteStringValue("webhookId", WebhookId);
+            writer.WriteStringValue("event_type", EventType);
+            writer.WriteStringValue("signing_secret", SigningSecret);
+            writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

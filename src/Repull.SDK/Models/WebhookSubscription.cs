@@ -7,15 +7,36 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// A registered webhook endpoint. The `secret` field is only present in the response of `POST /v1/webhooks` and `POST /v1/webhooks/{id}/rotate-secret` (Stripe pattern — capture it then; it is masked everywhere else).
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class WebhookSubscription : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
-        /// <summary>The active property</summary>
-        public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The apiVersion property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ApiVersion { get; set; }
+#nullable restore
+#else
+        public string ApiVersion { get; set; }
+#endif
+        /// <summary>The consecutiveFailures property</summary>
+        public int? ConsecutiveFailures { get; set; }
+        /// <summary>The createdAt property</summary>
+        public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>The description property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Description { get; set; }
+#nullable restore
+#else
+        public string Description { get; set; }
+#endif
+        /// <summary>The disabledAt property</summary>
+        public DateTimeOffset? DisabledAt { get; set; }
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -25,14 +46,16 @@ namespace Repull.SDK.Models
         public List<string> Events { get; set; }
 #endif
         /// <summary>The id property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
-        /// <summary>HMAC-SHA256 signing secret</summary>
+        public Guid? Id { get; set; }
+        /// <summary>The lastDeliveredAt property</summary>
+        public DateTimeOffset? LastDeliveredAt { get; set; }
+        /// <summary>The lastDeliveryStatus property</summary>
+        public int? LastDeliveryStatus { get; set; }
+        /// <summary>The lastFailureAt property</summary>
+        public DateTimeOffset? LastFailureAt { get; set; }
+        /// <summary>The lastSuccessAt property</summary>
+        public DateTimeOffset? LastSuccessAt { get; set; }
+        /// <summary>Plaintext signing secret. Only returned by create + rotate. Capture and store securely.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Secret { get; set; }
@@ -40,6 +63,18 @@ namespace Repull.SDK.Models
 #else
         public string Secret { get; set; }
 #endif
+        /// <summary>The secretMasked property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SecretMasked { get; set; }
+#nullable restore
+#else
+        public string SecretMasked { get; set; }
+#endif
+        /// <summary>The status property</summary>
+        public global::Repull.SDK.Models.WebhookSubscription_status? Status { get; set; }
+        /// <summary>The updatedAt property</summary>
+        public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>The url property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -73,10 +108,21 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "active", n => { Active = n.GetBoolValue(); } },
+                { "apiVersion", n => { ApiVersion = n.GetStringValue(); } },
+                { "consecutiveFailures", n => { ConsecutiveFailures = n.GetIntValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "description", n => { Description = n.GetStringValue(); } },
+                { "disabledAt", n => { DisabledAt = n.GetDateTimeOffsetValue(); } },
                 { "events", n => { Events = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
+                { "id", n => { Id = n.GetGuidValue(); } },
+                { "lastDeliveredAt", n => { LastDeliveredAt = n.GetDateTimeOffsetValue(); } },
+                { "lastDeliveryStatus", n => { LastDeliveryStatus = n.GetIntValue(); } },
+                { "lastFailureAt", n => { LastFailureAt = n.GetDateTimeOffsetValue(); } },
+                { "lastSuccessAt", n => { LastSuccessAt = n.GetDateTimeOffsetValue(); } },
                 { "secret", n => { Secret = n.GetStringValue(); } },
+                { "secretMasked", n => { SecretMasked = n.GetStringValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.WebhookSubscription_status>(); } },
+                { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -87,10 +133,21 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteBoolValue("active", Active);
+            writer.WriteStringValue("apiVersion", ApiVersion);
+            writer.WriteIntValue("consecutiveFailures", ConsecutiveFailures);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteStringValue("description", Description);
+            writer.WriteDateTimeOffsetValue("disabledAt", DisabledAt);
             writer.WriteCollectionOfPrimitiveValues<string>("events", Events);
-            writer.WriteStringValue("id", Id);
+            writer.WriteGuidValue("id", Id);
+            writer.WriteDateTimeOffsetValue("lastDeliveredAt", LastDeliveredAt);
+            writer.WriteIntValue("lastDeliveryStatus", LastDeliveryStatus);
+            writer.WriteDateTimeOffsetValue("lastFailureAt", LastFailureAt);
+            writer.WriteDateTimeOffsetValue("lastSuccessAt", LastSuccessAt);
             writer.WriteStringValue("secret", Secret);
+            writer.WriteStringValue("secretMasked", SecretMasked);
+            writer.WriteEnumValue<global::Repull.SDK.Models.WebhookSubscription_status>("status", Status);
+            writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }

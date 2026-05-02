@@ -7,14 +7,49 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Guest list-row shape returned by `GET /v1/guests`. Pre-resolved primary phone/email + display name + cumulative stay aggregates so list UIs can render without a per-row round-trip.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class Guest : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The email property</summary>
+        /// <summary>The avatarUrl property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AvatarUrl { get; set; }
+#nullable restore
+#else
+        public string AvatarUrl { get; set; }
+#endif
+        /// <summary>Guest country (from profile metadata or address).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Country { get; set; }
+#nullable restore
+#else
+        public string Country { get; set; }
+#endif
+        /// <summary>The created_at property</summary>
+        public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>Short display name (first name).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DisplayName { get; set; }
+#nullable restore
+#else
+        public string DisplayName { get; set; }
+#endif
+        /// <summary>Long display name (first + last). Falls back to displayName when last name is missing.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DisplayNameLong { get; set; }
+#nullable restore
+#else
+        public string DisplayNameLong { get; set; }
+#endif
+        /// <summary>Primary email contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Email { get; set; }
@@ -22,25 +57,21 @@ namespace Repull.SDK.Models
 #else
         public string Email { get; set; }
 #endif
-        /// <summary>The firstName property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? FirstName { get; set; }
-#nullable restore
-#else
-        public string FirstName { get; set; }
-#endif
+        /// <summary>The firstStayedAt property</summary>
+        public DateTimeOffset? FirstStayedAt { get; set; }
         /// <summary>The id property</summary>
         public int? Id { get; set; }
-        /// <summary>The lastName property</summary>
+        /// <summary>Guest&apos;s preferred language (ISO 639-1).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastName { get; set; }
+        public string? Language { get; set; }
 #nullable restore
 #else
-        public string LastName { get; set; }
+        public string Language { get; set; }
 #endif
-        /// <summary>The phone property</summary>
+        /// <summary>The lastStayedAt property</summary>
+        public DateTimeOffset? LastStayedAt { get; set; }
+        /// <summary>Primary phone contact (or first non-primary if no primary set).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Phone { get; set; }
@@ -48,10 +79,16 @@ namespace Repull.SDK.Models
 #else
         public string Phone { get; set; }
 #endif
-        /// <summary>The totalRevenue property</summary>
-        public double? TotalRevenue { get; set; }
-        /// <summary>The totalStays property</summary>
-        public int? TotalStays { get; set; }
+        /// <summary>Lifetime reservation count.</summary>
+        public int? TotalReservations { get; set; }
+        /// <summary>Decimal-as-string to preserve precision across mixed-currency totals.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TotalRevenue { get; set; }
+#nullable restore
+#else
+        public string TotalRevenue { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Guest"/> and sets the default values.
         /// </summary>
@@ -77,13 +114,19 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "avatarUrl", n => { AvatarUrl = n.GetStringValue(); } },
+                { "country", n => { Country = n.GetStringValue(); } },
+                { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "displayName", n => { DisplayName = n.GetStringValue(); } },
+                { "displayNameLong", n => { DisplayNameLong = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
-                { "firstName", n => { FirstName = n.GetStringValue(); } },
+                { "firstStayedAt", n => { FirstStayedAt = n.GetDateTimeOffsetValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
-                { "lastName", n => { LastName = n.GetStringValue(); } },
+                { "language", n => { Language = n.GetStringValue(); } },
+                { "lastStayedAt", n => { LastStayedAt = n.GetDateTimeOffsetValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
-                { "totalRevenue", n => { TotalRevenue = n.GetDoubleValue(); } },
-                { "totalStays", n => { TotalStays = n.GetIntValue(); } },
+                { "totalReservations", n => { TotalReservations = n.GetIntValue(); } },
+                { "totalRevenue", n => { TotalRevenue = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -93,13 +136,19 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("avatarUrl", AvatarUrl);
+            writer.WriteStringValue("country", Country);
+            writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
+            writer.WriteStringValue("displayName", DisplayName);
+            writer.WriteStringValue("displayNameLong", DisplayNameLong);
             writer.WriteStringValue("email", Email);
-            writer.WriteStringValue("firstName", FirstName);
+            writer.WriteDateTimeOffsetValue("firstStayedAt", FirstStayedAt);
             writer.WriteIntValue("id", Id);
-            writer.WriteStringValue("lastName", LastName);
+            writer.WriteStringValue("language", Language);
+            writer.WriteDateTimeOffsetValue("lastStayedAt", LastStayedAt);
             writer.WriteStringValue("phone", Phone);
-            writer.WriteDoubleValue("totalRevenue", TotalRevenue);
-            writer.WriteIntValue("totalStays", TotalStays);
+            writer.WriteIntValue("totalReservations", TotalReservations);
+            writer.WriteStringValue("totalRevenue", TotalRevenue);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

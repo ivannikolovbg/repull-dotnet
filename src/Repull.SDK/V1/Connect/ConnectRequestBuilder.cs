@@ -3,7 +3,11 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.Models;
+using Repull.SDK.V1.Connect.Booking;
 using Repull.SDK.V1.Connect.Item;
+using Repull.SDK.V1.Connect.Providers;
+using Repull.SDK.V1.Connect.Sessions;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +21,21 @@ namespace Repull.SDK.V1.Connect
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConnectRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The booking property</summary>
+        public global::Repull.SDK.V1.Connect.Booking.BookingRequestBuilder Booking
+        {
+            get => new global::Repull.SDK.V1.Connect.Booking.BookingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The providers property</summary>
+        public global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder Providers
+        {
+            get => new global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The sessions property</summary>
+        public global::Repull.SDK.V1.Connect.Sessions.SessionsRequestBuilder Sessions
+        {
+            get => new global::Repull.SDK.V1.Connect.Sessions.SessionsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>Gets an item from the Repull.SDK.v1.connect.item collection</summary>
         /// <param name="position">PMS provider slug (e.g., hostaway, guesty, ownerrez)</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder"/></returns>
@@ -48,39 +67,40 @@ namespace Repull.SDK.V1.Connect
         /// <summary>
         /// Returns all active connections to PMS and OTA platforms.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Connect.ConnectGetResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ConnectionListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Connect.ConnectGetResponse?> GetAsConnectGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ConnectionListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Connect.ConnectGetResponse> GetAsConnectGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ConnectionListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connect.ConnectGetResponse>(requestInfo, global::Repull.SDK.V1.Connect.ConnectGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ConnectionListResponse>(requestInfo, global::Repull.SDK.Models.ConnectionListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns all active connections to PMS and OTA platforms.
+        /// Mints a session that lands the user on the channel picker at `connect.repull.dev/{sessionId}` instead of jumping straight to a single provider. The user picks a channel from the registry, the picker page POSTs `selectConnectProvider` to bind the choice, and the per-provider flow takes over.Use this when you want one entry point for all 13 channels. Use `POST /v1/connect/{provider}` instead when your UI already knows which channel to connect.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Connect.ConnectResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ConnectSession"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        [Obsolete("This method is obsolete. Use GetAsConnectGetResponseAsync instead.")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Connect.ConnectResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ConnectSession?> PostAsync(global::Repull.SDK.V1.Connect.ConnectPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Connect.ConnectResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ConnectSession> PostAsync(global::Repull.SDK.V1.Connect.ConnectPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
-            var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connect.ConnectResponse>(requestInfo, global::Repull.SDK.V1.Connect.ConnectResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ConnectSession>(requestInfo, global::Repull.SDK.Models.ConnectSession.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Returns all active connections to PMS and OTA platforms.
@@ -102,6 +122,28 @@ namespace Repull.SDK.V1.Connect
             return requestInfo;
         }
         /// <summary>
+        /// Mints a session that lands the user on the channel picker at `connect.repull.dev/{sessionId}` instead of jumping straight to a single provider. The user picks a channel from the registry, the picker page POSTs `selectConnectProvider` to bind the choice, and the per-provider flow takes over.Use this when you want one entry point for all 13 channels. Use `POST /v1/connect/{provider}` instead when your UI already knows which channel to connect.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Connect.ConnectPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Connect.ConnectPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
+            return requestInfo;
+        }
+        /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Connect.ConnectRequestBuilder"/></returns>
@@ -116,6 +158,14 @@ namespace Repull.SDK.V1.Connect
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ConnectRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ConnectRequestBuilderPostRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }
