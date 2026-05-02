@@ -15,6 +15,7 @@ using Repull.SDK.V1.Markets;
 using Repull.SDK.V1.Properties;
 using Repull.SDK.V1.Reservations;
 using Repull.SDK.V1.Reviews;
+using Repull.SDK.V1.Schema;
 using Repull.SDK.V1.Webhooks;
 using System.Collections.Generic;
 using System.IO;
@@ -92,6 +93,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Reviews.ReviewsRequestBuilder Reviews
         {
             get => new global::Repull.SDK.V1.Reviews.ReviewsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The schema property</summary>
+        public global::Repull.SDK.V1.Schema.SchemaRequestBuilder Schema
+        {
+            get => new global::Repull.SDK.V1.Schema.SchemaRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The webhooks property</summary>
         public global::Repull.SDK.V1.Webhooks.WebhooksRequestBuilder Webhooks

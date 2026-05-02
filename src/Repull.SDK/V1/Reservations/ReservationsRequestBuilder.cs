@@ -19,7 +19,7 @@ namespace Repull.SDK.V1.Reservations
     public partial class ReservationsRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Repull.SDK.v1.reservations.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Internal Repull reservation ID.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Reservations.Item.ReservationsItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Reservations.Item.ReservationsItemRequestBuilder this[int position]
         {
@@ -31,7 +31,7 @@ namespace Repull.SDK.V1.Reservations
             }
         }
         /// <summary>Gets an item from the Repull.SDK.v1.reservations.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Internal Repull reservation ID.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Reservations.Item.ReservationsItemRequestBuilder"/></returns>
         [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
         public global::Repull.SDK.V1.Reservations.Item.ReservationsItemRequestBuilder this[string position]
