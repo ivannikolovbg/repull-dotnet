@@ -33,7 +33,7 @@ namespace Repull.SDK.V1.Channels.Booking.Content
         {
         }
         /// <summary>
-        /// Get Booking.com content
+        /// Fetch the current content (descriptions, amenities, photos) for a Booking.com property. Used to round-trip edits through Repull.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -51,7 +51,7 @@ namespace Repull.SDK.V1.Channels.Booking.Content
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update Booking.com content
+        /// Push content changes (descriptions, amenities, photos) to Booking.com. Booking enforces editorial review on text fields — changes appear after their content moderation queue clears.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -69,7 +69,7 @@ namespace Repull.SDK.V1.Channels.Booking.Content
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get Booking.com content
+        /// Fetch the current content (descriptions, amenities, photos) for a Booking.com property. Used to round-trip edits through Repull.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -87,7 +87,7 @@ namespace Repull.SDK.V1.Channels.Booking.Content
             return requestInfo;
         }
         /// <summary>
-        /// Update Booking.com content
+        /// Push content changes (descriptions, amenities, photos) to Booking.com. Booking enforces editorial review on text fields — changes appear after their content moderation queue clears.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

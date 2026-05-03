@@ -16,15 +16,33 @@ namespace Repull.SDK.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Currently mapped Repull listing ID, or null if not yet mapped.</summary>
-        public int? CurrentListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CurrentListingId { get; set; }
+#nullable restore
+#else
+        public string CurrentListingId { get; set; }
+#endif
         /// <summary>The maxGuests property</summary>
         public int? MaxGuests { get; set; }
         /// <summary>Number of inventory units of this room type at the hotel.</summary>
         public int? NumberOfRooms { get; set; }
         /// <summary>Booking.com-side room ID (used internally for `listing_platform_links`).</summary>
-        public int? RoomBookingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? RoomBookingId { get; set; }
+#nullable restore
+#else
+        public string RoomBookingId { get; set; }
+#endif
         /// <summary>Repull-side `listings_booking_rooms.id`. Pass this back in the mapping submission.</summary>
-        public int? RoomId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? RoomId { get; set; }
+#nullable restore
+#else
+        public string RoomId { get; set; }
+#endif
         /// <summary>The roomName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -58,11 +76,11 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "currentListingId", n => { CurrentListingId = n.GetIntValue(); } },
+                { "currentListingId", n => { CurrentListingId = n.GetStringValue(); } },
                 { "maxGuests", n => { MaxGuests = n.GetIntValue(); } },
                 { "numberOfRooms", n => { NumberOfRooms = n.GetIntValue(); } },
-                { "roomBookingId", n => { RoomBookingId = n.GetIntValue(); } },
-                { "roomId", n => { RoomId = n.GetIntValue(); } },
+                { "roomBookingId", n => { RoomBookingId = n.GetStringValue(); } },
+                { "roomId", n => { RoomId = n.GetStringValue(); } },
                 { "roomName", n => { RoomName = n.GetStringValue(); } },
             };
         }
@@ -73,11 +91,11 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("currentListingId", CurrentListingId);
+            writer.WriteStringValue("currentListingId", CurrentListingId);
             writer.WriteIntValue("maxGuests", MaxGuests);
             writer.WriteIntValue("numberOfRooms", NumberOfRooms);
-            writer.WriteIntValue("roomBookingId", RoomBookingId);
-            writer.WriteIntValue("roomId", RoomId);
+            writer.WriteStringValue("roomBookingId", RoomBookingId);
+            writer.WriteStringValue("roomId", RoomId);
             writer.WriteStringValue("roomName", RoomName);
             writer.WriteAdditionalData(AdditionalData);
         }

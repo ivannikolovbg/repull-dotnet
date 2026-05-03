@@ -51,6 +51,8 @@ namespace Repull.SDK.V1.Listings.Item.Pricing
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingPricingResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.ListingPricingResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Listings.Item.Pricing.PricingRequestBuilder.PricingRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -61,7 +63,12 @@ namespace Repull.SDK.V1.Listings.Item.Pricing
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingResponse>(requestInfo, global::Repull.SDK.Models.ListingPricingResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingResponse>(requestInfo, global::Repull.SDK.Models.ListingPricingResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Apply: writes the recommended price to the listing&apos;s calendar for the given dates and triggers the platform fan-out (Airbnb / Booking.com / VRBO). Decline: marks the recommendation as `declined` so it stops surfacing — the model can re-recommend on the next training cycle.
@@ -70,6 +77,7 @@ namespace Repull.SDK.V1.Listings.Item.Pricing
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.ListingPricingApplyResponse?> PostAsync(global::Repull.SDK.Models.ListingPricingApplyRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -81,7 +89,11 @@ namespace Repull.SDK.V1.Listings.Item.Pricing
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingApplyResponse>(requestInfo, global::Repull.SDK.Models.ListingPricingApplyResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingApplyResponse>(requestInfo, global::Repull.SDK.Models.ListingPricingApplyResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Returns date-by-date pricing recommendations for a listing&apos;s upcoming calendar window, plus the listing&apos;s base-price context and a 5km comp summary. Recommendations come from the Atlas pricing model — pre-computed nightly and stored in `pricing_recommendations`. Use POST to apply or decline pending recommendations.

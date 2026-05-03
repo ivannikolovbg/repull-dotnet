@@ -33,7 +33,7 @@ namespace Repull.SDK.Models
 #else
         public string ExternalId { get; set; }
 #endif
-        /// <summary>The guest_avatar property</summary>
+        /// <summary>The guestAvatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? GuestAvatar { get; set; }
@@ -41,9 +41,15 @@ namespace Repull.SDK.Models
 #else
         public string GuestAvatar { get; set; }
 #endif
-        /// <summary>The guest_id property</summary>
-        public int? GuestId { get; set; }
-        /// <summary>The guest_name property</summary>
+        /// <summary>The guestId property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestId { get; set; }
+#nullable restore
+#else
+        public string GuestId { get; set; }
+#endif
+        /// <summary>The guestName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? GuestName { get; set; }
@@ -54,7 +60,13 @@ namespace Repull.SDK.Models
         /// <summary>The hidden property</summary>
         public bool? Hidden { get; set; }
         /// <summary>Internal Repull review id — pass back to `/v1/reviews/{id}`.</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>Did the reviewer recommend the reviewee? Used for guest-side reviews.</summary>
         public bool? IsRevieweeRecommended { get; set; }
         /// <summary>Detected language (ISO 639-1) of the review body.</summary>
@@ -66,7 +78,13 @@ namespace Repull.SDK.Models
         public string Language { get; set; }
 #endif
         /// <summary>Internal Repull listing id the review is attached to.</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>The platform property</summary>
         public global::Repull.SDK.Models.Review_platform? Platform { get; set; }
         /// <summary>Private feedback the reviewer sent only to the host.</summary>
@@ -95,8 +113,14 @@ namespace Repull.SDK.Models
 #else
         public string ReservationConfirmationCode { get; set; }
 #endif
-        /// <summary>The reservation_id property</summary>
-        public int? ReservationId { get; set; }
+        /// <summary>The reservationId property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ReservationId { get; set; }
+#nullable restore
+#else
+        public string ReservationId { get; set; }
+#endif
         /// <summary>The response property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -106,10 +130,10 @@ namespace Repull.SDK.Models
         public global::Repull.SDK.Models.ReviewResponse Response { get; set; }
 #endif
         /// <summary>Who wrote the review — `guest` (about the host/property) or `host` (about the guest).</summary>
-        public global::Repull.SDK.Models.Review_reviewer_role? ReviewerRole { get; set; }
-        /// <summary>The submitted_at property</summary>
+        public global::Repull.SDK.Models.Review_reviewerRole? ReviewerRole { get; set; }
+        /// <summary>The submittedAt property</summary>
         public DateTimeOffset? SubmittedAt { get; set; }
-        /// <summary>The updated_at property</summary>
+        /// <summary>The updatedAt property</summary>
         public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Review"/> and sets the default values.
@@ -137,26 +161,26 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "categories", n => { Categories = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ReviewCategory>(global::Repull.SDK.Models.ReviewCategory.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "expires_at", n => { ExpiresAt = n.GetDateTimeOffsetValue(); } },
-                { "external_id", n => { ExternalId = n.GetStringValue(); } },
-                { "guest_avatar", n => { GuestAvatar = n.GetStringValue(); } },
-                { "guest_id", n => { GuestId = n.GetIntValue(); } },
-                { "guest_name", n => { GuestName = n.GetStringValue(); } },
+                { "expiresAt", n => { ExpiresAt = n.GetDateTimeOffsetValue(); } },
+                { "externalId", n => { ExternalId = n.GetStringValue(); } },
+                { "guestAvatar", n => { GuestAvatar = n.GetStringValue(); } },
+                { "guestId", n => { GuestId = n.GetStringValue(); } },
+                { "guestName", n => { GuestName = n.GetStringValue(); } },
                 { "hidden", n => { Hidden = n.GetBoolValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
-                { "is_reviewee_recommended", n => { IsRevieweeRecommended = n.GetBoolValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "isRevieweeRecommended", n => { IsRevieweeRecommended = n.GetBoolValue(); } },
                 { "language", n => { Language = n.GetStringValue(); } },
-                { "listing_id", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Review_platform>(); } },
-                { "private_feedback", n => { PrivateFeedback = n.GetStringValue(); } },
-                { "public_review", n => { PublicReview = n.GetStringValue(); } },
+                { "privateFeedback", n => { PrivateFeedback = n.GetStringValue(); } },
+                { "publicReview", n => { PublicReview = n.GetStringValue(); } },
                 { "rating", n => { Rating = n.GetDoubleValue(); } },
-                { "reservation_confirmation_code", n => { ReservationConfirmationCode = n.GetStringValue(); } },
-                { "reservation_id", n => { ReservationId = n.GetIntValue(); } },
+                { "reservationConfirmationCode", n => { ReservationConfirmationCode = n.GetStringValue(); } },
+                { "reservationId", n => { ReservationId = n.GetStringValue(); } },
                 { "response", n => { Response = n.GetObjectValue<global::Repull.SDK.Models.ReviewResponse>(global::Repull.SDK.Models.ReviewResponse.CreateFromDiscriminatorValue); } },
-                { "reviewer_role", n => { ReviewerRole = n.GetEnumValue<global::Repull.SDK.Models.Review_reviewer_role>(); } },
-                { "submitted_at", n => { SubmittedAt = n.GetDateTimeOffsetValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
+                { "reviewerRole", n => { ReviewerRole = n.GetEnumValue<global::Repull.SDK.Models.Review_reviewerRole>(); } },
+                { "submittedAt", n => { SubmittedAt = n.GetDateTimeOffsetValue(); } },
+                { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -167,26 +191,26 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ReviewCategory>("categories", Categories);
-            writer.WriteDateTimeOffsetValue("expires_at", ExpiresAt);
-            writer.WriteStringValue("external_id", ExternalId);
-            writer.WriteStringValue("guest_avatar", GuestAvatar);
-            writer.WriteIntValue("guest_id", GuestId);
-            writer.WriteStringValue("guest_name", GuestName);
+            writer.WriteDateTimeOffsetValue("expiresAt", ExpiresAt);
+            writer.WriteStringValue("externalId", ExternalId);
+            writer.WriteStringValue("guestAvatar", GuestAvatar);
+            writer.WriteStringValue("guestId", GuestId);
+            writer.WriteStringValue("guestName", GuestName);
             writer.WriteBoolValue("hidden", Hidden);
-            writer.WriteIntValue("id", Id);
-            writer.WriteBoolValue("is_reviewee_recommended", IsRevieweeRecommended);
+            writer.WriteStringValue("id", Id);
+            writer.WriteBoolValue("isRevieweeRecommended", IsRevieweeRecommended);
             writer.WriteStringValue("language", Language);
-            writer.WriteIntValue("listing_id", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteEnumValue<global::Repull.SDK.Models.Review_platform>("platform", Platform);
-            writer.WriteStringValue("private_feedback", PrivateFeedback);
-            writer.WriteStringValue("public_review", PublicReview);
+            writer.WriteStringValue("privateFeedback", PrivateFeedback);
+            writer.WriteStringValue("publicReview", PublicReview);
             writer.WriteDoubleValue("rating", Rating);
-            writer.WriteStringValue("reservation_confirmation_code", ReservationConfirmationCode);
-            writer.WriteIntValue("reservation_id", ReservationId);
+            writer.WriteStringValue("reservationConfirmationCode", ReservationConfirmationCode);
+            writer.WriteStringValue("reservationId", ReservationId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReviewResponse>("response", Response);
-            writer.WriteEnumValue<global::Repull.SDK.Models.Review_reviewer_role>("reviewer_role", ReviewerRole);
-            writer.WriteDateTimeOffsetValue("submitted_at", SubmittedAt);
-            writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Review_reviewerRole>("reviewerRole", ReviewerRole);
+            writer.WriteDateTimeOffsetValue("submittedAt", SubmittedAt);
+            writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

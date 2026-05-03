@@ -60,7 +60,7 @@ namespace Repull.SDK.V1.Conversations
         {
         }
         /// <summary>
-        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
+        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ConversationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Conversations
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ConversationListResponse>(requestInfo, global::Repull.SDK.Models.ConversationListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
+        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -117,12 +117,12 @@ namespace Repull.SDK.V1.Conversations
             return new global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
+        /// Cursor-paginated list of message threads owned by the workspace. Backed by main vanio&apos;s `/api/threads/list` which keyset-paginates against `(last_message_at, id)` for constant per-page cost. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ConversationsRequestBuilderGetQueryParameters 
         {
-            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.next_cursor`. Omit to fetch the first page.</summary>
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("cursor")]

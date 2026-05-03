@@ -2,24 +2,14 @@ namespace Repull.SDK.Models;
 
 /// <summary>
 /// Hand-written extensions to the auto-generated <see cref="Reservation"/> model.
-/// The Repull API currently returns <c>id</c> as a JSON string while the OpenAPI
-/// spec types it as <c>integer</c>; Kiota's strict deserializer drops the value.
-/// This partial exposes a string accessor that always works regardless of which
-/// shape the API returns.
+/// As of v0.2.0 the OpenAPI spec types <c>id</c>, <c>listingId</c>, and
+/// <c>guestId</c> as strings (matching the live API). <see cref="IdString"/>
+/// is retained as a back-compat alias for callers migrating from v0.1.x.
 /// </summary>
 public partial class Reservation
 {
     /// <summary>
-    /// Returns the reservation id as a string, surviving the int-vs-string
-    /// mismatch between the spec and the live API.
+    /// Back-compat alias for <see cref="Id"/>. Prefer <c>Id</c> directly in new code.
     /// </summary>
-    public string? IdString
-    {
-        get
-        {
-            if (Id.HasValue) return Id.Value.ToString();
-            if (AdditionalData.TryGetValue("id", out var raw)) return raw?.ToString();
-            return null;
-        }
-    }
+    public string? IdString => Id;
 }

@@ -9,7 +9,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A single (listing_id, dates) pair in a bulk pricing request. The action in the parent request body applies to every date in `dates` for this listing.
+    /// A single (listingId, dates) pair in a bulk pricing request. The action in the parent request body applies to every date in `dates` for this listing.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BulkPricingItem : IAdditionalDataHolder, IParsable
@@ -24,8 +24,14 @@ namespace Repull.SDK.Models
 #else
         public List<Date?> Dates { get; set; }
 #endif
-        /// <summary>The listing_id property</summary>
-        public int? ListingId { get; set; }
+        /// <summary>The listingId property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BulkPricingItem"/> and sets the default values.
         /// </summary>
@@ -52,7 +58,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "dates", n => { Dates = n.GetCollectionOfPrimitiveValues<Date?>()?.AsList(); } },
-                { "listing_id", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -63,7 +69,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<Date?>("dates", Dates);
-            writer.WriteIntValue("listing_id", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

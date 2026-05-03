@@ -16,19 +16,25 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The bedrooms property</summary>
         public int? Bedrooms { get; set; }
-        /// <summary>The current_nightly_rate property</summary>
+        /// <summary>The currentNightlyRate property</summary>
         public double? CurrentNightlyRate { get; set; }
-        /// <summary>The distance_km property</summary>
+        /// <summary>The distanceKm property</summary>
         public double? DistanceKm { get; set; }
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The lat property</summary>
         public double? Lat { get; set; }
         /// <summary>The lng property</summary>
         public double? Lng { get; set; }
-        /// <summary>The max_guests property</summary>
+        /// <summary>The maxGuests property</summary>
         public int? MaxGuests { get; set; }
-        /// <summary>The platform_listing_id property</summary>
+        /// <summary>The platformListingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? PlatformListingId { get; set; }
@@ -36,7 +42,7 @@ namespace Repull.SDK.Models
 #else
         public string PlatformListingId { get; set; }
 #endif
-        /// <summary>The property_type property</summary>
+        /// <summary>The propertyType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? PropertyType { get; set; }
@@ -46,9 +52,9 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The rating property</summary>
         public double? Rating { get; set; }
-        /// <summary>The review_count property</summary>
+        /// <summary>The reviewCount property</summary>
         public int? ReviewCount { get; set; }
-        /// <summary>The thumbnail_url property</summary>
+        /// <summary>The thumbnailUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ThumbnailUrl { get; set; }
@@ -98,17 +104,17 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "bedrooms", n => { Bedrooms = n.GetIntValue(); } },
-                { "current_nightly_rate", n => { CurrentNightlyRate = n.GetDoubleValue(); } },
-                { "distance_km", n => { DistanceKm = n.GetDoubleValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "currentNightlyRate", n => { CurrentNightlyRate = n.GetDoubleValue(); } },
+                { "distanceKm", n => { DistanceKm = n.GetDoubleValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "lat", n => { Lat = n.GetDoubleValue(); } },
                 { "lng", n => { Lng = n.GetDoubleValue(); } },
-                { "max_guests", n => { MaxGuests = n.GetIntValue(); } },
-                { "platform_listing_id", n => { PlatformListingId = n.GetStringValue(); } },
-                { "property_type", n => { PropertyType = n.GetStringValue(); } },
+                { "maxGuests", n => { MaxGuests = n.GetIntValue(); } },
+                { "platformListingId", n => { PlatformListingId = n.GetStringValue(); } },
+                { "propertyType", n => { PropertyType = n.GetStringValue(); } },
                 { "rating", n => { Rating = n.GetDoubleValue(); } },
-                { "review_count", n => { ReviewCount = n.GetIntValue(); } },
-                { "thumbnail_url", n => { ThumbnailUrl = n.GetStringValue(); } },
+                { "reviewCount", n => { ReviewCount = n.GetIntValue(); } },
+                { "thumbnailUrl", n => { ThumbnailUrl = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
@@ -121,17 +127,17 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("bedrooms", Bedrooms);
-            writer.WriteDoubleValue("current_nightly_rate", CurrentNightlyRate);
-            writer.WriteDoubleValue("distance_km", DistanceKm);
-            writer.WriteIntValue("id", Id);
+            writer.WriteDoubleValue("currentNightlyRate", CurrentNightlyRate);
+            writer.WriteDoubleValue("distanceKm", DistanceKm);
+            writer.WriteStringValue("id", Id);
             writer.WriteDoubleValue("lat", Lat);
             writer.WriteDoubleValue("lng", Lng);
-            writer.WriteIntValue("max_guests", MaxGuests);
-            writer.WriteStringValue("platform_listing_id", PlatformListingId);
-            writer.WriteStringValue("property_type", PropertyType);
+            writer.WriteIntValue("maxGuests", MaxGuests);
+            writer.WriteStringValue("platformListingId", PlatformListingId);
+            writer.WriteStringValue("propertyType", PropertyType);
             writer.WriteDoubleValue("rating", Rating);
-            writer.WriteIntValue("review_count", ReviewCount);
-            writer.WriteStringValue("thumbnail_url", ThumbnailUrl);
+            writer.WriteIntValue("reviewCount", ReviewCount);
+            writer.WriteStringValue("thumbnailUrl", ThumbnailUrl);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);

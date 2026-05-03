@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
         {
         }
         /// <summary>
-        /// List Booking.com conversations
+        /// List Booking.com guest conversations. Cursor-paginated. Use the messaging POST to send a reply.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.BookingConversationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -52,7 +52,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingConversationListResponse>(requestInfo, global::Repull.SDK.Models.BookingConversationListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Send Booking.com message
+        /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Booking.com conversations
+        /// List Booking.com guest conversations. Cursor-paginated. Use the messaging POST to send a reply.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
             return requestInfo;
         }
         /// <summary>
-        /// Send Booking.com message
+        /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

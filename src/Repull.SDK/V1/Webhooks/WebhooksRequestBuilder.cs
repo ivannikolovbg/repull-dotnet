@@ -72,7 +72,7 @@ namespace Repull.SDK.V1.Webhooks
         {
         }
         /// <summary>
-        /// List webhook subscriptions
+        /// List every webhook subscription registered for this workspace. Each row includes the destination URL, subscribed event types, and the most recent delivery summary.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.WebhookListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -110,7 +110,7 @@ namespace Repull.SDK.V1.Webhooks
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.WebhookSubscription>(requestInfo, global::Repull.SDK.Models.WebhookSubscription.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List webhook subscriptions
+        /// List every webhook subscription registered for this workspace. Each row includes the destination URL, subscribed event types, and the most recent delivery summary.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

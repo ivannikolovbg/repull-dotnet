@@ -22,7 +22,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.Connection> Data { get; set; }
 #endif
-        /// <summary>The pagination property</summary>
+        /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.Pagination? Pagination { get; set; }

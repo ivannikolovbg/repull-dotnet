@@ -47,7 +47,7 @@ namespace Repull.SDK.Models
 #else
         public string Country { get; set; }
 #endif
-        /// <summary>The created_at property</summary>
+        /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -90,7 +90,13 @@ namespace Repull.SDK.Models
         public List<global::Repull.SDK.Models.GuestFlag> Flags { get; set; }
 #endif
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The isBlacklisted property</summary>
         public bool? IsBlacklisted { get; set; }
         /// <summary>The language property</summary>
@@ -180,18 +186,18 @@ namespace Repull.SDK.Models
                 { "blacklistedReason", n => { BlacklistedReason = n.GetStringValue(); } },
                 { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.GuestContact>(global::Repull.SDK.Models.GuestContact.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
                 { "displayName", n => { DisplayName = n.GetStringValue(); } },
                 { "displayNameLong", n => { DisplayNameLong = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "flags", n => { Flags = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.GuestFlag>(global::Repull.SDK.Models.GuestFlag.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "isBlacklisted", n => { IsBlacklisted = n.GetBoolValue(); } },
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "notes", n => { Notes = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.GuestNote>(global::Repull.SDK.Models.GuestNote.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
-                { "reservations_summary", n => { ReservationsSummary = n.GetObjectValue<global::Repull.SDK.Models.GuestReservationsSummary>(global::Repull.SDK.Models.GuestReservationsSummary.CreateFromDiscriminatorValue); } },
+                { "reservationsSummary", n => { ReservationsSummary = n.GetObjectValue<global::Repull.SDK.Models.GuestReservationsSummary>(global::Repull.SDK.Models.GuestReservationsSummary.CreateFromDiscriminatorValue); } },
                 { "riskLevel", n => { RiskLevel = n.GetStringValue(); } },
                 { "totalReservations", n => { TotalReservations = n.GetIntValue(); } },
                 { "totalRevenue", n => { TotalRevenue = n.GetStringValue(); } },
@@ -209,18 +215,18 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("blacklistedReason", BlacklistedReason);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.GuestContact>("contacts", Contacts);
             writer.WriteStringValue("country", Country);
-            writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("currency", Currency);
             writer.WriteStringValue("displayName", DisplayName);
             writer.WriteStringValue("displayNameLong", DisplayNameLong);
             writer.WriteStringValue("email", Email);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.GuestFlag>("flags", Flags);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteBoolValue("isBlacklisted", IsBlacklisted);
             writer.WriteStringValue("language", Language);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.GuestNote>("notes", Notes);
             writer.WriteStringValue("phone", Phone);
-            writer.WriteObjectValue<global::Repull.SDK.Models.GuestReservationsSummary>("reservations_summary", ReservationsSummary);
+            writer.WriteObjectValue<global::Repull.SDK.Models.GuestReservationsSummary>("reservationsSummary", ReservationsSummary);
             writer.WriteStringValue("riskLevel", RiskLevel);
             writer.WriteIntValue("totalReservations", TotalReservations);
             writer.WriteStringValue("totalRevenue", TotalRevenue);

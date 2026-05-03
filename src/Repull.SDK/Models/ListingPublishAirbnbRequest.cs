@@ -16,7 +16,13 @@ namespace Repull.SDK.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Existing Airbnb connection row id</summary>
-        public int? AirbnbConnectionId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AirbnbConnectionId { get; set; }
+#nullable restore
+#else
+        public string AirbnbConnectionId { get; set; }
+#endif
         /// <summary>Re-push every section, ignoring dirty-fields tracking</summary>
         public bool? Force { get; set; }
         /// <summary>Airbnb host id (required for first-time creates)</summary>
@@ -52,7 +58,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "airbnbConnectionId", n => { AirbnbConnectionId = n.GetIntValue(); } },
+                { "airbnbConnectionId", n => { AirbnbConnectionId = n.GetStringValue(); } },
                 { "force", n => { Force = n.GetBoolValue(); } },
                 { "hostId", n => { HostId = n.GetStringValue(); } },
             };
@@ -64,7 +70,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("airbnbConnectionId", AirbnbConnectionId);
+            writer.WriteStringValue("airbnbConnectionId", AirbnbConnectionId);
             writer.WriteBoolValue("force", Force);
             writer.WriteStringValue("hostId", HostId);
             writer.WriteAdditionalData(AdditionalData);

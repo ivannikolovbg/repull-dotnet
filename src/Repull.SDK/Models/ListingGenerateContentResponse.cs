@@ -23,7 +23,13 @@ namespace Repull.SDK.Models
         public global::Repull.SDK.Models.ListingContent Content { get; set; }
 #endif
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>The persisted property</summary>
         public bool? Persisted { get; set; }
         /// <summary>
@@ -52,7 +58,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "content", n => { Content = n.GetObjectValue<global::Repull.SDK.Models.ListingContent>(global::Repull.SDK.Models.ListingContent.CreateFromDiscriminatorValue); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "persisted", n => { Persisted = n.GetBoolValue(); } },
             };
         }
@@ -64,7 +70,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContent>("content", Content);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteBoolValue("persisted", Persisted);
             writer.WriteAdditionalData(AdditionalData);
         }

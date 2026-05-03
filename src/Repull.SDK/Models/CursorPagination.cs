@@ -8,16 +8,16 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Cursor-based pagination. Pass `next_cursor` back as `cursor` to fetch the next page. When `has_more` is `false` you are done.
+    /// Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CursorPagination : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The has_more property</summary>
+        /// <summary>The hasMore property</summary>
         public bool? HasMore { get; set; }
-        /// <summary>Opaque base64-encoded cursor — pass back as `?cursor=&lt;value&gt;`. `null` when there are no more pages.</summary>
+        /// <summary>Opaque base64 cursor — pass back as `?cursor=&lt;value&gt;`. `null` when there are no more pages.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? NextCursor { get; set; }
@@ -25,6 +25,8 @@ namespace Repull.SDK.Models
 #else
         public string NextCursor { get; set; }
 #endif
+        /// <summary>Total rows matching the current filter (across all pages). Present when `?include_total=true` (the default on most endpoints). Omit `?include_total=false` to skip the COUNT(*) on very large workspaces.</summary>
+        public int? Total { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.CursorPagination"/> and sets the default values.
         /// </summary>
@@ -50,8 +52,9 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "has_more", n => { HasMore = n.GetBoolValue(); } },
-                { "next_cursor", n => { NextCursor = n.GetStringValue(); } },
+                { "hasMore", n => { HasMore = n.GetBoolValue(); } },
+                { "nextCursor", n => { NextCursor = n.GetStringValue(); } },
+                { "total", n => { Total = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -61,8 +64,9 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteBoolValue("has_more", HasMore);
-            writer.WriteStringValue("next_cursor", NextCursor);
+            writer.WriteBoolValue("hasMore", HasMore);
+            writer.WriteStringValue("nextCursor", NextCursor);
+            writer.WriteIntValue("total", Total);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

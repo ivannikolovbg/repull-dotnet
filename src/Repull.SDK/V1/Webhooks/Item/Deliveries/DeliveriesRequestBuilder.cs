@@ -60,7 +60,7 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries
         {
         }
         /// <summary>
-        /// Paginated history of every delivery attempt for this subscription.
+        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.WebhookDeliveryListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -78,7 +78,7 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.WebhookDeliveryListResponse>(requestInfo, global::Repull.SDK.Models.WebhookDeliveryListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Paginated history of every delivery attempt for this subscription.
+        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -106,7 +106,7 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries
             return new global::Repull.SDK.V1.Webhooks.Item.Deliveries.DeliveriesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Paginated history of every delivery attempt for this subscription.
+        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class DeliveriesRequestBuilderGetQueryParameters 

@@ -7,20 +7,25 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class Pagination : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The hasMore property</summary>
         public bool? HasMore { get; set; }
-        /// <summary>The limit property</summary>
-        public int? Limit { get; set; }
-        /// <summary>The offset property</summary>
-        public int? Offset { get; set; }
-        /// <summary>The total property</summary>
+        /// <summary>Opaque base64 cursor — pass back as `?cursor=&lt;value&gt;`. `null` when there are no more pages.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? NextCursor { get; set; }
+#nullable restore
+#else
+        public string NextCursor { get; set; }
+#endif
+        /// <summary>Total rows matching the current filter (across all pages). Present when `?include_total=true` (the default on most endpoints). Omit `?include_total=false` to skip the COUNT(*) on very large workspaces.</summary>
         public int? Total { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Pagination"/> and sets the default values.
@@ -48,8 +53,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "hasMore", n => { HasMore = n.GetBoolValue(); } },
-                { "limit", n => { Limit = n.GetIntValue(); } },
-                { "offset", n => { Offset = n.GetIntValue(); } },
+                { "nextCursor", n => { NextCursor = n.GetStringValue(); } },
                 { "total", n => { Total = n.GetIntValue(); } },
             };
         }
@@ -61,8 +65,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("hasMore", HasMore);
-            writer.WriteIntValue("limit", Limit);
-            writer.WriteIntValue("offset", Offset);
+            writer.WriteStringValue("nextCursor", NextCursor);
             writer.WriteIntValue("total", Total);
             writer.WriteAdditionalData(AdditionalData);
         }

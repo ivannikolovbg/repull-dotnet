@@ -16,7 +16,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The applied_at property</summary>
+        /// <summary>The appliedAt property</summary>
         public DateTimeOffset? AppliedAt { get; set; }
         /// <summary>Who applied it (e.g. `auto`, `api`, `user`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -33,10 +33,10 @@ namespace Repull.SDK.Models
         /// <summary>Raw model factors (comp distance, event boost, weekend, demand, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendation_factors? RecommendationFactors { get; set; }
+        public global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors? RecommendationFactors { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendation_factors RecommendationFactors { get; set; }
+        public global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors RecommendationFactors { get; set; }
 #endif
         /// <summary>The Atlas model&apos;s recommended price for the date.</summary>
         public double? RecommendedRate { get; set; }
@@ -67,12 +67,12 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "applied_at", n => { AppliedAt = n.GetDateTimeOffsetValue(); } },
-                { "applied_by", n => { AppliedBy = n.GetStringValue(); } },
-                { "applied_rate", n => { AppliedRate = n.GetDoubleValue(); } },
+                { "appliedAt", n => { AppliedAt = n.GetDateTimeOffsetValue(); } },
+                { "appliedBy", n => { AppliedBy = n.GetStringValue(); } },
+                { "appliedRate", n => { AppliedRate = n.GetDoubleValue(); } },
                 { "date", n => { Date = n.GetDateValue(); } },
-                { "recommendation_factors", n => { RecommendationFactors = n.GetObjectValue<global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendation_factors>(global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendation_factors.CreateFromDiscriminatorValue); } },
-                { "recommended_rate", n => { RecommendedRate = n.GetDoubleValue(); } },
+                { "recommendationFactors", n => { RecommendationFactors = n.GetObjectValue<global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors>(global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors.CreateFromDiscriminatorValue); } },
+                { "recommendedRate", n => { RecommendedRate = n.GetDoubleValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.ListingPricingHistoryEntry_status>(); } },
             };
         }
@@ -83,12 +83,12 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDateTimeOffsetValue("applied_at", AppliedAt);
-            writer.WriteStringValue("applied_by", AppliedBy);
-            writer.WriteDoubleValue("applied_rate", AppliedRate);
+            writer.WriteDateTimeOffsetValue("appliedAt", AppliedAt);
+            writer.WriteStringValue("appliedBy", AppliedBy);
+            writer.WriteDoubleValue("appliedRate", AppliedRate);
             writer.WriteDateValue("date", Date);
-            writer.WriteObjectValue<global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendation_factors>("recommendation_factors", RecommendationFactors);
-            writer.WriteDoubleValue("recommended_rate", RecommendedRate);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors>("recommendationFactors", RecommendationFactors);
+            writer.WriteDoubleValue("recommendedRate", RecommendedRate);
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingPricingHistoryEntry_status>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }

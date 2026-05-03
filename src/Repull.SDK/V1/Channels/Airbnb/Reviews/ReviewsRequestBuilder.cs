@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
         {
         }
         /// <summary>
-        /// List Airbnb reviews
+        /// List reviews left by guests on Airbnb listings in this workspace. Includes both reviews of the host and reviews of the guest (where the host has not yet submitted theirs).
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbReviewListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -52,7 +52,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReviewListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbReviewListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Respond to Airbnb review
+        /// Post a public response to a guest review. Airbnb allows one response per review — repeated POSTs return 409.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Airbnb reviews
+        /// List reviews left by guests on Airbnb listings in this workspace. Includes both reviews of the host and reviews of the guest (where the host has not yet submitted theirs).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
             return requestInfo;
         }
         /// <summary>
-        /// Respond to Airbnb review
+        /// Post a public response to a guest review. Airbnb allows one response per review — repeated POSTs return 409.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

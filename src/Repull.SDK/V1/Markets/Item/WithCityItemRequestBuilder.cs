@@ -45,6 +45,7 @@ namespace Repull.SDK.V1.Markets.Item
         /// <returns>A <see cref="global::Repull.SDK.Models.MarketDetailResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.MarketDetailResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Markets.Item.WithCityItemRequestBuilder.WithCityItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -55,7 +56,11 @@ namespace Repull.SDK.V1.Markets.Item
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MarketDetailResponse>(requestInfo, global::Repull.SDK.Models.MarketDetailResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MarketDetailResponse>(requestInfo, global::Repull.SDK.Models.MarketDetailResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Detailed market view for one city — price distribution, bedroom mix, property types, upcoming events, Wheelhouse demand, monthly benchmarks, customer health rollup, top comps (proximity-sorted, paginated), customer&apos;s percentile position, capacity-mix gap, and a 6-month supply trend.

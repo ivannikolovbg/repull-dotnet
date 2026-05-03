@@ -34,7 +34,13 @@ namespace Repull.SDK.Models
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Repull listing id</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -83,7 +89,7 @@ namespace Repull.SDK.Models
                 { "address", n => { Address = n.GetObjectValue<global::Repull.SDK.Models.Listing_address>(global::Repull.SDK.Models.Listing_address.CreateFromDiscriminatorValue); } },
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>(global::Repull.SDK.Models.ListingChannel.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Listing_status>(); } },
                 { "thumbnailUrl", n => { ThumbnailUrl = n.GetStringValue(); } },
@@ -100,7 +106,7 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_address>("address", Address);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>("channels", Channels);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_status>("status", Status);
             writer.WriteStringValue("thumbnailUrl", ThumbnailUrl);

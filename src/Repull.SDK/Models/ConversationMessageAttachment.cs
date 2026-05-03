@@ -25,7 +25,13 @@ namespace Repull.SDK.Models
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The imageUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -61,7 +67,7 @@ namespace Repull.SDK.Models
             {
                 { "contentType", n => { ContentType = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "imageUrl", n => { ImageUrl = n.GetStringValue(); } },
             };
         }
@@ -74,7 +80,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("contentType", ContentType);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("imageUrl", ImageUrl);
             writer.WriteAdditionalData(AdditionalData);
         }

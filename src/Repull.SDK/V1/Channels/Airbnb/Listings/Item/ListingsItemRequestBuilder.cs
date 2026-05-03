@@ -52,7 +52,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         {
         }
         /// <summary>
-        /// Get Airbnb listing
+        /// Fetch a single Airbnb listing by id with full pricing, availability, and content. Listing ids are Airbnb-side ids (numeric strings).
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbListing"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbListing>(requestInfo, global::Repull.SDK.Models.AirbnbListing.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Listing action (push/publish/unlist/delete)
+        /// Apply a state action to an Airbnb listing — `push` (sync local changes upstream), `publish` (make publicly bookable), `unlist` (hide), or `delete` (permanent). Each action has different reversibility — see docs.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -88,7 +88,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get Airbnb listing
+        /// Fetch a single Airbnb listing by id with full pricing, availability, and content. Listing ids are Airbnb-side ids (numeric strings).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -107,7 +107,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             return requestInfo;
         }
         /// <summary>
-        /// Listing action (push/publish/unlist/delete)
+        /// Apply a state action to an Airbnb listing — `push` (sync local changes upstream), `publish` (make publicly bookable), `unlist` (hide), or `delete` (permanent). Each action has different reversibility — see docs.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

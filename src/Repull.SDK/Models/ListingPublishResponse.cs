@@ -17,7 +17,13 @@ namespace Repull.SDK.Models
         /// <summary>The channel property</summary>
         public global::Repull.SDK.Models.ListingPublishResponse_channel? Channel { get; set; }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>Channel-specific push result (sections pushed, errors, etc.)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -52,7 +58,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "channel", n => { Channel = n.GetEnumValue<global::Repull.SDK.Models.ListingPublishResponse_channel>(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "result", n => { Result = n.GetObjectValue<global::Repull.SDK.Models.ListingPublishResponse_result>(global::Repull.SDK.Models.ListingPublishResponse_result.CreateFromDiscriminatorValue); } },
             };
         }
@@ -64,7 +70,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingPublishResponse_channel>("channel", Channel);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingPublishResponse_result>("result", Result);
             writer.WriteAdditionalData(AdditionalData);
         }

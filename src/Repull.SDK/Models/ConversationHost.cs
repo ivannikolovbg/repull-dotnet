@@ -48,7 +48,13 @@ namespace Repull.SDK.Models
         public string FirstName { get; set; }
 #endif
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConversationHost"/> and sets the default values.
         /// </summary>
@@ -78,7 +84,7 @@ namespace Repull.SDK.Models
                 { "avatarUrl", n => { AvatarUrl = n.GetStringValue(); } },
                 { "displayName", n => { DisplayName = n.GetStringValue(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -92,7 +98,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("avatarUrl", AvatarUrl);
             writer.WriteStringValue("displayName", DisplayName);
             writer.WriteStringValue("firstName", FirstName);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

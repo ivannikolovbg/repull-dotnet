@@ -47,7 +47,13 @@ namespace Repull.SDK.Models
         public global::Repull.SDK.Models.Reservation_guestDetails GuestDetails { get; set; }
 #endif
         /// <summary>Internal Repull guest ID. Use `GET /v1/guests/{id}` for the full profile.</summary>
-        public int? GuestId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestId { get; set; }
+#nullable restore
+#else
+        public string GuestId { get; set; }
+#endif
         /// <summary>Pre-resolved display name (`firstName lastName`) extracted from `guestDetails`. Null when no first name is available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,9 +63,21 @@ namespace Repull.SDK.Models
         public string GuestName { get; set; }
 #endif
         /// <summary>Internal Repull reservation ID</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>Internal Repull listing ID this reservation is on.</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>Booking source. Lowercase. May be null on legacy rows.</summary>
         public global::Repull.SDK.Models.Reservation_platform? Platform { get; set; }
         /// <summary>The status property</summary>
@@ -103,10 +121,10 @@ namespace Repull.SDK.Models
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
                 { "guestDetails", n => { GuestDetails = n.GetObjectValue<global::Repull.SDK.Models.Reservation_guestDetails>(global::Repull.SDK.Models.Reservation_guestDetails.CreateFromDiscriminatorValue); } },
-                { "guestId", n => { GuestId = n.GetIntValue(); } },
+                { "guestId", n => { GuestId = n.GetStringValue(); } },
                 { "guestName", n => { GuestName = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Reservation_platform>(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Reservation_status>(); } },
                 { "totalPrice", n => { TotalPrice = n.GetStringValue(); } },
@@ -125,10 +143,10 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("currency", Currency);
             writer.WriteObjectValue<global::Repull.SDK.Models.Reservation_guestDetails>("guestDetails", GuestDetails);
-            writer.WriteIntValue("guestId", GuestId);
+            writer.WriteStringValue("guestId", GuestId);
             writer.WriteStringValue("guestName", GuestName);
-            writer.WriteIntValue("id", Id);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_platform>("platform", Platform);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_status>("status", Status);
             writer.WriteStringValue("totalPrice", TotalPrice);

@@ -7,10 +7,11 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Overview of every market the customer operates in, plus auxiliary discovery slices. Wraps the canonical `{ data, pagination }` envelope around the per-city KPI list (`data`) so SDK consumers see the same shape they get from every other list endpoint. Auxiliary fields (`totals`, `myListings`, `browse`, `freeMarket`, `subscriptions`, `tier`) are returned as siblings because they are NOT paginated. The overview returns every market in one shot — `nextCursor` is always `null` and `hasMore` is always `false`.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class MarketsOverviewResponse : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -22,6 +23,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.MarketsOverviewResponse_browse Browse { get; set; }
 #endif
+        /// <summary>Per-city KPIs for every market the customer operates in.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.MarketSummary>? Data { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.MarketSummary> Data { get; set; }
+#endif
         /// <summary>City auto-assigned as the customer&apos;s free market (largest by listing count). Null for customers with no listings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -30,14 +39,6 @@ namespace Repull.SDK.Models
 #else
         public string FreeMarket { get; set; }
 #endif
-        /// <summary>The markets property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public List<global::Repull.SDK.Models.MarketSummary>? Markets { get; set; }
-#nullable restore
-#else
-        public List<global::Repull.SDK.Models.MarketSummary> Markets { get; set; }
-#endif
         /// <summary>The myListings property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -45,6 +46,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public List<global::Repull.SDK.Models.MarketMyListing> MyListings { get; set; }
+#endif
+        /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Pagination? Pagination { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Pagination Pagination { get; set; }
 #endif
         /// <summary>Active per-market unlocks vs the tier quota.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -96,9 +105,10 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "browse", n => { Browse = n.GetObjectValue<global::Repull.SDK.Models.MarketsOverviewResponse_browse>(global::Repull.SDK.Models.MarketsOverviewResponse_browse.CreateFromDiscriminatorValue); } },
-                { "free_market", n => { FreeMarket = n.GetStringValue(); } },
-                { "markets", n => { Markets = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.MarketSummary>(global::Repull.SDK.Models.MarketSummary.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.MarketSummary>(global::Repull.SDK.Models.MarketSummary.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "freeMarket", n => { FreeMarket = n.GetStringValue(); } },
                 { "myListings", n => { MyListings = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.MarketMyListing>(global::Repull.SDK.Models.MarketMyListing.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.Pagination>(global::Repull.SDK.Models.Pagination.CreateFromDiscriminatorValue); } },
                 { "subscriptions", n => { Subscriptions = n.GetObjectValue<global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions>(global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions.CreateFromDiscriminatorValue); } },
                 { "tier", n => { Tier = n.GetStringValue(); } },
                 { "totals", n => { Totals = n.GetObjectValue<global::Repull.SDK.Models.MarketsOverviewResponse_totals>(global::Repull.SDK.Models.MarketsOverviewResponse_totals.CreateFromDiscriminatorValue); } },
@@ -112,9 +122,10 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.Models.MarketsOverviewResponse_browse>("browse", Browse);
-            writer.WriteStringValue("free_market", FreeMarket);
-            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.MarketSummary>("markets", Markets);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.MarketSummary>("data", Data);
+            writer.WriteStringValue("freeMarket", FreeMarket);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.MarketMyListing>("myListings", MyListings);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Pagination>("pagination", Pagination);
             writer.WriteObjectValue<global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions>("subscriptions", Subscriptions);
             writer.WriteStringValue("tier", Tier);
             writer.WriteObjectValue<global::Repull.SDK.Models.MarketsOverviewResponse_totals>("totals", Totals);

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Markets.Browse
         {
         }
         /// <summary>
-        /// Cursor-paginated, search-filterable catalog of every Atlas-tracked market the customer could expand into. Backed by the precomputed `market_summaries` table (&gt;=5 active comps per city). Supports fuzzy `q` substring search (trigram-indexed), `country` (ISO 3166-1 alpha-2) filter, and `sort` (`listings_desc` | `name_asc`). Use the `next_cursor` from `pagination` to walk pages — the cursor is an opaque base64 token; do not parse it.
+        /// Cursor-paginated, search-filterable catalog of every Atlas-tracked market the customer could expand into. Backed by the precomputed `market_summaries` table (&gt;=5 active comps per city). Supports fuzzy `q` substring search (trigram-indexed), `country` (ISO 3166-1 alpha-2) filter, and `sort` (`listings_desc` | `name_asc`). Use the `nextCursor` from `pagination` to walk pages — the cursor is an opaque base64 token; do not parse it.`pagination.total` is the count of markets matching the current `q`/`country`/`min_listings` filter (across all pages). Renamed from the upstream&apos;s legacy `total_in_filter` so SDK consumers see the same `pagination.total` field as on every other list endpoint.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.MarketBrowseResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Repull.SDK.V1.Markets.Browse
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MarketBrowseResponse>(requestInfo, global::Repull.SDK.Models.MarketBrowseResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated, search-filterable catalog of every Atlas-tracked market the customer could expand into. Backed by the precomputed `market_summaries` table (&gt;=5 active comps per city). Supports fuzzy `q` substring search (trigram-indexed), `country` (ISO 3166-1 alpha-2) filter, and `sort` (`listings_desc` | `name_asc`). Use the `next_cursor` from `pagination` to walk pages — the cursor is an opaque base64 token; do not parse it.
+        /// Cursor-paginated, search-filterable catalog of every Atlas-tracked market the customer could expand into. Backed by the precomputed `market_summaries` table (&gt;=5 active comps per city). Supports fuzzy `q` substring search (trigram-indexed), `country` (ISO 3166-1 alpha-2) filter, and `sort` (`listings_desc` | `name_asc`). Use the `nextCursor` from `pagination` to walk pages — the cursor is an opaque base64 token; do not parse it.`pagination.total` is the count of markets matching the current `q`/`country`/`min_listings` filter (across all pages). Renamed from the upstream&apos;s legacy `total_in_filter` so SDK consumers see the same `pagination.total` field as on every other list endpoint.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -87,7 +87,7 @@ namespace Repull.SDK.V1.Markets.Browse
             return new global::Repull.SDK.V1.Markets.Browse.BrowseRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated, search-filterable catalog of every Atlas-tracked market the customer could expand into. Backed by the precomputed `market_summaries` table (&gt;=5 active comps per city). Supports fuzzy `q` substring search (trigram-indexed), `country` (ISO 3166-1 alpha-2) filter, and `sort` (`listings_desc` | `name_asc`). Use the `next_cursor` from `pagination` to walk pages — the cursor is an opaque base64 token; do not parse it.
+        /// Cursor-paginated, search-filterable catalog of every Atlas-tracked market the customer could expand into. Backed by the precomputed `market_summaries` table (&gt;=5 active comps per city). Supports fuzzy `q` substring search (trigram-indexed), `country` (ISO 3166-1 alpha-2) filter, and `sort` (`listings_desc` | `name_asc`). Use the `nextCursor` from `pagination` to walk pages — the cursor is an opaque base64 token; do not parse it.`pagination.total` is the count of markets matching the current `q`/`country`/`min_listings` filter (across all pages). Renamed from the upstream&apos;s legacy `total_in_filter` so SDK consumers see the same `pagination.total` field as on every other list endpoint.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class BrowseRequestBuilderGetQueryParameters 
@@ -102,7 +102,7 @@ namespace Repull.SDK.V1.Markets.Browse
             [QueryParameter("country")]
             public string Country { get; set; }
 #endif
-            /// <summary>Opaque cursor returned by the previous page&apos;s `pagination.next_cursor`.</summary>
+            /// <summary>Opaque cursor returned by the previous page&apos;s `pagination.nextCursor`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("cursor")]

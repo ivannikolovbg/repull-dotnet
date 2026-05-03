@@ -15,9 +15,9 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The is_primary property</summary>
+        /// <summary>The isPrimary property</summary>
         public bool? IsPrimary { get; set; }
-        /// <summary>The last_used property</summary>
+        /// <summary>The lastUsed property</summary>
         public DateTimeOffset? LastUsed { get; set; }
         /// <summary>Contact channel type (`phone`, `email`, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -62,8 +62,8 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "is_primary", n => { IsPrimary = n.GetBoolValue(); } },
-                { "last_used", n => { LastUsed = n.GetDateTimeOffsetValue(); } },
+                { "isPrimary", n => { IsPrimary = n.GetBoolValue(); } },
+                { "lastUsed", n => { LastUsed = n.GetDateTimeOffsetValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "value", n => { Value = n.GetStringValue(); } },
                 { "verified", n => { Verified = n.GetBoolValue(); } },
@@ -76,8 +76,8 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteBoolValue("is_primary", IsPrimary);
-            writer.WriteDateTimeOffsetValue("last_used", LastUsed);
+            writer.WriteBoolValue("isPrimary", IsPrimary);
+            writer.WriteDateTimeOffsetValue("lastUsed", LastUsed);
             writer.WriteStringValue("type", Type);
             writer.WriteStringValue("value", Value);
             writer.WriteBoolValue("verified", Verified);

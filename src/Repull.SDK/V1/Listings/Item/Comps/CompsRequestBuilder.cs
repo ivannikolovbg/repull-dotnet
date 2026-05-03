@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Listings.Item.Comps
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/comps{?end_date*,limit*,radius_km*,start_date*}", pathParameters)
+        public CompsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/comps{?endDate*,limit*,radius_km*,startDate*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Repull.SDK.V1.Listings.Item.Comps
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/comps{?end_date*,limit*,radius_km*,start_date*}", rawUrl)
+        public CompsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/comps{?endDate*,limit*,radius_km*,startDate*}", rawUrl)
         {
         }
         /// <summary>
@@ -97,7 +97,7 @@ namespace Repull.SDK.V1.Listings.Item.Comps
         public partial class CompsRequestBuilderGetQueryParameters 
         {
             /// <summary>Defaults to today + 30 days.</summary>
-            [QueryParameter("end_date")]
+            [QueryParameter("endDate")]
             public Date? EndDate { get; set; }
             /// <summary>Closest-first. Max 100.</summary>
             [QueryParameter("limit")]
@@ -106,7 +106,7 @@ namespace Repull.SDK.V1.Listings.Item.Comps
             [QueryParameter("radius_km")]
             public double? RadiusKm { get; set; }
             /// <summary>Defaults to today.</summary>
-            [QueryParameter("start_date")]
+            [QueryParameter("startDate")]
             public Date? StartDate { get; set; }
         }
         /// <summary>

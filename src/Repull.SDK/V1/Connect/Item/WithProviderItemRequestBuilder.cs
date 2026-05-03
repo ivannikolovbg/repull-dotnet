@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Connect.Item
         {
         }
         /// <summary>
-        /// Disconnect provider
+        /// Disconnect a PMS or OTA from this workspace. Revokes the OAuth token (where applicable), purges credentials, and stops all sync jobs. Resources synced from the provider remain queryable but become read-only and stop receiving updates.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -90,7 +90,7 @@ namespace Repull.SDK.V1.Connect.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Connection>(requestInfo, global::Repull.SDK.Models.Connection.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Disconnect provider
+        /// Disconnect a PMS or OTA from this workspace. Revokes the OAuth token (where applicable), purges credentials, and stops all sync jobs. Resources synced from the provider remain queryable but become read-only and stop receiving updates.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

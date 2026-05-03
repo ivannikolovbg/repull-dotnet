@@ -47,7 +47,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging
         {
         }
         /// <summary>
-        /// List Airbnb message threads
+        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbThreadListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbThreadListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbThreadListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Airbnb message threads
+        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

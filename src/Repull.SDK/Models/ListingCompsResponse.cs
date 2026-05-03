@@ -32,7 +32,13 @@ namespace Repull.SDK.Models
         public global::Repull.SDK.Models.ListingCompsResponse_dateRange DateRange { get; set; }
 #endif
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>The radiusKm property</summary>
         public double? RadiusKm { get; set; }
         /// <summary>The total property</summary>
@@ -72,7 +78,7 @@ namespace Repull.SDK.Models
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingComp>(global::Repull.SDK.Models.ListingComp.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "dateRange", n => { DateRange = n.GetObjectValue<global::Repull.SDK.Models.ListingCompsResponse_dateRange>(global::Repull.SDK.Models.ListingCompsResponse_dateRange.CreateFromDiscriminatorValue); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "radiusKm", n => { RadiusKm = n.GetDoubleValue(); } },
                 { "total", n => { Total = n.GetIntValue(); } },
                 { "warning", n => { Warning = n.GetStringValue(); } },
@@ -87,7 +93,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingComp>("data", Data);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingCompsResponse_dateRange>("dateRange", DateRange);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteDoubleValue("radiusKm", RadiusKm);
             writer.WriteIntValue("total", Total);
             writer.WriteStringValue("warning", Warning);

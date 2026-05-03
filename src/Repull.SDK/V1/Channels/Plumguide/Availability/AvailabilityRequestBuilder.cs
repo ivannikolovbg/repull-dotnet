@@ -33,7 +33,7 @@ namespace Repull.SDK.V1.Channels.Plumguide.Availability
         {
         }
         /// <summary>
-        /// Get Plumguide availability
+        /// Read the per-day availability calendar for a Plumguide listing. Returns the same row shape as Airbnb availability for SDK convenience.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -51,7 +51,7 @@ namespace Repull.SDK.V1.Channels.Plumguide.Availability
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Push availability to Plumguide
+        /// Push per-day availability changes to Plumguide. Plumguide accepts only the next 24 months — dates beyond that are silently ignored.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -69,7 +69,7 @@ namespace Repull.SDK.V1.Channels.Plumguide.Availability
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get Plumguide availability
+        /// Read the per-day availability calendar for a Plumguide listing. Returns the same row shape as Airbnb availability for SDK convenience.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -87,7 +87,7 @@ namespace Repull.SDK.V1.Channels.Plumguide.Availability
             return requestInfo;
         }
         /// <summary>
-        /// Push availability to Plumguide
+        /// Push per-day availability changes to Plumguide. Plumguide accepts only the next 24 months — dates beyond that are silently ignored.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

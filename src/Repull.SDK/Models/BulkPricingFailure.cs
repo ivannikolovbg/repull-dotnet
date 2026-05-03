@@ -32,10 +32,16 @@ namespace Repull.SDK.Models
 #else
         public string Error { get; set; }
 #endif
-        /// <summary>The error_code property</summary>
-        public global::Repull.SDK.Models.BulkPricingFailure_error_code? ErrorCode { get; set; }
-        /// <summary>The listing_id property</summary>
-        public int? ListingId { get; set; }
+        /// <summary>The errorCode property</summary>
+        public global::Repull.SDK.Models.BulkPricingFailure_errorCode? ErrorCode { get; set; }
+        /// <summary>The listingId property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BulkPricingFailure"/> and sets the default values.
         /// </summary>
@@ -63,8 +69,8 @@ namespace Repull.SDK.Models
             {
                 { "dates", n => { Dates = n.GetCollectionOfPrimitiveValues<Date?>()?.AsList(); } },
                 { "error", n => { Error = n.GetStringValue(); } },
-                { "error_code", n => { ErrorCode = n.GetEnumValue<global::Repull.SDK.Models.BulkPricingFailure_error_code>(); } },
-                { "listing_id", n => { ListingId = n.GetIntValue(); } },
+                { "errorCode", n => { ErrorCode = n.GetEnumValue<global::Repull.SDK.Models.BulkPricingFailure_errorCode>(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -76,8 +82,8 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<Date?>("dates", Dates);
             writer.WriteStringValue("error", Error);
-            writer.WriteEnumValue<global::Repull.SDK.Models.BulkPricingFailure_error_code>("error_code", ErrorCode);
-            writer.WriteIntValue("listing_id", ListingId);
+            writer.WriteEnumValue<global::Repull.SDK.Models.BulkPricingFailure_errorCode>("errorCode", ErrorCode);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

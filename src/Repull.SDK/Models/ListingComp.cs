@@ -17,8 +17,14 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The bedrooms property</summary>
         public int? Bedrooms { get; set; }
-        /// <summary>The comp_id property</summary>
-        public int? CompId { get; set; }
+        /// <summary>The compId property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CompId { get; set; }
+#nullable restore
+#else
+        public string CompId { get; set; }
+#endif
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -41,7 +47,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The lat property</summary>
         public double? Lat { get; set; }
-        /// <summary>The listing_name property</summary>
+        /// <summary>The listingName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ListingName { get; set; }
@@ -51,7 +57,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The lng property</summary>
         public double? Lng { get; set; }
-        /// <summary>The max_guests property</summary>
+        /// <summary>The maxGuests property</summary>
         public int? MaxGuests { get; set; }
         /// <summary>Per-day rate + availability for the requested window. May be empty if Atlas hasn&apos;t snapshotted the comp recently.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -103,15 +109,15 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "bedrooms", n => { Bedrooms = n.GetIntValue(); } },
-                { "comp_id", n => { CompId = n.GetIntValue(); } },
+                { "compId", n => { CompId = n.GetStringValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
-                { "current_nightly_rate", n => { CurrentNightlyRate = n.GetDoubleValue(); } },
-                { "distance_km", n => { DistanceKm = n.GetDoubleValue(); } },
-                { "external_url", n => { ExternalUrl = n.GetStringValue(); } },
+                { "currentNightlyRate", n => { CurrentNightlyRate = n.GetDoubleValue(); } },
+                { "distanceKm", n => { DistanceKm = n.GetDoubleValue(); } },
+                { "externalUrl", n => { ExternalUrl = n.GetStringValue(); } },
                 { "lat", n => { Lat = n.GetDoubleValue(); } },
-                { "listing_name", n => { ListingName = n.GetStringValue(); } },
+                { "listingName", n => { ListingName = n.GetStringValue(); } },
                 { "lng", n => { Lng = n.GetDoubleValue(); } },
-                { "max_guests", n => { MaxGuests = n.GetIntValue(); } },
+                { "maxGuests", n => { MaxGuests = n.GetIntValue(); } },
                 { "nightly", n => { Nightly = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingCompNightly>(global::Repull.SDK.Models.ListingCompNightly.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "platform", n => { Platform = n.GetStringValue(); } },
                 { "ratings", n => { Ratings = n.GetObjectValue<global::Repull.SDK.Models.ListingComp_ratings>(global::Repull.SDK.Models.ListingComp_ratings.CreateFromDiscriminatorValue); } },
@@ -125,15 +131,15 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("bedrooms", Bedrooms);
-            writer.WriteIntValue("comp_id", CompId);
+            writer.WriteStringValue("compId", CompId);
             writer.WriteStringValue("currency", Currency);
-            writer.WriteDoubleValue("current_nightly_rate", CurrentNightlyRate);
-            writer.WriteDoubleValue("distance_km", DistanceKm);
-            writer.WriteStringValue("external_url", ExternalUrl);
+            writer.WriteDoubleValue("currentNightlyRate", CurrentNightlyRate);
+            writer.WriteDoubleValue("distanceKm", DistanceKm);
+            writer.WriteStringValue("externalUrl", ExternalUrl);
             writer.WriteDoubleValue("lat", Lat);
-            writer.WriteStringValue("listing_name", ListingName);
+            writer.WriteStringValue("listingName", ListingName);
             writer.WriteDoubleValue("lng", Lng);
-            writer.WriteIntValue("max_guests", MaxGuests);
+            writer.WriteIntValue("maxGuests", MaxGuests);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingCompNightly>("nightly", Nightly);
             writer.WriteStringValue("platform", Platform);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingComp_ratings>("ratings", Ratings);

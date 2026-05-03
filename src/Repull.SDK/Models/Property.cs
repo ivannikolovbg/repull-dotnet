@@ -52,7 +52,13 @@ namespace Repull.SDK.Models
         public string ExternalId { get; set; }
 #endif
         /// <summary>Internal Repull property ID</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The latitude property</summary>
         public double? Latitude { get; set; }
         /// <summary>The longitude property</summary>
@@ -122,7 +128,7 @@ namespace Repull.SDK.Models
                 { "city", n => { City = n.GetStringValue(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
                 { "externalId", n => { ExternalId = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "latitude", n => { Latitude = n.GetDoubleValue(); } },
                 { "longitude", n => { Longitude = n.GetDoubleValue(); } },
                 { "maxGuests", n => { MaxGuests = n.GetIntValue(); } },
@@ -145,7 +151,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("city", City);
             writer.WriteStringValue("country", Country);
             writer.WriteStringValue("externalId", ExternalId);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteDoubleValue("latitude", Latitude);
             writer.WriteDoubleValue("longitude", Longitude);
             writer.WriteIntValue("maxGuests", MaxGuests);

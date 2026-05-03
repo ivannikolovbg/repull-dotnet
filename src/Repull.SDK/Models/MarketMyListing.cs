@@ -30,7 +30,13 @@ namespace Repull.SDK.Models
         public string City { get; set; }
 #endif
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The lat property</summary>
         public double? Lat { get; set; }
         /// <summary>The lng property</summary>
@@ -84,7 +90,7 @@ namespace Repull.SDK.Models
                 { "blocked", n => { Blocked = n.GetBoolValue(); } },
                 { "bookedNights", n => { BookedNights = n.GetIntValue(); } },
                 { "city", n => { City = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "lat", n => { Lat = n.GetDoubleValue(); } },
                 { "lng", n => { Lng = n.GetDoubleValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -104,7 +110,7 @@ namespace Repull.SDK.Models
             writer.WriteBoolValue("blocked", Blocked);
             writer.WriteIntValue("bookedNights", BookedNights);
             writer.WriteStringValue("city", City);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteDoubleValue("lat", Lat);
             writer.WriteDoubleValue("lng", Lng);
             writer.WriteStringValue("name", Name);

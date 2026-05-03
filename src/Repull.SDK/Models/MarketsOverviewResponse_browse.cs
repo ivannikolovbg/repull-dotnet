@@ -60,7 +60,7 @@ namespace Repull.SDK.Models
             {
                 { "categories", n => { Categories = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.MarketBrowseCategory>(global::Repull.SDK.Models.MarketBrowseCategory.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "featured", n => { Featured = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.MarketBrowseFeatured>(global::Repull.SDK.Models.MarketBrowseFeatured.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "total_available", n => { TotalAvailable = n.GetIntValue(); } },
+                { "totalAvailable", n => { TotalAvailable = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.MarketBrowseCategory>("categories", Categories);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.MarketBrowseFeatured>("featured", Featured);
-            writer.WriteIntValue("total_available", TotalAvailable);
+            writer.WriteIntValue("totalAvailable", TotalAvailable);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

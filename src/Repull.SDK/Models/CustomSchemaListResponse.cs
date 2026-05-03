@@ -23,6 +23,14 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.CustomSchemaSummary> Data { get; set; }
 #endif
+        /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Pagination? Pagination { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Pagination Pagination { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.CustomSchemaListResponse"/> and sets the default values.
         /// </summary>
@@ -49,6 +57,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.CustomSchemaSummary>(global::Repull.SDK.Models.CustomSchemaSummary.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.Pagination>(global::Repull.SDK.Models.Pagination.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -59,6 +68,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.CustomSchemaSummary>("data", Data);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Pagination>("pagination", Pagination);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -33,7 +33,13 @@ namespace Repull.SDK.Models
         public global::Repull.SDK.Models.ConnectHost Host { get; set; }
 #endif
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -72,7 +78,7 @@ namespace Repull.SDK.Models
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
                 { "host", n => { Host = n.GetObjectValue<global::Repull.SDK.Models.ConnectHost>(global::Repull.SDK.Models.ConnectHost.CreateFromDiscriminatorValue); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Connection_status>(); } },
             };
@@ -87,7 +93,7 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectHost>("host", Host);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("provider", Provider);
             writer.WriteEnumValue<global::Repull.SDK.Models.Connection_status>("status", Status);
             writer.WriteAdditionalData(AdditionalData);

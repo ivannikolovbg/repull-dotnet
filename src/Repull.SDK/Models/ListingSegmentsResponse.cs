@@ -18,7 +18,13 @@ namespace Repull.SDK.Models
         /// <summary>The level property</summary>
         public global::Repull.SDK.Models.ListingSegmentsResponse_level? Level { get; set; }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>The myQualityTier property</summary>
         public global::Repull.SDK.Models.ListingSegmentsResponse_myQualityTier? MyQualityTier { get; set; }
         /// <summary>The source listing&apos;s own `ai_segment` (or null if not yet scored).</summary>
@@ -89,7 +95,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "level", n => { Level = n.GetEnumValue<global::Repull.SDK.Models.ListingSegmentsResponse_level>(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "myQualityTier", n => { MyQualityTier = n.GetEnumValue<global::Repull.SDK.Models.ListingSegmentsResponse_myQualityTier>(); } },
                 { "mySegment", n => { MySegment = n.GetStringValue(); } },
                 { "qualityTiers", n => { QualityTiers = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingQualityTier>(global::Repull.SDK.Models.ListingQualityTier.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -107,7 +113,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingSegmentsResponse_level>("level", Level);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingSegmentsResponse_myQualityTier>("myQualityTier", MyQualityTier);
             writer.WriteStringValue("mySegment", MySegment);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingQualityTier>("qualityTiers", QualityTiers);

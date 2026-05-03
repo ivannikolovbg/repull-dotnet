@@ -33,7 +33,7 @@ namespace Repull.SDK.V1.Channels.Booking.Sync
         {
         }
         /// <summary>
-        /// Bulk sync to Booking.com
+        /// Trigger a full bulk sync of properties + availability + rates to Booking.com. Runs async — returns 202 with a job id; poll `/v1/sync/jobs/{id}` for status.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -51,7 +51,7 @@ namespace Repull.SDK.V1.Channels.Booking.Sync
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Bulk sync to Booking.com
+        /// Trigger a full bulk sync of properties + availability + rates to Booking.com. Runs async — returns 202 with a job id; poll `/v1/sync/jobs/{id}` for status.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

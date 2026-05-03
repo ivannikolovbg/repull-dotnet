@@ -7,37 +7,54 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// LAST-RESORT contact handle. Only set on errors that genuinely cannot be self-fixed (billing dispute, account-state corruption, OAuth partner intervention). Never fall back to support before trying `fix` and `docs_url`.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class ReviewGetResponse : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class Error_error_support : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A guest or host review unified across channels. Returned by `GET /v1/reviews` and `GET /v1/reviews/{id}`. Populated from main vanio&apos;s unified `reviews` table after the per-channel backfill cron has run.</summary>
+        /// <summary>The email property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Review? Data { get; set; }
+        public string? Email { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Review Data { get; set; }
+        public string Email { get; set; }
+#endif
+        /// <summary>Internal reference to quote when contacting support.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Reference { get; set; }
+#nullable restore
+#else
+        public string Reference { get; set; }
+#endif
+        /// <summary>The url property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Url { get; set; }
+#nullable restore
+#else
+        public string Url { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.ReviewGetResponse"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.Error_error_support"/> and sets the default values.
         /// </summary>
-        public ReviewGetResponse()
+        public Error_error_support()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.ReviewGetResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.Error_error_support"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.ReviewGetResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.Error_error_support CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.ReviewGetResponse();
+            return new global::Repull.SDK.Models.Error_error_support();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -47,7 +64,9 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data", n => { Data = n.GetObjectValue<global::Repull.SDK.Models.Review>(global::Repull.SDK.Models.Review.CreateFromDiscriminatorValue); } },
+                { "email", n => { Email = n.GetStringValue(); } },
+                { "reference", n => { Reference = n.GetStringValue(); } },
+                { "url", n => { Url = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -57,7 +76,9 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Repull.SDK.Models.Review>("data", Data);
+            writer.WriteStringValue("email", Email);
+            writer.WriteStringValue("reference", Reference);
+            writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

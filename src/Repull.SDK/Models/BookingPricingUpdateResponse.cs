@@ -22,7 +22,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors> Errors { get; set; }
 #endif
-        /// <summary>The hotel_id property</summary>
+        /// <summary>The hotelId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? HotelId { get; set; }
@@ -30,8 +30,14 @@ namespace Repull.SDK.Models
 #else
         public string HotelId { get; set; }
 #endif
-        /// <summary>The listing_id property</summary>
-        public int? ListingId { get; set; }
+        /// <summary>The listingId property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>Number of updates Booking.com accepted as `success`. Falls back to total update count when Booking omits per-update status on full success.</summary>
         public int? Pushed { get; set; }
         /// <summary>Verbatim Booking response envelope for debugging.</summary>
@@ -70,8 +76,8 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>(global::Repull.SDK.Models.BookingPricingUpdateResponse_errors.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "hotel_id", n => { HotelId = n.GetStringValue(); } },
-                { "listing_id", n => { ListingId = n.GetIntValue(); } },
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "pushed", n => { Pushed = n.GetIntValue(); } },
                 { "raw", n => { Raw = n.GetObjectValue<global::Repull.SDK.Models.BookingPricingUpdateResponse_raw>(global::Repull.SDK.Models.BookingPricingUpdateResponse_raw.CreateFromDiscriminatorValue); } },
                 { "requested", n => { Requested = n.GetIntValue(); } },
@@ -85,8 +91,8 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>("errors", Errors);
-            writer.WriteStringValue("hotel_id", HotelId);
-            writer.WriteIntValue("listing_id", ListingId);
+            writer.WriteStringValue("hotelId", HotelId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteIntValue("pushed", Pushed);
             writer.WriteObjectValue<global::Repull.SDK.Models.BookingPricingUpdateResponse_raw>("raw", Raw);
             writer.WriteIntValue("requested", Requested);

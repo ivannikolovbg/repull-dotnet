@@ -62,7 +62,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "avg_adr", n => { AvgAdr = n.GetDoubleValue(); } },
+                { "avgAdr", n => { AvgAdr = n.GetDoubleValue(); } },
                 { "city", n => { City = n.GetStringValue(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
                 { "listings", n => { Listings = n.GetIntValue(); } },
@@ -76,7 +76,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDoubleValue("avg_adr", AvgAdr);
+            writer.WriteDoubleValue("avgAdr", AvgAdr);
             writer.WriteStringValue("city", City);
             writer.WriteStringValue("country", Country);
             writer.WriteIntValue("listings", Listings);

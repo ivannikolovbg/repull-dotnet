@@ -15,7 +15,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The avg_adr property</summary>
+        /// <summary>The avgAdr property</summary>
         public double? AvgAdr { get; set; }
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -70,7 +70,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "avg_adr", n => { AvgAdr = n.GetDoubleValue(); } },
+                { "avgAdr", n => { AvgAdr = n.GetDoubleValue(); } },
                 { "city", n => { City = n.GetStringValue(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
@@ -85,7 +85,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDoubleValue("avg_adr", AvgAdr);
+            writer.WriteDoubleValue("avgAdr", AvgAdr);
             writer.WriteStringValue("city", City);
             writer.WriteStringValue("country", Country);
             writer.WriteStringValue("currency", Currency);

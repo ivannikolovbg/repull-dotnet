@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Cursor-paginated conversation list. Pass `pagination.next_cursor` back as `?cursor=` to fetch the next page.
+    /// Cursor-paginated conversation list. Pass `pagination.nextCursor` back as `?cursor=` to fetch the next page.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationListResponse : IAdditionalDataHolder, IParsable
@@ -23,7 +23,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.Conversation> Data { get; set; }
 #endif
-        /// <summary>Cursor-based pagination. Pass `next_cursor` back as `cursor` to fetch the next page. When `has_more` is `false` you are done.</summary>
+        /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.CursorPagination? Pagination { get; set; }

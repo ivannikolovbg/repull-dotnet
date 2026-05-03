@@ -62,7 +62,13 @@ namespace Repull.SDK.V1.Reservations
         public string GuestPhone { get; set; }
 #endif
         /// <summary>The propertyId property</summary>
-        public int? PropertyId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PropertyId { get; set; }
+#nullable restore
+#else
+        public string PropertyId { get; set; }
+#endif
         /// <summary>The totalPrice property</summary>
         public double? TotalPrice { get; set; }
         /// <summary>
@@ -98,7 +104,7 @@ namespace Repull.SDK.V1.Reservations
                 { "guestFirstName", n => { GuestFirstName = n.GetStringValue(); } },
                 { "guestLastName", n => { GuestLastName = n.GetStringValue(); } },
                 { "guestPhone", n => { GuestPhone = n.GetStringValue(); } },
-                { "propertyId", n => { PropertyId = n.GetIntValue(); } },
+                { "propertyId", n => { PropertyId = n.GetStringValue(); } },
                 { "totalPrice", n => { TotalPrice = n.GetDoubleValue(); } },
             };
         }
@@ -117,7 +123,7 @@ namespace Repull.SDK.V1.Reservations
             writer.WriteStringValue("guestFirstName", GuestFirstName);
             writer.WriteStringValue("guestLastName", GuestLastName);
             writer.WriteStringValue("guestPhone", GuestPhone);
-            writer.WriteIntValue("propertyId", PropertyId);
+            writer.WriteStringValue("propertyId", PropertyId);
             writer.WriteDoubleValue("totalPrice", TotalPrice);
             writer.WriteAdditionalData(AdditionalData);
         }

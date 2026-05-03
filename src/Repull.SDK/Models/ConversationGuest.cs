@@ -40,7 +40,13 @@ namespace Repull.SDK.Models
         public string DisplayName { get; set; }
 #endif
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConversationGuest"/> and sets the default values.
         /// </summary>
@@ -69,7 +75,7 @@ namespace Repull.SDK.Models
                 { "avatarUrl", n => { AvatarUrl = n.GetStringValue(); } },
                 { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConversationGuestContact>(global::Repull.SDK.Models.ConversationGuestContact.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "displayName", n => { DisplayName = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -82,7 +88,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("avatarUrl", AvatarUrl);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConversationGuestContact>("contacts", Contacts);
             writer.WriteStringValue("displayName", DisplayName);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -47,7 +47,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
         {
         }
         /// <summary>
-        /// List Airbnb listings
+        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. Sourced from the Airbnb Listing API. Listings sync automatically every few minutes — pass `?refresh=true` to force a fresh upstream pull.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbListingListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbListingListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbListingListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create/push Airbnb listing
+        /// Create a new Airbnb listing or push an existing Repull listing to Airbnb. Requires a connected Airbnb account. Returns the created listing id; publishing happens via the listing-action endpoint.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbListing"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -83,7 +83,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbListing>(requestInfo, global::Repull.SDK.Models.AirbnbListing.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Airbnb listings
+        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. Sourced from the Airbnb Listing API. Listings sync automatically every few minutes — pass `?refresh=true` to force a fresh upstream pull.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -102,7 +102,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
             return requestInfo;
         }
         /// <summary>
-        /// Create/push Airbnb listing
+        /// Create a new Airbnb listing or push an existing Repull listing to Airbnb. Requires a connected Airbnb account. Returns the created listing id; publishing happens via the listing-action endpoint.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

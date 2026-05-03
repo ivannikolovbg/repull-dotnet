@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
         {
         }
         /// <summary>
-        /// Get Airbnb messages
+        /// Fetch the full message log for an Airbnb thread, ordered oldest-to-newest. Walk pages with `?cursor=` until `pagination.hasMore` is `false`.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.MessageListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -52,7 +52,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MessageListResponse>(requestInfo, global::Repull.SDK.Models.MessageListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Send Airbnb message
+        /// Send a message in an Airbnb thread as the host. Airbnb enforces content rules (no off-platform contact info, no external URLs) — violating messages are rejected upstream and surface as `airbnb_error`.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get Airbnb messages
+        /// Fetch the full message log for an Airbnb thread, ordered oldest-to-newest. Walk pages with `?cursor=` until `pagination.hasMore` is `false`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
             return requestInfo;
         }
         /// <summary>
-        /// Send Airbnb message
+        /// Send a message in an Airbnb thread as the host. Airbnb enforces content rules (no off-platform contact info, no external URLs) — violating messages are rejected upstream and surface as `airbnb_error`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

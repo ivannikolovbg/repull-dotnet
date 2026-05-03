@@ -31,7 +31,7 @@ namespace Repull.SDK.Models
 #else
         public string Country { get; set; }
 #endif
-        /// <summary>The created_at property</summary>
+        /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Short display name (first name).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -60,7 +60,13 @@ namespace Repull.SDK.Models
         /// <summary>The firstStayedAt property</summary>
         public DateTimeOffset? FirstStayedAt { get; set; }
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>Guest&apos;s preferred language (ISO 639-1).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -116,12 +122,12 @@ namespace Repull.SDK.Models
             {
                 { "avatarUrl", n => { AvatarUrl = n.GetStringValue(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "displayName", n => { DisplayName = n.GetStringValue(); } },
                 { "displayNameLong", n => { DisplayNameLong = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "firstStayedAt", n => { FirstStayedAt = n.GetDateTimeOffsetValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "lastStayedAt", n => { LastStayedAt = n.GetDateTimeOffsetValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
@@ -138,12 +144,12 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("avatarUrl", AvatarUrl);
             writer.WriteStringValue("country", Country);
-            writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("displayName", DisplayName);
             writer.WriteStringValue("displayNameLong", DisplayNameLong);
             writer.WriteStringValue("email", Email);
             writer.WriteDateTimeOffsetValue("firstStayedAt", FirstStayedAt);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("language", Language);
             writer.WriteDateTimeOffsetValue("lastStayedAt", LastStayedAt);
             writer.WriteStringValue("phone", Phone);

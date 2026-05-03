@@ -30,9 +30,9 @@ namespace Repull.SDK.Models
 #else
         public string Category { get; set; }
 #endif
-        /// <summary>The created_at property</summary>
+        /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>The created_by property</summary>
+        /// <summary>The createdBy property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CreatedBy { get; set; }
@@ -41,7 +41,13 @@ namespace Repull.SDK.Models
         public string CreatedBy { get; set; }
 #endif
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestNote"/> and sets the default values.
         /// </summary>
@@ -69,9 +75,9 @@ namespace Repull.SDK.Models
             {
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "category", n => { Category = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "created_by", n => { CreatedBy = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "createdBy", n => { CreatedBy = n.GetStringValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -83,9 +89,9 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("category", Category);
-            writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
-            writer.WriteStringValue("created_by", CreatedBy);
-            writer.WriteIntValue("id", Id);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteStringValue("createdBy", CreatedBy);
+            writer.WriteStringValue("id", Id);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

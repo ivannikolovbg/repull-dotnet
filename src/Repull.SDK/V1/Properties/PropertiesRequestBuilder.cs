@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Properties
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PropertiesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?limit*,offset*,provider*}", pathParameters)
+        public PropertiesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?cursor*,include_total*,limit*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,16 +56,17 @@ namespace Repull.SDK.V1.Properties
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PropertiesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?limit*,offset*,provider*}", rawUrl)
+        public PropertiesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?cursor*,include_total*,limit*,status*}", rawUrl)
         {
         }
         /// <summary>
-        /// Returns all properties across connected PMS platforms. Supports pagination and filtering by provider.
+        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.PropertyListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.PropertyListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -79,11 +80,12 @@ namespace Repull.SDK.V1.Properties
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.PropertyListResponse>(requestInfo, global::Repull.SDK.Models.PropertyListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns all properties across connected PMS platforms. Supports pagination and filtering by provider.
+        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -111,27 +113,41 @@ namespace Repull.SDK.V1.Properties
             return new global::Repull.SDK.V1.Properties.PropertiesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Returns all properties across connected PMS platforms. Supports pagination and filtering by provider.
+        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PropertiesRequestBuilderGetQueryParameters 
         {
-            /// <summary>Max items per page</summary>
-            [QueryParameter("limit")]
-            public int? Limit { get; set; }
-            /// <summary>Pagination offset</summary>
-            [QueryParameter("offset")]
-            public int? Offset { get; set; }
-            /// <summary>Filter by PMS provider</summary>
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            [QueryParameter("provider")]
-            public string? Provider { get; set; }
+            [QueryParameter("cursor")]
+            public string? Cursor { get; set; }
 #nullable restore
 #else
-            [QueryParameter("provider")]
-            public string Provider { get; set; }
+            [QueryParameter("cursor")]
+            public string Cursor { get; set; }
 #endif
+            /// <summary>When `true` (default), the response&apos;s `pagination.total` carries the count of rows matching the current filter, across all pages. Pass `false` to skip the count for very large workspaces where the per-page COUNT(*) cost matters.</summary>
+            [QueryParameter("include_total")]
+            public bool? IncludeTotal { get; set; }
+            /// <summary>Page size (max 100). Requests over the cap return 422.</summary>
+            [QueryParameter("limit")]
+            public int? Limit { get; set; }
+            /// <summary>Filter by status. Default returns active only; pass `all` to include inactive.</summary>
+            [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("status")]
+            public string? Status { get; set; }
+#nullable restore
+#else
+            [QueryParameter("status")]
+            public string Status { get; set; }
+#endif
+            /// <summary>Filter by status. Default returns active only; pass `all` to include inactive.</summary>
+            [QueryParameter("status")]
+            public global::Repull.SDK.V1.Properties.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.

@@ -8,14 +8,14 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Returned by `GET /v1/channels/booking/listings/{id}/pricing`. Mirrors Booking&apos;s `getRoomRateAvailability` response with `hotel_id` and `listing_id` echoed back for SDK consumers.
+    /// Returned by `GET /v1/channels/booking/listings/{id}/pricing`. Mirrors Booking&apos;s `getRoomRateAvailability` response with `hotelId` and `listingId` echoed back for SDK consumers.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingPricingResponse : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The hotel_id property</summary>
+        /// <summary>The hotelId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? HotelId { get; set; }
@@ -23,8 +23,14 @@ namespace Repull.SDK.Models
 #else
         public string HotelId { get; set; }
 #endif
-        /// <summary>The listing_id property</summary>
-        public int? ListingId { get; set; }
+        /// <summary>The listingId property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingResponse"/> and sets the default values.
         /// </summary>
@@ -50,8 +56,8 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "hotel_id", n => { HotelId = n.GetStringValue(); } },
-                { "listing_id", n => { ListingId = n.GetIntValue(); } },
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -61,8 +67,8 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("hotel_id", HotelId);
-            writer.WriteIntValue("listing_id", ListingId);
+            writer.WriteStringValue("hotelId", HotelId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

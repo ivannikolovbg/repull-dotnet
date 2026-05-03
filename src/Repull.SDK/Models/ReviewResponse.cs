@@ -23,7 +23,7 @@ namespace Repull.SDK.Models
 #else
         public string Body { get; set; }
 #endif
-        /// <summary>The submitted_at property</summary>
+        /// <summary>The submittedAt property</summary>
         public DateTimeOffset? SubmittedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReviewResponse"/> and sets the default values.
@@ -51,7 +51,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "submitted_at", n => { SubmittedAt = n.GetDateTimeOffsetValue(); } },
+                { "submittedAt", n => { SubmittedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("body", Body);
-            writer.WriteDateTimeOffsetValue("submitted_at", SubmittedAt);
+            writer.WriteDateTimeOffsetValue("submittedAt", SubmittedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

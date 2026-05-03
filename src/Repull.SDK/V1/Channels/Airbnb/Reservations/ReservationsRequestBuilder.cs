@@ -47,7 +47,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations
         {
         }
         /// <summary>
-        /// List Airbnb reservations
+        /// List reservations sourced directly from Airbnb. Use this when you need Airbnb-specific fields (guest payout split, cancellation policy snapshot) that the unified `/v1/reservations` endpoint flattens away.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbReservationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReservationListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbReservationListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Airbnb reservations
+        /// List reservations sourced directly from Airbnb. Use this when you need Airbnb-specific fields (guest payout split, cancellation policy snapshot) that the unified `/v1/reservations` endpoint flattens away.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

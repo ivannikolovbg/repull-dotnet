@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Plumguide.Listings
         {
         }
         /// <summary>
-        /// List Plumguide listings
+        /// List Plumguide listings this workspace has access to. Plumguide is approval-based — listings appear once Plumguide has accepted them.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.PlumguideListingListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -52,7 +52,7 @@ namespace Repull.SDK.V1.Channels.Plumguide.Listings
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.PlumguideListingListResponse>(requestInfo, global::Repull.SDK.Models.PlumguideListingListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Plumguide listings
+        /// List Plumguide listings this workspace has access to. Plumguide is approval-based — listings appear once Plumguide has accepted them.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

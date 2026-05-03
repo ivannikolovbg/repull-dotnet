@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Cursor-paginated reservation list. Pass `pagination.next_cursor` back as `?cursor=` to fetch the next page; stop when `pagination.has_more` is `false`. The `total` field is the count of rows matching the current filter (across all pages).Legacy `?offset=` consumers continue to receive `pagination.limit` + `pagination.offset` during the deprecation window. A `Deprecation: true` header (with a `Sunset` date) is set on responses that came in via `?offset=` — migrate to `?cursor=`.
+    /// Cursor-paginated reservation list. Pass `pagination.nextCursor` back as `?cursor=` to fetch the next page; stop when `pagination.hasMore` is `false`. The `total` field is the count of rows matching the current filter (across all pages); pass `?include_total=false` to skip the COUNT(*) on very large workspaces.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationListResponse : IAdditionalDataHolder, IParsable
@@ -23,13 +23,13 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.Reservation> Data { get; set; }
 #endif
-        /// <summary>Hybrid pagination envelope for `/v1/reservations`. Always populates `next_cursor` + `has_more` + `total`. When the request used the deprecated `?offset=` path, also populates `limit` + `offset`.</summary>
+        /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationPagination? Pagination { get; set; }
+        public global::Repull.SDK.Models.Pagination? Pagination { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationPagination Pagination { get; set; }
+        public global::Repull.SDK.Models.Pagination Pagination { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationListResponse"/> and sets the default values.
@@ -57,7 +57,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Reservation>(global::Repull.SDK.Models.Reservation.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.ReservationPagination>(global::Repull.SDK.Models.ReservationPagination.CreateFromDiscriminatorValue); } },
+                { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.Pagination>(global::Repull.SDK.Models.Pagination.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Reservation>("data", Data);
-            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationPagination>("pagination", Pagination);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Pagination>("pagination", Pagination);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

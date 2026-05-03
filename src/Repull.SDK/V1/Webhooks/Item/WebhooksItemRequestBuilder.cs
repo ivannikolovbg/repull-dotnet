@@ -58,7 +58,7 @@ namespace Repull.SDK.V1.Webhooks.Item
         {
         }
         /// <summary>
-        /// Delete webhook subscription
+        /// Delete a webhook subscription. In-flight deliveries already on the queue are still attempted; new events stop firing immediately.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -76,7 +76,7 @@ namespace Repull.SDK.V1.Webhooks.Item
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get webhook subscription
+        /// Fetch a single webhook subscription by id. Use the `deliveries` sub-resource to list recent attempts, and `ping` to send a test event.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.WebhookSubscription"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -114,7 +114,7 @@ namespace Repull.SDK.V1.Webhooks.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.WebhookSubscription>(requestInfo, global::Repull.SDK.Models.WebhookSubscription.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Delete webhook subscription
+        /// Delete a webhook subscription. In-flight deliveries already on the queue are still attempted; new events stop firing immediately.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -132,7 +132,7 @@ namespace Repull.SDK.V1.Webhooks.Item
             return requestInfo;
         }
         /// <summary>
-        /// Get webhook subscription
+        /// Fetch a single webhook subscription by id. Use the `deliveries` sub-resource to list recent attempts, and `ping` to send a test event.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

@@ -14,11 +14,11 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The avg_adr property</summary>
+        /// <summary>The avgAdr property</summary>
         public double? AvgAdr { get; set; }
-        /// <summary>The sample_size property</summary>
+        /// <summary>The sampleSize property</summary>
         public int? SampleSize { get; set; }
-        /// <summary>The share_pct property</summary>
+        /// <summary>The sharePct property</summary>
         public double? SharePct { get; set; }
         /// <summary>The tier property</summary>
         public global::Repull.SDK.Models.ListingQualityTier_tier? Tier { get; set; }
@@ -47,9 +47,9 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "avg_adr", n => { AvgAdr = n.GetDoubleValue(); } },
-                { "sample_size", n => { SampleSize = n.GetIntValue(); } },
-                { "share_pct", n => { SharePct = n.GetDoubleValue(); } },
+                { "avgAdr", n => { AvgAdr = n.GetDoubleValue(); } },
+                { "sampleSize", n => { SampleSize = n.GetIntValue(); } },
+                { "sharePct", n => { SharePct = n.GetDoubleValue(); } },
                 { "tier", n => { Tier = n.GetEnumValue<global::Repull.SDK.Models.ListingQualityTier_tier>(); } },
             };
         }
@@ -60,9 +60,9 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDoubleValue("avg_adr", AvgAdr);
-            writer.WriteIntValue("sample_size", SampleSize);
-            writer.WriteDoubleValue("share_pct", SharePct);
+            writer.WriteDoubleValue("avgAdr", AvgAdr);
+            writer.WriteIntValue("sampleSize", SampleSize);
+            writer.WriteDoubleValue("sharePct", SharePct);
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingQualityTier_tier>("tier", Tier);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -25,7 +25,7 @@ namespace Repull.SDK.Models
 #else
         public string Category { get; set; }
 #endif
-        /// <summary>The demand_impact property</summary>
+        /// <summary>The demandImpact property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DemandImpact { get; set; }
@@ -33,7 +33,7 @@ namespace Repull.SDK.Models
 #else
         public string DemandImpact { get; set; }
 #endif
-        /// <summary>The end_date property</summary>
+        /// <summary>The endDate property</summary>
         public Date? EndDate { get; set; }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -55,11 +55,11 @@ namespace Repull.SDK.Models
         public double? Lat { get; set; }
         /// <summary>The lng property</summary>
         public double? Lng { get; set; }
-        /// <summary>The local_rank property</summary>
+        /// <summary>The localRank property</summary>
         public double? LocalRank { get; set; }
         /// <summary>The rank property</summary>
         public double? Rank { get; set; }
-        /// <summary>The start_date property</summary>
+        /// <summary>The startDate property</summary>
         public Date? StartDate { get; set; }
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -96,15 +96,15 @@ namespace Repull.SDK.Models
             {
                 { "attendance", n => { Attendance = n.GetIntValue(); } },
                 { "category", n => { Category = n.GetStringValue(); } },
-                { "demand_impact", n => { DemandImpact = n.GetStringValue(); } },
-                { "end_date", n => { EndDate = n.GetDateValue(); } },
+                { "demandImpact", n => { DemandImpact = n.GetStringValue(); } },
+                { "endDate", n => { EndDate = n.GetDateValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "labels", n => { Labels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "lat", n => { Lat = n.GetDoubleValue(); } },
                 { "lng", n => { Lng = n.GetDoubleValue(); } },
-                { "local_rank", n => { LocalRank = n.GetDoubleValue(); } },
+                { "localRank", n => { LocalRank = n.GetDoubleValue(); } },
                 { "rank", n => { Rank = n.GetDoubleValue(); } },
-                { "start_date", n => { StartDate = n.GetDateValue(); } },
+                { "startDate", n => { StartDate = n.GetDateValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
         }
@@ -117,15 +117,15 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("attendance", Attendance);
             writer.WriteStringValue("category", Category);
-            writer.WriteStringValue("demand_impact", DemandImpact);
-            writer.WriteDateValue("end_date", EndDate);
+            writer.WriteStringValue("demandImpact", DemandImpact);
+            writer.WriteDateValue("endDate", EndDate);
             writer.WriteStringValue("id", Id);
             writer.WriteCollectionOfPrimitiveValues<string>("labels", Labels);
             writer.WriteDoubleValue("lat", Lat);
             writer.WriteDoubleValue("lng", Lng);
-            writer.WriteDoubleValue("local_rank", LocalRank);
+            writer.WriteDoubleValue("localRank", LocalRank);
             writer.WriteDoubleValue("rank", Rank);
-            writer.WriteDateValue("start_date", StartDate);
+            writer.WriteDateValue("startDate", StartDate);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -5,6 +5,73 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-05-03
+
+### Changed (BREAKING)
+- **All ID fields are now string-typed across the entire SDK.** The OpenAPI spec
+  was tightened to match the live API: `Reservation.Id`, `Reservation.ListingId`,
+  `Reservation.GuestId`, and equivalent fields on related models are now `string?`
+  instead of `int?`. Update any callers that did `r.Id.HasValue` /
+  `r.Id.Value.ToString()` to use `r.Id` directly. The `Reservation.IdString`
+  back-compat alias is retained but deprecated — prefer `Id` in new code.
+- **Pagination canonical envelope.** All list endpoints now return
+  `{ data: [...], pagination: { nextCursor, hasMore, total? } }`. Required
+  fields on `Pagination` are `nextCursor` (nullable string) + `hasMore`
+  (boolean). `total` is present when `?include_total=true` (the default).
+- **`POST /v1/connect/airbnb` response field rename**: `oauthUrl` → `url`
+  on `ConnectSession`. Update callers reading the OAuth redirect URL.
+- **`/v1/markets` response shape**: top-level `markets` array → `data`,
+  `total_in_filter` → `total` (under the `pagination` envelope).
+- **`/v1/reviews/{id}` returns a bare `Review` object** (no envelope), aligning
+  with the rest of the detail endpoints.
+- **`/v1/channels/airbnb/*` list endpoints now use the canonical
+  `{ data, pagination }` envelope** instead of bespoke per-endpoint shapes.
+- All field names are camelCase on the wire (PascalCase in C# via Kiota's
+  `JsonPropertyName` attributes); verify any hand-rolled JSON code paths.
+
+### Added
+- Self-documenting `Error` shape: every error response now includes
+  `error.code`, `error.message`, `error.docsUrl`, `error.support.{email,url}`,
+  and per-error `requestId` for support escalation.
+- Rate-limit response headers (`X-RateLimit-Limit`, `X-RateLimit-Remaining`,
+  `X-RateLimit-Reset`) declared on all endpoints.
+- `X-Schema` request header declared on additional detail endpoints (parity
+  with the v0.1.2 list-endpoint additions).
+- New detail endpoints across reservations, listings, guests, conversations,
+  reviews, channels, and markets domains — see the OpenAPI spec at
+  https://api.repull.dev/openapi.json for the full surface.
+- Workspace API keys now have a `keyPrefix` field (`sk_live_…` / `sk_test_…`)
+  for safe display in dashboards.
+
+### Migration
+
+```csharp
+// Before (v0.1.x) — int IDs
+int? rid = r.Id;
+string idText = r.Id?.ToString() ?? "";
+
+// After (v0.2.0) — string IDs
+string? idText = r.Id;            // already a string
+string? listingId = r.ListingId;  // also a string now
+string? guestId = r.GuestId;      // also a string now
+
+// Before — Connect Airbnb response
+var oauth = session.OauthUrl;
+
+// After
+var oauth = session.Url;
+
+// Before — Markets list
+foreach (var m in resp.Markets) { /* ... */ }
+int? totalCount = resp.TotalInFilter;
+
+// After — canonical envelope
+foreach (var m in resp.Data) { /* ... */ }
+int? totalCount = resp.Pagination?.Total;
+```
+
+Regenerated against the latest `https://api.repull.dev/openapi.json` via Kiota 1.31.1.
+
 ## [0.1.2] - 2026-05-02
 
 ### Added

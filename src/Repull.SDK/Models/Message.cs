@@ -41,7 +41,7 @@ namespace Repull.SDK.Models
 #else
         public string Channel { get; set; }
 #endif
-        /// <summary>The delivered_at property</summary>
+        /// <summary>The deliveredAt property</summary>
         public DateTimeOffset? DeliveredAt { get; set; }
         /// <summary>The direction property</summary>
         public global::Repull.SDK.Models.Message_direction? Direction { get; set; }
@@ -54,12 +54,18 @@ namespace Repull.SDK.Models
         public string ExternalMessageId { get; set; }
 #endif
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>`true` when the message was sent by a Vanio automation (template, schedule, etc.).</summary>
         public bool? IsAutomated { get; set; }
-        /// <summary>The read_at property</summary>
+        /// <summary>The readAt property</summary>
         public DateTimeOffset? ReadAt { get; set; }
-        /// <summary>The sender_avatar property</summary>
+        /// <summary>The senderAvatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SenderAvatar { get; set; }
@@ -67,7 +73,7 @@ namespace Repull.SDK.Models
 #else
         public string SenderAvatar { get; set; }
 #endif
-        /// <summary>The sender_name property</summary>
+        /// <summary>The senderName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SenderName { get; set; }
@@ -83,7 +89,7 @@ namespace Repull.SDK.Models
 #else
         public string SenderType { get; set; }
 #endif
-        /// <summary>The sent_at property</summary>
+        /// <summary>The sentAt property</summary>
         public DateTimeOffset? SentAt { get; set; }
         /// <summary>English translation when the original language is non-English and a translation has been computed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -118,21 +124,21 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "ai_generated", n => { AiGenerated = n.GetBoolValue(); } },
+                { "aiGenerated", n => { AiGenerated = n.GetBoolValue(); } },
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>(global::Repull.SDK.Models.ConversationMessageAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "channel", n => { Channel = n.GetStringValue(); } },
-                { "delivered_at", n => { DeliveredAt = n.GetDateTimeOffsetValue(); } },
+                { "deliveredAt", n => { DeliveredAt = n.GetDateTimeOffsetValue(); } },
                 { "direction", n => { Direction = n.GetEnumValue<global::Repull.SDK.Models.Message_direction>(); } },
-                { "external_message_id", n => { ExternalMessageId = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
-                { "is_automated", n => { IsAutomated = n.GetBoolValue(); } },
-                { "read_at", n => { ReadAt = n.GetDateTimeOffsetValue(); } },
-                { "sender_avatar", n => { SenderAvatar = n.GetStringValue(); } },
-                { "sender_name", n => { SenderName = n.GetStringValue(); } },
-                { "sender_type", n => { SenderType = n.GetStringValue(); } },
-                { "sent_at", n => { SentAt = n.GetDateTimeOffsetValue(); } },
-                { "translated_body", n => { TranslatedBody = n.GetStringValue(); } },
+                { "externalMessageId", n => { ExternalMessageId = n.GetStringValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "isAutomated", n => { IsAutomated = n.GetBoolValue(); } },
+                { "readAt", n => { ReadAt = n.GetDateTimeOffsetValue(); } },
+                { "senderAvatar", n => { SenderAvatar = n.GetStringValue(); } },
+                { "senderName", n => { SenderName = n.GetStringValue(); } },
+                { "senderType", n => { SenderType = n.GetStringValue(); } },
+                { "sentAt", n => { SentAt = n.GetDateTimeOffsetValue(); } },
+                { "translatedBody", n => { TranslatedBody = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -142,21 +148,21 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteBoolValue("ai_generated", AiGenerated);
+            writer.WriteBoolValue("aiGenerated", AiGenerated);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>("attachments", Attachments);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("channel", Channel);
-            writer.WriteDateTimeOffsetValue("delivered_at", DeliveredAt);
+            writer.WriteDateTimeOffsetValue("deliveredAt", DeliveredAt);
             writer.WriteEnumValue<global::Repull.SDK.Models.Message_direction>("direction", Direction);
-            writer.WriteStringValue("external_message_id", ExternalMessageId);
-            writer.WriteIntValue("id", Id);
-            writer.WriteBoolValue("is_automated", IsAutomated);
-            writer.WriteDateTimeOffsetValue("read_at", ReadAt);
-            writer.WriteStringValue("sender_avatar", SenderAvatar);
-            writer.WriteStringValue("sender_name", SenderName);
-            writer.WriteStringValue("sender_type", SenderType);
-            writer.WriteDateTimeOffsetValue("sent_at", SentAt);
-            writer.WriteStringValue("translated_body", TranslatedBody);
+            writer.WriteStringValue("externalMessageId", ExternalMessageId);
+            writer.WriteStringValue("id", Id);
+            writer.WriteBoolValue("isAutomated", IsAutomated);
+            writer.WriteDateTimeOffsetValue("readAt", ReadAt);
+            writer.WriteStringValue("senderAvatar", SenderAvatar);
+            writer.WriteStringValue("senderName", SenderName);
+            writer.WriteStringValue("senderType", SenderType);
+            writer.WriteDateTimeOffsetValue("sentAt", SentAt);
+            writer.WriteStringValue("translatedBody", TranslatedBody);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

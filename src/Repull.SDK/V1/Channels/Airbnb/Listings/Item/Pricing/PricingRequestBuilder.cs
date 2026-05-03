@@ -33,7 +33,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Pricing
         {
         }
         /// <summary>
-        /// Get Airbnb pricing
+        /// Read the current pricing config (base price, weekend uplift, length-of-stay discounts, smart-pricing bounds) for an Airbnb listing.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -51,7 +51,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Pricing
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update Airbnb pricing
+        /// Push pricing changes to Airbnb. The full pricing object is replaced — to patch a single field, GET first, mutate locally, then PUT the whole object.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -69,7 +69,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Pricing
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get Airbnb pricing
+        /// Read the current pricing config (base price, weekend uplift, length-of-stay discounts, smart-pricing bounds) for an Airbnb listing.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -87,7 +87,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Pricing
             return requestInfo;
         }
         /// <summary>
-        /// Update Airbnb pricing
+        /// Push pricing changes to Airbnb. The full pricing object is replaced — to patch a single field, GET first, mutate locally, then PUT the whole object.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

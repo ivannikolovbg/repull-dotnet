@@ -39,6 +39,7 @@ namespace Repull.SDK.V1.Markets.Item.Calendar
         /// <returns>A <see cref="global::Repull.SDK.Models.MarketCalendarResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.MarketCalendarResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Markets.Item.Calendar.CalendarRequestBuilder.CalendarRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +50,11 @@ namespace Repull.SDK.V1.Markets.Item.Calendar
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MarketCalendarResponse>(requestInfo, global::Repull.SDK.Models.MarketCalendarResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MarketCalendarResponse>(requestInfo, global::Repull.SDK.Models.MarketCalendarResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Date-by-date market view for a city — market avg / min / max nightly rate, occupancy %, Wheelhouse demand, events touching the date, and (when `listingId` is supplied) an overlay of the customer&apos;s own pricing + availability.

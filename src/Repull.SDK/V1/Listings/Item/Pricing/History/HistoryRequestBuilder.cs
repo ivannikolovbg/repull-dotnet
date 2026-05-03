@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public HistoryRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/pricing/history{?cursor*,end_date*,limit*,start_date*}", pathParameters)
+        public HistoryRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/pricing/history{?cursor*,endDate*,limit*,startDate*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public HistoryRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/pricing/history{?cursor*,end_date*,limit*,start_date*}", rawUrl)
+        public HistoryRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/pricing/history{?cursor*,endDate*,limit*,startDate*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
+        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingPricingHistoryResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingHistoryResponse>(requestInfo, global::Repull.SDK.Models.ListingPricingHistoryResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
+        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -93,12 +93,12 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
             return new global::Repull.SDK.V1.Listings.Item.Pricing.History.HistoryRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
+        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class HistoryRequestBuilderGetQueryParameters 
         {
-            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.next_cursor`. Omit to fetch the first page.</summary>
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("cursor")]
@@ -109,12 +109,12 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
             public string Cursor { get; set; }
 #endif
             /// <summary>Inclusive. Defaults to today + 90 days.</summary>
-            [QueryParameter("end_date")]
+            [QueryParameter("endDate")]
             public Date? EndDate { get; set; }
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Inclusive. Defaults to today - 90 days.</summary>
-            [QueryParameter("start_date")]
+            [QueryParameter("startDate")]
             public Date? StartDate { get; set; }
         }
         /// <summary>

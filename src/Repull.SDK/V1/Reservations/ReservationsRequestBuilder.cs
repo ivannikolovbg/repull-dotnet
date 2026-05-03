@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,limit*,listing_id*,offset*,platform*,status*}", pathParameters)
+        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,include_total*,limit*,listingId*,platform*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,15 +56,16 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,limit*,listing_id*,offset*,platform*,status*}", rawUrl)
+        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,include_total*,limit*,listingId*,platform*,status*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.next_cursor` from one response back as `?cursor=` on the next request. Stop when `pagination.has_more` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Deprecation:** The `?offset=` query param is supported for backward compatibility but is deprecated and will be removed after the `Sunset` header date. Responses to offset requests carry a `Deprecation: true` header. Migrate to `?cursor=`.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ReservationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.ReservationListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder.ReservationsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -75,10 +76,14 @@ namespace Repull.SDK.V1.Reservations
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ReservationListResponse>(requestInfo, global::Repull.SDK.Models.ReservationListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ReservationListResponse>(requestInfo, global::Repull.SDK.Models.ReservationListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create a reservation
+        /// Create a reservation in the source PMS. Required fields depend on the connected provider (e.g. Airbnb requires guest email; Booking.com requires hotel id). Validation errors return 422 with the offending `field` populated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.Reservation"/></returns>
         /// <param name="body">The request body</param>
@@ -98,7 +103,7 @@ namespace Repull.SDK.V1.Reservations
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Reservation>(requestInfo, global::Repull.SDK.Models.Reservation.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.next_cursor` from one response back as `?cursor=` on the next request. Stop when `pagination.has_more` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Deprecation:** The `?offset=` query param is supported for backward compatibility but is deprecated and will be removed after the `Sunset` header date. Responses to offset requests carry a `Deprecation: true` header. Migrate to `?cursor=`.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -117,7 +122,7 @@ namespace Repull.SDK.V1.Reservations
             return requestInfo;
         }
         /// <summary>
-        /// Create a reservation
+        /// Create a reservation in the source PMS. Required fields depend on the connected provider (e.g. Airbnb requires guest email; Booking.com requires hotel id). Validation errors return 422 with the offending `field` populated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -148,7 +153,7 @@ namespace Repull.SDK.V1.Reservations
             return new global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.next_cursor` from one response back as `?cursor=` on the next request. Stop when `pagination.has_more` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Deprecation:** The `?offset=` query param is supported for backward compatibility but is deprecated and will be removed after the `Sunset` header date. Responses to offset requests carry a `Deprecation: true` header. Migrate to `?cursor=`.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ReservationsRequestBuilderGetQueryParameters 
@@ -167,7 +172,7 @@ namespace Repull.SDK.V1.Reservations
             [Obsolete("")]
             [QueryParameter("checkInTo")]
             public Date? CheckInTo { get; set; }
-            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.next_cursor`. Omit to fetch the first page.</summary>
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("cursor")]
@@ -177,16 +182,15 @@ namespace Repull.SDK.V1.Reservations
             [QueryParameter("cursor")]
             public string Cursor { get; set; }
 #endif
+            /// <summary>When `true` (default), the response&apos;s `pagination.total` carries the count of rows matching the current filter, across all pages. Pass `false` to skip the count for very large workspaces where the per-page COUNT(*) cost matters.</summary>
+            [QueryParameter("include_total")]
+            public bool? IncludeTotal { get; set; }
             /// <summary>Page size (max 100). Requests over the cap return 422.</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Filter to a single listing</summary>
-            [QueryParameter("listing_id")]
+            [QueryParameter("listingId")]
             public int? ListingId { get; set; }
-            /// <summary>Deprecated — use `cursor` instead. Will be removed after the `Sunset` response header date.</summary>
-            [Obsolete("")]
-            [QueryParameter("offset")]
-            public int? Offset { get; set; }
             /// <summary>Filter by booking platform</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

@@ -20,7 +20,13 @@ namespace Repull.SDK.Models
         /// <summary>The compPositionTarget property</summary>
         public global::Repull.SDK.Models.ListingPricingStrategy_compPositionTarget? CompPositionTarget { get; set; }
         /// <summary>The customerId property</summary>
-        public int? CustomerId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CustomerId { get; set; }
+#nullable restore
+#else
+        public string CustomerId { get; set; }
+#endif
         /// <summary>Multiplier per ISO weekday key (0..6).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -34,11 +40,23 @@ namespace Repull.SDK.Models
         /// <summary>The eventBoostMaxPct property</summary>
         public double? EventBoostMaxPct { get; set; }
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>true when no row exists yet and the response is server-side defaults.</summary>
         public bool? IsDefault { get; set; }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>Max day-over-day swing in %.</summary>
         public double? MaxDailyChangePct { get; set; }
         /// <summary>The maxPrice property</summary>
@@ -83,13 +101,13 @@ namespace Repull.SDK.Models
             {
                 { "compAdjustPct", n => { CompAdjustPct = n.GetDoubleValue(); } },
                 { "compPositionTarget", n => { CompPositionTarget = n.GetEnumValue<global::Repull.SDK.Models.ListingPricingStrategy_compPositionTarget>(); } },
-                { "customerId", n => { CustomerId = n.GetIntValue(); } },
+                { "customerId", n => { CustomerId = n.GetStringValue(); } },
                 { "dayOfWeekMultipliers", n => { DayOfWeekMultipliers = n.GetObjectValue<global::Repull.SDK.Models.ListingPricingStrategy_dayOfWeekMultipliers>(global::Repull.SDK.Models.ListingPricingStrategy_dayOfWeekMultipliers.CreateFromDiscriminatorValue); } },
                 { "eventBoostEnabled", n => { EventBoostEnabled = n.GetBoolValue(); } },
                 { "eventBoostMaxPct", n => { EventBoostMaxPct = n.GetDoubleValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "isDefault", n => { IsDefault = n.GetBoolValue(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "maxDailyChangePct", n => { MaxDailyChangePct = n.GetDoubleValue(); } },
                 { "maxPrice", n => { MaxPrice = n.GetDoubleValue(); } },
                 { "minPrice", n => { MinPrice = n.GetDoubleValue(); } },
@@ -109,13 +127,13 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDoubleValue("compAdjustPct", CompAdjustPct);
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingPricingStrategy_compPositionTarget>("compPositionTarget", CompPositionTarget);
-            writer.WriteIntValue("customerId", CustomerId);
+            writer.WriteStringValue("customerId", CustomerId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingPricingStrategy_dayOfWeekMultipliers>("dayOfWeekMultipliers", DayOfWeekMultipliers);
             writer.WriteBoolValue("eventBoostEnabled", EventBoostEnabled);
             writer.WriteDoubleValue("eventBoostMaxPct", EventBoostMaxPct);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteBoolValue("isDefault", IsDefault);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteDoubleValue("maxDailyChangePct", MaxDailyChangePct);
             writer.WriteDoubleValue("maxPrice", MaxPrice);
             writer.WriteDoubleValue("minPrice", MinPrice);

@@ -33,7 +33,7 @@ namespace Repull.SDK.V1.Health
         {
         }
         /// <summary>
-        /// Health check
+        /// Liveness probe. Returns `{ status: &quot;ok&quot;, version }` when the API process is running. No auth required. Suitable for uptime monitors, load-balancer health checks, and SDK self-tests.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Health.HealthGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -51,7 +51,7 @@ namespace Repull.SDK.V1.Health
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Health.HealthGetResponse>(requestInfo, global::Repull.SDK.V1.Health.HealthGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Health check
+        /// Liveness probe. Returns `{ status: &quot;ok&quot;, version }` when the API process is running. No auth required. Suitable for uptime monitors, load-balancer health checks, and SDK self-tests.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Health.HealthResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Health
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Health.HealthResponse>(requestInfo, global::Repull.SDK.V1.Health.HealthResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Health check
+        /// Liveness probe. Returns `{ status: &quot;ok&quot;, version }` when the API process is running. No auth required. Suitable for uptime monitors, load-balancer health checks, and SDK self-tests.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

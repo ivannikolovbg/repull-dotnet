@@ -23,7 +23,13 @@ namespace Repull.SDK.Models
         public List<global::Repull.SDK.Models.ListingPublishStatusChannel> Channels { get; set; }
 #endif
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPublishStatusResponse"/> and sets the default values.
         /// </summary>
@@ -50,7 +56,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusChannel>(global::Repull.SDK.Models.ListingPublishStatusChannel.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -61,7 +67,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusChannel>("channels", Channels);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

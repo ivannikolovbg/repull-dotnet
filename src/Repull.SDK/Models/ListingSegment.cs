@@ -15,7 +15,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The avg_adr_in_segment property</summary>
+        /// <summary>The avgAdrInSegment property</summary>
         public double? AvgAdrInSegment { get; set; }
         /// <summary>Decomposed bedroom count. `0` indicates studio.</summary>
         public int? Bedrooms { get; set; }
@@ -45,9 +45,9 @@ namespace Repull.SDK.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>The quality_tier property</summary>
-        public global::Repull.SDK.Models.ListingSegment_quality_tier? QualityTier { get; set; }
-        /// <summary>The sample_size property</summary>
+        /// <summary>The qualityTier property</summary>
+        public global::Repull.SDK.Models.ListingSegment_qualityTier? QualityTier { get; set; }
+        /// <summary>The sampleSize property</summary>
         public int? SampleSize { get; set; }
         /// <summary>Percent of analyzed comps in the scope that fall in this segment.</summary>
         public double? SharePct { get; set; }
@@ -76,15 +76,15 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "avg_adr_in_segment", n => { AvgAdrInSegment = n.GetDoubleValue(); } },
+                { "avgAdrInSegment", n => { AvgAdrInSegment = n.GetDoubleValue(); } },
                 { "bedrooms", n => { Bedrooms = n.GetIntValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
-                { "design_style", n => { DesignStyle = n.GetStringValue(); } },
-                { "my_listing_match", n => { MyListingMatch = n.GetBoolValue(); } },
+                { "designStyle", n => { DesignStyle = n.GetStringValue(); } },
+                { "myListingMatch", n => { MyListingMatch = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "quality_tier", n => { QualityTier = n.GetEnumValue<global::Repull.SDK.Models.ListingSegment_quality_tier>(); } },
-                { "sample_size", n => { SampleSize = n.GetIntValue(); } },
-                { "share_pct", n => { SharePct = n.GetDoubleValue(); } },
+                { "qualityTier", n => { QualityTier = n.GetEnumValue<global::Repull.SDK.Models.ListingSegment_qualityTier>(); } },
+                { "sampleSize", n => { SampleSize = n.GetIntValue(); } },
+                { "sharePct", n => { SharePct = n.GetDoubleValue(); } },
             };
         }
         /// <summary>
@@ -94,15 +94,15 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDoubleValue("avg_adr_in_segment", AvgAdrInSegment);
+            writer.WriteDoubleValue("avgAdrInSegment", AvgAdrInSegment);
             writer.WriteIntValue("bedrooms", Bedrooms);
             writer.WriteStringValue("currency", Currency);
-            writer.WriteStringValue("design_style", DesignStyle);
-            writer.WriteBoolValue("my_listing_match", MyListingMatch);
+            writer.WriteStringValue("designStyle", DesignStyle);
+            writer.WriteBoolValue("myListingMatch", MyListingMatch);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Repull.SDK.Models.ListingSegment_quality_tier>("quality_tier", QualityTier);
-            writer.WriteIntValue("sample_size", SampleSize);
-            writer.WriteDoubleValue("share_pct", SharePct);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ListingSegment_qualityTier>("qualityTier", QualityTier);
+            writer.WriteIntValue("sampleSize", SampleSize);
+            writer.WriteDoubleValue("sharePct", SharePct);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -39,7 +39,13 @@ namespace Repull.SDK.Models
         public global::Repull.SDK.Models.ListingPricingResponse_listing Listing { get; set; }
 #endif
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>The recommendations property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -76,7 +82,7 @@ namespace Repull.SDK.Models
                 { "compSummary", n => { CompSummary = n.GetObjectValue<global::Repull.SDK.Models.ListingPricingResponse_compSummary>(global::Repull.SDK.Models.ListingPricingResponse_compSummary.CreateFromDiscriminatorValue); } },
                 { "dateRange", n => { DateRange = n.GetObjectValue<global::Repull.SDK.Models.ListingPricingResponse_dateRange>(global::Repull.SDK.Models.ListingPricingResponse_dateRange.CreateFromDiscriminatorValue); } },
                 { "listing", n => { Listing = n.GetObjectValue<global::Repull.SDK.Models.ListingPricingResponse_listing>(global::Repull.SDK.Models.ListingPricingResponse_listing.CreateFromDiscriminatorValue); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "recommendations", n => { Recommendations = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingPricingRecommendation>(global::Repull.SDK.Models.ListingPricingRecommendation.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
@@ -90,7 +96,7 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingPricingResponse_compSummary>("compSummary", CompSummary);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingPricingResponse_dateRange>("dateRange", DateRange);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingPricingResponse_listing>("listing", Listing);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingPricingRecommendation>("recommendations", Recommendations);
             writer.WriteAdditionalData(AdditionalData);
         }

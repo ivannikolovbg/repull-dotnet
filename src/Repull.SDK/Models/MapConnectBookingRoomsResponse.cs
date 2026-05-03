@@ -15,7 +15,13 @@ namespace Repull.SDK.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The connectionId property</summary>
-        public int? ConnectionId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConnectionId { get; set; }
+#nullable restore
+#else
+        public string ConnectionId { get; set; }
+#endif
         /// <summary>Number of rooms processed (mapped + unmapped).</summary>
         public int? Mapped { get; set; }
         /// <summary>The sessionId property</summary>
@@ -53,7 +59,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "connectionId", n => { ConnectionId = n.GetIntValue(); } },
+                { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "mapped", n => { Mapped = n.GetIntValue(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "success", n => { Success = n.GetBoolValue(); } },
@@ -66,7 +72,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("connectionId", ConnectionId);
+            writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteIntValue("mapped", Mapped);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteBoolValue("success", Success);

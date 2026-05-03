@@ -15,9 +15,9 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The created_at property</summary>
+        /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>The is_active property</summary>
+        /// <summary>The isActive property</summary>
         public bool? IsActive { get; set; }
         /// <summary>Reason text when present.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -60,8 +60,8 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "is_active", n => { IsActive = n.GetBoolValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "isActive", n => { IsActive = n.GetBoolValue(); } },
                 { "note", n => { Note = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
@@ -73,8 +73,8 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
-            writer.WriteBoolValue("is_active", IsActive);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteBoolValue("isActive", IsActive);
             writer.WriteStringValue("note", Note);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);

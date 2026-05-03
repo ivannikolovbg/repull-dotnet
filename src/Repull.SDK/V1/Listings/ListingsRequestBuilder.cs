@@ -25,7 +25,7 @@ namespace Repull.SDK.V1.Listings
             get => new global::Repull.SDK.V1.Listings.Pricing.PricingRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Repull.SDK.v1.listings.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Repull listing id</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder this[int position]
         {
@@ -37,7 +37,7 @@ namespace Repull.SDK.V1.Listings
             }
         }
         /// <summary>Gets an item from the Repull.SDK.v1.listings.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Repull listing id</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder"/></returns>
         [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
         public global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder this[string position]
@@ -66,7 +66,7 @@ namespace Repull.SDK.V1.Listings
         {
         }
         /// <summary>
-        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
+        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -97,6 +97,7 @@ namespace Repull.SDK.V1.Listings
         /// <param name="body">Inputs for `POST /v1/listings`. Provide enough address detail (street + city + lat/lng) for downstream Airbnb publish to work.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.ListingCreateResponse?> PostAsync(global::Repull.SDK.Models.ListingCreateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -108,10 +109,14 @@ namespace Repull.SDK.V1.Listings
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingCreateResponse>(requestInfo, global::Repull.SDK.Models.ListingCreateResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingCreateResponse>(requestInfo, global::Repull.SDK.Models.ListingCreateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
+        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -161,7 +166,7 @@ namespace Repull.SDK.V1.Listings
             return new global::Repull.SDK.V1.Listings.ListingsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
+        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ListingsRequestBuilderGetQueryParameters 
@@ -176,7 +181,7 @@ namespace Repull.SDK.V1.Listings
             [QueryParameter("channel")]
             public string Channel { get; set; }
 #endif
-            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.next_cursor`. Omit to fetch the first page.</summary>
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("cursor")]

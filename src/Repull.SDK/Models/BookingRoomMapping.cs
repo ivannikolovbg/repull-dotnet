@@ -16,9 +16,21 @@ namespace Repull.SDK.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Repull listing to bind to this room. `null` to unmap.</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>Repull-side `listings_booking_rooms.id` from `listConnectBookingRooms`.</summary>
-        public int? RoomId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? RoomId { get; set; }
+#nullable restore
+#else
+        public string RoomId { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRoomMapping"/> and sets the default values.
         /// </summary>
@@ -44,8 +56,8 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
-                { "roomId", n => { RoomId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "roomId", n => { RoomId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -55,8 +67,8 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("listingId", ListingId);
-            writer.WriteIntValue("roomId", RoomId);
+            writer.WriteStringValue("listingId", ListingId);
+            writer.WriteStringValue("roomId", RoomId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

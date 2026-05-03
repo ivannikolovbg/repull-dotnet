@@ -24,7 +24,13 @@ namespace Repull.SDK.Models
         public string City { get; set; }
 #endif
         /// <summary>Repull-side `pms_connections.id` for the linked Booking account.</summary>
-        public int? ConnectionId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConnectionId { get; set; }
+#nullable restore
+#else
+        public string ConnectionId { get; set; }
+#endif
         /// <summary>The country property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -93,7 +99,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "city", n => { City = n.GetStringValue(); } },
-                { "connectionId", n => { ConnectionId = n.GetIntValue(); } },
+                { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "hotelName", n => { HotelName = n.GetStringValue(); } },
@@ -110,7 +116,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("city", City);
-            writer.WriteIntValue("connectionId", ConnectionId);
+            writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteStringValue("country", Country);
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteStringValue("hotelName", HotelName);

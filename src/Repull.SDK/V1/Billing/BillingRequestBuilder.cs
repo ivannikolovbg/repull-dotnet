@@ -33,7 +33,7 @@ namespace Repull.SDK.V1.Billing
         {
         }
         /// <summary>
-        /// Get plan and usage
+        /// Fetch the current plan, usage counters, and billing-cycle reset date for this workspace. Use this to surface a &quot;you have used X / Y&quot; indicator in your dashboard.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -71,7 +71,7 @@ namespace Repull.SDK.V1.Billing
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get plan and usage
+        /// Fetch the current plan, usage counters, and billing-cycle reset date for this workspace. Use this to surface a &quot;you have used X / Y&quot; indicator in your dashboard.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

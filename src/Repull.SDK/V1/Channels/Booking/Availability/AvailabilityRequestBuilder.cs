@@ -33,7 +33,7 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         {
         }
         /// <summary>
-        /// Update Booking.com rates/availability
+        /// Push availability + rate changes to Booking.com&apos;s OTA system. Accepts the standard OTA rate message — see Booking&apos;s OTA docs for the field shape. Errors from upstream surface as `booking_error`.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -51,7 +51,7 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update Booking.com rates/availability
+        /// Push availability + rate changes to Booking.com&apos;s OTA system. Accepts the standard OTA rate message — see Booking&apos;s OTA docs for the field shape. Errors from upstream surface as `booking_error`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

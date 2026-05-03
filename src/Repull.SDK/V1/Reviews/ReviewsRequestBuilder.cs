@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Reviews
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReviewsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reviews{?cursor*,limit*,listing_id*,platform*,rating_max*,rating_min*,reviewer_role*,status*}", pathParameters)
+        public ReviewsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reviews{?cursor*,limit*,listingId*,platform*,rating_max*,rating_min*,reviewerRole*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace Repull.SDK.V1.Reviews
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReviewsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reviews{?cursor*,limit*,listing_id*,platform*,rating_max*,rating_min*,reviewer_role*,status*}", rawUrl)
+        public ReviewsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reviews{?cursor*,limit*,listingId*,platform*,rating_max*,rating_min*,reviewerRole*,status*}", rawUrl)
         {
         }
         /// <summary>
@@ -122,7 +122,7 @@ namespace Repull.SDK.V1.Reviews
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ReviewsRequestBuilderGetQueryParameters 
         {
-            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.next_cursor`.</summary>
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("cursor")]
@@ -135,7 +135,7 @@ namespace Repull.SDK.V1.Reviews
             [QueryParameter("limit")]
             public int? Limit { get; set; }
             /// <summary>Restrict to one internal Repull listing.</summary>
-            [QueryParameter("listing_id")]
+            [QueryParameter("listingId")]
             public int? ListingId { get; set; }
             [Obsolete("This property is deprecated, use PlatformAsGetPlatformQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -157,16 +157,16 @@ namespace Repull.SDK.V1.Reviews
             [Obsolete("This property is deprecated, use ReviewerRoleAsGetReviewerRoleQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            [QueryParameter("reviewer_role")]
+            [QueryParameter("reviewerRole")]
             public string? ReviewerRole { get; set; }
 #nullable restore
 #else
-            [QueryParameter("reviewer_role")]
+            [QueryParameter("reviewerRole")]
             public string ReviewerRole { get; set; }
 #endif
             /// <summary>`guest` (default) — reviews written by guests about the host/property. `host` — reviews written by the host about guests. `all` — both.</summary>
-            [QueryParameter("reviewer_role")]
-            public global::Repull.SDK.V1.Reviews.GetReviewer_roleQueryParameterType? ReviewerRoleAsGetReviewerRoleQueryParameterType { get; set; }
+            [QueryParameter("reviewerRole")]
+            public global::Repull.SDK.V1.Reviews.GetReviewerRoleQueryParameterType? ReviewerRoleAsGetReviewerRoleQueryParameterType { get; set; }
             /// <summary>`responded` — host has replied. `unanswered` — host has not replied. `all` — no filter.</summary>
             [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

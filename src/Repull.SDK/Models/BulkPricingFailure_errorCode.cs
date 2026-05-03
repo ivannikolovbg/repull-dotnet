@@ -5,24 +5,24 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public enum ListingSegment_quality_tier
+    public enum BulkPricingFailure_errorCode
     #pragma warning restore CS1591
     {
-        [EnumMember(Value = "budget")]
+        [EnumMember(Value = "not_owned")]
         #pragma warning disable CS1591
-        Budget,
+        Not_owned,
         #pragma warning restore CS1591
-        [EnumMember(Value = "standard")]
+        [EnumMember(Value = "no_pending_recommendations")]
         #pragma warning disable CS1591
-        Standard,
+        No_pending_recommendations,
         #pragma warning restore CS1591
-        [EnumMember(Value = "upscale")]
+        [EnumMember(Value = "calendar_update_failed")]
         #pragma warning disable CS1591
-        Upscale,
+        Calendar_update_failed,
         #pragma warning restore CS1591
-        [EnumMember(Value = "luxury")]
+        [EnumMember(Value = "internal_error")]
         #pragma warning disable CS1591
-        Luxury,
+        Internal_error,
         #pragma warning restore CS1591
     }
 }

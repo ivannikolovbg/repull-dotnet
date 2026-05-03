@@ -39,6 +39,7 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.Strategy
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingPricingStrategy"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.ListingPricingStrategy?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,7 +50,11 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.Strategy
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingStrategy>(requestInfo, global::Repull.SDK.Models.ListingPricingStrategy.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingStrategy>(requestInfo, global::Repull.SDK.Models.ListingPricingStrategy.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Upserts the strategy on `(listing_id, customer_id)` — repeated PUTs are idempotent. Send only the fields you want to change; omitted fields take server-side defaults.

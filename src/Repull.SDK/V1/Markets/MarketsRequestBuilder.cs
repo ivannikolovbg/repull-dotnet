@@ -58,6 +58,7 @@ namespace Repull.SDK.V1.Markets
         /// <returns>A <see cref="global::Repull.SDK.Models.MarketsOverviewResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.MarketsOverviewResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -68,7 +69,11 @@ namespace Repull.SDK.V1.Markets
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MarketsOverviewResponse>(requestInfo, global::Repull.SDK.Models.MarketsOverviewResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MarketsOverviewResponse>(requestInfo, global::Repull.SDK.Models.MarketsOverviewResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Returns per-city KPIs across every market the authenticated customer has listings in (market share, ADR vs market, occupancy, ratings) plus a lightweight `browse` discovery summary (top-50 featured markets, country categories, total catalog size). For the full paginated discovery catalog with search, call `GET /v1/markets/browse`. Each `markets[]` entry is enriched with `subscribed` + `source` from the customer&apos;s market subscriptions.

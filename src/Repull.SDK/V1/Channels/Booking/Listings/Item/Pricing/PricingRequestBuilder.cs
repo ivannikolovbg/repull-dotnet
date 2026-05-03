@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PricingRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/listings/{id}/pricing{?number_of_days*,room_id*,room_level*,start_date*}", pathParameters)
+        public PricingRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/listings/{id}/pricing{?number_of_days*,room_id*,room_level*,startDate*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PricingRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/listings/{id}/pricing{?number_of_days*,room_id*,room_level*,start_date*}", rawUrl)
+        public PricingRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/listings/{id}/pricing{?number_of_days*,room_id*,room_level*,startDate*}", rawUrl)
         {
         }
         /// <summary>
@@ -163,7 +163,7 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
             /// <summary>When true, returns room-level (vs rate-plan-level) availability.</summary>
             [QueryParameter("room_level")]
             public bool? RoomLevel { get; set; }
-            [QueryParameter("start_date")]
+            [QueryParameter("startDate")]
             public Date? StartDate { get; set; }
         }
         /// <summary>

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Reservations.Item
         {
         }
         /// <summary>
-        /// Cancel reservation
+        /// Cancel an existing reservation. Cancellation rules vary by provider — Airbnb host-cancellations carry penalties; Booking.com cancellations apply the per-rate-plan policy. Once 200 is returned, the upstream PMS state is committed.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -81,7 +81,7 @@ namespace Repull.SDK.V1.Reservations.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Reservation>(requestInfo, global::Repull.SDK.Models.Reservation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update reservation
+        /// Patch reservation fields (dates, status, special requests). Only fields included in the body are modified. Use the cancel endpoint for cancellations — DELETE handles cancellation but not partial updates.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="body">The request body</param>
@@ -101,7 +101,7 @@ namespace Repull.SDK.V1.Reservations.Item
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cancel reservation
+        /// Cancel an existing reservation. Cancellation rules vary by provider — Airbnb host-cancellations carry penalties; Booking.com cancellations apply the per-rate-plan policy. Once 200 is returned, the upstream PMS state is committed.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -138,7 +138,7 @@ namespace Repull.SDK.V1.Reservations.Item
             return requestInfo;
         }
         /// <summary>
-        /// Update reservation
+        /// Patch reservation fields (dates, status, special requests). Only fields included in the body are modified. Use the cancel endpoint for cancellations — DELETE handles cancellation but not partial updates.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

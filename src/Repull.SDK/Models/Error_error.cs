@@ -14,7 +14,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The code property</summary>
+        /// <summary>Stable machine-parseable error identifier. Match on this for retry logic. Codes are namespaced and never change meaning.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Code { get; set; }
@@ -22,7 +22,15 @@ namespace Repull.SDK.Models
 #else
         public string Code { get; set; }
 #endif
-        /// <summary>The docs_url property</summary>
+        /// <summary>Suggestion for typos and near-matches. Present when the server can guess the intent.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DidYouMean { get; set; }
+#nullable restore
+#else
+        public string DidYouMean { get; set; }
+#endif
+        /// <summary>Canonical write-up for this error code. URL pattern: `https://repull.dev/docs/errors/{code}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DocsUrl { get; set; }
@@ -30,21 +38,79 @@ namespace Repull.SDK.Models
 #else
         public string DocsUrl { get; set; }
 #endif
-        /// <summary>Example of correct usage</summary>
+        /// <summary>The endpoint path that produced the error. Present on `code: &quot;unknown_params&quot;` so consumers can match validation failures to the operation they invoked.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Example { get; set; }
+        public string? Endpoint { get; set; }
 #nullable restore
 #else
-        public string Example { get; set; }
+        public string Endpoint { get; set; }
 #endif
-        /// <summary>The message property</summary>
+        /// <summary>Body field, query param, or path segment the error is about. Present when the error is parameter-specific.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Field { get; set; }
+#nullable restore
+#else
+        public string Field { get; set; }
+#endif
+        /// <summary>Exact recovery steps. Surface this verbatim in your UI / agent reasoning trace — it is written to be actionable without further reading.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Fix { get; set; }
+#nullable restore
+#else
+        public string Fix { get; set; }
+#endif
+        /// <summary>Human-readable cause. Echoes the offending value when relevant.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Message { get; set; }
 #nullable restore
 #else
         public string Message { get; set; }
+#endif
+        /// <summary>Opaque per-request id. Mirrors the `x-request-id` response header. Capture it before retrying so logs can be correlated.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? RequestId { get; set; }
+#nullable restore
+#else
+        public string RequestId { get; set; }
+#endif
+        /// <summary>Seconds the client should wait before retrying. Mirrors the `Retry-After` HTTP header. Present on rate-limit responses and on transient upstream failures that are safe to retry.</summary>
+        public int? RetryAfter { get; set; }
+        /// <summary>LAST-RESORT contact handle. Only set on errors that genuinely cannot be self-fixed (billing dispute, account-state corruption, OAuth partner intervention). Never fall back to support before trying `fix` and `docs_url`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Error_error_support? Support { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Error_error_support Support { get; set; }
+#endif
+        /// <summary>Sorted list of every query param this endpoint accepts. Present on `code: &quot;unknown_params&quot;` (HTTP 422) so SDK consumers can self-correct without reading docs.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? ValidParams { get; set; }
+#nullable restore
+#else
+        public List<string> ValidParams { get; set; }
+#endif
+        /// <summary>Allowed values when the error is enum-related (e.g. unknown `provider`, unknown `status`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? ValidValues { get; set; }
+#nullable restore
+#else
+        public List<string> ValidValues { get; set; }
+#endif
+        /// <summary>Echo of the offending value (truncated to 200 chars). Useful for debugging — helps callers see what the server actually parsed.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public UntypedNode? ValueReceived { get; set; }
+#nullable restore
+#else
+        public UntypedNode ValueReceived { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Error_error"/> and sets the default values.
@@ -72,9 +138,18 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "code", n => { Code = n.GetStringValue(); } },
+                { "did_you_mean", n => { DidYouMean = n.GetStringValue(); } },
                 { "docs_url", n => { DocsUrl = n.GetStringValue(); } },
-                { "example", n => { Example = n.GetStringValue(); } },
+                { "endpoint", n => { Endpoint = n.GetStringValue(); } },
+                { "field", n => { Field = n.GetStringValue(); } },
+                { "fix", n => { Fix = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
+                { "request_id", n => { RequestId = n.GetStringValue(); } },
+                { "retry_after", n => { RetryAfter = n.GetIntValue(); } },
+                { "support", n => { Support = n.GetObjectValue<global::Repull.SDK.Models.Error_error_support>(global::Repull.SDK.Models.Error_error_support.CreateFromDiscriminatorValue); } },
+                { "validParams", n => { ValidParams = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "valid_values", n => { ValidValues = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "value_received", n => { ValueReceived = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -85,9 +160,18 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("code", Code);
+            writer.WriteStringValue("did_you_mean", DidYouMean);
             writer.WriteStringValue("docs_url", DocsUrl);
-            writer.WriteStringValue("example", Example);
+            writer.WriteStringValue("endpoint", Endpoint);
+            writer.WriteStringValue("field", Field);
+            writer.WriteStringValue("fix", Fix);
             writer.WriteStringValue("message", Message);
+            writer.WriteStringValue("request_id", RequestId);
+            writer.WriteIntValue("retry_after", RetryAfter);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Error_error_support>("support", Support);
+            writer.WriteCollectionOfPrimitiveValues<string>("validParams", ValidParams);
+            writer.WriteCollectionOfPrimitiveValues<string>("valid_values", ValidValues);
+            writer.WriteObjectValue<UntypedNode>("value_received", ValueReceived);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

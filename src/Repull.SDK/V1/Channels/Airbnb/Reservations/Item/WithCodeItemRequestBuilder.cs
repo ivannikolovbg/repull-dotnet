@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations.Item
         {
         }
         /// <summary>
-        /// Get Airbnb reservation
+        /// Fetch a single Airbnb reservation by Airbnb confirmation code (e.g. `HMABCDEF12`).
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbReservation"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -52,7 +52,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReservation>(requestInfo, global::Repull.SDK.Models.AirbnbReservation.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Accept/decline/cancel Airbnb reservation
+        /// Apply a state action to an Airbnb reservation — `accept` / `decline` (for inquiries and reservation requests), `cancel` (host cancellation, carries penalties), `pre-approve` (for inquiries).
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations.Item
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get Airbnb reservation
+        /// Fetch a single Airbnb reservation by Airbnb confirmation code (e.g. `HMABCDEF12`).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations.Item
             return requestInfo;
         }
         /// <summary>
-        /// Accept/decline/cancel Airbnb reservation
+        /// Apply a state action to an Airbnb reservation — `accept` / `decline` (for inquiries and reservation requests), `cancel` (host cancellation, carries penalties), `pre-approve` (for inquiries).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

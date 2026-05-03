@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Conversations.Item.Messages
         {
         }
         /// <summary>
-        /// Cursor-paginated messages within one thread. Defaults to newest-first (`?order=desc`); pass `?order=asc` for chronological replay. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.
+        /// Cursor-paginated messages within one thread. Defaults to newest-first (`?order=desc`); pass `?order=asc` for chronological replay. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.MessageListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Conversations.Item.Messages
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MessageListResponse>(requestInfo, global::Repull.SDK.Models.MessageListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated messages within one thread. Defaults to newest-first (`?order=desc`); pass `?order=asc` for chronological replay. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.
+        /// Cursor-paginated messages within one thread. Defaults to newest-first (`?order=desc`); pass `?order=asc` for chronological replay. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -93,12 +93,12 @@ namespace Repull.SDK.V1.Conversations.Item.Messages
             return new global::Repull.SDK.V1.Conversations.Item.Messages.MessagesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated messages within one thread. Defaults to newest-first (`?order=desc`); pass `?order=asc` for chronological replay. Use `pagination.next_cursor` from one response as the `cursor` query param of the next request.
+        /// Cursor-paginated messages within one thread. Defaults to newest-first (`?order=desc`); pass `?order=asc` for chronological replay. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class MessagesRequestBuilderGetQueryParameters 
         {
-            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.next_cursor`.</summary>
+            /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("cursor")]

@@ -63,7 +63,7 @@ namespace Repull.SDK.V1.Connect
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "allowed_providers", n => { AllowedProviders = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "allowedProviders", n => { AllowedProviders = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
             };
@@ -75,7 +75,7 @@ namespace Repull.SDK.V1.Connect
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfPrimitiveValues<string>("allowed_providers", AllowedProviders);
+            writer.WriteCollectionOfPrimitiveValues<string>("allowedProviders", AllowedProviders);
             writer.WriteStringValue("redirectUrl", RedirectUrl);
             writer.WriteStringValue("state", State);
             writer.WriteAdditionalData(AdditionalData);

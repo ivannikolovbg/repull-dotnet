@@ -60,7 +60,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
         {
         }
         /// <summary>
-        /// List VRBO listings
+        /// List VRBO listings this workspace owns. VRBO is agency-model — Repull reads listings via the public iCal/HTTP feeds.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.VrboListingListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -78,7 +78,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.VrboListingListResponse>(requestInfo, global::Repull.SDK.Models.VrboListingListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List VRBO listings
+        /// List VRBO listings this workspace owns. VRBO is agency-model — Repull reads listings via the public iCal/HTTP feeds.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
