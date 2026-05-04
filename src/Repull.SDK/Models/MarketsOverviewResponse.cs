@@ -63,7 +63,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions Subscriptions { get; set; }
 #endif
-        /// <summary>Resolved Repull tier (free / pro / scale).</summary>
+        /// <summary>Resolved Repull tier (free / starter / custom).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Tier { get; set; }

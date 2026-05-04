@@ -7,6 +7,7 @@ using Repull.SDK.V1.Channels.Booking.Content;
 using Repull.SDK.V1.Channels.Booking.Listings;
 using Repull.SDK.V1.Channels.Booking.Messaging;
 using Repull.SDK.V1.Channels.Booking.Properties;
+using Repull.SDK.V1.Channels.Booking.Reviews;
 using Repull.SDK.V1.Channels.Booking.Sync;
 using System.Collections.Generic;
 using System.IO;
@@ -44,6 +45,11 @@ namespace Repull.SDK.V1.Channels.Booking
         public global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder Properties
         {
             get => new global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The reviews property</summary>
+        public global::Repull.SDK.V1.Channels.Booking.Reviews.ReviewsRequestBuilder Reviews
+        {
+            get => new global::Repull.SDK.V1.Channels.Booking.Reviews.ReviewsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The sync property</summary>
         public global::Repull.SDK.V1.Channels.Booking.Sync.SyncRequestBuilder Sync

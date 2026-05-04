@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,include_total*,limit*,listingId*,platform*,status*}", pathParameters)
+        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,11 +56,11 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,include_total*,limit*,listingId*,platform*,status*}", rawUrl)
+        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ReservationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -103,7 +103,7 @@ namespace Repull.SDK.V1.Reservations
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Reservation>(requestInfo, global::Repull.SDK.Models.Reservation.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -153,7 +153,7 @@ namespace Repull.SDK.V1.Reservations
             return new global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ReservationsRequestBuilderGetQueryParameters 
@@ -191,6 +191,9 @@ namespace Repull.SDK.V1.Reservations
             /// <summary>Filter to a single listing</summary>
             [QueryParameter("listingId")]
             public int? ListingId { get; set; }
+            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
+            [QueryParameter("offset")]
+            public int? Offset { get; set; }
             /// <summary>Filter by booking platform</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

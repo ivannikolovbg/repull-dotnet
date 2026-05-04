@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -33,10 +34,10 @@ namespace Repull.SDK.V1.Webhooks
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?>? Events { get; set; }
 #nullable restore
 #else
-        public List<string> Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?> Events { get; set; }
 #endif
         /// <summary>The url property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -73,7 +74,7 @@ namespace Repull.SDK.V1.Webhooks
             {
                 { "apiVersion", n => { ApiVersion = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
-                { "events", n => { Events = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "events", n => { Events = n.GetCollectionOfEnumValues<global::Repull.SDK.Models.WebhookEventType>()?.AsList(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -86,7 +87,7 @@ namespace Repull.SDK.V1.Webhooks
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("apiVersion", ApiVersion);
             writer.WriteStringValue("description", Description);
-            writer.WriteCollectionOfPrimitiveValues<string>("events", Events);
+            writer.WriteCollectionOfEnumValues<global::Repull.SDK.Models.WebhookEventType>("events", Events);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }

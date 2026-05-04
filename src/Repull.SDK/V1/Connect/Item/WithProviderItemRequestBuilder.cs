@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Connect.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ConnectStatus>(requestInfo, global::Repull.SDK.Models.ConnectStatus.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Establish a connection to a PMS or OTA platform. Credentials vary by provider — see docs for each provider.Airbnb-specific: pass `redirectUrl` (where to send the user after consent) and optionally `accessType` (`read_only` for calendar-only OAuth scopes, or `full_access` — the default — for full host scopes). The response returns a hosted `oauthUrl` to redirect the user to.
+        /// Establish a connection to a PMS or OTA platform. Credentials vary by provider — see docs for each provider.Airbnb-specific: pass `redirectUrl` (where to send the user after consent) and optionally `accessType` (`read_only` for calendar-only OAuth scopes, or `full_access` — the default — for full host scopes). The response returns a hosted `url` to redirect the user to.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.Connection"/></returns>
         /// <param name="body">Provider-specific credentials (apiKey, clientId/clientSecret, etc.) or OAuth init params for Airbnb.</param>
@@ -127,7 +127,7 @@ namespace Repull.SDK.V1.Connect.Item
             return requestInfo;
         }
         /// <summary>
-        /// Establish a connection to a PMS or OTA platform. Credentials vary by provider — see docs for each provider.Airbnb-specific: pass `redirectUrl` (where to send the user after consent) and optionally `accessType` (`read_only` for calendar-only OAuth scopes, or `full_access` — the default — for full host scopes). The response returns a hosted `oauthUrl` to redirect the user to.
+        /// Establish a connection to a PMS or OTA platform. Credentials vary by provider — see docs for each provider.Airbnb-specific: pass `redirectUrl` (where to send the user after consent) and optionally `accessType` (`read_only` for calendar-only OAuth scopes, or `full_access` — the default — for full host scopes). The response returns a hosted `url` to redirect the user to.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Provider-specific credentials (apiKey, clientId/clientSecret, etc.) or OAuth init params for Airbnb.</param>

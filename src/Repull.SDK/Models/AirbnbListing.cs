@@ -8,27 +8,31 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// An Airbnb listing in the host account. Mirrors the Airbnb partner API shape with light normalization.
+    /// A Vanio listing paired with its Airbnb connection rows. The list endpoint groups every `listings_airbnb` row that points at the same Vanio `listingId` under a single `connections[]` array.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbListing : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The bathrooms property</summary>
-        public double? Bathrooms { get; set; }
-        /// <summary>The bedrooms property</summary>
-        public int? Bedrooms { get; set; }
-        /// <summary>Airbnb listing ID</summary>
+        /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? City { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string City { get; set; }
 #endif
-        /// <summary>The maxGuests property</summary>
-        public int? MaxGuests { get; set; }
+        /// <summary>The connections property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.AirbnbConnection>? Connections { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.AirbnbConnection> Connections { get; set; }
+#endif
+        /// <summary>Vanio (Repull) listing id</summary>
+        public int? ListingId { get; set; }
         /// <summary>Listing title</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -36,38 +40,6 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Name { get; set; }
-#endif
-        /// <summary>The propertyType property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? PropertyType { get; set; }
-#nullable restore
-#else
-        public string PropertyType { get; set; }
-#endif
-        /// <summary>The roomType property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? RoomType { get; set; }
-#nullable restore
-#else
-        public string RoomType { get; set; }
-#endif
-        /// <summary>Listing status (active, unlisted, etc.)</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Status { get; set; }
-#nullable restore
-#else
-        public string Status { get; set; }
-#endif
-        /// <summary>The thumbnailUrl property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ThumbnailUrl { get; set; }
-#nullable restore
-#else
-        public string ThumbnailUrl { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListing"/> and sets the default values.
@@ -94,15 +66,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "bathrooms", n => { Bathrooms = n.GetDoubleValue(); } },
-                { "bedrooms", n => { Bedrooms = n.GetIntValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "maxGuests", n => { MaxGuests = n.GetIntValue(); } },
+                { "city", n => { City = n.GetStringValue(); } },
+                { "connections", n => { Connections = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection>(global::Repull.SDK.Models.AirbnbConnection.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "listingId", n => { ListingId = n.GetIntValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "propertyType", n => { PropertyType = n.GetStringValue(); } },
-                { "roomType", n => { RoomType = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetStringValue(); } },
-                { "thumbnailUrl", n => { ThumbnailUrl = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -112,15 +79,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDoubleValue("bathrooms", Bathrooms);
-            writer.WriteIntValue("bedrooms", Bedrooms);
-            writer.WriteStringValue("id", Id);
-            writer.WriteIntValue("maxGuests", MaxGuests);
+            writer.WriteStringValue("city", City);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection>("connections", Connections);
+            writer.WriteIntValue("listingId", ListingId);
             writer.WriteStringValue("name", Name);
-            writer.WriteStringValue("propertyType", PropertyType);
-            writer.WriteStringValue("roomType", RoomType);
-            writer.WriteStringValue("status", Status);
-            writer.WriteStringValue("thumbnailUrl", ThumbnailUrl);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
