@@ -7,10 +7,11 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Full request + response capture for one delivery attempt. `payload` is the exact `WebhookEvent` envelope that was (or would have been) POSTed to the subscription URL.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class WebhookDeliveryDetail : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -34,14 +35,8 @@ namespace Repull.SDK.Models
 #else
         public string EventId { get; set; }
 #endif
-        /// <summary>The eventType property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? EventType { get; set; }
-#nullable restore
-#else
-        public string EventType { get; set; }
-#endif
+        /// <summary>Canonical event type identifier. Every webhook delivery declares one of these in its `type` field; SDKs key the discriminated `WebhookEvent` union on this value.</summary>
+        public global::Repull.SDK.Models.WebhookEventType? EventType { get; set; }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -50,13 +45,13 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The payload property</summary>
+        /// <summary>The full event envelope POSTed to your webhook URL. Discriminated on `type` — narrow `event.data` by switching on `event.type`. Use the matching `*Event` variant directly if your SDK lacks discriminator support.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.WebhookDeliveryDetail_payload? Payload { get; set; }
+        public global::Repull.SDK.Models.WebhookEvent? Payload { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.WebhookDeliveryDetail_payload Payload { get; set; }
+        public global::Repull.SDK.Models.WebhookEvent Payload { get; set; }
 #endif
         /// <summary>The requestHeaders property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -117,9 +112,9 @@ namespace Repull.SDK.Models
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "errorMessage", n => { ErrorMessage = n.GetStringValue(); } },
                 { "eventId", n => { EventId = n.GetStringValue(); } },
-                { "eventType", n => { EventType = n.GetStringValue(); } },
+                { "eventType", n => { EventType = n.GetEnumValue<global::Repull.SDK.Models.WebhookEventType>(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "payload", n => { Payload = n.GetObjectValue<global::Repull.SDK.Models.WebhookDeliveryDetail_payload>(global::Repull.SDK.Models.WebhookDeliveryDetail_payload.CreateFromDiscriminatorValue); } },
+                { "payload", n => { Payload = n.GetObjectValue<global::Repull.SDK.Models.WebhookEvent>(global::Repull.SDK.Models.WebhookEvent.CreateFromDiscriminatorValue); } },
                 { "requestHeaders", n => { RequestHeaders = n.GetObjectValue<global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders>(global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders.CreateFromDiscriminatorValue); } },
                 { "responseBody", n => { ResponseBody = n.GetStringValue(); } },
                 { "responseHeaders", n => { ResponseHeaders = n.GetObjectValue<global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders>(global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders.CreateFromDiscriminatorValue); } },
@@ -139,9 +134,9 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("errorMessage", ErrorMessage);
             writer.WriteStringValue("eventId", EventId);
-            writer.WriteStringValue("eventType", EventType);
+            writer.WriteEnumValue<global::Repull.SDK.Models.WebhookEventType>("eventType", EventType);
             writer.WriteStringValue("id", Id);
-            writer.WriteObjectValue<global::Repull.SDK.Models.WebhookDeliveryDetail_payload>("payload", Payload);
+            writer.WriteObjectValue<global::Repull.SDK.Models.WebhookEvent>("payload", Payload);
             writer.WriteObjectValue<global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders>("requestHeaders", RequestHeaders);
             writer.WriteStringValue("responseBody", ResponseBody);
             writer.WriteObjectValue<global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders>("responseHeaders", ResponseHeaders);

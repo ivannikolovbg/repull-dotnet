@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Channels.Airbnb.Reviews.Item;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +18,18 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReviewsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>Gets an item from the Repull.SDK.v1.channels.airbnb.reviews.item collection</summary>
+        /// <param name="position">Airbnb review id (`HRabc123` style).</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.ReviewsItemRequestBuilder"/></returns>
+        public global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.ReviewsItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                urlTplParams.Add("id", position);
+                return new global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.ReviewsItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Reviews.ReviewsRequestBuilder"/> and sets the default values.
         /// </summary>
@@ -52,22 +65,22 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReviewListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbReviewListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Post a public response to a guest review. Airbnb allows one response per review — repeated POSTs return 409.
+        /// Legacy action-based shape. Body `{ action: &quot;respond&quot;|&quot;submit&quot;, reviewId, response?, review? }`. Kept for backwards compatibility — prefer `PUT /v1/channels/airbnb/reviews/{id}` (edit) and `POST /v1/channels/airbnb/reviews/{id}/respond` (reply) for new integrations.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            await RequestAdapter.SendNoContentAsync(requestInfo, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// List reviews left by guests on Airbnb listings in this workspace. Includes both reviews of the host and reviews of the guest (where the host has not yet submitted theirs).
@@ -89,10 +102,11 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
             return requestInfo;
         }
         /// <summary>
-        /// Post a public response to a guest review. Airbnb allows one response per review — repeated POSTs return 409.
+        /// Legacy action-based shape. Body `{ action: &quot;respond&quot;|&quot;submit&quot;, reviewId, response?, review? }`. Kept for backwards compatibility — prefer `PUT /v1/channels/airbnb/reviews/{id}` (edit) and `POST /v1/channels/airbnb/reviews/{id}/respond` (reply) for new integrations.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)

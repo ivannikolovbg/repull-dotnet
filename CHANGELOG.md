@@ -5,6 +5,22 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-05-04
+
+### Added — Studio routes (16 ops)
+
+Repull Studio is now reachable from the .NET SDK. The Kiota path tree gains
+`Studio` request builders covering 10 paths and 16 operations:
+
+- `Studio.Projects` — list, create, get, update, delete
+- `Studio.Projects[id].Files` — list, upsert (PUT), delete
+- `Studio.Projects[id].Generations` — create
+- `Studio.Generate` — completion endpoint
+- `Studio.Deployments` — list, create, get, delete, suspend, wake
+
+New models in `Repull.SDK.Models`: `StudioProject`, `StudioFile`,
+`StudioGeneration`, `StudioDeployment`, `StudioError`.
+
 ## [0.2.0] - 2026-05-03
 
 ### Changed (BREAKING)

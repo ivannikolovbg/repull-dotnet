@@ -7,10 +7,11 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// A single delivery attempt for a webhook event. The actual `WebhookEvent` envelope POSTed to the subscription URL is captured on `WebhookDeliveryDetail.payload` (this list view omits the body for size).
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class WebhookDelivery : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -28,14 +29,8 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Stable across retries of the same logical event.</summary>
         public Guid? EventId { get; set; }
-        /// <summary>The eventType property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? EventType { get; set; }
-#nullable restore
-#else
-        public string EventType { get; set; }
-#endif
+        /// <summary>Canonical event type identifier. Every webhook delivery declares one of these in its `type` field; SDKs key the discriminated `WebhookEvent` union on this value.</summary>
+        public global::Repull.SDK.Models.WebhookEventType? EventType { get; set; }
         /// <summary>The failedAt property</summary>
         public DateTimeOffset? FailedAt { get; set; }
         /// <summary>The id property</summary>
@@ -77,7 +72,7 @@ namespace Repull.SDK.Models
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "errorMessage", n => { ErrorMessage = n.GetStringValue(); } },
                 { "eventId", n => { EventId = n.GetGuidValue(); } },
-                { "eventType", n => { EventType = n.GetStringValue(); } },
+                { "eventType", n => { EventType = n.GetEnumValue<global::Repull.SDK.Models.WebhookEventType>(); } },
                 { "failedAt", n => { FailedAt = n.GetDateTimeOffsetValue(); } },
                 { "id", n => { Id = n.GetGuidValue(); } },
                 { "responseTimeMs", n => { ResponseTimeMs = n.GetIntValue(); } },
@@ -97,7 +92,7 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("errorMessage", ErrorMessage);
             writer.WriteGuidValue("eventId", EventId);
-            writer.WriteStringValue("eventType", EventType);
+            writer.WriteEnumValue<global::Repull.SDK.Models.WebhookEventType>("eventType", EventType);
             writer.WriteDateTimeOffsetValue("failedAt", FailedAt);
             writer.WriteGuidValue("id", Id);
             writer.WriteIntValue("responseTimeMs", ResponseTimeMs);

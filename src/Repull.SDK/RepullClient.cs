@@ -6,6 +6,7 @@ using Microsoft.Kiota.Serialization.Form;
 using Microsoft.Kiota.Serialization.Json;
 using Microsoft.Kiota.Serialization.Multipart;
 using Microsoft.Kiota.Serialization.Text;
+using Repull.SDK.Api;
 using Repull.SDK.V1;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +20,11 @@ namespace Repull.SDK
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class RepullClient : BaseRequestBuilder
     {
+        /// <summary>The api property</summary>
+        public global::Repull.SDK.Api.ApiRequestBuilder Api
+        {
+            get => new global::Repull.SDK.Api.ApiRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The v1 property</summary>
         public global::Repull.SDK.V1.V1RequestBuilder V1
         {

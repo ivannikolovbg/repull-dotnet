@@ -7,10 +7,11 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Canonical catalog of every event the API can deliver, grouped by domain. Each entry includes a realistic `samplePayload` matching the discriminated `WebhookEvent` union — so SDKs can render docs and dashboards from this single source of truth.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class WebhookEventCatalog : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -21,6 +22,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public List<global::Repull.SDK.Models.WebhookEventCatalog_domains> Domains { get; set; }
+#endif
+        /// <summary>All events in a flat list (same entries as `domains[].events`, ungrouped).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.WebhookEventCatalogEntry>? Flat { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.WebhookEventCatalogEntry> Flat { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.WebhookEventCatalog"/> and sets the default values.
@@ -48,6 +57,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "domains", n => { Domains = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.WebhookEventCatalog_domains>(global::Repull.SDK.Models.WebhookEventCatalog_domains.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "flat", n => { Flat = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.WebhookEventCatalogEntry>(global::Repull.SDK.Models.WebhookEventCatalogEntry.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -58,6 +68,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.WebhookEventCatalog_domains>("domains", Domains);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.WebhookEventCatalogEntry>("flat", Flat);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

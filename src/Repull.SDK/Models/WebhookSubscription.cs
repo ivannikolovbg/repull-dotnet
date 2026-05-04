@@ -40,10 +40,10 @@ namespace Repull.SDK.Models
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?>? Events { get; set; }
 #nullable restore
 #else
-        public List<string> Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?> Events { get; set; }
 #endif
         /// <summary>The id property</summary>
         public Guid? Id { get; set; }
@@ -113,7 +113,7 @@ namespace Repull.SDK.Models
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "disabledAt", n => { DisabledAt = n.GetDateTimeOffsetValue(); } },
-                { "events", n => { Events = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "events", n => { Events = n.GetCollectionOfEnumValues<global::Repull.SDK.Models.WebhookEventType>()?.AsList(); } },
                 { "id", n => { Id = n.GetGuidValue(); } },
                 { "lastDeliveredAt", n => { LastDeliveredAt = n.GetDateTimeOffsetValue(); } },
                 { "lastDeliveryStatus", n => { LastDeliveryStatus = n.GetIntValue(); } },
@@ -138,7 +138,7 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("description", Description);
             writer.WriteDateTimeOffsetValue("disabledAt", DisabledAt);
-            writer.WriteCollectionOfPrimitiveValues<string>("events", Events);
+            writer.WriteCollectionOfEnumValues<global::Repull.SDK.Models.WebhookEventType>("events", Events);
             writer.WriteGuidValue("id", Id);
             writer.WriteDateTimeOffsetValue("lastDeliveredAt", LastDeliveredAt);
             writer.WriteIntValue("lastDeliveryStatus", LastDeliveryStatus);

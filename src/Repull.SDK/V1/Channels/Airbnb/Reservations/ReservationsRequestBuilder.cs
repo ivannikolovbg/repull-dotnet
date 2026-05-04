@@ -35,7 +35,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/reservations", pathParameters)
+        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/reservations{?cursor*,end_date*,include_total*,limit*,listing_id*,offset*,start_date*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,39 +43,39 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/reservations", rawUrl)
+        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/reservations{?cursor*,end_date*,include_total*,limit*,listing_id*,offset*,start_date*,status*}", rawUrl)
         {
         }
         /// <summary>
-        /// List reservations sourced directly from Airbnb. Use this when you need Airbnb-specific fields (guest payout split, cancellation policy snapshot) that the unified `/v1/reservations` endpoint flattens away.
+        /// Cursor-paginated list of reservations sourced directly from Airbnb. Use this when you need Airbnb-specific fields (guest payout split, cancellation policy snapshot) that the unified `/v1/reservations` endpoint flattens away.Walk pages with `?cursor=&lt;pagination.next_cursor&gt;` until `pagination.has_more` is `false`. The cursor is opaque — never construct or parse it client-side.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. Internally this walks upstream Airbnb cursor pages to skip rows, so deep offsets cost N/limit upstream round-trips; cursor remains the better choice for deep pagination.When `status` is omitted, all statuses are returned (Airbnb defaults to `accepted` only on its own surface, but this endpoint normalises to &quot;all&quot;). Pass `?status=accepted` to scope.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbReservationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.AirbnbReservationListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbReservationListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder.ReservationsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.AirbnbReservationListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbReservationListResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder.ReservationsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReservationListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbReservationListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List reservations sourced directly from Airbnb. Use this when you need Airbnb-specific fields (guest payout split, cancellation policy snapshot) that the unified `/v1/reservations` endpoint flattens away.
+        /// Cursor-paginated list of reservations sourced directly from Airbnb. Use this when you need Airbnb-specific fields (guest payout split, cancellation policy snapshot) that the unified `/v1/reservations` endpoint flattens away.Walk pages with `?cursor=&lt;pagination.next_cursor&gt;` until `pagination.has_more` is `false`. The cursor is opaque — never construct or parse it client-side.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. Internally this walks upstream Airbnb cursor pages to skip rows, so deep offsets cost N/limit upstream round-trips; cursor remains the better choice for deep pagination.When `status` is omitted, all statuses are returned (Airbnb defaults to `accepted` only on its own surface, but this endpoint normalises to &quot;all&quot;). Pass `?status=accepted` to scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder.ReservationsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder.ReservationsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -93,11 +93,67 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations
             return new global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// Cursor-paginated list of reservations sourced directly from Airbnb. Use this when you need Airbnb-specific fields (guest payout split, cancellation policy snapshot) that the unified `/v1/reservations` endpoint flattens away.Walk pages with `?cursor=&lt;pagination.next_cursor&gt;` until `pagination.has_more` is `false`. The cursor is opaque — never construct or parse it client-side.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. Internally this walks upstream Airbnb cursor pages to skip rows, so deep offsets cost N/limit upstream round-trips; cursor remains the better choice for deep pagination.When `status` is omitted, all statuses are returned (Airbnb defaults to `accepted` only on its own surface, but this endpoint normalises to &quot;all&quot;). Pass `?status=accepted` to scope.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ReservationsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Opaque cursor returned by the previous response&apos;s `pagination.next_cursor`. Omit to fetch the first page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("cursor")]
+            public string? Cursor { get; set; }
+#nullable restore
+#else
+            [QueryParameter("cursor")]
+            public string Cursor { get; set; }
+#endif
+            /// <summary>ISO 8601 (YYYY-MM-DD) upper bound on Airbnb&apos;s date range filter.</summary>
+            [QueryParameter("end_date")]
+            public Date? EndDate { get; set; }
+            /// <summary>Whether to include `pagination.total`. Always populated when Airbnb returns a total count (effectively always); accepted for shape symmetry with the rest of the API.</summary>
+            [QueryParameter("include_total")]
+            public bool? IncludeTotal { get; set; }
+            /// <summary>Max items per page. Hard cap is 100.</summary>
+            [QueryParameter("limit")]
+            public int? Limit { get; set; }
+            /// <summary>Filter to one Airbnb listing id (numeric string).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("listing_id")]
+            public string? ListingId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("listing_id")]
+            public string ListingId { get; set; }
+#endif
+            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
+            [QueryParameter("offset")]
+            public int? Offset { get; set; }
+            /// <summary>ISO 8601 (YYYY-MM-DD) lower bound on Airbnb&apos;s date range filter.</summary>
+            [QueryParameter("start_date")]
+            public Date? StartDate { get; set; }
+            /// <summary>Filter by reservation status. Omit to receive all statuses.</summary>
+            [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("status")]
+            public string? Status { get; set; }
+#nullable restore
+#else
+            [QueryParameter("status")]
+            public string Status { get; set; }
+#endif
+            /// <summary>Filter by reservation status. Omit to receive all statuses.</summary>
+            [QueryParameter("status")]
+            public global::Repull.SDK.V1.Channels.Airbnb.Reservations.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ReservationsRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class ReservationsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder.ReservationsRequestBuilderGetQueryParameters>
         {
         }
     }

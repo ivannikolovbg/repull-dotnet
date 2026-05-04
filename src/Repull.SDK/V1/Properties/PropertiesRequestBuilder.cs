@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Properties
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PropertiesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?cursor*,include_total*,limit*,status*}", pathParameters)
+        public PropertiesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?cursor*,include_total*,lifecycle_status*,limit*,offset*,q*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,11 +56,11 @@ namespace Repull.SDK.V1.Properties
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PropertiesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?cursor*,include_total*,limit*,status*}", rawUrl)
+        public PropertiesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?cursor*,include_total*,lifecycle_status*,limit*,offset*,q*,status*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
+        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `q` (substring on name/street/city), `status` (active|inactive|all), `lifecycle_status` (exact match on the listing&apos;s lifecycle state). Other unknown params (e.g. `?search=` or `?propertyId=`) are rejected with 422 — no silent unfiltered results.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.PropertyListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -85,7 +85,7 @@ namespace Repull.SDK.V1.Properties
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.PropertyListResponse>(requestInfo, global::Repull.SDK.Models.PropertyListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
+        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `q` (substring on name/street/city), `status` (active|inactive|all), `lifecycle_status` (exact match on the listing&apos;s lifecycle state). Other unknown params (e.g. `?search=` or `?propertyId=`) are rejected with 422 — no silent unfiltered results.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -113,7 +113,7 @@ namespace Repull.SDK.V1.Properties
             return new global::Repull.SDK.V1.Properties.PropertiesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.**Breaking change:** `?offset=` is no longer accepted. Requests passing it return 422 with a `did_you_mean: &apos;cursor&apos;` hint.
+        /// Cursor-paginated list of properties for the authenticated workspace. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. Cursor is opaque base64 — do not parse it.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `q` (substring on name/street/city), `status` (active|inactive|all), `lifecycle_status` (exact match on the listing&apos;s lifecycle state). Other unknown params (e.g. `?search=` or `?propertyId=`) are rejected with 422 — no silent unfiltered results.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PropertiesRequestBuilderGetQueryParameters 
@@ -131,10 +131,33 @@ namespace Repull.SDK.V1.Properties
             /// <summary>When `true` (default), the response&apos;s `pagination.total` carries the count of rows matching the current filter, across all pages. Pass `false` to skip the count for very large workspaces where the per-page COUNT(*) cost matters.</summary>
             [QueryParameter("include_total")]
             public bool? IncludeTotal { get; set; }
+            /// <summary>Filter by lifecycle status (e.g. `live`, `draft`, `archived`). Pass `all` to disable the filter.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("lifecycle_status")]
+            public string? LifecycleStatus { get; set; }
+#nullable restore
+#else
+            [QueryParameter("lifecycle_status")]
+            public string LifecycleStatus { get; set; }
+#endif
             /// <summary>Page size (max 100). Requests over the cap return 422.</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
-            /// <summary>Filter by status. Default returns active only; pass `all` to include inactive.</summary>
+            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
+            [QueryParameter("offset")]
+            public int? Offset { get; set; }
+            /// <summary>Case-insensitive substring search on name, street, or city.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("q")]
+            public string? Q { get; set; }
+#nullable restore
+#else
+            [QueryParameter("q")]
+            public string Q { get; set; }
+#endif
+            /// <summary>Filter by status. Default returns active only; pass `inactive` to invert or `all` to include both.</summary>
             [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -145,7 +168,7 @@ namespace Repull.SDK.V1.Properties
             [QueryParameter("status")]
             public string Status { get; set; }
 #endif
-            /// <summary>Filter by status. Default returns active only; pass `all` to include inactive.</summary>
+            /// <summary>Filter by status. Default returns active only; pass `inactive` to invert or `all` to include both.</summary>
             [QueryParameter("status")]
             public global::Repull.SDK.V1.Properties.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
         }

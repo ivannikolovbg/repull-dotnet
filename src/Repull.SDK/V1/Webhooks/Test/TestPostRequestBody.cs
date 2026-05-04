@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -14,14 +15,8 @@ namespace Repull.SDK.V1.Webhooks.Test
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The event_type property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? EventType { get; set; }
-#nullable restore
-#else
-        public string EventType { get; set; }
-#endif
+        /// <summary>Canonical event type identifier. Every webhook delivery declares one of these in its `type` field; SDKs key the discriminated `WebhookEvent` union on this value.</summary>
+        public global::Repull.SDK.Models.WebhookEventType? EventType { get; set; }
         /// <summary>The signing_secret property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -63,7 +58,7 @@ namespace Repull.SDK.V1.Webhooks.Test
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "event_type", n => { EventType = n.GetStringValue(); } },
+                { "event_type", n => { EventType = n.GetEnumValue<global::Repull.SDK.Models.WebhookEventType>(); } },
                 { "signing_secret", n => { SigningSecret = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
@@ -75,7 +70,7 @@ namespace Repull.SDK.V1.Webhooks.Test
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("event_type", EventType);
+            writer.WriteEnumValue<global::Repull.SDK.Models.WebhookEventType>("event_type", EventType);
             writer.WriteStringValue("signing_secret", SigningSecret);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);

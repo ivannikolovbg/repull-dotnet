@@ -12,6 +12,10 @@ namespace Repull.SDK.V1.Properties
         #pragma warning disable CS1591
         Active,
         #pragma warning restore CS1591
+        [EnumMember(Value = "inactive")]
+        #pragma warning disable CS1591
+        Inactive,
+        #pragma warning restore CS1591
         [EnumMember(Value = "all")]
         #pragma warning disable CS1591
         All,

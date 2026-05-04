@@ -35,7 +35,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/listings", pathParameters)
+        public ListingsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/listings{?include*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,22 +43,22 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/listings", rawUrl)
+        public ListingsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/listings{?include*}", rawUrl)
         {
         }
         /// <summary>
-        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. Sourced from the Airbnb Listing API. Listings sync automatically every few minutes — pass `?refresh=true` to force a fresh upstream pull.
+        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. Default response is a fast DB read pairing each Vanio listing with its `listings_airbnb` connection rows.Pass `?include=amenities` to enrich each connection with its current Airbnb amenity set (one extra upstream call per unique Airbnb id, fanned out in parallel). Per-connection failures surface in `_errors.amenities` rather than failing the whole request.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbListingListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.AirbnbListingListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbListingListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.AirbnbListingListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbListingListResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -83,17 +83,17 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbListing>(requestInfo, global::Repull.SDK.Models.AirbnbListing.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. Sourced from the Airbnb Listing API. Listings sync automatically every few minutes — pass `?refresh=true` to force a fresh upstream pull.
+        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. Default response is a fast DB read pairing each Vanio listing with its `listings_airbnb` connection rows.Pass `?include=amenities` to enrich each connection with its current Airbnb amenity set (one extra upstream call per unique Airbnb id, fanned out in parallel). Per-connection failures surface in `_errors.amenities` rather than failing the whole request.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -130,11 +130,28 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
             return new global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. Default response is a fast DB read pairing each Vanio listing with its `listings_airbnb` connection rows.Pass `?include=amenities` to enrich each connection with its current Airbnb amenity set (one extra upstream call per unique Airbnb id, fanned out in parallel). Per-connection failures surface in `_errors.amenities` rather than failing the whole request.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ListingsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Comma-separated expansions. Currently supported: `amenities` (adds `amenities` and `accessibility_amenities` arrays to each connection). Each expansion adds one upstream Airbnb call per unique listing id.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("include")]
+            public string? Include { get; set; }
+#nullable restore
+#else
+            [QueryParameter("include")]
+            public string Include { get; set; }
+#endif
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ListingsRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class ListingsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>
         {
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -25,10 +26,10 @@ namespace Repull.SDK.V1.Webhooks.Item
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?>? Events { get; set; }
 #nullable restore
 #else
-        public List<string> Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?> Events { get; set; }
 #endif
         /// <summary>The status property</summary>
         public global::Repull.SDK.V1.Webhooks.Item.WebhooksPatchRequestBody_status? Status { get; set; }
@@ -66,7 +67,7 @@ namespace Repull.SDK.V1.Webhooks.Item
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "description", n => { Description = n.GetStringValue(); } },
-                { "events", n => { Events = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "events", n => { Events = n.GetCollectionOfEnumValues<global::Repull.SDK.Models.WebhookEventType>()?.AsList(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.V1.Webhooks.Item.WebhooksPatchRequestBody_status>(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
@@ -79,7 +80,7 @@ namespace Repull.SDK.V1.Webhooks.Item
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("description", Description);
-            writer.WriteCollectionOfPrimitiveValues<string>("events", Events);
+            writer.WriteCollectionOfEnumValues<global::Repull.SDK.Models.WebhookEventType>("events", Events);
             writer.WriteEnumValue<global::Repull.SDK.V1.Webhooks.Item.WebhooksPatchRequestBody_status>("status", Status);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);

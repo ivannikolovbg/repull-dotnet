@@ -17,10 +17,10 @@ namespace Repull.SDK.Models
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.WebhookEventCatalog_domains_events>? Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventCatalogEntry>? Events { get; set; }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.WebhookEventCatalog_domains_events> Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventCatalogEntry> Events { get; set; }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -63,7 +63,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "events", n => { Events = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.WebhookEventCatalog_domains_events>(global::Repull.SDK.Models.WebhookEventCatalog_domains_events.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "events", n => { Events = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.WebhookEventCatalogEntry>(global::Repull.SDK.Models.WebhookEventCatalogEntry.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
@@ -75,7 +75,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.WebhookEventCatalog_domains_events>("events", Events);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.WebhookEventCatalogEntry>("events", Events);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);

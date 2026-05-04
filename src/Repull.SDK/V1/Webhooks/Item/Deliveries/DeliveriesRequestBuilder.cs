@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public DeliveriesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/webhooks/{id}/deliveries{?cursor*,limit*,status*}", pathParameters)
+        public DeliveriesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/webhooks/{id}/deliveries{?cursor*,limit*,offset*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,11 +56,11 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public DeliveriesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/webhooks/{id}/deliveries{?cursor*,limit*,status*}", rawUrl)
+        public DeliveriesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/webhooks/{id}/deliveries{?cursor*,limit*,offset*,status*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it.
+        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it. `?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — mutually exclusive with `cursor`.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.WebhookDeliveryListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -78,7 +78,7 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.WebhookDeliveryListResponse>(requestInfo, global::Repull.SDK.Models.WebhookDeliveryListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it.
+        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it. `?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — mutually exclusive with `cursor`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -106,7 +106,7 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries
             return new global::Repull.SDK.V1.Webhooks.Item.Deliveries.DeliveriesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it.
+        /// Cursor-paginated history of every delivery attempt for this subscription. Walk pages with `?cursor=&lt;pagination.nextCursor&gt;`; stop when `pagination.hasMore` is `false`. The cursor is opaque base64 — do not parse it. `?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — mutually exclusive with `cursor`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class DeliveriesRequestBuilderGetQueryParameters 
@@ -122,6 +122,9 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries
 #endif
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
+            [QueryParameter("offset")]
+            public int? Offset { get; set; }
             [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

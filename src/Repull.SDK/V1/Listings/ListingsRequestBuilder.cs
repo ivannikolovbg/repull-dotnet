@@ -54,7 +54,7 @@ namespace Repull.SDK.V1.Listings
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings{?channel*,cursor*,limit*,q*,status*}", pathParameters)
+        public ListingsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings{?channel*,cursor*,limit*,offset*,q*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -62,11 +62,11 @@ namespace Repull.SDK.V1.Listings
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings{?channel*,cursor*,limit*,q*,status*}", rawUrl)
+        public ListingsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings{?channel*,cursor*,limit*,offset*,q*,status*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
+        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. `?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. Filters: `q` (substring on name/street/city), `status`, `channel`.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -116,7 +116,7 @@ namespace Repull.SDK.V1.Listings
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingCreateResponse>(requestInfo, global::Repull.SDK.Models.ListingCreateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
+        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. `?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. Filters: `q` (substring on name/street/city), `status`, `channel`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -166,7 +166,7 @@ namespace Repull.SDK.V1.Listings
             return new global::Repull.SDK.V1.Listings.ListingsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. Filters: `q` (substring on name/street/city), `status`, `channel`.
+        /// Cursor-paginated list of listings owned by the authenticated workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request to walk the full set. `?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. Filters: `q` (substring on name/street/city), `status`, `channel`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ListingsRequestBuilderGetQueryParameters 
@@ -194,6 +194,9 @@ namespace Repull.SDK.V1.Listings
             /// <summary>Max items per page. Hard cap is 100.</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
+            [QueryParameter("offset")]
+            public int? Offset { get; set; }
             /// <summary>Case-insensitive substring search on name, street, or city.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
