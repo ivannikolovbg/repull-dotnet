@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public HistoryRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/pricing/history{?cursor*,endDate*,limit*,startDate*}", pathParameters)
+        public HistoryRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/pricing/history{?cursor*,endDate*,limit*,offset*,startDate*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public HistoryRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/pricing/history{?cursor*,endDate*,limit*,startDate*}", rawUrl)
+        public HistoryRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}/pricing/history{?cursor*,endDate*,limit*,offset*,startDate*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
+        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingPricingHistoryResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingHistoryResponse>(requestInfo, global::Repull.SDK.Models.ListingPricingHistoryResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
+        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -93,7 +93,7 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
             return new global::Repull.SDK.V1.Listings.Item.Pricing.History.HistoryRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.
+        /// Cursor-paginated audit trail of pricing recommendations vs applied prices for a listing across a date window. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.Defaults to ±90 days from today. Cursor is a keyset on `date ASC` — stable even if rows are added during a partner&apos;s pagination walk. `limit` is capped at 500 — exceeding returns 422.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class HistoryRequestBuilderGetQueryParameters 
@@ -113,6 +113,9 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
             public Date? EndDate { get; set; }
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
+            [QueryParameter("offset")]
+            public int? Offset { get; set; }
             /// <summary>Inclusive. Defaults to today - 90 days.</summary>
             [QueryParameter("startDate")]
             public Date? StartDate { get; set; }

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Listings.Item.GenerateContent
         {
         }
         /// <summary>
-        /// Generate guest-facing copy (title, summary, description, amenities, etc.) for a listing using Kimi K2. When `photos` are provided the vision model is used for photo-grounded copy. Persists into the listing by default.
+        /// Generate guest-facing copy (title, summary, description, amenities, etc.) for a listing using Repull AI. When `photos` are provided the vision model is used for photo-grounded copy. Persists into the listing by default.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingGenerateContentResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -59,7 +59,7 @@ namespace Repull.SDK.V1.Listings.Item.GenerateContent
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingGenerateContentResponse>(requestInfo, global::Repull.SDK.Models.ListingGenerateContentResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Generate guest-facing copy (title, summary, description, amenities, etc.) for a listing using Kimi K2. When `photos` are provided the vision model is used for photo-grounded copy. Persists into the listing by default.
+        /// Generate guest-facing copy (title, summary, description, amenities, etc.) for a listing using Repull AI. When `photos` are provided the vision model is used for photo-grounded copy. Persists into the listing by default.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

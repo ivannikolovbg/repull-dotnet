@@ -16,7 +16,7 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Save the generated content to the listing (so subsequent publishes pick it up).</summary>
         public bool? Persist { get; set; }
-        /// <summary>Up to 8 reference photos. When present, Kimi K2 vision is used for grounded copy.</summary>
+        /// <summary>Up to 8 reference photos. When present, Repull AI vision is used for grounded copy.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Photos { get; set; }

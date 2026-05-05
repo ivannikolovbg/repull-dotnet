@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*}", pathParameters)
+        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInFrom*,checkInTo*,check_in_after*,check_in_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*}", rawUrl)
+        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*}", rawUrl)
         {
         }
         /// <summary>
@@ -159,10 +159,20 @@ namespace Repull.SDK.V1.Reservations
         public partial class ReservationsRequestBuilderGetQueryParameters 
         {
             /// <summary>Check-in date &gt;= this value</summary>
-            [QueryParameter("check_in_after")]
-            public Date? CheckInAfter { get; set; }
+            public Date? Check_in_after { get; set; }
             /// <summary>Check-in date &lt;= this value</summary>
-            [QueryParameter("check_in_before")]
+            public Date? Check_in_before { get; set; }
+            /// <summary>Check-out date &gt;= this value</summary>
+            public Date? Check_out_after { get; set; }
+            /// <summary>Check-out date &lt;= this value</summary>
+            public Date? Check_out_before { get; set; }
+            /// <summary>Use `check_in_after` (snake_case) instead.</summary>
+            [Obsolete("")]
+            [QueryParameter("checkInAfter")]
+            public Date? CheckInAfter { get; set; }
+            /// <summary>Use `check_in_before` (snake_case) instead.</summary>
+            [Obsolete("")]
+            [QueryParameter("checkInBefore")]
             public Date? CheckInBefore { get; set; }
             /// <summary>Deprecated alias for `check_in_after`.</summary>
             [Obsolete("")]
@@ -172,6 +182,14 @@ namespace Repull.SDK.V1.Reservations
             [Obsolete("")]
             [QueryParameter("checkInTo")]
             public Date? CheckInTo { get; set; }
+            /// <summary>Use `check_out_after` (snake_case) instead.</summary>
+            [Obsolete("")]
+            [QueryParameter("checkOutAfter")]
+            public Date? CheckOutAfter { get; set; }
+            /// <summary>Use `check_out_before` (snake_case) instead.</summary>
+            [Obsolete("")]
+            [QueryParameter("checkOutBefore")]
+            public Date? CheckOutBefore { get; set; }
             /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
