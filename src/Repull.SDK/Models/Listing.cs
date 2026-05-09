@@ -23,6 +23,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.Listing_address Address { get; set; }
 #endif
+        /// <summary>Amenity rows for the listing. **Only present when the caller passes `?include=amenities`.** Empty array (`[]`) when the listing has no amenity rows.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingAmenity>? Amenities { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingAmenity> Amenities { get; set; }
+#endif
         /// <summary>Channels (Airbnb, Booking, VRBO, etc.) the listing is connected to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -87,6 +95,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "address", n => { Address = n.GetObjectValue<global::Repull.SDK.Models.Listing_address>(global::Repull.SDK.Models.Listing_address.CreateFromDiscriminatorValue); } },
+                { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>(global::Repull.SDK.Models.ListingAmenity.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>(global::Repull.SDK.Models.ListingChannel.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
@@ -104,6 +113,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_address>("address", Address);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>("amenities", Amenities);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>("channels", Channels);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("id", Id);

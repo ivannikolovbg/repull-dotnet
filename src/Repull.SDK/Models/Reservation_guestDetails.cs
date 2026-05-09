@@ -8,8 +8,9 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Raw guest details from the source channel (firstName, lastName, email, phone, count, etc.). Shape varies by platform — use the dedicated guest endpoint for a normalized profile.
+    /// DEPRECATED — use `occupancy` for normalized counts and `primaryGuest` for guest identity. Raw guest details from the source channel; shape varies by platform.
     /// </summary>
+    [Obsolete("")]
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Reservation_guestDetails : IAdditionalDataHolder, IParsable
     {

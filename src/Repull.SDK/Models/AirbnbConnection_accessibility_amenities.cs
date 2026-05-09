@@ -14,6 +14,24 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Airbnb amenity id (e.g. `wheelchair_accessible`, `home_step_free_access`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The instruction property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Instruction { get; set; }
+#nullable restore
+#else
+        public string Instruction { get; set; }
+#endif
+        /// <summary>The is_present property</summary>
+        public bool? IsPresent { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities"/> and sets the default values.
         /// </summary>
@@ -39,6 +57,9 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "instruction", n => { Instruction = n.GetStringValue(); } },
+                { "is_present", n => { IsPresent = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -48,6 +69,9 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("instruction", Instruction);
+            writer.WriteBoolValue("is_present", IsPresent);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

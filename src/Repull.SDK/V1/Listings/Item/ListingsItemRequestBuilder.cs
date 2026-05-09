@@ -58,7 +58,7 @@ namespace Repull.SDK.V1.Listings.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}", pathParameters)
+        public ListingsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}{?include*}", pathParameters)
         {
         }
         /// <summary>
@@ -66,11 +66,11 @@ namespace Repull.SDK.V1.Listings.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}", rawUrl)
+        public ListingsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/listings/{id}{?include*}", rawUrl)
         {
         }
         /// <summary>
-        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.
+        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenities (sourced from the unified `listings_amenities` table). Returns `[]` when the listing has no amenity rows. The default response stays lean; consumers must opt in.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.Listing"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -80,11 +80,11 @@ namespace Repull.SDK.V1.Listings.Item
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.Listing?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.Listing?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder.ListingsItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.Listing> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.Listing> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder.ListingsItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -97,17 +97,17 @@ namespace Repull.SDK.V1.Listings.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Listing>(requestInfo, global::Repull.SDK.Models.Listing.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.
+        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenities (sourced from the unified `listings_amenities` table). Returns `[]` when the listing has no amenity rows. The default response stays lean; consumers must opt in.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder.ListingsItemRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder.ListingsItemRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -125,11 +125,32 @@ namespace Repull.SDK.V1.Listings.Item
             return new global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenities (sourced from the unified `listings_amenities` table). Returns `[]` when the listing has no amenity rows. The default response stays lean; consumers must opt in.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ListingsItemRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Comma-separated optional expansions. Currently supported: `amenities`. Unknown values return 422.</summary>
+            [Obsolete("This property is deprecated, use IncludeAsGetIncludeQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("include")]
+            public string? Include { get; set; }
+#nullable restore
+#else
+            [QueryParameter("include")]
+            public string Include { get; set; }
+#endif
+            /// <summary>Comma-separated optional expansions. Currently supported: `amenities`. Unknown values return 422.</summary>
+            [QueryParameter("include")]
+            public global::Repull.SDK.V1.Listings.Item.GetIncludeQueryParameterType? IncludeAsGetIncludeQueryParameterType { get; set; }
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ListingsItemRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class ListingsItemRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder.ListingsItemRequestBuilderGetQueryParameters>
         {
         }
     }

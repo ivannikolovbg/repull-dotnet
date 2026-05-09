@@ -9,13 +9,15 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A booking/reservation from a connected PMS. Identical shape between list-row (`GET /v1/reservations`) and detail (`GET /v1/reservations/{id}`) — SDK consumers can use the same type for both.
+    /// A booking/reservation from a connected PMS. Identical shape between list-row (`GET /v1/reservations`) and detail (`GET /v1/reservations/{id}`) — SDK consumers can use the same type for both.The canonical (post-2026-05) shape uses nested `primaryGuest`, `occupancy`, `financials` blocks. The legacy flat fields (`guestId`, `totalPrice`, `currency`, `guestDetails`) remain populated for back-compat and are marked `deprecated` here. New consumers should read from the nested blocks; existing consumers continue to work unchanged.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Reservation : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>When the booking was made on the source channel (when reported by the channel).</summary>
+        public DateTimeOffset? BookedAt { get; set; }
         /// <summary>The checkIn property</summary>
         public Date? CheckIn { get; set; }
         /// <summary>The checkOut property</summary>
@@ -30,7 +32,8 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>When the reservation row was created in Repull (not the booking-on-channel timestamp).</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>ISO 4217 currency code.</summary>
+        /// <summary>DEPRECATED — use `financials.currency`. ISO 4217 currency code.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Currency { get; set; }
@@ -38,7 +41,16 @@ namespace Repull.SDK.Models
 #else
         public string Currency { get; set; }
 #endif
-        /// <summary>Raw guest details from the source channel (firstName, lastName, email, phone, count, etc.). Shape varies by platform — use the dedicated guest endpoint for a normalized profile.</summary>
+        /// <summary>Normalized money block. Always populated for paid reservations.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationFinancials? Financials { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationFinancials Financials { get; set; }
+#endif
+        /// <summary>DEPRECATED — use `occupancy` for normalized counts and `primaryGuest` for guest identity. Raw guest details from the source channel; shape varies by platform.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.Reservation_guestDetails? GuestDetails { get; set; }
@@ -46,7 +58,8 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.Reservation_guestDetails GuestDetails { get; set; }
 #endif
-        /// <summary>Internal Repull guest ID. Use `GET /v1/guests/{id}` for the full profile.</summary>
+        /// <summary>DEPRECATED — use `primaryGuest.id`. Internal Repull guest ID. Kept populated for back-compat.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? GuestId { get; set; }
@@ -54,7 +67,7 @@ namespace Repull.SDK.Models
 #else
         public string GuestId { get; set; }
 #endif
-        /// <summary>Pre-resolved display name (`firstName lastName`) extracted from `guestDetails`. Null when no first name is available.</summary>
+        /// <summary>Pre-resolved display name (`firstName lastName`) from the joined guest row. Undefined when no first name is available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? GuestName { get; set; }
@@ -78,11 +91,31 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
-        /// <summary>Booking source. Lowercase. May be null on legacy rows.</summary>
+        /// <summary>Normalized guest counts. May be undefined when the source channel did not provide counts.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationOccupancy? Occupancy { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationOccupancy Occupancy { get; set; }
+#endif
+        /// <summary>DEPRECATED alias for `source`. Same value, kept for back-compat.</summary>
+        [Obsolete("")]
         public global::Repull.SDK.Models.Reservation_platform? Platform { get; set; }
-        /// <summary>The status property</summary>
+        /// <summary>Inline guest summary. May be undefined for owner-blocks / pre-arrival rows.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationPrimaryGuest? PrimaryGuest { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationPrimaryGuest PrimaryGuest { get; set; }
+#endif
+        /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
+        public global::Repull.SDK.Models.Reservation_source? Source { get; set; }
+        /// <summary>Lifecycle status. The API normalises a multi-decade internal taxonomy down to these four buckets, so the value you receive is always one of the enum constants. `completed` is derived from `checkOut &lt; today`.</summary>
         public global::Repull.SDK.Models.Reservation_status? Status { get; set; }
-        /// <summary>Decimal-as-string (precision 10, scale 2) to preserve precision across mixed-currency totals.</summary>
+        /// <summary>DEPRECATED — use `financials.totalPrice` (a number). Decimal-as-string (precision 10, scale 2) kept for back-compat.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? TotalPrice { get; set; }
@@ -115,17 +148,22 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "bookedAt", n => { BookedAt = n.GetDateTimeOffsetValue(); } },
                 { "checkIn", n => { CheckIn = n.GetDateValue(); } },
                 { "checkOut", n => { CheckOut = n.GetDateValue(); } },
                 { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
+                { "financials", n => { Financials = n.GetObjectValue<global::Repull.SDK.Models.ReservationFinancials>(global::Repull.SDK.Models.ReservationFinancials.CreateFromDiscriminatorValue); } },
                 { "guestDetails", n => { GuestDetails = n.GetObjectValue<global::Repull.SDK.Models.Reservation_guestDetails>(global::Repull.SDK.Models.Reservation_guestDetails.CreateFromDiscriminatorValue); } },
                 { "guestId", n => { GuestId = n.GetStringValue(); } },
                 { "guestName", n => { GuestName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "occupancy", n => { Occupancy = n.GetObjectValue<global::Repull.SDK.Models.ReservationOccupancy>(global::Repull.SDK.Models.ReservationOccupancy.CreateFromDiscriminatorValue); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Reservation_platform>(); } },
+                { "primaryGuest", n => { PrimaryGuest = n.GetObjectValue<global::Repull.SDK.Models.ReservationPrimaryGuest>(global::Repull.SDK.Models.ReservationPrimaryGuest.CreateFromDiscriminatorValue); } },
+                { "source", n => { Source = n.GetEnumValue<global::Repull.SDK.Models.Reservation_source>(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Reservation_status>(); } },
                 { "totalPrice", n => { TotalPrice = n.GetStringValue(); } },
             };
@@ -137,17 +175,22 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteDateTimeOffsetValue("bookedAt", BookedAt);
             writer.WriteDateValue("checkIn", CheckIn);
             writer.WriteDateValue("checkOut", CheckOut);
             writer.WriteStringValue("confirmationCode", ConfirmationCode);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("currency", Currency);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationFinancials>("financials", Financials);
             writer.WriteObjectValue<global::Repull.SDK.Models.Reservation_guestDetails>("guestDetails", GuestDetails);
             writer.WriteStringValue("guestId", GuestId);
             writer.WriteStringValue("guestName", GuestName);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("listingId", ListingId);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationOccupancy>("occupancy", Occupancy);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_platform>("platform", Platform);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationPrimaryGuest>("primaryGuest", PrimaryGuest);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_source>("source", Source);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_status>("status", Status);
             writer.WriteStringValue("totalPrice", TotalPrice);
             writer.WriteAdditionalData(AdditionalData);

@@ -7,14 +7,15 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Inline guest summary resolved by JOIN-ing the `guests` table. Populated for every reservation that has a linked guest row; OMITTED entirely (not null) for owner-blocks / pre-arrival rows / partial-sync gaps. Always optional-chain in SDK consumers.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class ReservationCreatedPayload_primaryGuest : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class ReservationPrimaryGuest : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The email property</summary>
+        /// <summary>Primary email contact (or first non-primary if no primary set).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Email { get; set; }
@@ -30,6 +31,22 @@ namespace Repull.SDK.Models
 #else
         public string FirstName { get; set; }
 #endif
+        /// <summary>Internal Repull guest ID. Use `GET /v1/guests/{id}` for the full profile.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>Guest&apos;s preferred language (BCP-47 / ISO 639-1).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Language { get; set; }
+#nullable restore
+#else
+        public string Language { get; set; }
+#endif
         /// <summary>The lastName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -38,22 +55,30 @@ namespace Repull.SDK.Models
 #else
         public string LastName { get; set; }
 #endif
+        /// <summary>Primary phone contact (or first non-primary if no primary set).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Phone { get; set; }
+#nullable restore
+#else
+        public string Phone { get; set; }
+#endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationPrimaryGuest"/> and sets the default values.
         /// </summary>
-        public ReservationCreatedPayload_primaryGuest()
+        public ReservationPrimaryGuest()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ReservationPrimaryGuest"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.ReservationPrimaryGuest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest();
+            return new global::Repull.SDK.Models.ReservationPrimaryGuest();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -65,7 +90,10 @@ namespace Repull.SDK.Models
             {
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "language", n => { Language = n.GetStringValue(); } },
                 { "lastName", n => { LastName = n.GetStringValue(); } },
+                { "phone", n => { Phone = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -77,7 +105,10 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("firstName", FirstName);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("language", Language);
             writer.WriteStringValue("lastName", LastName);
+            writer.WriteStringValue("phone", Phone);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

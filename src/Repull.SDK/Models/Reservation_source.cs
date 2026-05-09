@@ -3,10 +3,9 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>DEPRECATED alias for `source`. Same value, kept for back-compat.</summary>
+    /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    [Obsolete("")]
-    public enum Reservation_platform
+    public enum Reservation_source
     {
         [EnumMember(Value = "airbnb")]
         #pragma warning disable CS1591

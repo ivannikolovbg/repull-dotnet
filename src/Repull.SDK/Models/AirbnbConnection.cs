@@ -13,7 +13,7 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbConnection : IAdditionalDataHolder, IParsable
     {
-        /// <summary>Present only when `?include=amenities` is passed.</summary>
+        /// <summary>Present only when `?include=amenities` is passed. Accessibility-tagged subset of the local amenity cache (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Returns an empty array when amenities synced but none qualify as accessibility; returns `null` when the cache is empty for this connection (use `data_freshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities>? AccessibilityAmenities { get; set; }
@@ -33,7 +33,7 @@ namespace Repull.SDK.Models
 #else
         public string AirbnbId { get; set; }
 #endif
-        /// <summary>Present only when `?include=amenities` is passed. Sourced from `GET /v2/listings/:id/amenities` on Airbnb.</summary>
+        /// <summary>Present only when `?include=amenities` is passed. Sourced from the local `listings_airbnb_amenities` cache (populated by the Airbnb sync worker). Returns `null` when the cache is empty for this connection — see the top-level `data_freshness` envelope to disambiguate &quot;never synced&quot; vs &quot;host disconnected&quot; vs &quot;fresh and genuinely empty&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.AirbnbConnection_amenities>? Amenities { get; set; }
@@ -43,14 +43,6 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>Per-expansion failures. Present only when an `?include=` upstream call failed for this connection (others may still succeed).</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.Models.AirbnbConnection_errors? Errors { get; set; }
-#nullable restore
-#else
-        public global::Repull.SDK.Models.AirbnbConnection_errors Errors { get; set; }
-#endif
         /// <summary>Airbnb host user id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -103,7 +95,6 @@ namespace Repull.SDK.Models
                 { "airbnbId", n => { AirbnbId = n.GetStringValue(); } },
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection_amenities>(global::Repull.SDK.Models.AirbnbConnection_amenities.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "_errors", n => { Errors = n.GetObjectValue<global::Repull.SDK.Models.AirbnbConnection_errors>(global::Repull.SDK.Models.AirbnbConnection_errors.CreateFromDiscriminatorValue); } },
                 { "hostId", n => { HostId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "markup", n => { Markup = n.GetStringValue(); } },
@@ -123,7 +114,6 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("airbnbId", AirbnbId);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection_amenities>("amenities", Amenities);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
-            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbConnection_errors>("_errors", Errors);
             writer.WriteStringValue("hostId", HostId);
             writer.WriteIntValue("id", Id);
             writer.WriteStringValue("markup", Markup);

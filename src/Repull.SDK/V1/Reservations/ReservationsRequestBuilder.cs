@@ -222,6 +222,7 @@ namespace Repull.SDK.V1.Reservations
             [QueryParameter("platform")]
             public string Platform { get; set; }
 #endif
+            /// <summary>Filter by lifecycle status. **Case-insensitive** — `confirmed`, `Confirmed`, and `CONFIRMED` all match. Each public value expands to the full set of internal sub-states server-side: `confirmed` matches `accept`/`confirmed`/`modified`, `cancelled` matches every cancellation sub-state (`cancelled_by_host`, `declined`, `expired`, etc.), `pending` includes `inquiry`/`awaiting_payment`. `completed` is a derived state — combine `status=confirmed` with `check_out_before=&lt;today&gt;` to filter for past stays.</summary>
             [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -232,6 +233,7 @@ namespace Repull.SDK.V1.Reservations
             [QueryParameter("status")]
             public string Status { get; set; }
 #endif
+            /// <summary>Filter by lifecycle status. **Case-insensitive** — `confirmed`, `Confirmed`, and `CONFIRMED` all match. Each public value expands to the full set of internal sub-states server-side: `confirmed` matches `accept`/`confirmed`/`modified`, `cancelled` matches every cancellation sub-state (`cancelled_by_host`, `declined`, `expired`, etc.), `pending` includes `inquiry`/`awaiting_payment`. `completed` is a derived state — combine `status=confirmed` with `check_out_before=&lt;today&gt;` to filter for past stays.</summary>
             [QueryParameter("status")]
             public global::Repull.SDK.V1.Reservations.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
         }

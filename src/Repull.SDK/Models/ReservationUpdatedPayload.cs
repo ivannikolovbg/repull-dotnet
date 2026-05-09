@@ -8,33 +8,29 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Payload for `reservation.updated`. Dates, guest count, status, or pricing changed on an existing reservation. The `changes` map carries `{ from, to }` deltas for each field that moved.
+    /// Payload for `reservation.updated`. Dates, status, or any tracked field changed on an existing reservation. `data.object` is the post-change snapshot; `data.previousAttributes` lists ONLY the fields that actually moved, with their prior values. Fields not in `previousAttributes` did not change.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationUpdatedPayload : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Map of `field` → `{ from, to }` pairs describing what changed.</summary>
+        /// <summary>Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationUpdatedPayload_changes? Changes { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject? Object { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationUpdatedPayload_changes Changes { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject Object { get; set; }
 #endif
-        /// <summary>The confirmationCode property</summary>
+        /// <summary>Sparse map: every key here is a field on the reservation snapshot whose value changed in this event, mapped to its prior value. Mirrors the keys of `ReservationWebhookObject` (e.g. `checkinDate`, `checkoutDate`, `status`). Receivers can diff `object[k]` vs `previousAttributes[k]` to know what moved.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes? PreviousAttributes { get; set; }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes PreviousAttributes { get; set; }
 #endif
-        /// <summary>The id property</summary>
-        public int? Id { get; set; }
-        /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationUpdatedPayload"/> and sets the default values.
         /// </summary>
@@ -60,10 +56,8 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "changes", n => { Changes = n.GetObjectValue<global::Repull.SDK.Models.ReservationUpdatedPayload_changes>(global::Repull.SDK.Models.ReservationUpdatedPayload_changes.CreateFromDiscriminatorValue); } },
-                { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
-                { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
+                { "object", n => { Object = n.GetObjectValue<global::Repull.SDK.Models.ReservationWebhookObject>(global::Repull.SDK.Models.ReservationWebhookObject.CreateFromDiscriminatorValue); } },
+                { "previousAttributes", n => { PreviousAttributes = n.GetObjectValue<global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes>(global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -73,10 +67,8 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationUpdatedPayload_changes>("changes", Changes);
-            writer.WriteStringValue("confirmationCode", ConfirmationCode);
-            writer.WriteIntValue("id", Id);
-            writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationWebhookObject>("object", Object);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes>("previousAttributes", PreviousAttributes);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

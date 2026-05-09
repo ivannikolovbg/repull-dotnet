@@ -23,6 +23,14 @@ namespace Repull.SDK.Models
 #else
         public string Address { get; set; }
 #endif
+        /// <summary>Amenity rows for the property. **Only present when the caller passes `?include=amenities`.** Empty array (`[]`) when the property has no amenity rows.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingAmenity>? Amenities { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingAmenity> Amenities { get; set; }
+#endif
         /// <summary>The bathrooms property</summary>
         public double? Bathrooms { get; set; }
         /// <summary>The bedrooms property</summary>
@@ -123,6 +131,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "address", n => { Address = n.GetStringValue(); } },
+                { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>(global::Repull.SDK.Models.ListingAmenity.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "bathrooms", n => { Bathrooms = n.GetDoubleValue(); } },
                 { "bedrooms", n => { Bedrooms = n.GetIntValue(); } },
                 { "city", n => { City = n.GetStringValue(); } },
@@ -146,6 +155,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("address", Address);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>("amenities", Amenities);
             writer.WriteDoubleValue("bathrooms", Bathrooms);
             writer.WriteIntValue("bedrooms", Bedrooms);
             writer.WriteStringValue("city", City);

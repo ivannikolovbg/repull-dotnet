@@ -14,13 +14,21 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The channels property</summary>
+        /// <summary>Sync activity per channel — empty if the listing has never been pushed/pulled. Empty does NOT mean &quot;not connected&quot;; check `connections` for that.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.ListingPublishStatusChannel>? Channels { get; set; }
 #nullable restore
 #else
         public List<global::Repull.SDK.Models.ListingPublishStatusChannel> Channels { get; set; }
+#endif
+        /// <summary>Connection state per channel. Populated even when `channels` is empty so callers can distinguish &quot;owned, never pushed&quot; from &quot;owned, never connected&quot;.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingPublishStatusConnection>? Connections { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingPublishStatusConnection> Connections { get; set; }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,6 +64,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusChannel>(global::Repull.SDK.Models.ListingPublishStatusChannel.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "connections", n => { Connections = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusConnection>(global::Repull.SDK.Models.ListingPublishStatusConnection.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
             };
         }
@@ -67,6 +76,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusChannel>("channels", Channels);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusConnection>("connections", Connections);
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteAdditionalData(AdditionalData);
         }
