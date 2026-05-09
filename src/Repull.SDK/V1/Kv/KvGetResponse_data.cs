@@ -5,63 +5,51 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Repull.SDK.Models
+namespace Repull.SDK.V1.Kv
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReservationCreatedPayload_pricing : IAdditionalDataHolder, IParsable
+    public partial class KvGetResponse_data : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The currency property</summary>
+        /// <summary>The key property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Key { get; set; }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Key { get; set; }
 #endif
-        /// <summary>The subtotal property</summary>
+        /// <summary>The ttl_at property</summary>
+        public DateTimeOffset? TtlAt { get; set; }
+        /// <summary>The updated_at property</summary>
+        public DateTimeOffset? UpdatedAt { get; set; }
+        /// <summary>The value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Subtotal { get; set; }
+        public UntypedNode? Value { get; set; }
 #nullable restore
 #else
-        public string Subtotal { get; set; }
-#endif
-        /// <summary>The taxes property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Taxes { get; set; }
-#nullable restore
-#else
-        public string Taxes { get; set; }
-#endif
-        /// <summary>The total property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Total { get; set; }
-#nullable restore
-#else
-        public string Total { get; set; }
+        public UntypedNode Value { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCreatedPayload_pricing"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Kv.KvGetResponse_data"/> and sets the default values.
         /// </summary>
-        public ReservationCreatedPayload_pricing()
+        public KvGetResponse_data()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.ReservationCreatedPayload_pricing"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Kv.KvGetResponse_data"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.ReservationCreatedPayload_pricing CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.V1.Kv.KvGetResponse_data CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.ReservationCreatedPayload_pricing();
+            return new global::Repull.SDK.V1.Kv.KvGetResponse_data();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -71,10 +59,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "currency", n => { Currency = n.GetStringValue(); } },
-                { "subtotal", n => { Subtotal = n.GetStringValue(); } },
-                { "taxes", n => { Taxes = n.GetStringValue(); } },
-                { "total", n => { Total = n.GetStringValue(); } },
+                { "key", n => { Key = n.GetStringValue(); } },
+                { "ttl_at", n => { TtlAt = n.GetDateTimeOffsetValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
+                { "value", n => { Value = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -84,10 +72,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("currency", Currency);
-            writer.WriteStringValue("subtotal", Subtotal);
-            writer.WriteStringValue("taxes", Taxes);
-            writer.WriteStringValue("total", Total);
+            writer.WriteStringValue("key", Key);
+            writer.WriteDateTimeOffsetValue("ttl_at", TtlAt);
+            writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
+            writer.WriteObjectValue<UntypedNode>("value", Value);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

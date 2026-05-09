@@ -24,7 +24,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>Payload for `reservation.cancelled`. A reservation was cancelled by the guest, host, or platform.</summary>
+        /// <summary>Payload for `reservation.cancelled`. A reservation was cancelled by the guest, host, or platform. `data.object` reflects the post-cancel snapshot (status will be `cancelled`); top-level fields capture cancellation metadata.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ReservationCancelledPayload? Data { get; set; }

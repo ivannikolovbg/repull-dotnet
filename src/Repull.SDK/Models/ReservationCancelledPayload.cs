@@ -8,48 +8,32 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Payload for `reservation.cancelled`. A reservation was cancelled by the guest, host, or platform.
+    /// Payload for `reservation.cancelled`. A reservation was cancelled by the guest, host, or platform. `data.object` reflects the post-cancel snapshot (status will be `cancelled`); top-level fields capture cancellation metadata.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationCancelledPayload : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The cancelledAt property</summary>
+        /// <summary>When the cancellation was recorded.</summary>
         public DateTimeOffset? CancelledAt { get; set; }
-        /// <summary>Who initiated the cancellation (guest, host, platform).</summary>
+        /// <summary>Who initiated the cancellation.</summary>
+        public global::Repull.SDK.Models.ReservationCancelledPayload_cancelledBy? CancelledBy { get; set; }
+        /// <summary>Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CancelledBy { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject? Object { get; set; }
 #nullable restore
 #else
-        public string CancelledBy { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject Object { get; set; }
 #endif
-        /// <summary>The confirmationCode property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ConfirmationCode { get; set; }
-#nullable restore
-#else
-        public string ConfirmationCode { get; set; }
-#endif
-        /// <summary>The id property</summary>
-        public int? Id { get; set; }
-        /// <summary>The reason property</summary>
+        /// <summary>Free-form cancellation reason from the source channel, if available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Reason { get; set; }
 #nullable restore
 #else
         public string Reason { get; set; }
-#endif
-        /// <summary>The refund property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.Models.ReservationCancelledPayload_refund? Refund { get; set; }
-#nullable restore
-#else
-        public global::Repull.SDK.Models.ReservationCancelledPayload_refund Refund { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCancelledPayload"/> and sets the default values.
@@ -77,11 +61,9 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "cancelledAt", n => { CancelledAt = n.GetDateTimeOffsetValue(); } },
-                { "cancelledBy", n => { CancelledBy = n.GetStringValue(); } },
-                { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "cancelledBy", n => { CancelledBy = n.GetEnumValue<global::Repull.SDK.Models.ReservationCancelledPayload_cancelledBy>(); } },
+                { "object", n => { Object = n.GetObjectValue<global::Repull.SDK.Models.ReservationWebhookObject>(global::Repull.SDK.Models.ReservationWebhookObject.CreateFromDiscriminatorValue); } },
                 { "reason", n => { Reason = n.GetStringValue(); } },
-                { "refund", n => { Refund = n.GetObjectValue<global::Repull.SDK.Models.ReservationCancelledPayload_refund>(global::Repull.SDK.Models.ReservationCancelledPayload_refund.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -92,11 +74,9 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDateTimeOffsetValue("cancelledAt", CancelledAt);
-            writer.WriteStringValue("cancelledBy", CancelledBy);
-            writer.WriteStringValue("confirmationCode", ConfirmationCode);
-            writer.WriteIntValue("id", Id);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ReservationCancelledPayload_cancelledBy>("cancelledBy", CancelledBy);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationWebhookObject>("object", Object);
             writer.WriteStringValue("reason", Reason);
-            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationCancelledPayload_refund>("refund", Refund);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

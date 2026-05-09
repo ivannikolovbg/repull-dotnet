@@ -2,79 +2,26 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
-using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Payload for `reservation.created`. A new reservation arrived from any connected channel or direct booking.
+    /// Payload for `reservation.created`. A new reservation arrived from any connected channel or direct booking. Stripe-pattern envelope: `data.object` carries the reservation snapshot.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationCreatedPayload : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
-        /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
-        /// <summary>The confirmationCode property</summary>
+        /// <summary>Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject? Object { get; set; }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
-#endif
-        /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>The guests property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.Models.ReservationCreatedPayload_guests? Guests { get; set; }
-#nullable restore
-#else
-        public global::Repull.SDK.Models.ReservationCreatedPayload_guests Guests { get; set; }
-#endif
-        /// <summary>The id property</summary>
-        public int? Id { get; set; }
-        /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
-        /// <summary>The nights property</summary>
-        public int? Nights { get; set; }
-        /// <summary>The platform property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Platform { get; set; }
-#nullable restore
-#else
-        public string Platform { get; set; }
-#endif
-        /// <summary>The pricing property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.Models.ReservationCreatedPayload_pricing? Pricing { get; set; }
-#nullable restore
-#else
-        public global::Repull.SDK.Models.ReservationCreatedPayload_pricing Pricing { get; set; }
-#endif
-        /// <summary>The primaryGuest property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest? PrimaryGuest { get; set; }
-#nullable restore
-#else
-        public global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest PrimaryGuest { get; set; }
-#endif
-        /// <summary>The status property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Status { get; set; }
-#nullable restore
-#else
-        public string Status { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject Object { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCreatedPayload"/> and sets the default values.
@@ -101,18 +48,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "checkIn", n => { CheckIn = n.GetDateValue(); } },
-                { "checkOut", n => { CheckOut = n.GetDateValue(); } },
-                { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
-                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "guests", n => { Guests = n.GetObjectValue<global::Repull.SDK.Models.ReservationCreatedPayload_guests>(global::Repull.SDK.Models.ReservationCreatedPayload_guests.CreateFromDiscriminatorValue); } },
-                { "id", n => { Id = n.GetIntValue(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
-                { "nights", n => { Nights = n.GetIntValue(); } },
-                { "platform", n => { Platform = n.GetStringValue(); } },
-                { "pricing", n => { Pricing = n.GetObjectValue<global::Repull.SDK.Models.ReservationCreatedPayload_pricing>(global::Repull.SDK.Models.ReservationCreatedPayload_pricing.CreateFromDiscriminatorValue); } },
-                { "primaryGuest", n => { PrimaryGuest = n.GetObjectValue<global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest>(global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest.CreateFromDiscriminatorValue); } },
-                { "status", n => { Status = n.GetStringValue(); } },
+                { "object", n => { Object = n.GetObjectValue<global::Repull.SDK.Models.ReservationWebhookObject>(global::Repull.SDK.Models.ReservationWebhookObject.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -122,18 +58,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDateValue("checkIn", CheckIn);
-            writer.WriteDateValue("checkOut", CheckOut);
-            writer.WriteStringValue("confirmationCode", ConfirmationCode);
-            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
-            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationCreatedPayload_guests>("guests", Guests);
-            writer.WriteIntValue("id", Id);
-            writer.WriteIntValue("listingId", ListingId);
-            writer.WriteIntValue("nights", Nights);
-            writer.WriteStringValue("platform", Platform);
-            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationCreatedPayload_pricing>("pricing", Pricing);
-            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationCreatedPayload_primaryGuest>("primaryGuest", PrimaryGuest);
-            writer.WriteStringValue("status", Status);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationWebhookObject>("object", Object);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

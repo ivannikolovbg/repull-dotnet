@@ -24,7 +24,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>Payload for `reservation.created`. A new reservation arrived from any connected channel or direct booking.</summary>
+        /// <summary>Payload for `reservation.created`. A new reservation arrived from any connected channel or direct booking. Stripe-pattern envelope: `data.object` carries the reservation snapshot.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ReservationCreatedPayload? Data { get; set; }

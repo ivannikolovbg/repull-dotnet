@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Channels.Airbnb.Connection;
 using Repull.SDK.V1.Channels.Airbnb.Listings;
 using Repull.SDK.V1.Channels.Airbnb.Messaging;
 using Repull.SDK.V1.Channels.Airbnb.Reservations;
@@ -19,6 +20,11 @@ namespace Repull.SDK.V1.Channels.Airbnb
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The connection property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Connection.ConnectionRequestBuilder Connection
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Connection.ConnectionRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The listings property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder Listings
         {

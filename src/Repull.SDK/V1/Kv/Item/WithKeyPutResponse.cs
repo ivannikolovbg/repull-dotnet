@@ -5,49 +5,51 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Repull.SDK.Models
+namespace Repull.SDK.V1.Kv.Item
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbConnection_amenities : IAdditionalDataHolder, IParsable
+    public partial class WithKeyPutResponse : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Airbnb amenity id (e.g. `wifi`, `kitchen`).</summary>
+        /// <summary>The key property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Key { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Key { get; set; }
 #endif
-        /// <summary>Host-supplied instruction for the amenity (e.g. &quot;WiFi password is on the fridge&quot;).</summary>
+        /// <summary>The ttl_at property</summary>
+        public DateTimeOffset? TtlAt { get; set; }
+        /// <summary>The updated_at property</summary>
+        public DateTimeOffset? UpdatedAt { get; set; }
+        /// <summary>The value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Instruction { get; set; }
+        public UntypedNode? Value { get; set; }
 #nullable restore
 #else
-        public string Instruction { get; set; }
+        public UntypedNode Value { get; set; }
 #endif
-        /// <summary>The is_present property</summary>
-        public bool? IsPresent { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbConnection_amenities"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Kv.Item.WithKeyPutResponse"/> and sets the default values.
         /// </summary>
-        public AirbnbConnection_amenities()
+        public WithKeyPutResponse()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbConnection_amenities"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Kv.Item.WithKeyPutResponse"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.AirbnbConnection_amenities CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.V1.Kv.Item.WithKeyPutResponse CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.AirbnbConnection_amenities();
+            return new global::Repull.SDK.V1.Kv.Item.WithKeyPutResponse();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -57,9 +59,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "instruction", n => { Instruction = n.GetStringValue(); } },
-                { "is_present", n => { IsPresent = n.GetBoolValue(); } },
+                { "key", n => { Key = n.GetStringValue(); } },
+                { "ttl_at", n => { TtlAt = n.GetDateTimeOffsetValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
+                { "value", n => { Value = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -69,9 +72,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("instruction", Instruction);
-            writer.WriteBoolValue("is_present", IsPresent);
+            writer.WriteStringValue("key", Key);
+            writer.WriteDateTimeOffsetValue("ttl_at", TtlAt);
+            writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
+            writer.WriteObjectValue<UntypedNode>("value", Value);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
