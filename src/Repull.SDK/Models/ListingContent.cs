@@ -7,14 +7,23 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Rich multilingual content slab for a listing — guest-facing copy sourced from `listings_descriptions` (the `en` row when surfaced via `?include=content`). Also returned as the AI-generated payload from `POST /v1/listings/{id}/generate-content` (where `title` and `amenities` are populated). All fields are individually nullable.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class ListingContent : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The amenities property</summary>
+        /// <summary>Structured supplementary rules (JSON; shape evolves with the listings_descriptions schema).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public UntypedNode? AdditionalRules { get; set; }
+#nullable restore
+#else
+        public UntypedNode AdditionalRules { get; set; }
+#endif
+        /// <summary>Free-text amenity strings. Populated only by `generate-content`; the `?include=amenities` expansion returns the structured `ListingAmenity[]` instead.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Amenities { get; set; }
@@ -29,6 +38,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Description { get; set; }
+#endif
+        /// <summary>Free-text directions for getting to + around the property (e.g. &quot;Take Highway 95 north for 12 miles&quot;).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GettingAround { get; set; }
+#nullable restore
+#else
+        public string GettingAround { get; set; }
 #endif
         /// <summary>The guestAccess property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -45,6 +62,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string HouseRules { get; set; }
+#endif
+        /// <summary>Host’s description of how they engage with guests (e.g. &quot;Self check-in, available via message&quot;).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InteractionWithGuests { get; set; }
+#nullable restore
+#else
+        public string InteractionWithGuests { get; set; }
 #endif
         /// <summary>The neighborhoodOverview property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -78,7 +103,7 @@ namespace Repull.SDK.Models
 #else
         public string Summary { get; set; }
 #endif
-        /// <summary>The title property</summary>
+        /// <summary>Public listing title. Populated only by `generate-content`; not stored on `listings_descriptions`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Title { get; set; }
@@ -119,10 +144,13 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "additionalRules", n => { AdditionalRules = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "amenities", n => { Amenities = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
+                { "gettingAround", n => { GettingAround = n.GetStringValue(); } },
                 { "guestAccess", n => { GuestAccess = n.GetStringValue(); } },
                 { "houseRules", n => { HouseRules = n.GetStringValue(); } },
+                { "interactionWithGuests", n => { InteractionWithGuests = n.GetStringValue(); } },
                 { "neighborhoodOverview", n => { NeighborhoodOverview = n.GetStringValue(); } },
                 { "notes", n => { Notes = n.GetStringValue(); } },
                 { "space", n => { Space = n.GetStringValue(); } },
@@ -138,10 +166,13 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<UntypedNode>("additionalRules", AdditionalRules);
             writer.WriteCollectionOfPrimitiveValues<string>("amenities", Amenities);
             writer.WriteStringValue("description", Description);
+            writer.WriteStringValue("gettingAround", GettingAround);
             writer.WriteStringValue("guestAccess", GuestAccess);
             writer.WriteStringValue("houseRules", HouseRules);
+            writer.WriteStringValue("interactionWithGuests", InteractionWithGuests);
             writer.WriteStringValue("neighborhoodOverview", NeighborhoodOverview);
             writer.WriteStringValue("notes", Notes);
             writer.WriteStringValue("space", Space);

@@ -5,6 +5,13 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2026-05-15
+
+### Added
+- **`listings_limit_exceeded` (402) coverage.** The API now returns `402 Payment Required` with `error.code = "listings_limit_exceeded"` when a customer is over their tier's active-listing cap (free=5, starter=50, custom=unlimited). Unlike 429, this is NOT a "wait and retry" condition — `Retry-After` is not set. Recovery paths: `DELETE` listings to fall under the cap, or upgrade at `repull.dev/dashboard/billing`. `/v1/health`, `/v1/usage/*`, and any `DELETE` are exempt. The 402 envelope mirrors `rate_limit_exceeded` and adds `tier`, `limit`, `active_listings`, `upgrade_url`. Tracks vanio-repull-api PR #66.
+- **`Listing.Content` and `Listing.Details` properties** populated when caller passes `?include=content` / `?include=details`. Sourced from `listings_descriptions` (en locale) and `listings_details` respectively. Field `null` = no row stored; absent = caller did not opt in. (Catch-up regen for vanio-repull-api PRs #59 and #61, originally shipped only to other SDKs in 0.2.2.)
+- **`ListingDetails` model.** New schema for the structured details payload returned by `?include=details`.
+
 ## [0.2.0] - 2026-05-03
 
 ### Changed (BREAKING)

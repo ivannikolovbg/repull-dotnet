@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Listings.Item
         {
         }
         /// <summary>
-        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenities (sourced from the unified `listings_amenities` table). Returns `[]` when the listing has no amenity rows. The default response stays lean; consumers must opt in.
+        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenity rows (`[]` when the listing has none). Pass `?include=content` for the rich content slab (summary, description, space, house rules, etc. — sourced from `listings_descriptions` for the `en` locale; `null` when no row is stored). Pass `?include=details` for the structural slab (bedrooms, bathrooms, person capacity, check-in window, wifi, house manual, etc.; `null` when no row is stored). Combine comma-separated, e.g. `?include=amenities,content,details`. The default response stays lean; consumers must opt in.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.Listing"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -97,7 +97,7 @@ namespace Repull.SDK.V1.Listings.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Listing>(requestInfo, global::Repull.SDK.Models.Listing.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenities (sourced from the unified `listings_amenities` table). Returns `[]` when the listing has no amenity rows. The default response stays lean; consumers must opt in.
+        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenity rows (`[]` when the listing has none). Pass `?include=content` for the rich content slab (summary, description, space, house rules, etc. — sourced from `listings_descriptions` for the `en` locale; `null` when no row is stored). Pass `?include=details` for the structural slab (bedrooms, bathrooms, person capacity, check-in window, wifi, house manual, etc.; `null` when no row is stored). Combine comma-separated, e.g. `?include=amenities,content,details`. The default response stays lean; consumers must opt in.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -125,13 +125,12 @@ namespace Repull.SDK.V1.Listings.Item
             return new global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenities (sourced from the unified `listings_amenities` table). Returns `[]` when the listing has no amenity rows. The default response stays lean; consumers must opt in.
+        /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenity rows (`[]` when the listing has none). Pass `?include=content` for the rich content slab (summary, description, space, house rules, etc. — sourced from `listings_descriptions` for the `en` locale; `null` when no row is stored). Pass `?include=details` for the structural slab (bedrooms, bathrooms, person capacity, check-in window, wifi, house manual, etc.; `null` when no row is stored). Combine comma-separated, e.g. `?include=amenities,content,details`. The default response stays lean; consumers must opt in.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ListingsItemRequestBuilderGetQueryParameters 
         {
-            /// <summary>Comma-separated optional expansions. Currently supported: `amenities`. Unknown values return 422.</summary>
-            [Obsolete("This property is deprecated, use IncludeAsGetIncludeQueryParameterType instead")]
+            /// <summary>Comma-separated optional expansions. Currently supported: `amenities`, `content`, `details`. Unknown values return 422 with a `valid_values` envelope.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("include")]
@@ -141,9 +140,6 @@ namespace Repull.SDK.V1.Listings.Item
             [QueryParameter("include")]
             public string Include { get; set; }
 #endif
-            /// <summary>Comma-separated optional expansions. Currently supported: `amenities`. Unknown values return 422.</summary>
-            [QueryParameter("include")]
-            public global::Repull.SDK.V1.Listings.Item.GetIncludeQueryParameterType? IncludeAsGetIncludeQueryParameterType { get; set; }
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.

@@ -39,8 +39,24 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.ListingChannel> Channels { get; set; }
 #endif
+        /// <summary>**Only present when the caller passes `?include=content`.** Sourced from `listings_descriptions` for the `en` locale. `null` when the listing has no description row stored (vs the field being absent — that signals the caller did not opt into the expansion).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingContent? Content { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingContent Content { get; set; }
+#endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>**Only present when the caller passes `?include=details`.** Sourced from `listings_details`. `null` when the listing has no details row stored (vs the field being absent — that signals the caller did not opt into the expansion).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingDetails? Details { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingDetails Details { get; set; }
+#endif
         /// <summary>Repull listing id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -97,7 +113,9 @@ namespace Repull.SDK.Models
                 { "address", n => { Address = n.GetObjectValue<global::Repull.SDK.Models.Listing_address>(global::Repull.SDK.Models.Listing_address.CreateFromDiscriminatorValue); } },
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>(global::Repull.SDK.Models.ListingAmenity.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>(global::Repull.SDK.Models.ListingChannel.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "content", n => { Content = n.GetObjectValue<global::Repull.SDK.Models.ListingContent>(global::Repull.SDK.Models.ListingContent.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "details", n => { Details = n.GetObjectValue<global::Repull.SDK.Models.ListingDetails>(global::Repull.SDK.Models.ListingDetails.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Listing_status>(); } },
@@ -115,7 +133,9 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_address>("address", Address);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>("amenities", Amenities);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>("channels", Channels);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingContent>("content", Content);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingDetails>("details", Details);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_status>("status", Status);
