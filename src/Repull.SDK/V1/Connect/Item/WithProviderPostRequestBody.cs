@@ -13,7 +13,7 @@ namespace Repull.SDK.V1.Connect.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithProviderPostRequestBody : IAdditionalDataHolder, IParsable
     {
-        /// <summary>Airbnb only — selects the OAuth scope set. &apos;read_only&apos; grants calendar-only access; &apos;full_access&apos; grants full host scopes (default).</summary>
+        /// <summary>Airbnb only — selects the OAuth scope set. &apos;read_only&apos; grants read-only scopes; &apos;messaging&apos; grants read scopes plus message read/send but NOT property management, so it can coexist with another app (e.g. an existing PMS) that already holds property management on the same Airbnb account; &apos;full_access&apos; (default) grants full host scopes including the exclusive property management (only one app per Airbnb account can hold it).</summary>
         public global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType? AccessType { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }

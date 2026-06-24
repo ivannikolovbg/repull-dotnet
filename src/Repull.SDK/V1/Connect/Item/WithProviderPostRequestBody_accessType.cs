@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.V1.Connect.Item
 {
-    /// <summary>Airbnb only — selects the OAuth scope set. &apos;read_only&apos; grants calendar-only access; &apos;full_access&apos; grants full host scopes (default).</summary>
+    /// <summary>Airbnb only — selects the OAuth scope set. &apos;read_only&apos; grants read-only scopes; &apos;messaging&apos; grants read scopes plus message read/send but NOT property management, so it can coexist with another app (e.g. an existing PMS) that already holds property management on the same Airbnb account; &apos;full_access&apos; (default) grants full host scopes including the exclusive property management (only one app per Airbnb account can hold it).</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum WithProviderPostRequestBody_accessType
     {
@@ -14,6 +14,10 @@ namespace Repull.SDK.V1.Connect.Item
         [EnumMember(Value = "full_access")]
         #pragma warning disable CS1591
         Full_access,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messaging")]
+        #pragma warning disable CS1591
+        Messaging,
         #pragma warning restore CS1591
     }
 }

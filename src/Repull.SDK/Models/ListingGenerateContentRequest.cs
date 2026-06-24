@@ -32,6 +32,7 @@ namespace Repull.SDK.Models
         public ListingGenerateContentRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            Persist = true;
             Style = global::Repull.SDK.Models.ListingGenerateContentRequest_style.Warm;
         }
         /// <summary>

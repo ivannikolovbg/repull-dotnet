@@ -10,7 +10,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
     <PackageId>Repull.SDK</PackageId>
-    <Version>0.2.3</Version>
+    <Version>0.2.4</Version>
     <Authors>Repull</Authors>
     <Company>Repull</Company>
     <Product>Repull .NET SDK</Product>

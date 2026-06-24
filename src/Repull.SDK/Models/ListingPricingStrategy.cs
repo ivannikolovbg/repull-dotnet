@@ -79,7 +79,11 @@ namespace Repull.SDK.Models
         public ListingPricingStrategy()
         {
             AdditionalData = new Dictionary<string, object>();
+            CompAdjustPct = 0;
             CompPositionTarget = global::Repull.SDK.Models.ListingPricingStrategy_compPositionTarget.Match;
+            EventBoostEnabled = true;
+            EventBoostMaxPct = 30;
+            MaxDailyChangePct = 15;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
