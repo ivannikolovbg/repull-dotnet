@@ -5,6 +5,13 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.5] - 2026-06-25
+
+### Added
+- **Booking.com hosted connect flow.** `POST /v1/connect/{provider}` with `provider=booking` now accepts `redirectUrl` (no `accessType`) and returns a hosted `url` — send the user there to designate FantasticStay in their Booking.com Extranet and paste their Hotel ID. Same response shape as Airbnb (`url`, `sessionId`, `expiresAt`). The `WithProviderPostRequestBody.RedirectUrl` doc now covers both Airbnb and Booking.com.
+- **`Property.Channels` array.** `GET /v1/properties` responses now include `channels` on each `Property` — the OTAs/channels the property is actively published on (e.g. `airbnb`, `booking`, `vrbo`). Empty array when the property has no active channel links.
+- **`channel` query parameter on `GET /v1/properties`.** Filter to properties with an active link on a given OTA/channel. New `GetChannelQueryParameterType` enum (`Airbnb`, `Booking`, `Vrbo`); omit to include every channel.
+
 ## [0.2.4] - 2026-06-24
 
 ### Added

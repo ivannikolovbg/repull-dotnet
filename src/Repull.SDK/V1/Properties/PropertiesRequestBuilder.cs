@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Properties
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PropertiesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?cursor*,include_total*,lifecycle_status*,limit*,offset*,q*,status*}", pathParameters)
+        public PropertiesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?channel*,cursor*,include_total*,lifecycle_status*,limit*,offset*,q*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace Repull.SDK.V1.Properties
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PropertiesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?cursor*,include_total*,lifecycle_status*,limit*,offset*,q*,status*}", rawUrl)
+        public PropertiesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/properties{?channel*,cursor*,include_total*,lifecycle_status*,limit*,offset*,q*,status*}", rawUrl)
         {
         }
         /// <summary>
@@ -118,6 +118,20 @@ namespace Repull.SDK.V1.Properties
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PropertiesRequestBuilderGetQueryParameters 
         {
+            /// <summary>Filter to properties with an active link on the given OTA/channel (airbnb, booking, vrbo). Omit to include every channel. Each property also returns a `channels` array listing the OTAs it is published on.</summary>
+            [Obsolete("This property is deprecated, use ChannelAsGetChannelQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("channel")]
+            public string? Channel { get; set; }
+#nullable restore
+#else
+            [QueryParameter("channel")]
+            public string Channel { get; set; }
+#endif
+            /// <summary>Filter to properties with an active link on the given OTA/channel (airbnb, booking, vrbo). Omit to include every channel. Each property also returns a `channels` array listing the OTAs it is published on.</summary>
+            [QueryParameter("channel")]
+            public global::Repull.SDK.V1.Properties.GetChannelQueryParameterType? ChannelAsGetChannelQueryParameterType { get; set; }
             /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

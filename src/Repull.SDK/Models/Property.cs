@@ -35,6 +35,14 @@ namespace Repull.SDK.Models
         public double? Bathrooms { get; set; }
         /// <summary>The bedrooms property</summary>
         public int? Bedrooms { get; set; }
+        /// <summary>OTAs/channels this property is actively published on (e.g. `airbnb`, `booking`, `vrbo`). Empty array when the property has no active channel links.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? Channels { get; set; }
+#nullable restore
+#else
+        public List<string> Channels { get; set; }
+#endif
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -134,6 +142,7 @@ namespace Repull.SDK.Models
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>(global::Repull.SDK.Models.ListingAmenity.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "bathrooms", n => { Bathrooms = n.GetDoubleValue(); } },
                 { "bedrooms", n => { Bedrooms = n.GetIntValue(); } },
+                { "channels", n => { Channels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "city", n => { City = n.GetStringValue(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
                 { "externalId", n => { ExternalId = n.GetStringValue(); } },
@@ -158,6 +167,7 @@ namespace Repull.SDK.Models
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>("amenities", Amenities);
             writer.WriteDoubleValue("bathrooms", Bathrooms);
             writer.WriteIntValue("bedrooms", Bedrooms);
+            writer.WriteCollectionOfPrimitiveValues<string>("channels", Channels);
             writer.WriteStringValue("city", City);
             writer.WriteStringValue("country", Country);
             writer.WriteStringValue("externalId", ExternalId);

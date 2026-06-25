@@ -41,7 +41,7 @@ namespace Repull.SDK.V1.Connect.Item
 #else
         public string ClientSecret { get; set; }
 #endif
-        /// <summary>Airbnb only — where to redirect the user after the OAuth flow completes.</summary>
+        /// <summary>Airbnb + Booking.com — where to redirect the user after they finish the hosted connect flow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RedirectUrl { get; set; }
