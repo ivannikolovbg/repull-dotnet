@@ -22,6 +22,14 @@ namespace Repull.SDK.V1.Connect
 #else
         public List<string> AllowedProviders { get; set; }
 #endif
+        /// <summary>Optional UI language for the hosted Connect pages. Accepts any supported locale code (currently `en`, `fr`). When set it pins the language for the whole flow, overriding the workspace `default_language`. Unknown codes are ignored and the page falls back to the workspace default, then `Accept-Language`, then `en`. The end user can still override per-visit with a `?locale=` query param on the hosted page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Locale { get; set; }
+#nullable restore
+#else
+        public string Locale { get; set; }
+#endif
         /// <summary>Where to send the user after they finish (or cancel). Status query params are appended.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -64,6 +72,7 @@ namespace Repull.SDK.V1.Connect
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "allowedProviders", n => { AllowedProviders = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "locale", n => { Locale = n.GetStringValue(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
             };
@@ -76,6 +85,7 @@ namespace Repull.SDK.V1.Connect
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<string>("allowedProviders", AllowedProviders);
+            writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("redirectUrl", RedirectUrl);
             writer.WriteStringValue("state", State);
             writer.WriteAdditionalData(AdditionalData);

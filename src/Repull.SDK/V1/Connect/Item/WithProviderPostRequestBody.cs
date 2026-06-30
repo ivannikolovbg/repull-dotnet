@@ -41,6 +41,14 @@ namespace Repull.SDK.V1.Connect.Item
 #else
         public string ClientSecret { get; set; }
 #endif
+        /// <summary>Airbnb only — optional UI language for the hosted Connect pages. Accepts any supported locale code (currently `en`, `fr`); unknown codes are ignored and resolution falls back to the workspace `default_language`, then `Accept-Language`, then `en`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Locale { get; set; }
+#nullable restore
+#else
+        public string Locale { get; set; }
+#endif
         /// <summary>Airbnb + Booking.com — where to redirect the user after they finish the hosted connect flow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -79,6 +87,7 @@ namespace Repull.SDK.V1.Connect.Item
                 { "apiKey", n => { ApiKey = n.GetStringValue(); } },
                 { "clientId", n => { ClientId = n.GetStringValue(); } },
                 { "clientSecret", n => { ClientSecret = n.GetStringValue(); } },
+                { "locale", n => { Locale = n.GetStringValue(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
             };
         }
@@ -93,6 +102,7 @@ namespace Repull.SDK.V1.Connect.Item
             writer.WriteStringValue("apiKey", ApiKey);
             writer.WriteStringValue("clientId", ClientId);
             writer.WriteStringValue("clientSecret", ClientSecret);
+            writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("redirectUrl", RedirectUrl);
             writer.WriteAdditionalData(AdditionalData);
         }
