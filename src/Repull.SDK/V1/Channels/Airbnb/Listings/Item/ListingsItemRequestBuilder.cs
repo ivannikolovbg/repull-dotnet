@@ -70,7 +70,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbListing>(requestInfo, global::Repull.SDK.Models.AirbnbListing.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Apply a state action to an Airbnb listing — `push` (sync local changes upstream), `publish` (make publicly bookable), `unlist` (hide), or `delete` (permanent). Each action has different reversibility — see docs.
+        /// Apply a state action to a listing by id.`delete` is implemented as a **deactivate of the Repull record only** — it sets the listing inactive and KEEPS the row; it does NOT touch the upstream Airbnb listing (Repull never deletes or deactivates on Airbnb&apos;s side). Use it to exclude a listing / trim back under the plan-listings cap; reactivate via `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: true }`. Idempotent.`push` (sync local changes upstream), `publish` (make publicly bookable), and `unlist` (hide) depend on the host-side sync orchestrator and currently return 501.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -107,7 +107,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             return requestInfo;
         }
         /// <summary>
-        /// Apply a state action to an Airbnb listing — `push` (sync local changes upstream), `publish` (make publicly bookable), `unlist` (hide), or `delete` (permanent). Each action has different reversibility — see docs.
+        /// Apply a state action to a listing by id.`delete` is implemented as a **deactivate of the Repull record only** — it sets the listing inactive and KEEPS the row; it does NOT touch the upstream Airbnb listing (Repull never deletes or deactivates on Airbnb&apos;s side). Use it to exclude a listing / trim back under the plan-listings cap; reactivate via `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: true }`. Idempotent.`push` (sync local changes upstream), `publish` (make publicly bookable), and `unlist` (hide) depend on the host-side sync orchestrator and currently return 501.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

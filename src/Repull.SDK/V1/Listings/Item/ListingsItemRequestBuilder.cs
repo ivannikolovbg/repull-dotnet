@@ -70,6 +70,33 @@ namespace Repull.SDK.V1.Listings.Item
         {
         }
         /// <summary>
+        /// Deactivate a listing — sets it inactive and excludes it from Repull. This is a **soft** operation: the listing row is KEPT (never hard-deleted) and the upstream channel (Airbnb / Hospitable / Booking.com) is NEVER touched. Repull only mutates its own copy.Equivalent to `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: false }`. This is the primary self-serve way for a free-tier customer to trim back under the plan-listings cap — `DELETE` is served even when the account is over the cap (a 402-locked account can still call it). To bring a listing back, use `PATCH` with `{ &quot;active&quot;: true }`.Idempotent: deactivating an already-inactive listing returns 200.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ListingActiveResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.Models.ListingActiveResponse?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.Models.ListingActiveResponse> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingActiveResponse>(requestInfo, global::Repull.SDK.Models.ListingActiveResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenity rows (`[]` when the listing has none). Pass `?include=content` for the rich content slab (summary, description, space, house rules, etc. — sourced from `listings_descriptions` for the `en` locale; `null` when no row is stored). Pass `?include=details` for the structural slab (bedrooms, bathrooms, person capacity, check-in window, wifi, house manual, etc.; `null` when no row is stored). Combine comma-separated, e.g. `?include=amenities,content,details`. The default response stays lean; consumers must opt in.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.Listing"/></returns>
@@ -97,6 +124,56 @@ namespace Repull.SDK.V1.Listings.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Listing>(requestInfo, global::Repull.SDK.Models.Listing.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Toggle a listing&apos;s active state. Send `{ &quot;active&quot;: false }` to **deactivate** (exclude the listing from Repull) or `{ &quot;active&quot;: true }` to **reactivate** it.&quot;Deactivate&quot; keeps the listing row — it is NOT a hard delete, and it NEVER touches the upstream channel (Airbnb / Hospitable / Booking.com). Repull only mutates its own copy of the inventory. Deactivating is the self-serve way to get back under the plan-listings cap without paying.Reactivation respects the plan-listings cap: if activating this listing would push you over the cap for your tier, the call returns `402 listings_limit_exceeded` and the listing stays inactive. Deactivate another listing or upgrade first.Idempotent: setting a listing to the state it&apos;s already in returns 200.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ListingActiveResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 402 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.Models.ListingActiveResponse?> PatchAsync(global::Repull.SDK.Models.ListingActiveRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.Models.ListingActiveResponse> PatchAsync(global::Repull.SDK.Models.ListingActiveRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "402", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingActiveResponse>(requestInfo, global::Repull.SDK.Models.ListingActiveResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Deactivate a listing — sets it inactive and excludes it from Repull. This is a **soft** operation: the listing row is KEPT (never hard-deleted) and the upstream channel (Airbnb / Hospitable / Booking.com) is NEVER touched. Repull only mutates its own copy.Equivalent to `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: false }`. This is the primary self-serve way for a free-tier customer to trim back under the plan-listings cap — `DELETE` is served even when the account is over the cap (a 402-locked account can still call it). To bring a listing back, use `PATCH` with `{ &quot;active&quot;: true }`.Idempotent: deactivating an already-inactive listing returns 200.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
         /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenity rows (`[]` when the listing has none). Pass `?include=content` for the rich content slab (summary, description, space, house rules, etc. — sourced from `listings_descriptions` for the `en` locale; `null` when no row is stored). Pass `?include=details` for the structural slab (bedrooms, bathrooms, person capacity, check-in window, wifi, house manual, etc.; `null` when no row is stored). Combine comma-separated, e.g. `?include=amenities,content,details`. The default response stays lean; consumers must opt in.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -116,6 +193,28 @@ namespace Repull.SDK.V1.Listings.Item
             return requestInfo;
         }
         /// <summary>
+        /// Toggle a listing&apos;s active state. Send `{ &quot;active&quot;: false }` to **deactivate** (exclude the listing from Repull) or `{ &quot;active&quot;: true }` to **reactivate** it.&quot;Deactivate&quot; keeps the listing row — it is NOT a hard delete, and it NEVER touches the upstream channel (Airbnb / Hospitable / Booking.com). Repull only mutates its own copy of the inventory. Deactivating is the self-serve way to get back under the plan-listings cap without paying.Reactivation respects the plan-listings cap: if activating this listing would push you over the cap for your tier, the call returns `402 listings_limit_exceeded` and the listing stays inactive. Deactivate another listing or upgrade first.Idempotent: setting a listing to the state it&apos;s already in returns 200.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPatchRequestInformation(global::Repull.SDK.Models.ListingActiveRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPatchRequestInformation(global::Repull.SDK.Models.ListingActiveRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.PATCH, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
+            return requestInfo;
+        }
+        /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder"/></returns>
@@ -123,6 +222,14 @@ namespace Repull.SDK.V1.Listings.Item
         public global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ListingsItemRequestBuilderDeleteRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        {
         }
         /// <summary>
         /// Fetch a single listing by id. Returns the same shape as one element of the `GET /v1/listings` response, so you can bind the result to the same model. Cross-tenant access (a listing that belongs to a different workspace) returns 404 — never 403, never reveals the listing&apos;s existence.**Optional expansions:** Pass `?include=amenities` to enrich the response with the listing&apos;s amenity rows (`[]` when the listing has none). Pass `?include=content` for the rich content slab (summary, description, space, house rules, etc. — sourced from `listings_descriptions` for the `en` locale; `null` when no row is stored). Pass `?include=details` for the structural slab (bedrooms, bathrooms, person capacity, check-in window, wifi, house manual, etc.; `null` when no row is stored). Combine comma-separated, e.g. `?include=amenities,content,details`. The default response stays lean; consumers must opt in.
@@ -147,6 +254,14 @@ namespace Repull.SDK.V1.Listings.Item
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ListingsItemRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder.ListingsItemRequestBuilderGetQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ListingsItemRequestBuilderPatchRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }

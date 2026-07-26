@@ -98,6 +98,7 @@ namespace Repull.SDK.V1.Listings
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 402 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.ListingCreateResponse?> PostAsync(global::Repull.SDK.Models.ListingCreateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -112,6 +113,7 @@ namespace Repull.SDK.V1.Listings
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "402", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingCreateResponse>(requestInfo, global::Repull.SDK.Models.ListingCreateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
