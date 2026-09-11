@@ -5,6 +5,11 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.9] - 2026-09-11
+
+### Added
+- **Four new write operations**, regenerated from the live spec (170 → 174 operations, path count unchanged — new methods on existing paths): `POST /v1/guests` (`GuestsRequestBuilder.PostAsync`, find-or-create with contact normalisation), `POST /v1/reservations` (`ReservationsRequestBuilder.PostAsync`, creates a reservation plus guest/thread/dashboard-item/calendar-block/automations fan-out), `PATCH /v1/reservations/{id}` (`ReservationsItemRequestBuilder.PatchAsync`), `POST /v1/conversations/{id}/messages` (`MessagesRequestBuilder.PostAsync`). New request/response models: `GuestCreateRequest`, `GuestCreateResponse`, `ReservationCreateRequest`, `ReservationCreateResponse`, `ReservationUpdateRequest`, `ReservationUpdateResponse`, `SendMessageRequest`, `SendMessageResponse`, plus their nested enum/sub-object types.
+
 ## [0.2.8] - 2026-09-11
 
 ### Fixed

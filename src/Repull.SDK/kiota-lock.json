@@ -1,6 +1,6 @@
 {
-  "descriptionHash": "6D7B2F7F3D583D8642B16DB58CB2B3583A65306B48618A8886989419388D38837714B573E75A5EE8810C7D4C6F3153082A3CA675B135B8715D7EEE59A5479A06",
-  "descriptionLocation": "../../../../../../tmp/claude-1000/-home-ivan-work-vanio/162c4690-15b7-4251-b602-0e05cf464d84/scratchpad/live-spec-patched.json",
+  "descriptionHash": "EE766EB687903057AA1C421F3DAD1E26CCB0D5D49E4C41A1D2B8FB2DE1AD373CBE4DE85CCBE8491A100914D3E8119E34B725079B44AF3FE06E05846FBD5AB0A9",
+  "descriptionLocation": "../../openapi/v1.json",
   "lockFileVersion": "1.0.0",
   "kiotaVersion": "1.35.0",
   "clientClassName": "RepullClient",
