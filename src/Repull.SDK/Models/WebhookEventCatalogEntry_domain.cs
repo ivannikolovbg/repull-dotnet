@@ -24,6 +24,10 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         Accounts,
         #pragma warning restore CS1591
+        [EnumMember(Value = "reviews")]
+        #pragma warning disable CS1591
+        Reviews,
+        #pragma warning restore CS1591
         [EnumMember(Value = "ai")]
         #pragma warning disable CS1591
         Ai,

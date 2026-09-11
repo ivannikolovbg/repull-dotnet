@@ -19,7 +19,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging
     public partial class MessagingRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Repull.SDK.v1.channels.airbnb.messaging.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Airbnb thread id (matches the external thread id).</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.WithThreadItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.WithThreadItemRequestBuilder this[string position]
         {

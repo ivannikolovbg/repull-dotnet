@@ -5,6 +5,15 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.8] - 2026-09-11
+
+### Fixed
+- **Regenerated against the live spec (89 → 124 paths).** The client was badly behind: it advertised ten `/api/studio/*` operations for a different product on a different host (all 404 on `api.repull.dev`), plus four stubs that return `501`/`404` (`POST /v1/ai`, `POST /v1/channels/airbnb/sync`, `POST /v1/channels/booking/sync`, `GET /v1/channels/vrbo/listings/{id}/pricing`). All fourteen are gone from the generated client — verified zero `Studio*` types/builders and zero references to the four stub route segments. Added the 49 paths that were missing, bringing the SDK's surface in line with the live API (availability batch writes, Airbnb alterations, PMS connect-credentials endpoints, health checks, listing photos, quotes, review replies, and more — see the regenerated `V1/` request builders for the full list).
+
+### Notes
+- Regeneration required two upstream spec fixes (both landed in `vanio-repull-api`, not yet deployed as of this release): a dangling `$ref` to a nonexistent `ValidationError` response component on 14 paths, and a missing `id` path parameter declaration on `/v1/reviews/{id}/reply`. Neither changes the path set — `openapi/v1.json` in this repo is still byte-identical to what `api.repull.dev` serves today.
+- Dropped `sk_test_`/sandbox mentions from the README and `RepullClientFactory.cs` doc comment — the sandbox no longer exists; use `sk_live_*`.
+
 ## [0.2.5] - 2026-06-25
 
 ### Added

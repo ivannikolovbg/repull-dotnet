@@ -149,22 +149,30 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PricingRequestBuilderGetQueryParameters 
         {
+            #pragma warning disable CS1591
             [QueryParameter("number_of_days")]
             public int? NumberOfDays { get; set; }
+            #pragma warning restore CS1591
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
+            #pragma warning disable CS1591
             [QueryParameter("room_id")]
             public string? RoomId { get; set; }
+            #pragma warning restore CS1591
 #nullable restore
 #else
+            #pragma warning disable CS1591
             [QueryParameter("room_id")]
             public string RoomId { get; set; }
+            #pragma warning restore CS1591
 #endif
             /// <summary>When true, returns room-level (vs rate-plan-level) availability.</summary>
             [QueryParameter("room_level")]
             public bool? RoomLevel { get; set; }
+            #pragma warning disable CS1591
             [QueryParameter("startDate")]
             public Date? StartDate { get; set; }
+            #pragma warning restore CS1591
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.

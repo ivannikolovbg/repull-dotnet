@@ -3,12 +3,15 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Channels.Booking.Availability;
+using Repull.SDK.V1.Channels.Booking.Charges;
 using Repull.SDK.V1.Channels.Booking.Content;
 using Repull.SDK.V1.Channels.Booking.Listings;
 using Repull.SDK.V1.Channels.Booking.Messaging;
 using Repull.SDK.V1.Channels.Booking.Properties;
+using Repull.SDK.V1.Channels.Booking.Reservations;
 using Repull.SDK.V1.Channels.Booking.Reviews;
-using Repull.SDK.V1.Channels.Booking.Sync;
+using Repull.SDK.V1.Channels.Booking.Setup;
+using Repull.SDK.V1.Channels.Booking.Webhooks;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -25,6 +28,11 @@ namespace Repull.SDK.V1.Channels.Booking
         public global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder Availability
         {
             get => new global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The charges property</summary>
+        public global::Repull.SDK.V1.Channels.Booking.Charges.ChargesRequestBuilder Charges
+        {
+            get => new global::Repull.SDK.V1.Channels.Booking.Charges.ChargesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The content property</summary>
         public global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder Content
@@ -46,15 +54,25 @@ namespace Repull.SDK.V1.Channels.Booking
         {
             get => new global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The reservations property</summary>
+        public global::Repull.SDK.V1.Channels.Booking.Reservations.ReservationsRequestBuilder Reservations
+        {
+            get => new global::Repull.SDK.V1.Channels.Booking.Reservations.ReservationsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The reviews property</summary>
         public global::Repull.SDK.V1.Channels.Booking.Reviews.ReviewsRequestBuilder Reviews
         {
             get => new global::Repull.SDK.V1.Channels.Booking.Reviews.ReviewsRequestBuilder(PathParameters, RequestAdapter);
         }
-        /// <summary>The sync property</summary>
-        public global::Repull.SDK.V1.Channels.Booking.Sync.SyncRequestBuilder Sync
+        /// <summary>The setup property</summary>
+        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupRequestBuilder Setup
         {
-            get => new global::Repull.SDK.V1.Channels.Booking.Sync.SyncRequestBuilder(PathParameters, RequestAdapter);
+            get => new global::Repull.SDK.V1.Channels.Booking.Setup.SetupRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The webhooks property</summary>
+        public global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksRequestBuilder Webhooks
+        {
+            get => new global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.BookingRequestBuilder"/> and sets the default values.

@@ -25,7 +25,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>When the review window closes (Airbnb has a 14-day window after checkout).</summary>
         public DateTimeOffset? ExpiresAt { get; set; }
-        /// <summary>ID in the source channel (Airbnb review id, Booking review id, etc.).</summary>
+        /// <summary>ID in the source channel (Airbnb review id, Booking review id, etc.). Pass as `review_id` to the provider reply endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ExternalId { get; set; }
@@ -94,6 +94,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string PrivateFeedback { get; set; }
+#endif
+        /// <summary>The source channel&apos;s own listing/property id for this review (Booking.com hotel/property id, Airbnb listing id, …). Pass this as `property_id` to `POST /v1/channels/booking/reviews` to post a host reply — it is the bridge from a unified review straight to the provider-specific reply call. `null` when the source listing id has not been mirrored yet.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ProviderPropertyId { get; set; }
+#nullable restore
+#else
+        public string ProviderPropertyId { get; set; }
 #endif
         /// <summary>Public-facing review text shown on the listing page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -173,6 +181,7 @@ namespace Repull.SDK.Models
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Review_platform>(); } },
                 { "privateFeedback", n => { PrivateFeedback = n.GetStringValue(); } },
+                { "providerPropertyId", n => { ProviderPropertyId = n.GetStringValue(); } },
                 { "publicReview", n => { PublicReview = n.GetStringValue(); } },
                 { "rating", n => { Rating = n.GetDoubleValue(); } },
                 { "reservationConfirmationCode", n => { ReservationConfirmationCode = n.GetStringValue(); } },
@@ -203,6 +212,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteEnumValue<global::Repull.SDK.Models.Review_platform>("platform", Platform);
             writer.WriteStringValue("privateFeedback", PrivateFeedback);
+            writer.WriteStringValue("providerPropertyId", ProviderPropertyId);
             writer.WriteStringValue("publicReview", PublicReview);
             writer.WriteDoubleValue("rating", Rating);
             writer.WriteStringValue("reservationConfirmationCode", ReservationConfirmationCode);

@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*}", pathParameters)
+        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*,updated_since*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,11 +56,11 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*}", rawUrl)
+        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*,updated_since*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.**Incremental sync (only changes since last poll):** pass `?updated_since=&lt;ISO8601&gt;` to receive only reservations amended, cancelled, or created at or after that instant — no full re-walk. Each row carries `updatedAt`; the last row of the final page is your next watermark. Note that `updated_since` changes the page ordering to `updatedAt ASC, id ASC` (and the cursor with it) so mid-walk amendments cannot be skipped — see the parameter description for the full contract.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ReservationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -83,27 +83,7 @@ namespace Repull.SDK.V1.Reservations
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ReservationListResponse>(requestInfo, global::Repull.SDK.Models.ReservationListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create a reservation in the source PMS. Required fields depend on the connected provider (e.g. Airbnb requires guest email; Booking.com requires hotel id). Validation errors return 422 with the offending `field` populated.
-        /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.Reservation"/></returns>
-        /// <param name="body">The request body</param>
-        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
-        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public async Task<global::Repull.SDK.Models.Reservation?> PostAsync(global::Repull.SDK.V1.Reservations.ReservationsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#nullable restore
-#else
-        public async Task<global::Repull.SDK.Models.Reservation> PostAsync(global::Repull.SDK.V1.Reservations.ReservationsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#endif
-            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Reservation>(requestInfo, global::Repull.SDK.Models.Reservation.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
-        }
-        /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.**Incremental sync (only changes since last poll):** pass `?updated_since=&lt;ISO8601&gt;` to receive only reservations amended, cancelled, or created at or after that instant — no full re-walk. Each row carries `updatedAt`; the last row of the final page is your next watermark. Note that `updated_since` changes the page ordering to `updatedAt ASC, id ASC` (and the cursor with it) so mid-walk amendments cannot be skipped — see the parameter description for the full contract.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -122,28 +102,6 @@ namespace Repull.SDK.V1.Reservations
             return requestInfo;
         }
         /// <summary>
-        /// Create a reservation in the source PMS. Required fields depend on the connected provider (e.g. Airbnb requires guest email; Booking.com requires hotel id). Validation errors return 422 with the offending `field` populated.
-        /// </summary>
-        /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request body</param>
-        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Reservations.ReservationsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
-        {
-#nullable restore
-#else
-        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Reservations.ReservationsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
-        {
-#endif
-            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
-            requestInfo.Configure(requestConfiguration);
-            requestInfo.Headers.TryAdd("Accept", "application/json");
-            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
-            return requestInfo;
-        }
-        /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder"/></returns>
@@ -153,7 +111,7 @@ namespace Repull.SDK.V1.Reservations
             return new global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.
+        /// Cursor-paginated list of reservations across all connected PMS platforms. Filter by platform, status, listing, or check-in date range.**Pagination:** Walk pages with `?cursor=` — pass `pagination.nextCursor` from one response back as `?cursor=` on the next request. Stop when `pagination.hasMore` is `false`. `limit` defaults to 50, max 100; requesting more returns 422 (no silent truncation).`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`. For deep pagination cursor remains O(1) per page; offset &gt; 10000 returns 422 with a docs link.**Incremental sync (only changes since last poll):** pass `?updated_since=&lt;ISO8601&gt;` to receive only reservations amended, cancelled, or created at or after that instant — no full re-walk. Each row carries `updatedAt`; the last row of the final page is your next watermark. Note that `updated_since` changes the page ordering to `updatedAt ASC, id ASC` (and the cursor with it) so mid-walk amendments cannot be skipped — see the parameter description for the full contract.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ReservationsRequestBuilderGetQueryParameters 
@@ -236,6 +194,9 @@ namespace Repull.SDK.V1.Reservations
             /// <summary>Filter by lifecycle status. **Case-insensitive** — `confirmed`, `Confirmed`, and `CONFIRMED` all match. Each public value expands to the full set of internal sub-states server-side: `confirmed` matches `accept`/`confirmed`/`modified`, `cancelled` matches every cancellation sub-state (`cancelled_by_host`, `declined`, `expired`, etc.), `pending` includes `inquiry`/`awaiting_payment`. `completed` is a derived state — combine `status=confirmed` with `check_out_before=&lt;today&gt;` to filter for past stays.</summary>
             [QueryParameter("status")]
             public global::Repull.SDK.V1.Reservations.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
+            /// <summary>Incremental sync: return only records whose `updatedAt` is at or after this instant. This is the only filter on record **mutation** time — every `check_*` filter targets guest **stay** dates.**Accepted formats.** ISO 8601, with `Z` or a numeric offset — both work:- `2026-08-01T00:00:00Z`- `2026-08-01T00:00:00.123Z`- `2026-08-01T00:00:00+00:00`- `2026-08-01T02:30:00-07:00` (offset colon optional: `-0700`)- `2026-08-01T00:00` (seconds optional)- `2026-08-01T00:00:00` — no zone designator, interpreted as **UTC**- `2026-08-01` — date only, means midnight UTCAnything else returns 422 `invalid_params` naming the field; the value is never silently ignored.**Ordering changes when you pass this.** Results are ordered `updatedAt ASC, id ASC` (instead of the endpoint default) and the cursor keys on the same pair. That is required for correctness: under the default ordering a record amended mid-walk can move behind the cursor and never be emitted — which is exactly the event you are polling for. Ascending mutation time is monotonic with the cursor, so anything touched during a walk resurfaces later in it or on the next poll.**Cursors are not interchangeable between the two orderings.** Keep `updated_since` on every page of an incremental walk; replaying a cursor from the other ordering returns 422 rather than a page that silently skips rows.**Watermark.** The bound is inclusive (`updatedAt &gt;= value`), so the last row of the final page is the watermark for the next poll — re-polling with it re-emits that row. Delivery is at-least-once; upsert by `id`.</summary>
+            [QueryParameter("updated_since")]
+            public DateTimeOffset? UpdatedSince { get; set; }
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
@@ -243,14 +204,6 @@ namespace Repull.SDK.V1.Reservations
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ReservationsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder.ReservationsRequestBuilderGetQueryParameters>
-        {
-        }
-        /// <summary>
-        /// Configuration for the request such as headers, query parameters, and middleware options.
-        /// </summary>
-        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ReservationsRequestBuilderPostRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }

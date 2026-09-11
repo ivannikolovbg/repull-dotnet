@@ -8,21 +8,43 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Optional length-of-stay / availability restrictions for one rate update.
+    /// Optional length-of-stay / availability restrictions for one rate update. Every field here is forwarded verbatim into Booking.com&apos;s rates XML (`minimumstay`, `maximumstay`, `closedonarrival`, `closedondeparture`, …) — omit a field to leave that restriction untouched.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingPricingRateUpdateRestrictions : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The closedToArrival property</summary>
+        /// <summary>Closed-to-arrival — guests may not check in on the affected dates (`closedonarrival`).</summary>
         public bool? ClosedToArrival { get; set; }
-        /// <summary>The closedToDeparture property</summary>
+        /// <summary>Closed-to-departure — guests may not check out on the affected dates (`closedondeparture`).</summary>
         public bool? ClosedToDeparture { get; set; }
-        /// <summary>The maxStay property</summary>
+        /// <summary>Arrival-based exact length of stay (`exactstay_arrival`).</summary>
+        public int? ExactStayArrival { get; set; }
+        /// <summary>Maximum advance-reservation window, format `XDY` (X days Y hours) — `max_advance_res`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? MaxAdvanceRes { get; set; }
+#nullable restore
+#else
+        public string MaxAdvanceRes { get; set; }
+#endif
+        /// <summary>Maximum length of stay (`maximumstay`).</summary>
         public int? MaxStay { get; set; }
-        /// <summary>The minStay property</summary>
+        /// <summary>Arrival-based maximum length of stay (`maximumstay_arrival`).</summary>
+        public int? MaxStayArrival { get; set; }
+        /// <summary>Minimum advance-reservation window, format `XDY` (X days Y hours) — `min_advance_res`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? MinAdvanceRes { get; set; }
+#nullable restore
+#else
+        public string MinAdvanceRes { get; set; }
+#endif
+        /// <summary>Minimum length of stay (`minimumstay`).</summary>
         public int? MinStay { get; set; }
+        /// <summary>Arrival-based minimum length of stay (`minimumstay_arrival`).</summary>
+        public int? MinStayArrival { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions"/> and sets the default values.
         /// </summary>
@@ -50,8 +72,13 @@ namespace Repull.SDK.Models
             {
                 { "closedToArrival", n => { ClosedToArrival = n.GetBoolValue(); } },
                 { "closedToDeparture", n => { ClosedToDeparture = n.GetBoolValue(); } },
+                { "exactStayArrival", n => { ExactStayArrival = n.GetIntValue(); } },
+                { "maxAdvanceRes", n => { MaxAdvanceRes = n.GetStringValue(); } },
                 { "maxStay", n => { MaxStay = n.GetIntValue(); } },
+                { "maxStayArrival", n => { MaxStayArrival = n.GetIntValue(); } },
+                { "minAdvanceRes", n => { MinAdvanceRes = n.GetStringValue(); } },
                 { "minStay", n => { MinStay = n.GetIntValue(); } },
+                { "minStayArrival", n => { MinStayArrival = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -63,8 +90,13 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("closedToArrival", ClosedToArrival);
             writer.WriteBoolValue("closedToDeparture", ClosedToDeparture);
+            writer.WriteIntValue("exactStayArrival", ExactStayArrival);
+            writer.WriteStringValue("maxAdvanceRes", MaxAdvanceRes);
             writer.WriteIntValue("maxStay", MaxStay);
+            writer.WriteIntValue("maxStayArrival", MaxStayArrival);
+            writer.WriteStringValue("minAdvanceRes", MinAdvanceRes);
             writer.WriteIntValue("minStay", MinStay);
+            writer.WriteIntValue("minStayArrival", MinStayArrival);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

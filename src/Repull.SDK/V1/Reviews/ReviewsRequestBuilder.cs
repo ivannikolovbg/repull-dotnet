@@ -132,8 +132,10 @@ namespace Repull.SDK.V1.Reviews
             [QueryParameter("cursor")]
             public string Cursor { get; set; }
 #endif
+            #pragma warning disable CS1591
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            #pragma warning restore CS1591
             /// <summary>Restrict to one internal Repull listing.</summary>
             [QueryParameter("listingId")]
             public int? ListingId { get; set; }
@@ -143,19 +145,29 @@ namespace Repull.SDK.V1.Reviews
             [Obsolete("This property is deprecated, use PlatformAsGetPlatformQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
+            #pragma warning disable CS1591
             [QueryParameter("platform")]
             public string? Platform { get; set; }
+            #pragma warning restore CS1591
 #nullable restore
 #else
+            #pragma warning disable CS1591
             [QueryParameter("platform")]
             public string Platform { get; set; }
+            #pragma warning restore CS1591
 #endif
+            #pragma warning disable CS1591
             [QueryParameter("platform")]
             public global::Repull.SDK.V1.Reviews.GetPlatformQueryParameterType? PlatformAsGetPlatformQueryParameterType { get; set; }
+            #pragma warning restore CS1591
+            #pragma warning disable CS1591
             [QueryParameter("rating_max")]
             public double? RatingMax { get; set; }
+            #pragma warning restore CS1591
+            #pragma warning disable CS1591
             [QueryParameter("rating_min")]
             public double? RatingMin { get; set; }
+            #pragma warning restore CS1591
             /// <summary>`guest` (default) — reviews written by guests about the host/property. `host` — reviews written by the host about guests. `all` — both.</summary>
             [Obsolete("This property is deprecated, use ReviewerRoleAsGetReviewerRoleQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

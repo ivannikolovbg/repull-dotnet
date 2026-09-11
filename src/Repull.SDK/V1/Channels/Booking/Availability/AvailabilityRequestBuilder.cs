@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public AvailabilityRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/availability", pathParameters)
+        public AvailabilityRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/availability{?number_of_days*,room_id*,room_level*,start_date*}", pathParameters)
         {
         }
         /// <summary>
@@ -29,43 +30,108 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public AvailabilityRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/availability", rawUrl)
+        public AvailabilityRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/availability{?number_of_days*,room_id*,room_level*,start_date*}", rawUrl)
         {
         }
         /// <summary>
-        /// Push availability + rate changes to Booking.com&apos;s OTA system. Accepts the standard OTA rate message — see Booking&apos;s OTA docs for the field shape. Errors from upstream surface as `booking_error`.
+        /// Read the current rate, availability, and restriction state for a Booking.com property so you can reconcile before writing with the PUT on this path. Keyed by `property_id` (the Booking hotel id), symmetric with the PUT.Proxies Booking&apos;s `getRoomRateAvailability` — the returned fields (price, rooms-to-sell, min/max stay, closed-to-arrival/departure, stop-sell) are whatever Booking.com emits for the window. A listing-id-keyed equivalent is available at `GET /v1/channels/booking/listings/{id}/pricing`.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.BookingAvailabilityStateResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PutAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.BookingAvailabilityStateResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PutAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.BookingAvailabilityStateResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
-            var requestInfo = ToPutRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            var requestInfo = ToGetRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingAvailabilityStateResponse>(requestInfo, global::Repull.SDK.Models.BookingAvailabilityStateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Push availability + rate changes to Booking.com&apos;s OTA system. Accepts the standard OTA rate message — see Booking&apos;s OTA docs for the field shape. Errors from upstream surface as `booking_error`.
+        /// Push availability, rates, and the full restriction set to Booking.com. `type` selects the write path:- `rates` — nightly price + length-of-stay / arrival restrictions (min/max stay, closed-to-arrival, closed-to-departure, advance-reservation window).- `availability` — inventory (`availableRooms`), the dedicated stop-sell flag (`closed`), and the same restriction set.- `derived-pricing` — occupancy-derived pricing rules.Restrictions never leak across channels — this endpoint writes only to Booking.com. Errors from upstream surface as `booking_error`.
+        /// </summary>
+        /// <returns>A <see cref="Stream"/></returns>
+        /// <param name="body">Body for `PUT /v1/channels/booking/availability`. Selects one of Booking&apos;s three ARI write paths via `type` and forwards `updates` verbatim to the connector.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<Stream?> PutAsync(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<Stream> PutAsync(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Read the current rate, availability, and restriction state for a Booking.com property so you can reconcile before writing with the PUT on this path. Keyed by `property_id` (the Booking hotel id), symmetric with the PUT.Proxies Booking&apos;s `getRoomRateAvailability` — the returned fields (price, rooms-to-sell, min/max stay, closed-to-arrival/departure, stop-sell) are whatever Booking.com emits for the window. A listing-id-keyed equivalent is available at `GET /v1/channels/booking/listings/{id}/pricing`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
+            var requestInfo = new RequestInformation(Method.GET, "{+baseurl}/v1/channels/booking/availability?property_id={property_id}{&number_of_days*,room_id*,room_level*,start_date*}", PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Push availability, rates, and the full restriction set to Booking.com. `type` selects the write path:- `rates` — nightly price + length-of-stay / arrival restrictions (min/max stay, closed-to-arrival, closed-to-departure, advance-reservation window).- `availability` — inventory (`availableRooms`), the dedicated stop-sell flag (`closed`), and the same restriction set.- `derived-pricing` — occupancy-derived pricing rules.Restrictions never leak across channels — this endpoint writes only to Booking.com. Errors from upstream surface as `booking_error`.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">Body for `PUT /v1/channels/booking/availability`. Selects one of Booking&apos;s three ARI write paths via `type` and forwards `updates` verbatim to the connector.</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>
@@ -76,6 +142,50 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         public global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Read the current rate, availability, and restriction state for a Booking.com property so you can reconcile before writing with the PUT on this path. Keyed by `property_id` (the Booking hotel id), symmetric with the PUT.Proxies Booking&apos;s `getRoomRateAvailability` — the returned fields (price, rooms-to-sell, min/max stay, closed-to-arrival/departure, stop-sell) are whatever Booking.com emits for the window. A listing-id-keyed equivalent is available at `GET /v1/channels/booking/listings/{id}/pricing`.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class AvailabilityRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Window length in days.</summary>
+            [QueryParameter("number_of_days")]
+            public int? NumberOfDays { get; set; }
+            /// <summary>Booking.com hotel/property id.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("property_id")]
+            public string? PropertyId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("property_id")]
+            public string PropertyId { get; set; }
+#endif
+            /// <summary>Restrict to a single Booking.com room id.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("room_id")]
+            public string? RoomId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("room_id")]
+            public string RoomId { get; set; }
+#endif
+            /// <summary>When true, returns room-level (vs rate-plan-level) state.</summary>
+            [QueryParameter("room_level")]
+            public bool? RoomLevel { get; set; }
+            /// <summary>Window start (ISO YYYY-MM-DD).</summary>
+            [QueryParameter("start_date")]
+            public Date? StartDate { get; set; }
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class AvailabilityRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityRequestBuilderGetQueryParameters>
+        {
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.

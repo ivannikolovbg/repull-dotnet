@@ -123,6 +123,8 @@ namespace Repull.SDK.Models
 #else
         public string TotalPrice { get; set; }
 #endif
+        /// <summary>Last time this reservation was modified (dates, status, price, or guest details). Advances on every amendment or cancellation — poll or compare this value to reconcile changes instead of fingerprinting individual fields.</summary>
+        public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Reservation"/> and sets the default values.
         /// </summary>
@@ -166,6 +168,7 @@ namespace Repull.SDK.Models
                 { "source", n => { Source = n.GetEnumValue<global::Repull.SDK.Models.Reservation_source>(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Reservation_status>(); } },
                 { "totalPrice", n => { TotalPrice = n.GetStringValue(); } },
+                { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -193,6 +196,7 @@ namespace Repull.SDK.Models
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_source>("source", Source);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_status>("status", Status);
             writer.WriteStringValue("totalPrice", TotalPrice);
+            writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
