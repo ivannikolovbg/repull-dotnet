@@ -94,7 +94,7 @@ namespace Repull.SDK.V1.Webhooks.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.WebhookSubscription>(requestInfo, global::Repull.SDK.Models.WebhookSubscription.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update url, description, events, or status (active|paused). Re-enabling clears `consecutive_failures` and `disabled_at`.
+        /// Update url, description, events, or status (active|paused). Re-enabling clears `consecutiveFailures` and `disabledAt`.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.WebhookSubscription"/></returns>
         /// <param name="body">The request body</param>
@@ -151,7 +151,7 @@ namespace Repull.SDK.V1.Webhooks.Item
             return requestInfo;
         }
         /// <summary>
-        /// Update url, description, events, or status (active|paused). Re-enabling clears `consecutive_failures` and `disabled_at`.
+        /// Update url, description, events, or status (active|paused). Re-enabling clears `consecutiveFailures` and `disabledAt`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

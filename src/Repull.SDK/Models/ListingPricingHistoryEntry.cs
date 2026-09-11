@@ -26,7 +26,7 @@ namespace Repull.SDK.Models
 #else
         public string AppliedBy { get; set; }
 #endif
-        /// <summary>Price actually written to the calendar. `null` when status is `pending` or `declined`. For now, when `status=applied` this equals `recommended_rate` because the apply path writes the recommendation verbatim.</summary>
+        /// <summary>Price actually written to the calendar. `null` when status is `pending` or `declined`. For now, when `status=applied` this equals `recommendedRate` because the apply path writes the recommendation verbatim.</summary>
         public double? AppliedRate { get; set; }
         /// <summary>The date property</summary>
         public Date? Date { get; set; }

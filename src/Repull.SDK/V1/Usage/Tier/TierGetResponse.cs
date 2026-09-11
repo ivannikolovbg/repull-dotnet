@@ -30,7 +30,7 @@ namespace Repull.SDK.V1.Usage.Tier
 #else
         public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining Remaining { get; set; }
 #endif
-        /// <summary>The resets_at property</summary>
+        /// <summary>The resetsAt property</summary>
         public DateTimeOffset? ResetsAt { get; set; }
         /// <summary>The tier property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -75,7 +75,7 @@ namespace Repull.SDK.V1.Usage.Tier
             {
                 { "limits", n => { Limits = n.GetObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits>(global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits.CreateFromDiscriminatorValue); } },
                 { "remaining", n => { Remaining = n.GetObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining>(global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining.CreateFromDiscriminatorValue); } },
-                { "resets_at", n => { ResetsAt = n.GetDateTimeOffsetValue(); } },
+                { "resetsAt", n => { ResetsAt = n.GetDateTimeOffsetValue(); } },
                 { "tier", n => { Tier = n.GetStringValue(); } },
                 { "used", n => { Used = n.GetObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used>(global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used.CreateFromDiscriminatorValue); } },
             };
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Usage.Tier
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits>("limits", Limits);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining>("remaining", Remaining);
-            writer.WriteDateTimeOffsetValue("resets_at", ResetsAt);
+            writer.WriteDateTimeOffsetValue("resetsAt", ResetsAt);
             writer.WriteStringValue("tier", Tier);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used>("used", Used);
             writer.WriteAdditionalData(AdditionalData);

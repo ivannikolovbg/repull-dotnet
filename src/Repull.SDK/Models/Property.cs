@@ -65,8 +65,14 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>Detail endpoint only.</summary>
-        public double? Latitude { get; set; }
+        /// <summary>Detail endpoint only. Decimal degrees, as a string.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Latitude { get; set; }
+#nullable restore
+#else
+        public string Latitude { get; set; }
+#endif
         /// <summary>The listing&apos;s lifecycle state (e.g. `live`, `draft`, `archived`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -75,8 +81,14 @@ namespace Repull.SDK.Models
 #else
         public string LifecycleStatus { get; set; }
 #endif
-        /// <summary>Detail endpoint only.</summary>
-        public double? Longitude { get; set; }
+        /// <summary>Detail endpoint only. Decimal degrees, as a string.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Longitude { get; set; }
+#nullable restore
+#else
+        public string Longitude { get; set; }
+#endif
         /// <summary>Property name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -121,9 +133,9 @@ namespace Repull.SDK.Models
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "latitude", n => { Latitude = n.GetDoubleValue(); } },
+                { "latitude", n => { Latitude = n.GetStringValue(); } },
                 { "lifecycleStatus", n => { LifecycleStatus = n.GetStringValue(); } },
-                { "longitude", n => { Longitude = n.GetDoubleValue(); } },
+                { "longitude", n => { Longitude = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Property_status>(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
@@ -143,9 +155,9 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("currency", Currency);
             writer.WriteStringValue("id", Id);
-            writer.WriteDoubleValue("latitude", Latitude);
+            writer.WriteStringValue("latitude", Latitude);
             writer.WriteStringValue("lifecycleStatus", LifecycleStatus);
-            writer.WriteDoubleValue("longitude", Longitude);
+            writer.WriteStringValue("longitude", Longitude);
             writer.WriteStringValue("name", Name);
             writer.WriteEnumValue<global::Repull.SDK.Models.Property_status>("status", Status);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);

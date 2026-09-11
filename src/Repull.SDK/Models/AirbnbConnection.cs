@@ -13,7 +13,7 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbConnection : IAdditionalDataHolder, IParsable
     {
-        /// <summary>Present only when `?include=amenities` is passed. Accessibility-tagged subset of the local amenity cache (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Returns an empty array when amenities synced but none qualify as accessibility; returns `null` when the cache is empty for this connection (use `data_freshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;).</summary>
+        /// <summary>Present only when `?include=amenities` is passed. Accessibility-tagged subset of the local amenity cache (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Returns an empty array when amenities synced but none qualify as accessibility; returns `null` when the cache is empty for this connection (use `dataFreshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities>? AccessibilityAmenities { get; set; }
@@ -33,7 +33,7 @@ namespace Repull.SDK.Models
 #else
         public string AirbnbId { get; set; }
 #endif
-        /// <summary>Present only when `?include=amenities` is passed. Sourced from the local `listings_airbnb_amenities` cache (populated by the Airbnb sync worker). Returns `null` when the cache is empty for this connection — see the top-level `data_freshness` envelope to disambiguate &quot;never synced&quot; vs &quot;host disconnected&quot; vs &quot;fresh and genuinely empty&quot;.</summary>
+        /// <summary>Present only when `?include=amenities` is passed. Sourced from the local `listings_airbnb_amenities` cache (populated by the Airbnb sync worker). Returns `null` when the cache is empty for this connection — see the top-level `dataFreshness` envelope to disambiguate &quot;never synced&quot; vs &quot;host disconnected&quot; vs &quot;fresh and genuinely empty&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.AirbnbConnection_amenities>? Amenities { get; set; }
@@ -52,7 +52,13 @@ namespace Repull.SDK.Models
         public string HostId { get; set; }
 #endif
         /// <summary>Connection row id</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>Decimal markup (e.g. &quot;1.10&quot; for +10%).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -96,7 +102,7 @@ namespace Repull.SDK.Models
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection_amenities>(global::Repull.SDK.Models.AirbnbConnection_amenities.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "hostId", n => { HostId = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "markup", n => { Markup = n.GetStringValue(); } },
                 { "primary", n => { Primary = n.GetBoolValue(); } },
                 { "syncEnabled", n => { SyncEnabled = n.GetBoolValue(); } },
@@ -115,7 +121,7 @@ namespace Repull.SDK.Models
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection_amenities>("amenities", Amenities);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("hostId", HostId);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("markup", Markup);
             writer.WriteBoolValue("primary", Primary);
             writer.WriteBoolValue("syncEnabled", SyncEnabled);

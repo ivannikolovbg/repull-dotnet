@@ -64,7 +64,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbListing>(global::Repull.SDK.Models.AirbnbListing.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "data_freshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>(global::Repull.SDK.Models.AirbnbDataFreshness.CreateFromDiscriminatorValue); } },
+                { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>(global::Repull.SDK.Models.AirbnbDataFreshness.CreateFromDiscriminatorValue); } },
                 { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.Pagination>(global::Repull.SDK.Models.Pagination.CreateFromDiscriminatorValue); } },
             };
         }
@@ -76,7 +76,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbListing>("data", Data);
-            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>("data_freshness", DataFreshness);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>("dataFreshness", DataFreshness);
             writer.WriteObjectValue<global::Repull.SDK.Models.Pagination>("pagination", Pagination);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -14,7 +14,7 @@ namespace Repull.SDK.V1.Kv
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The has_more property</summary>
+        /// <summary>The hasMore property</summary>
         public bool? HasMore { get; set; }
         /// <summary>The total property</summary>
         public int? Total { get; set; }
@@ -43,7 +43,7 @@ namespace Repull.SDK.V1.Kv
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "has_more", n => { HasMore = n.GetBoolValue(); } },
+                { "hasMore", n => { HasMore = n.GetBoolValue(); } },
                 { "total", n => { Total = n.GetIntValue(); } },
             };
         }
@@ -54,7 +54,7 @@ namespace Repull.SDK.V1.Kv
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteBoolValue("has_more", HasMore);
+            writer.WriteBoolValue("hasMore", HasMore);
             writer.WriteIntValue("total", Total);
             writer.WriteAdditionalData(AdditionalData);
         }

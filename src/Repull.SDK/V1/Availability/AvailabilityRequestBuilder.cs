@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Availability
             get => new global::Repull.SDK.V1.Availability.Batch.BatchRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Repull.SDK.v1.availability.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Repull property id (equal to `listings.id`; the same integer used as `propertyId` on availability and `listingId` on reservations).</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder this[int position]
         {
@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Availability
             }
         }
         /// <summary>Gets an item from the Repull.SDK.v1.availability.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Repull property id (equal to `listings.id`; the same integer used as `propertyId` on availability and `listingId` on reservations).</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder"/></returns>
         [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
         public global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder this[string position]

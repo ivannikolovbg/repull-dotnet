@@ -14,9 +14,9 @@ namespace Repull.SDK.V1.Usage.Logs
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The has_more property</summary>
+        /// <summary>The hasMore property</summary>
         public bool? HasMore { get; set; }
-        /// <summary>The next_cursor property</summary>
+        /// <summary>The nextCursor property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? NextCursor { get; set; }
@@ -51,8 +51,8 @@ namespace Repull.SDK.V1.Usage.Logs
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "has_more", n => { HasMore = n.GetBoolValue(); } },
-                { "next_cursor", n => { NextCursor = n.GetStringValue(); } },
+                { "hasMore", n => { HasMore = n.GetBoolValue(); } },
+                { "nextCursor", n => { NextCursor = n.GetStringValue(); } },
                 { "total", n => { Total = n.GetIntValue(); } },
             };
         }
@@ -63,8 +63,8 @@ namespace Repull.SDK.V1.Usage.Logs
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteBoolValue("has_more", HasMore);
-            writer.WriteStringValue("next_cursor", NextCursor);
+            writer.WriteBoolValue("hasMore", HasMore);
+            writer.WriteStringValue("nextCursor", NextCursor);
             writer.WriteIntValue("total", Total);
             writer.WriteAdditionalData(AdditionalData);
         }

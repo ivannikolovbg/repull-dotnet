@@ -62,20 +62,21 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
         /// <summary>
         /// List Booking.com hotels claimed by this workspace. Each row includes the Booking-side hotel id and the connected room types.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.BookingPropertyListResponse"/></returns>
+        /// <returns>A List&lt;global::Repull.SDK.Models.BookingProperty&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.BookingPropertyListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Repull.SDK.Models.BookingProperty>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.BookingPropertyListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Repull.SDK.Models.BookingProperty>> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingPropertyListResponse>(requestInfo, global::Repull.SDK.Models.BookingPropertyListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Repull.SDK.Models.BookingProperty>(requestInfo, global::Repull.SDK.Models.BookingProperty.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return collectionResult?.AsList();
         }
         /// <summary>
         /// List Booking.com hotels claimed by this workspace. Each row includes the Booking-side hotel id and the connected room types.

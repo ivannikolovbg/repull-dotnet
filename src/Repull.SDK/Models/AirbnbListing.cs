@@ -32,7 +32,13 @@ namespace Repull.SDK.Models
         public List<global::Repull.SDK.Models.AirbnbConnection> Connections { get; set; }
 #endif
         /// <summary>Vanio (Repull) listing id</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>Listing title</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -68,7 +74,7 @@ namespace Repull.SDK.Models
             {
                 { "city", n => { City = n.GetStringValue(); } },
                 { "connections", n => { Connections = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection>(global::Repull.SDK.Models.AirbnbConnection.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
             };
         }
@@ -81,7 +87,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("city", City);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection>("connections", Connections);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteStringValue("name", Name);
             writer.WriteAdditionalData(AdditionalData);
         }

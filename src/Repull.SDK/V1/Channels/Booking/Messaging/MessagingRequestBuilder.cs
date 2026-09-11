@@ -36,20 +36,21 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
         /// <summary>
         /// List Booking.com guest conversations. Cursor-paginated. Use the messaging POST to send a reply.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.BookingConversationListResponse"/></returns>
+        /// <returns>A List&lt;global::Repull.SDK.Models.BookingConversation&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.BookingConversationListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Repull.SDK.Models.BookingConversation>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.BookingConversationListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Repull.SDK.Models.BookingConversation>> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingConversationListResponse>(requestInfo, global::Repull.SDK.Models.BookingConversationListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Repull.SDK.Models.BookingConversation>(requestInfo, global::Repull.SDK.Models.BookingConversation.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return collectionResult?.AsList();
         }
         /// <summary>
         /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.

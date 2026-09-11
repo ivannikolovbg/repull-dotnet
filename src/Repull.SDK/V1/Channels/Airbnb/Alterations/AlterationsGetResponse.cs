@@ -57,7 +57,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbAlteration>(global::Repull.SDK.Models.AirbnbAlteration.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "data_freshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>(global::Repull.SDK.Models.AirbnbDataFreshness.CreateFromDiscriminatorValue); } },
+                { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>(global::Repull.SDK.Models.AirbnbDataFreshness.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbAlteration>("data", Data);
-            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>("data_freshness", DataFreshness);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>("dataFreshness", DataFreshness);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

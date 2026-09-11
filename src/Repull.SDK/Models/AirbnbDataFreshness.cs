@@ -60,8 +60,8 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "fix_url", n => { FixUrl = n.GetStringValue(); } },
-                { "last_synced_at", n => { LastSyncedAt = n.GetDateTimeOffsetValue(); } },
+                { "fixUrl", n => { FixUrl = n.GetStringValue(); } },
+                { "lastSyncedAt", n => { LastSyncedAt = n.GetDateTimeOffsetValue(); } },
                 { "reason", n => { Reason = n.GetStringValue(); } },
                 { "stale", n => { Stale = n.GetBoolValue(); } },
             };
@@ -73,8 +73,8 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("fix_url", FixUrl);
-            writer.WriteDateTimeOffsetValue("last_synced_at", LastSyncedAt);
+            writer.WriteStringValue("fixUrl", FixUrl);
+            writer.WriteDateTimeOffsetValue("lastSyncedAt", LastSyncedAt);
             writer.WriteStringValue("reason", Reason);
             writer.WriteBoolValue("stale", Stale);
             writer.WriteAdditionalData(AdditionalData);
