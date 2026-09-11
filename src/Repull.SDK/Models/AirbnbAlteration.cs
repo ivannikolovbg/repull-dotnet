@@ -26,7 +26,13 @@ namespace Repull.SDK.Models
         /// <summary>When the alteration was first mirrored locally.</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Internal Repull mirror-row id (not the Airbnb alteration id — use `alterationId` for the `{id}` path param on the get / accept / decline routes).</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>Who proposed the alteration — e.g. `host` or `guest`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -88,7 +94,13 @@ namespace Repull.SDK.Models
         public string Reason { get; set; }
 #endif
         /// <summary>Repull reservation id the alteration belongs to.</summary>
-        public int? ReservationId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ReservationId { get; set; }
+#nullable restore
+#else
+        public string ReservationId { get; set; }
+#endif
         /// <summary>Alteration lifecycle status — e.g. `pending` (awaiting a decision), `accepted`, `declined`, `canceled`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -126,7 +138,7 @@ namespace Repull.SDK.Models
             {
                 { "alterationId", n => { AlterationId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "initiator", n => { Initiator = n.GetStringValue(); } },
                 { "newCheckIn", n => { NewCheckIn = n.GetDateTimeOffsetValue(); } },
                 { "newCheckOut", n => { NewCheckOut = n.GetDateTimeOffsetValue(); } },
@@ -139,7 +151,7 @@ namespace Repull.SDK.Models
                 { "originalTotalPrice", n => { OriginalTotalPrice = n.GetStringValue(); } },
                 { "platform", n => { Platform = n.GetStringValue(); } },
                 { "reason", n => { Reason = n.GetStringValue(); } },
-                { "reservationId", n => { ReservationId = n.GetIntValue(); } },
+                { "reservationId", n => { ReservationId = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
@@ -153,7 +165,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("alterationId", AlterationId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("initiator", Initiator);
             writer.WriteDateTimeOffsetValue("newCheckIn", NewCheckIn);
             writer.WriteDateTimeOffsetValue("newCheckOut", NewCheckOut);
@@ -166,7 +178,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("originalTotalPrice", OriginalTotalPrice);
             writer.WriteStringValue("platform", Platform);
             writer.WriteStringValue("reason", Reason);
-            writer.WriteIntValue("reservationId", ReservationId);
+            writer.WriteStringValue("reservationId", ReservationId);
             writer.WriteStringValue("status", Status);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);

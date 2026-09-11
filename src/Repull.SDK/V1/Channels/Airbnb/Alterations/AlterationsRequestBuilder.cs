@@ -47,7 +47,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
         {
         }
         /// <summary>
-        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `data_freshness` envelope.
+        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -72,7 +72,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `data_freshness` envelope.
+        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -126,7 +126,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `data_freshness` envelope.
+        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -176,7 +176,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
             return new global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `data_freshness` envelope.
+        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class AlterationsRequestBuilderGetQueryParameters 

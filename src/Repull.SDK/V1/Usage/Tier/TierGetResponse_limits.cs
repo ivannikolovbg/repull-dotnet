@@ -14,11 +14,11 @@ namespace Repull.SDK.V1.Usage.Tier
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The daily_ai_requests property</summary>
+        /// <summary>The dailyAiRequests property</summary>
         public int? DailyAiRequests { get; set; }
-        /// <summary>The dynamic_pricing_listings property</summary>
+        /// <summary>The dynamicPricingListings property</summary>
         public int? DynamicPricingListings { get; set; }
-        /// <summary>The monthly_requests property</summary>
+        /// <summary>The monthlyRequests property</summary>
         public int? MonthlyRequests { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits"/> and sets the default values.
@@ -45,9 +45,9 @@ namespace Repull.SDK.V1.Usage.Tier
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "daily_ai_requests", n => { DailyAiRequests = n.GetIntValue(); } },
-                { "dynamic_pricing_listings", n => { DynamicPricingListings = n.GetIntValue(); } },
-                { "monthly_requests", n => { MonthlyRequests = n.GetIntValue(); } },
+                { "dailyAiRequests", n => { DailyAiRequests = n.GetIntValue(); } },
+                { "dynamicPricingListings", n => { DynamicPricingListings = n.GetIntValue(); } },
+                { "monthlyRequests", n => { MonthlyRequests = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -57,9 +57,9 @@ namespace Repull.SDK.V1.Usage.Tier
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("daily_ai_requests", DailyAiRequests);
-            writer.WriteIntValue("dynamic_pricing_listings", DynamicPricingListings);
-            writer.WriteIntValue("monthly_requests", MonthlyRequests);
+            writer.WriteIntValue("dailyAiRequests", DailyAiRequests);
+            writer.WriteIntValue("dynamicPricingListings", DynamicPricingListings);
+            writer.WriteIntValue("monthlyRequests", MonthlyRequests);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

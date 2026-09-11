@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities
         {
         }
         /// <summary>
-        /// List an Airbnb listing&apos;s amenities. **Pure DB read** from the local `listings_airbnb_amenities` cache — never calls Airbnb upstream. The response splits amenities into `amenities` (regular) and `accessibility_amenities` (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Both are arrays (`[]` when none). Consult `data_freshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;. Returns `404` when the listing has no Airbnb connection in this workspace.
+        /// List an Airbnb listing&apos;s amenities. **Pure DB read** from the local `listings_airbnb_amenities` cache — never calls Airbnb upstream. The response splits amenities into `amenities` (regular) and `accessibility_amenities` (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Both are arrays (`[]` when none). Consult `dataFreshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;. Returns `404` when the listing has no Airbnb connection in this workspace.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -63,7 +63,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List an Airbnb listing&apos;s amenities. **Pure DB read** from the local `listings_airbnb_amenities` cache — never calls Airbnb upstream. The response splits amenities into `amenities` (regular) and `accessibility_amenities` (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Both are arrays (`[]` when none). Consult `data_freshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;. Returns `404` when the listing has no Airbnb connection in this workspace.
+        /// List an Airbnb listing&apos;s amenities. **Pure DB read** from the local `listings_airbnb_amenities` cache — never calls Airbnb upstream. The response splits amenities into `amenities` (regular) and `accessibility_amenities` (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Both are arrays (`[]` when none). Consult `dataFreshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;. Returns `404` when the listing has no Airbnb connection in this workspace.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -93,7 +93,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List an Airbnb listing&apos;s amenities. **Pure DB read** from the local `listings_airbnb_amenities` cache — never calls Airbnb upstream. The response splits amenities into `amenities` (regular) and `accessibility_amenities` (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Both are arrays (`[]` when none). Consult `data_freshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;. Returns `404` when the listing has no Airbnb connection in this workspace.
+        /// List an Airbnb listing&apos;s amenities. **Pure DB read** from the local `listings_airbnb_amenities` cache — never calls Airbnb upstream. The response splits amenities into `amenities` (regular) and `accessibility_amenities` (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Both are arrays (`[]` when none). Consult `dataFreshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;. Returns `404` when the listing has no Airbnb connection in this workspace.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

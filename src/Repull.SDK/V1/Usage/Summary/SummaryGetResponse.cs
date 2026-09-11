@@ -46,7 +46,7 @@ namespace Repull.SDK.V1.Usage.Summary
 #else
         public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining Remaining { get; set; }
 #endif
-        /// <summary>The resets_at property</summary>
+        /// <summary>The resetsAt property</summary>
         public DateTimeOffset? ResetsAt { get; set; }
         /// <summary>The statusDistribution property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -117,7 +117,7 @@ namespace Repull.SDK.V1.Usage.Summary
                 { "limits", n => { Limits = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits.CreateFromDiscriminatorValue); } },
                 { "range", n => { Range = n.GetStringValue(); } },
                 { "remaining", n => { Remaining = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining.CreateFromDiscriminatorValue); } },
-                { "resets_at", n => { ResetsAt = n.GetDateTimeOffsetValue(); } },
+                { "resetsAt", n => { ResetsAt = n.GetDateTimeOffsetValue(); } },
                 { "statusDistribution", n => { StatusDistribution = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution.CreateFromDiscriminatorValue); } },
                 { "tier", n => { Tier = n.GetStringValue(); } },
                 { "timeline", n => { Timeline = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -136,7 +136,7 @@ namespace Repull.SDK.V1.Usage.Summary
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>("limits", Limits);
             writer.WriteStringValue("range", Range);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining>("remaining", Remaining);
-            writer.WriteDateTimeOffsetValue("resets_at", ResetsAt);
+            writer.WriteDateTimeOffsetValue("resetsAt", ResetsAt);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution>("statusDistribution", StatusDistribution);
             writer.WriteStringValue("tier", Tier);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline>("timeline", Timeline);

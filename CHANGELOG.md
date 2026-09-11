@@ -5,6 +5,16 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.10] - 2026-09-11
+
+### Fixed
+- **Regenerated against 19 schema corrections merged into the live spec.** Path/operation inventory unchanged (124 paths / 174 operations) — only shapes changed:
+  - **10 fields renamed snake_case → camelCase**, matching what the live API actually serializes: `AirbnbDataFreshness.dataFreshness`/`fixUrl`/`lastSyncedAt`, `AirbnbConnectionSummary.fixUrl`, `Pagination.nextCursor`/`hasMore`, `UsageSummary`/`UsageTier` fields `monthlyRequests`, `dailyAiRequests`, `dailyAi`, `dynamicPricingListings`, `resetsAt`.
+  - **3 list responses collapsed from `{data, pagination}` envelopes to bare arrays** — `BookingPropertyListResponse`, `BookingConversationListResponse`, `VrboListingListResponse` are gone; `PropertiesRequestBuilder.GetAsync`, `MessagingRequestBuilder.GetAsync`, and `ListingsRequestBuilder.GetAsync` (Vrbo) now return `List<T>` directly.
+  - **4 `id` fields changed integer → string**: `AirbnbAlteration.Id`/`ReservationId`, `AirbnbConnection.Id`, `AirbnbListing.ListingId`.
+  - **`Property.Latitude`/`Longitude` changed number → string.**
+- `scripts/check-spec-freshness.py` now compares schema shapes (not just path/operation counts) and gates CI on drift.
+
 ## [0.2.9] - 2026-09-11
 
 ### Added

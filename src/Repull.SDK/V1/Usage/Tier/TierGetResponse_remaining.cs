@@ -14,9 +14,9 @@ namespace Repull.SDK.V1.Usage.Tier
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The daily_ai property</summary>
+        /// <summary>The dailyAi property</summary>
         public int? DailyAi { get; set; }
-        /// <summary>The dynamic_pricing_listings property</summary>
+        /// <summary>The dynamicPricingListings property</summary>
         public int? DynamicPricingListings { get; set; }
         /// <summary>The monthly property</summary>
         public int? Monthly { get; set; }
@@ -45,8 +45,8 @@ namespace Repull.SDK.V1.Usage.Tier
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "daily_ai", n => { DailyAi = n.GetIntValue(); } },
-                { "dynamic_pricing_listings", n => { DynamicPricingListings = n.GetIntValue(); } },
+                { "dailyAi", n => { DailyAi = n.GetIntValue(); } },
+                { "dynamicPricingListings", n => { DynamicPricingListings = n.GetIntValue(); } },
                 { "monthly", n => { Monthly = n.GetIntValue(); } },
             };
         }
@@ -57,8 +57,8 @@ namespace Repull.SDK.V1.Usage.Tier
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("daily_ai", DailyAi);
-            writer.WriteIntValue("dynamic_pricing_listings", DynamicPricingListings);
+            writer.WriteIntValue("dailyAi", DailyAi);
+            writer.WriteIntValue("dynamicPricingListings", DynamicPricingListings);
             writer.WriteIntValue("monthly", Monthly);
             writer.WriteAdditionalData(AdditionalData);
         }
