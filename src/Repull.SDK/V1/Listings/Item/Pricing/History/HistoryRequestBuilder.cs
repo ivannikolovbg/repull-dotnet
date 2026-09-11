@@ -111,8 +111,10 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.History
             /// <summary>Inclusive. Defaults to today + 90 days.</summary>
             [QueryParameter("endDate")]
             public Date? EndDate { get; set; }
+            #pragma warning disable CS1591
             [QueryParameter("limit")]
             public int? Limit { get; set; }
+            #pragma warning restore CS1591
             /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
             [QueryParameter("offset")]
             public int? Offset { get; set; }

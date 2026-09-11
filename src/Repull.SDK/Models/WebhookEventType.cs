@@ -23,6 +23,14 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ReservationMessageReceived,
         #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.alteration.created")]
+        #pragma warning disable CS1591
+        ReservationAlterationCreated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.alteration.responded")]
+        #pragma warning disable CS1591
+        ReservationAlterationResponded,
+        #pragma warning restore CS1591
         [EnumMember(Value = "listing.created")]
         #pragma warning disable CS1591
         ListingCreated,
@@ -46,6 +54,14 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "account.disconnected")]
         #pragma warning disable CS1591
         AccountDisconnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "review.created")]
+        #pragma warning disable CS1591
+        ReviewCreated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "review.responded")]
+        #pragma warning disable CS1591
+        ReviewResponded,
         #pragma warning restore CS1591
         [EnumMember(Value = "ai.operation.completed")]
         #pragma warning disable CS1591

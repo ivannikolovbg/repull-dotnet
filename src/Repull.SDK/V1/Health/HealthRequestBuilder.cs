@@ -3,6 +3,11 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Health.Atlas;
+using Repull.SDK.V1.Health.Auth;
+using Repull.SDK.V1.Health.Channels;
+using Repull.SDK.V1.Health.Mcp;
+using Repull.SDK.V1.Health.Webhooks;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,6 +21,31 @@ namespace Repull.SDK.V1.Health
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class HealthRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The atlas property</summary>
+        public global::Repull.SDK.V1.Health.Atlas.AtlasRequestBuilder Atlas
+        {
+            get => new global::Repull.SDK.V1.Health.Atlas.AtlasRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The auth property</summary>
+        public global::Repull.SDK.V1.Health.Auth.AuthRequestBuilder Auth
+        {
+            get => new global::Repull.SDK.V1.Health.Auth.AuthRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The channels property</summary>
+        public global::Repull.SDK.V1.Health.Channels.ChannelsRequestBuilder Channels
+        {
+            get => new global::Repull.SDK.V1.Health.Channels.ChannelsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The mcp property</summary>
+        public global::Repull.SDK.V1.Health.Mcp.McpRequestBuilder Mcp
+        {
+            get => new global::Repull.SDK.V1.Health.Mcp.McpRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The webhooks property</summary>
+        public global::Repull.SDK.V1.Health.Webhooks.WebhooksRequestBuilder Webhooks
+        {
+            get => new global::Repull.SDK.V1.Health.Webhooks.WebhooksRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Health.HealthRequestBuilder"/> and sets the default values.
         /// </summary>

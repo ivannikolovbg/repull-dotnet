@@ -2,7 +2,6 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
-using Repull.SDK.V1.Ai;
 using Repull.SDK.V1.Availability;
 using Repull.SDK.V1.Billing;
 using Repull.SDK.V1.Channels;
@@ -14,9 +13,11 @@ using Repull.SDK.V1.Kv;
 using Repull.SDK.V1.Listings;
 using Repull.SDK.V1.Markets;
 using Repull.SDK.V1.Properties;
+using Repull.SDK.V1.Quotes;
 using Repull.SDK.V1.Reservations;
 using Repull.SDK.V1.Reviews;
 using Repull.SDK.V1.Schema;
+using Repull.SDK.V1.Usage;
 using Repull.SDK.V1.Webhooks;
 using System.Collections.Generic;
 using System.IO;
@@ -30,11 +31,6 @@ namespace Repull.SDK.V1
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class V1RequestBuilder : BaseRequestBuilder
     {
-        /// <summary>The ai property</summary>
-        public global::Repull.SDK.V1.Ai.AiRequestBuilder Ai
-        {
-            get => new global::Repull.SDK.V1.Ai.AiRequestBuilder(PathParameters, RequestAdapter);
-        }
         /// <summary>The availability property</summary>
         public global::Repull.SDK.V1.Availability.AvailabilityRequestBuilder Availability
         {
@@ -90,6 +86,11 @@ namespace Repull.SDK.V1
         {
             get => new global::Repull.SDK.V1.Properties.PropertiesRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The quotes property</summary>
+        public global::Repull.SDK.V1.Quotes.QuotesRequestBuilder Quotes
+        {
+            get => new global::Repull.SDK.V1.Quotes.QuotesRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The reservations property</summary>
         public global::Repull.SDK.V1.Reservations.ReservationsRequestBuilder Reservations
         {
@@ -104,6 +105,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Schema.SchemaRequestBuilder Schema
         {
             get => new global::Repull.SDK.V1.Schema.SchemaRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The usage property</summary>
+        public global::Repull.SDK.V1.Usage.UsageRequestBuilder Usage
+        {
+            get => new global::Repull.SDK.V1.Usage.UsageRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The webhooks property</summary>
         public global::Repull.SDK.V1.Webhooks.WebhooksRequestBuilder Webhooks

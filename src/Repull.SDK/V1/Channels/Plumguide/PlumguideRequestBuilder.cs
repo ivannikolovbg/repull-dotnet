@@ -3,8 +3,10 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Channels.Plumguide.Availability;
+using Repull.SDK.V1.Channels.Plumguide.Bookings;
 using Repull.SDK.V1.Channels.Plumguide.Listings;
 using Repull.SDK.V1.Channels.Plumguide.Pricing;
+using Repull.SDK.V1.Channels.Plumguide.Webhooks;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -22,6 +24,11 @@ namespace Repull.SDK.V1.Channels.Plumguide
         {
             get => new global::Repull.SDK.V1.Channels.Plumguide.Availability.AvailabilityRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The bookings property</summary>
+        public global::Repull.SDK.V1.Channels.Plumguide.Bookings.BookingsRequestBuilder Bookings
+        {
+            get => new global::Repull.SDK.V1.Channels.Plumguide.Bookings.BookingsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The listings property</summary>
         public global::Repull.SDK.V1.Channels.Plumguide.Listings.ListingsRequestBuilder Listings
         {
@@ -31,6 +38,11 @@ namespace Repull.SDK.V1.Channels.Plumguide
         public global::Repull.SDK.V1.Channels.Plumguide.Pricing.PricingRequestBuilder Pricing
         {
             get => new global::Repull.SDK.V1.Channels.Plumguide.Pricing.PricingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The webhooks property</summary>
+        public global::Repull.SDK.V1.Channels.Plumguide.Webhooks.WebhooksRequestBuilder Webhooks
+        {
+            get => new global::Repull.SDK.V1.Channels.Plumguide.Webhooks.WebhooksRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Plumguide.PlumguideRequestBuilder"/> and sets the default values.

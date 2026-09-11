@@ -4,10 +4,20 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Connect.Beds24;
 using Repull.SDK.V1.Connect.Booking;
+using Repull.SDK.V1.Connect.Bookingsync;
+using Repull.SDK.V1.Connect.Guesty;
+using Repull.SDK.V1.Connect.Hospitable;
+using Repull.SDK.V1.Connect.Hostaway;
+using Repull.SDK.V1.Connect.Igms;
 using Repull.SDK.V1.Connect.Item;
+using Repull.SDK.V1.Connect.Lodgify;
+using Repull.SDK.V1.Connect.Ownerrez;
 using Repull.SDK.V1.Connect.Providers;
 using Repull.SDK.V1.Connect.Sessions;
+using Repull.SDK.V1.Connect.Smoobu;
+using Repull.SDK.V1.Connect.Vrbo;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -21,10 +31,50 @@ namespace Repull.SDK.V1.Connect
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConnectRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The beds24 property</summary>
+        public global::Repull.SDK.V1.Connect.Beds24.Beds24RequestBuilder Beds24
+        {
+            get => new global::Repull.SDK.V1.Connect.Beds24.Beds24RequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The booking property</summary>
         public global::Repull.SDK.V1.Connect.Booking.BookingRequestBuilder Booking
         {
             get => new global::Repull.SDK.V1.Connect.Booking.BookingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The bookingsync property</summary>
+        public global::Repull.SDK.V1.Connect.Bookingsync.BookingsyncRequestBuilder Bookingsync
+        {
+            get => new global::Repull.SDK.V1.Connect.Bookingsync.BookingsyncRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The guesty property</summary>
+        public global::Repull.SDK.V1.Connect.Guesty.GuestyRequestBuilder Guesty
+        {
+            get => new global::Repull.SDK.V1.Connect.Guesty.GuestyRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The hospitable property</summary>
+        public global::Repull.SDK.V1.Connect.Hospitable.HospitableRequestBuilder Hospitable
+        {
+            get => new global::Repull.SDK.V1.Connect.Hospitable.HospitableRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The hostaway property</summary>
+        public global::Repull.SDK.V1.Connect.Hostaway.HostawayRequestBuilder Hostaway
+        {
+            get => new global::Repull.SDK.V1.Connect.Hostaway.HostawayRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The igms property</summary>
+        public global::Repull.SDK.V1.Connect.Igms.IgmsRequestBuilder Igms
+        {
+            get => new global::Repull.SDK.V1.Connect.Igms.IgmsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The lodgify property</summary>
+        public global::Repull.SDK.V1.Connect.Lodgify.LodgifyRequestBuilder Lodgify
+        {
+            get => new global::Repull.SDK.V1.Connect.Lodgify.LodgifyRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The ownerrez property</summary>
+        public global::Repull.SDK.V1.Connect.Ownerrez.OwnerrezRequestBuilder Ownerrez
+        {
+            get => new global::Repull.SDK.V1.Connect.Ownerrez.OwnerrezRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The providers property</summary>
         public global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder Providers
@@ -35,6 +85,16 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.Sessions.SessionsRequestBuilder Sessions
         {
             get => new global::Repull.SDK.V1.Connect.Sessions.SessionsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The smoobu property</summary>
+        public global::Repull.SDK.V1.Connect.Smoobu.SmoobuRequestBuilder Smoobu
+        {
+            get => new global::Repull.SDK.V1.Connect.Smoobu.SmoobuRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The vrbo property</summary>
+        public global::Repull.SDK.V1.Connect.Vrbo.VrboRequestBuilder Vrbo
+        {
+            get => new global::Repull.SDK.V1.Connect.Vrbo.VrboRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Repull.SDK.v1.connect.item collection</summary>
         /// <param name="position">PMS provider slug (e.g., hostaway, guesty, ownerrez)</param>

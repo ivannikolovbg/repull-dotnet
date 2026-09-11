@@ -43,7 +43,7 @@ namespace Repull.SDK.Models
 #else
         public string RateId { get; set; }
 #endif
-        /// <summary>Optional length-of-stay / availability restrictions for one rate update.</summary>
+        /// <summary>Optional length-of-stay / availability restrictions for one rate update. Every field here is forwarded verbatim into Booking.com&apos;s rates XML (`minimumstay`, `maximumstay`, `closedonarrival`, `closedondeparture`, …) — omit a field to leave that restriction untouched.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions? Restrictions { get; set; }
@@ -59,7 +59,7 @@ namespace Repull.SDK.Models
 #else
         public string RoomId { get; set; }
 #endif
-        /// <summary>The roomsToSell property</summary>
+        /// <summary>Rooms to sell for the date range. Set to `0` to stop-sell this room/rate on the rates endpoint (Booking&apos;s dedicated `&lt;closed&gt;` stop-sell flag lives on the availability endpoint — see `BookingAvailabilityUpdate.closed`).</summary>
         public int? RoomsToSell { get; set; }
         /// <summary>The singlePrice property</summary>
         public double? SinglePrice { get; set; }

@@ -8,13 +8,21 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Normalized money block. `totalPrice` is a `number` (NOT a decimal-as-string) — the legacy top-level `totalPrice` string field is kept on the parent for back-compat but is deprecated.
+    /// Normalized money block. `totalPrice` is a `number` (NOT a decimal-as-string) — the legacy top-level `totalPrice` string field is kept on the parent for back-compat but is deprecated. `totalPrice` is the GUEST-side stay total (what the guest paid), NOT the host payout.The full host/guest breakdown — accommodation subtotal, discounts, cleaning and other guest fees, channel service fees split host/guest, tax lines, and the expected host payout — is served inline under `host` and `guest` for EVERY channel. (Earlier versions of this spec sent you to `GET /v1/channels/airbnb/transactions` for the host payout; that endpoint is Airbnb-only and is no longer the place to look for a reservation&apos;s financials. It remains useful for settlement-level detail — actual payout dates and settlement status — which the reservation record does not carry.)Not yet served here: individual guest **payment records** (charges, refunds, schedules) and post-booking **adjustments** — neither is stored on the reservation breakdown.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationFinancials : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Channel cancellation policy code, verbatim from the reservation. Airbnb codes look like `strict_14_with_grace_period`, `moderate`, `flexible`, `tiered_pricing_non_refundable`; Booking.com reports a numeric policy id. Omitted when the channel did not supply one.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CancellationPolicy { get; set; }
+#nullable restore
+#else
+        public string CancellationPolicy { get; set; }
+#endif
         /// <summary>ISO 4217 currency code.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -22,6 +30,22 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Currency { get; set; }
+#endif
+        /// <summary>GUEST-side view of the stay — what the guest was actually charged. Same non-fabrication rule as `ReservationHostFinancials`: absent components are omitted, never zero-filled.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationGuestFinancials? Guest { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationGuestFinancials Guest { get; set; }
+#endif
+        /// <summary>HOST-side view of the stay — what it looks like on the host ledger. Projected from the reservation&apos;s own stored price breakdown, so it is available on every channel (Airbnb, Booking.com, VRBO, direct, owner), not just Airbnb.**Nothing here is synthesised.** A property is present only when the source breakdown genuinely carries it; a component the channel never reported is OMITTED rather than returned as `0`. An empty array means the channel reported an empty collection.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationHostFinancials? Host { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationHostFinancials Host { get; set; }
 #endif
         /// <summary>Payment lifecycle status (e.g. `pending`, `paid`, `refunded`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -31,7 +55,7 @@ namespace Repull.SDK.Models
 #else
         public string PaymentStatus { get; set; }
 #endif
-        /// <summary>Stay total in `currency`. Number, not string.</summary>
+        /// <summary>GUEST-side stay total in `currency` — what the guest paid, not the host payout. Number, not string. For the host payout see `financials.host.revenue`.</summary>
         public double? TotalPrice { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationFinancials"/> and sets the default values.
@@ -58,7 +82,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "cancellationPolicy", n => { CancellationPolicy = n.GetStringValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
+                { "guest", n => { Guest = n.GetObjectValue<global::Repull.SDK.Models.ReservationGuestFinancials>(global::Repull.SDK.Models.ReservationGuestFinancials.CreateFromDiscriminatorValue); } },
+                { "host", n => { Host = n.GetObjectValue<global::Repull.SDK.Models.ReservationHostFinancials>(global::Repull.SDK.Models.ReservationHostFinancials.CreateFromDiscriminatorValue); } },
                 { "paymentStatus", n => { PaymentStatus = n.GetStringValue(); } },
                 { "totalPrice", n => { TotalPrice = n.GetDoubleValue(); } },
             };
@@ -70,7 +97,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("cancellationPolicy", CancellationPolicy);
             writer.WriteStringValue("currency", Currency);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationGuestFinancials>("guest", Guest);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationHostFinancials>("host", Host);
             writer.WriteStringValue("paymentStatus", PaymentStatus);
             writer.WriteDoubleValue("totalPrice", TotalPrice);
             writer.WriteAdditionalData(AdditionalData);

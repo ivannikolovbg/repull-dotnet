@@ -17,6 +17,14 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>The source channel&apos;s own thread id (Airbnb thread id, Booking conversation id, …). Pass this as the `{threadId}` path param on `POST /v1/channels/airbnb/messaging/{threadId}/messages` to reply — it is the bridge from a unified conversation straight to the provider-specific send call. `null` when the thread has no external id yet (e.g. a website/email thread).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExternalThreadId { get; set; }
+#nullable restore
+#else
+        public string ExternalThreadId { get; set; }
+#endif
         /// <summary>The guestId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -101,6 +109,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "externalThreadId", n => { ExternalThreadId = n.GetStringValue(); } },
                 { "guestId", n => { GuestId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "lastMessageAt", n => { LastMessageAt = n.GetDateTimeOffsetValue(); } },
@@ -122,6 +131,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteStringValue("externalThreadId", ExternalThreadId);
             writer.WriteStringValue("guestId", GuestId);
             writer.WriteStringValue("id", Id);
             writer.WriteDateTimeOffsetValue("lastMessageAt", LastMessageAt);

@@ -5,7 +5,9 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Listings.Item.Comps;
+using Repull.SDK.V1.Listings.Item.Content;
 using Repull.SDK.V1.Listings.Item.GenerateContent;
+using Repull.SDK.V1.Listings.Item.Photos;
 using Repull.SDK.V1.Listings.Item.Pricing;
 using Repull.SDK.V1.Listings.Item.Publish;
 using Repull.SDK.V1.Listings.Item.PublishStatus;
@@ -28,10 +30,20 @@ namespace Repull.SDK.V1.Listings.Item
         {
             get => new global::Repull.SDK.V1.Listings.Item.Comps.CompsRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The content property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Content.ContentRequestBuilder Content
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Content.ContentRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The generateContent property</summary>
         public global::Repull.SDK.V1.Listings.Item.GenerateContent.GenerateContentRequestBuilder GenerateContent
         {
             get => new global::Repull.SDK.V1.Listings.Item.GenerateContent.GenerateContentRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The photos property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Photos.PhotosRequestBuilder Photos
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Photos.PhotosRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The pricing property</summary>
         public global::Repull.SDK.V1.Listings.Item.Pricing.PricingRequestBuilder Pricing

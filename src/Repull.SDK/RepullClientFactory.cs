@@ -20,7 +20,7 @@ public static class RepullClientFactory
     /// <summary>
     /// Build a fully-configured <see cref="RepullClient"/> from an API key.
     /// </summary>
-    /// <param name="apiKey">A Repull API key (sk_test_... or sk_live_...).</param>
+    /// <param name="apiKey">A Repull API key (sk_live_...).</param>
     /// <param name="baseUrl">Optional base URL override (defaults to https://api.repull.dev).</param>
     public static RepullClient Create(string apiKey, string? baseUrl = null)
     {

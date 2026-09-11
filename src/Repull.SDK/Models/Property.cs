@@ -8,14 +8,14 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A vacation rental property from a connected PMS
+    /// A vacation rental property in your Repull workspace. Backed by the core `listings` row — enriched per-PMS fields (bedrooms, property type, provider id, etc.) live in provider-specific detail tables and are NOT returned here.Field availability differs by endpoint:- `channels` is returned by the list endpoint (`GET /v1/properties`) only.- `latitude`, `longitude`, `createdAt`, and `amenities` are returned by the detail endpoint (`GET /v1/properties/{id}`) only. `amenities` requires `?include=amenities`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Property : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Full address</summary>
+        /// <summary>Street address (from the listing&apos;s `street` field).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Address { get; set; }
@@ -23,7 +23,7 @@ namespace Repull.SDK.Models
 #else
         public string Address { get; set; }
 #endif
-        /// <summary>Amenity rows for the property. **Only present when the caller passes `?include=amenities`.** Empty array (`[]`) when the property has no amenity rows.</summary>
+        /// <summary>Amenity rows for the property. Detail endpoint only, and **only present when the caller passes `?include=amenities`.** Empty array (`[]`) when the property has no amenity rows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.ListingAmenity>? Amenities { get; set; }
@@ -31,11 +31,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.ListingAmenity> Amenities { get; set; }
 #endif
-        /// <summary>The bathrooms property</summary>
-        public double? Bathrooms { get; set; }
-        /// <summary>The bedrooms property</summary>
-        public int? Bedrooms { get; set; }
-        /// <summary>OTAs/channels this property is actively published on (e.g. `airbnb`, `booking`, `vrbo`). Empty array when the property has no active channel links.</summary>
+        /// <summary>OTAs/channels this property is actively published on, as channel-name strings (e.g. `airbnb`, `booking`, `vrbo`). Empty array when the property has no active channel links. List endpoint (`GET /v1/properties`) only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Channels { get; set; }
@@ -51,23 +47,17 @@ namespace Repull.SDK.Models
 #else
         public string City { get; set; }
 #endif
-        /// <summary>The country property</summary>
+        /// <summary>When the property was created. Detail endpoint only.</summary>
+        public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>ISO 4217 currency code for this property&apos;s pricing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Country { get; set; }
+        public string? Currency { get; set; }
 #nullable restore
 #else
-        public string Country { get; set; }
+        public string Currency { get; set; }
 #endif
-        /// <summary>ID in the source PMS</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ExternalId { get; set; }
-#nullable restore
-#else
-        public string ExternalId { get; set; }
-#endif
-        /// <summary>Internal Repull property ID</summary>
+        /// <summary>Internal Repull property ID. Equal to the listing id (`listings.id`); the same integer is used as `listingId` on reservations and `propertyId` on availability.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get; set; }
@@ -75,12 +65,18 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The latitude property</summary>
+        /// <summary>Detail endpoint only.</summary>
         public double? Latitude { get; set; }
-        /// <summary>The longitude property</summary>
+        /// <summary>The listing&apos;s lifecycle state (e.g. `live`, `draft`, `archived`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LifecycleStatus { get; set; }
+#nullable restore
+#else
+        public string LifecycleStatus { get; set; }
+#endif
+        /// <summary>Detail endpoint only.</summary>
         public double? Longitude { get; set; }
-        /// <summary>The maxGuests property</summary>
-        public int? MaxGuests { get; set; }
         /// <summary>Property name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -89,30 +85,10 @@ namespace Repull.SDK.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>Source PMS</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Provider { get; set; }
-#nullable restore
-#else
-        public string Provider { get; set; }
-#endif
-        /// <summary>The state property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? State { get; set; }
-#nullable restore
-#else
-        public string State { get; set; }
-#endif
-        /// <summary>Primary photo URL</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Thumbnail { get; set; }
-#nullable restore
-#else
-        public string Thumbnail { get; set; }
-#endif
+        /// <summary>Derived from `listings.active`.</summary>
+        public global::Repull.SDK.Models.Property_status? Status { get; set; }
+        /// <summary>Last time this property record changed. Feed the newest value you have seen back as `?updated_since=` to poll for changes only. List endpoint (`GET /v1/properties`) only.</summary>
+        public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Property"/> and sets the default values.
         /// </summary>
@@ -140,20 +116,17 @@ namespace Repull.SDK.Models
             {
                 { "address", n => { Address = n.GetStringValue(); } },
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>(global::Repull.SDK.Models.ListingAmenity.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "bathrooms", n => { Bathrooms = n.GetDoubleValue(); } },
-                { "bedrooms", n => { Bedrooms = n.GetIntValue(); } },
                 { "channels", n => { Channels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "city", n => { City = n.GetStringValue(); } },
-                { "country", n => { Country = n.GetStringValue(); } },
-                { "externalId", n => { ExternalId = n.GetStringValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "currency", n => { Currency = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "latitude", n => { Latitude = n.GetDoubleValue(); } },
+                { "lifecycleStatus", n => { LifecycleStatus = n.GetStringValue(); } },
                 { "longitude", n => { Longitude = n.GetDoubleValue(); } },
-                { "maxGuests", n => { MaxGuests = n.GetIntValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "provider", n => { Provider = n.GetStringValue(); } },
-                { "state", n => { State = n.GetStringValue(); } },
-                { "thumbnail", n => { Thumbnail = n.GetStringValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Property_status>(); } },
+                { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -165,20 +138,17 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("address", Address);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>("amenities", Amenities);
-            writer.WriteDoubleValue("bathrooms", Bathrooms);
-            writer.WriteIntValue("bedrooms", Bedrooms);
             writer.WriteCollectionOfPrimitiveValues<string>("channels", Channels);
             writer.WriteStringValue("city", City);
-            writer.WriteStringValue("country", Country);
-            writer.WriteStringValue("externalId", ExternalId);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteStringValue("currency", Currency);
             writer.WriteStringValue("id", Id);
             writer.WriteDoubleValue("latitude", Latitude);
+            writer.WriteStringValue("lifecycleStatus", LifecycleStatus);
             writer.WriteDoubleValue("longitude", Longitude);
-            writer.WriteIntValue("maxGuests", MaxGuests);
             writer.WriteStringValue("name", Name);
-            writer.WriteStringValue("provider", Provider);
-            writer.WriteStringValue("state", State);
-            writer.WriteStringValue("thumbnail", Thumbnail);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Property_status>("status", Status);
+            writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

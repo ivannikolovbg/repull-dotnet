@@ -50,7 +50,7 @@ Full runnable copy lives in [`examples/Quickstart`](examples/Quickstart).
 
 ## Authentication
 
-All requests require a Repull API key (`sk_test_...` for sandbox, `sk_live_...` for production):
+All requests require a Repull API key (`sk_live_...`):
 
 ```csharp
 var client = RepullClientFactory.Create("sk_live_...");
@@ -77,7 +77,7 @@ var client = new RepullClient(adapter);
 Run any example:
 
 ```bash
-REPULL_API_KEY=sk_test_... dotnet run --project examples/Quickstart
+REPULL_API_KEY=sk_live_... dotnet run --project examples/Quickstart
 ```
 
 ## Reference

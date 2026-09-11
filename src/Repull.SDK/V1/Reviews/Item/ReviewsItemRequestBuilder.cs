@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Reviews.Item.Reply;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace Repull.SDK.V1.Reviews.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReviewsItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The reply property</summary>
+        public global::Repull.SDK.V1.Reviews.Item.Reply.ReplyRequestBuilder Reply
+        {
+            get => new global::Repull.SDK.V1.Reviews.Item.Reply.ReplyRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Reviews.Item.ReviewsItemRequestBuilder"/> and sets the default values.
         /// </summary>

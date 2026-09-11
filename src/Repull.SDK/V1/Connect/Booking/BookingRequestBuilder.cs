@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Connect.Booking.Callback;
 using Repull.SDK.V1.Connect.Booking.MapRooms;
 using Repull.SDK.V1.Connect.Booking.Rooms;
 using Repull.SDK.V1.Connect.Booking.Verify;
@@ -17,6 +18,11 @@ namespace Repull.SDK.V1.Connect.Booking
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The callback property</summary>
+        public global::Repull.SDK.V1.Connect.Booking.Callback.CallbackRequestBuilder Callback
+        {
+            get => new global::Repull.SDK.V1.Connect.Booking.Callback.CallbackRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The mapRooms property</summary>
         public global::Repull.SDK.V1.Connect.Booking.MapRooms.MapRoomsRequestBuilder MapRooms
         {

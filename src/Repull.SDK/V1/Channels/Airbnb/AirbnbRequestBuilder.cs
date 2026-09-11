@@ -2,12 +2,14 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Channels.Airbnb.Alterations;
 using Repull.SDK.V1.Channels.Airbnb.Connection;
 using Repull.SDK.V1.Channels.Airbnb.Listings;
 using Repull.SDK.V1.Channels.Airbnb.Messaging;
+using Repull.SDK.V1.Channels.Airbnb.Offers;
 using Repull.SDK.V1.Channels.Airbnb.Reservations;
 using Repull.SDK.V1.Channels.Airbnb.Reviews;
-using Repull.SDK.V1.Channels.Airbnb.Sync;
+using Repull.SDK.V1.Channels.Airbnb.Transactions;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -20,6 +22,11 @@ namespace Repull.SDK.V1.Channels.Airbnb
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The alterations property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsRequestBuilder Alterations
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The connection property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Connection.ConnectionRequestBuilder Connection
         {
@@ -35,6 +42,11 @@ namespace Repull.SDK.V1.Channels.Airbnb
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Messaging.MessagingRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The offers property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder Offers
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The reservations property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder Reservations
         {
@@ -45,10 +57,10 @@ namespace Repull.SDK.V1.Channels.Airbnb
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Reviews.ReviewsRequestBuilder(PathParameters, RequestAdapter);
         }
-        /// <summary>The sync property</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Sync.SyncRequestBuilder Sync
+        /// <summary>The transactions property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder Transactions
         {
-            get => new global::Repull.SDK.V1.Channels.Airbnb.Sync.SyncRequestBuilder(PathParameters, RequestAdapter);
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.AirbnbRequestBuilder"/> and sets the default values.

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Availability.Batch;
 using Repull.SDK.V1.Availability.Item;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,11 @@ namespace Repull.SDK.V1.Availability
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AvailabilityRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The batch property</summary>
+        public global::Repull.SDK.V1.Availability.Batch.BatchRequestBuilder Batch
+        {
+            get => new global::Repull.SDK.V1.Availability.Batch.BatchRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>Gets an item from the Repull.SDK.v1.availability.item collection</summary>
         /// <param name="position">Unique identifier of the item</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Availability.Item.WithPropertyItemRequestBuilder"/></returns>

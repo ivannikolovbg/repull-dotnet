@@ -12,7 +12,7 @@ namespace Repull.SDK.Models
     public partial class ListingActiveRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>Target active state. `false` deactivates (excludes) the listing; `true` reactivates it (subject to the plan-listings cap).</summary>
+        /// <summary>Target active state. `false` deactivates the listing and removes it from your billable listing count; `true` reactivates it. Free-tier workspaces are still subject to their listing cap.</summary>
         public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
