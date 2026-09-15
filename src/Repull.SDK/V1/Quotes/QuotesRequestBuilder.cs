@@ -34,12 +34,13 @@ namespace Repull.SDK.V1.Quotes
         {
         }
         /// <summary>
-        /// Returns the full price breakdown for a stay — nightly total, length-of-stay discount, cleaning fee, pet and other fees, taxes, and the total.A quote is priced against a booking website, because the markup, custom fees and tax overrides that decide what a guest is actually charged live there. A workspace with no booking site receives `422 quote_unavailable` rather than a number computed from different rules than the ones applied at checkout.
+        /// Returns the full price breakdown for a stay — nightly total, length-of-stay discount, cleaning fee, pet and other fees, taxes, and the total.A quote is priced against a booking website, because the markup, custom fees and tax overrides that decide what a guest is actually charged live there. A workspace with no booking site receives `422 quote_unavailable` rather than a number computed from different rules than the ones applied at checkout.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.Quote"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -55,13 +56,14 @@ namespace Repull.SDK.V1.Quotes
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Quote>(requestInfo, global::Repull.SDK.Models.Quote.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns the full price breakdown for a stay — nightly total, length-of-stay discount, cleaning fee, pet and other fees, taxes, and the total.A quote is priced against a booking website, because the markup, custom fees and tax overrides that decide what a guest is actually charged live there. A workspace with no booking site receives `422 quote_unavailable` rather than a number computed from different rules than the ones applied at checkout.
+        /// Returns the full price breakdown for a stay — nightly total, length-of-stay discount, cleaning fee, pet and other fees, taxes, and the total.A quote is priced against a booking website, because the markup, custom fees and tax overrides that decide what a guest is actually charged live there. A workspace with no booking site receives `422 quote_unavailable` rather than a number computed from different rules than the ones applied at checkout.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -89,7 +91,7 @@ namespace Repull.SDK.V1.Quotes
             return new global::Repull.SDK.V1.Quotes.QuotesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Returns the full price breakdown for a stay — nightly total, length-of-stay discount, cleaning fee, pet and other fees, taxes, and the total.A quote is priced against a booking website, because the markup, custom fees and tax overrides that decide what a guest is actually charged live there. A workspace with no booking site receives `422 quote_unavailable` rather than a number computed from different rules than the ones applied at checkout.
+        /// Returns the full price breakdown for a stay — nightly total, length-of-stay discount, cleaning fee, pet and other fees, taxes, and the total.A quote is priced against a booking website, because the markup, custom fees and tax overrides that decide what a guest is actually charged live there. A workspace with no booking site receives `422 quote_unavailable` rather than a number computed from different rules than the ones applied at checkout.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class QuotesRequestBuilderGetQueryParameters 

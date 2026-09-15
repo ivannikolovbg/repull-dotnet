@@ -46,12 +46,13 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations.Item
         {
         }
         /// <summary>
-        /// Fetch a single Airbnb reservation alteration by its Airbnb alteration id. **Pure DB read**, workspace-scoped via the reservations join. Returns `404 not_found` when no alteration matches the id in your workspace.
+        /// Fetch a single Airbnb reservation alteration by its Airbnb alteration id. **Pure DB read**, workspace-scoped via the reservations join. Returns `404 not_found` when no alteration matches the id in your workspace.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Alterations.Item.AlterationsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -67,18 +68,20 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Alterations.Item.AlterationsGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Alterations.Item.AlterationsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a single Airbnb reservation alteration by its Airbnb alteration id. **Pure DB read**, workspace-scoped via the reservations join. Returns `404 not_found` when no alteration matches the id in your workspace.
+        /// Fetch a single Airbnb reservation alteration by its Airbnb alteration id. **Pure DB read**, workspace-scoped via the reservations join. Returns `404 not_found` when no alteration matches the id in your workspace.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Alterations.Item.AlterationsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
         [Obsolete("This method is obsolete. Use GetAsAlterationsGetResponseAsync instead.")]
@@ -95,13 +98,14 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Alterations.Item.AlterationsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Alterations.Item.AlterationsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a single Airbnb reservation alteration by its Airbnb alteration id. **Pure DB read**, workspace-scoped via the reservations join. Returns `404 not_found` when no alteration matches the id in your workspace.
+        /// Fetch a single Airbnb reservation alteration by its Airbnb alteration id. **Pure DB read**, workspace-scoped via the reservations join. Returns `404 not_found` when no alteration matches the id in your workspace.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

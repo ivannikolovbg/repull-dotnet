@@ -62,6 +62,14 @@ namespace Repull.SDK.Models
 #else
         public string Fix { get; set; }
 #endif
+        /// <summary>Every inactive listing the request involved. Present on `code: &quot;listing_inactive&quot;` (HTTP 403) — activate these ids and retry.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? ListingIds { get; set; }
+#nullable restore
+#else
+        public List<string> ListingIds { get; set; }
+#endif
         /// <summary>Human-readable cause. Echoes the offending value when relevant.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -143,6 +151,7 @@ namespace Repull.SDK.Models
                 { "endpoint", n => { Endpoint = n.GetStringValue(); } },
                 { "field", n => { Field = n.GetStringValue(); } },
                 { "fix", n => { Fix = n.GetStringValue(); } },
+                { "listing_ids", n => { ListingIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "request_id", n => { RequestId = n.GetStringValue(); } },
                 { "retry_after", n => { RetryAfter = n.GetIntValue(); } },
@@ -165,6 +174,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("endpoint", Endpoint);
             writer.WriteStringValue("field", Field);
             writer.WriteStringValue("fix", Fix);
+            writer.WriteCollectionOfPrimitiveValues<string>("listing_ids", ListingIds);
             writer.WriteStringValue("message", Message);
             writer.WriteStringValue("request_id", RequestId);
             writer.WriteIntValue("retry_after", RetryAfter);

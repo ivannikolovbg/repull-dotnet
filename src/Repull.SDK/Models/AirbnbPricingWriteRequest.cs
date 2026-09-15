@@ -15,7 +15,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Required for `type: &quot;currency&quot;` — ISO 4217 code.</summary>
+        /// <summary>Required for `type: &quot;currency&quot;` — ISO 4217 code in capitals, e.g. `USD`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Currency { get; set; }
@@ -24,13 +24,7 @@ namespace Repull.SDK.Models
         public string Currency { get; set; }
 #endif
         /// <summary>Required when `type: &quot;model&quot;` — the pricing-availability model to switch the listing to.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ModelType { get; set; }
-#nullable restore
-#else
-        public string ModelType { get; set; }
-#endif
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType? ModelType { get; set; }
         /// <summary>Required when `type: &quot;calendar&quot;`. Batch of per-date price + restriction operations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -91,7 +85,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "currency", n => { Currency = n.GetStringValue(); } },
-                { "modelType", n => { ModelType = n.GetStringValue(); } },
+                { "modelType", n => { ModelType = n.GetEnumValue<global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType>(); } },
                 { "operations", n => { Operations = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbCalendarOperation>(global::Repull.SDK.Models.AirbnbCalendarOperation.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "records", n => { Records = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records>(global::Repull.SDK.Models.AirbnbPricingWriteRequest_records.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "rule", n => { Rule = n.GetObjectValue<global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule>(global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule.CreateFromDiscriminatorValue); } },
@@ -107,7 +101,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("currency", Currency);
-            writer.WriteStringValue("modelType", ModelType);
+            writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType>("modelType", ModelType);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbCalendarOperation>("operations", Operations);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records>("records", Records);
             writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule>("rule", Rule);

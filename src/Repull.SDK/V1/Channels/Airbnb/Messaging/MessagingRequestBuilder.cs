@@ -47,11 +47,12 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging
         {
         }
         /// <summary>
-        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.
+        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.Threads on inactive listings are left out; they keep syncing and reappear once the listing is activated. Filtering by an inactive listing (`listing_id`) returns `403 listing_inactive`.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbThreadListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.AirbnbThreadListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -62,10 +63,14 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbThreadListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbThreadListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbThreadListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbThreadListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.
+        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.Threads on inactive listings are left out; they keep syncing and reappear once the listing is activated. Filtering by an inactive listing (`listing_id`) returns `403 listing_inactive`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

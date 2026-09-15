@@ -13,6 +13,14 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConnectStatus : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Airbnb only: every Airbnb account this workspace has connected, including ones since disconnected. Pass `externalAccountId` as `accountId` to `DELETE /v1/connect/airbnb` to disconnect one account.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ConnectStatus_accounts>? Accounts { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ConnectStatus_accounts> Accounts { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The connected property</summary>
@@ -78,6 +86,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accounts", n => { Accounts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConnectStatus_accounts>(global::Repull.SDK.Models.ConnectStatus_accounts.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
@@ -94,6 +103,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConnectStatus_accounts>("accounts", Accounts);
             writer.WriteBoolValue("connected", Connected);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);

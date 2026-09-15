@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -14,6 +15,18 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The check_in_date property</summary>
+        public Date? CheckInDate { get; set; }
+        /// <summary>The guest_count property</summary>
+        public int? GuestCount { get; set; }
+        /// <summary>The los_data property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public UntypedNode? LosData { get; set; }
+#nullable restore
+#else
+        public UntypedNode LosData { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPricingWriteRequest_records"/> and sets the default values.
         /// </summary>
@@ -39,6 +52,9 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "check_in_date", n => { CheckInDate = n.GetDateValue(); } },
+                { "guest_count", n => { GuestCount = n.GetIntValue(); } },
+                { "los_data", n => { LosData = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -48,6 +64,9 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteDateValue("check_in_date", CheckInDate);
+            writer.WriteIntValue("guest_count", GuestCount);
+            writer.WriteObjectValue<UntypedNode>("los_data", LosData);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

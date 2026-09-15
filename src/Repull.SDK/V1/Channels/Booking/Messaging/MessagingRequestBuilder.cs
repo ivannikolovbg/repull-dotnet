@@ -34,11 +34,13 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
         {
         }
         /// <summary>
-        /// List Booking.com guest conversations. Cursor-paginated. Use the messaging POST to send a reply.
+        /// List Booking.com guest conversations. Cursor-paginated. Use the messaging POST to send a reply.Scoped to this workspace. With `property_id`, the property must be connected to this workspace — any other id returns `404 not_found`. Without it, only messages for this workspace&apos;s own Booking.com properties are returned.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A List&lt;global::Repull.SDK.Models.BookingConversation&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::Repull.SDK.Models.BookingConversation>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,17 +51,23 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Repull.SDK.Models.BookingConversation>(requestInfo, global::Repull.SDK.Models.BookingConversation.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Repull.SDK.Models.BookingConversation>(requestInfo, global::Repull.SDK.Models.BookingConversation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.
+        /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -77,13 +85,14 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Booking.com guest conversations. Cursor-paginated. Use the messaging POST to send a reply.
+        /// List Booking.com guest conversations. Cursor-paginated. Use the messaging POST to send a reply.Scoped to this workspace. With `property_id`, the property must be connected to this workspace — any other id returns `404 not_found`. Without it, only messages for this workspace&apos;s own Booking.com properties are returned.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -102,7 +111,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
             return requestInfo;
         }
         /// <summary>
-        /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.
+        /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

@@ -31,6 +31,14 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.BookingConnectListingOption> ListingOptions { get; set; }
 #endif
+        /// <summary>Capabilities Booking.com explicitly refused for this property, usually empty. `content` means reservations, availability and messaging sync normally, but the Content API was never granted — so room names and photos are placeholders, and nightly prices cannot be published until the grant is added (the currency is unknown and is never guessed).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.BookingConnectRoomsResponse_missingCapabilities?>? MissingCapabilities { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.BookingConnectRoomsResponse_missingCapabilities?> MissingCapabilities { get; set; }
+#endif
         /// <summary>The rooms property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -76,6 +84,7 @@ namespace Repull.SDK.Models
             {
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "listingOptions", n => { ListingOptions = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingConnectListingOption>(global::Repull.SDK.Models.BookingConnectListingOption.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "missingCapabilities", n => { MissingCapabilities = n.GetCollectionOfEnumValues<global::Repull.SDK.Models.BookingConnectRoomsResponse_missingCapabilities>()?.AsList(); } },
                 { "rooms", n => { Rooms = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingConnectRoom>(global::Repull.SDK.Models.BookingConnectRoom.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.BookingConnectRoomsResponse_status>(); } },
@@ -90,6 +99,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingConnectListingOption>("listingOptions", ListingOptions);
+            writer.WriteCollectionOfEnumValues<global::Repull.SDK.Models.BookingConnectRoomsResponse_missingCapabilities>("missingCapabilities", MissingCapabilities);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingConnectRoom>("rooms", Rooms);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteEnumValue<global::Repull.SDK.Models.BookingConnectRoomsResponse_status>("status", Status);

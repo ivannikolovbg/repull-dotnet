@@ -34,13 +34,14 @@ namespace Repull.SDK.V1.Guests.Item
         {
         }
         /// <summary>
-        /// Returns the full guest profile — base list-row fields plus contacts, flags, notes, risk metadata, and reservation aggregates. Aggregates main vanio&apos;s `GuestService.getGuestProfile()` into the public Repull shape so SDK consumers don&apos;t have to learn the internal schema.
+        /// Returns the full guest profile — base list-row fields plus contacts, flags, notes, risk metadata, and reservation aggregates. Aggregates main vanio&apos;s `GuestService.getGuestProfile()` into the public Repull shape so SDK consumers don&apos;t have to learn the internal schema.**Inactive listings:** a guest whose every reservation is on an inactive listing returns `403 listing_inactive` naming those listings (the guest is kept, so this is not a 404). Otherwise the reservation aggregates exclude reservations on inactive listings. A guest with no reservations is always readable.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.GuestProfile"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -57,13 +58,14 @@ namespace Repull.SDK.V1.Guests.Item
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.GuestProfile>(requestInfo, global::Repull.SDK.Models.GuestProfile.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns the full guest profile — base list-row fields plus contacts, flags, notes, risk metadata, and reservation aggregates. Aggregates main vanio&apos;s `GuestService.getGuestProfile()` into the public Repull shape so SDK consumers don&apos;t have to learn the internal schema.
+        /// Returns the full guest profile — base list-row fields plus contacts, flags, notes, risk metadata, and reservation aggregates. Aggregates main vanio&apos;s `GuestService.getGuestProfile()` into the public Repull shape so SDK consumers don&apos;t have to learn the internal schema.**Inactive listings:** a guest whose every reservation is on an inactive listing returns `403 listing_inactive` naming those listings (the guest is kept, so this is not a 404). Otherwise the reservation aggregates exclude reservations on inactive listings. A guest with no reservations is always readable.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

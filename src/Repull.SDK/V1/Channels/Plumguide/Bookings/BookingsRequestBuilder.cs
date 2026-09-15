@@ -34,12 +34,13 @@ namespace Repull.SDK.V1.Channels.Plumguide.Bookings
         {
         }
         /// <summary>
-        /// List Plumguide bookings. Default returns all bookings; pass `listing_id` to filter to one listing, or `booking_code` to fetch a single booking.
+        /// List Plumguide bookings. Default returns all bookings; pass `listing_id` to filter to one listing, or `booking_code` to fetch a single booking.Returns `403 listing_inactive` when `listing_id` or `booking_code` resolves to an inactive listing. The unfiltered list is read straight from Plum Guide and is not filtered by listing status.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -55,13 +56,14 @@ namespace Repull.SDK.V1.Channels.Plumguide.Bookings
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Plumguide bookings. Default returns all bookings; pass `listing_id` to filter to one listing, or `booking_code` to fetch a single booking.
+        /// List Plumguide bookings. Default returns all bookings; pass `listing_id` to filter to one listing, or `booking_code` to fetch a single booking.Returns `403 listing_inactive` when `listing_id` or `booking_code` resolves to an inactive listing. The unfiltered list is read straight from Plum Guide and is not filtered by listing status.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -89,7 +91,7 @@ namespace Repull.SDK.V1.Channels.Plumguide.Bookings
             return new global::Repull.SDK.V1.Channels.Plumguide.Bookings.BookingsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// List Plumguide bookings. Default returns all bookings; pass `listing_id` to filter to one listing, or `booking_code` to fetch a single booking.
+        /// List Plumguide bookings. Default returns all bookings; pass `listing_id` to filter to one listing, or `booking_code` to fetch a single booking.Returns `403 listing_inactive` when `listing_id` or `booking_code` resolves to an inactive listing. The unfiltered list is read straight from Plum Guide and is not filtered by listing status.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class BookingsRequestBuilderGetQueryParameters 

@@ -119,7 +119,7 @@ namespace Repull.SDK.V1.Markets.Browse
             /// <summary>Minimum comp-set size — cities with fewer active comps are excluded.</summary>
             [QueryParameter("min_listings")]
             public int? MinListings { get; set; }
-            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
+            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.nextCursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
             [QueryParameter("offset")]
             public int? Offset { get; set; }
             /// <summary>Substring match on city name (case-insensitive).</summary>

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Usage.Logs
         {
         }
         /// <summary>
-        /// Cursor-paginated raw API request log for the authenticated workspace, newest first. Filter by time `range`, `operation` id(s), status class, or free-text `q`. Walk pages with `cursor` from `pagination.next_cursor` until `pagination.has_more` is `false`; `offset` is accepted as a shallow alias (deep walks must use `cursor`).
+        /// Cursor-paginated raw API request log for the authenticated workspace, newest first. Filter by time `range`, `operation` id(s), status class, or free-text `q`. Walk pages with `cursor` from `pagination.nextCursor` until `pagination.hasMore` is `false`; `offset` is accepted as a shallow alias (deep walks must use `cursor`).
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Usage.Logs.LogsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -61,7 +61,7 @@ namespace Repull.SDK.V1.Usage.Logs
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Usage.Logs.LogsGetResponse>(requestInfo, global::Repull.SDK.V1.Usage.Logs.LogsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated raw API request log for the authenticated workspace, newest first. Filter by time `range`, `operation` id(s), status class, or free-text `q`. Walk pages with `cursor` from `pagination.next_cursor` until `pagination.has_more` is `false`; `offset` is accepted as a shallow alias (deep walks must use `cursor`).
+        /// Cursor-paginated raw API request log for the authenticated workspace, newest first. Filter by time `range`, `operation` id(s), status class, or free-text `q`. Walk pages with `cursor` from `pagination.nextCursor` until `pagination.hasMore` is `false`; `offset` is accepted as a shallow alias (deep walks must use `cursor`).
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Usage.Logs.LogsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Usage.Logs
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Usage.Logs.LogsResponse>(requestInfo, global::Repull.SDK.V1.Usage.Logs.LogsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated raw API request log for the authenticated workspace, newest first. Filter by time `range`, `operation` id(s), status class, or free-text `q`. Walk pages with `cursor` from `pagination.next_cursor` until `pagination.has_more` is `false`; `offset` is accepted as a shallow alias (deep walks must use `cursor`).
+        /// Cursor-paginated raw API request log for the authenticated workspace, newest first. Filter by time `range`, `operation` id(s), status class, or free-text `q`. Walk pages with `cursor` from `pagination.nextCursor` until `pagination.hasMore` is `false`; `offset` is accepted as a shallow alias (deep walks must use `cursor`).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -117,12 +117,12 @@ namespace Repull.SDK.V1.Usage.Logs
             return new global::Repull.SDK.V1.Usage.Logs.LogsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated raw API request log for the authenticated workspace, newest first. Filter by time `range`, `operation` id(s), status class, or free-text `q`. Walk pages with `cursor` from `pagination.next_cursor` until `pagination.has_more` is `false`; `offset` is accepted as a shallow alias (deep walks must use `cursor`).
+        /// Cursor-paginated raw API request log for the authenticated workspace, newest first. Filter by time `range`, `operation` id(s), status class, or free-text `q`. Walk pages with `cursor` from `pagination.nextCursor` until `pagination.hasMore` is `false`; `offset` is accepted as a shallow alias (deep walks must use `cursor`).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class LogsRequestBuilderGetQueryParameters 
         {
-            /// <summary>Opaque cursor from the previous response&apos;s `pagination.next_cursor`.</summary>
+            /// <summary>Opaque cursor from the previous response&apos;s `pagination.nextCursor`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("cursor")]
@@ -138,7 +138,7 @@ namespace Repull.SDK.V1.Usage.Logs
             /// <summary>Page size (max 200).</summary>
             [QueryParameter("limit")]
             public int? Limit { get; set; }
-            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.next_cursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
+            /// <summary>First-class alias for cursor-based pagination. Mutually exclusive with `cursor` — passing both returns 422. Accepts integers in `[0, 10000]`; deeper walks must use `cursor` (constant per-page cost). The response always includes `pagination.nextCursor` so consumers can switch from offset → cursor mid-walk for deep pagination without re-keying.</summary>
             [QueryParameter("offset")]
             public int? Offset { get; set; }
             /// <summary>Comma-separated `operation_id` filter.</summary>

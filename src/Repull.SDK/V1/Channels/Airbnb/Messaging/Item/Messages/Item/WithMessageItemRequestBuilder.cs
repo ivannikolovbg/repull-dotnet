@@ -34,13 +34,14 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.Item
         {
         }
         /// <summary>
-        /// Act on a single message in an Airbnb thread. **Write-side** — calls Airbnb upstream. The `action` discriminator selects the operation:- `edit` — replace message text (requires `message`).- `unsend` — retract the message.- `read` — mark the message as read.- `react` — add a reaction (requires `reaction`).Requires a connected Airbnb host, else `404 no_connection`.
+        /// Act on a single message in an Airbnb thread. **Write-side** — calls Airbnb upstream. The `action` discriminator selects the operation:- `edit` — replace message text (requires `message`).- `unsend` — retract the message.- `read` — mark the message as read.- `react` — add a reaction (requires `reaction`).Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
@@ -58,6 +59,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
@@ -65,7 +67,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.Item
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Act on a single message in an Airbnb thread. **Write-side** — calls Airbnb upstream. The `action` discriminator selects the operation:- `edit` — replace message text (requires `message`).- `unsend` — retract the message.- `read` — mark the message as read.- `react` — add a reaction (requires `reaction`).Requires a connected Airbnb host, else `404 no_connection`.
+        /// Act on a single message in an Airbnb thread. **Write-side** — calls Airbnb upstream. The `action` discriminator selects the operation:- `edit` — replace message text (requires `message`).- `unsend` — retract the message.- `read` — mark the message as read.- `react` — add a reaction (requires `reaction`).Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

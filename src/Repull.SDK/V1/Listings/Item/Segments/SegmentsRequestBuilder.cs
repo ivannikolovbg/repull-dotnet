@@ -34,13 +34,14 @@ namespace Repull.SDK.V1.Listings.Item.Segments
         {
         }
         /// <summary>
-        /// Aggregates Atlas DNA segment signal (quality tier, design style, bedrooms) across the listing&apos;s geographic neighborhood (default: 5km radius) or the whole city, so consumers can answer:- What segments dominate my market?- Which segment does my listing match best?- What&apos;s the ADR uplift for moving up a tier?DNA coverage is still ramping — segments are scored asynchronously. Cities and radii without scored comps return `totalCompsAnalyzed: 0` plus a `low_dna_coverage` recommendation rather than fabricated data.
+        /// Aggregates Atlas DNA segment signal (quality tier, design style, bedrooms) across the listing&apos;s geographic neighborhood (default: 5km radius) or the whole city, so consumers can answer:- What segments dominate my market?- Which segment does my listing match best?- What&apos;s the ADR uplift for moving up a tier?DNA coverage is still ramping — segments are scored asynchronously. Cities and radii without scored comps return `totalCompsAnalyzed: 0` plus a `low_dna_coverage` recommendation rather than fabricated data.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingSegmentsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -57,13 +58,14 @@ namespace Repull.SDK.V1.Listings.Item.Segments
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingSegmentsResponse>(requestInfo, global::Repull.SDK.Models.ListingSegmentsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Aggregates Atlas DNA segment signal (quality tier, design style, bedrooms) across the listing&apos;s geographic neighborhood (default: 5km radius) or the whole city, so consumers can answer:- What segments dominate my market?- Which segment does my listing match best?- What&apos;s the ADR uplift for moving up a tier?DNA coverage is still ramping — segments are scored asynchronously. Cities and radii without scored comps return `totalCompsAnalyzed: 0` plus a `low_dna_coverage` recommendation rather than fabricated data.
+        /// Aggregates Atlas DNA segment signal (quality tier, design style, bedrooms) across the listing&apos;s geographic neighborhood (default: 5km radius) or the whole city, so consumers can answer:- What segments dominate my market?- Which segment does my listing match best?- What&apos;s the ADR uplift for moving up a tier?DNA coverage is still ramping — segments are scored asynchronously. Cities and radii without scored comps return `totalCompsAnalyzed: 0` plus a `low_dna_coverage` recommendation rather than fabricated data.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -91,7 +93,7 @@ namespace Repull.SDK.V1.Listings.Item.Segments
             return new global::Repull.SDK.V1.Listings.Item.Segments.SegmentsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Aggregates Atlas DNA segment signal (quality tier, design style, bedrooms) across the listing&apos;s geographic neighborhood (default: 5km radius) or the whole city, so consumers can answer:- What segments dominate my market?- Which segment does my listing match best?- What&apos;s the ADR uplift for moving up a tier?DNA coverage is still ramping — segments are scored asynchronously. Cities and radii without scored comps return `totalCompsAnalyzed: 0` plus a `low_dna_coverage` recommendation rather than fabricated data.
+        /// Aggregates Atlas DNA segment signal (quality tier, design style, bedrooms) across the listing&apos;s geographic neighborhood (default: 5km radius) or the whole city, so consumers can answer:- What segments dominate my market?- Which segment does my listing match best?- What&apos;s the ADR uplift for moving up a tier?DNA coverage is still ramping — segments are scored asynchronously. Cities and radii without scored comps return `totalCompsAnalyzed: 0` plus a `low_dna_coverage` recommendation rather than fabricated data.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class SegmentsRequestBuilderGetQueryParameters 

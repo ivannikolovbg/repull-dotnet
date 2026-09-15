@@ -8,14 +8,16 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A single room→listing assignment. Pass `listingId: null` to explicitly UNMAP a room (e.g. &quot;skip this room for now&quot;) — this also removes the corresponding `listing_platform_links` row.
+    /// A single room→listing assignment. Pass `listingId: null` to explicitly UNMAP a room (e.g. &quot;skip this room for now&quot;) — this also removes the corresponding `listing_platform_links` row. Pass `create: true` instead of a `listingId` to have a listing created for the room, which is what a customer onboarding from Booking.com first needs, since they have no listings to map to yet.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingRoomMapping : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Repull listing to bind to this room. `null` to unmap.</summary>
+        /// <summary>Create a new listing for this room and map it, instead of binding an existing one. Mutually exclusive with `listingId` — sending both is rejected with 400 rather than silently resolved. Idempotent: a room that is already mapped keeps its existing listing and no duplicate is created.</summary>
+        public bool? Create { get; set; }
+        /// <summary>Repull listing to bind to this room. `null` to unmap. Omit when `create` is true.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ListingId { get; set; }
@@ -56,6 +58,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "create", n => { Create = n.GetBoolValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "roomId", n => { RoomId = n.GetStringValue(); } },
             };
@@ -67,6 +70,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("create", Create);
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteStringValue("roomId", RoomId);
             writer.WriteAdditionalData(AdditionalData);

@@ -63,6 +63,14 @@ namespace Repull.SDK.Models
 #else
         public string HotelType { get; set; }
 #endif
+        /// <summary>Capabilities Booking.com explicitly refused for this property (HTTP 401/403), usually empty. `content` means the connection is live and syncs reservations, rates and messages normally, but the Content API was never granted, so the property name, rooms and photos cannot be read from Booking.com and are substituted. A capability whose probe failed for any other reason is omitted rather than listed here.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities?>? MissingCapabilities { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities?> MissingCapabilities { get; set; }
+#endif
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -104,6 +112,7 @@ namespace Repull.SDK.Models
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "hotelName", n => { HotelName = n.GetStringValue(); } },
                 { "hotelType", n => { HotelType = n.GetStringValue(); } },
+                { "missingCapabilities", n => { MissingCapabilities = n.GetCollectionOfEnumValues<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities>()?.AsList(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "valid", n => { Valid = n.GetBoolValue(); } },
             };
@@ -121,6 +130,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteStringValue("hotelName", HotelName);
             writer.WriteStringValue("hotelType", HotelType);
+            writer.WriteCollectionOfEnumValues<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities>("missingCapabilities", MissingCapabilities);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteBoolValue("valid", Valid);
             writer.WriteAdditionalData(AdditionalData);

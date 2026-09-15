@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Connect.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithProviderItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/connect/{provider}", pathParameters)
+        public WithProviderItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/connect/{provider}{?accountId*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,33 +30,67 @@ namespace Repull.SDK.V1.Connect.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithProviderItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/connect/{provider}", rawUrl)
+        public WithProviderItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/connect/{provider}{?accountId*}", rawUrl)
         {
         }
         /// <summary>
-        /// Disconnect a PMS or OTA from this workspace.Currently supported for `booking` only: drops the stored connection and stops syncing the mapped rooms. Resources already synced remain queryable but become read-only and stop receiving updates.Every other provider returns `501 not_implemented` with instructions for disconnecting on the provider&apos;s side — Airbnb in particular has to be revoked by the host (Account → Privacy &amp; sharing → Connected apps), because the OAuth grant lives outside this service. The endpoint used to report `200 { disconnected: true }` for every provider while doing nothing; it now tells you the truth.
+        /// Disconnect ONE connected account of a provider from this workspace. Supported for `airbnb` and `booking`.**Which account.** Pass `accountId` — for Airbnb the host id (`accounts[].externalAccountId` from `GET /v1/connect/airbnb`), for Booking.com the hotel id. It is optional only when the workspace has exactly one account for the provider. With several and no `accountId`, the call returns `422` with the account ids in `valid_values` instead of guessing. An `accountId` that is not connected to this workspace returns `404`. Disconnecting one account leaves the others connected.**What happens.** The account&apos;s stored authorization is removed and it stops syncing. Its listings are **deactivated**, not deleted: they stop counting toward your plan&apos;s listing limit, their data is kept, and they are returned in `listingsDeactivated`. A listing that is still connected through another account or channel stays active. Reconnect the account, then activate the listings with `POST /v1/listings/status`.The change is all or nothing. For Airbnb, the host can also revoke access on Airbnb&apos;s side (Account → Privacy &amp; sharing → Connected apps); that alone does not update this workspace, so call this endpoint as well.Other providers return `501 not_implemented` with instructions for disconnecting on the provider&apos;s side.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Connect.Item.WithProviderDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 501 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Connect.Item.WithProviderDeleteResponse?> DeleteAsWithProviderDeleteResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder.WithProviderItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Connect.Item.WithProviderDeleteResponse> DeleteAsWithProviderDeleteResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder.WithProviderItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "501", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connect.Item.WithProviderDeleteResponse>(requestInfo, global::Repull.SDK.V1.Connect.Item.WithProviderDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Disconnect ONE connected account of a provider from this workspace. Supported for `airbnb` and `booking`.**Which account.** Pass `accountId` — for Airbnb the host id (`accounts[].externalAccountId` from `GET /v1/connect/airbnb`), for Booking.com the hotel id. It is optional only when the workspace has exactly one account for the provider. With several and no `accountId`, the call returns `422` with the account ids in `valid_values` instead of guessing. An `accountId` that is not connected to this workspace returns `404`. Disconnecting one account leaves the others connected.**What happens.** The account&apos;s stored authorization is removed and it stops syncing. Its listings are **deactivated**, not deleted: they stop counting toward your plan&apos;s listing limit, their data is kept, and they are returned in `listingsDeactivated`. A listing that is still connected through another account or channel stays active. Reconnect the account, then activate the listings with `POST /v1/listings/status`.The change is all or nothing. For Airbnb, the host can also revoke access on Airbnb&apos;s side (Account → Privacy &amp; sharing → Connected apps); that alone does not update this workspace, so call this endpoint as well.Other providers return `501 not_implemented` with instructions for disconnecting on the provider&apos;s side.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Connect.Item.WithProviderResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 501 status code</exception>
+        [Obsolete("This method is obsolete. Use DeleteAsWithProviderDeleteResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Connect.Item.WithProviderResponse?> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder.WithProviderItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Connect.Item.WithProviderResponse> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder.WithProviderItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "501", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connect.Item.WithProviderResponse>(requestInfo, global::Repull.SDK.V1.Connect.Item.WithProviderResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Returns the current connection status for a provider, including host metadata (display name + avatar) for Airbnb so clients can render an account-level confirmation UI.
@@ -97,17 +131,17 @@ namespace Repull.SDK.V1.Connect.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Connection>(requestInfo, global::Repull.SDK.Models.Connection.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Disconnect a PMS or OTA from this workspace.Currently supported for `booking` only: drops the stored connection and stops syncing the mapped rooms. Resources already synced remain queryable but become read-only and stop receiving updates.Every other provider returns `501 not_implemented` with instructions for disconnecting on the provider&apos;s side — Airbnb in particular has to be revoked by the host (Account → Privacy &amp; sharing → Connected apps), because the OAuth grant lives outside this service. The endpoint used to report `200 { disconnected: true }` for every provider while doing nothing; it now tells you the truth.
+        /// Disconnect ONE connected account of a provider from this workspace. Supported for `airbnb` and `booking`.**Which account.** Pass `accountId` — for Airbnb the host id (`accounts[].externalAccountId` from `GET /v1/connect/airbnb`), for Booking.com the hotel id. It is optional only when the workspace has exactly one account for the provider. With several and no `accountId`, the call returns `422` with the account ids in `valid_values` instead of guessing. An `accountId` that is not connected to this workspace returns `404`. Disconnecting one account leaves the others connected.**What happens.** The account&apos;s stored authorization is removed and it stops syncing. Its listings are **deactivated**, not deleted: they stop counting toward your plan&apos;s listing limit, their data is kept, and they are returned in `listingsDeactivated`. A listing that is still connected through another account or channel stays active. Reconnect the account, then activate the listings with `POST /v1/listings/status`.The change is all or nothing. For Airbnb, the host can also revoke access on Airbnb&apos;s side (Account → Privacy &amp; sharing → Connected apps); that alone does not update this workspace, so call this endpoint as well.Other providers return `501 not_implemented` with instructions for disconnecting on the provider&apos;s side.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder.WithProviderItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder.WithProviderItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
@@ -166,11 +200,28 @@ namespace Repull.SDK.V1.Connect.Item
             return new global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// Disconnect ONE connected account of a provider from this workspace. Supported for `airbnb` and `booking`.**Which account.** Pass `accountId` — for Airbnb the host id (`accounts[].externalAccountId` from `GET /v1/connect/airbnb`), for Booking.com the hotel id. It is optional only when the workspace has exactly one account for the provider. With several and no `accountId`, the call returns `422` with the account ids in `valid_values` instead of guessing. An `accountId` that is not connected to this workspace returns `404`. Disconnecting one account leaves the others connected.**What happens.** The account&apos;s stored authorization is removed and it stops syncing. Its listings are **deactivated**, not deleted: they stop counting toward your plan&apos;s listing limit, their data is kept, and they are returned in `listingsDeactivated`. A listing that is still connected through another account or channel stays active. Reconnect the account, then activate the listings with `POST /v1/listings/status`.The change is all or nothing. For Airbnb, the host can also revoke access on Airbnb&apos;s side (Account → Privacy &amp; sharing → Connected apps); that alone does not update this workspace, so call this endpoint as well.Other providers return `501 not_implemented` with instructions for disconnecting on the provider&apos;s side.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class WithProviderItemRequestBuilderDeleteQueryParameters 
+        {
+            /// <summary>The account to disconnect: the Airbnb host id (`accounts[].externalAccountId` on `GET /v1/connect/airbnb`) or the Booking.com hotel id. Required when the workspace has more than one connected account for the provider. Not the same as the `X-Account-Id` header.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("accountId")]
+            public string? AccountId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("accountId")]
+            public string AccountId { get; set; }
+#endif
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class WithProviderItemRequestBuilderDeleteRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class WithProviderItemRequestBuilderDeleteRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder.WithProviderItemRequestBuilderDeleteQueryParameters>
         {
         }
         /// <summary>

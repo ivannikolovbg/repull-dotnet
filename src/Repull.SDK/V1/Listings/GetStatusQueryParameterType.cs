@@ -20,5 +20,9 @@ namespace Repull.SDK.V1.Listings
         #pragma warning disable CS1591
         Archived,
         #pragma warning restore CS1591
+        [EnumMember(Value = "all")]
+        #pragma warning disable CS1591
+        All,
+        #pragma warning restore CS1591
     }
 }

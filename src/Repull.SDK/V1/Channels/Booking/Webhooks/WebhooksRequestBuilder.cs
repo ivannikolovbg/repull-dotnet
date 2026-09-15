@@ -34,15 +34,14 @@ namespace Repull.SDK.V1.Channels.Booking.Webhooks
         {
         }
         /// <summary>
-        /// Remove a Booking.com CNS subscription. Pass the `notification_type` to unsubscribe as a query param — required.
+        /// **Not available through the API — always returns `403 forbidden`.** Booking.com notification subscriptions belong to the Repull platform account that every workspace shares: they are per notification type, not per property, so reading or changing them would affect every workspace. Booking.com events for your own properties are delivered through Repull webhooks — subscribe with `POST /v1/webhooks`.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<Stream?> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksRequestBuilder.WebhooksRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -55,22 +54,20 @@ namespace Repull.SDK.V1.Channels.Booking.Webhooks
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List the workspace&apos;s Booking.com Content Notification Service (CNS) subscriptions — the notification types Booking pushes to your callback URLs.
+        /// **Not available through the API — always returns `403 forbidden`.** Booking.com notification subscriptions belong to the Repull platform account that every workspace shares: they are per notification type, not per property, so reading or changing them would affect every workspace. Booking.com events for your own properties are delivered through Repull webhooks — subscribe with `POST /v1/webhooks`.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<Stream?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -84,46 +81,44 @@ namespace Repull.SDK.V1.Channels.Booking.Webhooks
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Subscribe to a Booking.com CNS notification type, delivered to `callback_url`. Returns 201 on success.
+        /// **Not available through the API — always returns `403 forbidden`.** Booking.com notification subscriptions belong to the Repull platform account that every workspace shares: they are per notification type, not per property, so reading or changing them would affect every workspace. Booking.com events for your own properties are delivered through Repull webhooks — subscribe with `POST /v1/webhooks`.
         /// </summary>
+        /// <returns>A <see cref="Stream"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task PostAsync(global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> PostAsync(global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task PostAsync(global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> PostAsync(global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Remove a Booking.com CNS subscription. Pass the `notification_type` to unsubscribe as a query param — required.
+        /// **Not available through the API — always returns `403 forbidden`.** Booking.com notification subscriptions belong to the Repull platform account that every workspace shares: they are per notification type, not per property, so reading or changing them would affect every workspace. Booking.com events for your own properties are delivered through Repull webhooks — subscribe with `POST /v1/webhooks`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksRequestBuilder.WebhooksRequestBuilderDeleteQueryParameters>>? requestConfiguration = default)
@@ -139,10 +134,11 @@ namespace Repull.SDK.V1.Channels.Booking.Webhooks
             return requestInfo;
         }
         /// <summary>
-        /// List the workspace&apos;s Booking.com Content Notification Service (CNS) subscriptions — the notification types Booking pushes to your callback URLs.
+        /// **Not available through the API — always returns `403 forbidden`.** Booking.com notification subscriptions belong to the Repull platform account that every workspace shares: they are per notification type, not per property, so reading or changing them would affect every workspace. Booking.com events for your own properties are delivered through Repull webhooks — subscribe with `POST /v1/webhooks`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
@@ -158,11 +154,12 @@ namespace Repull.SDK.V1.Channels.Booking.Webhooks
             return requestInfo;
         }
         /// <summary>
-        /// Subscribe to a Booking.com CNS notification type, delivered to `callback_url`. Returns 201 on success.
+        /// **Not available through the API — always returns `403 forbidden`.** Booking.com notification subscriptions belong to the Repull platform account that every workspace shares: they are per notification type, not per property, so reading or changing them would affect every workspace. Booking.com events for your own properties are delivered through Repull webhooks — subscribe with `POST /v1/webhooks`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
@@ -184,12 +181,13 @@ namespace Repull.SDK.V1.Channels.Booking.Webhooks
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksRequestBuilder"/></returns>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
+        [Obsolete("")]
         public global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Remove a Booking.com CNS subscription. Pass the `notification_type` to unsubscribe as a query param — required.
+        /// **Not available through the API — always returns `403 forbidden`.** Booking.com notification subscriptions belong to the Repull platform account that every workspace shares: they are per notification type, not per property, so reading or changing them would affect every workspace. Booking.com events for your own properties are delivered through Repull webhooks — subscribe with `POST /v1/webhooks`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WebhooksRequestBuilderDeleteQueryParameters 

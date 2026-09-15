@@ -34,13 +34,14 @@ namespace Repull.SDK.V1.Channels.Booking.Reservations
         {
         }
         /// <summary>
-        /// Pull reservations from Booking.com. `type=new` (default) returns un-acknowledged bookings; `type=modified` returns changed bookings. Pass both `reservation_id` and `hotel_id` to fetch a single reservation&apos;s full details. Acknowledge processed reservations with the POST so Booking stops re-serving them in the `new` queue.
+        /// Pull reservations from Booking.com. `type=new` (default) returns un-acknowledged bookings; `type=modified` returns changed bookings. Pass both `reservation_id` and `hotel_id` to fetch a single reservation&apos;s full details. Acknowledge processed reservations with the POST so Booking stops re-serving them in the `new` queue.Scoped to this workspace. `hotel_id` (or its alias `property_id`) must be a property connected to this workspace; any other id returns `404 not_found`, the same as an id that does not exist. Without a hotel, `new`/`modified` cover every Booking.com property this workspace holds (and return `404 not_found` if it holds none). A `reservation_id` that belongs to another workspace returns `404 not_found`.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.BookingReservation"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -57,13 +58,14 @@ namespace Repull.SDK.V1.Channels.Booking.Reservations
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingReservation>(requestInfo, global::Repull.SDK.Models.BookingReservation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Acknowledge one or more reservations so Booking.com removes them from the `new` queue. The body carries `reservation_ids` (non-empty array). Acknowledge only after you have durably persisted each reservation.
+        /// Acknowledge one or more reservations so Booking.com removes them from the `new` queue. The body carries `reservation_ids` (non-empty array). Acknowledge only after you have durably persisted each reservation.Only reservations that belong to this workspace can be acknowledged. If any id in `reservation_ids` is not one of this workspace&apos;s Booking.com reservations (`confirmationCode` on `GET /v1/reservations?platform=booking`), nothing is acknowledged and the response is `404 not_found` naming those ids in `reservation_ids`.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="body">The request body</param>
@@ -94,7 +96,7 @@ namespace Repull.SDK.V1.Channels.Booking.Reservations
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Pull reservations from Booking.com. `type=new` (default) returns un-acknowledged bookings; `type=modified` returns changed bookings. Pass both `reservation_id` and `hotel_id` to fetch a single reservation&apos;s full details. Acknowledge processed reservations with the POST so Booking stops re-serving them in the `new` queue.
+        /// Pull reservations from Booking.com. `type=new` (default) returns un-acknowledged bookings; `type=modified` returns changed bookings. Pass both `reservation_id` and `hotel_id` to fetch a single reservation&apos;s full details. Acknowledge processed reservations with the POST so Booking stops re-serving them in the `new` queue.Scoped to this workspace. `hotel_id` (or its alias `property_id`) must be a property connected to this workspace; any other id returns `404 not_found`, the same as an id that does not exist. Without a hotel, `new`/`modified` cover every Booking.com property this workspace holds (and return `404 not_found` if it holds none). A `reservation_id` that belongs to another workspace returns `404 not_found`.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -113,7 +115,7 @@ namespace Repull.SDK.V1.Channels.Booking.Reservations
             return requestInfo;
         }
         /// <summary>
-        /// Acknowledge one or more reservations so Booking.com removes them from the `new` queue. The body carries `reservation_ids` (non-empty array). Acknowledge only after you have durably persisted each reservation.
+        /// Acknowledge one or more reservations so Booking.com removes them from the `new` queue. The body carries `reservation_ids` (non-empty array). Acknowledge only after you have durably persisted each reservation.Only reservations that belong to this workspace can be acknowledged. If any id in `reservation_ids` is not one of this workspace&apos;s Booking.com reservations (`confirmationCode` on `GET /v1/reservations?platform=booking`), nothing is acknowledged and the response is `404 not_found` naming those ids in `reservation_ids`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -144,7 +146,7 @@ namespace Repull.SDK.V1.Channels.Booking.Reservations
             return new global::Repull.SDK.V1.Channels.Booking.Reservations.ReservationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Pull reservations from Booking.com. `type=new` (default) returns un-acknowledged bookings; `type=modified` returns changed bookings. Pass both `reservation_id` and `hotel_id` to fetch a single reservation&apos;s full details. Acknowledge processed reservations with the POST so Booking stops re-serving them in the `new` queue.
+        /// Pull reservations from Booking.com. `type=new` (default) returns un-acknowledged bookings; `type=modified` returns changed bookings. Pass both `reservation_id` and `hotel_id` to fetch a single reservation&apos;s full details. Acknowledge processed reservations with the POST so Booking stops re-serving them in the `new` queue.Scoped to this workspace. `hotel_id` (or its alias `property_id`) must be a property connected to this workspace; any other id returns `404 not_found`, the same as an id that does not exist. Without a hotel, `new`/`modified` cover every Booking.com property this workspace holds (and return `404 not_found` if it holds none). A `reservation_id` that belongs to another workspace returns `404 not_found`.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ReservationsRequestBuilderGetQueryParameters 

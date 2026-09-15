@@ -34,13 +34,14 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
         {
         }
         /// <summary>
-        /// Action-router for onboarding a property onto Booking.com. Select the step with `action`:- `create-legal-entity` — register the legal entity (returns 201).- `check-legal-status` — poll legal-entity status by `leid`.- `check-readiness` — check whether a property is ready to open (`property_id`).- `open-property` — open the property for sale (`property_id`).- `set-contacts` — set property contacts (`property_id`, `contacts`).- `set-policies` — set property policies (`property_id`, plus policy fields).Missing required fields per action return a validation error; upstream failures surface as `booking_error`.
+        /// Action-router for onboarding a property onto Booking.com. Select the step with `action`:- `create-legal-entity` — register the legal entity (returns 201).- `check-legal-status` — poll legal-entity status by `leid`.- `check-readiness` — check whether a property is ready to open (`property_id`).- `open-property` — open the property for sale (`property_id`).- `set-contacts` — set property contacts (`property_id`, `contacts`).- `set-policies` — set property policies (`property_id`, plus policy fields).Missing required fields per action return a validation error; upstream failures surface as `booking_error`.Every action that takes a `property_id` requires a property connected to this workspace; any other id returns `404 not_found`.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -58,13 +59,14 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Action-router for onboarding a property onto Booking.com. Select the step with `action`:- `create-legal-entity` — register the legal entity (returns 201).- `check-legal-status` — poll legal-entity status by `leid`.- `check-readiness` — check whether a property is ready to open (`property_id`).- `open-property` — open the property for sale (`property_id`).- `set-contacts` — set property contacts (`property_id`, `contacts`).- `set-policies` — set property policies (`property_id`, plus policy fields).Missing required fields per action return a validation error; upstream failures surface as `booking_error`.
+        /// Action-router for onboarding a property onto Booking.com. Select the step with `action`:- `create-legal-entity` — register the legal entity (returns 201).- `check-legal-status` — poll legal-entity status by `leid`.- `check-readiness` — check whether a property is ready to open (`property_id`).- `open-property` — open the property for sale (`property_id`).- `set-contacts` — set property contacts (`property_id`, `contacts`).- `set-policies` — set property policies (`property_id`, plus policy fields).Missing required fields per action return a validation error; upstream failures surface as `booking_error`.Every action that takes a `property_id` requires a property connected to this workspace; any other id returns `404 not_found`.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

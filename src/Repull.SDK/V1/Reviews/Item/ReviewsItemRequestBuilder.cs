@@ -40,13 +40,14 @@ namespace Repull.SDK.V1.Reviews.Item
         {
         }
         /// <summary>
-        /// Returns one review (the bare `Review` object — NOT wrapped in `{ data: ... }`). Scoped to the authenticated workspace via the listings join — reviews that don&apos;t belong to the workspace return 404 (we don&apos;t differentiate to avoid leaking other customers&apos; ids).
+        /// Returns one review (the bare `Review` object — NOT wrapped in `{ data: ... }`). Scoped to the authenticated workspace via the listings join — reviews that don&apos;t belong to the workspace return 404 (we don&apos;t differentiate to avoid leaking other customers&apos; ids).A review of an inactive listing returns `403 listing_inactive`. Inactive listings keep syncing; activate the listing to use it here.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.Review"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -63,13 +64,14 @@ namespace Repull.SDK.V1.Reviews.Item
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.Review>(requestInfo, global::Repull.SDK.Models.Review.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns one review (the bare `Review` object — NOT wrapped in `{ data: ... }`). Scoped to the authenticated workspace via the listings join — reviews that don&apos;t belong to the workspace return 404 (we don&apos;t differentiate to avoid leaking other customers&apos; ids).
+        /// Returns one review (the bare `Review` object — NOT wrapped in `{ data: ... }`). Scoped to the authenticated workspace via the listings join — reviews that don&apos;t belong to the workspace return 404 (we don&apos;t differentiate to avoid leaking other customers&apos; ids).A review of an inactive listing returns `403 listing_inactive`. Inactive listings keep syncing; activate the listing to use it here.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

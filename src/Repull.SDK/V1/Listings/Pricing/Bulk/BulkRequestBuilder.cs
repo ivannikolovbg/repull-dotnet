@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Listings.Pricing.Bulk
         {
         }
         /// <summary>
-        /// Apply or decline pending Atlas pricing recommendations across many listings in one call. Built for power users with hundreds of listings who would otherwise need 500 sequential single-listing POSTs.- `items` is capped at 500 entries per request — exceeding returns 422.- Per-item failures (stale listing IDs, no pending recs, channel auth blips) DO NOT fail the whole batch — partial success is the norm at this scale and the granular `failed[]` array lets the SDK retry just the bad entries.- Tier-limit accounting: this endpoint counts as **1 API call** regardless of how many items the body contains.Apply path writes the recommended price to each listing&apos;s calendar via the calendar service (which fans out to Airbnb/Booking/VRBO) then marks the Atlas recommendation `applied`. Decline path is Atlas-only — fast.
+        /// Apply or decline pending Atlas pricing recommendations across many listings in one call. Built for power users with hundreds of listings who would otherwise need 500 sequential single-listing POSTs.- `items` is capped at 500 entries per request — exceeding returns 422.- Per-item failures (stale listing IDs, no pending recs, channel auth blips) DO NOT fail the whole batch — partial success is the norm at this scale and the granular `failed[]` array lets the SDK retry just the bad entries.- Tier-limit accounting: this endpoint counts as **1 API call** regardless of how many items the body contains.Apply path writes the recommended price to each listing&apos;s calendar via the calendar service (which fans out to Airbnb/Booking/VRBO) then marks the Atlas recommendation `applied`. Decline path is Atlas-only — fast.Returns `403 listing_inactive` naming every inactive listing when any listing in the request is inactive; nothing is written.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.BulkPricingResponse"/></returns>
         /// <param name="body">Body for `POST /v1/listings/pricing/bulk`. Apply or decline pending Atlas pricing recommendations across many listings in one call. Capped at 500 items per request — exceeding returns 422.</param>
@@ -42,6 +42,7 @@ namespace Repull.SDK.V1.Listings.Pricing.Bulk
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -59,13 +60,14 @@ namespace Repull.SDK.V1.Listings.Pricing.Bulk
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BulkPricingResponse>(requestInfo, global::Repull.SDK.Models.BulkPricingResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Apply or decline pending Atlas pricing recommendations across many listings in one call. Built for power users with hundreds of listings who would otherwise need 500 sequential single-listing POSTs.- `items` is capped at 500 entries per request — exceeding returns 422.- Per-item failures (stale listing IDs, no pending recs, channel auth blips) DO NOT fail the whole batch — partial success is the norm at this scale and the granular `failed[]` array lets the SDK retry just the bad entries.- Tier-limit accounting: this endpoint counts as **1 API call** regardless of how many items the body contains.Apply path writes the recommended price to each listing&apos;s calendar via the calendar service (which fans out to Airbnb/Booking/VRBO) then marks the Atlas recommendation `applied`. Decline path is Atlas-only — fast.
+        /// Apply or decline pending Atlas pricing recommendations across many listings in one call. Built for power users with hundreds of listings who would otherwise need 500 sequential single-listing POSTs.- `items` is capped at 500 entries per request — exceeding returns 422.- Per-item failures (stale listing IDs, no pending recs, channel auth blips) DO NOT fail the whole batch — partial success is the norm at this scale and the granular `failed[]` array lets the SDK retry just the bad entries.- Tier-limit accounting: this endpoint counts as **1 API call** regardless of how many items the body contains.Apply path writes the recommended price to each listing&apos;s calendar via the calendar service (which fans out to Airbnb/Booking/VRBO) then marks the Atlas recommendation `applied`. Decline path is Atlas-only — fast.Returns `403 listing_inactive` naming every inactive listing when any listing in the request is inactive; nothing is written.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Body for `POST /v1/listings/pricing/bulk`. Apply or decline pending Atlas pricing recommendations across many listings in one call. Capped at 500 items per request — exceeding returns 422.</param>

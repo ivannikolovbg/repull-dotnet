@@ -34,13 +34,14 @@ namespace Repull.SDK.V1.Channels.Booking.Charges
         {
         }
         /// <summary>
-        /// Fetch the extra-charge set (cleaning fee, resort fee, city tax, etc.) configured for a Booking.com property. Pass the Booking.com `property_id` as a query param — required.
+        /// Fetch the extra-charge set (cleaning fee, resort fee, city tax, etc.) configured for a Booking.com property. Pass the Booking.com `property_id` as a query param — required.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -57,13 +58,14 @@ namespace Repull.SDK.V1.Channels.Booking.Charges
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Replace the extra-charge set for a Booking.com property. The body carries the target `property_id` and the full `charges` array — Booking treats the write as a full replacement, so include every charge you want to keep.
+        /// Replace the extra-charge set for a Booking.com property. The body carries the target `property_id` and the full `charges` array — Booking treats the write as a full replacement, so include every charge you want to keep.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="body">The request body</param>
@@ -71,6 +73,7 @@ namespace Repull.SDK.V1.Channels.Booking.Charges
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -88,13 +91,14 @@ namespace Repull.SDK.V1.Channels.Booking.Charges
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch the extra-charge set (cleaning fee, resort fee, city tax, etc.) configured for a Booking.com property. Pass the Booking.com `property_id` as a query param — required.
+        /// Fetch the extra-charge set (cleaning fee, resort fee, city tax, etc.) configured for a Booking.com property. Pass the Booking.com `property_id` as a query param — required.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -113,7 +117,7 @@ namespace Repull.SDK.V1.Channels.Booking.Charges
             return requestInfo;
         }
         /// <summary>
-        /// Replace the extra-charge set for a Booking.com property. The body carries the target `property_id` and the full `charges` array — Booking treats the write as a full replacement, so include every charge you want to keep.
+        /// Replace the extra-charge set for a Booking.com property. The body carries the target `property_id` and the full `charges` array — Booking treats the write as a full replacement, so include every charge you want to keep.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -144,7 +148,7 @@ namespace Repull.SDK.V1.Channels.Booking.Charges
             return new global::Repull.SDK.V1.Channels.Booking.Charges.ChargesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Fetch the extra-charge set (cleaning fee, resort fee, city tax, etc.) configured for a Booking.com property. Pass the Booking.com `property_id` as a query param — required.
+        /// Fetch the extra-charge set (cleaning fee, resort fee, city tax, etc.) configured for a Booking.com property. Pass the Booking.com `property_id` as a query param — required.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ChargesRequestBuilderGetQueryParameters 

@@ -34,12 +34,13 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.Strategy
         {
         }
         /// <summary>
-        /// Returns the strategy that constrains how the Atlas pricing model behaves for this listing. If no strategy row exists yet, returns sane defaults flagged with `isDefault: true`.
+        /// Returns the strategy that constrains how the Atlas pricing model behaves for this listing. If no strategy row exists yet, returns sane defaults flagged with `isDefault: true`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingPricingStrategy"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.ListingPricingStrategy?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -53,16 +54,18 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.Strategy
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPricingStrategy>(requestInfo, global::Repull.SDK.Models.ListingPricingStrategy.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Upserts the strategy on `(listing_id, customer_id)` — repeated PUTs are idempotent. Send only the fields you want to change; omitted fields take server-side defaults.
+        /// Upserts the strategy on `(listing_id, customer_id)` — repeated PUTs are idempotent. Send only the fields you want to change; omitted fields take server-side defaults.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyPutResponse"/></returns>
         /// <param name="body">Same shape as `ListingPricingStrategy` minus the read-only fields. Send only fields you want to change.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyPutResponse?> PutAsStrategyPutResponseAsync(global::Repull.SDK.Models.ListingPricingStrategyInput body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -74,15 +77,20 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.Strategy
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyPutResponse>(requestInfo, global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyPutResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyPutResponse>(requestInfo, global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyPutResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Upserts the strategy on `(listing_id, customer_id)` — repeated PUTs are idempotent. Send only the fields you want to change; omitted fields take server-side defaults.
+        /// Upserts the strategy on `(listing_id, customer_id)` — repeated PUTs are idempotent. Send only the fields you want to change; omitted fields take server-side defaults.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyResponse"/></returns>
         /// <param name="body">Same shape as `ListingPricingStrategy` minus the read-only fields. Send only fields you want to change.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         [Obsolete("This method is obsolete. Use PutAsStrategyPutResponseAsync instead.")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -95,10 +103,14 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.Strategy
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyResponse>(requestInfo, global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyResponse>(requestInfo, global::Repull.SDK.V1.Listings.Item.Pricing.Strategy.StrategyResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns the strategy that constrains how the Atlas pricing model behaves for this listing. If no strategy row exists yet, returns sane defaults flagged with `isDefault: true`.
+        /// Returns the strategy that constrains how the Atlas pricing model behaves for this listing. If no strategy row exists yet, returns sane defaults flagged with `isDefault: true`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -117,7 +129,7 @@ namespace Repull.SDK.V1.Listings.Item.Pricing.Strategy
             return requestInfo;
         }
         /// <summary>
-        /// Upserts the strategy on `(listing_id, customer_id)` — repeated PUTs are idempotent. Send only the fields you want to change; omitted fields take server-side defaults.
+        /// Upserts the strategy on `(listing_id, customer_id)` — repeated PUTs are idempotent. Send only the fields you want to change; omitted fields take server-side defaults.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Same shape as `ListingPricingStrategy` minus the read-only fields. Send only fields you want to change.</param>

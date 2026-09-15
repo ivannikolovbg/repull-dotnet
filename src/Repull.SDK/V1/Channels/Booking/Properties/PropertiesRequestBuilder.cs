@@ -60,7 +60,7 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
         {
         }
         /// <summary>
-        /// List Booking.com hotels claimed by this workspace. Each row includes the Booking-side hotel id and the connected room types.
+        /// List Booking.com hotels claimed by this workspace. Each row includes the Booking-side hotel id and the connected room types.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
         /// </summary>
         /// <returns>A List&lt;global::Repull.SDK.Models.BookingProperty&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -79,7 +79,7 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// List Booking.com hotels claimed by this workspace. Each row includes the Booking-side hotel id and the connected room types.
+        /// List Booking.com hotels claimed by this workspace. Each row includes the Booking-side hotel id and the connected room types.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

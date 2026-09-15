@@ -40,12 +40,13 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item
         {
         }
         /// <summary>
-        /// Fetch a single Airbnb message thread by its Airbnb thread id. **Pure DB read** from the local `message_threads` mirror, workspace-scoped. Returns `404 not_found` when no thread matches. For the messages within a thread use `GET /v1/channels/airbnb/messaging/{threadId}/messages`.
+        /// Fetch a single Airbnb message thread by its Airbnb thread id. **Pure DB read** from the local `message_threads` mirror, workspace-scoped. Returns `404 not_found` when no thread matches. For the messages within a thread use `GET /v1/channels/airbnb/messaging/{threadId}/messages`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.WithThreadGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -61,18 +62,20 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.WithThreadGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.WithThreadGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a single Airbnb message thread by its Airbnb thread id. **Pure DB read** from the local `message_threads` mirror, workspace-scoped. Returns `404 not_found` when no thread matches. For the messages within a thread use `GET /v1/channels/airbnb/messaging/{threadId}/messages`.
+        /// Fetch a single Airbnb message thread by its Airbnb thread id. **Pure DB read** from the local `message_threads` mirror, workspace-scoped. Returns `404 not_found` when no thread matches. For the messages within a thread use `GET /v1/channels/airbnb/messaging/{threadId}/messages`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.WithThreadResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
         [Obsolete("This method is obsolete. Use GetAsWithThreadGetResponseAsync instead.")]
@@ -89,13 +92,14 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.WithThreadResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.WithThreadResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a single Airbnb message thread by its Airbnb thread id. **Pure DB read** from the local `message_threads` mirror, workspace-scoped. Returns `404 not_found` when no thread matches. For the messages within a thread use `GET /v1/channels/airbnb/messaging/{threadId}/messages`.
+        /// Fetch a single Airbnb message thread by its Airbnb thread id. **Pure DB read** from the local `message_threads` mirror, workspace-scoped. Returns `404 not_found` when no thread matches. For the messages within a thread use `GET /v1/channels/airbnb/messaging/{threadId}/messages`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

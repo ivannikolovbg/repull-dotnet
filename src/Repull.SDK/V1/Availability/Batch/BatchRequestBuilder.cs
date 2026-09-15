@@ -34,13 +34,14 @@ namespace Repull.SDK.V1.Availability.Batch
         {
         }
         /// <summary>
-        /// Applies ONE settings object across up to 500 properties and pushes the result to every connected channel.Ownership is checked before anything is written: a batch containing a property from another workspace is refused as a whole and names the offending ids, rather than being partially applied.Per-property *different* values are separate calls — presenting them as one request would be a false claim about atomicity.
+        /// Applies ONE settings object across up to 500 properties and pushes the result to every connected channel.Ownership is checked before anything is written: a batch containing a property from another workspace is refused as a whole and names the offending ids, rather than being partially applied.Per-property *different* values are separate calls — presenting them as one request would be a false claim about atomicity.Returns `403 listing_inactive` naming every inactive listing when any listing in the request is inactive; nothing is written.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AvailabilityWriteResult"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -57,13 +58,14 @@ namespace Repull.SDK.V1.Availability.Batch
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AvailabilityWriteResult>(requestInfo, global::Repull.SDK.Models.AvailabilityWriteResult.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Applies ONE settings object across up to 500 properties and pushes the result to every connected channel.Ownership is checked before anything is written: a batch containing a property from another workspace is refused as a whole and names the offending ids, rather than being partially applied.Per-property *different* values are separate calls — presenting them as one request would be a false claim about atomicity.
+        /// Applies ONE settings object across up to 500 properties and pushes the result to every connected channel.Ownership is checked before anything is written: a batch containing a property from another workspace is refused as a whole and names the offending ids, rather than being partially applied.Per-property *different* values are separate calls — presenting them as one request would be a false claim about atomicity.Returns `403 listing_inactive` naming every inactive listing when any listing in the request is inactive; nothing is written.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

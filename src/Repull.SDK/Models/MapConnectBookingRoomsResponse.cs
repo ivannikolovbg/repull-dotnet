@@ -24,6 +24,8 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Number of rooms processed (mapped + unmapped).</summary>
         public int? Mapped { get; set; }
+        /// <summary>Reservations pulled from Booking.com once the rooms were mapped. Mapping triggers the same full property sync the dashboard&apos;s Sync button runs, because a reservation can only be resolved to a listing through a mapped room. `null` means the sync could not be run — the connection and mapping are still good, and the property can be synced from the dashboard.</summary>
+        public int? ReservationsImported { get; set; }
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -61,6 +63,7 @@ namespace Repull.SDK.Models
             {
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "mapped", n => { Mapped = n.GetIntValue(); } },
+                { "reservationsImported", n => { ReservationsImported = n.GetIntValue(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "success", n => { Success = n.GetBoolValue(); } },
             };
@@ -74,6 +77,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteIntValue("mapped", Mapped);
+            writer.WriteIntValue("reservationsImported", ReservationsImported);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteBoolValue("success", Success);
             writer.WriteAdditionalData(AdditionalData);

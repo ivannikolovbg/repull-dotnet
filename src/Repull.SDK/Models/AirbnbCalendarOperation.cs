@@ -9,22 +9,22 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// One calendar operation. Supply either `start_date` + `end_date` OR a `dates` array. Every restriction here is forwarded verbatim to Airbnb&apos;s batch calendar API.
+    /// One calendar operation, applied to every date it names. Supply either `dates` OR a `start_date` + `end_date` pair (not both). Unknown fields are refused with `422 invalid_params` rather than dropped, so a misspelling such as `price` (the field is `daily_price`) can never look like a successful write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbCalendarOperation : IAdditionalDataHolder, IParsable
+    public partial class AirbnbCalendarOperation : IParsable
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Stop-sell is expressed here: `unavailable` blocks the date(s); `available` re-opens; `default` reverts to rule-based availability.</summary>
         public global::Repull.SDK.Models.AirbnbCalendarOperation_availability? Availability { get; set; }
+        /// <summary>Why a blocked date is blocked. Airbnb requires it whenever `availability` is `unavailable`; when you leave it out, Repull sends **`BLOCKED_BY_HOST`**. Use `OUTSIDE_RESERVATION` for a date held by a booking made on another channel.</summary>
+        public global::Repull.SDK.Models.AirbnbCalendarOperation_busy_subtype? BusySubtype { get; set; }
         /// <summary>Closed-to-arrival — no check-ins on the affected date(s).</summary>
         public bool? ClosedToArrival { get; set; }
         /// <summary>Closed-to-departure — no check-outs on the affected date(s).</summary>
         public bool? ClosedToDeparture { get; set; }
-        /// <summary>Nightly price override.</summary>
+        /// <summary>Nightly price override, in the listing currency.</summary>
         public double? DailyPrice { get; set; }
-        /// <summary>Explicit date or `start:end` range strings, as an alternative to `start_date`/`end_date`.</summary>
+        /// <summary>Dates as `YYYY-MM-DD`, or inclusive ranges as `YYYY-MM-DD:YYYY-MM-DD` — an alternative to `start_date`/`end_date`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Dates { get; set; }
@@ -32,9 +32,9 @@ namespace Repull.SDK.Models
 #else
         public List<string> Dates { get; set; }
 #endif
-        /// <summary>Inclusive range end (pair with `start_date`).</summary>
+        /// <summary>Inclusive range end, YYYY-MM-DD, on or after `start_date`.</summary>
         public Date? EndDate { get; set; }
-        /// <summary>Maximum length of stay for the date(s).</summary>
+        /// <summary>Maximum length of stay for the date(s); no lower than `min_nights`.</summary>
         public int? MaxNights { get; set; }
         /// <summary>Minimum length of stay for the date(s).</summary>
         public int? MinNights { get; set; }
@@ -46,15 +46,8 @@ namespace Repull.SDK.Models
 #else
         public string Notes { get; set; }
 #endif
-        /// <summary>Inclusive range start (pair with `end_date`).</summary>
+        /// <summary>Inclusive range start, YYYY-MM-DD. Send together with `end_date`.</summary>
         public Date? StartDate { get; set; }
-        /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbCalendarOperation"/> and sets the default values.
-        /// </summary>
-        public AirbnbCalendarOperation()
-        {
-            AdditionalData = new Dictionary<string, object>();
-        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -74,6 +67,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "availability", n => { Availability = n.GetEnumValue<global::Repull.SDK.Models.AirbnbCalendarOperation_availability>(); } },
+                { "busy_subtype", n => { BusySubtype = n.GetEnumValue<global::Repull.SDK.Models.AirbnbCalendarOperation_busy_subtype>(); } },
                 { "closed_to_arrival", n => { ClosedToArrival = n.GetBoolValue(); } },
                 { "closed_to_departure", n => { ClosedToDeparture = n.GetBoolValue(); } },
                 { "daily_price", n => { DailyPrice = n.GetDoubleValue(); } },
@@ -93,6 +87,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbCalendarOperation_availability>("availability", Availability);
+            writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbCalendarOperation_busy_subtype>("busy_subtype", BusySubtype);
             writer.WriteBoolValue("closed_to_arrival", ClosedToArrival);
             writer.WriteBoolValue("closed_to_departure", ClosedToDeparture);
             writer.WriteDoubleValue("daily_price", DailyPrice);
@@ -102,7 +97,6 @@ namespace Repull.SDK.Models
             writer.WriteIntValue("min_nights", MinNights);
             writer.WriteStringValue("notes", Notes);
             writer.WriteDateValue("start_date", StartDate);
-            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }
