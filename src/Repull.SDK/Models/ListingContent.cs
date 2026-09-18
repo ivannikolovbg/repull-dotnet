@@ -71,6 +71,14 @@ namespace Repull.SDK.Models
 #else
         public string InteractionWithGuests { get; set; }
 #endif
+        /// <summary>The listing&apos;s stored public title, and the one a channel pull writes — after `POST /v1/listings/{id}/pull/airbnb` this is the title as it stands on Airbnb.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Name { get; set; }
+#nullable restore
+#else
+        public string Name { get; set; }
+#endif
         /// <summary>The neighborhoodOverview property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -103,7 +111,7 @@ namespace Repull.SDK.Models
 #else
         public string Summary { get; set; }
 #endif
-        /// <summary>Public listing title. Populated only by `generate-content`; not stored on `listings_descriptions`.</summary>
+        /// <summary>Public listing title as proposed by `POST /v1/listings/{id}/generate-content`. The STORED title is `name` — read that one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Title { get; set; }
@@ -151,6 +159,7 @@ namespace Repull.SDK.Models
                 { "guestAccess", n => { GuestAccess = n.GetStringValue(); } },
                 { "houseRules", n => { HouseRules = n.GetStringValue(); } },
                 { "interactionWithGuests", n => { InteractionWithGuests = n.GetStringValue(); } },
+                { "name", n => { Name = n.GetStringValue(); } },
                 { "neighborhoodOverview", n => { NeighborhoodOverview = n.GetStringValue(); } },
                 { "notes", n => { Notes = n.GetStringValue(); } },
                 { "space", n => { Space = n.GetStringValue(); } },
@@ -173,6 +182,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("guestAccess", GuestAccess);
             writer.WriteStringValue("houseRules", HouseRules);
             writer.WriteStringValue("interactionWithGuests", InteractionWithGuests);
+            writer.WriteStringValue("name", Name);
             writer.WriteStringValue("neighborhoodOverview", NeighborhoodOverview);
             writer.WriteStringValue("notes", Notes);
             writer.WriteStringValue("space", Space);

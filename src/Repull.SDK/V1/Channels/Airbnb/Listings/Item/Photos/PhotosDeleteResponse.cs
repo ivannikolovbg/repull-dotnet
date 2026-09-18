@@ -16,6 +16,8 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The deleted property</summary>
         public bool? Deleted { get; set; }
+        /// <summary>Whether our own copy dropped the photo too.</summary>
+        public bool? Stored { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosDeleteResponse"/> and sets the default values.
         /// </summary>
@@ -42,6 +44,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "deleted", n => { Deleted = n.GetBoolValue(); } },
+                { "stored", n => { Stored = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -52,6 +55,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("deleted", Deleted);
+            writer.WriteBoolValue("stored", Stored);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -14,6 +14,14 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Airbnb&apos;s own id for that listing, so the host can find it in Airbnb. Present on `code: &quot;listing_not_api_connected&quot;` (HTTP 403).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AirbnbListingId { get; set; }
+#nullable restore
+#else
+        public string AirbnbListingId { get; set; }
+#endif
         /// <summary>Stable machine-parseable error identifier. Match on this for retry logic. Codes are namespaced and never change meaning.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -62,6 +70,14 @@ namespace Repull.SDK.Models
 #else
         public string Fix { get; set; }
 #endif
+        /// <summary>The single Repull listing the error is about. Present on `code: &quot;listing_not_api_connected&quot;` (HTTP 403).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>Every inactive listing the request involved. Present on `code: &quot;listing_inactive&quot;` (HTTP 403) — activate these ids and retry.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -95,6 +111,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public global::Repull.SDK.Models.Error_error_support Support { get; set; }
+#endif
+        /// <summary>The listing&apos;s current Airbnb API sync category — why the write was refused. Present on `code: &quot;listing_not_api_connected&quot;` (HTTP 403).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SyncCategory { get; set; }
+#nullable restore
+#else
+        public string SyncCategory { get; set; }
 #endif
         /// <summary>Sorted list of every query param this endpoint accepts. Present on `code: &quot;unknown_params&quot;` (HTTP 422) so SDK consumers can self-correct without reading docs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -145,17 +169,20 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "airbnb_listing_id", n => { AirbnbListingId = n.GetStringValue(); } },
                 { "code", n => { Code = n.GetStringValue(); } },
                 { "did_you_mean", n => { DidYouMean = n.GetStringValue(); } },
                 { "docs_url", n => { DocsUrl = n.GetStringValue(); } },
                 { "endpoint", n => { Endpoint = n.GetStringValue(); } },
                 { "field", n => { Field = n.GetStringValue(); } },
                 { "fix", n => { Fix = n.GetStringValue(); } },
+                { "listing_id", n => { ListingId = n.GetStringValue(); } },
                 { "listing_ids", n => { ListingIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "request_id", n => { RequestId = n.GetStringValue(); } },
                 { "retry_after", n => { RetryAfter = n.GetIntValue(); } },
                 { "support", n => { Support = n.GetObjectValue<global::Repull.SDK.Models.Error_error_support>(global::Repull.SDK.Models.Error_error_support.CreateFromDiscriminatorValue); } },
+                { "sync_category", n => { SyncCategory = n.GetStringValue(); } },
                 { "validParams", n => { ValidParams = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "valid_values", n => { ValidValues = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "value_received", n => { ValueReceived = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
@@ -168,17 +195,20 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("airbnb_listing_id", AirbnbListingId);
             writer.WriteStringValue("code", Code);
             writer.WriteStringValue("did_you_mean", DidYouMean);
             writer.WriteStringValue("docs_url", DocsUrl);
             writer.WriteStringValue("endpoint", Endpoint);
             writer.WriteStringValue("field", Field);
             writer.WriteStringValue("fix", Fix);
+            writer.WriteStringValue("listing_id", ListingId);
             writer.WriteCollectionOfPrimitiveValues<string>("listing_ids", ListingIds);
             writer.WriteStringValue("message", Message);
             writer.WriteStringValue("request_id", RequestId);
             writer.WriteIntValue("retry_after", RetryAfter);
             writer.WriteObjectValue<global::Repull.SDK.Models.Error_error_support>("support", Support);
+            writer.WriteStringValue("sync_category", SyncCategory);
             writer.WriteCollectionOfPrimitiveValues<string>("validParams", ValidParams);
             writer.WriteCollectionOfPrimitiveValues<string>("valid_values", ValidValues);
             writer.WriteObjectValue<UntypedNode>("value_received", ValueReceived);

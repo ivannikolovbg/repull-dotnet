@@ -97,6 +97,43 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions.DescriptionsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions.DescriptionsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Write one locale&apos;s copy to the live Airbnb listing.Airbnb keeps a SEPARATE description per locale (`PUT /v2/listing_descriptions/{listingId}/{locale}`), which is why `locale` is part of the request and not a guess: a listing can carry twelve of them, and writing Italian copy into the English row is how a translation gets lost. Only the fields you send are written; Airbnb keeps the rest. `GET /v1/channels/airbnb/listings/{id}/settings?type=locales` lists the locales already synced for the listing.`description` is not an accepted field: Airbnb composes the public description from the sections (`summary`, `space`, `access`, …) and ignores a directly-supplied one.**A 200 does not by itself mean the change was applied.** On an established listing Airbnb LOCKS host-managed description fields — the write returns 200, reports them as locked, and applies nothing for them. The response reports `blockedFields`: the fields YOU sent that Airbnb dropped. `blockedFields: []` is what a landed write looks like; a non-empty list is still a 200 (the other fields really were written) with a `message` naming what was not. Reporting that as a clean success is the bug behind &quot;the description does not push to Airbnb&quot;.This writes to AIRBNB. To write Repull&apos;s own canonical copy — the content a later publish distributes — use `PUT /v1/listings/{id}/content` with `locale`.Send `Idempotency-Key` to make a retry safe.Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbContentWriteResponse"/></returns>
+        /// <param name="body">Write one locale&apos;s copy. Airbnb keeps a separate description per locale, which is why the locale is explicit: writing Italian copy into the English row is how a translation gets lost. Only the fields you send are written.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.Models.AirbnbContentWriteResponse?> PutAsync(global::Repull.SDK.Models.AirbnbDescriptionWriteRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.Models.AirbnbContentWriteResponse> PutAsync(global::Repull.SDK.Models.AirbnbDescriptionWriteRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbContentWriteResponse>(requestInfo, global::Repull.SDK.Models.AirbnbContentWriteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// List an Airbnb listing&apos;s per-locale content (name, summary, house rules, etc). **Pure DB read** from `listings_airbnb_descriptions`. Filter to one locale with `?locale=en` (the legacy `?country=` param is accepted as a soft alias). Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -113,6 +150,28 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Write one locale&apos;s copy to the live Airbnb listing.Airbnb keeps a SEPARATE description per locale (`PUT /v2/listing_descriptions/{listingId}/{locale}`), which is why `locale` is part of the request and not a guess: a listing can carry twelve of them, and writing Italian copy into the English row is how a translation gets lost. Only the fields you send are written; Airbnb keeps the rest. `GET /v1/channels/airbnb/listings/{id}/settings?type=locales` lists the locales already synced for the listing.`description` is not an accepted field: Airbnb composes the public description from the sections (`summary`, `space`, `access`, …) and ignores a directly-supplied one.**A 200 does not by itself mean the change was applied.** On an established listing Airbnb LOCKS host-managed description fields — the write returns 200, reports them as locked, and applies nothing for them. The response reports `blockedFields`: the fields YOU sent that Airbnb dropped. `blockedFields: []` is what a landed write looks like; a non-empty list is still a 200 (the other fields really were written) with a `message` naming what was not. Reporting that as a clean success is the bug behind &quot;the description does not push to Airbnb&quot;.This writes to AIRBNB. To write Repull&apos;s own canonical copy — the content a later publish distributes — use `PUT /v1/listings/{id}/content` with `locale`.Send `Idempotency-Key` to make a retry safe.Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">Write one locale&apos;s copy. Airbnb keeps a separate description per locale, which is why the locale is explicit: writing Italian copy into the English row is how a translation gets lost. Only the fields you send are written.</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.AirbnbDescriptionWriteRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.AirbnbDescriptionWriteRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>
@@ -157,6 +216,14 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class DescriptionsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions.DescriptionsRequestBuilder.DescriptionsRequestBuilderGetQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class DescriptionsRequestBuilderPutRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }

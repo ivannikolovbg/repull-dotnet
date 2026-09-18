@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>`delete` deactivates the Repull record. `push`/`publish` push content to Airbnb.</summary>
+    /// <summary>`delete` deactivates the REPULL RECORD — billing and API visibility — and never calls Airbnb. `push`/`publish` push content to Airbnb. `unlist` takes the LIVE AIRBNB LISTING down so it stops taking bookings; `relist` puts it back up. Deactivating and unlisting are different operations with different blast radii and are deliberately different action names.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum AirbnbListingActionRequest_action
     {
@@ -18,6 +18,14 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "publish")]
         #pragma warning disable CS1591
         Publish,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "unlist")]
+        #pragma warning disable CS1591
+        Unlist,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "relist")]
+        #pragma warning disable CS1591
+        Relist,
         #pragma warning restore CS1591
     }
 }

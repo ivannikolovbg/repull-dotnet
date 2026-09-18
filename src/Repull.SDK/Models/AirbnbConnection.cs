@@ -21,6 +21,22 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities> AccessibilityAmenities { get; set; }
 #endif
+        /// <summary>Which connected Airbnb account this row belongs to — the Airbnb host id, as a string (they exceed 2^53). The same value `?account_id=` accepts and `GET /v1/connect/airbnb` returns as `accounts[].externalAccountId`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountId { get; set; }
+#nullable restore
+#else
+        public string AccountId { get; set; }
+#endif
+        /// <summary>Display name of that connected Airbnb account.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountName { get; set; }
+#nullable restore
+#else
+        public string AccountName { get; set; }
+#endif
         /// <summary>The active property</summary>
         public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -43,13 +59,21 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>Airbnb host user id</summary>
+        /// <summary>Alias of `accountId`, kept for compatibility — same Airbnb host id, same string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? HostId { get; set; }
 #nullable restore
 #else
         public string HostId { get; set; }
+#endif
+        /// <summary>Alias of `accountName`, kept for compatibility.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HostName { get; set; }
+#nullable restore
+#else
+        public string HostName { get; set; }
 #endif
         /// <summary>Connection row id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -58,6 +82,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>Fields Airbnb will NOT let you change on this listing — `property_type_category`, `name`, `check_in_option`, `summary`, `space`, individual amenities, … Airbnb does not refuse a write to a locked field: it returns 200, reports the field as locked, and applies nothing. Check this before a content write; `[]` means nothing is known to be locked. Recorded at sync time, so a lock added on Airbnb since the last sync will show up on the write instead (as `blockedFields` in the response).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? LockedFields { get; set; }
+#nullable restore
+#else
+        public List<string> LockedFields { get; set; }
 #endif
         /// <summary>Decimal markup (e.g. &quot;1.10&quot; for +10%).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -69,8 +101,12 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The primary property</summary>
         public bool? Primary { get; set; }
+        /// <summary>Airbnb&apos;s own API sync decision for THIS listing, as Airbnb reports it. Airbnb authorises sync one listing at a time, so a connected account can still contain listings it will not accept writes for.- `sync_all` — Repull manages content, rates and availability.- `sync_rates_and_availability` — Repull manages rates and availability; listing content is managed by the host on Airbnb.- `none` — the listing is **not** connected to Repull on Airbnb&apos;s side. Every write to it is refused with `403 listing_not_api_connected`; reconnecting the Airbnb account does not change this, the host must switch the listing on in Airbnb.`null` when the listing has not synced yet. Not to be confused with `syncEnabled`, which is a Repull-side flag and says nothing about what Airbnb accepts.</summary>
+        public global::Repull.SDK.Models.AirbnbConnection_syncCategory? SyncCategory { get; set; }
         /// <summary>The syncEnabled property</summary>
         public bool? SyncEnabled { get; set; }
+        /// <summary>Whether Repull will send a write for this listing to Airbnb. `false` exactly when `syncCategory` is `none` — such a write is refused with `403 listing_not_api_connected` before anything reaches Airbnb. Check this before a portfolio-wide push instead of discovering it one 403 at a time.</summary>
+        public bool? Writable { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbConnection"/> and sets the default values.
         /// </summary>
@@ -97,15 +133,21 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "accessibility_amenities", n => { AccessibilityAmenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities>(global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "accountId", n => { AccountId = n.GetStringValue(); } },
+                { "accountName", n => { AccountName = n.GetStringValue(); } },
                 { "active", n => { Active = n.GetBoolValue(); } },
                 { "airbnbId", n => { AirbnbId = n.GetStringValue(); } },
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection_amenities>(global::Repull.SDK.Models.AirbnbConnection_amenities.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "hostId", n => { HostId = n.GetStringValue(); } },
+                { "hostName", n => { HostName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "lockedFields", n => { LockedFields = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "markup", n => { Markup = n.GetStringValue(); } },
                 { "primary", n => { Primary = n.GetBoolValue(); } },
+                { "syncCategory", n => { SyncCategory = n.GetEnumValue<global::Repull.SDK.Models.AirbnbConnection_syncCategory>(); } },
                 { "syncEnabled", n => { SyncEnabled = n.GetBoolValue(); } },
+                { "writable", n => { Writable = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -116,15 +158,21 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities>("accessibility_amenities", AccessibilityAmenities);
+            writer.WriteStringValue("accountId", AccountId);
+            writer.WriteStringValue("accountName", AccountName);
             writer.WriteBoolValue("active", Active);
             writer.WriteStringValue("airbnbId", AirbnbId);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection_amenities>("amenities", Amenities);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("hostId", HostId);
+            writer.WriteStringValue("hostName", HostName);
             writer.WriteStringValue("id", Id);
+            writer.WriteCollectionOfPrimitiveValues<string>("lockedFields", LockedFields);
             writer.WriteStringValue("markup", Markup);
             writer.WriteBoolValue("primary", Primary);
+            writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbConnection_syncCategory>("syncCategory", SyncCategory);
             writer.WriteBoolValue("syncEnabled", SyncEnabled);
+            writer.WriteBoolValue("writable", Writable);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

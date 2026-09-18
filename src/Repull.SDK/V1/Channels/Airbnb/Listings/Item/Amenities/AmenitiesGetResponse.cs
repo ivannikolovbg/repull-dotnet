@@ -23,7 +23,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities
 #else
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesGetResponse_data Data { get; set; }
 #endif
-        /// <summary>Top-level freshness indicator for any DB-backed Airbnb read. Tells consumers WHY a column may be `null` or stale without sprinkling per-row error envelopes through the response. The endpoint always returns 200 + DB data; this field is the single signal for &quot;should I prompt the user to reconnect / wait for sync?&quot;.</summary>
+        /// <summary>Top-level freshness indicator for any DB-backed Airbnb read. Tells consumers WHY a column may be `null` or stale without sprinkling per-row error envelopes through the response. The endpoint always returns 200 + DB data; this field is the single signal for &quot;should I prompt the user to reconnect / wait for sync?&quot;.A workspace can connect several Airbnb accounts, so the answer has two levels. `accounts[]` carries the verdict per account; the top-level fields aggregate it. Scope a request with `?account_id=` and `accounts[]` holds exactly that account, with the top-level fields mirroring it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.AirbnbDataFreshness? DataFreshness { get; set; }

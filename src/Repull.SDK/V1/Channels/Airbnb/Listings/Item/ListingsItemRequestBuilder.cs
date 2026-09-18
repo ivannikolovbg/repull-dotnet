@@ -6,13 +6,17 @@ using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Availability;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckoutGuide;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Details;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Permits;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Pricing;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Quality;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Settings;
 using System.Collections.Generic;
 using System.IO;
@@ -37,6 +41,11 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Availability.AvailabilityRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The bookingSettings property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsRequestBuilder BookingSettings
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The checkinGuide property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideRequestBuilder CheckinGuide
         {
@@ -51,6 +60,16 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions.DescriptionsRequestBuilder Descriptions
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions.DescriptionsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The details property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Details.DetailsRequestBuilder Details
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Details.DetailsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The permits property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Permits.PermitsRequestBuilder Permits
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Permits.PermitsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The photos property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosRequestBuilder Photos
@@ -71,6 +90,11 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder Rooms
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The safetyDisclosures property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresRequestBuilder SafetyDisclosures
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The settings property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Settings.SettingsRequestBuilder Settings
@@ -94,7 +118,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         {
         }
         /// <summary>
-        /// Fetch all Airbnb connection rows for a single Vanio listing id. A property may be linked from multiple Airbnb hosts — every match is returned. Pass `?include=amenities` to enrich each row with its current Airbnb amenities.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Fetch all Airbnb connection rows for a single Vanio listing id. A property may be linked from multiple Airbnb hosts — every match is returned. Pass `?include=amenities` to enrich each row with its current Airbnb amenities.Each row carries `syncCategory` — Airbnb&apos;s own per-listing API sync decision (`sync_all`, `sync_rates_and_availability`, or `none`) — and `writable`, which is `false` exactly when that category is `none`, meaning Airbnb refuses every write to the listing and Repull returns `403 listing_not_api_connected` without sending anything. `GET /v1/channels/airbnb/listings` reports both fields for the whole portfolio in one call.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbListing"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -117,21 +141,24 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbListing>(requestInfo, global::Repull.SDK.Models.AirbnbListing.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Apply a state action to a listing by id. The path `id` is the canonical Repull listing id.`delete` is a **deactivate of the Repull record only** — it sets the listing inactive and KEEPS the row; it does NOT touch the upstream Airbnb listing (Repull never deletes or deactivates on Airbnb&apos;s side). Use it to exclude a listing / trim back under the plan-listings cap; reactivate via `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: true }`. Idempotent.`push` / `publish` push the listing&apos;s content to Airbnb via the same host-side sync orchestrator as `POST /v1/listings/{id}/publish/airbnb` — pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create + publish a new one under that host. `force` re-pushes every field, ignoring dirty-field tracking.Any other action (e.g. `pull`, `unlist`) returns a structured 422 naming the supported actions.Returns `403 listing_inactive` for `push`/`publish` when the listing is inactive. `delete` (deactivation) is always accepted.
+        /// Apply a state action to a listing by id. The path `id` is the canonical Repull listing id.**Deactivating in Repull and unlisting on Airbnb are different operations.**`delete` is a **deactivate of the Repull record only** — it sets the listing inactive and KEEPS the row; it does NOT touch the Airbnb listing, which stays live and keeps taking bookings. Use it to exclude a listing from the API / trim back under the plan-listings cap; reactivate via `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: true }`. Idempotent.`unlist` calls Airbnb and **takes the live listing down**: it is deactivated with a valid deactivation reason and then READ BACK, so &quot;Airbnb accepted the call but the listing is still live&quot; is reported as a failure rather than a success. Requires `airbnbConnectionId` — a listing can be connected to more than one Airbnb listing, and taking down the wrong one is not undoable through this API. `relist` puts it back up (re-enables sync and makes the listing available again); it does not push content.`push` / `publish` push the listing&apos;s content to Airbnb via the same host-side sync orchestrator as `POST /v1/listings/{id}/publish/airbnb` — pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create + publish a new one under that host. `force` re-pushes every field, ignoring dirty-field tracking. The result is per-section: see `AirbnbPublishResult`.Any other action (e.g. `pull`) returns a structured 422 naming the supported actions.Returns `403 listing_inactive` for `push`/`publish`/`unlist`/`relist` when the listing is inactive. `delete` (deactivation) is always accepted.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse"/></returns>
         /// <param name="body">Body for `POST /v1/channels/airbnb/listings/{id}`.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PostAsync(global::Repull.SDK.Models.AirbnbListingActionRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse?> PostAsListingsPostResponseAsync(global::Repull.SDK.Models.AirbnbListingActionRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PostAsync(global::Repull.SDK.Models.AirbnbListingActionRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse> PostAsListingsPostResponseAsync(global::Repull.SDK.Models.AirbnbListingActionRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -139,12 +166,49 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch all Airbnb connection rows for a single Vanio listing id. A property may be linked from multiple Airbnb hosts — every match is returned. Pass `?include=amenities` to enrich each row with its current Airbnb amenities.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Apply a state action to a listing by id. The path `id` is the canonical Repull listing id.**Deactivating in Repull and unlisting on Airbnb are different operations.**`delete` is a **deactivate of the Repull record only** — it sets the listing inactive and KEEPS the row; it does NOT touch the Airbnb listing, which stays live and keeps taking bookings. Use it to exclude a listing from the API / trim back under the plan-listings cap; reactivate via `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: true }`. Idempotent.`unlist` calls Airbnb and **takes the live listing down**: it is deactivated with a valid deactivation reason and then READ BACK, so &quot;Airbnb accepted the call but the listing is still live&quot; is reported as a failure rather than a success. Requires `airbnbConnectionId` — a listing can be connected to more than one Airbnb listing, and taking down the wrong one is not undoable through this API. `relist` puts it back up (re-enables sync and makes the listing available again); it does not push content.`push` / `publish` push the listing&apos;s content to Airbnb via the same host-side sync orchestrator as `POST /v1/listings/{id}/publish/airbnb` — pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create + publish a new one under that host. `force` re-pushes every field, ignoring dirty-field tracking. The result is per-section: see `AirbnbPublishResult`.Any other action (e.g. `pull`) returns a structured 422 naming the supported actions.Returns `403 listing_inactive` for `push`/`publish`/`unlist`/`relist` when the listing is inactive. `delete` (deactivation) is always accepted.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse"/></returns>
+        /// <param name="body">Body for `POST /v1/channels/airbnb/listings/{id}`.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("This method is obsolete. Use PostAsListingsPostResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse?> PostAsync(global::Repull.SDK.Models.AirbnbListingActionRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse> PostAsync(global::Repull.SDK.Models.AirbnbListingActionRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Fetch all Airbnb connection rows for a single Vanio listing id. A property may be linked from multiple Airbnb hosts — every match is returned. Pass `?include=amenities` to enrich each row with its current Airbnb amenities.Each row carries `syncCategory` — Airbnb&apos;s own per-listing API sync decision (`sync_all`, `sync_rates_and_availability`, or `none`) — and `writable`, which is `false` exactly when that category is `none`, meaning Airbnb refuses every write to the listing and Repull returns `403 listing_not_api_connected` without sending anything. `GET /v1/channels/airbnb/listings` reports both fields for the whole portfolio in one call.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -163,7 +227,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             return requestInfo;
         }
         /// <summary>
-        /// Apply a state action to a listing by id. The path `id` is the canonical Repull listing id.`delete` is a **deactivate of the Repull record only** — it sets the listing inactive and KEEPS the row; it does NOT touch the upstream Airbnb listing (Repull never deletes or deactivates on Airbnb&apos;s side). Use it to exclude a listing / trim back under the plan-listings cap; reactivate via `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: true }`. Idempotent.`push` / `publish` push the listing&apos;s content to Airbnb via the same host-side sync orchestrator as `POST /v1/listings/{id}/publish/airbnb` — pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create + publish a new one under that host. `force` re-pushes every field, ignoring dirty-field tracking.Any other action (e.g. `pull`, `unlist`) returns a structured 422 naming the supported actions.Returns `403 listing_inactive` for `push`/`publish` when the listing is inactive. `delete` (deactivation) is always accepted.
+        /// Apply a state action to a listing by id. The path `id` is the canonical Repull listing id.**Deactivating in Repull and unlisting on Airbnb are different operations.**`delete` is a **deactivate of the Repull record only** — it sets the listing inactive and KEEPS the row; it does NOT touch the Airbnb listing, which stays live and keeps taking bookings. Use it to exclude a listing from the API / trim back under the plan-listings cap; reactivate via `PATCH /v1/listings/{id}` with `{ &quot;active&quot;: true }`. Idempotent.`unlist` calls Airbnb and **takes the live listing down**: it is deactivated with a valid deactivation reason and then READ BACK, so &quot;Airbnb accepted the call but the listing is still live&quot; is reported as a failure rather than a success. Requires `airbnbConnectionId` — a listing can be connected to more than one Airbnb listing, and taking down the wrong one is not undoable through this API. `relist` puts it back up (re-enables sync and makes the listing available again); it does not push content.`push` / `publish` push the listing&apos;s content to Airbnb via the same host-side sync orchestrator as `POST /v1/listings/{id}/publish/airbnb` — pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create + publish a new one under that host. `force` re-pushes every field, ignoring dirty-field tracking. The result is per-section: see `AirbnbPublishResult`.Any other action (e.g. `pull`) returns a structured 422 naming the supported actions.Returns `403 listing_inactive` for `push`/`publish`/`unlist`/`relist` when the listing is inactive. `delete` (deactivation) is always accepted.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Body for `POST /v1/channels/airbnb/listings/{id}`.</param>
@@ -194,7 +258,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
             return new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Fetch all Airbnb connection rows for a single Vanio listing id. A property may be linked from multiple Airbnb hosts — every match is returned. Pass `?include=amenities` to enrich each row with its current Airbnb amenities.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Fetch all Airbnb connection rows for a single Vanio listing id. A property may be linked from multiple Airbnb hosts — every match is returned. Pass `?include=amenities` to enrich each row with its current Airbnb amenities.Each row carries `syncCategory` — Airbnb&apos;s own per-listing API sync decision (`sync_all`, `sync_rates_and_availability`, or `none`) — and `writable`, which is `false` exactly when that category is `none`, meaning Airbnb refuses every write to the listing and Repull returns `403 listing_not_api_connected` without sending anything. `GET /v1/channels/airbnb/listings` reports both fields for the whole portfolio in one call.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ListingsItemRequestBuilderGetQueryParameters 
@@ -225,6 +289,180 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ListingsItemRequestBuilderPostRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/>, <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1"/>, <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ListingsPostResponse : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse? AirbnbListingLifecycleResponse { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse AirbnbListingLifecycleResponse { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1? ListingsPostResponseMember1 { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1 ListingsPostResponseMember1 { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2? ListingsPostResponseMember2 { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2 ListingsPostResponseMember2 { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse();
+                if("AirbnbListingLifecycleResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.AirbnbListingLifecycleResponse = new global::Repull.SDK.Models.AirbnbListingLifecycleResponse();
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                if(AirbnbListingLifecycleResponse != null)
+                {
+                    return AirbnbListingLifecycleResponse.GetFieldDeserializers();
+                }
+                else if(ListingsPostResponseMember1 != null)
+                {
+                    return ListingsPostResponseMember1.GetFieldDeserializers();
+                }
+                else if(ListingsPostResponseMember2 != null)
+                {
+                    return ListingsPostResponseMember2.GetFieldDeserializers();
+                }
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(AirbnbListingLifecycleResponse != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbListingLifecycleResponse>(null, AirbnbListingLifecycleResponse);
+                }
+                else if(ListingsPostResponseMember1 != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1>(null, ListingsPostResponseMember1);
+                }
+                else if(ListingsPostResponseMember2 != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2>(null, ListingsPostResponseMember2);
+                }
+            }
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/>, <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1"/>, <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ListingsResponse : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse? AirbnbListingLifecycleResponse { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse AirbnbListingLifecycleResponse { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1? ListingsPostResponseMember1 { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1 ListingsPostResponseMember1 { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2? ListingsPostResponseMember2 { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2 ListingsPostResponseMember2 { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse();
+                if("AirbnbListingLifecycleResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.AirbnbListingLifecycleResponse = new global::Repull.SDK.Models.AirbnbListingLifecycleResponse();
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                if(AirbnbListingLifecycleResponse != null)
+                {
+                    return AirbnbListingLifecycleResponse.GetFieldDeserializers();
+                }
+                else if(ListingsPostResponseMember1 != null)
+                {
+                    return ListingsPostResponseMember1.GetFieldDeserializers();
+                }
+                else if(ListingsPostResponseMember2 != null)
+                {
+                    return ListingsPostResponseMember2.GetFieldDeserializers();
+                }
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(AirbnbListingLifecycleResponse != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbListingLifecycleResponse>(null, AirbnbListingLifecycleResponse);
+                }
+                else if(ListingsPostResponseMember1 != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1>(null, ListingsPostResponseMember1);
+                }
+                else if(ListingsPostResponseMember2 != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2>(null, ListingsPostResponseMember2);
+                }
+            }
         }
     }
 }

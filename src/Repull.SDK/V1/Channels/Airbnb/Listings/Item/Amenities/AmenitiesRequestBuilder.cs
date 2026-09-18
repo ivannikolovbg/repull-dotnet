@@ -97,6 +97,77 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Set amenities on an Airbnb listing. **Write-side** — calls Airbnb upstream.**Partial by design**: only the amenities you name change, so turning one off is a one-line body and nothing else on the listing moves. Ids are the `id` values `GET /amenities` returns (e.g. `wireless_internet`, `ac`, `kitchen`); case is ignored. Airbnb refuses ids outside its vocabulary — that comes back as `422 airbnb_rejected` carrying Airbnb&apos;s own message.`accessibility_amenities` go to Airbnb&apos;s separate accessibility resource, which has **no read side at all** — Airbnb offers no endpoint to fetch them back, and the combined amenities GET 404s on production listings. What you can read back is our own copy: this endpoint updates it on success, and `GET /amenities` returns it under `accessibilityAmenities`. Airbnb may also hold an accessibility claim for review until photo evidence is attached; pass `photo_ids` to supply it.Our Airbnb copy is updated on success so a read straight after this write returns the new values. The platform-neutral copy behind `GET /v1/listings/{id}?include=amenities` uses a different amenity vocabulary and is refreshed by the next sync, except where an id happens to be identical in both.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutResponse"/></returns>
+        /// <param name="body">At least one amenity across `amenities` and `accessibility_amenities`. A body that changes nothing is refused rather than reported as a successful write.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutResponse?> PutAsAmenitiesPutResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutResponse> PutAsAmenitiesPutResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Set amenities on an Airbnb listing. **Write-side** — calls Airbnb upstream.**Partial by design**: only the amenities you name change, so turning one off is a one-line body and nothing else on the listing moves. Ids are the `id` values `GET /amenities` returns (e.g. `wireless_internet`, `ac`, `kitchen`); case is ignored. Airbnb refuses ids outside its vocabulary — that comes back as `422 airbnb_rejected` carrying Airbnb&apos;s own message.`accessibility_amenities` go to Airbnb&apos;s separate accessibility resource, which has **no read side at all** — Airbnb offers no endpoint to fetch them back, and the combined amenities GET 404s on production listings. What you can read back is our own copy: this endpoint updates it on success, and `GET /amenities` returns it under `accessibilityAmenities`. Airbnb may also hold an accessibility claim for review until photo evidence is attached; pass `photo_ids` to supply it.Our Airbnb copy is updated on success so a read straight after this write returns the new values. The platform-neutral copy behind `GET /v1/listings/{id}?include=amenities` uses a different amenity vocabulary and is refreshed by the next sync, except where an id happens to be identical in both.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse"/></returns>
+        /// <param name="body">At least one amenity across `amenities` and `accessibility_amenities`. A body that changes nothing is refused rather than reported as a successful write.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        [Obsolete("This method is obsolete. Use PutAsAmenitiesPutResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse?> PutAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse> PutAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// List an Airbnb listing&apos;s amenities. **Pure DB read** from the local `listings_airbnb_amenities` cache — never calls Airbnb upstream. The response splits amenities into `amenities` (regular) and `accessibility_amenities` (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Both are arrays (`[]` when none). Consult `dataFreshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;. Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -116,6 +187,28 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities
             return requestInfo;
         }
         /// <summary>
+        /// Set amenities on an Airbnb listing. **Write-side** — calls Airbnb upstream.**Partial by design**: only the amenities you name change, so turning one off is a one-line body and nothing else on the listing moves. Ids are the `id` values `GET /amenities` returns (e.g. `wireless_internet`, `ac`, `kitchen`); case is ignored. Airbnb refuses ids outside its vocabulary — that comes back as `422 airbnb_rejected` carrying Airbnb&apos;s own message.`accessibility_amenities` go to Airbnb&apos;s separate accessibility resource, which has **no read side at all** — Airbnb offers no endpoint to fetch them back, and the combined amenities GET 404s on production listings. What you can read back is our own copy: this endpoint updates it on success, and `GET /amenities` returns it under `accessibilityAmenities`. Airbnb may also hold an accessibility claim for review until photo evidence is attached; pass `photo_ids` to supply it.Our Airbnb copy is updated on success so a read straight after this write returns the new values. The platform-neutral copy behind `GET /v1/listings/{id}?include=amenities` uses a different amenity vocabulary and is refreshed by the next sync, except where an id happens to be identical in both.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">At least one amenity across `amenities` and `accessibility_amenities`. A body that changes nothing is refused rather than reported as a successful write.</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
+            return requestInfo;
+        }
+        /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesRequestBuilder"/></returns>
@@ -130,6 +223,14 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class AmenitiesRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class AmenitiesRequestBuilderPutRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }

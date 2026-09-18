@@ -13,6 +13,22 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbThread : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Which connected Airbnb account this row belongs to — the Airbnb host id, as a string (they exceed 2^53). The same value `?account_id=` accepts and `GET /v1/connect/airbnb` returns as `accounts[].externalAccountId`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountId { get; set; }
+#nullable restore
+#else
+        public string AccountId { get; set; }
+#endif
+        /// <summary>Display name of that connected Airbnb account.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountName { get; set; }
+#nullable restore
+#else
+        public string AccountName { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The guestName property</summary>
@@ -68,6 +84,8 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accountId", n => { AccountId = n.GetStringValue(); } },
+                { "accountName", n => { AccountName = n.GetStringValue(); } },
                 { "guestName", n => { GuestName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "lastMessageAt", n => { LastMessageAt = n.GetDateTimeOffsetValue(); } },
@@ -82,6 +100,8 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("accountId", AccountId);
+            writer.WriteStringValue("accountName", AccountName);
             writer.WriteStringValue("guestName", GuestName);
             writer.WriteStringValue("id", Id);
             writer.WriteDateTimeOffsetValue("lastMessageAt", LastMessageAt);

@@ -35,7 +35,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public AlterationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/alterations{?reservation_code*,type*}", pathParameters)
+        public AlterationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/alterations{?account_id*,reservation_code*,type*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,17 +43,18 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public AlterationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/alterations{?reservation_code*,type*}", rawUrl)
+        public AlterationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/alterations{?account_id*,reservation_code*,type*}", rawUrl)
         {
         }
         /// <summary>
-        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.Alterations of reservations on inactive listings are left out. Filtering by a reservation on an inactive listing (`reservation_code`) returns `403 listing_inactive`.
+        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.Each row carries the proposed change in its `new*` fields. A **listing transfer** shows up as `newListingId` (Repull listing id) and `newAirbnbListingId` (Airbnb&apos;s own id); both are `null` when the alteration does not move the reservation.Alterations of reservations on inactive listings are left out. Filtering by a reservation on an inactive listing (`reservation_code`) returns `403 listing_inactive`.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -69,18 +70,20 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.Alterations of reservations on inactive listings are left out. Filtering by a reservation on an inactive listing (`reservation_code`) returns `403 listing_inactive`.
+        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.Each row carries the proposed change in its `new*` fields. A **listing transfer** shows up as `newListingId` (Repull listing id) and `newAirbnbListingId` (Airbnb&apos;s own id); both are `null` when the alteration does not move the reservation.Alterations of reservations on inactive listings are left out. Filtering by a reservation on an inactive listing (`reservation_code`) returns `403 listing_inactive`.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
         [Obsolete("This method is obsolete. Use GetAsAlterationsGetResponseAsync instead.")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -97,27 +100,32 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create a reservation alteration request (change dates, guest count, or price) on Airbnb. **Write-side** — calls Airbnb upstream. Requires a connected Airbnb host for the workspace, else `404 no_connection`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Propose a change to an existing Airbnb reservation: new dates, a new guest count, a new total price, or a move to a different listing. **Write-side** — calls Airbnb upstream. Requires a connected Airbnb host for the workspace, else `404 no_connection`.The body is validated before anything reaches Airbnb. `confirmation_code` is required and **at least one** of `check_in`, `check_out`, `number_of_guests`, `total_price` or `listing_id` must be sent with it — an alteration that changes nothing is `422 invalid_params`, not a request Airbnb is asked to act on. Unknown fields are refused rather than ignored, so a misspelling can never look like a successful write.**Listing transfer.** `listing_id` moves the reservation to another listing in your workspace. Send the **Repull** listing id (the `id` from `GET /v1/properties`); Repull checks you own it, that it is active and connected to Airbnb, translates it to the Airbnb listing id and sends it upstream. Callers who hold the Airbnb-side id instead may send `airbnb_listing_id`. **Airbnb decides** whether to honour a listing change on an alteration — Repull sends it and reports Airbnb’s answer; a refusal comes back as `422 airbnb_rejected` carrying Airbnb’s own message.Returns `403 listing_inactive` when the reservation’s listing, or the listing it is being moved to, is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
-        /// <param name="body">The request body</param>
+        /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbAlteration"/></returns>
+        /// <param name="body">A proposed change to an existing Airbnb reservation. `confirmation_code` names the reservation; at least one of `check_in`, `check_out`, `number_of_guests`, `total_price` or `listing_id` must be sent with it, because an alteration that changes nothing is not something Airbnb can act on (it is refused with `422 invalid_params`).Unknown fields are refused rather than silently dropped. The older connector-native spellings (`start_date`, `end_date`, `total_price_override`, and an Airbnb guest-details object in place of `number_of_guests`) are still accepted for existing integrations; send the canonical names above in new code, and never a canonical field and its older spelling with different values.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbAlteration?> PostAsync(global::Repull.SDK.Models.AirbnbAlterationCreateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbAlteration> PostAsync(global::Repull.SDK.Models.AirbnbAlterationCreateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -127,12 +135,15 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbAlteration>(requestInfo, global::Repull.SDK.Models.AirbnbAlteration.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.Alterations of reservations on inactive listings are left out. Filtering by a reservation on an inactive listing (`reservation_code`) returns `403 listing_inactive`.
+        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.Each row carries the proposed change in its `new*` fields. A **listing transfer** shows up as `newListingId` (Repull listing id) and `newAirbnbListingId` (Airbnb&apos;s own id); both are `null` when the alteration does not move the reservation.Alterations of reservations on inactive listings are left out. Filtering by a reservation on an inactive listing (`reservation_code`) returns `403 listing_inactive`.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -151,18 +162,18 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
             return requestInfo;
         }
         /// <summary>
-        /// Create a reservation alteration request (change dates, guest count, or price) on Airbnb. **Write-side** — calls Airbnb upstream. Requires a connected Airbnb host for the workspace, else `404 no_connection`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Propose a change to an existing Airbnb reservation: new dates, a new guest count, a new total price, or a move to a different listing. **Write-side** — calls Airbnb upstream. Requires a connected Airbnb host for the workspace, else `404 no_connection`.The body is validated before anything reaches Airbnb. `confirmation_code` is required and **at least one** of `check_in`, `check_out`, `number_of_guests`, `total_price` or `listing_id` must be sent with it — an alteration that changes nothing is `422 invalid_params`, not a request Airbnb is asked to act on. Unknown fields are refused rather than ignored, so a misspelling can never look like a successful write.**Listing transfer.** `listing_id` moves the reservation to another listing in your workspace. Send the **Repull** listing id (the `id` from `GET /v1/properties`); Repull checks you own it, that it is active and connected to Airbnb, translates it to the Airbnb listing id and sends it upstream. Callers who hold the Airbnb-side id instead may send `airbnb_listing_id`. **Airbnb decides** whether to honour a listing change on an alteration — Repull sends it and reports Airbnb’s answer; a refusal comes back as `422 airbnb_rejected` carrying Airbnb’s own message.Returns `403 listing_inactive` when the reservation’s listing, or the listing it is being moved to, is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request body</param>
+        /// <param name="body">A proposed change to an existing Airbnb reservation. `confirmation_code` names the reservation; at least one of `check_in`, `check_out`, `number_of_guests`, `total_price` or `listing_id` must be sent with it, because an alteration that changes nothing is not something Airbnb can act on (it is refused with `422 invalid_params`).Unknown fields are refused rather than silently dropped. The older connector-native spellings (`start_date`, `end_date`, `total_price_override`, and an Airbnb guest-details object in place of `number_of_guests`) are still accepted for existing integrations; send the canonical names above in new code, and never a canonical field and its older spelling with different values.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.Models.AirbnbAlterationCreateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.Models.AirbnbAlterationCreateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -182,11 +193,21 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
             return new global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.Alterations of reservations on inactive listings are left out. Filtering by a reservation on an inactive listing (`reservation_code`) returns `403 listing_inactive`.
+        /// List reservation alteration requests for Airbnb reservations in this workspace. **Pure DB read** from the local `reservation_alterations` mirror — never calls Airbnb upstream — scoped to your workspace via the reservations join.Default returns only pending alterations; pass `?type=all` for the full history. Filter to a single reservation with `?reservation_code=&lt;confirmation code&gt;`. Every response carries the `dataFreshness` envelope.Each row carries the proposed change in its `new*` fields. A **listing transfer** shows up as `newListingId` (Repull listing id) and `newAirbnbListingId` (Airbnb&apos;s own id); both are `null` when the alteration does not move the reservation.Alterations of reservations on inactive listings are left out. Filtering by a reservation on an inactive listing (`reservation_code`) returns `403 listing_inactive`.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class AlterationsRequestBuilderGetQueryParameters 
         {
+            /// <summary>Scope the response to ONE connected Airbnb account. The value is the Airbnb host id — the same `accounts[].externalAccountId` that `GET /v1/connect/airbnb` returns and `DELETE /v1/connect/airbnb?accountId=` accepts.A workspace can connect several Airbnb accounts. Omit this and you get every account&apos;s rows (the default, unchanged). Every row carries `accountId` + `accountName` either way, so you can group without a second call.An id that is not connected to THIS workspace returns `404 not_found` with your own ids in `valid_values` — we do not distinguish &quot;no such host&quot; from &quot;someone else&apos;s host&quot;, because confirming the latter would leak another workspace&apos;s account.Note this is NOT the `X-Account-Id` header, which carries a connection id and cannot tell two Airbnb hosts apart.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("account_id")]
+            public string? AccountId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("account_id")]
+            public string AccountId { get; set; }
+#endif
             /// <summary>Airbnb confirmation code — restricts results to a single reservation. Returns an empty array when no reservation matches within your workspace.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

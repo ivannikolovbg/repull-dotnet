@@ -22,6 +22,14 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.AirbnbThread> Data { get; set; }
 #endif
+        /// <summary>Top-level freshness indicator for any DB-backed Airbnb read. Tells consumers WHY a column may be `null` or stale without sprinkling per-row error envelopes through the response. The endpoint always returns 200 + DB data; this field is the single signal for &quot;should I prompt the user to reconnect / wait for sync?&quot;.A workspace can connect several Airbnb accounts, so the answer has two levels. `accounts[]` carries the verdict per account; the top-level fields aggregate it. Scope a request with `?account_id=` and `accounts[]` holds exactly that account, with the top-level fields mirroring it.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.AirbnbDataFreshness? DataFreshness { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.AirbnbDataFreshness DataFreshness { get; set; }
+#endif
         /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -56,6 +64,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbThread>(global::Repull.SDK.Models.AirbnbThread.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>(global::Repull.SDK.Models.AirbnbDataFreshness.CreateFromDiscriminatorValue); } },
                 { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.Pagination>(global::Repull.SDK.Models.Pagination.CreateFromDiscriminatorValue); } },
             };
         }
@@ -67,6 +76,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbThread>("data", Data);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>("dataFreshness", DataFreshness);
             writer.WriteObjectValue<global::Repull.SDK.Models.Pagination>("pagination", Pagination);
             writer.WriteAdditionalData(AdditionalData);
         }

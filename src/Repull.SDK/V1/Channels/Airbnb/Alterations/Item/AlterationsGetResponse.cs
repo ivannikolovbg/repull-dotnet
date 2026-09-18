@@ -15,7 +15,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations.Item
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>An Airbnb reservation alteration request (date change, guest-count change, or price change), mirrored locally in `reservation_alterations`. Fields prefixed `original*` describe the reservation as it stands today; `new*` fields describe the proposed change. Compare them to render a diff and decide whether to accept (`POST .../{id}/accept`) or decline (`POST .../{id}/decline`).</summary>
+        /// <summary>An Airbnb reservation alteration request (date change, guest-count change, price change, or a move to another listing), mirrored locally in `reservation_alterations`. Fields prefixed `original*` describe the reservation as it stands today; `new*` fields describe the proposed change. Compare them to render a diff and decide whether to accept (`POST .../{id}/accept`) or decline (`POST .../{id}/decline`) — or, for one you proposed yourself, to withdraw it (`POST .../{id}/cancel`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.AirbnbAlteration? Data { get; set; }
@@ -23,7 +23,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations.Item
 #else
         public global::Repull.SDK.Models.AirbnbAlteration Data { get; set; }
 #endif
-        /// <summary>Top-level freshness indicator for any DB-backed Airbnb read. Tells consumers WHY a column may be `null` or stale without sprinkling per-row error envelopes through the response. The endpoint always returns 200 + DB data; this field is the single signal for &quot;should I prompt the user to reconnect / wait for sync?&quot;.</summary>
+        /// <summary>Top-level freshness indicator for any DB-backed Airbnb read. Tells consumers WHY a column may be `null` or stale without sprinkling per-row error envelopes through the response. The endpoint always returns 200 + DB data; this field is the single signal for &quot;should I prompt the user to reconnect / wait for sync?&quot;.A workspace can connect several Airbnb accounts, so the answer has two levels. `accounts[]` carries the verdict per account; the top-level fields aggregate it. Scope a request with `?account_id=` and `accounts[]` holds exactly that account, with the top-level fields mirroring it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.AirbnbDataFreshness? DataFreshness { get; set; }

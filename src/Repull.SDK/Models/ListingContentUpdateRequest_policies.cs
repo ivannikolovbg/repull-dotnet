@@ -40,6 +40,16 @@ namespace Repull.SDK.Models
 #else
         public string CancellationPolicy { get; set; }
 #endif
+        /// <summary>Instruction shown with the check-in method.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CheckInInstruction { get; set; }
+#nullable restore
+#else
+        public string CheckInInstruction { get; set; }
+#endif
+        /// <summary>How the guest lets themselves in. Canonical storage only — distributing it to Airbnb is `PUT /v1/channels/airbnb/listings/{id}/details` with `check_in_option`.</summary>
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_policies_checkInMethod? CheckInMethod { get; set; }
         /// <summary>The checkInTimeEnd property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -64,6 +74,14 @@ namespace Repull.SDK.Models
 #else
         public string CheckOutTime { get; set; }
 #endif
+        /// <summary>Guest-safety disclosures — exterior cameras, noise monitors, stairs, pets, an unfenced pool. FULL replacement of the canonical set: omit to leave untouched, send `[]` to clear. Canonical storage only — distributing them to Airbnb is `PUT /v1/channels/airbnb/listings/{id}/safety-disclosures`, which merges rather than replaces.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? GuestSafetyDisclosures { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> GuestSafetyDisclosures { get; set; }
+#endif
         /// <summary>Free-text house rules.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -71,6 +89,22 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string HouseRules { get; set; }
+#endif
+        /// <summary>The quietHoursEnd property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? QuietHoursEnd { get; set; }
+#nullable restore
+#else
+        public string QuietHoursEnd { get; set; }
+#endif
+        /// <summary>Quiet-hours window start, e.g. &quot;22:00&quot;. Distributed to Airbnb by the publish path.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? QuietHoursStart { get; set; }
+#nullable restore
+#else
+        public string QuietHoursStart { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest_policies"/> and sets the default values.
@@ -104,10 +138,15 @@ namespace Repull.SDK.Models
                 { "allowsSmoking", n => { AllowsSmoking = n.GetBoolValue(); } },
                 { "cancellation", n => { Cancellation = n.GetStringValue(); } },
                 { "cancellationPolicy", n => { CancellationPolicy = n.GetStringValue(); } },
+                { "checkInInstruction", n => { CheckInInstruction = n.GetStringValue(); } },
+                { "checkInMethod", n => { CheckInMethod = n.GetEnumValue<global::Repull.SDK.Models.ListingContentUpdateRequest_policies_checkInMethod>(); } },
                 { "checkInTimeEnd", n => { CheckInTimeEnd = n.GetStringValue(); } },
                 { "checkInTimeStart", n => { CheckInTimeStart = n.GetStringValue(); } },
                 { "checkOutTime", n => { CheckOutTime = n.GetStringValue(); } },
+                { "guestSafetyDisclosures", n => { GuestSafetyDisclosures = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbSafetyDisclosure>(global::Repull.SDK.Models.AirbnbSafetyDisclosure.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "houseRules", n => { HouseRules = n.GetStringValue(); } },
+                { "quietHoursEnd", n => { QuietHoursEnd = n.GetStringValue(); } },
+                { "quietHoursStart", n => { QuietHoursStart = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -124,10 +163,15 @@ namespace Repull.SDK.Models
             writer.WriteBoolValue("allowsSmoking", AllowsSmoking);
             writer.WriteStringValue("cancellation", Cancellation);
             writer.WriteStringValue("cancellationPolicy", CancellationPolicy);
+            writer.WriteStringValue("checkInInstruction", CheckInInstruction);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ListingContentUpdateRequest_policies_checkInMethod>("checkInMethod", CheckInMethod);
             writer.WriteStringValue("checkInTimeEnd", CheckInTimeEnd);
             writer.WriteStringValue("checkInTimeStart", CheckInTimeStart);
             writer.WriteStringValue("checkOutTime", CheckOutTime);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbSafetyDisclosure>("guestSafetyDisclosures", GuestSafetyDisclosures);
             writer.WriteStringValue("houseRules", HouseRules);
+            writer.WriteStringValue("quietHoursEnd", QuietHoursEnd);
+            writer.WriteStringValue("quietHoursStart", QuietHoursStart);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

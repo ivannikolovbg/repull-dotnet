@@ -39,6 +39,22 @@ namespace Repull.SDK.Models
 #else
         public string Description { get; set; }
 #endif
+        /// <summary>What KIND of property this is. The publish path reads all three on every push, so setting them here is the update path for a listing that already exists — `POST /v1/listings` could only set the type at creation. Airbnb may lock these on an established listing; the publish response reports that in `lockedFields`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_details? Details { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_details Details { get; set; }
+#endif
+        /// <summary>Which language the `title` / `description` / `summary` / `policies.houseRules` in THIS request are written in. Defaults to `en`. Canonical content is stored per locale — one row per (listing, locale) — so sending Italian copy with `locale: &quot;it&quot;` creates or updates the Italian row instead of overwriting the English one. Distribution of a non-primary locale to Airbnb is a separate call: `PUT /v1/channels/airbnb/listings/{id}/descriptions`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Locale { get; set; }
+#nullable restore
+#else
+        public string Locale { get; set; }
+#endif
         /// <summary>Alias for `title`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -81,7 +97,7 @@ namespace Repull.SDK.Models
 #else
         public string Summary { get; set; }
 #endif
-        /// <summary>Guest-facing title. Written to the listing name and the `en` description.</summary>
+        /// <summary>Guest-facing title. Written to the listing name and the description row for `locale`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Title { get; set; }
@@ -118,6 +134,8 @@ namespace Repull.SDK.Models
                 { "address", n => { Address = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_address>(global::Repull.SDK.Models.ListingContentUpdateRequest_address.CreateFromDiscriminatorValue); } },
                 { "amenities", n => { Amenities = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities>(global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities.CreateFromDiscriminatorValue); } },
                 { "description", n => { Description = n.GetStringValue(); } },
+                { "details", n => { Details = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_details>(global::Repull.SDK.Models.ListingContentUpdateRequest_details.CreateFromDiscriminatorValue); } },
+                { "locale", n => { Locale = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "occupancy", n => { Occupancy = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy>(global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy.CreateFromDiscriminatorValue); } },
                 { "photos", n => { Photos = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
@@ -137,6 +155,8 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_address>("address", Address);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities>("amenities", Amenities);
             writer.WriteStringValue("description", Description);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_details>("details", Details);
+            writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("name", Name);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy>("occupancy", Occupancy);
             writer.WriteCollectionOfPrimitiveValues<string>("photos", Photos);

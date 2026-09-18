@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
         {
         }
         /// <summary>
-        /// Delete a room from an Airbnb listing. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=`. Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Delete a room from an Airbnb listing, and its beds with it. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=`. Requires a connected Airbnb host, else `404 no_connection`.The room is proven to belong to the listing named in the path first; a room from another listing returns `404`. Both stored copies drop the room on success — `stored` reports whether that succeeded.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsDeleteResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Delete a room from an Airbnb listing. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=`. Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Delete a room from an Airbnb listing, and its beds with it. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=`. Requires a connected Airbnb host, else `404 no_connection`.The room is proven to belong to the listing named in the path first; a room from another listing returns `404`. Both stored copies drop the room on success — `stored` reports whether that succeeded.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -97,7 +97,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List the rooms configured on an Airbnb listing, ordered by room number. **Pure DB read** from `listings_airbnb_rooms`. Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// List the rooms configured on an Airbnb listing, ordered by room number, each with its sleeping arrangement in `beds`. **Pure DB read** from `listings_airbnb_rooms` + `listings_airbnb_beds`. Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -128,7 +128,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List the rooms configured on an Airbnb listing, ordered by room number. **Pure DB read** from `listings_airbnb_rooms`. Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// List the rooms configured on an Airbnb listing, ordered by room number, each with its sleeping arrangement in `beds`. **Pure DB read** from `listings_airbnb_rooms` + `listings_airbnb_beds`. Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -160,9 +160,9 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create a new room on an Airbnb listing. **Write-side** — calls Airbnb upstream. Body is the full room object minus `room_id`. Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Create a new room on an Airbnb listing, with its sleeping arrangement. **Write-side** — calls Airbnb upstream. Requires a connected Airbnb host, else `404 no_connection`.The response is the room object as Airbnb returned it. The new room is also seeded into our own copy, so the very next `GET /rooms` shows it rather than waiting for the sync.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
-        /// <param name="body">Full Airbnb room object minus `room_id`.</param>
+        /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
@@ -190,7 +190,78 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Delete a room from an Airbnb listing. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=`. Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Change a room&apos;s type, number, privacy or sleeping arrangement. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=` and send only the fields you want to change.`beds` REPLACES the room&apos;s whole arrangement — that is Airbnb&apos;s semantics for the field — so send every bed the room has, not just the changed one.Airbnb&apos;s room endpoints are keyed by room id alone, so the room is proven to belong to the listing named in the path before anything is sent; a room from another listing returns `404`, the same answer a room that does not exist gets.On success both stored copies are rebuilt to match, so a read straight after this write returns the new arrangement. `stored` says whether that succeeded.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutResponse"/></returns>
+        /// <param name="body">At least one field. A body that changes nothing is refused rather than reported as a successful write.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutResponse?> PutAsRoomsPutResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutResponse> PutAsRoomsPutResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Change a room&apos;s type, number, privacy or sleeping arrangement. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=` and send only the fields you want to change.`beds` REPLACES the room&apos;s whole arrangement — that is Airbnb&apos;s semantics for the field — so send every bed the room has, not just the changed one.Airbnb&apos;s room endpoints are keyed by room id alone, so the room is proven to belong to the listing named in the path before anything is sent; a room from another listing returns `404`, the same answer a room that does not exist gets.On success both stored copies are rebuilt to match, so a read straight after this write returns the new arrangement. `stored` says whether that succeeded.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse"/></returns>
+        /// <param name="body">At least one field. A body that changes nothing is refused rather than reported as a successful write.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        [Obsolete("This method is obsolete. Use PutAsRoomsPutResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse?> PutAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse> PutAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Delete a room from an Airbnb listing, and its beds with it. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=`. Requires a connected Airbnb host, else `404 no_connection`.The room is proven to belong to the listing named in the path first; a room from another listing returns `404`. Both stored copies drop the room on success — `stored` reports whether that succeeded.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -209,7 +280,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             return requestInfo;
         }
         /// <summary>
-        /// List the rooms configured on an Airbnb listing, ordered by room number. **Pure DB read** from `listings_airbnb_rooms`. Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// List the rooms configured on an Airbnb listing, ordered by room number, each with its sleeping arrangement in `beds`. **Pure DB read** from `listings_airbnb_rooms` + `listings_airbnb_beds`. Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -228,10 +299,10 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             return requestInfo;
         }
         /// <summary>
-        /// Create a new room on an Airbnb listing. **Write-side** — calls Airbnb upstream. Body is the full room object minus `room_id`. Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Create a new room on an Airbnb listing, with its sleeping arrangement. **Write-side** — calls Airbnb upstream. Requires a connected Airbnb host, else `404 no_connection`.The response is the room object as Airbnb returned it. The new room is also seeded into our own copy, so the very next `GET /rooms` shows it rather than waiting for the sync.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">Full Airbnb room object minus `room_id`.</param>
+        /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -250,6 +321,28 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             return requestInfo;
         }
         /// <summary>
+        /// Change a room&apos;s type, number, privacy or sleeping arrangement. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=` and send only the fields you want to change.`beds` REPLACES the room&apos;s whole arrangement — that is Airbnb&apos;s semantics for the field — so send every bed the room has, not just the changed one.Airbnb&apos;s room endpoints are keyed by room id alone, so the room is proven to belong to the listing named in the path before anything is sent; a room from another listing returns `404`, the same answer a room that does not exist gets.On success both stored copies are rebuilt to match, so a read straight after this write returns the new arrangement. `stored` says whether that succeeded.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">At least one field. A body that changes nothing is refused rather than reported as a successful write.</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPutQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPutQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.PUT, "{+baseurl}/v1/channels/airbnb/listings/{id}/rooms?roomId={roomId}", PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
+            return requestInfo;
+        }
+        /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder"/></returns>
@@ -259,7 +352,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
             return new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Delete a room from an Airbnb listing. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=`. Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Delete a room from an Airbnb listing, and its beds with it. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=`. Requires a connected Airbnb host, else `404 no_connection`.The room is proven to belong to the listing named in the path first; a room from another listing returns `404`. Both stored copies drop the room on success — `stored` reports whether that succeeded.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class RoomsRequestBuilderDeleteQueryParameters 
@@ -297,6 +390,31 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class RoomsRequestBuilderPostRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Change a room&apos;s type, number, privacy or sleeping arrangement. **Write-side** — calls Airbnb upstream. Pass the Airbnb-side room id as `?roomId=` and send only the fields you want to change.`beds` REPLACES the room&apos;s whole arrangement — that is Airbnb&apos;s semantics for the field — so send every bed the room has, not just the changed one.Airbnb&apos;s room endpoints are keyed by room id alone, so the room is proven to belong to the listing named in the path before anything is sent; a room from another listing returns `404`, the same answer a room that does not exist gets.On success both stored copies are rebuilt to match, so a read straight after this write returns the new arrangement. `stored` says whether that succeeded.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RoomsRequestBuilderPutQueryParameters 
+        {
+            /// <summary>Airbnb-side room id to update.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("roomId")]
+            public string? RoomId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("roomId")]
+            public string RoomId { get; set; }
+#endif
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RoomsRequestBuilderPutRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPutQueryParameters>
         {
         }
     }

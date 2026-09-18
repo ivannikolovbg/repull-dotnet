@@ -20,8 +20,24 @@ namespace Repull.SDK.Models
         public DateTimeOffset? BookedAt { get; set; }
         /// <summary>The checkIn property</summary>
         public Date? CheckIn { get; set; }
+        /// <summary>Local check-in time for this stay, `HH:MM` on a 24-hour clock in the **property&apos;s own timezone** — not UTC. Usually inherited from the listing policy, overridden per reservation where an early check-in was agreed. `null` when unknown. This is the same field `PATCH /v1/reservations/{id}` writes.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CheckInTime { get; set; }
+#nullable restore
+#else
+        public string CheckInTime { get; set; }
+#endif
         /// <summary>The checkOut property</summary>
         public Date? CheckOut { get; set; }
+        /// <summary>Local check-out time for this stay, `HH:MM` on a 24-hour clock in the property&apos;s own timezone. Pair with `checkOut` to schedule the turnover clean. `null` when unknown. This is the same field `PATCH /v1/reservations/{id}` writes.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CheckOutTime { get; set; }
+#nullable restore
+#else
+        public string CheckOutTime { get; set; }
+#endif
         /// <summary>Channel-side confirmation code (Airbnb HMxxx, Booking.com numeric, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -152,7 +168,9 @@ namespace Repull.SDK.Models
             {
                 { "bookedAt", n => { BookedAt = n.GetDateTimeOffsetValue(); } },
                 { "checkIn", n => { CheckIn = n.GetDateValue(); } },
+                { "checkInTime", n => { CheckInTime = n.GetStringValue(); } },
                 { "checkOut", n => { CheckOut = n.GetDateValue(); } },
+                { "checkOutTime", n => { CheckOutTime = n.GetStringValue(); } },
                 { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
@@ -180,7 +198,9 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDateTimeOffsetValue("bookedAt", BookedAt);
             writer.WriteDateValue("checkIn", CheckIn);
+            writer.WriteStringValue("checkInTime", CheckInTime);
             writer.WriteDateValue("checkOut", CheckOut);
+            writer.WriteStringValue("checkOutTime", CheckOutTime);
             writer.WriteStringValue("confirmationCode", ConfirmationCode);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("currency", Currency);

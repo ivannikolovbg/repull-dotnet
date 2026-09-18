@@ -41,7 +41,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/listings{?include*}", pathParameters)
+        public ListingsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/listings{?account_id*,include*}", pathParameters)
         {
         }
         /// <summary>
@@ -49,15 +49,17 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/listings{?include*}", rawUrl)
+        public ListingsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/listings{?account_id*,include*}", rawUrl)
         {
         }
         /// <summary>
-        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. **Pure DB read — never calls Airbnb upstream.** The connect flow is what populates the local cache; the API serves what&apos;s already there. Customers with a disconnected host still see their last-synced data, with the top-level `dataFreshness` envelope flagging the staleness and pointing at the reconnect URL.Pass `?include=amenities` to enrich each connection with its locally-cached amenity set. Returns `null` per connection when the cache is empty.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. **Pure DB read — never calls Airbnb upstream.** The connect flow is what populates the local cache; the API serves what&apos;s already there. Customers with a disconnected host still see their last-synced data, with the top-level `dataFreshness` envelope flagging the staleness and pointing at the reconnect URL.Pass `?include=amenities` to enrich each connection with its locally-cached amenity set. Returns `null` per connection when the cache is empty.Pass `?include=thumbnail` to add `thumbnailUrl` to each listing — one extra column on the query that already runs, so a selection screen renders from a single request instead of one call per listing. `null` when the listing has no thumbnail stored. Combine comma-separated, e.g. `?include=amenities,thumbnail`.**Can this listing be written to?** Every connection carries `syncCategory` — Airbnb&apos;s own per-listing API sync decision (`sync_all`, `sync_rates_and_availability`, or `none`) — and `writable`, which is `false` exactly when that category is `none`. Airbnb authorises sync one listing at a time, so a connected account can still hold listings Airbnb refuses every write to; a write to one of those returns `403 listing_not_api_connected` before anything is sent, and reconnecting the account does not change it (the host must switch the listing on in Airbnb). Check `writable` here before a portfolio-wide push instead of discovering it one 403 at a time.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbListingListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.AirbnbListingListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -68,10 +70,15 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbListingListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbListingListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbListingListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbListingListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. **Pure DB read — never calls Airbnb upstream.** The connect flow is what populates the local cache; the API serves what&apos;s already there. Customers with a disconnected host still see their last-synced data, with the top-level `dataFreshness` envelope flagging the staleness and pointing at the reconnect URL.Pass `?include=amenities` to enrich each connection with its locally-cached amenity set. Returns `null` per connection when the cache is empty.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. **Pure DB read — never calls Airbnb upstream.** The connect flow is what populates the local cache; the API serves what&apos;s already there. Customers with a disconnected host still see their last-synced data, with the top-level `dataFreshness` envelope flagging the staleness and pointing at the reconnect URL.Pass `?include=amenities` to enrich each connection with its locally-cached amenity set. Returns `null` per connection when the cache is empty.Pass `?include=thumbnail` to add `thumbnailUrl` to each listing — one extra column on the query that already runs, so a selection screen renders from a single request instead of one call per listing. `null` when the listing has no thumbnail stored. Combine comma-separated, e.g. `?include=amenities,thumbnail`.**Can this listing be written to?** Every connection carries `syncCategory` — Airbnb&apos;s own per-listing API sync decision (`sync_all`, `sync_rates_and_availability`, or `none`) — and `writable`, which is `false` exactly when that category is `none`. Airbnb authorises sync one listing at a time, so a connected account can still hold listings Airbnb refuses every write to; a write to one of those returns `403 listing_not_api_connected` before anything is sent, and reconnecting the account does not change it (the host must switch the listing on in Airbnb). Check `writable` here before a portfolio-wide push instead of discovering it one 403 at a time.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -99,12 +106,22 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings
             return new global::Repull.SDK.V1.Channels.Airbnb.Listings.ListingsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. **Pure DB read — never calls Airbnb upstream.** The connect flow is what populates the local cache; the API serves what&apos;s already there. Customers with a disconnected host still see their last-synced data, with the top-level `dataFreshness` envelope flagging the staleness and pointing at the reconnect URL.Pass `?include=amenities` to enrich each connection with its locally-cached amenity set. Returns `null` per connection when the cache is empty.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List every Airbnb listing this workspace has access to via the connected Airbnb account. **Pure DB read — never calls Airbnb upstream.** The connect flow is what populates the local cache; the API serves what&apos;s already there. Customers with a disconnected host still see their last-synced data, with the top-level `dataFreshness` envelope flagging the staleness and pointing at the reconnect URL.Pass `?include=amenities` to enrich each connection with its locally-cached amenity set. Returns `null` per connection when the cache is empty.Pass `?include=thumbnail` to add `thumbnailUrl` to each listing — one extra column on the query that already runs, so a selection screen renders from a single request instead of one call per listing. `null` when the listing has no thumbnail stored. Combine comma-separated, e.g. `?include=amenities,thumbnail`.**Can this listing be written to?** Every connection carries `syncCategory` — Airbnb&apos;s own per-listing API sync decision (`sync_all`, `sync_rates_and_availability`, or `none`) — and `writable`, which is `false` exactly when that category is `none`. Airbnb authorises sync one listing at a time, so a connected account can still hold listings Airbnb refuses every write to; a write to one of those returns `403 listing_not_api_connected` before anything is sent, and reconnecting the account does not change it (the host must switch the listing on in Airbnb). Check `writable` here before a portfolio-wide push instead of discovering it one 403 at a time.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ListingsRequestBuilderGetQueryParameters 
         {
-            /// <summary>Comma-separated expansions. Currently supported: `amenities` (adds `amenities` and `accessibility_amenities` arrays to each connection, sourced from the local `listings_airbnb_amenities` cache).</summary>
+            /// <summary>Scope the response to ONE connected Airbnb account. The value is the Airbnb host id — the same `accounts[].externalAccountId` that `GET /v1/connect/airbnb` returns and `DELETE /v1/connect/airbnb?accountId=` accepts.A workspace can connect several Airbnb accounts. Omit this and you get every account&apos;s rows (the default, unchanged). Every row carries `accountId` + `accountName` either way, so you can group without a second call.An id that is not connected to THIS workspace returns `404 not_found` with your own ids in `valid_values` — we do not distinguish &quot;no such host&quot; from &quot;someone else&apos;s host&quot;, because confirming the latter would leak another workspace&apos;s account.Note this is NOT the `X-Account-Id` header, which carries a connection id and cannot tell two Airbnb hosts apart.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("account_id")]
+            public string? AccountId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("account_id")]
+            public string AccountId { get; set; }
+#endif
+            /// <summary>Comma-separated expansions. Currently supported: `amenities` (adds `amenities` and `accessibility_amenities` arrays to each connection, sourced from the local `listings_airbnb_amenities` cache) and `thumbnail` (adds `thumbnailUrl` to each listing). Unknown values return 422 with a `valid_values` envelope.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("include")]

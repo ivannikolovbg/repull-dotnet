@@ -2,49 +2,44 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
-using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Repull.SDK.V1.Channels.Airbnb.Alterations
+namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AlterationsPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class CoverPutResponse : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>New check-in date (YYYY-MM-DD).</summary>
-        public Date? CheckIn { get; set; }
-        /// <summary>New check-out date (YYYY-MM-DD).</summary>
-        public Date? CheckOut { get; set; }
-        /// <summary>Airbnb confirmation code of the reservation to alter.</summary>
+        /// <summary>The data property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse_data? Data { get; set; }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse_data Data { get; set; }
 #endif
-        /// <summary>New guest count.</summary>
-        public int? NumberOfGuests { get; set; }
+        /// <summary>Whether our own copy (tour order and listing thumbnail) was brought in line.</summary>
+        public bool? Stored { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsPostRequestBody"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse"/> and sets the default values.
         /// </summary>
-        public AlterationsPostRequestBody()
+        public CoverPutResponse()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsPostRequestBody"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsPostRequestBody CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.V1.Channels.Airbnb.Alterations.AlterationsPostRequestBody();
+            return new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -54,10 +49,8 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "check_in", n => { CheckIn = n.GetDateValue(); } },
-                { "check_out", n => { CheckOut = n.GetDateValue(); } },
-                { "confirmation_code", n => { ConfirmationCode = n.GetStringValue(); } },
-                { "number_of_guests", n => { NumberOfGuests = n.GetIntValue(); } },
+                { "data", n => { Data = n.GetObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse_data>(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse_data.CreateFromDiscriminatorValue); } },
+                { "stored", n => { Stored = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -67,10 +60,8 @@ namespace Repull.SDK.V1.Channels.Airbnb.Alterations
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDateValue("check_in", CheckIn);
-            writer.WriteDateValue("check_out", CheckOut);
-            writer.WriteStringValue("confirmation_code", ConfirmationCode);
-            writer.WriteIntValue("number_of_guests", NumberOfGuests);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutResponse_data>("data", Data);
+            writer.WriteBoolValue("stored", Stored);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

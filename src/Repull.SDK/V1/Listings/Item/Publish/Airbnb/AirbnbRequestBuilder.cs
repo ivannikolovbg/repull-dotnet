@@ -34,21 +34,22 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Airbnb
         {
         }
         /// <summary>
-        /// Push a Repull listing to Airbnb. Pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create a brand-new Airbnb listing under that host.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Push a Repull listing&apos;s canonical content to Airbnb. Pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create a brand-new Airbnb listing under that host.**A publish is not one call to Airbnb.** It is up to eight independent ones — details, description, amenities, rooms, policies, photos, pricing, checkout_tasks — and each can fail on its own. `result.published` is true only when every attempted section landed; `result.sections` lists the ones that did and `result.errors[]` carries Airbnb&apos;s own reason, per section, for the ones that did not. **A partial publish is normal and is not rolled back**: what succeeded stays applied. Publish again once you have fixed the failing sections — a re-publish of an unchanged section is harmless.`result.lockedFields` names the fields Airbnb will not let this listing change at all. They are not retryable by anyone: Airbnb answers 200 and applies nothing. `GET /v1/channels/airbnb/listings/{id}` reports the same list up front.**Which fields this pushes** — title, description sections and house rules (English/primary locale), amenities, rooms and beds, photos, nightly price and fees, cancellation policy and guest controls, check-in/out times, quiet hours, property and room type, checkout tasks. **Not pushed by this endpoint:** non-primary locales (`PUT /v1/channels/airbnb/listings/{id}/descriptions`), guest-safety disclosures (`PUT …/safety-disclosures`), check-in method (`PUT …/details`), permits (`PUT …/permits`), and the calendar (`PUT …/availability`).`force: true` re-pushes every section, ignoring dirty-field tracking. Without it only the sections changed since the last successful publish are sent.Send `Idempotency-Key` to make a retry safe: a timeout on a publish otherwise leaves you unable to tell whether it ran.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.ListingPublishResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ListingPublishAirbnbResponse"/></returns>
         /// <param name="body">Pass either `airbnbConnectionId` (update an already-mapped listing) or `hostId` (create a brand-new Airbnb listing under that host).</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.ListingPublishResponse?> PostAsync(global::Repull.SDK.Models.ListingPublishAirbnbRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ListingPublishAirbnbResponse?> PostAsync(global::Repull.SDK.Models.ListingPublishAirbnbRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.ListingPublishResponse> PostAsync(global::Repull.SDK.Models.ListingPublishAirbnbRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ListingPublishAirbnbResponse> PostAsync(global::Repull.SDK.Models.ListingPublishAirbnbRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -57,11 +58,12 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Airbnb
             {
                 { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPublishResponse>(requestInfo, global::Repull.SDK.Models.ListingPublishResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingPublishAirbnbResponse>(requestInfo, global::Repull.SDK.Models.ListingPublishAirbnbResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Push a Repull listing to Airbnb. Pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create a brand-new Airbnb listing under that host.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Push a Repull listing&apos;s canonical content to Airbnb. Pass `airbnbConnectionId` to update an already-mapped Airbnb listing, or `hostId` to create a brand-new Airbnb listing under that host.**A publish is not one call to Airbnb.** It is up to eight independent ones — details, description, amenities, rooms, policies, photos, pricing, checkout_tasks — and each can fail on its own. `result.published` is true only when every attempted section landed; `result.sections` lists the ones that did and `result.errors[]` carries Airbnb&apos;s own reason, per section, for the ones that did not. **A partial publish is normal and is not rolled back**: what succeeded stays applied. Publish again once you have fixed the failing sections — a re-publish of an unchanged section is harmless.`result.lockedFields` names the fields Airbnb will not let this listing change at all. They are not retryable by anyone: Airbnb answers 200 and applies nothing. `GET /v1/channels/airbnb/listings/{id}` reports the same list up front.**Which fields this pushes** — title, description sections and house rules (English/primary locale), amenities, rooms and beds, photos, nightly price and fees, cancellation policy and guest controls, check-in/out times, quiet hours, property and room type, checkout tasks. **Not pushed by this endpoint:** non-primary locales (`PUT /v1/channels/airbnb/listings/{id}/descriptions`), guest-safety disclosures (`PUT …/safety-disclosures`), check-in method (`PUT …/details`), permits (`PUT …/permits`), and the calendar (`PUT …/availability`).`force: true` re-pushes every section, ignoring dirty-field tracking. Without it only the sections changed since the last successful publish are sent.Send `Idempotency-Key` to make a retry safe: a timeout on a publish otherwise leaves you unable to tell whether it ran.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Pass either `airbnbConnectionId` (update an already-mapped listing) or `hostId` (create a brand-new Airbnb listing under that host).</param>

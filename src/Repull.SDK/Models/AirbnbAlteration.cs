@@ -8,11 +8,27 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// An Airbnb reservation alteration request (date change, guest-count change, or price change), mirrored locally in `reservation_alterations`. Fields prefixed `original*` describe the reservation as it stands today; `new*` fields describe the proposed change. Compare them to render a diff and decide whether to accept (`POST .../{id}/accept`) or decline (`POST .../{id}/decline`).
+    /// An Airbnb reservation alteration request (date change, guest-count change, price change, or a move to another listing), mirrored locally in `reservation_alterations`. Fields prefixed `original*` describe the reservation as it stands today; `new*` fields describe the proposed change. Compare them to render a diff and decide whether to accept (`POST .../{id}/accept`) or decline (`POST .../{id}/decline`) — or, for one you proposed yourself, to withdraw it (`POST .../{id}/cancel`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbAlteration : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Which connected Airbnb account this row belongs to — the Airbnb host id, as a string (they exceed 2^53). The same value `?account_id=` accepts and `GET /v1/connect/airbnb` returns as `accounts[].externalAccountId`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountId { get; set; }
+#nullable restore
+#else
+        public string AccountId { get; set; }
+#endif
+        /// <summary>Display name of that connected Airbnb account.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountName { get; set; }
+#nullable restore
+#else
+        public string AccountName { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Airbnb alteration id. This is the `{id}` you pass to `GET/POST /v1/channels/airbnb/alterations/{id}` and the accept / decline sub-routes.</summary>
@@ -41,12 +57,28 @@ namespace Repull.SDK.Models
 #else
         public string Initiator { get; set; }
 #endif
+        /// <summary>The same transfer target as Airbnb spells it (the Airbnb listing id). Present alongside `newListingId`; it is also the only one of the two that is set when the destination listing has not been imported into this workspace.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? NewAirbnbListingId { get; set; }
+#nullable restore
+#else
+        public string NewAirbnbListingId { get; set; }
+#endif
         /// <summary>Proposed new check-in.</summary>
         public DateTimeOffset? NewCheckIn { get; set; }
         /// <summary>Proposed new check-out.</summary>
         public DateTimeOffset? NewCheckOut { get; set; }
         /// <summary>Proposed new guest count.</summary>
         public int? NewGuestCount { get; set; }
+        /// <summary>Repull listing id the alteration moves the reservation to — a **listing transfer**. `null` when the alteration does not change the listing, which is the usual case. Compare it with the reservation&apos;s current `listingId` to render the move. Like every id on this API it is a string.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? NewListingId { get; set; }
+#nullable restore
+#else
+        public string NewListingId { get; set; }
+#endif
         /// <summary>Proposed new total price (decimal string).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -136,13 +168,17 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accountId", n => { AccountId = n.GetStringValue(); } },
+                { "accountName", n => { AccountName = n.GetStringValue(); } },
                 { "alterationId", n => { AlterationId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "initiator", n => { Initiator = n.GetStringValue(); } },
+                { "newAirbnbListingId", n => { NewAirbnbListingId = n.GetStringValue(); } },
                 { "newCheckIn", n => { NewCheckIn = n.GetDateTimeOffsetValue(); } },
                 { "newCheckOut", n => { NewCheckOut = n.GetDateTimeOffsetValue(); } },
                 { "newGuestCount", n => { NewGuestCount = n.GetIntValue(); } },
+                { "newListingId", n => { NewListingId = n.GetStringValue(); } },
                 { "newTotalPrice", n => { NewTotalPrice = n.GetStringValue(); } },
                 { "notes", n => { Notes = n.GetStringValue(); } },
                 { "originalCheckIn", n => { OriginalCheckIn = n.GetDateTimeOffsetValue(); } },
@@ -163,13 +199,17 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("accountId", AccountId);
+            writer.WriteStringValue("accountName", AccountName);
             writer.WriteStringValue("alterationId", AlterationId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("initiator", Initiator);
+            writer.WriteStringValue("newAirbnbListingId", NewAirbnbListingId);
             writer.WriteDateTimeOffsetValue("newCheckIn", NewCheckIn);
             writer.WriteDateTimeOffsetValue("newCheckOut", NewCheckOut);
             writer.WriteIntValue("newGuestCount", NewGuestCount);
+            writer.WriteStringValue("newListingId", NewListingId);
             writer.WriteStringValue("newTotalPrice", NewTotalPrice);
             writer.WriteStringValue("notes", Notes);
             writer.WriteDateTimeOffsetValue("originalCheckIn", OriginalCheckIn);

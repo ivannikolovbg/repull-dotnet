@@ -5,6 +5,33 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.12] - 2026-09-18
+
+### Added
+- **Regenerated against the live spec (175 → 191 operations, 133 paths).** 16 new operations, nothing removed.
+- **Airbnb listing content write surface** — full read/write control of a listing's Airbnb-side content, under `client.V1.Channels.Airbnb.Listings[id]`:
+  - `BookingSettings` (`GET`/`PUT`) — instant book, advance notice, booking window, check-in/check-out windows, preparation time, and cancellation policy including `nonRefundable` and `shortStayPolicy`.
+  - `Details` (`GET`/`PUT`) — property type (category + group), room type, person capacity, bedrooms/beds/bathrooms, check-in option (`category` + `instruction`), and quiet hours. Responses carry `lockedFields` — attributes Airbnb won't let this listing change.
+  - `Permits` (`GET`/`PUT`) — permit answers, with a `cached`/`cached.permitData` shape for previously-submitted values.
+  - `SafetyDisclosures` (`GET`/`PUT`).
+  - `Photos.PatchAsync` — update photo metadata (caption, category, room) without re-uploading; `Photos.Order.PutAsync` — reorder the gallery; `Photos.Cover.PutAsync` — set the cover photo.
+  - `Rooms.PutAsync` — update an existing room (beds, room type, room amenities), alongside the existing `Rooms.PostAsync` create.
+  - `Amenities.PutAsync` — bulk-write amenities and accessibility amenities.
+  - `Descriptions.PutAsync` — per-locale content writes now return `blockedFields` (fields Airbnb dropped as locked) distinct from a clean `[]`.
+- **`AirbnbAlterationsItemRequestBuilder.Cancel.PostAsync`** — `POST /v1/channels/airbnb/alterations/{id}/cancel`.
+- **`ListingsItemRequestBuilder.Pull.Airbnb.PostAsync`** — `POST /v1/listings/{id}/pull/airbnb`, optionally scoped to one connection via `AirbnbConnectionId` (`ListingPullAirbnbRequest`) when a listing carries several Airbnb connections.
+- **`?include=thumbnail`** now supported on both listing lists — `GET /v1/listings` and `GET /v1/channels/airbnb/listings` — guaranteeing `thumbnailUrl` on every row, including reduced inactive ones; combine with `?include=content,thumbnail`.
+- **`AirbnbConnection`** gains `SyncCategory`, `Writable`, `LockedFields`, `AccountId`, `AccountName`, `HostName`.
+- **`AirbnbDataFreshness.Accounts`** (`List<AirbnbAccountFreshness>`) — per-account freshness breakdown.
+- **`Reservation.CheckInTime` / `CheckOutTime`**.
+- **New error code `listing_not_api_connected`** — the existing Airbnb error family now also covers the new content-write routes.
+- **`AirbnbPublishResult`** — typed publish outcome (`Published`, `Sections`, `Errors` as `List<PublishSectionError>`, `LockedFields`, `Reason`) for a publish that Airbnb applies as up to eight independent, individually-failable sections.
+
+### Changed (BREAKING)
+- **`Listings.Item.Publish.Airbnb.PostAsync` return type** changed from `Models.ListingPublishResponse` to the new `Models.ListingPublishAirbnbResponse`. `ListingPublishResponse` is unchanged and still used by `Listings.Item.Publish.Booking`.
+- **`Channels.Airbnb.Alterations.PostAsync`** — request body type renamed from the nested `Alterations.AlterationsPostRequestBody` to the shared `Models.AirbnbAlterationCreateRequest`, and the return type changed from `Task` (void) to `Task<AirbnbAlteration>`.
+- **`Channels.Airbnb.Listings.Item.PostAsync`** (listing state action: `delete`/`push`/`publish`/`force`) return type changed from raw `Stream` to a typed composed response (`AirbnbListingLifecycleResponse` / member types) — Kiota keeps the old `PostAsync` signature as `[Obsolete]` and adds `PostAsListingsPostResponseAsync` as the preferred typed call.
+
 ## [0.2.11] - 2026-09-15
 
 ### Added

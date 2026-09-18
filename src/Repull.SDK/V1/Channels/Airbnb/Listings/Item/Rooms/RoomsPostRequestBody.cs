@@ -7,21 +7,50 @@ using System.IO;
 using System;
 namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
 {
-    /// <summary>
-    /// Full Airbnb room object minus `room_id`.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class RoomsPostRequestBody : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class RoomsPostRequestBody : IParsable
+    #pragma warning restore CS1591
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody"/> and sets the default values.
-        /// </summary>
-        public RoomsPostRequestBody()
-        {
-            AdditionalData = new Dictionary<string, object>();
-        }
+        /// <summary>The room&apos;s whole sleeping arrangement. Replaces what is there — send every bed, not just the changed one.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_beds>? Beds { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_beds> Beds { get; set; }
+#endif
+        /// <summary>The is_private property</summary>
+        public bool? IsPrivate { get; set; }
+        /// <summary>Accepted and ignored — the listing comes from the path.</summary>
+        [Obsolete("")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody.RoomsPostRequestBody_listing_id? ListingId { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody.RoomsPostRequestBody_listing_id ListingId { get; set; }
+#endif
+        /// <summary>The metadata property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_metadata? Metadata { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_metadata Metadata { get; set; }
+#endif
+        /// <summary>Amenities attached to this room, not to the listing.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_room_amenities>? RoomAmenities { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_room_amenities> RoomAmenities { get; set; }
+#endif
+        /// <summary>The room&apos;s position among the listing&apos;s rooms. Airbnb keys rooms of the same type by this number, so two bedrooms are 1 and 2.</summary>
+        public int? RoomNumber { get; set; }
+        /// <summary>The room_type property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_room_type? RoomType { get; set; }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -40,6 +69,13 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "beds", n => { Beds = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_beds>(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_beds.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "is_private", n => { IsPrivate = n.GetBoolValue(); } },
+                { "listing_id", n => { ListingId = n.GetObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody.RoomsPostRequestBody_listing_id>(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody.RoomsPostRequestBody_listing_id.CreateFromDiscriminatorValue); } },
+                { "metadata", n => { Metadata = n.GetObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_metadata>(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_metadata.CreateFromDiscriminatorValue); } },
+                { "room_amenities", n => { RoomAmenities = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_room_amenities>(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_room_amenities.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "room_number", n => { RoomNumber = n.GetIntValue(); } },
+                { "room_type", n => { RoomType = n.GetEnumValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_room_type>(); } },
             };
         }
         /// <summary>
@@ -49,7 +85,74 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteAdditionalData(AdditionalData);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_beds>("beds", Beds);
+            writer.WriteBoolValue("is_private", IsPrivate);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody.RoomsPostRequestBody_listing_id>("listing_id", ListingId);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_metadata>("metadata", Metadata);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_room_amenities>("room_amenities", RoomAmenities);
+            writer.WriteIntValue("room_number", RoomNumber);
+            writer.WriteEnumValue<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody_room_type>("room_type", RoomType);
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="int"/>, <see cref="string"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RoomsPostRequestBody_listing_id : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="int"/></summary>
+            public int? Integer { get; set; }
+            /// <summary>Composed type representation for type <see cref="string"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public string? String { get; set; }
+#nullable restore
+#else
+            public string String { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody.RoomsPostRequestBody_listing_id"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody.RoomsPostRequestBody_listing_id CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPostRequestBody.RoomsPostRequestBody_listing_id();
+                if(parseNode.GetIntValue() is int integerValue)
+                {
+                    result.Integer = integerValue;
+                }
+                else if(parseNode.GetStringValue() is string stringValue)
+                {
+                    result.String = stringValue;
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(Integer != null)
+                {
+                    writer.WriteIntValue(null, Integer);
+                }
+                else if(String != null)
+                {
+                    writer.WriteStringValue(null, String);
+                }
+            }
         }
     }
 }

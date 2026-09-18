@@ -35,7 +35,7 @@ namespace Repull.SDK.Models
 #else
         public string LastDisconnectReason { get; set; }
 #endif
-        /// <summary>When the host record was last touched (token refresh / activation / restriction). Closest available proxy for &quot;last successful sync&quot;.</summary>
+        /// <summary>When this account last COMPLETED an Airbnb import. `null` when it never has. A run that failed or was rate-limited does not move it, and neither does anything other than a sync.</summary>
         public DateTimeOffset? LastSyncedAt { get; set; }
         /// <summary>Display name (preferred form, falling back to legal first name). Null when both fields are empty.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

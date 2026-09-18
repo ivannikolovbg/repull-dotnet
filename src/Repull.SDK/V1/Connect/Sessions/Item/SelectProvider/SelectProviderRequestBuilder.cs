@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Connect.Sessions.Item.SelectProvider
         {
         }
         /// <summary>
-        /// Called by the hosted picker page once the user clicks a channel card. Validates the provider exists and is permitted by the session&apos;s `allowed_providers` whitelist (if any), then returns the next-step URL the picker should navigate to.No API key required — the session ID is the capability token. The session must still be pending and unexpired.
+        /// Called by the hosted picker page once the user clicks a channel card. Validates the provider exists and is permitted by the session&apos;s `allowedProviders` whitelist (if any), then returns the next-step URL the picker should navigate to.No API key required — the session ID is the capability token. The session must still be pending and unexpired.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.SelectProviderResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -54,7 +54,7 @@ namespace Repull.SDK.V1.Connect.Sessions.Item.SelectProvider
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.SelectProviderResponse>(requestInfo, global::Repull.SDK.Models.SelectProviderResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Called by the hosted picker page once the user clicks a channel card. Validates the provider exists and is permitted by the session&apos;s `allowed_providers` whitelist (if any), then returns the next-step URL the picker should navigate to.No API key required — the session ID is the capability token. The session must still be pending and unexpired.
+        /// Called by the hosted picker page once the user clicks a channel card. Validates the provider exists and is permitted by the session&apos;s `allowedProviders` whitelist (if any), then returns the next-step URL the picker should navigate to.No API key required — the session ID is the capability token. The session must still be pending and unexpired.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

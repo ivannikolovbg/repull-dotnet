@@ -9,13 +9,21 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.
+    /// Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.**Stay terms are the one exception to that rule.** `cancellationPolicy`, `checkInTime` and `checkOutTime` ride on every delivery, because the decisions they drive — is a refund owed, when can housekeeping turn the unit over — are made at the moment the webhook lands, not on a follow-up fetch. They are operational parameters of the booking, not contact or payment data. Guest email, payment method and payment reference stay off the snapshot; see `GET /v1/reservations/{id}`.All three are `null` when the source channel did not supply them. They are never defaulted: a fabricated policy is worse than a missing one.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationWebhookObject : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Cancellation policy the booking was made under, **verbatim from the source channel** — not normalised, because the codes do not mean the same thing across channels.- Airbnb, Vrbo, direct and owner bookings carry a named code: `flexible`, `moderate`, `firm_14`, `strict_14_with_grace_period`, `better_strict_with_grace_period`, `super_strict_30`, `super_strict_60`, `tiered_pricing_non_refundable`, `long_term_flexible`, `flexible_new`.- **Booking.com carries its numeric policy id as a string** (`&quot;1&quot;`, `&quot;74&quot;`, `&quot;121&quot;`). It is not self-describing — resolve it against the property&apos;s policy set on Booking.com.`null` when the channel supplied none (iCal-imported bookings, some legacy direct rows).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CancellationPolicy { get; set; }
+#nullable restore
+#else
+        public string CancellationPolicy { get; set; }
+#endif
         /// <summary>Source channel — `airbnb`, `booking`, `vrbo`, `direct`, `owner`, `mid_stay_clean`, etc.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -26,8 +34,24 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Check-in date (local property date, no timezone).</summary>
         public Date? CheckinDate { get; set; }
+        /// <summary>Local check-in time, `HH:MM` on a 24-hour clock in the **property&apos;s own timezone** — not UTC, and not the subscriber&apos;s. Usually inherited from the listing policy, but per-reservation where the channel or an agreed early check-in overrides it. `null` when unknown.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CheckInTime { get; set; }
+#nullable restore
+#else
+        public string CheckInTime { get; set; }
+#endif
         /// <summary>Check-out date (local property date, no timezone).</summary>
         public Date? CheckoutDate { get; set; }
+        /// <summary>Local check-out time, `HH:MM` on a 24-hour clock in the property&apos;s own timezone. Pair it with `checkoutDate` to schedule the turnover. `null` when unknown.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CheckOutTime { get; set; }
+#nullable restore
+#else
+        public string CheckOutTime { get; set; }
+#endif
         /// <summary>Workspace (customer) id this reservation belongs to.</summary>
         public int? CustomerId { get; set; }
         /// <summary>Repull-internal reservation id. Pass to `GET /v1/reservations/{id}`.</summary>
@@ -75,7 +99,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "cancellationPolicy", n => { CancellationPolicy = n.GetStringValue(); } },
                 { "channel", n => { Channel = n.GetStringValue(); } },
+                { "checkInTime", n => { CheckInTime = n.GetStringValue(); } },
+                { "checkOutTime", n => { CheckOutTime = n.GetStringValue(); } },
                 { "checkinDate", n => { CheckinDate = n.GetDateValue(); } },
                 { "checkoutDate", n => { CheckoutDate = n.GetDateValue(); } },
                 { "customerId", n => { CustomerId = n.GetIntValue(); } },
@@ -92,9 +119,12 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("cancellationPolicy", CancellationPolicy);
             writer.WriteStringValue("channel", Channel);
             writer.WriteDateValue("checkinDate", CheckinDate);
+            writer.WriteStringValue("checkInTime", CheckInTime);
             writer.WriteDateValue("checkoutDate", CheckoutDate);
+            writer.WriteStringValue("checkOutTime", CheckOutTime);
             writer.WriteIntValue("customerId", CustomerId);
             writer.WriteIntValue("id", Id);
             writer.WriteIntValue("listingId", ListingId);

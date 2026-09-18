@@ -35,7 +35,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public MessagingRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/messaging", pathParameters)
+        public MessagingRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/messaging{?account_id*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,44 +43,46 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public MessagingRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/messaging", rawUrl)
+        public MessagingRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/messaging{?account_id*}", rawUrl)
         {
         }
         /// <summary>
-        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.Threads on inactive listings are left out; they keep syncing and reappear once the listing is activated. Filtering by an inactive listing (`listing_id`) returns `403 listing_inactive`.
+        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.Threads on inactive listings are left out; they keep syncing and reappear once the listing is activated. Filtering by an inactive listing (`listing_id`) returns `403 listing_inactive`.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbThreadListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.AirbnbThreadListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbThreadListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.MessagingRequestBuilder.MessagingRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.AirbnbThreadListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbThreadListResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.MessagingRequestBuilder.MessagingRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbThreadListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbThreadListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.Threads on inactive listings are left out; they keep syncing and reappear once the listing is activated. Filtering by an inactive listing (`listing_id`) returns `403 listing_inactive`.
+        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.Threads on inactive listings are left out; they keep syncing and reappear once the listing is activated. Filtering by an inactive listing (`listing_id`) returns `403 listing_inactive`.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.MessagingRequestBuilder.MessagingRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.MessagingRequestBuilder.MessagingRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -98,11 +100,28 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging
             return new global::Repull.SDK.V1.Channels.Airbnb.Messaging.MessagingRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// List Airbnb message threads (one per guest conversation). Cursor-paginated. Each thread includes a preview of the latest message.Threads on inactive listings are left out; they keep syncing and reappear once the listing is activated. Filtering by an inactive listing (`listing_id`) returns `403 listing_inactive`.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class MessagingRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Scope the response to ONE connected Airbnb account. The value is the Airbnb host id — the same `accounts[].externalAccountId` that `GET /v1/connect/airbnb` returns and `DELETE /v1/connect/airbnb?accountId=` accepts.A workspace can connect several Airbnb accounts. Omit this and you get every account&apos;s rows (the default, unchanged). Every row carries `accountId` + `accountName` either way, so you can group without a second call.An id that is not connected to THIS workspace returns `404 not_found` with your own ids in `valid_values` — we do not distinguish &quot;no such host&quot; from &quot;someone else&apos;s host&quot;, because confirming the latter would leak another workspace&apos;s account.Note this is NOT the `X-Account-Id` header, which carries a connection id and cannot tell two Airbnb hosts apart.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("account_id")]
+            public string? AccountId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("account_id")]
+            public string AccountId { get; set; }
+#endif
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class MessagingRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class MessagingRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.MessagingRequestBuilder.MessagingRequestBuilderGetQueryParameters>
         {
         }
     }

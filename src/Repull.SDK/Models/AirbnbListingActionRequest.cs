@@ -13,11 +13,11 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbListingActionRequest : IAdditionalDataHolder, IParsable
     {
-        /// <summary>`delete` deactivates the Repull record. `push`/`publish` push content to Airbnb.</summary>
+        /// <summary>`delete` deactivates the REPULL RECORD — billing and API visibility — and never calls Airbnb. `push`/`publish` push content to Airbnb. `unlist` takes the LIVE AIRBNB LISTING down so it stops taking bookings; `relist` puts it back up. Deactivating and unlisting are different operations with different blast radii and are deliberately different action names.</summary>
         public global::Repull.SDK.Models.AirbnbListingActionRequest_action? Action { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>For `push`/`publish`: the Airbnb connection to update (from `GET /v1/channels/airbnb/listings/{id}`). Pass this OR `hostId`.</summary>
+        /// <summary>For `push`/`publish`: the Airbnb connection to update (from `GET /v1/channels/airbnb/listings/{id}`). Pass this OR `hostId`. REQUIRED for `unlist`/`relist`: a listing can be connected to more than one Airbnb listing and the wrong one cannot be un-taken-down through this API.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AirbnbConnectionId { get; set; }

@@ -14,6 +14,22 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbTransaction : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Which connected Airbnb account this transaction belongs to — the Airbnb host id, as a string (they exceed 2^53). `null` on rows that name no listing (payouts).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountId { get; set; }
+#nullable restore
+#else
+        public string AccountId { get; set; }
+#endif
+        /// <summary>Display name of that connected Airbnb account.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountName { get; set; }
+#nullable restore
+#else
+        public string AccountName { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Top-level transaction amount.</summary>
@@ -191,6 +207,8 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "account_id", n => { AccountId = n.GetStringValue(); } },
+                { "account_name", n => { AccountName = n.GetStringValue(); } },
                 { "amount", n => { Amount = n.GetDoubleValue(); } },
                 { "booked_at", n => { BookedAt = n.GetDateTimeOffsetValue(); } },
                 { "check_in", n => { CheckIn = n.GetDateTimeOffsetValue(); } },
@@ -227,6 +245,8 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("account_id", AccountId);
+            writer.WriteStringValue("account_name", AccountName);
             writer.WriteDoubleValue("amount", Amount);
             writer.WriteDateTimeOffsetValue("booked_at", BookedAt);
             writer.WriteDateTimeOffsetValue("check_in", CheckIn);

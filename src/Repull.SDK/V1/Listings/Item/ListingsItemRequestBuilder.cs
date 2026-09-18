@@ -11,6 +11,7 @@ using Repull.SDK.V1.Listings.Item.Photos;
 using Repull.SDK.V1.Listings.Item.Pricing;
 using Repull.SDK.V1.Listings.Item.Publish;
 using Repull.SDK.V1.Listings.Item.PublishStatus;
+using Repull.SDK.V1.Listings.Item.Pull;
 using Repull.SDK.V1.Listings.Item.Segments;
 using System.Collections.Generic;
 using System.IO;
@@ -59,6 +60,11 @@ namespace Repull.SDK.V1.Listings.Item
         public global::Repull.SDK.V1.Listings.Item.PublishStatus.PublishStatusRequestBuilder PublishStatus
         {
             get => new global::Repull.SDK.V1.Listings.Item.PublishStatus.PublishStatusRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The pull property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Pull.PullRequestBuilder Pull
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Pull.PullRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The segments property</summary>
         public global::Repull.SDK.V1.Listings.Item.Segments.SegmentsRequestBuilder Segments
