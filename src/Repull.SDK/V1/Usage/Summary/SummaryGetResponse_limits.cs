@@ -16,6 +16,8 @@ namespace Repull.SDK.V1.Usage.Summary
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The dailyAiRequests property</summary>
         public int? DailyAiRequests { get; set; }
+        /// <summary>The dailyRequests property</summary>
+        public int? DailyRequests { get; set; }
         /// <summary>The monthlyRequests property</summary>
         public int? MonthlyRequests { get; set; }
         /// <summary>
@@ -44,6 +46,7 @@ namespace Repull.SDK.V1.Usage.Summary
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "dailyAiRequests", n => { DailyAiRequests = n.GetIntValue(); } },
+                { "dailyRequests", n => { DailyRequests = n.GetIntValue(); } },
                 { "monthlyRequests", n => { MonthlyRequests = n.GetIntValue(); } },
             };
         }
@@ -55,6 +58,7 @@ namespace Repull.SDK.V1.Usage.Summary
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("dailyAiRequests", DailyAiRequests);
+            writer.WriteIntValue("dailyRequests", DailyRequests);
             writer.WriteIntValue("monthlyRequests", MonthlyRequests);
             writer.WriteAdditionalData(AdditionalData);
         }

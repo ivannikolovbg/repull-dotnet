@@ -8,14 +8,14 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Returned by `GET /v1/channels/booking/properties/{id}/rooms`. Exposes the Booking.com room + rate-plan mapping ids for a listing so a caller can assemble a `PUT /v1/channels/booking/availability` restriction write (which requires `roomId` + `rateId` on every update). Sourced from Booking&apos;s B.XML roomrates feed.
+    /// Returned by `GET /v1/channels/booking/properties/{id}/rooms`. Exposes the Booking.com room + rate-plan mapping ids for a listing so a caller can assemble a `PUT /v1/channels/booking/availability` restriction write (which requires `roomId` + `rateId` on every update). Read live from Booking&apos;s B.XML roomrates feed; `source` says so, and says when the answer came from the last import instead.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingRoomsRatesResponse : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Booking.com hotel/property id the rooms belong to.</summary>
+        /// <summary>Booking.com hotel/property id the rooms belong to — the one the mapping resolved to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? HotelId { get; set; }
@@ -23,9 +23,31 @@ namespace Repull.SDK.Models
 #else
         public string HotelId { get; set; }
 #endif
-        /// <summary>Vanio listing id echoed back.</summary>
-        public int? ListingId { get; set; }
-        /// <summary>The rooms property</summary>
+        /// <summary>Repull listing id echoed back.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
+        /// <summary>Why the live read was not used. Null when `source` is `booking`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? MirrorReason { get; set; }
+#nullable restore
+#else
+        public string MirrorReason { get; set; }
+#endif
+        /// <summary>Other Booking.com properties this listing is also published under. Empty in the normal case. Pass one as `?hotel_id=` to read its rooms instead.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? OtherHotelIds { get; set; }
+#nullable restore
+#else
+        public List<string> OtherHotelIds { get; set; }
+#endif
+        /// <summary>Empty only when Booking.com reports no rooms for this property AND nothing was recorded at the last import. A failed read is never an empty list — it is an error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms>? Rooms { get; set; }
@@ -33,6 +55,8 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms> Rooms { get; set; }
 #endif
+        /// <summary>Where the rooms came from. `booking` — read live from Booking.com just now. `mirror` — Booking.com returned nothing usable, so these are the rooms and rate plans recorded at the last import; the ids are Booking.com&apos;s own and are safe to write against, but they can be stale and `maxPersons`, `policy`, `policyId`, `pricingType` and `isChildRate` come back `null` because only the live feed states them.</summary>
+        public global::Repull.SDK.Models.BookingRoomsRatesResponse_source? Source { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRoomsRatesResponse"/> and sets the default values.
         /// </summary>
@@ -58,9 +82,12 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "hotel_id", n => { HotelId = n.GetStringValue(); } },
-                { "listing_id", n => { ListingId = n.GetIntValue(); } },
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "mirrorReason", n => { MirrorReason = n.GetStringValue(); } },
+                { "otherHotelIds", n => { OtherHotelIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "rooms", n => { Rooms = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms>(global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "source", n => { Source = n.GetEnumValue<global::Repull.SDK.Models.BookingRoomsRatesResponse_source>(); } },
             };
         }
         /// <summary>
@@ -70,9 +97,12 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("hotel_id", HotelId);
-            writer.WriteIntValue("listing_id", ListingId);
+            writer.WriteStringValue("hotelId", HotelId);
+            writer.WriteStringValue("listingId", ListingId);
+            writer.WriteStringValue("mirrorReason", MirrorReason);
+            writer.WriteCollectionOfPrimitiveValues<string>("otherHotelIds", OtherHotelIds);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms>("rooms", Rooms);
+            writer.WriteEnumValue<global::Repull.SDK.Models.BookingRoomsRatesResponse_source>("source", Source);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

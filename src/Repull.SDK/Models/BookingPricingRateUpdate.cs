@@ -8,14 +8,14 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A single (room, rate-plan, date-range) update pushed to Booking.com via the rates API.
+    /// A single (room, rate-plan, date-range) price update. The amount is written against the party size in `occupancy`, for every night from `dateRange.start` to `dateRange.end` inclusive.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingPricingRateUpdate : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The currency property</summary>
+        /// <summary>Currency the rate plan is sold in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Currency { get; set; }
@@ -23,7 +23,7 @@ namespace Repull.SDK.Models
 #else
         public string Currency { get; set; }
 #endif
-        /// <summary>The dateRange property</summary>
+        /// <summary>The nights this update applies to. **Both ends are inclusive**: `{ &quot;start&quot;: &quot;2026-11-04&quot;, &quot;end&quot;: &quot;2026-11-04&quot; }` writes exactly one night.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.BookingPricingRateUpdate_dateRange? DateRange { get; set; }
@@ -31,11 +31,11 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.BookingPricingRateUpdate_dateRange DateRange { get; set; }
 #endif
-        /// <summary>The occupancy property</summary>
+        /// <summary>The party size this rate plan prices — a key, not a preference. Booking.com stores the amount against this number: above the rate plan&apos;s own maximum it declines the price in silence and the night keeps its old value; below it, it answers 400 and the old price stays published. Omit it and Repull resolves it from Booking.com&apos;s own data for this (room, rate plan) and echoes the value and its source back in `occupancy[]`. When it cannot be resolved the write is refused with `422` naming `updates[N].occupancy` — a price is never sent at a guessed party size.</summary>
         public int? Occupancy { get; set; }
-        /// <summary>The price property</summary>
+        /// <summary>Nightly amount, in `currency`, for a party of `occupancy`.</summary>
         public double? Price { get; set; }
-        /// <summary>Booking.com rate-plan ID.</summary>
+        /// <summary>Booking.com rate-plan id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RateId { get; set; }
@@ -43,7 +43,7 @@ namespace Repull.SDK.Models
 #else
         public string RateId { get; set; }
 #endif
-        /// <summary>Optional length-of-stay / availability restrictions for one rate update. Every field here is forwarded verbatim into Booking.com&apos;s rates XML (`minimumstay`, `maximumstay`, `closedonarrival`, `closedondeparture`, …) — omit a field to leave that restriction untouched.</summary>
+        /// <summary>Length-of-stay and arrival restrictions for the nights in this update. Omit a field to leave that restriction untouched — nothing you do not state is changed.These are written on Booking.com&apos;s availability notification, which is the wire that carries a restriction when no inventory changes hands. Sending them alongside a price is supported: the prices and the restrictions are two writes, and the response reports each one separately (`price` and `restrictions`), so a half that lands is never reported as a failure and a half that is refused is never reported as applied.Three restrictions are refused with `422 restriction_not_supported` naming the field: Booking.com&apos;s notification has no element for them, and dropping a restriction you stated would be worse than refusing it. Set those on the rate plan in the Booking.com Extranet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions? Restrictions { get; set; }
@@ -51,7 +51,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions Restrictions { get; set; }
 #endif
-        /// <summary>Booking.com room ID for the rate plan. Comes from `listings_booking_rooms` mapping.</summary>
+        /// <summary>Booking.com room id the rate plan sells. `GET /v1/channels/booking/properties/{id}/rooms` lists them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RoomId { get; set; }
@@ -59,9 +59,10 @@ namespace Repull.SDK.Models
 #else
         public string RoomId { get; set; }
 #endif
-        /// <summary>Rooms to sell for the date range. Set to `0` to stop-sell this room/rate on the rates endpoint (Booking&apos;s dedicated `&lt;closed&gt;` stop-sell flag lives on the availability endpoint — see `BookingAvailabilityUpdate.closed`).</summary>
+        /// <summary>Refused. A rate update carries prices only; sending this returns `422 inventory_not_in_rate_update` naming `updates[N].roomsToSell`. Write inventory with `type: &quot;availability&quot;` and `availableRooms` (plus `closed: true` for a stop-sell).</summary>
+        [Obsolete("")]
         public int? RoomsToSell { get; set; }
-        /// <summary>The singlePrice property</summary>
+        /// <summary>Optional single-occupancy amount, written alongside the main amount.</summary>
         public double? SinglePrice { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingRateUpdate"/> and sets the default values.

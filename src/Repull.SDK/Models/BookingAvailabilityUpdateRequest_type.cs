@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>`rates` → price + restrictions (`updateRates`); `availability` → inventory + stop-sell + restrictions (`updateAvailability`); `derived-pricing` → occupancy-derived pricing rules (`updateDerivedPricing`).</summary>
+    /// <summary>`rates` → nightly prices (+ any restrictions sent with them), written at an explicit `occupancy`; `availability` → inventory, stop-sell and restrictions; `derived-pricing` → occupancy-derived pricing rules. A rates update may not carry `roomsToSell`: inventory is an `availability` write.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum BookingAvailabilityUpdateRequest_type
     {

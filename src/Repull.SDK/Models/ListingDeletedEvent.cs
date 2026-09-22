@@ -12,6 +12,14 @@ namespace Repull.SDK.Models
     public partial class ListingDeletedEvent : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Which connected account produced this event. Null when it cannot be resolved — present-but-null rather than omitted, so a receiver can tell &quot;unresolvable&quot; from &quot;an old event&quot;.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.WebhookEventAccount? Account { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.WebhookEventAccount Account { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The apiVersion property</summary>
@@ -22,8 +30,6 @@ namespace Repull.SDK.Models
 #else
         public string ApiVersion { get; set; }
 #endif
-        /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Payload for `listing.deleted`. A property was removed from Repull or the upstream PMS.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -32,10 +38,12 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ListingDeletedPayload Data { get; set; }
 #endif
-        /// <summary>The id property</summary>
-        public Guid? Id { get; set; }
-        /// <summary>The type property</summary>
-        public global::Repull.SDK.Models.ListingDeletedEvent_type? Type { get; set; }
+        /// <summary>The event name. This field is `event`, not `type`.</summary>
+        public global::Repull.SDK.Models.ListingDeletedEvent_event? Event { get; set; }
+        /// <summary>Stable across every delivery and replay of this logical event — dedupe on it.</summary>
+        public Guid? EventId { get; set; }
+        /// <summary>When this delivery was built.</summary>
+        public DateTimeOffset? Timestamp { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/> and sets the default values.
         /// </summary>
@@ -61,11 +69,12 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "account", n => { Account = n.GetObjectValue<global::Repull.SDK.Models.WebhookEventAccount>(global::Repull.SDK.Models.WebhookEventAccount.CreateFromDiscriminatorValue); } },
                 { "apiVersion", n => { ApiVersion = n.GetStringValue(); } },
-                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "data", n => { Data = n.GetObjectValue<global::Repull.SDK.Models.ListingDeletedPayload>(global::Repull.SDK.Models.ListingDeletedPayload.CreateFromDiscriminatorValue); } },
-                { "id", n => { Id = n.GetGuidValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Repull.SDK.Models.ListingDeletedEvent_type>(); } },
+                { "event", n => { Event = n.GetEnumValue<global::Repull.SDK.Models.ListingDeletedEvent_event>(); } },
+                { "eventId", n => { EventId = n.GetGuidValue(); } },
+                { "timestamp", n => { Timestamp = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -75,11 +84,12 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.WebhookEventAccount>("account", Account);
             writer.WriteStringValue("apiVersion", ApiVersion);
-            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingDeletedPayload>("data", Data);
-            writer.WriteGuidValue("id", Id);
-            writer.WriteEnumValue<global::Repull.SDK.Models.ListingDeletedEvent_type>("type", Type);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ListingDeletedEvent_event>("event", Event);
+            writer.WriteGuidValue("eventId", EventId);
+            writer.WriteDateTimeOffsetValue("timestamp", Timestamp);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

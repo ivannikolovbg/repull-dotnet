@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Usage.Tier
         {
         }
         /// <summary>
-        /// Lightweight current-tier snapshot for status badges and quota meters — plan limits (monthly requests, daily AI requests, dynamic-pricing listings), the amount used, the amount remaining, and the next reset. `null` limits mean unlimited on that dimension.
+        /// Lightweight current-tier snapshot for status badges and quota meters — plan limits (daily requests, monthly requests, daily AI requests, dynamic-pricing listings), the amount used, the amount remaining, and the next reset. Two request quotas are reported and they reset at different times: `dailyRequests` is the daily circuit breaker that stops runaway client loops (resets at `dailyResetsAt`, the next UTC midnight) and `monthlyRequests` is the billing quota (resets at `resetsAt`). Exceeding the daily cap returns 429 `daily_limit_exceeded`; exceeding the monthly one returns 429 `rate_limit_exceeded`. `null` limits mean unlimited on that dimension.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Usage.Tier.TierGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Repull.SDK.V1.Usage.Tier
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Usage.Tier.TierGetResponse>(requestInfo, global::Repull.SDK.V1.Usage.Tier.TierGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Lightweight current-tier snapshot for status badges and quota meters — plan limits (monthly requests, daily AI requests, dynamic-pricing listings), the amount used, the amount remaining, and the next reset. `null` limits mean unlimited on that dimension.
+        /// Lightweight current-tier snapshot for status badges and quota meters — plan limits (daily requests, monthly requests, daily AI requests, dynamic-pricing listings), the amount used, the amount remaining, and the next reset. Two request quotas are reported and they reset at different times: `dailyRequests` is the daily circuit breaker that stops runaway client loops (resets at `dailyResetsAt`, the next UTC midnight) and `monthlyRequests` is the billing quota (resets at `resetsAt`). Exceeding the daily cap returns 429 `daily_limit_exceeded`; exceeding the monthly one returns 429 `rate_limit_exceeded`. `null` limits mean unlimited on that dimension.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Usage.Tier.TierResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -85,7 +85,7 @@ namespace Repull.SDK.V1.Usage.Tier
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Usage.Tier.TierResponse>(requestInfo, global::Repull.SDK.V1.Usage.Tier.TierResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Lightweight current-tier snapshot for status badges and quota meters — plan limits (monthly requests, daily AI requests, dynamic-pricing listings), the amount used, the amount remaining, and the next reset. `null` limits mean unlimited on that dimension.
+        /// Lightweight current-tier snapshot for status badges and quota meters — plan limits (daily requests, monthly requests, daily AI requests, dynamic-pricing listings), the amount used, the amount remaining, and the next reset. Two request quotas are reported and they reset at different times: `dailyRequests` is the daily circuit breaker that stops runaway client loops (resets at `dailyResetsAt`, the next UTC midnight) and `monthlyRequests` is the billing quota (resets at `resetsAt`). Exceeding the daily cap returns 429 `daily_limit_exceeded`; exceeding the monthly one returns 429 `rate_limit_exceeded`. `null` limits mean unlimited on that dimension.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

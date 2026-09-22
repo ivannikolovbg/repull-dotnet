@@ -8,18 +8,18 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// One (room, rate-plan, date-range) availability update. Carries inventory (`availableRooms`), the dedicated stop-sell flag (`closed`), and the same length-of-stay / arrival restrictions as a rate update.
+    /// One (room, rate-plan, date-range) availability update. Carries inventory (`availableRooms`), the dedicated stop-sell flag (`closed`), and length-of-stay / arrival restrictions. Omit `availableRooms` and `closed` for a restriction-only write — inventory is then left untouched.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingAvailabilityUpdate : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Rooms to sell (`roomstosell`). `0` blocks the room for the range.</summary>
+        /// <summary>Rooms to sell (`roomstosell`). `0` blocks the room for the range. Omit it to leave inventory alone — `0` is a stop-sell, not a no-op.</summary>
         public int? AvailableRooms { get; set; }
         /// <summary>Dedicated stop-sell flag (`&lt;closed&gt;` in Booking&apos;s XML). `true` fully stops sale for the room/date-range regardless of `availableRooms`.</summary>
         public bool? Closed { get; set; }
-        /// <summary>The dateRange property</summary>
+        /// <summary>The nights this update applies to. **Both ends are inclusive** — `start` equal to `end` is one night.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.BookingAvailabilityUpdate_dateRange? DateRange { get; set; }
@@ -35,7 +35,7 @@ namespace Repull.SDK.Models
 #else
         public string RateId { get; set; }
 #endif
-        /// <summary>Optional length-of-stay / availability restrictions for one rate update. Every field here is forwarded verbatim into Booking.com&apos;s rates XML (`minimumstay`, `maximumstay`, `closedonarrival`, `closedondeparture`, …) — omit a field to leave that restriction untouched.</summary>
+        /// <summary>Length-of-stay and arrival restrictions for the nights in this update. Omit a field to leave that restriction untouched — nothing you do not state is changed.These are written on Booking.com&apos;s availability notification, which is the wire that carries a restriction when no inventory changes hands. Sending them alongside a price is supported: the prices and the restrictions are two writes, and the response reports each one separately (`price` and `restrictions`), so a half that lands is never reported as a failure and a half that is refused is never reported as applied.Three restrictions are refused with `422 restriction_not_supported` naming the field: Booking.com&apos;s notification has no element for them, and dropping a restriction you stated would be worse than refusing it. Set those on the rate plan in the Booking.com Extranet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions? Restrictions { get; set; }

@@ -8,53 +8,79 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A property registered in the Booking.com extranet for the connected hotel ID.
+    /// A Booking.com property this workspace holds, with the Repull listings mapped under it. A property is a building; its rooms are what guests book, and each room maps to one Repull listing — so one property commonly carries many listings.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingProperty : IAdditionalDataHolder, IParsable
     {
+        /// <summary>The active property</summary>
+        public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The city property</summary>
+        /// <summary>The bookingUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? BookingUrl { get; set; }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string BookingUrl { get; set; }
 #endif
-        /// <summary>The country property</summary>
+        /// <summary>Repull-side id for this Booking.com connection.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Country { get; set; }
+        public string? ConnectionId { get; set; }
 #nullable restore
 #else
-        public string Country { get; set; }
+        public string ConnectionId { get; set; }
 #endif
-        /// <summary>Booking.com hotel/property ID</summary>
+        /// <summary>The createdAt property</summary>
+        public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>Booking.com hotel/property id. This is what `/v1/channels/booking/availability` takes as `property_id`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? HotelId { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string HotelId { get; set; }
 #endif
-        /// <summary>The name property</summary>
+        /// <summary>The Repull listings mapped under this property. Empty when `mappingStatus` is `unmapped`. Inactive listings are left out.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public List<global::Repull.SDK.Models.BookingProperty_listings>? Listings { get; set; }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public List<global::Repull.SDK.Models.BookingProperty_listings> Listings { get; set; }
 #endif
-        /// <summary>The status property</summary>
+        /// <summary>`mapped` — at least one room points at a listing. `unmapped` — the property is claimed but its rooms are not mapped yet, so `listings` is empty; finish `POST /v1/connect/booking/map-rooms`. An unmapped property is listed rather than hidden, so a half-finished connection is visible instead of looking like no connection at all.</summary>
+        public global::Repull.SDK.Models.BookingProperty_mappingStatus? MappingStatus { get; set; }
+        /// <summary>The markup property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Markup { get; set; }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Markup { get; set; }
 #endif
+        /// <summary>The suspendedAt property</summary>
+        public DateTimeOffset? SuspendedAt { get; set; }
+        /// <summary>The suspensionReason property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SuspensionReason { get; set; }
+#nullable restore
+#else
+        public string SuspensionReason { get; set; }
+#endif
+        /// <summary>The syncCategory property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SyncCategory { get; set; }
+#nullable restore
+#else
+        public string SyncCategory { get; set; }
+#endif
+        /// <summary>The syncEnabled property</summary>
+        public bool? SyncEnabled { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingProperty"/> and sets the default values.
         /// </summary>
@@ -80,11 +106,18 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "city", n => { City = n.GetStringValue(); } },
-                { "country", n => { Country = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "name", n => { Name = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetStringValue(); } },
+                { "active", n => { Active = n.GetBoolValue(); } },
+                { "bookingUrl", n => { BookingUrl = n.GetStringValue(); } },
+                { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
+                { "listings", n => { Listings = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingProperty_listings>(global::Repull.SDK.Models.BookingProperty_listings.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "mappingStatus", n => { MappingStatus = n.GetEnumValue<global::Repull.SDK.Models.BookingProperty_mappingStatus>(); } },
+                { "markup", n => { Markup = n.GetStringValue(); } },
+                { "suspendedAt", n => { SuspendedAt = n.GetDateTimeOffsetValue(); } },
+                { "suspensionReason", n => { SuspensionReason = n.GetStringValue(); } },
+                { "syncCategory", n => { SyncCategory = n.GetStringValue(); } },
+                { "syncEnabled", n => { SyncEnabled = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -94,11 +127,18 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("city", City);
-            writer.WriteStringValue("country", Country);
-            writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("name", Name);
-            writer.WriteStringValue("status", Status);
+            writer.WriteBoolValue("active", Active);
+            writer.WriteStringValue("bookingUrl", BookingUrl);
+            writer.WriteStringValue("connectionId", ConnectionId);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteStringValue("hotelId", HotelId);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingProperty_listings>("listings", Listings);
+            writer.WriteEnumValue<global::Repull.SDK.Models.BookingProperty_mappingStatus>("mappingStatus", MappingStatus);
+            writer.WriteStringValue("markup", Markup);
+            writer.WriteDateTimeOffsetValue("suspendedAt", SuspendedAt);
+            writer.WriteStringValue("suspensionReason", SuspensionReason);
+            writer.WriteStringValue("syncCategory", SyncCategory);
+            writer.WriteBoolValue("syncEnabled", SyncEnabled);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

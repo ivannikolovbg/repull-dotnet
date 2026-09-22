@@ -31,6 +31,14 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
+        /// <summary>Other Booking.com properties this listing is also published under. Empty in the normal case. Pass one as `?hotel_id=` to read its pricing instead.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? OtherHotelIds { get; set; }
+#nullable restore
+#else
+        public List<string> OtherHotelIds { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingResponse"/> and sets the default values.
         /// </summary>
@@ -58,6 +66,7 @@ namespace Repull.SDK.Models
             {
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "otherHotelIds", n => { OtherHotelIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
         }
         /// <summary>
@@ -69,6 +78,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteStringValue("listingId", ListingId);
+            writer.WriteCollectionOfPrimitiveValues<string>("otherHotelIds", OtherHotelIds);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

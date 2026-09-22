@@ -14,6 +14,8 @@ namespace Repull.SDK.V1.Usage.Summary
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The daily property</summary>
+        public int? Daily { get; set; }
         /// <summary>The dailyAi property</summary>
         public int? DailyAi { get; set; }
         /// <summary>The monthly property</summary>
@@ -43,6 +45,7 @@ namespace Repull.SDK.V1.Usage.Summary
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "daily", n => { Daily = n.GetIntValue(); } },
                 { "dailyAi", n => { DailyAi = n.GetIntValue(); } },
                 { "monthly", n => { Monthly = n.GetIntValue(); } },
             };
@@ -54,6 +57,7 @@ namespace Repull.SDK.V1.Usage.Summary
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("daily", Daily);
             writer.WriteIntValue("dailyAi", DailyAi);
             writer.WriteIntValue("monthly", Monthly);
             writer.WriteAdditionalData(AdditionalData);

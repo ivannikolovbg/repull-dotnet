@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RoomsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/properties/{id}/rooms", pathParameters)
+        public RoomsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/properties/{id}/rooms{?hotel_id*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RoomsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/properties/{id}/rooms", rawUrl)
+        public RoomsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/properties/{id}/rooms{?hotel_id*}", rawUrl)
         {
         }
         /// <summary>
-        /// Return every Booking.com room and its rate plans for a listing, each with the `roomId` / `rateId` needed to assemble a restriction write via `PUT /v1/channels/booking/availability`.`id` is a Vanio listing id — resolved to the Booking `hotel_id` via the workspace mapping (a listing with no active Booking.com mapping returns 404). Sourced from Booking&apos;s B.XML roomrates feed, which returns rooms and rate plans together (the rooms-unit feed alone omits rate-plan ids). This is the API-key surface for the room/rate ids that were previously only reachable inside the hosted Connect room-mapping flow.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Return every Booking.com room and its rate plans for a listing, each with the `roomId` / `rateId` needed to assemble a restriction write via `PUT /v1/channels/booking/availability`.`id` is a **Repull listing id**, not a Booking.com hotel id, despite the `properties` segment — resolved to the Booking `hotel_id` through the workspace mapping, read from wherever the Connect flow recorded it (`listings_booking_rooms` for anything mapped through `POST /v1/connect/booking/map-rooms`). A listing with no active Booking.com mapping returns 404, and the message says which id space the path takes. When the listing is published under several properties the oldest is used, the rest come back in `otherHotelIds`, and `?hotel_id=` names a different one. Sourced from Booking&apos;s B.XML roomrates feed, which returns rooms and rate plans together (the rooms-unit feed alone omits rate-plan ids). This is the API-key surface for the room/rate ids that were previously only reachable inside the hosted Connect room-mapping flow.`source` says where the answer came from. `booking` means it was read live just now. If Booking.com returns nothing usable for the property, the rooms and rate plans recorded at the last import are served instead, `source` is `mirror`, and `mirrorReason` names what went wrong live — the ids are Booking.com&apos;s own and can be written against, but they can be stale, and `maxPersons`, `policy`, `policyId`, `pricingType` and `isChildRate` come back `null` because only the live feed states them. `rooms` is empty only when Booking.com and the last import both have nothing; a read that failed is an error, never an empty list.Each rate plan carries `maxPersons` — the party size that rate plan prices, which is the `occupancy` a rate amount must be written at. Each room carries `maxAdults`, Booking.com&apos;s capacity for the room, which is what a rate write falls back to when the rate plan states no `maxPersons`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.BookingRoomsRatesResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -46,11 +46,11 @@ namespace Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.BookingRoomsRatesResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.BookingRoomsRatesResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.BookingRoomsRatesResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.BookingRoomsRatesResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -65,17 +65,17 @@ namespace Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingRoomsRatesResponse>(requestInfo, global::Repull.SDK.Models.BookingRoomsRatesResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Return every Booking.com room and its rate plans for a listing, each with the `roomId` / `rateId` needed to assemble a restriction write via `PUT /v1/channels/booking/availability`.`id` is a Vanio listing id — resolved to the Booking `hotel_id` via the workspace mapping (a listing with no active Booking.com mapping returns 404). Sourced from Booking&apos;s B.XML roomrates feed, which returns rooms and rate plans together (the rooms-unit feed alone omits rate-plan ids). This is the API-key surface for the room/rate ids that were previously only reachable inside the hosted Connect room-mapping flow.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Return every Booking.com room and its rate plans for a listing, each with the `roomId` / `rateId` needed to assemble a restriction write via `PUT /v1/channels/booking/availability`.`id` is a **Repull listing id**, not a Booking.com hotel id, despite the `properties` segment — resolved to the Booking `hotel_id` through the workspace mapping, read from wherever the Connect flow recorded it (`listings_booking_rooms` for anything mapped through `POST /v1/connect/booking/map-rooms`). A listing with no active Booking.com mapping returns 404, and the message says which id space the path takes. When the listing is published under several properties the oldest is used, the rest come back in `otherHotelIds`, and `?hotel_id=` names a different one. Sourced from Booking&apos;s B.XML roomrates feed, which returns rooms and rate plans together (the rooms-unit feed alone omits rate-plan ids). This is the API-key surface for the room/rate ids that were previously only reachable inside the hosted Connect room-mapping flow.`source` says where the answer came from. `booking` means it was read live just now. If Booking.com returns nothing usable for the property, the rooms and rate plans recorded at the last import are served instead, `source` is `mirror`, and `mirrorReason` names what went wrong live — the ids are Booking.com&apos;s own and can be written against, but they can be stale, and `maxPersons`, `policy`, `policyId`, `pricingType` and `isChildRate` come back `null` because only the live feed states them. `rooms` is empty only when Booking.com and the last import both have nothing; a read that failed is an error, never an empty list.Each rate plan carries `maxPersons` — the party size that rate plan prices, which is the `occupancy` a rate amount must be written at. Each room carries `maxAdults`, Booking.com&apos;s capacity for the room, which is what a rate write falls back to when the rate plan states no `maxPersons`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -93,11 +93,28 @@ namespace Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms
             return new global::Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms.RoomsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// Return every Booking.com room and its rate plans for a listing, each with the `roomId` / `rateId` needed to assemble a restriction write via `PUT /v1/channels/booking/availability`.`id` is a **Repull listing id**, not a Booking.com hotel id, despite the `properties` segment — resolved to the Booking `hotel_id` through the workspace mapping, read from wherever the Connect flow recorded it (`listings_booking_rooms` for anything mapped through `POST /v1/connect/booking/map-rooms`). A listing with no active Booking.com mapping returns 404, and the message says which id space the path takes. When the listing is published under several properties the oldest is used, the rest come back in `otherHotelIds`, and `?hotel_id=` names a different one. Sourced from Booking&apos;s B.XML roomrates feed, which returns rooms and rate plans together (the rooms-unit feed alone omits rate-plan ids). This is the API-key surface for the room/rate ids that were previously only reachable inside the hosted Connect room-mapping flow.`source` says where the answer came from. `booking` means it was read live just now. If Booking.com returns nothing usable for the property, the rooms and rate plans recorded at the last import are served instead, `source` is `mirror`, and `mirrorReason` names what went wrong live — the ids are Booking.com&apos;s own and can be written against, but they can be stale, and `maxPersons`, `policy`, `policyId`, `pricingType` and `isChildRate` come back `null` because only the live feed states them. `rooms` is empty only when Booking.com and the last import both have nothing; a read that failed is an error, never an empty list.Each rate plan carries `maxPersons` — the party size that rate plan prices, which is the `occupancy` a rate amount must be written at. Each room carries `maxAdults`, Booking.com&apos;s capacity for the room, which is what a rate write falls back to when the rate plan states no `maxPersons`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RoomsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Booking.com hotel id, when this listing is published under more than one property. Omit it and a read uses the oldest mapping (reporting the rest in `otherHotelIds`), while a write is refused with `409 ambiguous_booking_mapping` rather than guess. `GET /v1/channels/booking/properties` lists the valid ids.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("hotel_id")]
+            public string? HotelId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("hotel_id")]
+            public string HotelId { get; set; }
+#endif
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class RoomsRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class RoomsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderGetQueryParameters>
         {
         }
     }

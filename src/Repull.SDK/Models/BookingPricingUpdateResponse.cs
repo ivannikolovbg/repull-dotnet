@@ -7,14 +7,25 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// What a Booking.com rate write actually did. Returned by `PUT /v1/channels/booking/listings/{id}/pricing` and by `PUT /v1/channels/booking/availability` with `type: &quot;rates&quot;`.Prices and restrictions are two writes on two of Booking.com&apos;s wires, and Booking.com can take one and refuse the other. The response says so: `price` and `restrictions` each carry their own state, their own read-back and — when refused — Booking.com&apos;s own reason. The top-level `applied` summarises them, and is `partial` when they disagree. A half that landed is never reported as a failure.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class BookingPricingUpdateResponse : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Per-update failure rows from Booking — shape mirrors the Booking rates API response.</summary>
+        /// <summary>What is known about the nights now. `verified` — read back, every night carries what was sent. `mismatch` — read back, some do not (`verification.rows` / `restrictions.verification.rows` name them). `rejected` — Booking.com refused everything that was sent. `partial` — one half landed and the other did not; read `price.applied` and `restrictions.applied` to see which, and `restrictions.rejection.message` for Booking.com&apos;s reason. `unverified` — Booking.com acknowledged the request and no read-back ran: an unknown, not a success. A bare acknowledgement is never reported as &quot;all applied&quot;.</summary>
+        public global::Repull.SDK.Models.BookingPricingUpdateResponse_applied? Applied { get; set; }
+        /// <summary>Booking.com&apos;s own answers, verbatim: `rates` (the rate-amount notification) and `restrictions` (the availability notification, when the updates carried any restriction).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.BookingPricingUpdateResponse_booking? Booking { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.BookingPricingUpdateResponse_booking Booking { get; set; }
+#endif
+        /// <summary>Failures Booking.com named, across both wires. Empty means Booking.com named none — not that the nights changed; that is what `applied` is for.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>? Errors { get; set; }
@@ -38,18 +49,56 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
-        /// <summary>Number of updates Booking.com accepted as `success`. Falls back to total update count when Booking omits per-update status on full success.</summary>
-        public int? Pushed { get; set; }
-        /// <summary>Verbatim Booking response envelope for debugging.</summary>
+        /// <summary>The occupancy property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingPricingUpdateResponse_raw? Raw { get; set; }
+        public List<global::Repull.SDK.Models.BookingRateWriteOccupancy>? Occupancy { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingPricingUpdateResponse_raw Raw { get; set; }
+        public List<global::Repull.SDK.Models.BookingRateWriteOccupancy> Occupancy { get; set; }
 #endif
-        /// <summary>The requested property</summary>
+        /// <summary>The prices: what was sent, what Booking.com said, and what is live now.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.BookingRateWritePriceHalf? Price { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.BookingRateWritePriceHalf Price { get; set; }
+#endif
+        /// <summary>Echoed back by `PUT /v1/channels/booking/availability`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PropertyId { get; set; }
+#nullable restore
+#else
+        public string PropertyId { get; set; }
+#endif
+        /// <summary>Present when Booking.com&apos;s rate-plan read did not complete, so an occupancy fell back to the room definition.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? RatePlanReadError { get; set; }
+#nullable restore
+#else
+        public string RatePlanReadError { get; set; }
+#endif
+        /// <summary>How many updates were sent.</summary>
         public int? Requested { get; set; }
+        /// <summary>The restrictions: the same report as the price half, for the other write.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.BookingRateWriteRestrictionHalf? Restrictions { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.BookingRateWriteRestrictionHalf Restrictions { get; set; }
+#endif
+        /// <summary>The read-back. Booking.com&apos;s answer to a rate write is an acknowledgement of the request with no per-date status, so the dates are read back to find out what is actually live.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.BookingRateWriteVerification? Verification { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.BookingRateWriteVerification Verification { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/> and sets the default values.
         /// </summary>
@@ -75,12 +124,18 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "applied", n => { Applied = n.GetEnumValue<global::Repull.SDK.Models.BookingPricingUpdateResponse_applied>(); } },
+                { "booking", n => { Booking = n.GetObjectValue<global::Repull.SDK.Models.BookingPricingUpdateResponse_booking>(global::Repull.SDK.Models.BookingPricingUpdateResponse_booking.CreateFromDiscriminatorValue); } },
                 { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>(global::Repull.SDK.Models.BookingPricingUpdateResponse_errors.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
-                { "pushed", n => { Pushed = n.GetIntValue(); } },
-                { "raw", n => { Raw = n.GetObjectValue<global::Repull.SDK.Models.BookingPricingUpdateResponse_raw>(global::Repull.SDK.Models.BookingPricingUpdateResponse_raw.CreateFromDiscriminatorValue); } },
+                { "occupancy", n => { Occupancy = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingRateWriteOccupancy>(global::Repull.SDK.Models.BookingRateWriteOccupancy.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "price", n => { Price = n.GetObjectValue<global::Repull.SDK.Models.BookingRateWritePriceHalf>(global::Repull.SDK.Models.BookingRateWritePriceHalf.CreateFromDiscriminatorValue); } },
+                { "propertyId", n => { PropertyId = n.GetStringValue(); } },
+                { "ratePlanReadError", n => { RatePlanReadError = n.GetStringValue(); } },
                 { "requested", n => { Requested = n.GetIntValue(); } },
+                { "restrictions", n => { Restrictions = n.GetObjectValue<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf>(global::Repull.SDK.Models.BookingRateWriteRestrictionHalf.CreateFromDiscriminatorValue); } },
+                { "verification", n => { Verification = n.GetObjectValue<global::Repull.SDK.Models.BookingRateWriteVerification>(global::Repull.SDK.Models.BookingRateWriteVerification.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -90,12 +145,18 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteEnumValue<global::Repull.SDK.Models.BookingPricingUpdateResponse_applied>("applied", Applied);
+            writer.WriteObjectValue<global::Repull.SDK.Models.BookingPricingUpdateResponse_booking>("booking", Booking);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>("errors", Errors);
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteStringValue("listingId", ListingId);
-            writer.WriteIntValue("pushed", Pushed);
-            writer.WriteObjectValue<global::Repull.SDK.Models.BookingPricingUpdateResponse_raw>("raw", Raw);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingRateWriteOccupancy>("occupancy", Occupancy);
+            writer.WriteObjectValue<global::Repull.SDK.Models.BookingRateWritePriceHalf>("price", Price);
+            writer.WriteStringValue("propertyId", PropertyId);
+            writer.WriteStringValue("ratePlanReadError", RatePlanReadError);
             writer.WriteIntValue("requested", Requested);
+            writer.WriteObjectValue<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf>("restrictions", Restrictions);
+            writer.WriteObjectValue<global::Repull.SDK.Models.BookingRateWriteVerification>("verification", Verification);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

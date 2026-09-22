@@ -3,14 +3,13 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>The event name. This field is `event`, not `type`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public enum PaymentCompletedEvent_type
-    #pragma warning restore CS1591
+    public enum CalendarUpdatedEvent_event
     {
-        [EnumMember(Value = "payment.completed")]
+        [EnumMember(Value = "calendar.updated")]
         #pragma warning disable CS1591
-        PaymentCompleted,
+        CalendarUpdated,
         #pragma warning restore CS1591
     }
 }

@@ -3,14 +3,13 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>The event name. This field is `event`, not `type`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public enum ReservationUpdatedEvent_type
-    #pragma warning restore CS1591
+    public enum ListingCreatedEvent_event
     {
-        [EnumMember(Value = "reservation.updated")]
+        [EnumMember(Value = "listing.created")]
         #pragma warning disable CS1591
-        ReservationUpdated,
+        ListingCreated,
         #pragma warning restore CS1591
     }
 }

@@ -14,6 +14,8 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Booking.com&apos;s capacity for this room, as imported. The occupancy a rate write falls back to when the rate plan states no `maxPersons`. Null when Booking.com never stated one.</summary>
+        public int? MaxAdults { get; set; }
         /// <summary>The rates property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -63,6 +65,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "maxAdults", n => { MaxAdults = n.GetIntValue(); } },
                 { "rates", n => { Rates = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms_rates>(global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms_rates.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "roomId", n => { RoomId = n.GetStringValue(); } },
                 { "roomName", n => { RoomName = n.GetStringValue(); } },
@@ -75,6 +78,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("maxAdults", MaxAdults);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms_rates>("rates", Rates);
             writer.WriteStringValue("roomId", RoomId);
             writer.WriteStringValue("roomName", RoomName);

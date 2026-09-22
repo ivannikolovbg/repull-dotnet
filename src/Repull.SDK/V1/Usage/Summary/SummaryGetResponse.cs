@@ -22,6 +22,8 @@ namespace Repull.SDK.V1.Usage.Summary
 #else
         public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown> Breakdown { get; set; }
 #endif
+        /// <summary>The dailyResetsAt property</summary>
+        public DateTimeOffset? DailyResetsAt { get; set; }
         /// <summary>The limits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -114,6 +116,7 @@ namespace Repull.SDK.V1.Usage.Summary
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "breakdown", n => { Breakdown = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "dailyResetsAt", n => { DailyResetsAt = n.GetDateTimeOffsetValue(); } },
                 { "limits", n => { Limits = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits.CreateFromDiscriminatorValue); } },
                 { "range", n => { Range = n.GetStringValue(); } },
                 { "remaining", n => { Remaining = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining.CreateFromDiscriminatorValue); } },
@@ -133,6 +136,7 @@ namespace Repull.SDK.V1.Usage.Summary
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>("breakdown", Breakdown);
+            writer.WriteDateTimeOffsetValue("dailyResetsAt", DailyResetsAt);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>("limits", Limits);
             writer.WriteStringValue("range", Range);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining>("remaining", Remaining);

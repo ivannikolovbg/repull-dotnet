@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Usage.Summary
         {
         }
         /// <summary>
-        /// Aggregated usage over the requested `range` — tier + plan limits, quota used/remaining, next reset, a per-operation breakdown (request/error counts, error rate, avg latency), a daily timeline, status-class distribution, and range totals.
+        /// Aggregated usage over the requested `range` — tier + plan limits, quota used/remaining, next reset, a per-operation breakdown (request/error counts, error rate, avg latency), a daily timeline, status-class distribution, and range totals. Two request quotas are reported and they reset at different times: `dailyRequests` is the daily circuit breaker that stops runaway client loops (resets at `dailyResetsAt`, the next UTC midnight) and `monthlyRequests` is the billing quota (resets at `resetsAt`). `null` limits mean unlimited on that dimension.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Repull.SDK.V1.Usage.Summary
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse>(requestInfo, global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Aggregated usage over the requested `range` — tier + plan limits, quota used/remaining, next reset, a per-operation breakdown (request/error counts, error rate, avg latency), a daily timeline, status-class distribution, and range totals.
+        /// Aggregated usage over the requested `range` — tier + plan limits, quota used/remaining, next reset, a per-operation breakdown (request/error counts, error rate, avg latency), a daily timeline, status-class distribution, and range totals. Two request quotas are reported and they reset at different times: `dailyRequests` is the daily circuit breaker that stops runaway client loops (resets at `dailyResetsAt`, the next UTC midnight) and `monthlyRequests` is the billing quota (resets at `resetsAt`). `null` limits mean unlimited on that dimension.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Usage.Summary.SummaryResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -85,7 +85,7 @@ namespace Repull.SDK.V1.Usage.Summary
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Usage.Summary.SummaryResponse>(requestInfo, global::Repull.SDK.V1.Usage.Summary.SummaryResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Aggregated usage over the requested `range` — tier + plan limits, quota used/remaining, next reset, a per-operation breakdown (request/error counts, error rate, avg latency), a daily timeline, status-class distribution, and range totals.
+        /// Aggregated usage over the requested `range` — tier + plan limits, quota used/remaining, next reset, a per-operation breakdown (request/error counts, error rate, avg latency), a daily timeline, status-class distribution, and range totals. Two request quotas are reported and they reset at different times: `dailyRequests` is the daily circuit breaker that stops runaway client loops (resets at `dailyResetsAt`, the next UTC midnight) and `monthlyRequests` is the billing quota (resets at `resetsAt`). `null` limits mean unlimited on that dimension.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -113,7 +113,7 @@ namespace Repull.SDK.V1.Usage.Summary
             return new global::Repull.SDK.V1.Usage.Summary.SummaryRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Aggregated usage over the requested `range` — tier + plan limits, quota used/remaining, next reset, a per-operation breakdown (request/error counts, error rate, avg latency), a daily timeline, status-class distribution, and range totals.
+        /// Aggregated usage over the requested `range` — tier + plan limits, quota used/remaining, next reset, a per-operation breakdown (request/error counts, error rate, avg latency), a daily timeline, status-class distribution, and range totals. Two request quotas are reported and they reset at different times: `dailyRequests` is the daily circuit breaker that stops runaway client loops (resets at `dailyResetsAt`, the next UTC midnight) and `monthlyRequests` is the billing quota (resets at `resetsAt`). `null` limits mean unlimited on that dimension.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class SummaryRequestBuilderGetQueryParameters 

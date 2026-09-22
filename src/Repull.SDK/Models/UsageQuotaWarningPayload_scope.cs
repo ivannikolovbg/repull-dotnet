@@ -3,14 +3,13 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>Which quota this warning is about.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public enum PaymentRefundedEvent_type
-    #pragma warning restore CS1591
+    public enum UsageQuotaWarningPayload_scope
     {
-        [EnumMember(Value = "payment.refunded")]
+        [EnumMember(Value = "daily_requests")]
         #pragma warning disable CS1591
-        PaymentRefunded,
+        Daily_requests,
         #pragma warning restore CS1591
     }
 }

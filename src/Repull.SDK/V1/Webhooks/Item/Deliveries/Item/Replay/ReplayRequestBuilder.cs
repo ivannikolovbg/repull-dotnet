@@ -34,45 +34,54 @@ namespace Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay
         {
         }
         /// <summary>
-        /// Re-sends the original payload (same eventId, fresh deliveryId, attempt + 1). A delivery about a listing that is inactive now is not re-sent and answers `403 listing_inactive`; activate the listing first.
+        /// Re-sends the original payload (same eventId, fresh deliveryId, attempt + 1).A delivery may be replayed at most **3 times per rolling 60 minutes**; the 4th inside that window answers `409 replay_limit_reached` and names the time the next one is allowed. The limit is charged to the original delivery, so replaying the delivery a replay produced draws on the same budget. It is not a lifetime cap — a delivery that has not been replayed for an hour starts fresh.A delivery your endpoint already accepted is not re-sent (it would be a duplicate) and answers `409 delivery_already_succeeded`; send `{&quot;force&quot;: true}` to replay it anyway, which still counts against the limit.A delivery about a listing that is inactive now is not re-sent and answers `403 listing_inactive`; activate the listing first.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> PostAsync(global::Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay.ReplayPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> PostAsync(global::Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay.ReplayPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
-            var requestInfo = ToPostRequestInformation(requestConfiguration);
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Re-sends the original payload (same eventId, fresh deliveryId, attempt + 1). A delivery about a listing that is inactive now is not re-sent and answers `403 listing_inactive`; activate the listing first.
+        /// Re-sends the original payload (same eventId, fresh deliveryId, attempt + 1).A delivery may be replayed at most **3 times per rolling 60 minutes**; the 4th inside that window answers `409 replay_limit_reached` and names the time the next one is allowed. The limit is charged to the original delivery, so replaying the delivery a replay produced draws on the same budget. It is not a lifetime cap — a delivery that has not been replayed for an hour starts fresh.A delivery your endpoint already accepted is not re-sent (it would be a duplicate) and answers `409 delivery_already_succeeded`; send `{&quot;force&quot;: true}` to replay it anyway, which still counts against the limit.A delivery about a listing that is inactive now is not re-sent and answers `403 listing_inactive`; activate the listing first.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay.ReplayPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay.ReplayPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>

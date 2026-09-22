@@ -16,7 +16,7 @@ namespace Repull.SDK.V1.Channels.Booking.Listings
     public partial class ListingsRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Repull.SDK.v1.channels.booking.listings.item collection</summary>
-        /// <param name="position">Vanio listing ID — resolved to a Booking.com hotel ID via the workspace mapping.</param>
+        /// <param name="position">Repull listing id — NOT a Booking.com hotel id. Resolved to a Booking.com hotel id via the workspace mapping.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Listings.Item.ListingsItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Channels.Booking.Listings.Item.ListingsItemRequestBuilder this[int position]
         {
@@ -28,7 +28,7 @@ namespace Repull.SDK.V1.Channels.Booking.Listings
             }
         }
         /// <summary>Gets an item from the Repull.SDK.v1.channels.booking.listings.item collection</summary>
-        /// <param name="position">Vanio listing ID — resolved to a Booking.com hotel ID via the workspace mapping.</param>
+        /// <param name="position">Repull listing id — NOT a Booking.com hotel id. Resolved to a Booking.com hotel id via the workspace mapping.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Listings.Item.ListingsItemRequestBuilder"/></returns>
         [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
         public global::Repull.SDK.V1.Channels.Booking.Listings.Item.ListingsItemRequestBuilder this[string position]

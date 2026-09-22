@@ -19,7 +19,7 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
     public partial class PropertiesRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Repull.SDK.v1.channels.booking.properties.item collection</summary>
-        /// <param name="position">Vanio listing ID.</param>
+        /// <param name="position">Repull listing id — NOT a Booking.com hotel id.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Properties.Item.PropertiesItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Channels.Booking.Properties.Item.PropertiesItemRequestBuilder this[int position]
         {
@@ -31,7 +31,7 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
             }
         }
         /// <summary>Gets an item from the Repull.SDK.v1.channels.booking.properties.item collection</summary>
-        /// <param name="position">Vanio listing ID.</param>
+        /// <param name="position">Repull listing id — NOT a Booking.com hotel id.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Properties.Item.PropertiesItemRequestBuilder"/></returns>
         [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
         public global::Repull.SDK.V1.Channels.Booking.Properties.Item.PropertiesItemRequestBuilder this[string position]
@@ -60,7 +60,7 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
         {
         }
         /// <summary>
-        /// List Booking.com hotels claimed by this workspace. Each row includes the Booking-side hotel id and the connected room types.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List every Booking.com property this workspace holds. Each property is returned ONCE, with the Repull listings mapped under it.A Booking.com property is a building; its rooms are what guests book, and each room is mapped to one Repull listing — so one property routinely carries many listings. `listings[].roomBookingId` is the Booking.com room id an ARI write takes.A property whose rooms are not mapped yet is still listed, with `mappingStatus: &quot;unmapped&quot;` and an empty `listings` array. That is a real mid-onboarding state, not an error: finish `POST /v1/connect/booking/map-rooms` and the listings appear. Such a property used to be dropped silently, which made a mapped-but-unreadable workspace indistinguishable from one with no Booking connection at all.Inactive listings are left out of `listings`; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
         /// </summary>
         /// <returns>A List&lt;global::Repull.SDK.Models.BookingProperty&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -79,7 +79,7 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// List Booking.com hotels claimed by this workspace. Each row includes the Booking-side hotel id and the connected room types.Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List every Booking.com property this workspace holds. Each property is returned ONCE, with the Repull listings mapped under it.A Booking.com property is a building; its rooms are what guests book, and each room is mapped to one Repull listing — so one property routinely carries many listings. `listings[].roomBookingId` is the Booking.com room id an ARI write takes.A property whose rooms are not mapped yet is still listed, with `mappingStatus: &quot;unmapped&quot;` and an empty `listings` array. That is a real mid-onboarding state, not an error: finish `POST /v1/connect/booking/map-rooms` and the listings appear. Such a property used to be dropped silently, which made a mapped-but-unreadable workspace indistinguishable from one with no Booking connection at all.Inactive listings are left out of `listings`; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

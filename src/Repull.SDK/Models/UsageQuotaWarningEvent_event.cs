@@ -3,14 +3,13 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>The event name. This field is `event`, not `type`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public enum ReservationMessageReceivedEvent_type
-    #pragma warning restore CS1591
+    public enum UsageQuotaWarningEvent_event
     {
-        [EnumMember(Value = "reservation.message.received")]
+        [EnumMember(Value = "usage.quota.warning")]
         #pragma warning disable CS1591
-        ReservationMessageReceived,
+        UsageQuotaWarning,
         #pragma warning restore CS1591
     }
 }

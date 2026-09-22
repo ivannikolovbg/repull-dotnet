@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Body for `PUT /v1/channels/booking/availability`. Selects one of Booking&apos;s three ARI write paths via `type` and forwards `updates` verbatim to the connector.
+    /// Body for `PUT /v1/channels/booking/availability`. `type` selects which of Booking.com&apos;s writes to perform. Date ranges are inclusive at both ends everywhere in this body.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingAvailabilityUpdateRequest : IAdditionalDataHolder, IParsable
@@ -23,7 +23,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id PropertyId { get; set; }
 #endif
-        /// <summary>`rates` → price + restrictions (`updateRates`); `availability` → inventory + stop-sell + restrictions (`updateAvailability`); `derived-pricing` → occupancy-derived pricing rules (`updateDerivedPricing`).</summary>
+        /// <summary>`rates` → nightly prices (+ any restrictions sent with them), written at an explicit `occupancy`; `availability` → inventory, stop-sell and restrictions; `derived-pricing` → occupancy-derived pricing rules. A rates update may not carry `roomsToSell`: inventory is an `availability` write.</summary>
         public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest_type? Type { get; set; }
         /// <summary>For `type: &quot;rates&quot;` each item is a `BookingPricingRateUpdate`; for `type: &quot;availability&quot;` a `BookingAvailabilityUpdate`; for `type: &quot;derived-pricing&quot;` a derived-price rule set.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -33,6 +33,8 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates> Updates { get; set; }
 #endif
+        /// <summary>Only for `type: &quot;rates&quot;`. Default `true`: after the write the affected nights are read back off Booking.com so `applied` can say `verified` or `mismatch`. Send `false` to skip the read (one fewer Booking.com call); the response then reports `applied: &quot;unverified&quot;`.</summary>
+        public bool? Verify { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdateRequest"/> and sets the default values.
         /// </summary>
@@ -61,6 +63,7 @@ namespace Repull.SDK.Models
                 { "property_id", n => { PropertyId = n.GetObjectValue<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id>(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetEnumValue<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest_type>(); } },
                 { "updates", n => { Updates = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates>(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "verify", n => { Verify = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -73,6 +76,7 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id>("property_id", PropertyId);
             writer.WriteEnumValue<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest_type>("type", Type);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates>("updates", Updates);
+            writer.WriteBoolValue("verify", Verify);
             writer.WriteAdditionalData(AdditionalData);
         }
         /// <summary>

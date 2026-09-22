@@ -8,20 +8,22 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Optional length-of-stay / availability restrictions for one rate update. Every field here is forwarded verbatim into Booking.com&apos;s rates XML (`minimumstay`, `maximumstay`, `closedonarrival`, `closedondeparture`, …) — omit a field to leave that restriction untouched.
+    /// Length-of-stay and arrival restrictions for the nights in this update. Omit a field to leave that restriction untouched — nothing you do not state is changed.These are written on Booking.com&apos;s availability notification, which is the wire that carries a restriction when no inventory changes hands. Sending them alongside a price is supported: the prices and the restrictions are two writes, and the response reports each one separately (`price` and `restrictions`), so a half that lands is never reported as a failure and a half that is refused is never reported as applied.Three restrictions are refused with `422 restriction_not_supported` naming the field: Booking.com&apos;s notification has no element for them, and dropping a restriction you stated would be worse than refusing it. Set those on the rate plan in the Booking.com Extranet.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingPricingRateUpdateRestrictions : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Closed-to-arrival — guests may not check in on the affected dates (`closedonarrival`).</summary>
+        /// <summary>Closed-to-arrival — guests may not check in on these nights. `false` clears the flag; omit the field to leave it as it is.</summary>
         public bool? ClosedToArrival { get; set; }
-        /// <summary>Closed-to-departure — guests may not check out on the affected dates (`closedondeparture`).</summary>
+        /// <summary>Closed-to-departure — guests may not check out on these nights. `false` clears the flag; omit the field to leave it as it is.</summary>
         public bool? ClosedToDeparture { get; set; }
-        /// <summary>Arrival-based exact length of stay (`exactstay_arrival`).</summary>
+        /// <summary>Refused. Booking.com&apos;s restriction notification has no element for an exact arrival-based stay length, so it cannot be written through the API; sending it returns `422 restriction_not_supported` naming `updates[N].restrictions.exactStayArrival`. Set it on the rate plan in the Booking.com Extranet.</summary>
+        [Obsolete("")]
         public int? ExactStayArrival { get; set; }
-        /// <summary>Maximum advance-reservation window, format `XDY` (X days Y hours) — `max_advance_res`.</summary>
+        /// <summary>Refused, for the same reason as `exactStayArrival` — returns `422 restriction_not_supported`. Set the maximum advance-reservation window on the rate plan in the Booking.com Extranet.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? MaxAdvanceRes { get; set; }
@@ -29,11 +31,12 @@ namespace Repull.SDK.Models
 #else
         public string MaxAdvanceRes { get; set; }
 #endif
-        /// <summary>Maximum length of stay (`maximumstay`).</summary>
+        /// <summary>Maximum length of stay.</summary>
         public int? MaxStay { get; set; }
-        /// <summary>Arrival-based maximum length of stay (`maximumstay_arrival`).</summary>
+        /// <summary>Arrival-based maximum length of stay.</summary>
         public int? MaxStayArrival { get; set; }
-        /// <summary>Minimum advance-reservation window, format `XDY` (X days Y hours) — `min_advance_res`.</summary>
+        /// <summary>Refused, for the same reason as `exactStayArrival` — returns `422 restriction_not_supported`. Set the minimum advance-reservation window on the rate plan in the Booking.com Extranet.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? MinAdvanceRes { get; set; }
@@ -41,9 +44,9 @@ namespace Repull.SDK.Models
 #else
         public string MinAdvanceRes { get; set; }
 #endif
-        /// <summary>Minimum length of stay (`minimumstay`).</summary>
+        /// <summary>Minimum length of stay. Booking.com stores a 1-night minimum as no minimum at all, so `minStay: 1` reads back as `0` and is reported as applied.</summary>
         public int? MinStay { get; set; }
-        /// <summary>Arrival-based minimum length of stay (`minimumstay_arrival`).</summary>
+        /// <summary>Arrival-based minimum length of stay — applies to stays that START on these nights, rather than any stay covering them.</summary>
         public int? MinStayArrival { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions"/> and sets the default values.

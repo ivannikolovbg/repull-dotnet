@@ -16,7 +16,7 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether this rate plan is a derived child rate.</summary>
         public bool? IsChildRate { get; set; }
-        /// <summary>The maxPersons property</summary>
+        /// <summary>The party size this rate plan prices. A rate amount must be written at this number: above it Booking.com declines the price in silence, below it answers 400. Null when `source` is `mirror`.</summary>
         public int? MaxPersons { get; set; }
         /// <summary>Cancellation policy name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

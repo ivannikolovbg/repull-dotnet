@@ -5,32 +5,34 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Repull.SDK.Models
+namespace Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay
 {
-    /// <summary>
-    /// Verbatim Booking response envelope for debugging.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingPricingUpdateResponse_raw : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class ReplayPostRequestBody : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Replay even though this delivery already succeeded. Still counts against the 3-per-hour limit.</summary>
+        public bool? Force { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse_raw"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay.ReplayPostRequestBody"/> and sets the default values.
         /// </summary>
-        public BookingPricingUpdateResponse_raw()
+        public ReplayPostRequestBody()
         {
             AdditionalData = new Dictionary<string, object>();
+            Force = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse_raw"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay.ReplayPostRequestBody"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.BookingPricingUpdateResponse_raw CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay.ReplayPostRequestBody CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.BookingPricingUpdateResponse_raw();
+            return new global::Repull.SDK.V1.Webhooks.Item.Deliveries.Item.Replay.ReplayPostRequestBody();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +42,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "force", n => { Force = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -49,6 +52,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("force", Force);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -8,16 +8,17 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// The nights this update applies to. **Both ends are inclusive** — `start` equal to `end` is one night.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class BookingAvailabilityUpdate_dateRange : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The end property</summary>
+        /// <summary>Last night, YYYY-MM-DD, inclusive.</summary>
         public Date? End { get; set; }
-        /// <summary>The start property</summary>
+        /// <summary>First night, YYYY-MM-DD.</summary>
         public Date? Start { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdate_dateRange"/> and sets the default values.

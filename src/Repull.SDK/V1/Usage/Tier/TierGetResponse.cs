@@ -14,6 +14,8 @@ namespace Repull.SDK.V1.Usage.Tier
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The dailyResetsAt property</summary>
+        public DateTimeOffset? DailyResetsAt { get; set; }
         /// <summary>The limits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -73,6 +75,7 @@ namespace Repull.SDK.V1.Usage.Tier
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "dailyResetsAt", n => { DailyResetsAt = n.GetDateTimeOffsetValue(); } },
                 { "limits", n => { Limits = n.GetObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits>(global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits.CreateFromDiscriminatorValue); } },
                 { "remaining", n => { Remaining = n.GetObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining>(global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining.CreateFromDiscriminatorValue); } },
                 { "resetsAt", n => { ResetsAt = n.GetDateTimeOffsetValue(); } },
@@ -87,6 +90,7 @@ namespace Repull.SDK.V1.Usage.Tier
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteDateTimeOffsetValue("dailyResetsAt", DailyResetsAt);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits>("limits", Limits);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining>("remaining", Remaining);
             writer.WriteDateTimeOffsetValue("resetsAt", ResetsAt);

@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PricingRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/listings/{id}/pricing{?number_of_days*,room_id*,room_level*,startDate*}", pathParameters)
+        public PricingRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/listings/{id}/pricing{?hotel_id*,number_of_days*,room_id*,room_level*,startDate*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PricingRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/listings/{id}/pricing{?number_of_days*,room_id*,room_level*,startDate*}", rawUrl)
+        public PricingRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/listings/{id}/pricing{?hotel_id*,number_of_days*,room_id*,room_level*,startDate*}", rawUrl)
         {
         }
         /// <summary>
-        /// Resolves the Vanio listing ID to its Booking.com `hotel_id` (via the `listings_booking` mapping owned by the authenticated workspace), then proxies Booking&apos;s `getRoomRateAvailability` for the requested window. Pricing on Booking is per-room/per-rate-plan, so `room_id` and `room_level` flow through query params unchanged.Mirrors the per-channel `/listings/{id}/pricing` shape used by Airbnb so SDK consumers can carry a Vanio listing ID across channels.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Resolves the Repull listing id to its Booking.com `hotel_id` (via the room mapping the Connect flow records for the authenticated workspace), then proxies Booking&apos;s `getRoomRateAvailability` for the requested window. Pricing on Booking is per-room/per-rate-plan, so `room_id` and `room_level` flow through query params unchanged.Mirrors the per-channel `/listings/{id}/pricing` shape used by Airbnb so SDK consumers can carry a Repull listing id across channels. `id` is a Repull listing id, never a Booking.com hotel id — the hotel-id surface is `/v1/channels/booking/availability`.A listing can be published under several Booking.com properties. GET uses the oldest and reports the rest in `otherHotelIds`; PUT refuses with `409 ambiguous_booking_mapping` rather than push rates into a property it guessed at. `?hotel_id=` names the property explicitly for either.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.BookingPricingResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -44,6 +44,7 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.BookingPricingResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing.PricingRequestBuilder.PricingRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -61,11 +62,12 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingPricingResponse>(requestInfo, global::Repull.SDK.Models.BookingPricingResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Pushes one or more rate updates to Booking.com via `updateRates`. Each update needs `roomId` + `rateId` + `dateRange` + `price` + `currency`. Field-level validation runs up front so callers don&apos;t have to parse Booking&apos;s XML error envelope to discover a missing `roomId`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Writes nightly prices for a listing&apos;s Booking.com room + rate plan. Each update needs `roomId` + `rateId` + `dateRange` + `price` + `currency`; `dateRange` is inclusive at both ends, so `start` equal to `end` writes exactly one night.**Occupancy.** Booking.com stores a rate amount against the party size the rate plan prices. Send `occupancy` and that is what is used; omit it and it is resolved from Booking.com&apos;s own data for that (room, rate plan) and echoed back in `occupancy[]` with its `source`. When it cannot be resolved the write is refused with `422` naming `updates[N].occupancy` — a price is never sent at a guessed party size, because Booking.com declines such an amount without saying so.**Inventory is a separate write.** `roomsToSell` on a rate update returns `422 inventory_not_in_rate_update`; use `PUT /v1/channels/booking/availability` with `type: &quot;availability&quot;`.**Restrictions ride along, on their own wire.** Send `restrictions` with the price and Booking.com receives two writes; the response reports each separately in `price` and `restrictions`, each with its own state, read-back and — when refused — Booking.com&apos;s own reason. `minStay`, `maxStay`, `minStayArrival`, `maxStayArrival`, `closedToArrival` and `closedToDeparture` are written; `exactStayArrival`, `minAdvanceRes` and `maxAdvanceRes` are refused with `422 restriction_not_supported` (Booking.com&apos;s notification has no element for them — set those on the rate plan in the Extranet). Nothing you send is silently ignored.**The response says what is known.** Booking.com acknowledges a write without per-date status, so the affected nights are read back — prices and restrictions out of the same read — and `applied` reports `verified`, `mismatch`, `partial`, `rejected` or `unverified`. `partial` means one half landed and the other did not, which is never reported as a total failure. Send `verify: false` to skip the read-back; `applied` is then `unverified`. Booking.com stores a 1-night minimum as no minimum, so `minStay: 1` reads back as `0` and still counts as applied.`id` is a Repull listing id. When it is published under several Booking.com properties this returns `409 ambiguous_booking_mapping` and pushes nothing — name the property with `?hotel_id=` instead.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/></returns>
         /// <param name="body">Body for `PUT /v1/channels/booking/listings/{id}/pricing`. Pricing on Booking is per-room/per-rate-plan, so `room_id` + `rate_id` are required on every update.</param>
@@ -75,14 +77,18 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.BookingPricingUpdateResponse?> PutAsync(global::Repull.SDK.Models.BookingPricingUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.BookingPricingUpdateResponse?> PutAsync(global::Repull.SDK.Models.BookingPricingUpdateRequest body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing.PricingRequestBuilder.PricingRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.BookingPricingUpdateResponse> PutAsync(global::Repull.SDK.Models.BookingPricingUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.BookingPricingUpdateResponse> PutAsync(global::Repull.SDK.Models.BookingPricingUpdateRequest body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing.PricingRequestBuilder.PricingRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -93,12 +99,16 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingPricingUpdateResponse>(requestInfo, global::Repull.SDK.Models.BookingPricingUpdateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Resolves the Vanio listing ID to its Booking.com `hotel_id` (via the `listings_booking` mapping owned by the authenticated workspace), then proxies Booking&apos;s `getRoomRateAvailability` for the requested window. Pricing on Booking is per-room/per-rate-plan, so `room_id` and `room_level` flow through query params unchanged.Mirrors the per-channel `/listings/{id}/pricing` shape used by Airbnb so SDK consumers can carry a Vanio listing ID across channels.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Resolves the Repull listing id to its Booking.com `hotel_id` (via the room mapping the Connect flow records for the authenticated workspace), then proxies Booking&apos;s `getRoomRateAvailability` for the requested window. Pricing on Booking is per-room/per-rate-plan, so `room_id` and `room_level` flow through query params unchanged.Mirrors the per-channel `/listings/{id}/pricing` shape used by Airbnb so SDK consumers can carry a Repull listing id across channels. `id` is a Repull listing id, never a Booking.com hotel id — the hotel-id surface is `/v1/channels/booking/availability`.A listing can be published under several Booking.com properties. GET uses the oldest and reports the rest in `otherHotelIds`; PUT refuses with `409 ambiguous_booking_mapping` rather than push rates into a property it guessed at. `?hotel_id=` names the property explicitly for either.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -117,18 +127,18 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
             return requestInfo;
         }
         /// <summary>
-        /// Pushes one or more rate updates to Booking.com via `updateRates`. Each update needs `roomId` + `rateId` + `dateRange` + `price` + `currency`. Field-level validation runs up front so callers don&apos;t have to parse Booking&apos;s XML error envelope to discover a missing `roomId`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Writes nightly prices for a listing&apos;s Booking.com room + rate plan. Each update needs `roomId` + `rateId` + `dateRange` + `price` + `currency`; `dateRange` is inclusive at both ends, so `start` equal to `end` writes exactly one night.**Occupancy.** Booking.com stores a rate amount against the party size the rate plan prices. Send `occupancy` and that is what is used; omit it and it is resolved from Booking.com&apos;s own data for that (room, rate plan) and echoed back in `occupancy[]` with its `source`. When it cannot be resolved the write is refused with `422` naming `updates[N].occupancy` — a price is never sent at a guessed party size, because Booking.com declines such an amount without saying so.**Inventory is a separate write.** `roomsToSell` on a rate update returns `422 inventory_not_in_rate_update`; use `PUT /v1/channels/booking/availability` with `type: &quot;availability&quot;`.**Restrictions ride along, on their own wire.** Send `restrictions` with the price and Booking.com receives two writes; the response reports each separately in `price` and `restrictions`, each with its own state, read-back and — when refused — Booking.com&apos;s own reason. `minStay`, `maxStay`, `minStayArrival`, `maxStayArrival`, `closedToArrival` and `closedToDeparture` are written; `exactStayArrival`, `minAdvanceRes` and `maxAdvanceRes` are refused with `422 restriction_not_supported` (Booking.com&apos;s notification has no element for them — set those on the rate plan in the Extranet). Nothing you send is silently ignored.**The response says what is known.** Booking.com acknowledges a write without per-date status, so the affected nights are read back — prices and restrictions out of the same read — and `applied` reports `verified`, `mismatch`, `partial`, `rejected` or `unverified`. `partial` means one half landed and the other did not, which is never reported as a total failure. Send `verify: false` to skip the read-back; `applied` is then `unverified`. Booking.com stores a 1-night minimum as no minimum, so `minStay: 1` reads back as `0` and still counts as applied.`id` is a Repull listing id. When it is published under several Booking.com properties this returns `409 ambiguous_booking_mapping` and pushes nothing — name the property with `?hotel_id=` instead.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Body for `PUT /v1/channels/booking/listings/{id}/pricing`. Pricing on Booking is per-room/per-rate-plan, so `room_id` + `rate_id` are required on every update.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.BookingPricingUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.BookingPricingUpdateRequest body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing.PricingRequestBuilder.PricingRequestBuilderPutQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.BookingPricingUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.BookingPricingUpdateRequest body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing.PricingRequestBuilder.PricingRequestBuilderPutQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -148,11 +158,21 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
             return new global::Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing.PricingRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Resolves the Vanio listing ID to its Booking.com `hotel_id` (via the `listings_booking` mapping owned by the authenticated workspace), then proxies Booking&apos;s `getRoomRateAvailability` for the requested window. Pricing on Booking is per-room/per-rate-plan, so `room_id` and `room_level` flow through query params unchanged.Mirrors the per-channel `/listings/{id}/pricing` shape used by Airbnb so SDK consumers can carry a Vanio listing ID across channels.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Resolves the Repull listing id to its Booking.com `hotel_id` (via the room mapping the Connect flow records for the authenticated workspace), then proxies Booking&apos;s `getRoomRateAvailability` for the requested window. Pricing on Booking is per-room/per-rate-plan, so `room_id` and `room_level` flow through query params unchanged.Mirrors the per-channel `/listings/{id}/pricing` shape used by Airbnb so SDK consumers can carry a Repull listing id across channels. `id` is a Repull listing id, never a Booking.com hotel id — the hotel-id surface is `/v1/channels/booking/availability`.A listing can be published under several Booking.com properties. GET uses the oldest and reports the rest in `otherHotelIds`; PUT refuses with `409 ambiguous_booking_mapping` rather than push rates into a property it guessed at. `?hotel_id=` names the property explicitly for either.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PricingRequestBuilderGetQueryParameters 
         {
+            /// <summary>Booking.com hotel id, when this listing is published under more than one property. Omit it and a read uses the oldest mapping (reporting the rest in `otherHotelIds`), while a write is refused with `409 ambiguous_booking_mapping` rather than guess. `GET /v1/channels/booking/properties` lists the valid ids.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("hotel_id")]
+            public string? HotelId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("hotel_id")]
+            public string HotelId { get; set; }
+#endif
             #pragma warning disable CS1591
             [QueryParameter("number_of_days")]
             public int? NumberOfDays { get; set; }
@@ -187,11 +207,28 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
         {
         }
         /// <summary>
+        /// Writes nightly prices for a listing&apos;s Booking.com room + rate plan. Each update needs `roomId` + `rateId` + `dateRange` + `price` + `currency`; `dateRange` is inclusive at both ends, so `start` equal to `end` writes exactly one night.**Occupancy.** Booking.com stores a rate amount against the party size the rate plan prices. Send `occupancy` and that is what is used; omit it and it is resolved from Booking.com&apos;s own data for that (room, rate plan) and echoed back in `occupancy[]` with its `source`. When it cannot be resolved the write is refused with `422` naming `updates[N].occupancy` — a price is never sent at a guessed party size, because Booking.com declines such an amount without saying so.**Inventory is a separate write.** `roomsToSell` on a rate update returns `422 inventory_not_in_rate_update`; use `PUT /v1/channels/booking/availability` with `type: &quot;availability&quot;`.**Restrictions ride along, on their own wire.** Send `restrictions` with the price and Booking.com receives two writes; the response reports each separately in `price` and `restrictions`, each with its own state, read-back and — when refused — Booking.com&apos;s own reason. `minStay`, `maxStay`, `minStayArrival`, `maxStayArrival`, `closedToArrival` and `closedToDeparture` are written; `exactStayArrival`, `minAdvanceRes` and `maxAdvanceRes` are refused with `422 restriction_not_supported` (Booking.com&apos;s notification has no element for them — set those on the rate plan in the Extranet). Nothing you send is silently ignored.**The response says what is known.** Booking.com acknowledges a write without per-date status, so the affected nights are read back — prices and restrictions out of the same read — and `applied` reports `verified`, `mismatch`, `partial`, `rejected` or `unverified`. `partial` means one half landed and the other did not, which is never reported as a total failure. Send `verify: false` to skip the read-back; `applied` is then `unverified`. Booking.com stores a 1-night minimum as no minimum, so `minStay: 1` reads back as `0` and still counts as applied.`id` is a Repull listing id. When it is published under several Booking.com properties this returns `409 ambiguous_booking_mapping` and pushes nothing — name the property with `?hotel_id=` instead.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class PricingRequestBuilderPutQueryParameters 
+        {
+            /// <summary>Booking.com hotel id, when this listing is published under more than one property. Omit it and a read uses the oldest mapping (reporting the rest in `otherHotelIds`), while a write is refused with `409 ambiguous_booking_mapping` rather than guess. `GET /v1/channels/booking/properties` lists the valid ids.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("hotel_id")]
+            public string? HotelId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("hotel_id")]
+            public string HotelId { get; set; }
+#endif
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class PricingRequestBuilderPutRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class PricingRequestBuilderPutRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing.PricingRequestBuilder.PricingRequestBuilderPutQueryParameters>
         {
         }
     }

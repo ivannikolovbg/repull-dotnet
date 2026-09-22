@@ -83,5 +83,9 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         RepullPing,
         #pragma warning restore CS1591
+        [EnumMember(Value = "usage.quota.warning")]
+        #pragma warning disable CS1591
+        UsageQuotaWarning,
+        #pragma warning restore CS1591
     }
 }
