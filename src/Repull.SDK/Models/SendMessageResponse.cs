@@ -14,6 +14,14 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The files delivered, in request order. Empty array for a text-only send.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.SentAttachment>? Attachments { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.SentAttachment> Attachments { get; set; }
+#endif
         /// <summary>The channel the message actually went out on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -51,6 +59,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>Present only when `attachments` were sent: one entry per channel message, in delivery order. `id` is the text message (or the last file message when there is no text).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.SendMessagePart>? Parts { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.SendMessagePart> Parts { get; set; }
 #endif
         /// <summary>The status property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -101,6 +117,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.SentAttachment>(global::Repull.SDK.Models.SentAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "channel", n => { Channel = n.GetStringValue(); } },
                 { "contentRewritten", n => { ContentRewritten = n.GetBoolValue(); } },
                 { "conversationId", n => { ConversationId = n.GetIntValue(); } },
@@ -108,6 +125,7 @@ namespace Repull.SDK.Models
                 { "direction", n => { Direction = n.GetEnumValue<global::Repull.SDK.Models.SendMessageResponse_direction>(); } },
                 { "externalMessageId", n => { ExternalMessageId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "parts", n => { Parts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.SendMessagePart>(global::Repull.SDK.Models.SendMessagePart.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "statusReason", n => { StatusReason = n.GetStringValue(); } },
                 { "submittedContent", n => { SubmittedContent = n.GetStringValue(); } },
@@ -120,6 +138,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.SentAttachment>("attachments", Attachments);
             writer.WriteStringValue("channel", Channel);
             writer.WriteBoolValue("contentRewritten", ContentRewritten);
             writer.WriteIntValue("conversationId", ConversationId);
@@ -127,6 +146,7 @@ namespace Repull.SDK.Models
             writer.WriteEnumValue<global::Repull.SDK.Models.SendMessageResponse_direction>("direction", Direction);
             writer.WriteStringValue("externalMessageId", ExternalMessageId);
             writer.WriteStringValue("id", Id);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.SendMessagePart>("parts", Parts);
             writer.WriteStringValue("status", Status);
             writer.WriteStringValue("statusReason", StatusReason);
             writer.WriteStringValue("submittedContent", SubmittedContent);

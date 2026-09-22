@@ -60,7 +60,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Send a text message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.**Text only.** To send photos, use `POST /v1/conversations/{id}/messages` with `attachments` (JPEG or PNG, up to 10 MB each, with message text) — it uploads the files to Booking.com and records them in the conversation. Passing `attachments`, `attachment_ids` or `mediaUrl` here returns `422 attachments_not_supported` and sends nothing.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -69,6 +69,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -87,6 +88,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
@@ -111,7 +113,7 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
             return requestInfo;
         }
         /// <summary>
-        /// Send a message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Send a text message in a Booking.com conversation as the host. Booking enforces content rules similar to Airbnb.**Text only.** To send photos, use `POST /v1/conversations/{id}/messages` with `attachments` (JPEG or PNG, up to 10 MB each, with message text) — it uploads the files to Booking.com and records them in the conversation. Passing `attachments`, `attachment_ids` or `mediaUrl` here returns `422 attachments_not_supported` and sends nothing.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

@@ -34,52 +34,164 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
         {
         }
         /// <summary>
-        /// Withdraw a previously-created Airbnb special offer. **Write-side** — calls Airbnb upstream. Pass the offer id as `?offerId=`. Requires a connected Airbnb host, else `404 no_connection`.
+        /// Withdraw a special offer the guest has not booked. **Write-side** — calls Airbnb upstream. Pass the Airbnb offer id as `?offerId=`. The Repull-id equivalent is `DELETE /v1/conversations/{id}/special-offers/{offerId}`.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersDeleteResponse?> DeleteAsOffersDeleteResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersDeleteResponse> DeleteAsOffersDeleteResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersDeleteResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create a special offer or a pre-approval on Airbnb. **Write-side** — calls Airbnb upstream. The `type` discriminator selects the flavour:- `offer` — a special offer with custom terms (the remaining body fields are the offer params).- `preapproval` — pre-approve an inquiry thread (requires `threadId`; optional `blockInstantBooking`).Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Withdraw a special offer the guest has not booked. **Write-side** — calls Airbnb upstream. Pass the Airbnb offer id as `?offerId=`. The Repull-id equivalent is `DELETE /v1/conversations/{id}/special-offers/{offerId}`.
         /// </summary>
-        /// <param name="body">The request body</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("This method is obsolete. Use DeleteAsOffersDeleteResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse?> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Read a pre-approval or special offer from Airbnb by its Airbnb id. **Live read** — calls Airbnb upstream. Pass the id as `?offerId=`. The Repull-id equivalent is `GET /v1/conversations/{id}/special-offers/{offerId}`, which also confirms the offer belongs to that conversation.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
-        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse?> GetAsOffersGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse> GetAsOffersGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToGetRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Read a pre-approval or special offer from Airbnb by its Airbnb id. **Live read** — calls Airbnb upstream. Pass the id as `?offerId=`. The Repull-id equivalent is `GET /v1/conversations/{id}/special-offers/{offerId}`, which also confirms the offer belongs to that conversation.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("This method is obsolete. Use GetAsOffersGetResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToGetRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Create a pre-approval or a special offer on an Airbnb thread, addressed by **Airbnb** ids. **Write-side** — calls Airbnb upstream. The Repull-id equivalents, which also update the inquiry in Vanio, are `POST /v1/conversations/{id}/pre-approval` and `POST /v1/conversations/{id}/special-offers` — prefer those unless you only hold Airbnb ids.- `type: &quot;preapproval&quot;` — let the guest book the dates and price they asked about. Requires `thread_id`; optional `block_instant_booking`.- `type: &quot;offer&quot;` — your own terms. Requires `thread_id`, `listing_id` (the **Airbnb** listing id, as a string), `start_date`, `nights`, `total_price` (whole stay, listing currency) and `guest_details` with `number_of_guests` (or `number_of_adults`; Airbnb counts adults + children).The body is validated before anything reaches Airbnb (a `422 invalid_params` names the field), and unknown fields are refused. The legacy spellings `threadId` and `blockInstantBooking` still work. The request is sent as the Airbnb account that owns the thread or listing.Airbnb refusals are mapped rather than returned as a 500: `409 inquiry_no_longer_open` / `inquiry_expired` when the inquiry moved on, `422 airbnb_rejected` with Airbnb’s reason otherwise, `403 connection_reauth_required` when the grant does not allow it.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostResponse?> PostAsOffersPostResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostResponse> PostAsOffersPostResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -89,13 +201,53 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
-                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Withdraw a previously-created Airbnb special offer. **Write-side** — calls Airbnb upstream. Pass the offer id as `?offerId=`. Requires a connected Airbnb host, else `404 no_connection`.
+        /// Create a pre-approval or a special offer on an Airbnb thread, addressed by **Airbnb** ids. **Write-side** — calls Airbnb upstream. The Repull-id equivalents, which also update the inquiry in Vanio, are `POST /v1/conversations/{id}/pre-approval` and `POST /v1/conversations/{id}/special-offers` — prefer those unless you only hold Airbnb ids.- `type: &quot;preapproval&quot;` — let the guest book the dates and price they asked about. Requires `thread_id`; optional `block_instant_booking`.- `type: &quot;offer&quot;` — your own terms. Requires `thread_id`, `listing_id` (the **Airbnb** listing id, as a string), `start_date`, `nights`, `total_price` (whole stay, listing currency) and `guest_details` with `number_of_guests` (or `number_of_adults`; Airbnb counts adults + children).The body is validated before anything reaches Airbnb (a `422 invalid_params` names the field), and unknown fields are refused. The legacy spellings `threadId` and `blockInstantBooking` still work. The request is sent as the Airbnb account that owns the thread or listing.Airbnb refusals are mapped rather than returned as a 500: `409 inquiry_no_longer_open` / `inquiry_expired` when the inquiry moved on, `422 airbnb_rejected` with Airbnb’s reason otherwise, `403 connection_reauth_required` when the grant does not allow it.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("This method is obsolete. Use PostAsOffersPostResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse?> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Withdraw a special offer the guest has not booked. **Write-side** — calls Airbnb upstream. Pass the Airbnb offer id as `?offerId=`. The Repull-id equivalent is `DELETE /v1/conversations/{id}/special-offers/{offerId}`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -114,7 +266,26 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
             return requestInfo;
         }
         /// <summary>
-        /// Create a special offer or a pre-approval on Airbnb. **Write-side** — calls Airbnb upstream. The `type` discriminator selects the flavour:- `offer` — a special offer with custom terms (the remaining body fields are the offer params).- `preapproval` — pre-approve an inquiry thread (requires `threadId`; optional `blockInstantBooking`).Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Read a pre-approval or special offer from Airbnb by its Airbnb id. **Live read** — calls Airbnb upstream. Pass the id as `?offerId=`. The Repull-id equivalent is `GET /v1/conversations/{id}/special-offers/{offerId}`, which also confirms the offer belongs to that conversation.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderGetQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderGetQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            var requestInfo = new RequestInformation(Method.GET, "{+baseurl}/v1/channels/airbnb/offers?offerId={offerId}", PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Create a pre-approval or a special offer on an Airbnb thread, addressed by **Airbnb** ids. **Write-side** — calls Airbnb upstream. The Repull-id equivalents, which also update the inquiry in Vanio, are `POST /v1/conversations/{id}/pre-approval` and `POST /v1/conversations/{id}/special-offers` — prefer those unless you only hold Airbnb ids.- `type: &quot;preapproval&quot;` — let the guest book the dates and price they asked about. Requires `thread_id`; optional `block_instant_booking`.- `type: &quot;offer&quot;` — your own terms. Requires `thread_id`, `listing_id` (the **Airbnb** listing id, as a string), `start_date`, `nights`, `total_price` (whole stay, listing currency) and `guest_details` with `number_of_guests` (or `number_of_adults`; Airbnb counts adults + children).The body is validated before anything reaches Airbnb (a `422 invalid_params` names the field), and unknown fields are refused. The legacy spellings `threadId` and `blockInstantBooking` still work. The request is sent as the Airbnb account that owns the thread or listing.Airbnb refusals are mapped rather than returned as a 500: `409 inquiry_no_longer_open` / `inquiry_expired` when the inquiry moved on, `422 airbnb_rejected` with Airbnb’s reason otherwise, `403 connection_reauth_required` when the grant does not allow it.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -145,12 +316,12 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
             return new global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Withdraw a previously-created Airbnb special offer. **Write-side** — calls Airbnb upstream. Pass the offer id as `?offerId=`. Requires a connected Airbnb host, else `404 no_connection`.
+        /// Withdraw a special offer the guest has not booked. **Write-side** — calls Airbnb upstream. Pass the Airbnb offer id as `?offerId=`. The Repull-id equivalent is `DELETE /v1/conversations/{id}/special-offers/{offerId}`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class OffersRequestBuilderDeleteQueryParameters 
         {
-            /// <summary>Airbnb special-offer id to withdraw.</summary>
+            /// <summary>Airbnb special-offer id (the `id` Airbnb returned when the offer was created).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("offerId")]
@@ -167,6 +338,31 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class OffersRequestBuilderDeleteRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderDeleteQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Read a pre-approval or special offer from Airbnb by its Airbnb id. **Live read** — calls Airbnb upstream. Pass the id as `?offerId=`. The Repull-id equivalent is `GET /v1/conversations/{id}/special-offers/{offerId}`, which also confirms the offer belongs to that conversation.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class OffersRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Airbnb special-offer id (the `id` Airbnb returned when the offer was created).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("offerId")]
+            public string? OfferId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("offerId")]
+            public string OfferId { get; set; }
+#endif
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class OffersRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersRequestBuilder.OffersRequestBuilderGetQueryParameters>
         {
         }
         /// <summary>

@@ -7,10 +7,11 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// A file on a message — a photo the guest sent, or a file sent to the guest. Files are copied to durable storage, so `url` keeps working after the channel&apos;s own link expires. Treat `url` as opaque.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class ConversationMessageAttachment : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -32,13 +33,24 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The imageUrl property</summary>
+        /// <summary>Same value as `url` (kept for older clients; it is not image-only). Use `url`.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ImageUrl { get; set; }
 #nullable restore
 #else
         public string ImageUrl { get; set; }
+#endif
+        /// <summary>Coarse kind, derived from `contentType`.</summary>
+        public global::Repull.SDK.Models.ConversationMessageAttachment_type? Type { get; set; }
+        /// <summary>Where to download the file.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Url { get; set; }
+#nullable restore
+#else
+        public string Url { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConversationMessageAttachment"/> and sets the default values.
@@ -69,6 +81,8 @@ namespace Repull.SDK.Models
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "imageUrl", n => { ImageUrl = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Repull.SDK.Models.ConversationMessageAttachment_type>(); } },
+                { "url", n => { Url = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -82,6 +96,8 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("imageUrl", ImageUrl);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ConversationMessageAttachment_type>("type", Type);
+            writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

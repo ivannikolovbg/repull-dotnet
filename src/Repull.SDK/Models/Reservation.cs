@@ -126,10 +126,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ReservationPrimaryGuest PrimaryGuest { get; set; }
 #endif
+        /// <summary>On a `pending` Airbnb booking request that can still be answered: when it lapses (24 hours after the guest asked). Accept or decline before then with `POST /v1/reservations/{id}/accept` / `/decline`. Absent on every other reservation.</summary>
+        public DateTimeOffset? RespondBy { get; set; }
         /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
         public global::Repull.SDK.Models.Reservation_source? Source { get; set; }
-        /// <summary>Lifecycle status. The API normalises a multi-decade internal taxonomy down to these four buckets, so the value you receive is always one of the enum constants. `completed` is derived from `checkOut &lt; today`.</summary>
+        /// <summary>Lifecycle status. The API normalises a multi-decade internal taxonomy down to these four buckets, so the value you receive is always one of the enum constants. `completed` is derived from `checkOut &lt; today`. A `pending` booking request the channel already let lapse — Airbnb expires an unanswered request 24 hours after the guest asks, and no request can be answered once its check-in has passed — is reported as `cancelled` with `statusDetail: &quot;request_expired&quot;`, even when the channel never told us.</summary>
         public global::Repull.SDK.Models.Reservation_status? Status { get; set; }
+        /// <summary>Present only when `status` was derived rather than reported by the channel. `request_expired` — a booking request nobody answered in time (Airbnb&apos;s 24-hour window passed, or the check-in did). Absent otherwise.</summary>
+        public global::Repull.SDK.Models.Reservation_statusDetail? StatusDetail { get; set; }
         /// <summary>DEPRECATED — use `financials.totalPrice` (a number). Decimal-as-string (precision 10, scale 2) kept for back-compat.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -183,8 +187,10 @@ namespace Repull.SDK.Models
                 { "occupancy", n => { Occupancy = n.GetObjectValue<global::Repull.SDK.Models.ReservationOccupancy>(global::Repull.SDK.Models.ReservationOccupancy.CreateFromDiscriminatorValue); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Reservation_platform>(); } },
                 { "primaryGuest", n => { PrimaryGuest = n.GetObjectValue<global::Repull.SDK.Models.ReservationPrimaryGuest>(global::Repull.SDK.Models.ReservationPrimaryGuest.CreateFromDiscriminatorValue); } },
+                { "respondBy", n => { RespondBy = n.GetDateTimeOffsetValue(); } },
                 { "source", n => { Source = n.GetEnumValue<global::Repull.SDK.Models.Reservation_source>(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Reservation_status>(); } },
+                { "statusDetail", n => { StatusDetail = n.GetEnumValue<global::Repull.SDK.Models.Reservation_statusDetail>(); } },
                 { "totalPrice", n => { TotalPrice = n.GetStringValue(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
@@ -213,8 +219,10 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationOccupancy>("occupancy", Occupancy);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_platform>("platform", Platform);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationPrimaryGuest>("primaryGuest", PrimaryGuest);
+            writer.WriteDateTimeOffsetValue("respondBy", RespondBy);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_source>("source", Source);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_status>("status", Status);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_statusDetail>("statusDetail", StatusDetail);
             writer.WriteStringValue("totalPrice", TotalPrice);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);

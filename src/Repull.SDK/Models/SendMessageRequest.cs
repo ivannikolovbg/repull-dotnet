@@ -7,16 +7,25 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// `message`, `attachments`, or both. Per-channel limits for `attachments`:| Channel | Accepted types | Per file | Per request | Text ||---|---|---|---|---|| Airbnb | JPEG, PNG, GIF, WebP (sent as JPEG), MP4, QuickTime | 10 MB | 5 | optional — each file is sent as its own message, then the text || Booking.com | JPEG, PNG | 10 MB | 5 | **required** — all files ride on the one text message || SMS, email, direct-booking site chat | — | — | — | `422 attachments_not_supported`; nothing is sent |
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class SendMessageRequest : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Files to send. See the per-channel table above.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.SendMessageAttachment>? Attachments { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.SendMessageAttachment> Attachments { get; set; }
+#endif
         /// <summary>Force a channel. Omit to send on whichever channel the conversation already uses, which is the right default.</summary>
         public global::Repull.SDK.Models.SendMessageRequest_channel? Channel { get; set; }
-        /// <summary>The text to send the guest.</summary>
+        /// <summary>The text to send the guest. Required unless `attachments` is present.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Message { get; set; }
@@ -49,6 +58,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.SendMessageAttachment>(global::Repull.SDK.Models.SendMessageAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "channel", n => { Channel = n.GetEnumValue<global::Repull.SDK.Models.SendMessageRequest_channel>(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
             };
@@ -60,6 +70,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.SendMessageAttachment>("attachments", Attachments);
             writer.WriteEnumValue<global::Repull.SDK.Models.SendMessageRequest_channel>("channel", Channel);
             writer.WriteStringValue("message", Message);
             writer.WriteAdditionalData(AdditionalData);

@@ -4,6 +4,8 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Reservations.Item.Accept;
+using Repull.SDK.V1.Reservations.Item.Decline;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +19,16 @@ namespace Repull.SDK.V1.Reservations.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationsItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The accept property</summary>
+        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptRequestBuilder Accept
+        {
+            get => new global::Repull.SDK.V1.Reservations.Item.Accept.AcceptRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The decline property</summary>
+        public global::Repull.SDK.V1.Reservations.Item.Decline.DeclineRequestBuilder Decline
+        {
+            get => new global::Repull.SDK.V1.Reservations.Item.Decline.DeclineRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Reservations.Item.ReservationsItemRequestBuilder"/> and sets the default values.
         /// </summary>

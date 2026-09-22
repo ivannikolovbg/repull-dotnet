@@ -35,7 +35,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public MessagesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/messaging/{threadId}/messages", pathParameters)
+        public MessagesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/messaging/{threadId}/messages{?all*,cursor*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,23 +43,23 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public MessagesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/messaging/{threadId}/messages", rawUrl)
+        public MessagesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/messaging/{threadId}/messages{?all*,cursor*}", rawUrl)
         {
         }
         /// <summary>
-        /// Fetch the full message log for an Airbnb thread, ordered oldest-to-newest. Walk pages with `?cursor=` until `pagination.hasMore` is `false`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Messages stored for an Airbnb thread, as recorded rows (not the unified `Message` shape — use `GET /v1/conversations/{id}/messages` for that). By default returns 50 per page, newest first; walk older pages with `?cursor=` (the `pagination.nextCursor` of the previous page) until `pagination.hasMore` is `false`. `?all=true` returns up to 1000 rows oldest-first in one response, with no `pagination`.Each row carries `attachments` — photos and other files on that message, inbound or outbound — in the same shape as the unified endpoint.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.MessageListResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.MessageListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesGetResponse?> GetAsMessagesGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesRequestBuilder.MessagesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.MessageListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesGetResponse> GetAsMessagesGetResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesRequestBuilder.MessagesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -67,25 +67,51 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
             {
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.MessageListResponse>(requestInfo, global::Repull.SDK.Models.MessageListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Send a message in an Airbnb thread as the host. Airbnb enforces content rules (no off-platform contact info, no external URLs) — violating messages are rejected upstream and surface as `airbnb_error`.The `{threadId}` is the Airbnb thread id — the `externalThreadId` field on a unified `Conversation` (`GET /v1/conversations`).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Messages stored for an Airbnb thread, as recorded rows (not the unified `Message` shape — use `GET /v1/conversations/{id}/messages` for that). By default returns 50 per page, newest first; walk older pages with `?cursor=` (the `pagination.nextCursor` of the previous page) until `pagination.hasMore` is `false`. `?all=true` returns up to 1000 rows oldest-first in one response, with no `pagination`.Each row carries `attachments` — photos and other files on that message, inbound or outbound — in the same shape as the unified endpoint.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
-        /// <param name="body">The request body</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        [Obsolete("This method is obsolete. Use GetAsMessagesGetResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesRequestBuilder.MessagesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesRequestBuilder.MessagesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToGetRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Send a message in an Airbnb thread as the host. Airbnb enforces content rules (no off-platform contact info, no external URLs) — violating messages are rejected upstream and surface as `airbnb_error`.### Sending a photo or video (`mediaUrl`)Airbnb only accepts media uploaded to a signed URL it issues, one file per message and no text on the same message. With `mediaUrl`, Repull downloads the file (public `https://` only, 10 MB max), reads its real type from the bytes (JPEG, PNG, GIF, WebP — converted to JPEG — or MP4/QuickTime), uploads it to Airbnb and sends it; `message`, if given, follows as a separate message. This is the same flow as `POST /v1/conversations/{id}/messages` with `attachments` — prefer that endpoint, which also takes several files per request. The response is a `SendMessageResponse`, the send is recorded in the conversation, and failures are the 422 codes documented there (`attachment_type_not_supported`, `attachment_too_large`, `message_not_sent` for a pre-booking thread, …). The thread must already be synced to Repull (`GET /v1/conversations` lists them), otherwise `404`.Text-only sends (no `mediaUrl`) go straight to Airbnb and return Airbnb&apos;s message object.The `{threadId}` is the Airbnb thread id — the `externalThreadId` field on a unified `Conversation` (`GET /v1/conversations`).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.Models.SendMessageResponse"/></returns>
+        /// <param name="body">`message`, `mediaUrl`, or both.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.SendMessageResponse?> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.SendMessageResponse> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -95,22 +121,23 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.SendMessageResponse>(requestInfo, global::Repull.SDK.Models.SendMessageResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch the full message log for an Airbnb thread, ordered oldest-to-newest. Walk pages with `?cursor=` until `pagination.hasMore` is `false`.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Messages stored for an Airbnb thread, as recorded rows (not the unified `Message` shape — use `GET /v1/conversations/{id}/messages` for that). By default returns 50 per page, newest first; walk older pages with `?cursor=` (the `pagination.nextCursor` of the previous page) until `pagination.hasMore` is `false`. `?all=true` returns up to 1000 rows oldest-first in one response, with no `pagination`.Each row carries `attachments` — photos and other files on that message, inbound or outbound — in the same shape as the unified endpoint.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesRequestBuilder.MessagesRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesRequestBuilder.MessagesRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -119,10 +146,10 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
             return requestInfo;
         }
         /// <summary>
-        /// Send a message in an Airbnb thread as the host. Airbnb enforces content rules (no off-platform contact info, no external URLs) — violating messages are rejected upstream and surface as `airbnb_error`.The `{threadId}` is the Airbnb thread id — the `externalThreadId` field on a unified `Conversation` (`GET /v1/conversations`).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Send a message in an Airbnb thread as the host. Airbnb enforces content rules (no off-platform contact info, no external URLs) — violating messages are rejected upstream and surface as `airbnb_error`.### Sending a photo or video (`mediaUrl`)Airbnb only accepts media uploaded to a signed URL it issues, one file per message and no text on the same message. With `mediaUrl`, Repull downloads the file (public `https://` only, 10 MB max), reads its real type from the bytes (JPEG, PNG, GIF, WebP — converted to JPEG — or MP4/QuickTime), uploads it to Airbnb and sends it; `message`, if given, follows as a separate message. This is the same flow as `POST /v1/conversations/{id}/messages` with `attachments` — prefer that endpoint, which also takes several files per request. The response is a `SendMessageResponse`, the send is recorded in the conversation, and failures are the 422 codes documented there (`attachment_type_not_supported`, `attachment_too_large`, `message_not_sent` for a pre-booking thread, …). The thread must already be synced to Repull (`GET /v1/conversations` lists them), otherwise `404`.Text-only sends (no `mediaUrl`) go straight to Airbnb and return Airbnb&apos;s message object.The `{threadId}` is the Airbnb thread id — the `externalThreadId` field on a unified `Conversation` (`GET /v1/conversations`).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request body</param>
+        /// <param name="body">`message`, `mediaUrl`, or both.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -150,11 +177,31 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
             return new global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// Messages stored for an Airbnb thread, as recorded rows (not the unified `Message` shape — use `GET /v1/conversations/{id}/messages` for that). By default returns 50 per page, newest first; walk older pages with `?cursor=` (the `pagination.nextCursor` of the previous page) until `pagination.hasMore` is `false`. `?all=true` returns up to 1000 rows oldest-first in one response, with no `pagination`.Each row carries `attachments` — photos and other files on that message, inbound or outbound — in the same shape as the unified endpoint.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class MessagesRequestBuilderGetQueryParameters 
+        {
+            /// <summary>`true` returns up to 1000 messages oldest-first in one response, without `pagination`.</summary>
+            [QueryParameter("all")]
+            public bool? All { get; set; }
+            /// <summary>`pagination.nextCursor` from the previous page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("cursor")]
+            public string? Cursor { get; set; }
+#nullable restore
+#else
+            [QueryParameter("cursor")]
+            public string Cursor { get; set; }
+#endif
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class MessagesRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class MessagesRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesRequestBuilder.MessagesRequestBuilderGetQueryParameters>
         {
         }
         /// <summary>

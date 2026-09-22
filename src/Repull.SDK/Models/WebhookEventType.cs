@@ -31,6 +31,22 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ReservationAlterationResponded,
         #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.request.created")]
+        #pragma warning disable CS1591
+        ReservationRequestCreated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.request.updated")]
+        #pragma warning disable CS1591
+        ReservationRequestUpdated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "inquiry.created")]
+        #pragma warning disable CS1591
+        InquiryCreated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "inquiry.updated")]
+        #pragma warning disable CS1591
+        InquiryUpdated,
+        #pragma warning restore CS1591
         [EnumMember(Value = "listing.created")]
         #pragma warning disable CS1591
         ListingCreated,

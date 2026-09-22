@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.V1.Channels.Airbnb.Offers
 {
-    /// <summary>Which kind of offer to create.</summary>
+    /// <summary>What to create.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum OffersPostRequestBody_type
     {

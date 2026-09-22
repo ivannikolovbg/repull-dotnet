@@ -57,27 +57,79 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReservation>(requestInfo, global::Repull.SDK.Models.AirbnbReservation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Apply a state action to an Airbnb reservation — `accept` / `decline` (for inquiries and reservation requests), `cancel` (host cancellation, carries penalties), `pre-approve` (for inquiries).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Act on an Airbnb reservation by its Airbnb confirmation code. **Write-side** — calls Airbnb upstream, as the Airbnb account that owns the booking.- `accept` — accept a pending booking request.- `decline` — decline a pending booking request. Requires `reason` (one of Airbnb&apos;s decline reasons) and `message` (sent to the guest, at most 500 characters).- `cancel` — cancel a confirmed booking as the host. Requires `reason` (one of Airbnb&apos;s host-cancellation reasons). **Host cancellations carry Airbnb penalties.**The body is validated before anything reaches Airbnb; unknown fields are refused. There is no `pre-approve` action: a pre-approval answers an inquiry, which has no confirmation code — use `POST /v1/conversations/{id}/pre-approval`. For accept/decline, `POST /v1/reservations/{id}/accept` and `/decline` do the same by Repull id and also update Vanio.Airbnb refusals are mapped rather than returned as a 500: a request that already moved on is `409 request_no_longer_pending` (do not retry), an expired one `409 request_expired`, any other refusal `422 airbnb_rejected` with Airbnb&apos;s reason.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.Send `Idempotency-Key` to make a retry safe.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostResponse"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostResponse?> PostAsWithCodePostResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostResponse> PostAsWithCodePostResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
-            var requestInfo = ToPostRequestInformation(requestConfiguration);
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Act on an Airbnb reservation by its Airbnb confirmation code. **Write-side** — calls Airbnb upstream, as the Airbnb account that owns the booking.- `accept` — accept a pending booking request.- `decline` — decline a pending booking request. Requires `reason` (one of Airbnb&apos;s decline reasons) and `message` (sent to the guest, at most 500 characters).- `cancel` — cancel a confirmed booking as the host. Requires `reason` (one of Airbnb&apos;s host-cancellation reasons). **Host cancellations carry Airbnb penalties.**The body is validated before anything reaches Airbnb; unknown fields are refused. There is no `pre-approve` action: a pre-approval answers an inquiry, which has no confirmation code — use `POST /v1/conversations/{id}/pre-approval`. For accept/decline, `POST /v1/reservations/{id}/accept` and `/decline` do the same by Repull id and also update Vanio.Airbnb refusals are mapped rather than returned as a 500: a request that already moved on is `409 request_no_longer_pending` (do not retry), an expired one `409 request_expired`, any other refusal `422 airbnb_rejected` with Airbnb&apos;s reason.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.Send `Idempotency-Key` to make a retry safe.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodeResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("This method is obsolete. Use PostAsWithCodePostResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodeResponse?> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodeResponse> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodeResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodeResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Fetch a single Airbnb reservation by Airbnb confirmation code (e.g. `HMABCDEF12`).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
@@ -99,22 +151,25 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations.Item
             return requestInfo;
         }
         /// <summary>
-        /// Apply a state action to an Airbnb reservation — `accept` / `decline` (for inquiries and reservation requests), `cancel` (host cancellation, carries penalties), `pre-approve` (for inquiries).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Act on an Airbnb reservation by its Airbnb confirmation code. **Write-side** — calls Airbnb upstream, as the Airbnb account that owns the booking.- `accept` — accept a pending booking request.- `decline` — decline a pending booking request. Requires `reason` (one of Airbnb&apos;s decline reasons) and `message` (sent to the guest, at most 500 characters).- `cancel` — cancel a confirmed booking as the host. Requires `reason` (one of Airbnb&apos;s host-cancellation reasons). **Host cancellations carry Airbnb penalties.**The body is validated before anything reaches Airbnb; unknown fields are refused. There is no `pre-approve` action: a pre-approval answers an inquiry, which has no confirmation code — use `POST /v1/conversations/{id}/pre-approval`. For accept/decline, `POST /v1/reservations/{id}/accept` and `/decline` do the same by Repull id and also update Vanio.Airbnb refusals are mapped rather than returned as a 500: a request that already moved on is `409 request_no_longer_pending` (do not retry), an expired one `409 request_expired`, any other refusal `422 airbnb_rejected` with Airbnb&apos;s reason.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.Send `Idempotency-Key` to make a retry safe.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>

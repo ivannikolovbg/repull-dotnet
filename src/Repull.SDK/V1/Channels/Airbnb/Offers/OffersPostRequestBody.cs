@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,14 +10,32 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class OffersPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class OffersPostRequestBody : IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>For `preapproval` — whether to block instant booking.</summary>
+        /// <summary>Pre-approval only: require the guest to book through the pre-approval rather than Instant Book. (`blockInstantBooking` is accepted too.)</summary>
         public bool? BlockInstantBooking { get; set; }
-        /// <summary>Airbnb thread id. Required when `type` is `preapproval`.</summary>
+        /// <summary>Offer only (required). `number_of_guests` is adults + children; if omitted it is computed from them.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details? GuestDetails { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details GuestDetails { get; set; }
+#endif
+        /// <summary>Offer only (required): the AIRBNB listing id, as a string.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
+        /// <summary>Offer only (required).</summary>
+        public int? Nights { get; set; }
+        /// <summary>Offer only (required): first night.</summary>
+        public Date? StartDate { get; set; }
+        /// <summary>Airbnb message-thread id the offer answers. (`threadId` is accepted too.)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ThreadId { get; set; }
@@ -24,14 +43,15 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
 #else
         public string ThreadId { get; set; }
 #endif
-        /// <summary>Which kind of offer to create.</summary>
+        /// <summary>Offer only (required): total for the stay, in the listing’s Airbnb currency.</summary>
+        public double? TotalPrice { get; set; }
+        /// <summary>What to create.</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_type? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody"/> and sets the default values.
         /// </summary>
         public OffersPostRequestBody()
         {
-            AdditionalData = new Dictionary<string, object>();
             BlockInstantBooking = false;
         }
         /// <summary>
@@ -52,8 +72,13 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "blockInstantBooking", n => { BlockInstantBooking = n.GetBoolValue(); } },
-                { "threadId", n => { ThreadId = n.GetStringValue(); } },
+                { "block_instant_booking", n => { BlockInstantBooking = n.GetBoolValue(); } },
+                { "guest_details", n => { GuestDetails = n.GetObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details>(global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details.CreateFromDiscriminatorValue); } },
+                { "listing_id", n => { ListingId = n.GetStringValue(); } },
+                { "nights", n => { Nights = n.GetIntValue(); } },
+                { "start_date", n => { StartDate = n.GetDateValue(); } },
+                { "thread_id", n => { ThreadId = n.GetStringValue(); } },
+                { "total_price", n => { TotalPrice = n.GetDoubleValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_type>(); } },
             };
         }
@@ -64,10 +89,14 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteBoolValue("blockInstantBooking", BlockInstantBooking);
-            writer.WriteStringValue("threadId", ThreadId);
+            writer.WriteBoolValue("block_instant_booking", BlockInstantBooking);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details>("guest_details", GuestDetails);
+            writer.WriteStringValue("listing_id", ListingId);
+            writer.WriteIntValue("nights", Nights);
+            writer.WriteDateValue("start_date", StartDate);
+            writer.WriteStringValue("thread_id", ThreadId);
+            writer.WriteDoubleValue("total_price", TotalPrice);
             writer.WriteEnumValue<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_type>("type", Type);
-            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }

@@ -15,7 +15,15 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The body property</summary>
+        /// <summary>Files the guest sent (photos, videos, documents), same shape as `GET /v1/conversations/{id}/messages`. Empty array when there are none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment> Attachments { get; set; }
+#endif
+        /// <summary>Empty when the guest sent only a file.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Body { get; set; }
@@ -68,6 +76,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>(global::Repull.SDK.Models.ConversationMessageAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Repull.SDK.Models.ReservationMessageReceivedPayload_from>(global::Repull.SDK.Models.ReservationMessageReceivedPayload_from.CreateFromDiscriminatorValue); } },
                 { "reservationId", n => { ReservationId = n.GetIntValue(); } },
@@ -82,6 +91,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>("attachments", Attachments);
             writer.WriteStringValue("body", Body);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationMessageReceivedPayload_from>("from", From);
             writer.WriteIntValue("reservationId", ReservationId);

@@ -9,6 +9,7 @@ using Repull.SDK.V1.Connect;
 using Repull.SDK.V1.Conversations;
 using Repull.SDK.V1.Guests;
 using Repull.SDK.V1.Health;
+using Repull.SDK.V1.Inquiries;
 using Repull.SDK.V1.Kv;
 using Repull.SDK.V1.Listings;
 using Repull.SDK.V1.Markets;
@@ -65,6 +66,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Health.HealthRequestBuilder Health
         {
             get => new global::Repull.SDK.V1.Health.HealthRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The inquiries property</summary>
+        public global::Repull.SDK.V1.Inquiries.InquiriesRequestBuilder Inquiries
+        {
+            get => new global::Repull.SDK.V1.Inquiries.InquiriesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The kv property</summary>
         public global::Repull.SDK.V1.Kv.KvRequestBuilder Kv

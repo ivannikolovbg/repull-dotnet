@@ -17,7 +17,7 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>`true` when the body was authored by Vanio AI (autopilot, draft).</summary>
         public bool? AiGenerated { get; set; }
-        /// <summary>The attachments property</summary>
+        /// <summary>Files on this message, inbound or outbound. Empty array when there are none. A file-only message has an empty `body`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments { get; set; }

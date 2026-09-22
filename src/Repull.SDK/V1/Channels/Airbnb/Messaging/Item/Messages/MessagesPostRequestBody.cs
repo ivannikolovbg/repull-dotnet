@@ -7,14 +7,15 @@ using System.IO;
 using System;
 namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
 {
+    /// <summary>
+    /// `message`, `mediaUrl`, or both.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class MessagesPostRequestBody : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Optional MIME/media type hint for `mediaUrl` (e.g. `image/jpeg`).</summary>
+        /// <summary>Optional MIME type hint for `mediaUrl` (e.g. `image/jpeg`). The type is read from the file itself; this never overrides it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? MediaType { get; set; }
@@ -22,7 +23,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
 #else
         public string MediaType { get; set; }
 #endif
-        /// <summary>Optional URL of an image/media attachment to send with the message.</summary>
+        /// <summary>Public https URL of one image or video to send (JPEG/PNG/GIF/WebP/MP4/QuickTime, up to 10 MB). Repull uploads it to Airbnb for you.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? MediaUrl { get; set; }
@@ -30,7 +31,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
 #else
         public string MediaUrl { get; set; }
 #endif
-        /// <summary>Message body to send to the guest.</summary>
+        /// <summary>Message body to send to the guest. Optional when `mediaUrl` is set (it is then sent as a separate message after the file).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Message { get; set; }

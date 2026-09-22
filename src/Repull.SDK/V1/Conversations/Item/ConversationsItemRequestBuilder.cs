@@ -5,6 +5,8 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Conversations.Item.Messages;
+using Repull.SDK.V1.Conversations.Item.PreApproval;
+using Repull.SDK.V1.Conversations.Item.SpecialOffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -22,6 +24,16 @@ namespace Repull.SDK.V1.Conversations.Item
         public global::Repull.SDK.V1.Conversations.Item.Messages.MessagesRequestBuilder Messages
         {
             get => new global::Repull.SDK.V1.Conversations.Item.Messages.MessagesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The preApproval property</summary>
+        public global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalRequestBuilder PreApproval
+        {
+            get => new global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The specialOffers property</summary>
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersRequestBuilder SpecialOffers
+        {
+            get => new global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.ConversationsItemRequestBuilder"/> and sets the default values.

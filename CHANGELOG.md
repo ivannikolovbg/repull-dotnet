@@ -5,6 +5,21 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.13] - 2026-09-22
+
+### Added
+- **Regenerated against the live spec (191 → 199 operations).** 8 new operations, nothing removed.
+- **Inquiries** — `client.V1.Inquiries.GetAsInquiriesGetResponseAsync(...)` (`GET /v1/inquiries`; `Status` defaults to `open`, `all` for every state; `ListingId`, `ConversationId`, cursor pagination).
+- **Pre-approval** — `client.V1.Conversations[id].PreApproval.PostAsync(...)` (`POST /v1/conversations/{id}/pre-approval`, optional `BlockInstantBooking`).
+- **Special offers** — `client.V1.Conversations[id].SpecialOffers.PostAsync(...)`, `.SpecialOffers[offerId].GetAsync()` / `.DeleteAsync()` (`POST`/`GET`/`DELETE /v1/conversations/{id}/special-offers[/{offerId}]`), plus `client.V1.Channels.Airbnb.Offers.GetAsync(q => q.QueryParameters.OfferId = ...)`.
+- **Booking requests** — `client.V1.Reservations[id].Accept.PostAsync()` / `.Decline.PostAsync(body)` (`POST /v1/reservations/{id}/accept|decline`).
+- **Message attachments** — `SendMessageRequest.Attachments` (1–5 `SendMessageAttachment`s by public `https://` URL) on `client.V1.Conversations[id].Messages.PostAsync`; the response carries `SentAttachment`s.
+- **Webhooks** — `WebhookEventType` gains `reservation.request.created`, `reservation.request.updated`, `inquiry.created`, `inquiry.updated`; models `ReservationRequestCreatedEvent`, `ReservationRequestUpdatedEvent`, `InquiryCreatedEvent`, `InquiryUpdatedEvent`, `InquiryWebhookObject`.
+- `Reservation` gains `StatusDetail` (`request_expired`) and `RespondBy`.
+
+### Changed
+- Several existing Airbnb endpoints now declare typed responses and parameters in the spec, so their builders changed: `Channels.Airbnb.Messaging[threadId].Messages.GetAsync` takes `Cursor`/`All` query parameters and returns `MessagesResponse` (the previous `MessageListResponse` shape is `GetAsMessagesGetResponseAsync`); `Messaging[threadId].Messages.PostAsync`, `Offers.PostAsync`/`DeleteAsync` and `Reservations[code].PostAsync` now return typed responses instead of `Task`; `Reservations[code].PostAsync` takes a `WithCodePostRequestBody`.
+
 ## [0.2.12] - 2026-09-18
 
 ### Added
