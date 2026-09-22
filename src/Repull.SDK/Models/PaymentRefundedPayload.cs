@@ -8,49 +8,33 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Payload for `payment.refunded`. A previous payment was refunded in part or in full.
+    /// Payload for `payment.refunded`. Money went back. Covers both a refund-typed movement and any adjustment with a negative amount — the sign on `object.amount` is preserved so the direction never has to be inferred.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PaymentRefundedPayload : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The amount property</summary>
+        /// <summary>A money movement: a guest charge, a host payout, a refund, a tourist-tax pass-through, a resolution payout, or an adjustment that claws money back.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Amount { get; set; }
+        public global::Repull.SDK.Models.PaymentWebhookObject? Object { get; set; }
 #nullable restore
 #else
-        public string Amount { get; set; }
+        public global::Repull.SDK.Models.PaymentWebhookObject Object { get; set; }
 #endif
-        /// <summary>The currency property</summary>
+        /// <summary>The reason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Reason { get; set; }
 #nullable restore
 #else
-        public string Currency { get; set; }
-#endif
-        /// <summary>The id property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
+        public string Reason { get; set; }
 #endif
         /// <summary>The refundedAt property</summary>
         public DateTimeOffset? RefundedAt { get; set; }
-        /// <summary>The refundId property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? RefundId { get; set; }
-#nullable restore
-#else
-        public string RefundId { get; set; }
-#endif
-        /// <summary>The reservationId property</summary>
-        public int? ReservationId { get; set; }
+        /// <summary>The revision property</summary>
+        public DateTimeOffset? Revision { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PaymentRefundedPayload"/> and sets the default values.
         /// </summary>
@@ -76,12 +60,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "amount", n => { Amount = n.GetStringValue(); } },
-                { "currency", n => { Currency = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "refundId", n => { RefundId = n.GetStringValue(); } },
+                { "object", n => { Object = n.GetObjectValue<global::Repull.SDK.Models.PaymentWebhookObject>(global::Repull.SDK.Models.PaymentWebhookObject.CreateFromDiscriminatorValue); } },
+                { "reason", n => { Reason = n.GetStringValue(); } },
                 { "refundedAt", n => { RefundedAt = n.GetDateTimeOffsetValue(); } },
-                { "reservationId", n => { ReservationId = n.GetIntValue(); } },
+                { "revision", n => { Revision = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -91,12 +73,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("amount", Amount);
-            writer.WriteStringValue("currency", Currency);
-            writer.WriteStringValue("id", Id);
+            writer.WriteObjectValue<global::Repull.SDK.Models.PaymentWebhookObject>("object", Object);
+            writer.WriteStringValue("reason", Reason);
             writer.WriteDateTimeOffsetValue("refundedAt", RefundedAt);
-            writer.WriteStringValue("refundId", RefundId);
-            writer.WriteIntValue("reservationId", ReservationId);
+            writer.WriteDateTimeOffsetValue("revision", Revision);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

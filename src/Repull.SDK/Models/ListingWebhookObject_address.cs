@@ -7,30 +7,53 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>
-    /// Map of `field` → `{ from, to }` pairs describing what changed.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingUpdatedPayload_changes : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class ListingWebhookObject_address : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The city property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? City { get; set; }
+#nullable restore
+#else
+        public string City { get; set; }
+#endif
+        /// <summary>The region property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Region { get; set; }
+#nullable restore
+#else
+        public string Region { get; set; }
+#endif
+        /// <summary>The street property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Street { get; set; }
+#nullable restore
+#else
+        public string Street { get; set; }
+#endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingUpdatedPayload_changes"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingWebhookObject_address"/> and sets the default values.
         /// </summary>
-        public ListingUpdatedPayload_changes()
+        public ListingWebhookObject_address()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.ListingUpdatedPayload_changes"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ListingWebhookObject_address"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.ListingUpdatedPayload_changes CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.ListingWebhookObject_address CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.ListingUpdatedPayload_changes();
+            return new global::Repull.SDK.Models.ListingWebhookObject_address();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +63,9 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "city", n => { City = n.GetStringValue(); } },
+                { "region", n => { Region = n.GetStringValue(); } },
+                { "street", n => { Street = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -49,6 +75,9 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("city", City);
+            writer.WriteStringValue("region", Region);
+            writer.WriteStringValue("street", Street);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

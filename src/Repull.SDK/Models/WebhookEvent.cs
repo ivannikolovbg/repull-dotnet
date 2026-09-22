@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.CalendarUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
+    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.CalendarUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WebhookEvent : IComposedTypeWrapper, IParsable
@@ -68,6 +68,22 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public global::Repull.SDK.Models.ListingDeletedEvent ListingDeletedEvent { get; set; }
+#endif
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingReactivatedEvent? ListingReactivatedEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingReactivatedEvent ListingReactivatedEvent { get; set; }
+#endif
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingSuspendedEvent? ListingSuspendedEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingSuspendedEvent ListingSuspendedEvent { get; set; }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -211,6 +227,14 @@ namespace Repull.SDK.Models
             {
                 result.ListingDeletedEvent = new global::Repull.SDK.Models.ListingDeletedEvent();
             }
+            else if("listing.reactivated".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.ListingReactivatedEvent = new global::Repull.SDK.Models.ListingReactivatedEvent();
+            }
+            else if("listing.suspended".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.ListingSuspendedEvent = new global::Repull.SDK.Models.ListingSuspendedEvent();
+            }
             else if("listing.updated".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ListingUpdatedEvent = new global::Repull.SDK.Models.ListingUpdatedEvent();
@@ -298,6 +322,14 @@ namespace Repull.SDK.Models
             else if(ListingDeletedEvent != null)
             {
                 return ListingDeletedEvent.GetFieldDeserializers();
+            }
+            else if(ListingReactivatedEvent != null)
+            {
+                return ListingReactivatedEvent.GetFieldDeserializers();
+            }
+            else if(ListingSuspendedEvent != null)
+            {
+                return ListingSuspendedEvent.GetFieldDeserializers();
             }
             else if(ListingUpdatedEvent != null)
             {
@@ -387,6 +419,14 @@ namespace Repull.SDK.Models
             else if(ListingDeletedEvent != null)
             {
                 writer.WriteObjectValue<global::Repull.SDK.Models.ListingDeletedEvent>(null, ListingDeletedEvent);
+            }
+            else if(ListingReactivatedEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.ListingReactivatedEvent>(null, ListingReactivatedEvent);
+            }
+            else if(ListingSuspendedEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.ListingSuspendedEvent>(null, ListingSuspendedEvent);
             }
             else if(ListingUpdatedEvent != null)
             {

@@ -30,7 +30,7 @@ namespace Repull.SDK.Models
 #else
         public string ApiVersion { get; set; }
 #endif
-        /// <summary>Payload for `payment.refunded`. A previous payment was refunded in part or in full.</summary>
+        /// <summary>Payload for `payment.refunded`. Money went back. Covers both a refund-typed movement and any adjustment with a negative amount — the sign on `object.amount` is preserved so the direction never has to be inferred.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.PaymentRefundedPayload? Data { get; set; }

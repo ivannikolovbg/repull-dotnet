@@ -30,7 +30,7 @@ namespace Repull.SDK.Models
 #else
         public string ApiVersion { get; set; }
 #endif
-        /// <summary>Payload for `listing.updated`. Listing content, amenities, photos, or status changed.</summary>
+        /// <summary>Payload for `listing.updated`. Something about the listing changed on the channel — content, pricing, booking settings, house rules, availability or sync settings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ListingUpdatedPayload? Data { get; set; }

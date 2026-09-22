@@ -7,48 +7,57 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>
-    /// Payload for `listing.deleted`. The listing is no longer reachable on the channel — usually because the host unlinked it.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingDeletedPayload : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class ListingWebhookObject_channels : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
+        /// <summary>The active property</summary>
+        public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The deletedAt property</summary>
-        public DateTimeOffset? DeletedAt { get; set; }
-        /// <summary>The listing, in the shape `GET /v1/listings/{id}` returns. Hydrated at delivery, so a receiver gets the listing rather than a reason to fetch one.</summary>
+        /// <summary>The externalId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingWebhookObject? Object { get; set; }
+        public string? ExternalId { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingWebhookObject Object { get; set; }
+        public string ExternalId { get; set; }
 #endif
-        /// <summary>The reason property</summary>
+        /// <summary>The platform property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Platform { get; set; }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Platform { get; set; }
 #endif
+        /// <summary>The syncCategory property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SyncCategory { get; set; }
+#nullable restore
+#else
+        public string SyncCategory { get; set; }
+#endif
+        /// <summary>The syncEnabled property</summary>
+        public bool? SyncEnabled { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingDeletedPayload"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingWebhookObject_channels"/> and sets the default values.
         /// </summary>
-        public ListingDeletedPayload()
+        public ListingWebhookObject_channels()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.ListingDeletedPayload"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ListingWebhookObject_channels"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.ListingDeletedPayload CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.ListingWebhookObject_channels CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.ListingDeletedPayload();
+            return new global::Repull.SDK.Models.ListingWebhookObject_channels();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -58,9 +67,11 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "deletedAt", n => { DeletedAt = n.GetDateTimeOffsetValue(); } },
-                { "object", n => { Object = n.GetObjectValue<global::Repull.SDK.Models.ListingWebhookObject>(global::Repull.SDK.Models.ListingWebhookObject.CreateFromDiscriminatorValue); } },
-                { "reason", n => { Reason = n.GetStringValue(); } },
+                { "active", n => { Active = n.GetBoolValue(); } },
+                { "externalId", n => { ExternalId = n.GetStringValue(); } },
+                { "platform", n => { Platform = n.GetStringValue(); } },
+                { "syncCategory", n => { SyncCategory = n.GetStringValue(); } },
+                { "syncEnabled", n => { SyncEnabled = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -70,9 +81,11 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDateTimeOffsetValue("deletedAt", DeletedAt);
-            writer.WriteObjectValue<global::Repull.SDK.Models.ListingWebhookObject>("object", Object);
-            writer.WriteStringValue("reason", Reason);
+            writer.WriteBoolValue("active", Active);
+            writer.WriteStringValue("externalId", ExternalId);
+            writer.WriteStringValue("platform", Platform);
+            writer.WriteStringValue("syncCategory", SyncCategory);
+            writer.WriteBoolValue("syncEnabled", SyncEnabled);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

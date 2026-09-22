@@ -43,6 +43,14 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ListingDeleted,
         #pragma warning restore CS1591
+        [EnumMember(Value = "listing.suspended")]
+        #pragma warning disable CS1591
+        ListingSuspended,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "listing.reactivated")]
+        #pragma warning disable CS1591
+        ListingReactivated,
+        #pragma warning restore CS1591
         [EnumMember(Value = "calendar.updated")]
         #pragma warning disable CS1591
         CalendarUpdated,

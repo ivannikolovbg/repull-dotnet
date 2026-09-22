@@ -30,7 +30,7 @@ namespace Repull.SDK.Models
 #else
         public string ApiVersion { get; set; }
 #endif
-        /// <summary>Payload for `listing.deleted`. A property was removed from Repull or the upstream PMS.</summary>
+        /// <summary>Payload for `listing.deleted`. The listing is no longer reachable on the channel — usually because the host unlinked it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ListingDeletedPayload? Data { get; set; }

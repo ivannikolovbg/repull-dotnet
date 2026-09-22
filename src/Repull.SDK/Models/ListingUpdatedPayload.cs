@@ -8,25 +8,33 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Payload for `listing.updated`. Listing content, amenities, photos, or status changed.
+    /// Payload for `listing.updated`. Something about the listing changed on the channel — content, pricing, booking settings, house rules, availability or sync settings.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ListingUpdatedPayload : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Map of `field` → `{ from, to }` pairs describing what changed.</summary>
+        /// <summary>Which part moved. Airbnb sends one notification per area rather than a diff, so this is the signal for what to re-read.</summary>
+        public global::Repull.SDK.Models.ListingUpdatedPayload_area? Area { get; set; }
+        /// <summary>The listing, in the shape `GET /v1/listings/{id}` returns. Hydrated at delivery, so a receiver gets the listing rather than a reason to fetch one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingUpdatedPayload_changes? Changes { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject? Object { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingUpdatedPayload_changes Changes { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject Object { get; set; }
 #endif
-        /// <summary>The id property</summary>
-        public int? Id { get; set; }
-        /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        /// <summary>Fields that changed and their prior values, when the source reports them.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes? PreviousAttributes { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes PreviousAttributes { get; set; }
+#endif
+        /// <summary>The revision property</summary>
+        public DateTimeOffset? Revision { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingUpdatedPayload"/> and sets the default values.
         /// </summary>
@@ -52,9 +60,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "changes", n => { Changes = n.GetObjectValue<global::Repull.SDK.Models.ListingUpdatedPayload_changes>(global::Repull.SDK.Models.ListingUpdatedPayload_changes.CreateFromDiscriminatorValue); } },
-                { "id", n => { Id = n.GetIntValue(); } },
-                { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
+                { "area", n => { Area = n.GetEnumValue<global::Repull.SDK.Models.ListingUpdatedPayload_area>(); } },
+                { "object", n => { Object = n.GetObjectValue<global::Repull.SDK.Models.ListingWebhookObject>(global::Repull.SDK.Models.ListingWebhookObject.CreateFromDiscriminatorValue); } },
+                { "previousAttributes", n => { PreviousAttributes = n.GetObjectValue<global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes>(global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes.CreateFromDiscriminatorValue); } },
+                { "revision", n => { Revision = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -64,9 +73,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Repull.SDK.Models.ListingUpdatedPayload_changes>("changes", Changes);
-            writer.WriteIntValue("id", Id);
-            writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ListingUpdatedPayload_area>("area", Area);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingWebhookObject>("object", Object);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes>("previousAttributes", PreviousAttributes);
+            writer.WriteDateTimeOffsetValue("revision", Revision);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
