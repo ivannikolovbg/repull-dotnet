@@ -25,6 +25,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>True when the link is active (not disconnected/suspended).</summary>
         public bool? Connected { get; set; }
+        /// <summary>Fields the channel will not let this listing change. **Airbnb only** — present on the `airbnb` entry and absent on every other channel, because no other channel has the concept.Airbnb does not refuse a write to a locked field: the request returns 200, reports the field as locked, and applies nothing. So a write to one of these looks exactly like a write that worked. Read this before you let a user edit — it is here, rather than only on `GET /v1/channels/airbnb/listings/{id}`, because this is the endpoint a listing editor already calls.Empty for a listing with nothing locked, and for one that has not synced since we began recording them — the two are not distinguished, because a caller acts the same way on both. This is what Airbnb last told us, not a promise: a lock can appear between syncs, which is why a publish result also reports `lockedFields`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? LockedFields { get; set; }
+#nullable restore
+#else
+        public List<string> LockedFields { get; set; }
+#endif
         /// <summary>ISO timestamp the connection was first established.</summary>
         public DateTimeOffset? Since { get; set; }
         /// <summary>True when sync writes are enabled for this channel.</summary>
@@ -56,6 +64,7 @@ namespace Repull.SDK.Models
             {
                 { "channel", n => { Channel = n.GetStringValue(); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
+                { "lockedFields", n => { LockedFields = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "since", n => { Since = n.GetDateTimeOffsetValue(); } },
                 { "syncEnabled", n => { SyncEnabled = n.GetBoolValue(); } },
             };
@@ -69,6 +78,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("channel", Channel);
             writer.WriteBoolValue("connected", Connected);
+            writer.WriteCollectionOfPrimitiveValues<string>("lockedFields", LockedFields);
             writer.WriteDateTimeOffsetValue("since", Since);
             writer.WriteBoolValue("syncEnabled", SyncEnabled);
             writer.WriteAdditionalData(AdditionalData);

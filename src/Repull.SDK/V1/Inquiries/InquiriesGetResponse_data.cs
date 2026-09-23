@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Inquiries
         public DateTimeOffset? RespondBy { get; set; }
         /// <summary>The respondedAt property</summary>
         public DateTimeOffset? RespondedAt { get; set; }
-        /// <summary>`open` — nobody has answered and the stay is still ahead; `pre_approved`; `special_offer_sent` (from the API, Vanio, or Airbnb’s own app); `booked` — the guest booked (`reservationId`); `expired` — the stay has started or Airbnb expired it; `declined`; `not_possible` — Airbnb says the dates cannot be booked.</summary>
+        /// <summary>`open` — nobody has answered and the stay is still ahead; `pre_approved`; `special_offer_sent` (from the API, a connected app, or Airbnb’s own app); `booked` — the guest booked (`reservationId`); `expired` — the stay has started or Airbnb expired it; `declined`; `not_possible` — Airbnb says the dates cannot be booked.</summary>
         public global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_status? Status { get; set; }
         /// <summary>The updatedAt property</summary>
         public DateTimeOffset? UpdatedAt { get; set; }

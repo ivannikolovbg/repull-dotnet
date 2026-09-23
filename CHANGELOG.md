@@ -5,6 +5,21 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.14] - 2026-09-23
+
+### Added
+- **Regenerated against the live spec (199 → 202 operations).** 3 new operations, nothing removed.
+- **Market state** — `client.V1.Listings[id].Online.PostAsync(body)` / `.Offline.PostAsync(body)` (`POST /v1/listings/{id}/online|offline`). Takes a listing off sale, or puts it back, on every connected channel in one call. This is **not** the same as deactivating a listing in Repull: going offline stops the listing taking bookings but leaves billing, plan limits and API access untouched, while `Active = false` does the opposite. Body is `ListingMarketStateRequest` (optional `HotelId`); the reply is `ListingMarketStateResponse` carrying `ChannelMarketStateItem`s — channels fail independently, so read each item's `Ok` rather than the status code alone.
+- **Booking.com unlist / relist** — `client.V1.Channels.Booking.Properties[id].PostAsync(body)` (`POST /v1/channels/booking/properties/{id}`; `id` is a Repull listing id, not a Booking.com hotel id). Booking.com has no unlist, so `unlist` closes the mapped room across the forward window; `relist` re-syncs the true calendar rather than opening everything, so genuinely blocked dates stay blocked. Set `HotelId` when the listing maps to several properties, or the call is refused with `409 ambiguous_booking_mapping` and nothing is written. Models: `BookingPropertyActionRequest`, `BookingPropertyActionResponse`.
+- **Booking.com setup actions** — `POST /v1/channels/booking/setup` gains `create-property`, `add-room`, `add-unit`, `advance`.
+- **Listing address + room type on create** — `ListingCreateRequest` gains `RoomTypeCategory`, `PropertyTypeCategory`, `PostalCode` (plus the `Zipcode` alias); `ListingContentUpdateRequest_address` gains `State` and `PostalCode`. Airbnb refuses to activate a listing that has not stated a room type.
+- **Publish diagnostics** — `ListingPublishStatusChannel.PushError` (the channel's own reason for the last failed push, verbatim), `ListingPublishStatusConnection.LockedFields`, `ListingPublishStatusResponse.AddressReadiness` (`ListingAddressReadiness`).
+- **Publish results** — new `BookingPublishResult` / `BookingPublishSectionError`; `AirbnbPublishResult` gains `Live` and `Warnings`. `Published = true` with `Live = false` is a real and common outcome — content landed but activation never ran; `Warnings` says why. A null `Live` is not `false`.
+- **Errors** — the error envelope gains `previous_code`.
+
+### Changed
+- `ListingPublishResponse` is now `ListingPublishBookingResponse` (the model behind `POST /v1/listings/{id}/publish/booking`); the old name is gone.
+
 ## [0.2.13] - 2026-09-22
 
 ### Added

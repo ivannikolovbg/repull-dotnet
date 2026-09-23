@@ -15,7 +15,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Partial address. Only provided sub-fields are written.</summary>
+        /// <summary>Partial address. Only provided sub-fields are written; the ones you omit keep their current value, and an explicit `null` clears one.This is also the repair path for a listing that cannot be published: Airbnb requires `street` and `city` for every country and additionally `state` and `postalCode` for a **US** property — and a listing with no `countryCode` behaves as US. Send just the missing part, e.g. `{ &quot;address&quot;: { &quot;state&quot;: &quot;FL&quot; } }`. `GET /v1/listings/{id}/publish-status` names what is missing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ListingContentUpdateRequest_address? Address { get; set; }

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
         {
         }
         /// <summary>
-        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. Runs the same action as the Vanio dashboard’s Withdraw offer. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
+        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -71,7 +71,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferDeleteResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. Runs the same action as the Vanio dashboard’s Withdraw offer. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
+        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -180,7 +180,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. Runs the same action as the Vanio dashboard’s Withdraw offer. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
+        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

@@ -7,6 +7,8 @@ using Repull.SDK.Models;
 using Repull.SDK.V1.Listings.Item.Comps;
 using Repull.SDK.V1.Listings.Item.Content;
 using Repull.SDK.V1.Listings.Item.GenerateContent;
+using Repull.SDK.V1.Listings.Item.Offline;
+using Repull.SDK.V1.Listings.Item.Online;
 using Repull.SDK.V1.Listings.Item.Photos;
 using Repull.SDK.V1.Listings.Item.Pricing;
 using Repull.SDK.V1.Listings.Item.Publish;
@@ -40,6 +42,16 @@ namespace Repull.SDK.V1.Listings.Item
         public global::Repull.SDK.V1.Listings.Item.GenerateContent.GenerateContentRequestBuilder GenerateContent
         {
             get => new global::Repull.SDK.V1.Listings.Item.GenerateContent.GenerateContentRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The offline property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Offline.OfflineRequestBuilder Offline
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Offline.OfflineRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The online property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Online.OnlineRequestBuilder Online
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Online.OnlineRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The photos property</summary>
         public global::Repull.SDK.V1.Listings.Item.Photos.PhotosRequestBuilder Photos

@@ -24,9 +24,21 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
 #else
         public List<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts> Contacts { get; set; }
 #endif
-        /// <summary>Legal entity id — required for `check-legal-status`.</summary>
+        /// <summary>Used by `create-property` ONLY when this workspace has no legal entity yet — one is registered with Booking.com from these details and used for the property. Ignored when the workspace already has one, so a second is never registered.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity? LegalEntity { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity LegalEntity { get; set; }
+#endif
+        /// <summary>Optional override for `create-property`. Omit it: the legal entity this workspace already uses is resolved automatically. An id that carries another workspace&apos;s properties is refused with `403 legal_entity_not_yours`. `legalEntityId` is accepted as an alias.</summary>
+        public int? LegalEntityId { get; set; }
+        /// <summary>Legal entity id — required for `check-legal-status`, which always answers 404.</summary>
         public int? Leid { get; set; }
-        /// <summary>Booking.com property id — required for readiness/open/contacts/policies actions.</summary>
+        /// <summary>Repull listing id — required for `create-property`, `add-room` and `add-unit`. NOT a Booking.com Hotel ID. `listingId` is accepted as an alias.</summary>
+        public int? ListingId { get; set; }
+        /// <summary>Booking.com Hotel ID — required for `add-room`, `add-unit`, `advance`, and the readiness/open/contacts/policies actions.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? PropertyId { get; set; }
@@ -34,6 +46,8 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
 #else
         public string PropertyId { get; set; }
 #endif
+        /// <summary>Booking.com room id — required for `add-unit`. `GET /v1/channels/booking/properties/{listingId}/rooms` lists them. `roomId` is accepted as an alias.</summary>
+        public int? RoomId { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody"/> and sets the default values.
         /// </summary>
@@ -61,8 +75,12 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
             {
                 { "action", n => { Action = n.GetEnumValue<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_action>(); } },
                 { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts>(global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "legal_entity", n => { LegalEntity = n.GetObjectValue<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity>(global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity.CreateFromDiscriminatorValue); } },
+                { "legal_entity_id", n => { LegalEntityId = n.GetIntValue(); } },
                 { "leid", n => { Leid = n.GetIntValue(); } },
+                { "listing_id", n => { ListingId = n.GetIntValue(); } },
                 { "property_id", n => { PropertyId = n.GetStringValue(); } },
+                { "room_id", n => { RoomId = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -74,8 +92,12 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_action>("action", Action);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts>("contacts", Contacts);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity>("legal_entity", LegalEntity);
+            writer.WriteIntValue("legal_entity_id", LegalEntityId);
             writer.WriteIntValue("leid", Leid);
+            writer.WriteIntValue("listing_id", ListingId);
             writer.WriteStringValue("property_id", PropertyId);
+            writer.WriteIntValue("room_id", RoomId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

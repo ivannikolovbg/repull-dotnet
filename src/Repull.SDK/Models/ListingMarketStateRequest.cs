@@ -8,29 +8,37 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Channel-specific push result (sections pushed, errors, etc.)
+    /// Optional. Send no body at all unless this listing is mapped to more than one Booking.com property.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPublishResponse_result : IAdditionalDataHolder, IParsable
+    public partial class ListingMarketStateRequest : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Booking.com property to act on, for a listing mapped to more than one. Without it the Booking.com item comes back refused with `ambiguous_booking_mapping` — closing the wrong property&apos;s availability takes real inventory off sale, so it is never guessed. The Airbnb items are unaffected and still run. `GET /v1/channels/booking/properties` lists every property in the workspace with the listings mapped under it. `?hotel_id=` in the query string means the same thing; the body wins if you send both.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HotelId { get; set; }
+#nullable restore
+#else
+        public string HotelId { get; set; }
+#endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPublishResponse_result"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingMarketStateRequest"/> and sets the default values.
         /// </summary>
-        public ListingPublishResponse_result()
+        public ListingMarketStateRequest()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.ListingPublishResponse_result"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ListingMarketStateRequest"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.ListingPublishResponse_result CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.ListingMarketStateRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.ListingPublishResponse_result();
+            return new global::Repull.SDK.Models.ListingMarketStateRequest();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +48,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -49,6 +58,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("hotelId", HotelId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

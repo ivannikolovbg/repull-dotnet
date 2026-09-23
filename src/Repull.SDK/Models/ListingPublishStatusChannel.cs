@@ -7,10 +7,11 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Sync activity for one channel. `pushStatus` says whether the last push landed; `pushError` says why it did not.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class ListingPublishStatusChannel : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -36,6 +37,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The platformHasChanges property</summary>
         public bool? PlatformHasChanges { get; set; }
+        /// <summary>Why the last push failed — the channel&apos;s own reason, verbatim, sanitised for display.This is the field to render when `pushStatus` is `error`. It carries what Airbnb or Booking.com actually objected to, which is almost always something the operator can fix in the listing content: `&quot;Airbnb error (400): We can&apos;t save your info yet. Links and contact info can&apos;t be shared.&quot;`, `&quot;Check-in start time must be before end time&quot;`, `&quot;property_type_group must be one of [apartments, houses, …]&quot;`, `&quot;Rate limited by provider&quot;`.**Free text, not an enum.** It is written by the channel and changes without notice: show it to a human, log it, put it next to the retry button — but never parse it or branch on its contents. When a push fails for several reasons at once the reasons are joined with `; `.`null` when the last push succeeded, and when no push has run yet — the two are told apart by `pushStatus` and `lastPushedAt`, not by this field.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PushError { get; set; }
+#nullable restore
+#else
+        public string PushError { get; set; }
+#endif
         /// <summary>The pushStatus property</summary>
         public global::Repull.SDK.Models.ListingPublishStatusChannel_pushStatus? PushStatus { get; set; }
         /// <summary>
@@ -68,6 +77,7 @@ namespace Repull.SDK.Models
                 { "lastPushedAt", n => { LastPushedAt = n.GetDateTimeOffsetValue(); } },
                 { "platform", n => { Platform = n.GetStringValue(); } },
                 { "platformHasChanges", n => { PlatformHasChanges = n.GetBoolValue(); } },
+                { "pushError", n => { PushError = n.GetStringValue(); } },
                 { "pushStatus", n => { PushStatus = n.GetEnumValue<global::Repull.SDK.Models.ListingPublishStatusChannel_pushStatus>(); } },
             };
         }
@@ -83,6 +93,7 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("lastPushedAt", LastPushedAt);
             writer.WriteStringValue("platform", Platform);
             writer.WriteBoolValue("platformHasChanges", PlatformHasChanges);
+            writer.WriteStringValue("pushError", PushError);
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingPublishStatusChannel_pushStatus>("pushStatus", PushStatus);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.V1.Inquiries
 {
-    /// <summary>`open` — nobody has answered and the stay is still ahead; `pre_approved`; `special_offer_sent` (from the API, Vanio, or Airbnb’s own app); `booked` — the guest booked (`reservationId`); `expired` — the stay has started or Airbnb expired it; `declined`; `not_possible` — Airbnb says the dates cannot be booked.</summary>
+    /// <summary>`open` — nobody has answered and the stay is still ahead; `pre_approved`; `special_offer_sent` (from the API, a connected app, or Airbnb’s own app); `booked` — the guest booked (`reservationId`); `expired` — the stay has started or Airbnb expired it; `declined`; `not_possible` — Airbnb says the dates cannot be booked.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum InquiriesGetResponse_data_status
     {

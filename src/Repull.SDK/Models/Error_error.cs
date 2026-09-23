@@ -94,6 +94,15 @@ namespace Repull.SDK.Models
 #else
         public string Message { get; set; }
 #endif
+        /// <summary>The `code` THIS response used to carry, for callers whose branch still matches the old string. A migration aid with a deprecation window — **`code` is canonical, always match on that.**Present only where an endpoint&apos;s classification actually changed, never as a permanent synonym, and it disappears from a response as soon as the canonical code and the old one agree.The live case: the reviews, messaging, check-in-guide, alteration-answer and Airbnb-pull endpoints used to report EVERY Airbnb failure as `500 airbnb_error`, including refusals Airbnb will repeat forever. They now classify the same way every other Airbnb write does — an Airbnb 4xx is `422 airbnb_rejected` (fix the request), 5xx and timeouts stay `502 airbnb_error` (retry with backoff), and a dead grant is `403 connection_reauth_required`. Those responses carry `previous_code: &quot;airbnb_error&quot;`. **Removed in v2** — migrate your branches to `code` before then.</summary>
+        [Obsolete("")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PreviousCode { get; set; }
+#nullable restore
+#else
+        public string PreviousCode { get; set; }
+#endif
         /// <summary>Opaque per-request id. Mirrors the `x-request-id` response header. Capture it before retrying so logs can be correlated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -179,6 +188,7 @@ namespace Repull.SDK.Models
                 { "listing_id", n => { ListingId = n.GetStringValue(); } },
                 { "listing_ids", n => { ListingIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
+                { "previous_code", n => { PreviousCode = n.GetStringValue(); } },
                 { "request_id", n => { RequestId = n.GetStringValue(); } },
                 { "retry_after", n => { RetryAfter = n.GetIntValue(); } },
                 { "support", n => { Support = n.GetObjectValue<global::Repull.SDK.Models.Error_error_support>(global::Repull.SDK.Models.Error_error_support.CreateFromDiscriminatorValue); } },
@@ -205,6 +215,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("listing_id", ListingId);
             writer.WriteCollectionOfPrimitiveValues<string>("listing_ids", ListingIds);
             writer.WriteStringValue("message", Message);
+            writer.WriteStringValue("previous_code", PreviousCode);
             writer.WriteStringValue("request_id", RequestId);
             writer.WriteIntValue("retry_after", RetryAfter);
             writer.WriteObjectValue<global::Repull.SDK.Models.Error_error_support>("support", Support);

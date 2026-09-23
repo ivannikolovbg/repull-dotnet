@@ -24,7 +24,7 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
-        /// <summary>A publish is not one call to Airbnb: it is up to eight independent ones (details, description, amenities, rooms, policies, photos, pricing, checkout_tasks), each of which can fail on its own. A PARTIAL publish is normal — what succeeded stays applied; there is no rollback.</summary>
+        /// <summary>A publish is not one call to Airbnb: it is up to eight independent ones (details, description, amenities, rooms, policies, photos, pricing, checkout_tasks), each of which can fail on its own. A PARTIAL publish is normal — what succeeded stays applied; there is no rollback.**Content landing and the listing being live are two different answers.** `published` is about content; `live` is about whether the listing takes bookings. Read both.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.AirbnbPublishResult? Result { get; set; }

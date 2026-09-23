@@ -30,7 +30,7 @@ namespace Repull.SDK.Models
 #else
         public string ApiVersion { get; set; }
 #endif
-        /// <summary>Payload for `inquiry.updated`. The inquiry&apos;s status, dates, guest count or the reservation it became changed. `previousAttributes` holds only what moved, with prior values. Fires whether the host acted through the API, the Vanio dashboard or the Airbnb app. An inquiry whose dates simply pass is `expired` in `GET /v1/inquiries` but fires no event unless the channel reports it.</summary>
+        /// <summary>Payload for `inquiry.updated`. The inquiry&apos;s status, dates, guest count or the reservation it became changed. `previousAttributes` holds only what moved, with prior values. Fires whether the host acted through the API, a connected app or the Airbnb app. An inquiry whose dates simply pass is `expired` in `GET /v1/inquiries` but fires no event unless the channel reports it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.InquiryUpdatedPayload? Data { get; set; }

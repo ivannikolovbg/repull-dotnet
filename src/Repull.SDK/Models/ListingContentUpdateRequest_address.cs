@@ -8,14 +8,14 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Partial address. Only provided sub-fields are written.
+    /// Partial address. Only provided sub-fields are written; the ones you omit keep their current value, and an explicit `null` clears one.This is also the repair path for a listing that cannot be published: Airbnb requires `street` and `city` for every country and additionally `state` and `postalCode` for a **US** property — and a listing with no `countryCode` behaves as US. Send just the missing part, e.g. `{ &quot;address&quot;: { &quot;state&quot;: &quot;FL&quot; } }`. `GET /v1/listings/{id}/publish-status` names what is missing.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ListingContentUpdateRequest_address : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The city property</summary>
+        /// <summary>City / town. Required by Airbnb for every country.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? City { get; set; }
@@ -23,7 +23,7 @@ namespace Repull.SDK.Models
 #else
         public string City { get; set; }
 #endif
-        /// <summary>ISO-3166 alpha-2 country code.</summary>
+        /// <summary>ISO-3166 alpha-2 country code. **Send this for any non-US property.** Leaving it unset does not mean &quot;unknown&quot; — the publish path treats a listing with no country as US and then demands `state` and `postalCode`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CountryCode { get; set; }
@@ -31,17 +31,41 @@ namespace Repull.SDK.Models
 #else
         public string CountryCode { get; set; }
 #endif
-        /// <summary>The lat property</summary>
+        /// <summary>Latitude. Never a substitute for the postal address — Airbnb rejects coordinates it cannot reconcile with a full address.</summary>
         public double? Lat { get; set; }
-        /// <summary>The lng property</summary>
+        /// <summary>Longitude. See `lat`.</summary>
         public double? Lng { get; set; }
-        /// <summary>The street property</summary>
+        /// <summary>Postal code — ZIP in the US, postcode in the UK, and so on. **Required for a US property**, and a listing with no `countryCode` counts as US. Send the complete code; a partial postcode is rejected downstream. Alias: `zipcode`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PostalCode { get; set; }
+#nullable restore
+#else
+        public string PostalCode { get; set; }
+#endif
+        /// <summary>State, province or region. **Required for a US property**, and a listing with no `countryCode` counts as US.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? State { get; set; }
+#nullable restore
+#else
+        public string State { get; set; }
+#endif
+        /// <summary>Street address including the number. Required by Airbnb for every country.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Street { get; set; }
 #nullable restore
 #else
         public string Street { get; set; }
+#endif
+        /// <summary>Alias for `postalCode`, accepted because it is the field name on the Airbnb mirror. `postalCode` wins if you send both.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Zipcode { get; set; }
+#nullable restore
+#else
+        public string Zipcode { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest_address"/> and sets the default values.
@@ -72,7 +96,10 @@ namespace Repull.SDK.Models
                 { "countryCode", n => { CountryCode = n.GetStringValue(); } },
                 { "lat", n => { Lat = n.GetDoubleValue(); } },
                 { "lng", n => { Lng = n.GetDoubleValue(); } },
+                { "postalCode", n => { PostalCode = n.GetStringValue(); } },
+                { "state", n => { State = n.GetStringValue(); } },
                 { "street", n => { Street = n.GetStringValue(); } },
+                { "zipcode", n => { Zipcode = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -86,7 +113,10 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("countryCode", CountryCode);
             writer.WriteDoubleValue("lat", Lat);
             writer.WriteDoubleValue("lng", Lng);
+            writer.WriteStringValue("postalCode", PostalCode);
+            writer.WriteStringValue("state", State);
             writer.WriteStringValue("street", Street);
+            writer.WriteStringValue("zipcode", Zipcode);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -3,18 +3,17 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>The state you asked for. Compare each item&apos;s own `state` against it.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public enum ListingPublishResponse_channel
-    #pragma warning restore CS1591
+    public enum ListingMarketStateResponse_state
     {
-        [EnumMember(Value = "airbnb")]
+        [EnumMember(Value = "online")]
         #pragma warning disable CS1591
-        Airbnb,
+        Online,
         #pragma warning restore CS1591
-        [EnumMember(Value = "booking")]
+        [EnumMember(Value = "offline")]
         #pragma warning disable CS1591
-        Booking,
+        Offline,
         #pragma warning restore CS1591
     }
 }

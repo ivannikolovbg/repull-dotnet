@@ -14,6 +14,14 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Address readiness per channel, keyed by channel name (`airbnb` today). Airbnb requires `street` and `city` for every country and additionally `state` and `postalCode` for a **US** property — and a listing with no `countryCode` behaves as US. Check this BEFORE calling a publish endpoint: an incomplete address is refused at the create preflight and never reaches the channel.It sits here rather than inside `channels[]` because `channels` reports sync activity and is empty for a listing that has never been pushed — exactly the listing whose address blocker you need to see. Repair a gap with `PUT /v1/listings/{id}/content`, sending only the missing parts under `address`. An empty object means readiness was not reported; it never means ready.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness? AddressReadiness { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness AddressReadiness { get; set; }
+#endif
         /// <summary>Sync activity per channel — empty if the listing has never been pushed/pulled. Empty does NOT mean &quot;not connected&quot;; check `connections` for that.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -63,6 +71,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "addressReadiness", n => { AddressReadiness = n.GetObjectValue<global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness>(global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness.CreateFromDiscriminatorValue); } },
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusChannel>(global::Repull.SDK.Models.ListingPublishStatusChannel.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "connections", n => { Connections = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusConnection>(global::Repull.SDK.Models.ListingPublishStatusConnection.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
@@ -75,6 +84,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness>("addressReadiness", AddressReadiness);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusChannel>("channels", Channels);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingPublishStatusConnection>("connections", Connections);
             writer.WriteStringValue("listingId", ListingId);

@@ -8,6 +8,22 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
     public enum SetupPostRequestBody_action
     #pragma warning restore CS1591
     {
+        [EnumMember(Value = "create-property")]
+        #pragma warning disable CS1591
+        CreateProperty,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "add-room")]
+        #pragma warning disable CS1591
+        AddRoom,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "add-unit")]
+        #pragma warning disable CS1591
+        AddUnit,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "advance")]
+        #pragma warning disable CS1591
+        Advance,
+        #pragma warning restore CS1591
         [EnumMember(Value = "create-legal-entity")]
         #pragma warning disable CS1591
         CreateLegalEntity,

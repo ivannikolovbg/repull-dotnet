@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A publish is not one call to Airbnb: it is up to eight independent ones (details, description, amenities, rooms, policies, photos, pricing, checkout_tasks), each of which can fail on its own. A PARTIAL publish is normal — what succeeded stays applied; there is no rollback.
+    /// A publish is not one call to Airbnb: it is up to eight independent ones (details, description, amenities, rooms, policies, photos, pricing, checkout_tasks), each of which can fail on its own. A PARTIAL publish is normal — what succeeded stays applied; there is no rollback.**Content landing and the listing being live are two different answers.** `published` is about content; `live` is about whether the listing takes bookings. Read both.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbPublishResult : IAdditionalDataHolder, IParsable
@@ -23,6 +23,8 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.PublishSectionError> Errors { get; set; }
 #endif
+        /// <summary>Whether the listing is active and bookable on Airbnb — that is, whether activation was actually performed and succeeded.`published: true` with `live: false` is a real and common outcome: every content section landed, but the listing was never activated, because activation is skipped when instant-booking cannot be confirmed to be off. `warnings` says why.**Absent is not `false`.** The field is omitted entirely when activation was never part of the operation — publishing to an already-mapped Airbnb listing updates content and activates nothing, so there is nothing to report. Only treat the listing as not-live when `live` is present and false.</summary>
+        public bool? Live { get; set; }
         /// <summary>Fields Airbnb will not let this listing change — collected from the failures above and from the `locked_attributes` Airbnb recorded for the listing. Sending them again returns success and changes nothing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -48,6 +50,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public List<string> Sections { get; set; }
+#endif
+        /// <summary>Steps that failed WITHOUT failing the publish — optional work the push carried on past, each in the push&apos;s own words. These used to be swallowed silently, so the only sign of one was a listing that was somehow not quite right afterwards. A publish can be `published: true` and still carry warnings; read them before concluding nothing needs doing.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? Warnings { get; set; }
+#nullable restore
+#else
+        public List<string> Warnings { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPublishResult"/> and sets the default values.
@@ -75,10 +85,12 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.PublishSectionError>(global::Repull.SDK.Models.PublishSectionError.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "live", n => { Live = n.GetBoolValue(); } },
                 { "lockedFields", n => { LockedFields = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "published", n => { Published = n.GetBoolValue(); } },
                 { "reason", n => { Reason = n.GetStringValue(); } },
                 { "sections", n => { Sections = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "warnings", n => { Warnings = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
         }
         /// <summary>
@@ -89,10 +101,12 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.PublishSectionError>("errors", Errors);
+            writer.WriteBoolValue("live", Live);
             writer.WriteCollectionOfPrimitiveValues<string>("lockedFields", LockedFields);
             writer.WriteBoolValue("published", Published);
             writer.WriteStringValue("reason", Reason);
             writer.WriteCollectionOfPrimitiveValues<string>("sections", Sections);
+            writer.WriteCollectionOfPrimitiveValues<string>("warnings", Warnings);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

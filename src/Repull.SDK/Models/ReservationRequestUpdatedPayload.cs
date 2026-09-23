@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Payload for `reservation.request.updated`. A booking request stopped waiting on the host. `requestStatus` says how; `data.object` is the reservation after the change (`status` `confirmed` once accepted, `cancelled` otherwise). An accepted request also fires `reservation.created`. Fires when the channel reports the outcome, whoever acted — the API, the Vanio dashboard or the channel&apos;s own app.
+    /// Payload for `reservation.request.updated`. A booking request stopped waiting on the host. `requestStatus` says how; `data.object` is the reservation after the change (`status` `confirmed` once accepted, `cancelled` otherwise). An accepted request also fires `reservation.created`. Fires when the channel reports the outcome, whoever acted — the API, a connected app or the channel&apos;s own app.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationRequestUpdatedPayload : IAdditionalDataHolder, IParsable

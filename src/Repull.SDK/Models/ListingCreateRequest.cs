@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Inputs for `POST /v1/listings`. Provide enough address detail (street + city + lat/lng) for downstream Airbnb publish to work.
+    /// Inputs for `POST /v1/listings`.**Address requirements — read this before you build the payload.** Publishing to Airbnb runs a create preflight that refuses the listing outright if the address is incomplete, and the refusal only surfaces later, at publish time. Airbnb requires `street` and `city` for every country. For a **US** property it additionally requires `state` and `postalCode`. Crucially, **omitting `countryCode` makes the listing behave as US**, so a listing created without a country needs `state` and `postalCode` too. Send `countryCode` explicitly for a non-US property. `lat`/`lng` alone are not enough — Airbnb rejects coordinates that are not backed by a full postal address. Use `GET /v1/listings/{id}/publish-status` to see which parts are still missing before you attempt a publish.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ListingCreateRequest : IAdditionalDataHolder, IParsable
@@ -47,7 +47,7 @@ namespace Repull.SDK.Models
 #else
         public string CheckOutTime { get; set; }
 #endif
-        /// <summary>The city property</summary>
+        /// <summary>City / town. Required by Airbnb for every country — a publish is refused without it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? City { get; set; }
@@ -57,7 +57,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The cleaningFee property</summary>
         public double? CleaningFee { get; set; }
-        /// <summary>The countryCode property</summary>
+        /// <summary>ISO-3166 alpha-2 country code. **Send this for any non-US property.** Omitting it does not mean &quot;unknown&quot; — the publish path treats a listing with no country as US, which then requires `state` and `postalCode` and will refuse the listing when they are absent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CountryCode { get; set; }
@@ -75,9 +75,9 @@ namespace Repull.SDK.Models
 #else
         public string Description { get; set; }
 #endif
-        /// <summary>The lat property</summary>
+        /// <summary>Latitude. Useful for map search, but never a substitute for the postal address — Airbnb rejects coordinates it cannot reconcile with a full address.</summary>
         public double? Lat { get; set; }
-        /// <summary>The lng property</summary>
+        /// <summary>Longitude. See `lat`.</summary>
         public double? Lng { get; set; }
         /// <summary>Public guest-facing title</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -89,6 +89,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The personCapacity property</summary>
         public int? PersonCapacity { get; set; }
+        /// <summary>Postal code — ZIP in the US, postcode in the UK, and so on. **Required for a US property**, and a listing with no `countryCode` counts as US. Send the complete code: Booking.com rejects a partial postcode such as `SW6` where the full value is `SW6 1EP`. Alias: `zipcode`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PostalCode { get; set; }
+#nullable restore
+#else
+        public string PostalCode { get; set; }
+#endif
         /// <summary>The propertyType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -97,7 +105,17 @@ namespace Repull.SDK.Models
 #else
         public string PropertyType { get; set; }
 #endif
-        /// <summary>The state property</summary>
+        /// <summary>Airbnb&apos;s finer property-type category, when you know it. Optional.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PropertyTypeCategory { get; set; }
+#nullable restore
+#else
+        public string PropertyTypeCategory { get; set; }
+#endif
+        /// <summary>What the guest actually gets. Airbnb refuses to activate a listing that has not stated one, answering &quot;Please specify a valid room type&quot; — which reads like a beds problem and is not. It is never defaulted: most listings are an entire home, but hundreds are a private or hotel room, and publishing one of those as an entire home is a false claim about someone&apos;s property. Settable later with `PUT /v1/listings/{id}/content` under `details`.</summary>
+        public global::Repull.SDK.Models.ListingCreateRequest_roomTypeCategory? RoomTypeCategory { get; set; }
+        /// <summary>State, province or region. **Required for a US property**, and a listing with no `countryCode` counts as US. Optional elsewhere, but stored and used wherever the channel carries it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? State { get; set; }
@@ -105,7 +123,7 @@ namespace Repull.SDK.Models
 #else
         public string State { get; set; }
 #endif
-        /// <summary>The street property</summary>
+        /// <summary>Street address including the number. Required by Airbnb for every country — a publish is refused without it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Street { get; set; }
@@ -120,6 +138,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Summary { get; set; }
+#endif
+        /// <summary>Alias for `postalCode`, accepted because it is the field name on the Airbnb mirror. `postalCode` wins if you send both. Prefer `postalCode` — the field holds non-US postcodes too.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Zipcode { get; set; }
+#nullable restore
+#else
+        public string Zipcode { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingCreateRequest"/> and sets the default values.
@@ -165,10 +191,14 @@ namespace Repull.SDK.Models
                 { "lng", n => { Lng = n.GetDoubleValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "personCapacity", n => { PersonCapacity = n.GetIntValue(); } },
+                { "postalCode", n => { PostalCode = n.GetStringValue(); } },
                 { "propertyType", n => { PropertyType = n.GetStringValue(); } },
+                { "propertyTypeCategory", n => { PropertyTypeCategory = n.GetStringValue(); } },
+                { "roomTypeCategory", n => { RoomTypeCategory = n.GetEnumValue<global::Repull.SDK.Models.ListingCreateRequest_roomTypeCategory>(); } },
                 { "state", n => { State = n.GetStringValue(); } },
                 { "street", n => { Street = n.GetStringValue(); } },
                 { "summary", n => { Summary = n.GetStringValue(); } },
+                { "zipcode", n => { Zipcode = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -197,10 +227,14 @@ namespace Repull.SDK.Models
             writer.WriteDoubleValue("lng", Lng);
             writer.WriteStringValue("name", Name);
             writer.WriteIntValue("personCapacity", PersonCapacity);
+            writer.WriteStringValue("postalCode", PostalCode);
             writer.WriteStringValue("propertyType", PropertyType);
+            writer.WriteStringValue("propertyTypeCategory", PropertyTypeCategory);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ListingCreateRequest_roomTypeCategory>("roomTypeCategory", RoomTypeCategory);
             writer.WriteStringValue("state", State);
             writer.WriteStringValue("street", Street);
             writer.WriteStringValue("summary", Summary);
+            writer.WriteStringValue("zipcode", Zipcode);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

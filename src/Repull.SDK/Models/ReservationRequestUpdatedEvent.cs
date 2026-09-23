@@ -30,7 +30,7 @@ namespace Repull.SDK.Models
 #else
         public string ApiVersion { get; set; }
 #endif
-        /// <summary>Payload for `reservation.request.updated`. A booking request stopped waiting on the host. `requestStatus` says how; `data.object` is the reservation after the change (`status` `confirmed` once accepted, `cancelled` otherwise). An accepted request also fires `reservation.created`. Fires when the channel reports the outcome, whoever acted — the API, the Vanio dashboard or the channel&apos;s own app.</summary>
+        /// <summary>Payload for `reservation.request.updated`. A booking request stopped waiting on the host. `requestStatus` says how; `data.object` is the reservation after the change (`status` `confirmed` once accepted, `cancelled` otherwise). An accepted request also fires `reservation.created`. Fires when the channel reports the outcome, whoever acted — the API, a connected app or the channel&apos;s own app.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ReservationRequestUpdatedPayload? Data { get; set; }
