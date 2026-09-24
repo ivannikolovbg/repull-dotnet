@@ -22,6 +22,14 @@ namespace Repull.SDK.V1.Connect
 #else
         public List<string> AllowedProviders { get; set; }
 #endif
+        /// <summary>Migrate only — your wording for the hosted pages. Anything you leave out uses Repull&apos;s localized migration copy.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy? Copy { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy Copy { get; set; }
+#endif
         /// <summary>Optional UI language for the hosted Connect pages. Accepts any supported locale code (currently `en`, `fr`). When set it pins the language for the whole flow, overriding the workspace `default_language`. Unknown codes are ignored and the page falls back to the workspace default, then `Accept-Language`, then `en`. The end user can still override per-visit with a `?locale=` query param on the hosted page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -30,6 +38,8 @@ namespace Repull.SDK.V1.Connect
 #else
         public string Locale { get; set; }
 #endif
+        /// <summary>`migrate` starts a Repull Migrate session: the property manager connects their current PMS (or channel) and their data is copied into a new workspace of theirs, which you read with `X-Workspace-Id`. The hosted pages use migration wording, and after connecting they show the import&apos;s progress.</summary>
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose? Purpose { get; set; }
         /// <summary>Where to send the user after they finish (or cancel). Status query params are appended.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -37,6 +47,14 @@ namespace Repull.SDK.V1.Connect
 #nullable restore
 #else
         public string RedirectUrl { get; set; }
+#endif
+        /// <summary>Migrate only — what you want brought across, listed to the property manager before they connect.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?>? Scope { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?> Scope { get; set; }
 #endif
         /// <summary>Opaque pass-through correlation token. Echoed back in the response.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -46,12 +64,21 @@ namespace Repull.SDK.V1.Connect
 #else
         public string State { get; set; }
 #endif
+        /// <summary>Migrate only — the property manager being moved. Required unless you send `X-Workspace-Id` to reconnect an existing migration.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace? Workspace { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace Workspace { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.ConnectPostRequestBody"/> and sets the default values.
         /// </summary>
         public ConnectPostRequestBody()
         {
             AdditionalData = new Dictionary<string, object>();
+            Purpose = global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose.Connect;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -72,9 +99,13 @@ namespace Repull.SDK.V1.Connect
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "allowedProviders", n => { AllowedProviders = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "copy", n => { Copy = n.GetObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>(global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy.CreateFromDiscriminatorValue); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
+                { "purpose", n => { Purpose = n.GetEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose>(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
+                { "scope", n => { Scope = n.GetCollectionOfEnumValues<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope>()?.AsList(); } },
                 { "state", n => { State = n.GetStringValue(); } },
+                { "workspace", n => { Workspace = n.GetObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace>(global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -85,9 +116,13 @@ namespace Repull.SDK.V1.Connect
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<string>("allowedProviders", AllowedProviders);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>("copy", Copy);
             writer.WriteStringValue("locale", Locale);
+            writer.WriteEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose>("purpose", Purpose);
             writer.WriteStringValue("redirectUrl", RedirectUrl);
+            writer.WriteCollectionOfEnumValues<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope>("scope", Scope);
             writer.WriteStringValue("state", State);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace>("workspace", Workspace);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

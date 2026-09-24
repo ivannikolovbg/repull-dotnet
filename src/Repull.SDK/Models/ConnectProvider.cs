@@ -67,6 +67,14 @@ namespace Repull.SDK.Models
 #else
         public string LogoUrl { get; set; }
 #endif
+        /// <summary>PMS providers: what Repull Migrate can carry across, per entity — `{ read: { listings: { level, notes }, … }, write: { … } }` with `level` `full` | `partial` | `none`. `null` for channels (OTAs).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ConnectProvider_migrationCapabilities? MigrationCapabilities { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ConnectProvider_migrationCapabilities MigrationCapabilities { get; set; }
+#endif
         /// <summary>Pickers should hide / disable `coming-soon` cards. `beta` cards are clickable but show a Beta pill.</summary>
         public global::Repull.SDK.Models.ConnectProvider_status? Status { get; set; }
         /// <summary>
@@ -102,6 +110,7 @@ namespace Repull.SDK.Models
                 { "docsUrl", n => { DocsUrl = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "logoUrl", n => { LogoUrl = n.GetStringValue(); } },
+                { "migrationCapabilities", n => { MigrationCapabilities = n.GetObjectValue<global::Repull.SDK.Models.ConnectProvider_migrationCapabilities>(global::Repull.SDK.Models.ConnectProvider_migrationCapabilities.CreateFromDiscriminatorValue); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.ConnectProvider_status>(); } },
             };
         }
@@ -120,6 +129,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("docsUrl", DocsUrl);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("logoUrl", LogoUrl);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ConnectProvider_migrationCapabilities>("migrationCapabilities", MigrationCapabilities);
             writer.WriteEnumValue<global::Repull.SDK.Models.ConnectProvider_status>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }

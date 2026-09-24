@@ -65,7 +65,7 @@ namespace Repull.SDK.Models
 #else
         public string CountryCode { get; set; }
 #endif
-        /// <summary>The defaultDailyPrice property</summary>
+        /// <summary>Nightly rate for every night that is not a weekend night. Stating it is what gives the new listing a calendar: 365 nights are written from it, and that calendar is what a publish sends to the channel. Without a price the listing has no availability to publish, which Booking.com refuses with &quot;No availability pushed&quot;.</summary>
         public double? DefaultDailyPrice { get; set; }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -97,6 +97,8 @@ namespace Repull.SDK.Models
 #else
         public string PostalCode { get; set; }
 #endif
+        /// <summary>Charged per guest above the number included in the nightly rate.</summary>
+        public double? PricePerExtraGuest { get; set; }
         /// <summary>The propertyType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -139,6 +141,8 @@ namespace Repull.SDK.Models
 #else
         public string Summary { get; set; }
 #endif
+        /// <summary>Nightly rate for Saturday and Sunday nights (UTC). Omit it and those nights take `defaultDailyPrice`. It is the same rate the direct-booking quoter charges for a weekend night, so the calendar and a quote cannot disagree.</summary>
+        public double? WeekendPrice { get; set; }
         /// <summary>Alias for `postalCode`, accepted because it is the field name on the Airbnb mirror. `postalCode` wins if you send both. Prefer `postalCode` — the field holds non-US postcodes too.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -192,12 +196,14 @@ namespace Repull.SDK.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "personCapacity", n => { PersonCapacity = n.GetIntValue(); } },
                 { "postalCode", n => { PostalCode = n.GetStringValue(); } },
+                { "pricePerExtraGuest", n => { PricePerExtraGuest = n.GetDoubleValue(); } },
                 { "propertyType", n => { PropertyType = n.GetStringValue(); } },
                 { "propertyTypeCategory", n => { PropertyTypeCategory = n.GetStringValue(); } },
                 { "roomTypeCategory", n => { RoomTypeCategory = n.GetEnumValue<global::Repull.SDK.Models.ListingCreateRequest_roomTypeCategory>(); } },
                 { "state", n => { State = n.GetStringValue(); } },
                 { "street", n => { Street = n.GetStringValue(); } },
                 { "summary", n => { Summary = n.GetStringValue(); } },
+                { "weekendPrice", n => { WeekendPrice = n.GetDoubleValue(); } },
                 { "zipcode", n => { Zipcode = n.GetStringValue(); } },
             };
         }
@@ -228,12 +234,14 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("name", Name);
             writer.WriteIntValue("personCapacity", PersonCapacity);
             writer.WriteStringValue("postalCode", PostalCode);
+            writer.WriteDoubleValue("pricePerExtraGuest", PricePerExtraGuest);
             writer.WriteStringValue("propertyType", PropertyType);
             writer.WriteStringValue("propertyTypeCategory", PropertyTypeCategory);
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingCreateRequest_roomTypeCategory>("roomTypeCategory", RoomTypeCategory);
             writer.WriteStringValue("state", State);
             writer.WriteStringValue("street", Street);
             writer.WriteStringValue("summary", Summary);
+            writer.WriteDoubleValue("weekendPrice", WeekendPrice);
             writer.WriteStringValue("zipcode", Zipcode);
             writer.WriteAdditionalData(AdditionalData);
         }

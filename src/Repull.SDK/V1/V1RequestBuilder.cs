@@ -13,6 +13,7 @@ using Repull.SDK.V1.Inquiries;
 using Repull.SDK.V1.Kv;
 using Repull.SDK.V1.Listings;
 using Repull.SDK.V1.Markets;
+using Repull.SDK.V1.Migrations;
 using Repull.SDK.V1.Properties;
 using Repull.SDK.V1.Quotes;
 using Repull.SDK.V1.Reservations;
@@ -86,6 +87,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Markets.MarketsRequestBuilder Markets
         {
             get => new global::Repull.SDK.V1.Markets.MarketsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The migrations property</summary>
+        public global::Repull.SDK.V1.Migrations.MigrationsRequestBuilder Migrations
+        {
+            get => new global::Repull.SDK.V1.Migrations.MigrationsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The properties property</summary>
         public global::Repull.SDK.V1.Properties.PropertiesRequestBuilder Properties

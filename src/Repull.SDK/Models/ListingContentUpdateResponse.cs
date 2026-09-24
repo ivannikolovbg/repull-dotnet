@@ -14,7 +14,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Content slabs that were actually written, e.g. [&quot;title&quot;,&quot;occupancy&quot;,&quot;amenities&quot;]. A non-English write also reports `locale:&lt;tag&gt;` so you can see which row was written.</summary>
+        /// <summary>Content slabs that were actually written, e.g. [&quot;title&quot;,&quot;occupancy&quot;,&quot;amenities&quot;]. A non-English write also reports `locale:&lt;tag&gt;` so you can see which row was written. A rate change reports `pricing`, and `calendar` as well when nights on the calendar moved to the new rate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Changed { get; set; }

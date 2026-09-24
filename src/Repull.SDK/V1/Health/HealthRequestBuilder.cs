@@ -3,7 +3,6 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
-using Repull.SDK.V1.Health.Atlas;
 using Repull.SDK.V1.Health.Auth;
 using Repull.SDK.V1.Health.Channels;
 using Repull.SDK.V1.Health.Mcp;
@@ -21,11 +20,6 @@ namespace Repull.SDK.V1.Health
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class HealthRequestBuilder : BaseRequestBuilder
     {
-        /// <summary>The atlas property</summary>
-        public global::Repull.SDK.V1.Health.Atlas.AtlasRequestBuilder Atlas
-        {
-            get => new global::Repull.SDK.V1.Health.Atlas.AtlasRequestBuilder(PathParameters, RequestAdapter);
-        }
         /// <summary>The auth property</summary>
         public global::Repull.SDK.V1.Health.Auth.AuthRequestBuilder Auth
         {

@@ -103,6 +103,14 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         PaymentRefunded,
         #pragma warning restore CS1591
+        [EnumMember(Value = "migration.completed")]
+        #pragma warning disable CS1591
+        MigrationCompleted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "migration.failed")]
+        #pragma warning disable CS1591
+        MigrationFailed,
+        #pragma warning restore CS1591
         [EnumMember(Value = "repull.ping")]
         #pragma warning disable CS1591
         RepullPing,

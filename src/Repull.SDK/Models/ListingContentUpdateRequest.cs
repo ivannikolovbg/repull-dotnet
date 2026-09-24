@@ -89,6 +89,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ListingContentUpdateRequest_policies Policies { get; set; }
 #endif
+        /// <summary>The listing&apos;s standing rates. Partial like every other section: only the fields you send are written, and `null` clears one.Changing `defaultDailyPrice` or `weekendPrice` also moves the nights on the calendar that still carry the old rate and were written by us — a night you or a channel priced yourself is never touched, and neither is a blocked or reserved one. So a price change reaches the calendar without overwriting anyone&apos;s work.This is still a local write. Publish to send the new rates to a channel.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_pricing? Pricing { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_pricing Pricing { get; set; }
+#endif
         /// <summary>Short summary / tagline.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -141,6 +149,7 @@ namespace Repull.SDK.Models
                 { "photos", n => { Photos = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "photosMode", n => { PhotosMode = n.GetEnumValue<global::Repull.SDK.Models.ListingContentUpdateRequest_photosMode>(); } },
                 { "policies", n => { Policies = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_policies>(global::Repull.SDK.Models.ListingContentUpdateRequest_policies.CreateFromDiscriminatorValue); } },
+                { "pricing", n => { Pricing = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_pricing>(global::Repull.SDK.Models.ListingContentUpdateRequest_pricing.CreateFromDiscriminatorValue); } },
                 { "summary", n => { Summary = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
@@ -162,6 +171,7 @@ namespace Repull.SDK.Models
             writer.WriteCollectionOfPrimitiveValues<string>("photos", Photos);
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingContentUpdateRequest_photosMode>("photosMode", PhotosMode);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_policies>("policies", Policies);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_pricing>("pricing", Pricing);
             writer.WriteStringValue("summary", Summary);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);

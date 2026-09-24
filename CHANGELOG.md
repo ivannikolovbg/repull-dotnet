@@ -5,6 +5,23 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.15] - 2026-09-24
+
+Regenerated against the live `https://api.repull.dev/openapi.json` (202 → 209 operations).
+
+### Added
+- **Repull Migrate** — `client.V1.Migrations`: list, get (`Migrations[workspaceId]`), `Report`, `ChannelMap`,
+  `Import`, `CutoverCheck`, `Cutover`, and `DeleteAsync` to end a migration.
+- Connect sessions accept `Purpose = "migrate"`, `Workspace`, `Copy` and `Scope`; the session returns `WorkspaceId`.
+- `migration.completed` / `migration.failed` webhook events; child-workspace events carry `WorkspaceId`.
+- `ConnectProvider.MigrationCapabilities`.
+
+### Changed
+- Airbnb permits write takes Airbnb's submission shape (`flow_slug` + `answers` keyed by `answer_key`).
+
+### Removed
+- Atlas health endpoint (retired).
+
 ## [0.2.14] - 2026-09-23
 
 ### Added

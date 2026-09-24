@@ -14,6 +14,8 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Nights of calendar written from the price you stated. `0` means the listing has no calendar and a publish will send no availability — state `defaultDailyPrice` on the create, or set it later with `PUT /v1/listings/{id}/content` under `pricing`.</summary>
+        public int? CalendarDaysSeeded { get; set; }
         /// <summary>New listing ID — use for follow-up generate-content / publish calls</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -47,6 +49,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "calendarDaysSeeded", n => { CalendarDaysSeeded = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
             };
         }
@@ -57,6 +60,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("calendarDaysSeeded", CalendarDaysSeeded);
             writer.WriteStringValue("id", Id);
             writer.WriteAdditionalData(AdditionalData);
         }

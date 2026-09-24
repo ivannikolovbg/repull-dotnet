@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.CalendarUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
+    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.CalendarUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WebhookEvent : IComposedTypeWrapper, IParsable
@@ -108,6 +108,22 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public global::Repull.SDK.Models.ListingUpdatedEvent ListingUpdatedEvent { get; set; }
+#endif
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.MigrationCompletedEvent? MigrationCompletedEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.MigrationCompletedEvent MigrationCompletedEvent { get; set; }
+#endif
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.MigrationFailedEvent? MigrationFailedEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.MigrationFailedEvent MigrationFailedEvent { get; set; }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -279,6 +295,14 @@ namespace Repull.SDK.Models
             {
                 result.ListingUpdatedEvent = new global::Repull.SDK.Models.ListingUpdatedEvent();
             }
+            else if("migration.completed".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.MigrationCompletedEvent = new global::Repull.SDK.Models.MigrationCompletedEvent();
+            }
+            else if("migration.failed".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.MigrationFailedEvent = new global::Repull.SDK.Models.MigrationFailedEvent();
+            }
             else if("payment.completed".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.PaymentCompletedEvent = new global::Repull.SDK.Models.PaymentCompletedEvent();
@@ -390,6 +414,14 @@ namespace Repull.SDK.Models
             else if(ListingUpdatedEvent != null)
             {
                 return ListingUpdatedEvent.GetFieldDeserializers();
+            }
+            else if(MigrationCompletedEvent != null)
+            {
+                return MigrationCompletedEvent.GetFieldDeserializers();
+            }
+            else if(MigrationFailedEvent != null)
+            {
+                return MigrationFailedEvent.GetFieldDeserializers();
             }
             else if(PaymentCompletedEvent != null)
             {
@@ -503,6 +535,14 @@ namespace Repull.SDK.Models
             else if(ListingUpdatedEvent != null)
             {
                 writer.WriteObjectValue<global::Repull.SDK.Models.ListingUpdatedEvent>(null, ListingUpdatedEvent);
+            }
+            else if(MigrationCompletedEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.MigrationCompletedEvent>(null, MigrationCompletedEvent);
+            }
+            else if(MigrationFailedEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.MigrationFailedEvent>(null, MigrationFailedEvent);
             }
             else if(PaymentCompletedEvent != null)
             {

@@ -12,15 +12,31 @@ namespace Repull.SDK.Models
     public partial class AirbnbPermitsWriteRequest_permits : IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>The answers property</summary>
+        /// <summary>Keyed by each question&apos;s `answer_key`. Each value carries exactly one field, chosen by the question&apos;s `type`: TEXT → `text_value`, ATTESTATION → `attestation_value`, RADIO → `radio_value`, DATE → `date_value`, SELECT → `selected_options_value`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers>? Answers { get; set; }
+        public global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers? Answers { get; set; }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers> Answers { get; set; }
+        public global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers Answers { get; set; }
 #endif
-        /// <summary>The regulation_type property</summary>
+        /// <summary>The `slug` of the flow you are answering, e.g. `existing_registration` or `exemption_claim`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FlowSlug { get; set; }
+#nullable restore
+#else
+        public string FlowSlug { get; set; }
+#endif
+        /// <summary>Echo the GET&apos;s `regulation_context` (e.g. `initial`) when present.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? RegulationContext { get; set; }
+#nullable restore
+#else
+        public string RegulationContext { get; set; }
+#endif
+        /// <summary>As returned by the GET.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RegulationType { get; set; }
@@ -28,7 +44,7 @@ namespace Repull.SDK.Models
 #else
         public string RegulationType { get; set; }
 #endif
-        /// <summary>As named by the GET, e.g. the city or registry asking.</summary>
+        /// <summary>As returned by the GET, e.g. `maui_county_hawaii`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RegulatoryBody { get; set; }
@@ -54,7 +70,9 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "answers", n => { Answers = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers>(global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "answers", n => { Answers = n.GetObjectValue<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers>(global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers.CreateFromDiscriminatorValue); } },
+                { "flow_slug", n => { FlowSlug = n.GetStringValue(); } },
+                { "regulation_context", n => { RegulationContext = n.GetStringValue(); } },
                 { "regulation_type", n => { RegulationType = n.GetStringValue(); } },
                 { "regulatory_body", n => { RegulatoryBody = n.GetStringValue(); } },
             };
@@ -66,7 +84,9 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers>("answers", Answers);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers>("answers", Answers);
+            writer.WriteStringValue("flow_slug", FlowSlug);
+            writer.WriteStringValue("regulation_context", RegulationContext);
             writer.WriteStringValue("regulation_type", RegulationType);
             writer.WriteStringValue("regulatory_body", RegulatoryBody);
         }

@@ -115,6 +115,8 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ReservationOccupancy Occupancy { get; set; }
 #endif
+        /// <summary>Why a `pending` reservation is pending — who has to act next. `host_approval`: a booking request the host must accept or decline (see `respondBy`). `guest_payment`: Airbnb is waiting for the guest to pay. `guest_verification`: Airbnb is holding the booking while the guest completes identity verification. The last two need no action from the host, and Airbnb does not publish a deadline for them. Present only while `status` is `pending`; when it changes you receive `reservation.updated` with the previous raw status in `previousAttributes.status`, even if `status` stays `pending`.</summary>
+        public global::Repull.SDK.Models.Reservation_pendingReason? PendingReason { get; set; }
         /// <summary>DEPRECATED alias for `source`. Same value, kept for back-compat.</summary>
         [Obsolete("")]
         public global::Repull.SDK.Models.Reservation_platform? Platform { get; set; }
@@ -126,7 +128,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ReservationPrimaryGuest PrimaryGuest { get; set; }
 #endif
-        /// <summary>On a `pending` Airbnb booking request that can still be answered: when it lapses (24 hours after the guest asked). Accept or decline before then with `POST /v1/reservations/{id}/accept` / `/decline`. Absent on every other reservation.</summary>
+        /// <summary>On a `pending` Airbnb booking request (`pendingReason: host_approval`) that can still be answered: when it lapses (24 hours after the guest asked). Accept or decline before then with `POST /v1/reservations/{id}/accept` / `/decline`. Absent on every other reservation, including bookings Airbnb is holding for the guest&apos;s payment or verification — those have no deadline we can report.</summary>
         public DateTimeOffset? RespondBy { get; set; }
         /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
         public global::Repull.SDK.Models.Reservation_source? Source { get; set; }
@@ -185,6 +187,7 @@ namespace Repull.SDK.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "occupancy", n => { Occupancy = n.GetObjectValue<global::Repull.SDK.Models.ReservationOccupancy>(global::Repull.SDK.Models.ReservationOccupancy.CreateFromDiscriminatorValue); } },
+                { "pendingReason", n => { PendingReason = n.GetEnumValue<global::Repull.SDK.Models.Reservation_pendingReason>(); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Reservation_platform>(); } },
                 { "primaryGuest", n => { PrimaryGuest = n.GetObjectValue<global::Repull.SDK.Models.ReservationPrimaryGuest>(global::Repull.SDK.Models.ReservationPrimaryGuest.CreateFromDiscriminatorValue); } },
                 { "respondBy", n => { RespondBy = n.GetDateTimeOffsetValue(); } },
@@ -217,6 +220,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationOccupancy>("occupancy", Occupancy);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_pendingReason>("pendingReason", PendingReason);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_platform>("platform", Platform);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationPrimaryGuest>("primaryGuest", PrimaryGuest);
             writer.WriteDateTimeOffsetValue("respondBy", RespondBy);

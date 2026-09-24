@@ -8,43 +8,20 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Exactly one value field applies, decided by the question&apos;s `answer_type`.
+    /// Keyed by each question&apos;s `answer_key`. Each value carries exactly one field, chosen by the question&apos;s `type`: TEXT → `text_value`, ATTESTATION → `attestation_value`, RADIO → `radio_value`, DATE → `date_value`, SELECT → `selected_options_value`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbPermitsWriteRequest_permits_answers : IParsable
+    public partial class AirbnbPermitsWriteRequest_permits_answers : IAdditionalDataHolder, IParsable
     {
-        /// <summary>ISO date, YYYY-MM-DD.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? DateValue { get; set; }
-#nullable restore
-#else
-        public string DateValue { get; set; }
-#endif
-        /// <summary>The question_key property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? QuestionKey { get; set; }
-#nullable restore
-#else
-        public string QuestionKey { get; set; }
-#endif
-        /// <summary>The selected_options_value property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public List<string>? SelectedOptionsValue { get; set; }
-#nullable restore
-#else
-        public List<string> SelectedOptionsValue { get; set; }
-#endif
-        /// <summary>The text_value property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? TextValue { get; set; }
-#nullable restore
-#else
-        public string TextValue { get; set; }
-#endif
+        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
+        public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers"/> and sets the default values.
+        /// </summary>
+        public AirbnbPermitsWriteRequest_permits_answers()
+        {
+            AdditionalData = new Dictionary<string, object>();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -63,10 +40,6 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "date_value", n => { DateValue = n.GetStringValue(); } },
-                { "question_key", n => { QuestionKey = n.GetStringValue(); } },
-                { "selected_options_value", n => { SelectedOptionsValue = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "text_value", n => { TextValue = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -76,10 +49,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("date_value", DateValue);
-            writer.WriteStringValue("question_key", QuestionKey);
-            writer.WriteCollectionOfPrimitiveValues<string>("selected_options_value", SelectedOptionsValue);
-            writer.WriteStringValue("text_value", TextValue);
+            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }

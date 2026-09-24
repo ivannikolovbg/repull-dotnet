@@ -22,7 +22,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.AirbnbPermitsResponse_cached> Cached { get; set; }
 #endif
-        /// <summary>The live permit flows from Airbnb — present only with `?source=live`, `null` otherwise. Each flow names its `regulatory_body`, `regulation_type`, `status`, and the `question_key` / `answer_type` / `options` of every question you have to answer, plus the answers already on file.</summary>
+        /// <summary>The live permit flows from Airbnb — present only with `?source=live`, `null` otherwise. Each flow names its `regulatory_body`, `regulation_type`, `status`, its `flows[]` with the `answer_key` / `type` / `choices` of every question you have to answer, plus the answers already on file.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.AirbnbPermitsResponse_permits>? Permits { get; set; }

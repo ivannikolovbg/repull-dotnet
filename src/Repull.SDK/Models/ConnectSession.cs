@@ -17,6 +17,8 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The expiresAt property</summary>
         public DateTimeOffset? ExpiresAt { get; set; }
+        /// <summary>Present only on a Repull Migrate session.</summary>
+        public global::Repull.SDK.Models.ConnectSession_purpose? Purpose { get; set; }
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -40,6 +42,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Url { get; set; }
+#endif
+        /// <summary>Repull Migrate only: the workspace the property manager&apos;s data lands in. Read it with `X-Workspace-Id`, track it with `GET /v1/migrations/{workspaceId}`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WorkspaceId { get; set; }
+#nullable restore
+#else
+        public string WorkspaceId { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectSession"/> and sets the default values.
@@ -67,9 +77,11 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "expiresAt", n => { ExpiresAt = n.GetDateTimeOffsetValue(); } },
+                { "purpose", n => { Purpose = n.GetEnumValue<global::Repull.SDK.Models.ConnectSession_purpose>(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
+                { "workspaceId", n => { WorkspaceId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -80,9 +92,11 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDateTimeOffsetValue("expiresAt", ExpiresAt);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ConnectSession_purpose>("purpose", Purpose);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteStringValue("state", State);
             writer.WriteStringValue("url", Url);
+            writer.WriteStringValue("workspaceId", WorkspaceId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
