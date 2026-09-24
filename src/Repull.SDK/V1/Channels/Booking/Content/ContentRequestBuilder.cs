@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Booking.Content
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContentRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/content", pathParameters)
+        public ContentRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/content{?room_id*,type*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,95 +30,108 @@ namespace Repull.SDK.V1.Channels.Booking.Content
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContentRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/content", rawUrl)
+        public ContentRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/content{?room_id*,type*}", rawUrl)
         {
         }
         /// <summary>
-        /// Fetch the current content (descriptions, amenities, photos) for a Booking.com property. Used to round-trip edits through Repull.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Read one kind of content for a Booking.com property, straight from Booking.com.| `type` | What it is ||---|---|| `photos` | The property&apos;s photos. Add `room_id` to read one room&apos;s gallery. || `facilities` | Property facilities, or a room&apos;s with `room_id` (Booking.com&apos;s ids — `GET` returns them). || `description` | The property description. Booking.com rewrites what you send into its own multilingual copy; allow about 3 hours to appear. || `settings` | House rules, pets, children, damage deposit, invoice recipient, booking model. || `policies` | Cancellation and prepayment policies. || `licences` | The region&apos;s licence rules and the licence on file. || `checkin_methods` | How guests get in (holiday homes). || `contacts` | Who Booking.com contacts about the property. |`amenities` is accepted as another name for `facilities`, and `descriptions` for `description`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder.ContentRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder.ContentRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Push content changes (descriptions, amenities, photos) to Booking.com. Booking enforces editorial review on text fields — changes appear after their content moderation queue clears.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Write one kind of content to a Booking.com property only. Nothing on the canonical listing or on Airbnb changes. To send the listing&apos;s own content to every channel instead, use `PUT /v1/listings/{id}/content` and publish.| `type` | What it is ||---|---|| `photos` | The property&apos;s photos. Add `room_id` to read one room&apos;s gallery. || `facilities` | Property facilities, or a room&apos;s with `room_id` (Booking.com&apos;s ids — `GET` returns them). || `description` | The property description. Booking.com rewrites what you send into its own multilingual copy; allow about 3 hours to appear. || `settings` | House rules, pets, children, damage deposit, invoice recipient, booking model. || `policies` | Cancellation and prepayment policies. || `licences` | The region&apos;s licence rules and the licence on file. || `checkin_methods` | How guests get in (holiday homes). || `contacts` | Who Booking.com contacts about the property. |`amenities` is accepted as another name for `facilities`, and `descriptions` for `description`.What each `type` takes:- `description`: `text`, optional `language` (default `en`).- `facilities`: `facilities: [{ facility_id | room_facility_id, state: &quot;PRESENT&quot; | &quot;MISSING&quot;, instances? }]`. Facilities you do not send stay as they are.- `photos`: `photos: [{ url }]`, uploaded in the background. With `room_id`, send `photo_ids` instead to add photos that have finished processing to that room.- `settings`: `settings: { &lt;block&gt;: {…} }`, for example `{ &quot;pets&quot;: { &quot;pets_allowed&quot;: &quot;PETS_ALLOWED&quot; } }`. Each block is written separately and reported in `results`.- `policies`: `policyCode` (152 = free cancellation at any time, 1 = non-refundable, …), optional `prepaymentRequired`; add `policyId` to change an existing policy. A property holds at most 7 policies and none can be deleted.- `licences`: `variantId` and `contentData: [{ name, value }]`, from the rules `GET ?type=licences` returns; optional `room_id`.- `checkin_methods`: `methods: [{ checkin_method }]`, using a name from `GET ?type=checkin_methods` `available`.- `contacts`: `contacts: [...]` in Booking.com&apos;s contact shape.If Booking.com refuses the write, the response is `422 booking_rejected` with Booking.com&apos;s reason, even when Booking.com answered HTTP 200. Resending the same body will be refused again.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> PostAsync(global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PostAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> PostAsync(global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
-            var requestInfo = ToPostRequestInformation(requestConfiguration);
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch the current content (descriptions, amenities, photos) for a Booking.com property. Used to round-trip edits through Repull.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Read one kind of content for a Booking.com property, straight from Booking.com.| `type` | What it is ||---|---|| `photos` | The property&apos;s photos. Add `room_id` to read one room&apos;s gallery. || `facilities` | Property facilities, or a room&apos;s with `room_id` (Booking.com&apos;s ids — `GET` returns them). || `description` | The property description. Booking.com rewrites what you send into its own multilingual copy; allow about 3 hours to appear. || `settings` | House rules, pets, children, damage deposit, invoice recipient, booking model. || `policies` | Cancellation and prepayment policies. || `licences` | The region&apos;s licence rules and the licence on file. || `checkin_methods` | How guests get in (holiday homes). || `contacts` | Who Booking.com contacts about the property. |`amenities` is accepted as another name for `facilities`, and `descriptions` for `description`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder.ContentRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder.ContentRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.GET, "{+baseurl}/v1/channels/booking/content?property_id={property_id}{&room_id*,type*}", PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
         }
         /// <summary>
-        /// Push content changes (descriptions, amenities, photos) to Booking.com. Booking enforces editorial review on text fields — changes appear after their content moderation queue clears.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Write one kind of content to a Booking.com property only. Nothing on the canonical listing or on Airbnb changes. To send the listing&apos;s own content to every channel instead, use `PUT /v1/listings/{id}/content` and publish.| `type` | What it is ||---|---|| `photos` | The property&apos;s photos. Add `room_id` to read one room&apos;s gallery. || `facilities` | Property facilities, or a room&apos;s with `room_id` (Booking.com&apos;s ids — `GET` returns them). || `description` | The property description. Booking.com rewrites what you send into its own multilingual copy; allow about 3 hours to appear. || `settings` | House rules, pets, children, damage deposit, invoice recipient, booking model. || `policies` | Cancellation and prepayment policies. || `licences` | The region&apos;s licence rules and the licence on file. || `checkin_methods` | How guests get in (holiday homes). || `contacts` | Who Booking.com contacts about the property. |`amenities` is accepted as another name for `facilities`, and `descriptions` for `description`.What each `type` takes:- `description`: `text`, optional `language` (default `en`).- `facilities`: `facilities: [{ facility_id | room_facility_id, state: &quot;PRESENT&quot; | &quot;MISSING&quot;, instances? }]`. Facilities you do not send stay as they are.- `photos`: `photos: [{ url }]`, uploaded in the background. With `room_id`, send `photo_ids` instead to add photos that have finished processing to that room.- `settings`: `settings: { &lt;block&gt;: {…} }`, for example `{ &quot;pets&quot;: { &quot;pets_allowed&quot;: &quot;PETS_ALLOWED&quot; } }`. Each block is written separately and reported in `results`.- `policies`: `policyCode` (152 = free cancellation at any time, 1 = non-refundable, …), optional `prepaymentRequired`; add `policyId` to change an existing policy. A property holds at most 7 policies and none can be deleted.- `licences`: `variantId` and `contentData: [{ name, value }]`, from the rules `GET ?type=licences` returns; optional `room_id`.- `checkin_methods`: `methods: [{ checkin_method }]`, using a name from `GET ?type=checkin_methods` `available`.- `contacts`: `contacts: [...]` in Booking.com&apos;s contact shape.If Booking.com refuses the write, the response is `422 booking_rejected` with Booking.com&apos;s reason, even when Booking.com answered HTTP 200. Resending the same body will be refused again.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>
@@ -131,11 +144,52 @@ namespace Repull.SDK.V1.Channels.Booking.Content
             return new global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// Read one kind of content for a Booking.com property, straight from Booking.com.| `type` | What it is ||---|---|| `photos` | The property&apos;s photos. Add `room_id` to read one room&apos;s gallery. || `facilities` | Property facilities, or a room&apos;s with `room_id` (Booking.com&apos;s ids — `GET` returns them). || `description` | The property description. Booking.com rewrites what you send into its own multilingual copy; allow about 3 hours to appear. || `settings` | House rules, pets, children, damage deposit, invoice recipient, booking model. || `policies` | Cancellation and prepayment policies. || `licences` | The region&apos;s licence rules and the licence on file. || `checkin_methods` | How guests get in (holiday homes). || `contacts` | Who Booking.com contacts about the property. |`amenities` is accepted as another name for `facilities`, and `descriptions` for `description`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ContentRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Booking.com property id.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("property_id")]
+            public string? PropertyId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("property_id")]
+            public string PropertyId { get; set; }
+#endif
+            /// <summary>A Booking.com room id, for `photos`, `facilities` and `licences`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("room_id")]
+            public string? RoomId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("room_id")]
+            public string RoomId { get; set; }
+#endif
+            /// <summary>Which content to read.</summary>
+            [Obsolete("This property is deprecated, use TypeAsGetTypeQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("type")]
+            public string? Type { get; set; }
+#nullable restore
+#else
+            [QueryParameter("type")]
+            public string Type { get; set; }
+#endif
+            /// <summary>Which content to read.</summary>
+            [QueryParameter("type")]
+            public global::Repull.SDK.V1.Channels.Booking.Content.GetTypeQueryParameterType? TypeAsGetTypeQueryParameterType { get; set; }
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ContentRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class ContentRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Content.ContentRequestBuilder.ContentRequestBuilderGetQueryParameters>
         {
         }
         /// <summary>

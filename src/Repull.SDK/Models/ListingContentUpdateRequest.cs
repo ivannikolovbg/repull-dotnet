@@ -31,6 +31,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities Amenities { get; set; }
 #endif
+        /// <summary>What the guest is asked to do before leaving. FULL replacement: omit to leave untouched; send `[]` to clear. An unknown `taskType` refuses the whole request with `422 invalid_params`.Published to Airbnb, which is the only channel with checkout tasks. Airbnb accepts them only from partner apps it has certified for the feature; until then the publish result reports Airbnb&apos;s own refusal for this section and every other section still lands.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks>? CheckoutTasks { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks> CheckoutTasks { get; set; }
+#endif
         /// <summary>Long-form listing description.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -97,6 +105,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ListingContentUpdateRequest_pricing Pricing { get; set; }
 #endif
+        /// <summary>The listing&apos;s rooms and the beds in each — what Airbnb shows as the sleeping arrangements and needs before a listing can go live. FULL replacement: the rooms you send become the whole set. Omit to leave rooms untouched; send `[]` to clear them.Every entry is checked before anything is written, so a bad entry refuses the whole request with `422 invalid_params` naming it (e.g. `rooms[1].beds[0].quantity`) — a listing is never left with half its rooms.Values use Airbnb&apos;s vocabulary, which Booking.com room mapping also reads. This is a local write; publish to send it to a channel.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms>? Rooms { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms> Rooms { get; set; }
+#endif
         /// <summary>Short summary / tagline.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -141,6 +157,7 @@ namespace Repull.SDK.Models
             {
                 { "address", n => { Address = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_address>(global::Repull.SDK.Models.ListingContentUpdateRequest_address.CreateFromDiscriminatorValue); } },
                 { "amenities", n => { Amenities = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities>(global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities.CreateFromDiscriminatorValue); } },
+                { "checkoutTasks", n => { CheckoutTasks = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks>(global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "details", n => { Details = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_details>(global::Repull.SDK.Models.ListingContentUpdateRequest_details.CreateFromDiscriminatorValue); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
@@ -150,6 +167,7 @@ namespace Repull.SDK.Models
                 { "photosMode", n => { PhotosMode = n.GetEnumValue<global::Repull.SDK.Models.ListingContentUpdateRequest_photosMode>(); } },
                 { "policies", n => { Policies = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_policies>(global::Repull.SDK.Models.ListingContentUpdateRequest_policies.CreateFromDiscriminatorValue); } },
                 { "pricing", n => { Pricing = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_pricing>(global::Repull.SDK.Models.ListingContentUpdateRequest_pricing.CreateFromDiscriminatorValue); } },
+                { "rooms", n => { Rooms = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms>(global::Repull.SDK.Models.ListingContentUpdateRequest_rooms.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "summary", n => { Summary = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
@@ -163,6 +181,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_address>("address", Address);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities>("amenities", Amenities);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks>("checkoutTasks", CheckoutTasks);
             writer.WriteStringValue("description", Description);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_details>("details", Details);
             writer.WriteStringValue("locale", Locale);
@@ -172,6 +191,7 @@ namespace Repull.SDK.Models
             writer.WriteEnumValue<global::Repull.SDK.Models.ListingContentUpdateRequest_photosMode>("photosMode", PhotosMode);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_policies>("policies", Policies);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateRequest_pricing>("pricing", Pricing);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms>("rooms", Rooms);
             writer.WriteStringValue("summary", Summary);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);

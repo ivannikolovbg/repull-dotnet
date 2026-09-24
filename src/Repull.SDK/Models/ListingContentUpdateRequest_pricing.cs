@@ -29,7 +29,7 @@ namespace Repull.SDK.Models
         public double? DefaultDailyPrice { get; set; }
         /// <summary>Guests covered by the nightly rate before `pricePerExtraGuest` applies.</summary>
         public int? GuestsIncluded { get; set; }
-        /// <summary>Fraction, not a percentage.</summary>
+        /// <summary>A percentage, not a fraction: `20` is 20% off a stay of 28 nights or more. Values between 0 and 1 are refused, as for `weeklyDiscount`.</summary>
         public double? MonthlyDiscount { get; set; }
         /// <summary>The pricePerExtraGuest property</summary>
         public double? PricePerExtraGuest { get; set; }
@@ -37,7 +37,7 @@ namespace Repull.SDK.Models
         public double? SecurityDeposit { get; set; }
         /// <summary>Nightly rate for Saturday and Sunday nights (UTC).</summary>
         public double? WeekendPrice { get; set; }
-        /// <summary>Fraction, not a percentage: `0.1` is 10% off a stay of a week or more.</summary>
+        /// <summary>A percentage, not a fraction: `10` is 10% off a stay of a week or more. A value between 0 and 1 is refused (it would publish as a fraction of one percent) — send `10`, not `0.1`. `0` clears it.</summary>
         public double? WeeklyDiscount { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest_pricing"/> and sets the default values.

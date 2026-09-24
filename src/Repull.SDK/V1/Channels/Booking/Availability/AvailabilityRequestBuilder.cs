@@ -184,7 +184,7 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
             [QueryParameter("room_id")]
             public string RoomId { get; set; }
 #endif
-            /// <summary>When true, returns room-level (vs rate-plan-level) state.</summary>
+            /// <summary>Defaults to `true`: availability per room, which is how Booking.com keeps inventory and how Vanio reads it. Send `false` for the per-rate read — its `roomsToSell` is often 0 for rooms that are on sale.</summary>
             [QueryParameter("room_level")]
             public bool? RoomLevel { get; set; }
             /// <summary>Window start (ISO YYYY-MM-DD).</summary>

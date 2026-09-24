@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Channels.Booking.Listings.Item;
+using Repull.SDK.V1.Channels.Booking.Listings.Map;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,6 +16,11 @@ namespace Repull.SDK.V1.Channels.Booking.Listings
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ListingsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The map property</summary>
+        public global::Repull.SDK.V1.Channels.Booking.Listings.Map.MapRequestBuilder Map
+        {
+            get => new global::Repull.SDK.V1.Channels.Booking.Listings.Map.MapRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>Gets an item from the Repull.SDK.v1.channels.booking.listings.item collection</summary>
         /// <param name="position">Repull listing id — NOT a Booking.com hotel id. Resolved to a Booking.com hotel id via the workspace mapping.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Listings.Item.ListingsItemRequestBuilder"/></returns>

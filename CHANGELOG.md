@@ -5,6 +5,16 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.16] - 2026-09-24
+
+Regenerated against the live `https://api.repull.dev/openapi.json` (210 operations):
+
+- `POST /v1/channels/booking/listings/map` — map a Booking.com room to a listing with an API key; the property's reservations import automatically.
+- `/v1/channels/booking/content` rebuilt on Booking.com's Property Management APIs — types `photos`, `facilities`, `description`, `settings`, `policies`, `licences`, `checkin_methods`, `contacts`.
+- `/v1/channels/booking/setup` — `check-readiness` and `advance` return `blockers`; `create-property` accepts `contact`.
+- `PUT /v1/listings/{id}/content` — `rooms` (with beds) and `checkoutTasks`; `weeklyDiscount`/`monthlyDiscount` are percentages.
+- `GET /v1/channels/booking/availability` and `…/listings/{id}/pricing` read per room by default.
+
 ## [0.2.15] - 2026-09-24
 
 Regenerated against the live `https://api.repull.dev/openapi.json` (202 → 209 operations).

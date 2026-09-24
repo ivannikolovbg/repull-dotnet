@@ -190,7 +190,7 @@ namespace Repull.SDK.V1.Channels.Booking.Listings.Item.Pricing
             public string RoomId { get; set; }
             #pragma warning restore CS1591
 #endif
-            /// <summary>When true, returns room-level (vs rate-plan-level) availability.</summary>
+            /// <summary>Defaults to `true`: availability per room, which is how Booking.com keeps inventory and how Vanio reads it. Send `false` for the per-rate read — its `roomsToSell` is often 0 for rooms that are on sale.</summary>
             [QueryParameter("room_level")]
             public bool? RoomLevel { get; set; }
             #pragma warning disable CS1591
