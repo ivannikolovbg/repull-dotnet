@@ -3,13 +3,41 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>Present only when `status` was derived rather than reported by the channel. `request_expired` — a booking request nobody answered in time (Airbnb&apos;s 24-hour window passed, or the check-in did). Absent otherwise.</summary>
+    /// <summary>On a `cancelled` reservation: how it ended. `request_expired` — a booking request nobody answered in time (Airbnb&apos;s 24-hour window passed, or the check-in did), whether the channel reported it or we derived it. `declined` — the host declined the request. `request_voided` — the request was withdrawn or voided before anyone answered it. `verification_failed` — the guest failed Airbnb&apos;s identity verification. `hold_voided` — Airbnb voided a booking it was holding for the guest&apos;s payment or verification. `cancelled_by_guest` / `cancelled_by_host` / `cancelled_by_platform` — a booking cancelled by that party (`platform` is the channel itself, e.g. Airbnb support). Matches what the webhooks report for the same change. Absent on every other status, and on a cancellation whose channel gives no reason.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum Reservation_statusDetail
     {
         [EnumMember(Value = "request_expired")]
         #pragma warning disable CS1591
         Request_expired,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "declined")]
+        #pragma warning disable CS1591
+        Declined,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "request_voided")]
+        #pragma warning disable CS1591
+        Request_voided,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "verification_failed")]
+        #pragma warning disable CS1591
+        Verification_failed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "hold_voided")]
+        #pragma warning disable CS1591
+        Hold_voided,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "cancelled_by_guest")]
+        #pragma warning disable CS1591
+        Cancelled_by_guest,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "cancelled_by_host")]
+        #pragma warning disable CS1591
+        Cancelled_by_host,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "cancelled_by_platform")]
+        #pragma warning disable CS1591
+        Cancelled_by_platform,
         #pragma warning restore CS1591
     }
 }
