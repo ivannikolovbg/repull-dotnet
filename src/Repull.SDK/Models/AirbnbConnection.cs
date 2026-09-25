@@ -91,7 +91,7 @@ namespace Repull.SDK.Models
 #else
         public List<string> LockedFields { get; set; }
 #endif
-        /// <summary>Decimal markup (e.g. &quot;1.10&quot; for +10%).</summary>
+        /// <summary>The Airbnb markup as a fraction: &quot;0.35&quot; = +35% on the listing&apos;s own price. Read or set it as a percentage with `/v1/listings/{id}/markups`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Markup { get; set; }

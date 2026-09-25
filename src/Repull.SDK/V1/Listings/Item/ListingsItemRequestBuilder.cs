@@ -7,6 +7,7 @@ using Repull.SDK.Models;
 using Repull.SDK.V1.Listings.Item.Comps;
 using Repull.SDK.V1.Listings.Item.Content;
 using Repull.SDK.V1.Listings.Item.GenerateContent;
+using Repull.SDK.V1.Listings.Item.Markups;
 using Repull.SDK.V1.Listings.Item.Offline;
 using Repull.SDK.V1.Listings.Item.Online;
 using Repull.SDK.V1.Listings.Item.Photos;
@@ -42,6 +43,11 @@ namespace Repull.SDK.V1.Listings.Item
         public global::Repull.SDK.V1.Listings.Item.GenerateContent.GenerateContentRequestBuilder GenerateContent
         {
             get => new global::Repull.SDK.V1.Listings.Item.GenerateContent.GenerateContentRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The markups property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Markups.MarkupsRequestBuilder Markups
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Markups.MarkupsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The offline property</summary>
         public global::Repull.SDK.V1.Listings.Item.Offline.OfflineRequestBuilder Offline

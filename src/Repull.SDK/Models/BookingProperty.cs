@@ -53,7 +53,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>`mapped` — at least one room points at a listing. `unmapped` — the property is claimed but its rooms are not mapped yet, so `listings` is empty; finish `POST /v1/connect/booking/map-rooms`. An unmapped property is listed rather than hidden, so a half-finished connection is visible instead of looking like no connection at all.</summary>
         public global::Repull.SDK.Models.BookingProperty_mappingStatus? MappingStatus { get; set; }
-        /// <summary>The markup property</summary>
+        /// <summary>The Booking.com markup on this property, as a fraction: &quot;0.18&quot; = +18%, shared by every listing on the property. Read or set it as a percentage with `/v1/listings/{id}/markups`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Markup { get; set; }
