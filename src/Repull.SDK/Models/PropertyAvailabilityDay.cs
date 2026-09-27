@@ -18,6 +18,8 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether the property is bookable on this date. `false` when the calendar marks the date booked or blocked. Only dates we actually hold a calendar row for appear in `days`, so this is never a guess — a date with no data is listed in `coverage.missingDates` instead.</summary>
         public bool? Available { get; set; }
+        /// <summary>Units still sellable that night. 1 or 0 for a single home. For a hotel-model listing (a Mews or Cloudbeds room type) the rooms of that type left, e.g. 3 of 5 — see `GET /v1/listings/{id}/units`. `available` is false whenever this is 0.</summary>
+        public int? AvailableUnits { get; set; }
         /// <summary>The calendar date, ISO `YYYY-MM-DD`.</summary>
         public Date? Date { get; set; }
         /// <summary>Minimum-stay requirement for a stay starting on this date. Falls back to the listing-level default min-nights when the calendar row carries none.</summary>
@@ -50,6 +52,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "available", n => { Available = n.GetBoolValue(); } },
+                { "availableUnits", n => { AvailableUnits = n.GetIntValue(); } },
                 { "date", n => { Date = n.GetDateValue(); } },
                 { "minNights", n => { MinNights = n.GetIntValue(); } },
                 { "price", n => { Price = n.GetDoubleValue(); } },
@@ -63,6 +66,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("available", Available);
+            writer.WriteIntValue("availableUnits", AvailableUnits);
             writer.WriteDateValue("date", Date);
             writer.WriteIntValue("minNights", MinNights);
             writer.WriteDoubleValue("price", Price);

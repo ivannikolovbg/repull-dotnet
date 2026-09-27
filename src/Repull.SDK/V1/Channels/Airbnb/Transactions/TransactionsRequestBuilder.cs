@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TransactionsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/transactions{?account_id*}", pathParameters)
+        public TransactionsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/transactions{?account_id*,confirmation_code*,cursor*,end_date*,limit*,payout_id*,start_date*,status*,type*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,17 +30,18 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TransactionsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/transactions{?account_id*}", rawUrl)
+        public TransactionsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/airbnb/transactions{?account_id*,confirmation_code*,cursor*,end_date*,limit*,payout_id*,start_date*,status*,type*}", rawUrl)
         {
         }
         /// <summary>
-        /// List Airbnb host transactions (reservation earnings, payouts, resolution adjustments) for this workspace, newest first. **Pure DB read** — customer-facing reads never call Airbnb upstream; they serve the `airbnb_transactions` mirror. Each row carries the genuine host- and guest-side financial breakdown (accommodation subtotal, cleaning fee, host + guest service fees split base/VAT, tax buckets, expected/actual host payout with settlement status). Trigger a refresh with `POST` on this path. When the mirror is empty or the host disconnected, `dataFreshness.stale = true` with a `reason` (`never_synced`, `host_disconnected_&lt;iso&gt;`, `sync_lag_&gt;_24h`).Transactions of reservations on inactive listings are left out; payout rows, which belong to no listing, are always included.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
+        /// The Airbnb settlement ledger for this workspace: every payout Airbnb sent to the host, each followed by the lines it paid — reservations and their installments, adjustments, resolution payouts and adjustments, cancellation fees. A payout&apos;s lines&apos; signed `amount`s sum to its `payout.paidOutAmount` exactly, negative lines included (an adjustment offset against a later payout appears under that payout). `status: UPCOMING` lines are expected earnings not paid out yet; they belong to no payout.**Ids are stable.** Airbnb sends no line id and no payout id on lines, so Repull derives them deterministically: a Payout row&apos;s id is Airbnb&apos;s payout id; a line&apos;s is `&lt;payoutId&gt;:&lt;type&gt;:&lt;confirmationCode&gt;:&lt;n&gt;`. The same line has the same id on every refresh and every page, so you can upsert on `transactionId`. A payout that nets to $0.00 has no Airbnb id; it gets a derived `Z-&lt;date&gt;-&lt;hash&gt;` id with `payout.payoutIdSynthetic: true`.**Order:** newest first by the payout&apos;s date; each Payout row is followed by its lines in Airbnb&apos;s order (`payout.lineIndex`).**Dates:** `start_date` / `end_date` match the payout&apos;s date for settled lines (a line can be dated the day before its payout, and is still returned with it) and the line&apos;s own date for UPCOMING lines.**Pure DB read** — never calls Airbnb. Refresh with `POST` on this path. `dataFreshness` reports when each account&apos;s ledger was last refreshed.Lines on listings that are inactive in Repull are included and flagged `onInactiveListing: true`, so every payout reconciles. Lines Repull cannot match to a reservation keep `reservationId: null`.**Not in Airbnb&apos;s transaction history** (listed in `unavailableFields`): taxes Airbnb collects and remits itself, and the guest-paid total (see the reservation&apos;s financial breakdown); pass-through occupancy tax paid to the host does appear, as its own `Pass Through Tot` lines, the original line a refund or reversal reverses (it names the stay and the resolution), and currency-conversion amounts (only the payout currency is reported).
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -56,18 +57,20 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Airbnb host transactions (reservation earnings, payouts, resolution adjustments) for this workspace, newest first. **Pure DB read** — customer-facing reads never call Airbnb upstream; they serve the `airbnb_transactions` mirror. Each row carries the genuine host- and guest-side financial breakdown (accommodation subtotal, cleaning fee, host + guest service fees split base/VAT, tax buckets, expected/actual host payout with settlement status). Trigger a refresh with `POST` on this path. When the mirror is empty or the host disconnected, `dataFreshness.stale = true` with a `reason` (`never_synced`, `host_disconnected_&lt;iso&gt;`, `sync_lag_&gt;_24h`).Transactions of reservations on inactive listings are left out; payout rows, which belong to no listing, are always included.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
+        /// The Airbnb settlement ledger for this workspace: every payout Airbnb sent to the host, each followed by the lines it paid — reservations and their installments, adjustments, resolution payouts and adjustments, cancellation fees. A payout&apos;s lines&apos; signed `amount`s sum to its `payout.paidOutAmount` exactly, negative lines included (an adjustment offset against a later payout appears under that payout). `status: UPCOMING` lines are expected earnings not paid out yet; they belong to no payout.**Ids are stable.** Airbnb sends no line id and no payout id on lines, so Repull derives them deterministically: a Payout row&apos;s id is Airbnb&apos;s payout id; a line&apos;s is `&lt;payoutId&gt;:&lt;type&gt;:&lt;confirmationCode&gt;:&lt;n&gt;`. The same line has the same id on every refresh and every page, so you can upsert on `transactionId`. A payout that nets to $0.00 has no Airbnb id; it gets a derived `Z-&lt;date&gt;-&lt;hash&gt;` id with `payout.payoutIdSynthetic: true`.**Order:** newest first by the payout&apos;s date; each Payout row is followed by its lines in Airbnb&apos;s order (`payout.lineIndex`).**Dates:** `start_date` / `end_date` match the payout&apos;s date for settled lines (a line can be dated the day before its payout, and is still returned with it) and the line&apos;s own date for UPCOMING lines.**Pure DB read** — never calls Airbnb. Refresh with `POST` on this path. `dataFreshness` reports when each account&apos;s ledger was last refreshed.Lines on listings that are inactive in Repull are included and flagged `onInactiveListing: true`, so every payout reconciles. Lines Repull cannot match to a reservation keep `reservationId: null`.**Not in Airbnb&apos;s transaction history** (listed in `unavailableFields`): taxes Airbnb collects and remits itself, and the guest-paid total (see the reservation&apos;s financial breakdown); pass-through occupancy tax paid to the host does appear, as its own `Pass Through Tot` lines, the original line a refund or reversal reverses (it names the stay and the resolution), and currency-conversion amounts (only the payout currency is reported).
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
         [Obsolete("This method is obsolete. Use GetAsTransactionsGetResponseAsync instead.")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -84,27 +87,33 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Refresh the Airbnb transactions mirror for this workspace by pulling from Airbnb upstream and upserting the breakdown that `GET` serves. Optional JSON body `{ start_date, end_date, transaction_type }` (`transaction_type` is `COMPLETED` or `UPCOMING`; both are synced when omitted). Returns `{ synced, count }`.
+        /// Pull the transaction history from Airbnb into the ledger `GET` serves. Every connected Airbnb account is refreshed, or only `?account_id=`. Without dates: settled lines from the last 12 months and the forecast for the next 12. Safe to repeat: settled lines are upserted on their stable ids, never duplicated or removed; the UPCOMING forecast inside the fetched window is replaced, so a line that has since been paid out moves to its payout. Each account reports its own outcome in `accounts[]`: one account Airbnb refuses (a revoked host, a listing Airbnb no longer serves) is reported there with Airbnb&apos;s reason and does not stop the others. When every account fails, the response is Airbnb&apos;s answer with its usual code.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse?> PostAsTransactionsPostResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse?> PostAsTransactionsPostResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse> PostAsTransactionsPostResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse> PostAsTransactionsPostResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -112,29 +121,39 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Refresh the Airbnb transactions mirror for this workspace by pulling from Airbnb upstream and upserting the breakdown that `GET` serves. Optional JSON body `{ start_date, end_date, transaction_type }` (`transaction_type` is `COMPLETED` or `UPCOMING`; both are synced when omitted). Returns `{ synced, count }`.
+        /// Pull the transaction history from Airbnb into the ledger `GET` serves. Every connected Airbnb account is refreshed, or only `?account_id=`. Without dates: settled lines from the last 12 months and the forecast for the next 12. Safe to repeat: settled lines are upserted on their stable ids, never duplicated or removed; the UPCOMING forecast inside the fetched window is replaced, so a line that has since been paid out moves to its payout. Each account reports its own outcome in `accounts[]`: one account Airbnb refuses (a revoked host, a listing Airbnb no longer serves) is reported there with Airbnb&apos;s reason and does not stop the others. When every account fails, the response is Airbnb&apos;s answer with its usual code.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
         [Obsolete("This method is obsolete. Use PostAsTransactionsPostResponseAsync instead.")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse?> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse?> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -142,13 +161,18 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List Airbnb host transactions (reservation earnings, payouts, resolution adjustments) for this workspace, newest first. **Pure DB read** — customer-facing reads never call Airbnb upstream; they serve the `airbnb_transactions` mirror. Each row carries the genuine host- and guest-side financial breakdown (accommodation subtotal, cleaning fee, host + guest service fees split base/VAT, tax buckets, expected/actual host payout with settlement status). Trigger a refresh with `POST` on this path. When the mirror is empty or the host disconnected, `dataFreshness.stale = true` with a `reason` (`never_synced`, `host_disconnected_&lt;iso&gt;`, `sync_lag_&gt;_24h`).Transactions of reservations on inactive listings are left out; payout rows, which belong to no listing, are always included.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
+        /// The Airbnb settlement ledger for this workspace: every payout Airbnb sent to the host, each followed by the lines it paid — reservations and their installments, adjustments, resolution payouts and adjustments, cancellation fees. A payout&apos;s lines&apos; signed `amount`s sum to its `payout.paidOutAmount` exactly, negative lines included (an adjustment offset against a later payout appears under that payout). `status: UPCOMING` lines are expected earnings not paid out yet; they belong to no payout.**Ids are stable.** Airbnb sends no line id and no payout id on lines, so Repull derives them deterministically: a Payout row&apos;s id is Airbnb&apos;s payout id; a line&apos;s is `&lt;payoutId&gt;:&lt;type&gt;:&lt;confirmationCode&gt;:&lt;n&gt;`. The same line has the same id on every refresh and every page, so you can upsert on `transactionId`. A payout that nets to $0.00 has no Airbnb id; it gets a derived `Z-&lt;date&gt;-&lt;hash&gt;` id with `payout.payoutIdSynthetic: true`.**Order:** newest first by the payout&apos;s date; each Payout row is followed by its lines in Airbnb&apos;s order (`payout.lineIndex`).**Dates:** `start_date` / `end_date` match the payout&apos;s date for settled lines (a line can be dated the day before its payout, and is still returned with it) and the line&apos;s own date for UPCOMING lines.**Pure DB read** — never calls Airbnb. Refresh with `POST` on this path. `dataFreshness` reports when each account&apos;s ledger was last refreshed.Lines on listings that are inactive in Repull are included and flagged `onInactiveListing: true`, so every payout reconciles. Lines Repull cannot match to a reservation keep `reservationId: null`.**Not in Airbnb&apos;s transaction history** (listed in `unavailableFields`): taxes Airbnb collects and remits itself, and the guest-paid total (see the reservation&apos;s financial breakdown); pass-through occupancy tax paid to the host does appear, as its own `Pass Through Tot` lines, the original line a refund or reversal reverses (it names the stay and the resolution), and currency-conversion amounts (only the payout currency is reported).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -167,18 +191,18 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             return requestInfo;
         }
         /// <summary>
-        /// Refresh the Airbnb transactions mirror for this workspace by pulling from Airbnb upstream and upserting the breakdown that `GET` serves. Optional JSON body `{ start_date, end_date, transaction_type }` (`transaction_type` is `COMPLETED` or `UPCOMING`; both are synced when omitted). Returns `{ synced, count }`.
+        /// Pull the transaction history from Airbnb into the ledger `GET` serves. Every connected Airbnb account is refreshed, or only `?account_id=`. Without dates: settled lines from the last 12 months and the forecast for the next 12. Safe to repeat: settled lines are upserted on their stable ids, never duplicated or removed; the UPCOMING forecast inside the fetched window is replaced, so a line that has since been paid out moves to its payout. Each account reports its own outcome in `accounts[]`: one account Airbnb refuses (a revoked host, a listing Airbnb no longer serves) is reported there with Airbnb&apos;s reason and does not stop the others. When every account fails, the response is Airbnb&apos;s answer with its usual code.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderPostQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderPostQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -198,10 +222,98 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             return new global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// List Airbnb host transactions (reservation earnings, payouts, resolution adjustments) for this workspace, newest first. **Pure DB read** — customer-facing reads never call Airbnb upstream; they serve the `airbnb_transactions` mirror. Each row carries the genuine host- and guest-side financial breakdown (accommodation subtotal, cleaning fee, host + guest service fees split base/VAT, tax buckets, expected/actual host payout with settlement status). Trigger a refresh with `POST` on this path. When the mirror is empty or the host disconnected, `dataFreshness.stale = true` with a `reason` (`never_synced`, `host_disconnected_&lt;iso&gt;`, `sync_lag_&gt;_24h`).Transactions of reservations on inactive listings are left out; payout rows, which belong to no listing, are always included.**Several Airbnb accounts?** A workspace can connect more than one. By default this returns every connected account&apos;s rows; pass `?account_id=&lt;airbnb host id&gt;` to scope to one. Every row carries `accountId` + `accountName` either way, and `dataFreshness.accounts[]` reports each account&apos;s freshness separately, so one disconnected host no longer marks the whole response stale.
+        /// The Airbnb settlement ledger for this workspace: every payout Airbnb sent to the host, each followed by the lines it paid — reservations and their installments, adjustments, resolution payouts and adjustments, cancellation fees. A payout&apos;s lines&apos; signed `amount`s sum to its `payout.paidOutAmount` exactly, negative lines included (an adjustment offset against a later payout appears under that payout). `status: UPCOMING` lines are expected earnings not paid out yet; they belong to no payout.**Ids are stable.** Airbnb sends no line id and no payout id on lines, so Repull derives them deterministically: a Payout row&apos;s id is Airbnb&apos;s payout id; a line&apos;s is `&lt;payoutId&gt;:&lt;type&gt;:&lt;confirmationCode&gt;:&lt;n&gt;`. The same line has the same id on every refresh and every page, so you can upsert on `transactionId`. A payout that nets to $0.00 has no Airbnb id; it gets a derived `Z-&lt;date&gt;-&lt;hash&gt;` id with `payout.payoutIdSynthetic: true`.**Order:** newest first by the payout&apos;s date; each Payout row is followed by its lines in Airbnb&apos;s order (`payout.lineIndex`).**Dates:** `start_date` / `end_date` match the payout&apos;s date for settled lines (a line can be dated the day before its payout, and is still returned with it) and the line&apos;s own date for UPCOMING lines.**Pure DB read** — never calls Airbnb. Refresh with `POST` on this path. `dataFreshness` reports when each account&apos;s ledger was last refreshed.Lines on listings that are inactive in Repull are included and flagged `onInactiveListing: true`, so every payout reconciles. Lines Repull cannot match to a reservation keep `reservationId: null`.**Not in Airbnb&apos;s transaction history** (listed in `unavailableFields`): taxes Airbnb collects and remits itself, and the guest-paid total (see the reservation&apos;s financial breakdown); pass-through occupancy tax paid to the host does appear, as its own `Pass Through Tot` lines, the original line a refund or reversal reverses (it names the stay and the resolution), and currency-conversion amounts (only the payout currency is reported).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class TransactionsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Scope the response to ONE connected Airbnb account. The value is the Airbnb host id — the same `accounts[].externalAccountId` that `GET /v1/connect/airbnb` returns and `DELETE /v1/connect/airbnb?accountId=` accepts.A workspace can connect several Airbnb accounts. Omit this and you get every account&apos;s rows (the default, unchanged). Every row carries `accountId` + `accountName` either way, so you can group without a second call.An id that is not connected to THIS workspace returns `404 not_found` with your own ids in `valid_values` — we do not distinguish &quot;no such host&quot; from &quot;someone else&apos;s host&quot;, because confirming the latter would leak another workspace&apos;s account.Note this is NOT the `X-Account-Id` header, which carries a connection id and cannot tell two Airbnb hosts apart.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("account_id")]
+            public string? AccountId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("account_id")]
+            public string AccountId { get; set; }
+#endif
+            /// <summary>Every line for one reservation — each installment, adjustment and resolution.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("confirmation_code")]
+            public string? ConfirmationCode { get; set; }
+#nullable restore
+#else
+            [QueryParameter("confirmation_code")]
+            public string ConfirmationCode { get; set; }
+#endif
+            /// <summary>Opaque cursor returned by the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("cursor")]
+            public string? Cursor { get; set; }
+#nullable restore
+#else
+            [QueryParameter("cursor")]
+            public string Cursor { get; set; }
+#endif
+            /// <summary>Inclusive upper bound, as `start_date`.</summary>
+            [QueryParameter("end_date")]
+            public Date? EndDate { get; set; }
+            /// <summary>Lines per page. Hard cap is 500.</summary>
+            [QueryParameter("limit")]
+            public int? Limit { get; set; }
+            /// <summary>One payout: its Payout row and all its lines.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("payout_id")]
+            public string? PayoutId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("payout_id")]
+            public string PayoutId { get; set; }
+#endif
+            /// <summary>Inclusive lower bound on the payout&apos;s date (the line&apos;s own date for UPCOMING lines). YYYY-MM-DD.</summary>
+            [QueryParameter("start_date")]
+            public Date? StartDate { get; set; }
+            /// <summary>`COMPLETED` (settled) or `UPCOMING` (expected).</summary>
+            [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("status")]
+            public string? Status { get; set; }
+#nullable restore
+#else
+            [QueryParameter("status")]
+            public string Status { get; set; }
+#endif
+            /// <summary>`COMPLETED` (settled) or `UPCOMING` (expected).</summary>
+            [QueryParameter("status")]
+            public global::Repull.SDK.V1.Channels.Airbnb.Transactions.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
+            /// <summary>Airbnb&apos;s line type, exact match ignoring case — e.g. `Payout`, `Reservation`, `Adjustment`, `Resolution Payout`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("type")]
+            public string? Type { get; set; }
+#nullable restore
+#else
+            [QueryParameter("type")]
+            public string Type { get; set; }
+#endif
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class TransactionsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderGetQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Pull the transaction history from Airbnb into the ledger `GET` serves. Every connected Airbnb account is refreshed, or only `?account_id=`. Without dates: settled lines from the last 12 months and the forecast for the next 12. Safe to repeat: settled lines are upserted on their stable ids, never duplicated or removed; the UPCOMING forecast inside the fetched window is replaced, so a line that has since been paid out moves to its payout. Each account reports its own outcome in `accounts[]`: one account Airbnb refuses (a revoked host, a listing Airbnb no longer serves) is reported there with Airbnb&apos;s reason and does not stop the others. When every account fails, the response is Airbnb&apos;s answer with its usual code.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class TransactionsRequestBuilderPostQueryParameters 
         {
             /// <summary>Scope the response to ONE connected Airbnb account. The value is the Airbnb host id — the same `accounts[].externalAccountId` that `GET /v1/connect/airbnb` returns and `DELETE /v1/connect/airbnb?accountId=` accepts.A workspace can connect several Airbnb accounts. Omit this and you get every account&apos;s rows (the default, unchanged). Every row carries `accountId` + `accountName` either way, so you can group without a second call.An id that is not connected to THIS workspace returns `404 not_found` with your own ids in `valid_values` — we do not distinguish &quot;no such host&quot; from &quot;someone else&apos;s host&quot;, because confirming the latter would leak another workspace&apos;s account.Note this is NOT the `X-Account-Id` header, which carries a connection id and cannot tell two Airbnb hosts apart.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -219,15 +331,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class TransactionsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderGetQueryParameters>
-        {
-        }
-        /// <summary>
-        /// Configuration for the request such as headers, query parameters, and middleware options.
-        /// </summary>
-        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class TransactionsRequestBuilderPostRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class TransactionsRequestBuilderPostRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsRequestBuilder.TransactionsRequestBuilderPostQueryParameters>
         {
         }
     }

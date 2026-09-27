@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A guest or host review unified across channels. Returned by `GET /v1/reviews` and `GET /v1/reviews/{id}`. Populated from main vanio&apos;s unified `reviews` table after the per-channel backfill cron has run.
+    /// A guest or host review unified across channels. Returned by `GET /v1/reviews` and `GET /v1/reviews/{id}`. Includes every channel&apos;s reviews once they have been imported.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Review : IAdditionalDataHolder, IParsable

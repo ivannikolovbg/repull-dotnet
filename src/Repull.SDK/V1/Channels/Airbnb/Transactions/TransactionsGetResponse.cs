@@ -31,6 +31,14 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
 #else
         public global::Repull.SDK.Models.AirbnbDataFreshness DataFreshness { get; set; }
 #endif
+        /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Pagination? Pagination { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Pagination Pagination { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsGetResponse"/> and sets the default values.
         /// </summary>
@@ -58,6 +66,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbTransaction>(global::Repull.SDK.Models.AirbnbTransaction.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>(global::Repull.SDK.Models.AirbnbDataFreshness.CreateFromDiscriminatorValue); } },
+                { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.Pagination>(global::Repull.SDK.Models.Pagination.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -69,6 +78,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbTransaction>("data", Data);
             writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbDataFreshness>("dataFreshness", DataFreshness);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Pagination>("pagination", Pagination);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

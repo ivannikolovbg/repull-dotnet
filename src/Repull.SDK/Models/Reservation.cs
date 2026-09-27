@@ -145,6 +145,14 @@ namespace Repull.SDK.Models
 #else
         public string TotalPrice { get; set; }
 #endif
+        /// <summary>The physical room the stay was assigned, for a hotel-model PMS (Mews, Cloudbeds) where the listing is a room type. `null` when no room is assigned yet, and for every listing that is a single home.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Reservation_unit? Unit { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Reservation_unit Unit { get; set; }
+#endif
         /// <summary>Last time this reservation was modified (dates, status, price, or guest details). Advances on every amendment or cancellation — poll or compare this value to reconcile changes instead of fingerprinting individual fields.</summary>
         public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
@@ -195,6 +203,7 @@ namespace Repull.SDK.Models
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Reservation_status>(); } },
                 { "statusDetail", n => { StatusDetail = n.GetEnumValue<global::Repull.SDK.Models.Reservation_statusDetail>(); } },
                 { "totalPrice", n => { TotalPrice = n.GetStringValue(); } },
+                { "unit", n => { Unit = n.GetObjectValue<global::Repull.SDK.Models.Reservation_unit>(global::Repull.SDK.Models.Reservation_unit.CreateFromDiscriminatorValue); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
@@ -228,6 +237,7 @@ namespace Repull.SDK.Models
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_status>("status", Status);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_statusDetail>("statusDetail", StatusDetail);
             writer.WriteStringValue("totalPrice", TotalPrice);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Reservation_unit>("unit", Unit);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }

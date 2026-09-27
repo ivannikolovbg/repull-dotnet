@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>Payout status signal: COMPLETED (settled) vs UPCOMING (expected).</summary>
+    /// <summary>`COMPLETED`: settled in a payout. `UPCOMING`: expected, not paid out yet.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum AirbnbTransaction_status
     {

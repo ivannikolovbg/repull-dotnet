@@ -23,6 +23,14 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ReservationMessageReceived,
         #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.message.sent")]
+        #pragma warning disable CS1591
+        ReservationMessageSent,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.message.updated")]
+        #pragma warning disable CS1591
+        ReservationMessageUpdated,
+        #pragma warning restore CS1591
         [EnumMember(Value = "reservation.alteration.created")]
         #pragma warning disable CS1591
         ReservationAlterationCreated,
@@ -102,6 +110,10 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "payment.refunded")]
         #pragma warning disable CS1591
         PaymentRefunded,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "payout.completed")]
+        #pragma warning disable CS1591
+        PayoutCompleted,
         #pragma warning restore CS1591
         [EnumMember(Value = "migration.completed")]
         #pragma warning disable CS1591

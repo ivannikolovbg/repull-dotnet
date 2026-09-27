@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A Vanio listing paired with its Airbnb connection rows. The list endpoint groups every `listings_airbnb` row that points at the same Vanio `listingId` under a single `connections[]` array.
+    /// A listing paired with its Airbnb connections. The list endpoint groups every Airbnb connection of the same `listingId` under a single `connections[]` array.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbListing : IAdditionalDataHolder, IParsable
@@ -31,7 +31,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.AirbnbConnection> Connections { get; set; }
 #endif
-        /// <summary>Vanio (Repull) listing id</summary>
+        /// <summary>Repull listing id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ListingId { get; set; }
@@ -47,7 +47,7 @@ namespace Repull.SDK.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>Cover photo URL for the Vanio listing. **Only present when the caller passes `?include=thumbnail`.** `null` when the listing has no cover photo stored — the listing is still returned.</summary>
+        /// <summary>Cover photo URL for the listing. **Only present when the caller passes `?include=thumbnail`.** `null` when the listing has no cover photo stored — the listing is still returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ThumbnailUrl { get; set; }

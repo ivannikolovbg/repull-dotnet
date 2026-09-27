@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.CalendarUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
+    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.CalendarUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.PayoutCompletedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageSentEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WebhookEvent : IComposedTypeWrapper, IParsable
@@ -141,6 +141,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.PaymentRefundedEvent PaymentRefundedEvent { get; set; }
 #endif
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.PayoutCompletedEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.PayoutCompletedEvent? PayoutCompletedEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.PayoutCompletedEvent PayoutCompletedEvent { get; set; }
+#endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.RepullPingEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -188,6 +196,22 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public global::Repull.SDK.Models.ReservationMessageReceivedEvent ReservationMessageReceivedEvent { get; set; }
+#endif
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationMessageSentEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationMessageSentEvent? ReservationMessageSentEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationMessageSentEvent ReservationMessageSentEvent { get; set; }
+#endif
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationMessageUpdatedEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationMessageUpdatedEvent? ReservationMessageUpdatedEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationMessageUpdatedEvent ReservationMessageUpdatedEvent { get; set; }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -311,6 +335,10 @@ namespace Repull.SDK.Models
             {
                 result.PaymentRefundedEvent = new global::Repull.SDK.Models.PaymentRefundedEvent();
             }
+            else if("payout.completed".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.PayoutCompletedEvent = new global::Repull.SDK.Models.PayoutCompletedEvent();
+            }
             else if("repull.ping".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.RepullPingEvent = new global::Repull.SDK.Models.RepullPingEvent();
@@ -334,6 +362,14 @@ namespace Repull.SDK.Models
             else if("reservation.message.received".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ReservationMessageReceivedEvent = new global::Repull.SDK.Models.ReservationMessageReceivedEvent();
+            }
+            else if("reservation.message.sent".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.ReservationMessageSentEvent = new global::Repull.SDK.Models.ReservationMessageSentEvent();
+            }
+            else if("reservation.message.updated".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.ReservationMessageUpdatedEvent = new global::Repull.SDK.Models.ReservationMessageUpdatedEvent();
             }
             else if("reservation.request.created".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
@@ -431,6 +467,10 @@ namespace Repull.SDK.Models
             {
                 return PaymentRefundedEvent.GetFieldDeserializers();
             }
+            else if(PayoutCompletedEvent != null)
+            {
+                return PayoutCompletedEvent.GetFieldDeserializers();
+            }
             else if(RepullPingEvent != null)
             {
                 return RepullPingEvent.GetFieldDeserializers();
@@ -454,6 +494,14 @@ namespace Repull.SDK.Models
             else if(ReservationMessageReceivedEvent != null)
             {
                 return ReservationMessageReceivedEvent.GetFieldDeserializers();
+            }
+            else if(ReservationMessageSentEvent != null)
+            {
+                return ReservationMessageSentEvent.GetFieldDeserializers();
+            }
+            else if(ReservationMessageUpdatedEvent != null)
+            {
+                return ReservationMessageUpdatedEvent.GetFieldDeserializers();
             }
             else if(ReservationRequestCreatedEvent != null)
             {
@@ -552,6 +600,10 @@ namespace Repull.SDK.Models
             {
                 writer.WriteObjectValue<global::Repull.SDK.Models.PaymentRefundedEvent>(null, PaymentRefundedEvent);
             }
+            else if(PayoutCompletedEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.PayoutCompletedEvent>(null, PayoutCompletedEvent);
+            }
             else if(RepullPingEvent != null)
             {
                 writer.WriteObjectValue<global::Repull.SDK.Models.RepullPingEvent>(null, RepullPingEvent);
@@ -575,6 +627,14 @@ namespace Repull.SDK.Models
             else if(ReservationMessageReceivedEvent != null)
             {
                 writer.WriteObjectValue<global::Repull.SDK.Models.ReservationMessageReceivedEvent>(null, ReservationMessageReceivedEvent);
+            }
+            else if(ReservationMessageSentEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.ReservationMessageSentEvent>(null, ReservationMessageSentEvent);
+            }
+            else if(ReservationMessageUpdatedEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.ReservationMessageUpdatedEvent>(null, ReservationMessageUpdatedEvent);
             }
             else if(ReservationRequestCreatedEvent != null)
             {

@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A risk/operational flag attached to a guest profile (e.g. blacklist, do-not-host, VIP). Severity comes from main vanio&apos;s flag taxonomy.
+    /// A risk/operational flag attached to a guest profile (e.g. blacklist, do-not-host, VIP).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class GuestFlag : IAdditionalDataHolder, IParsable

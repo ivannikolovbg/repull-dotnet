@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// An Airbnb-side connection record for a Vanio listing. The same property may appear under multiple connections if it has been linked from multiple Airbnb host accounts.
+    /// An Airbnb-side connection record for a listing. The same property may appear under multiple connections if it has been linked from multiple Airbnb host accounts.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbConnection : IAdditionalDataHolder, IParsable

@@ -22,9 +22,11 @@ namespace Repull.SDK.Models
 #else
         public string ConnectionId { get; set; }
 #endif
-        /// <summary>Number of rooms processed (mapped + unmapped).</summary>
+        /// <summary>Rooms now linked to a listing.</summary>
         public int? Mapped { get; set; }
-        /// <summary>Reservations pulled from Booking.com once the rooms were mapped. Mapping triggers the same full property sync the dashboard&apos;s Sync button runs, because a reservation can only be resolved to a listing through a mapped room. `null` means the sync could not be run — the connection and mapping are still good, and the property can be synced from the dashboard.</summary>
+        /// <summary>How many reservations Booking.com returned for the property. Equal to `reservationsImported` unless some could not be attached to a listing — so `0` here means Booking.com had none. `null` when the sync could not run.</summary>
+        public int? ReservationsFound { get; set; }
+        /// <summary>Reservations pulled from Booking.com once the rooms were mapped. Mapping triggers the same full property sync the dashboard&apos;s Sync button runs, because a reservation can only be resolved to a listing through a mapped room. `0` without a sync when no room was mapped. `null` means the sync could not be run — the connection and mapping are still good, and the property can be synced from the dashboard.</summary>
         public int? ReservationsImported { get; set; }
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -36,6 +38,8 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The success property</summary>
         public bool? Success { get; set; }
+        /// <summary>Rooms submitted with `listingId: null` (&quot;don&apos;t map&quot;), which are left without a listing.</summary>
+        public int? Unmapped { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MapConnectBookingRoomsResponse"/> and sets the default values.
         /// </summary>
@@ -63,9 +67,11 @@ namespace Repull.SDK.Models
             {
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "mapped", n => { Mapped = n.GetIntValue(); } },
+                { "reservationsFound", n => { ReservationsFound = n.GetIntValue(); } },
                 { "reservationsImported", n => { ReservationsImported = n.GetIntValue(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "success", n => { Success = n.GetBoolValue(); } },
+                { "unmapped", n => { Unmapped = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -77,9 +83,11 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteIntValue("mapped", Mapped);
+            writer.WriteIntValue("reservationsFound", ReservationsFound);
             writer.WriteIntValue("reservationsImported", ReservationsImported);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteBoolValue("success", Success);
+            writer.WriteIntValue("unmapped", Unmapped);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -15,11 +15,11 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Inclusive upper bound on transaction date.</summary>
+        /// <summary>Inclusive upper bound (YYYY-MM-DD).</summary>
         public Date? EndDate { get; set; }
-        /// <summary>Inclusive lower bound on transaction date.</summary>
+        /// <summary>Inclusive lower bound (YYYY-MM-DD).</summary>
         public Date? StartDate { get; set; }
-        /// <summary>The transaction_type property</summary>
+        /// <summary>Refresh only settled or only upcoming lines. Both when omitted.</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody_transaction_type? TransactionType { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody"/> and sets the default values.

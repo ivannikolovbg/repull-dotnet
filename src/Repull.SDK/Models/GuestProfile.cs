@@ -131,7 +131,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.GuestReservationsSummary ReservationsSummary { get; set; }
 #endif
-        /// <summary>Main-vanio risk score (e.g. `low`, `medium`, `high`).</summary>
+        /// <summary>Risk score (e.g. `low`, `medium`, `high`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RiskLevel { get; set; }

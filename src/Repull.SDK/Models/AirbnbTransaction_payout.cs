@@ -15,11 +15,13 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The paid_out_amount property</summary>
+        /// <summary>Position within the payout, from 1. `null` on the Payout row and on UPCOMING lines.</summary>
+        public int? LineIndex { get; set; }
+        /// <summary>On the Payout row only: the amount paid out. Its lines sum to it.</summary>
         public double? PaidOutAmount { get; set; }
-        /// <summary>Settlement date (populated on Payout-type rows).</summary>
+        /// <summary>The payoutDate property</summary>
         public Date? PayoutDate { get; set; }
-        /// <summary>The payout_id property</summary>
+        /// <summary>The payout this line was settled in (its own id on a Payout row). `null` on an UPCOMING line.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? PayoutId { get; set; }
@@ -27,6 +29,8 @@ namespace Repull.SDK.Models
 #else
         public string PayoutId { get; set; }
 #endif
+        /// <summary>`true` when Airbnb sent no payout id (a payout netting to $0.00) and Repull derived a stable one.</summary>
+        public bool? PayoutIdSynthetic { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbTransaction_payout"/> and sets the default values.
         /// </summary>
@@ -52,9 +56,11 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "paid_out_amount", n => { PaidOutAmount = n.GetDoubleValue(); } },
-                { "payout_date", n => { PayoutDate = n.GetDateValue(); } },
-                { "payout_id", n => { PayoutId = n.GetStringValue(); } },
+                { "lineIndex", n => { LineIndex = n.GetIntValue(); } },
+                { "paidOutAmount", n => { PaidOutAmount = n.GetDoubleValue(); } },
+                { "payoutDate", n => { PayoutDate = n.GetDateValue(); } },
+                { "payoutId", n => { PayoutId = n.GetStringValue(); } },
+                { "payoutIdSynthetic", n => { PayoutIdSynthetic = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -64,9 +70,11 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteDoubleValue("paid_out_amount", PaidOutAmount);
-            writer.WriteDateValue("payout_date", PayoutDate);
-            writer.WriteStringValue("payout_id", PayoutId);
+            writer.WriteIntValue("lineIndex", LineIndex);
+            writer.WriteDoubleValue("paidOutAmount", PaidOutAmount);
+            writer.WriteDateValue("payoutDate", PayoutDate);
+            writer.WriteStringValue("payoutId", PayoutId);
+            writer.WriteBoolValue("payoutIdSynthetic", PayoutIdSynthetic);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

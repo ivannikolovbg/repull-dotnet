@@ -70,7 +70,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>**What is now true of this item**, not what you asked for.`offline` — it is off the market. `online` — it is back on. `unchanged` — nothing was sent, or what was sent did not take; `code` and `message` say why.`unchanged` never means &quot;it was already like that&quot;: it means we did not put it there, and it is still in whatever state it was in before the call.</summary>
         public global::Repull.SDK.Models.ChannelMarketStateItem_state? State { get; set; }
-        /// <summary>Airbnb only, and only when going offline: the listing was READ BACK after the deactivation and confirmed down. Airbnb accepts a deactivation and leaves some listings live, so &quot;we sent the request&quot; is a weaker claim than this one and is never reported as success.</summary>
+        /// <summary>Airbnb only: the listing was READ BACK afterwards and is in the state asked for — down after `offline`, live after `online`. Airbnb can accept a deactivation and leave a listing live, or accept an activation and keep it offline; either is returned as a failure, never as success. `false` means the read-back could not run — an unknown, not a success.</summary>
         public bool? Verified { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ChannelMarketStateItem"/> and sets the default values.

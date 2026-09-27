@@ -28,7 +28,7 @@ namespace Repull.SDK.Models
 #else
         public string Currency { get; set; }
 #endif
-        /// <summary>Current calendar price (from Vanio listings_calendar_days) before applying the recommendation.</summary>
+        /// <summary>Current calendar price before applying the recommendation.</summary>
         public double? CurrentPrice { get; set; }
         /// <summary>The date property</summary>
         public Date? Date { get; set; }

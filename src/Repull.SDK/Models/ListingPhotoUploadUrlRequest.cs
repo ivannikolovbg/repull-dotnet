@@ -22,7 +22,7 @@ namespace Repull.SDK.Models
 #else
         public string FileName { get; set; }
 #endif
-        /// <summary>File size in bytes, when known. Must be positive if provided.</summary>
+        /// <summary>File size in bytes. Required: the signed upload is issued for this size.</summary>
         public int? FileSize { get; set; }
         /// <summary>Image MIME type. Must start with &quot;image/&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

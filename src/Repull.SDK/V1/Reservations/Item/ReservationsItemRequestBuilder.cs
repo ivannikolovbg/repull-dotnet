@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Reservations.Item.Accept;
+using Repull.SDK.V1.Reservations.Item.Cancel;
 using Repull.SDK.V1.Reservations.Item.Decline;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,11 @@ namespace Repull.SDK.V1.Reservations.Item
         public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptRequestBuilder Accept
         {
             get => new global::Repull.SDK.V1.Reservations.Item.Accept.AcceptRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The cancel property</summary>
+        public global::Repull.SDK.V1.Reservations.Item.Cancel.CancelRequestBuilder Cancel
+        {
+            get => new global::Repull.SDK.V1.Reservations.Item.Cancel.CancelRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The decline property</summary>
         public global::Repull.SDK.V1.Reservations.Item.Decline.DeclineRequestBuilder Decline

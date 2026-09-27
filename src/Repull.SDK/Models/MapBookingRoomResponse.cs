@@ -49,6 +49,8 @@ namespace Repull.SDK.Models
 #else
         public string PreviousListingId { get; set; }
 #endif
+        /// <summary>How many reservations Booking.com returned for the property. Equal to `reservationsImported` unless some could not be attached — so `0` here means Booking.com had none. Same `null` / absent rules as `reservationsImported`.</summary>
+        public int? ReservationsFound { get; set; }
         /// <summary>Reservations Booking.com returned for the property and ran through the import after the room was mapped — the property&apos;s active bookings, which would otherwise never reach the listing. A reservation already present is left as it is, so this counts what was processed, not what was new, and re-sending never duplicates. Runs on every successful map, including a re-map to the same listing, so re-sending retries an import that did not run. `null` means the mapping succeeded but the import could not run; the room is still mapped. Absent after an unmap, when there is nothing to pull.</summary>
         public int? ReservationsImported { get; set; }
         /// <summary>Booking.com&apos;s room id, as recorded for this room.</summary>
@@ -107,6 +109,7 @@ namespace Repull.SDK.Models
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "platformLinkId", n => { PlatformLinkId = n.GetStringValue(); } },
                 { "previousListingId", n => { PreviousListingId = n.GetStringValue(); } },
+                { "reservationsFound", n => { ReservationsFound = n.GetIntValue(); } },
                 { "reservationsImported", n => { ReservationsImported = n.GetIntValue(); } },
                 { "roomBookingId", n => { RoomBookingId = n.GetStringValue(); } },
                 { "roomId", n => { RoomId = n.GetStringValue(); } },
@@ -126,6 +129,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteStringValue("platformLinkId", PlatformLinkId);
             writer.WriteStringValue("previousListingId", PreviousListingId);
+            writer.WriteIntValue("reservationsFound", ReservationsFound);
             writer.WriteIntValue("reservationsImported", ReservationsImported);
             writer.WriteStringValue("roomBookingId", RoomBookingId);
             writer.WriteStringValue("roomId", RoomId);

@@ -25,6 +25,14 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
+        /// <summary>What to do after uploading. Uploading does NOT attach the photo to the listing: send `publicUrl` in `photos` on `PUT /v1/listings/{id}/content` (with `photosMode: &quot;append&quot;` to keep existing photos).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? NextStep { get; set; }
+#nullable restore
+#else
+        public string NextStep { get; set; }
+#endif
         /// <summary>Storage path the photo will live at once uploaded. Pass this to `DELETE /v1/listings/{id}/photos` to remove it later.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -49,7 +57,7 @@ namespace Repull.SDK.Models
 #else
         public string Token { get; set; }
 #endif
-        /// <summary>PUT the raw file bytes here directly from the client. Not a Repull or vanio API endpoint — a signed storage URL.</summary>
+        /// <summary>PUT the raw file bytes here directly from the client. Not a Repull API endpoint — a signed storage URL.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? UploadUrl { get; set; }
@@ -84,6 +92,7 @@ namespace Repull.SDK.Models
             {
                 { "expiresIn", n => { ExpiresIn = n.GetIntValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "nextStep", n => { NextStep = n.GetStringValue(); } },
                 { "path", n => { Path = n.GetStringValue(); } },
                 { "publicUrl", n => { PublicUrl = n.GetStringValue(); } },
                 { "token", n => { Token = n.GetStringValue(); } },
@@ -99,6 +108,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("expiresIn", ExpiresIn);
             writer.WriteStringValue("listingId", ListingId);
+            writer.WriteStringValue("nextStep", NextStep);
             writer.WriteStringValue("path", Path);
             writer.WriteStringValue("publicUrl", PublicUrl);
             writer.WriteStringValue("token", Token);

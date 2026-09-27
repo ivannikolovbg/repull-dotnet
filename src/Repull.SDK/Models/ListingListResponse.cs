@@ -30,6 +30,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.CursorPagination Pagination { get; set; }
 #endif
+        /// <summary>Added to the body of EVERY JSON response (success or error, except bare arrays and 5xx) while the workspace is connected to more listings than its plan lets it use — so a developer reading any payload, or an AI assistant relaying it, sees it. Connect keeps every listing it finds, but on a capped plan only as many as the plan allows are active; the rest are held back inactive and keep syncing. The same responses also carry the `X-Repull-Listings-Held-Back` and `X-Repull-Active-Listing-Limit` headers. Using a held-back listing answers `403 listing_inactive` with `reason: &quot;plan_limit&quot;`. Tell the user: they can see the held-back listings with `GET /v1/listings?status=all`, choose which are active with `POST /v1/listings/status`, or upgrade.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.PlanNotice? PlanNotice { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.PlanNotice PlanNotice { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingListResponse"/> and sets the default values.
         /// </summary>
@@ -57,6 +65,7 @@ namespace Repull.SDK.Models
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Listing>(global::Repull.SDK.Models.Listing.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.CursorPagination>(global::Repull.SDK.Models.CursorPagination.CreateFromDiscriminatorValue); } },
+                { "planNotice", n => { PlanNotice = n.GetObjectValue<global::Repull.SDK.Models.PlanNotice>(global::Repull.SDK.Models.PlanNotice.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -68,6 +77,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Listing>("data", Data);
             writer.WriteObjectValue<global::Repull.SDK.Models.CursorPagination>("pagination", Pagination);
+            writer.WriteObjectValue<global::Repull.SDK.Models.PlanNotice>("planNotice", PlanNotice);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

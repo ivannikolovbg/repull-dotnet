@@ -9,12 +9,12 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// One Airbnb host transaction — a reservation earning, a settled payout, or a resolution adjustment — with the genuine host- and guest-side financial breakdown Airbnb exposes. All money is in host currency; fees and withholding are negative (deductions). Two owner-statement concepts are NOT available from Airbnb and are listed in `unavailable_fields` rather than fabricated: property-management fee and itemised nightly discounts (the latter are already netted into `host_breakdown.accommodation_subtotal`).
+    /// One line of the Airbnb settlement ledger: a Payout row (`isPayout: true`) or a line it paid. Money is in the payout currency; `amount` is signed (negative = taken back, e.g. an adjustment offset against this payout). A payout&apos;s lines sum to its `payout.paidOutAmount`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbTransaction : IAdditionalDataHolder, IParsable
     {
-        /// <summary>Which connected Airbnb account this transaction belongs to — the Airbnb host id, as a string (they exceed 2^53). `null` on rows that name no listing (payouts).</summary>
+        /// <summary>The connected Airbnb account (host id, as a string — they exceed 2^53).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AccountId { get; set; }
@@ -22,7 +22,7 @@ namespace Repull.SDK.Models
 #else
         public string AccountId { get; set; }
 #endif
-        /// <summary>Display name of that connected Airbnb account.</summary>
+        /// <summary>The accountName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AccountName { get; set; }
@@ -32,15 +32,9 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Top-level transaction amount.</summary>
+        /// <summary>Signed amount this line contributes to its payout, after Airbnb&apos;s host service fee. On a Payout row, the amount paid out.</summary>
         public double? Amount { get; set; }
-        /// <summary>The booked_at property</summary>
-        public DateTimeOffset? BookedAt { get; set; }
-        /// <summary>The check_in property</summary>
-        public DateTimeOffset? CheckIn { get; set; }
-        /// <summary>The check_out property</summary>
-        public DateTimeOffset? CheckOut { get; set; }
-        /// <summary>Airbnb confirmation code — links this transaction to a reservation.</summary>
+        /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ConfirmationCode { get; set; }
@@ -56,17 +50,27 @@ namespace Repull.SDK.Models
 #else
         public string Currency { get; set; }
 #endif
-        /// <summary>Transaction date.</summary>
+        /// <summary>The line&apos;s date as Airbnb reports it. Can be the day before its payout&apos;s date.</summary>
         public Date? Date { get; set; }
-        /// <summary>Guest-side breakdown (what the guest paid).</summary>
+        /// <summary>Airbnb&apos;s description: the stay dates, the resolution, or on a Payout row the payout method.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbTransaction_guest_breakdown? GuestBreakdown { get; set; }
+        public string? Description { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbTransaction_guest_breakdown GuestBreakdown { get; set; }
+        public string Description { get; set; }
 #endif
-        /// <summary>The guest_name property</summary>
+        /// <summary>The fees property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.AirbnbTransaction_fees? Fees { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.AirbnbTransaction_fees Fees { get; set; }
+#endif
+        /// <summary>Before Airbnb&apos;s host service fee: `amount - fees.hostServiceFee`.</summary>
+        public double? GrossAmount { get; set; }
+        /// <summary>The guestName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? GuestName { get; set; }
@@ -74,22 +78,8 @@ namespace Repull.SDK.Models
 #else
         public string GuestName { get; set; }
 #endif
-        /// <summary>Host-side breakdown (all host currency).</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.Models.AirbnbTransaction_host_breakdown? HostBreakdown { get; set; }
-#nullable restore
-#else
-        public global::Repull.SDK.Models.AirbnbTransaction_host_breakdown HostBreakdown { get; set; }
-#endif
-        /// <summary>The host_currency property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? HostCurrency { get; set; }
-#nullable restore
-#else
-        public string HostCurrency { get; set; }
-#endif
+        /// <summary>`true` on the Payout row itself.</summary>
+        public bool? IsPayout { get; set; }
         /// <summary>Airbnb listing id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -98,8 +88,18 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
+        /// <summary>The listingName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingName { get; set; }
+#nullable restore
+#else
+        public string ListingName { get; set; }
+#endif
         /// <summary>The nights property</summary>
         public int? Nights { get; set; }
+        /// <summary>`true` when the line is on a listing that is inactive in Repull. Still returned, so the payout reconciles.</summary>
+        public bool? OnInactiveListing { get; set; }
         /// <summary>The payout property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -108,7 +108,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.AirbnbTransaction_payout Payout { get; set; }
 #endif
-        /// <summary>The reference property</summary>
+        /// <summary>The resolution id on resolution payouts and adjustments; else `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Reference { get; set; }
@@ -116,55 +116,21 @@ namespace Repull.SDK.Models
 #else
         public string Reference { get; set; }
 #endif
-        /// <summary>Resolved Vanio reservation id when the confirmation code matched a reservation in this workspace; null otherwise.</summary>
-        public int? ReservationId { get; set; }
-        /// <summary>The reservation_start_date property</summary>
+        /// <summary>Repull reservation id when the confirmation code matches a reservation in this workspace; `null` when it does not (explicitly unlinked).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ReservationId { get; set; }
+#nullable restore
+#else
+        public string ReservationId { get; set; }
+#endif
+        /// <summary>The reservationStartDate property</summary>
         public Date? ReservationStartDate { get; set; }
-        /// <summary>Raw Airbnb standard-fees array.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public UntypedNode? StandardFees { get; set; }
-#nullable restore
-#else
-        public UntypedNode StandardFees { get; set; }
-#endif
-        /// <summary>Payout status signal: COMPLETED (settled) vs UPCOMING (expected).</summary>
+        /// <summary>`COMPLETED`: settled in a payout. `UPCOMING`: expected, not paid out yet.</summary>
         public global::Repull.SDK.Models.AirbnbTransaction_status? Status { get; set; }
-        /// <summary>The status_type property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? StatusType { get; set; }
-#nullable restore
-#else
-        public string StatusType { get; set; }
-#endif
-        /// <summary>The synced_at property</summary>
+        /// <summary>The syncedAt property</summary>
         public DateTimeOffset? SyncedAt { get; set; }
-        /// <summary>Raw Airbnb tax-details object.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public UntypedNode? TaxDetails { get; set; }
-#nullable restore
-#else
-        public UntypedNode TaxDetails { get; set; }
-#endif
-        /// <summary>The thread_id property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ThreadId { get; set; }
-#nullable restore
-#else
-        public string ThreadId { get; set; }
-#endif
-        /// <summary>The time_zone property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? TimeZone { get; set; }
-#nullable restore
-#else
-        public string TimeZone { get; set; }
-#endif
-        /// <summary>Upstream Airbnb transaction id.</summary>
+        /// <summary>Stable id. A Payout row: Airbnb&apos;s payout id. A settled line: `&lt;payoutId&gt;:&lt;type&gt;:&lt;confirmationCode&gt;:&lt;n&gt;`. An upcoming line: `upcoming:&lt;accountId&gt;:&lt;type&gt;:&lt;confirmationCode&gt;:&lt;date&gt;:&lt;n&gt;`. Identical on every refresh; upsert on it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? TransactionId { get; set; }
@@ -172,9 +138,15 @@ namespace Repull.SDK.Models
 #else
         public string TransactionId { get; set; }
 #endif
-        /// <summary>Transaction kind.</summary>
-        public global::Repull.SDK.Models.AirbnbTransaction_type? Type { get; set; }
-        /// <summary>Fields Airbnb does not expose (never fabricated), e.g. `management_fee`, `itemized_discounts`.</summary>
+        /// <summary>Airbnb&apos;s line type, verbatim: `Payout`, `Reservation`, `Adjustment`, `Resolution Payout`, `Resolution Adjustment`, `Cancellation Fee`, `Pass Through Tot`, …</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Type { get; set; }
+#nullable restore
+#else
+        public string Type { get; set; }
+#endif
+        /// <summary>What Airbnb&apos;s transaction history does not carry, so it is never filled in: `taxes` (those Airbnb remits itself; pass-through tax paid to the host arrives as `Pass Through Tot` lines), `guest_paid_total`, `original_transaction_id`, `currency_conversion`, `management_fee`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? UnavailableFields { get; set; }
@@ -207,35 +179,30 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "account_id", n => { AccountId = n.GetStringValue(); } },
-                { "account_name", n => { AccountName = n.GetStringValue(); } },
+                { "accountId", n => { AccountId = n.GetStringValue(); } },
+                { "accountName", n => { AccountName = n.GetStringValue(); } },
                 { "amount", n => { Amount = n.GetDoubleValue(); } },
-                { "booked_at", n => { BookedAt = n.GetDateTimeOffsetValue(); } },
-                { "check_in", n => { CheckIn = n.GetDateTimeOffsetValue(); } },
-                { "check_out", n => { CheckOut = n.GetDateTimeOffsetValue(); } },
-                { "confirmation_code", n => { ConfirmationCode = n.GetStringValue(); } },
+                { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
                 { "date", n => { Date = n.GetDateValue(); } },
-                { "guest_breakdown", n => { GuestBreakdown = n.GetObjectValue<global::Repull.SDK.Models.AirbnbTransaction_guest_breakdown>(global::Repull.SDK.Models.AirbnbTransaction_guest_breakdown.CreateFromDiscriminatorValue); } },
-                { "guest_name", n => { GuestName = n.GetStringValue(); } },
-                { "host_breakdown", n => { HostBreakdown = n.GetObjectValue<global::Repull.SDK.Models.AirbnbTransaction_host_breakdown>(global::Repull.SDK.Models.AirbnbTransaction_host_breakdown.CreateFromDiscriminatorValue); } },
-                { "host_currency", n => { HostCurrency = n.GetStringValue(); } },
-                { "listing_id", n => { ListingId = n.GetStringValue(); } },
+                { "description", n => { Description = n.GetStringValue(); } },
+                { "fees", n => { Fees = n.GetObjectValue<global::Repull.SDK.Models.AirbnbTransaction_fees>(global::Repull.SDK.Models.AirbnbTransaction_fees.CreateFromDiscriminatorValue); } },
+                { "grossAmount", n => { GrossAmount = n.GetDoubleValue(); } },
+                { "guestName", n => { GuestName = n.GetStringValue(); } },
+                { "isPayout", n => { IsPayout = n.GetBoolValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "listingName", n => { ListingName = n.GetStringValue(); } },
                 { "nights", n => { Nights = n.GetIntValue(); } },
+                { "onInactiveListing", n => { OnInactiveListing = n.GetBoolValue(); } },
                 { "payout", n => { Payout = n.GetObjectValue<global::Repull.SDK.Models.AirbnbTransaction_payout>(global::Repull.SDK.Models.AirbnbTransaction_payout.CreateFromDiscriminatorValue); } },
                 { "reference", n => { Reference = n.GetStringValue(); } },
-                { "reservation_id", n => { ReservationId = n.GetIntValue(); } },
-                { "reservation_start_date", n => { ReservationStartDate = n.GetDateValue(); } },
-                { "standard_fees", n => { StandardFees = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
+                { "reservationId", n => { ReservationId = n.GetStringValue(); } },
+                { "reservationStartDate", n => { ReservationStartDate = n.GetDateValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.AirbnbTransaction_status>(); } },
-                { "status_type", n => { StatusType = n.GetStringValue(); } },
-                { "synced_at", n => { SyncedAt = n.GetDateTimeOffsetValue(); } },
-                { "tax_details", n => { TaxDetails = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
-                { "thread_id", n => { ThreadId = n.GetStringValue(); } },
-                { "time_zone", n => { TimeZone = n.GetStringValue(); } },
-                { "transaction_id", n => { TransactionId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Repull.SDK.Models.AirbnbTransaction_type>(); } },
-                { "unavailable_fields", n => { UnavailableFields = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "syncedAt", n => { SyncedAt = n.GetDateTimeOffsetValue(); } },
+                { "transactionId", n => { TransactionId = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetStringValue(); } },
+                { "unavailableFields", n => { UnavailableFields = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
         }
         /// <summary>
@@ -245,35 +212,30 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("account_id", AccountId);
-            writer.WriteStringValue("account_name", AccountName);
+            writer.WriteStringValue("accountId", AccountId);
+            writer.WriteStringValue("accountName", AccountName);
             writer.WriteDoubleValue("amount", Amount);
-            writer.WriteDateTimeOffsetValue("booked_at", BookedAt);
-            writer.WriteDateTimeOffsetValue("check_in", CheckIn);
-            writer.WriteDateTimeOffsetValue("check_out", CheckOut);
-            writer.WriteStringValue("confirmation_code", ConfirmationCode);
+            writer.WriteStringValue("confirmationCode", ConfirmationCode);
             writer.WriteStringValue("currency", Currency);
             writer.WriteDateValue("date", Date);
-            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbTransaction_guest_breakdown>("guest_breakdown", GuestBreakdown);
-            writer.WriteStringValue("guest_name", GuestName);
-            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbTransaction_host_breakdown>("host_breakdown", HostBreakdown);
-            writer.WriteStringValue("host_currency", HostCurrency);
-            writer.WriteStringValue("listing_id", ListingId);
+            writer.WriteStringValue("description", Description);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbTransaction_fees>("fees", Fees);
+            writer.WriteDoubleValue("grossAmount", GrossAmount);
+            writer.WriteStringValue("guestName", GuestName);
+            writer.WriteBoolValue("isPayout", IsPayout);
+            writer.WriteStringValue("listingId", ListingId);
+            writer.WriteStringValue("listingName", ListingName);
             writer.WriteIntValue("nights", Nights);
+            writer.WriteBoolValue("onInactiveListing", OnInactiveListing);
             writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbTransaction_payout>("payout", Payout);
             writer.WriteStringValue("reference", Reference);
-            writer.WriteIntValue("reservation_id", ReservationId);
-            writer.WriteDateValue("reservation_start_date", ReservationStartDate);
-            writer.WriteObjectValue<UntypedNode>("standard_fees", StandardFees);
+            writer.WriteStringValue("reservationId", ReservationId);
+            writer.WriteDateValue("reservationStartDate", ReservationStartDate);
             writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbTransaction_status>("status", Status);
-            writer.WriteStringValue("status_type", StatusType);
-            writer.WriteDateTimeOffsetValue("synced_at", SyncedAt);
-            writer.WriteObjectValue<UntypedNode>("tax_details", TaxDetails);
-            writer.WriteStringValue("thread_id", ThreadId);
-            writer.WriteStringValue("time_zone", TimeZone);
-            writer.WriteStringValue("transaction_id", TransactionId);
-            writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbTransaction_type>("type", Type);
-            writer.WriteCollectionOfPrimitiveValues<string>("unavailable_fields", UnavailableFields);
+            writer.WriteDateTimeOffsetValue("syncedAt", SyncedAt);
+            writer.WriteStringValue("transactionId", TransactionId);
+            writer.WriteStringValue("type", Type);
+            writer.WriteCollectionOfPrimitiveValues<string>("unavailableFields", UnavailableFields);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

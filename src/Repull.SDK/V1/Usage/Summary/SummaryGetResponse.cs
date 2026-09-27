@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -31,6 +32,14 @@ namespace Repull.SDK.V1.Usage.Summary
 #nullable restore
 #else
         public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits Limits { get; set; }
+#endif
+        /// <summary>Added to the body of EVERY JSON response (success or error, except bare arrays and 5xx) while the workspace is connected to more listings than its plan lets it use — so a developer reading any payload, or an AI assistant relaying it, sees it. Connect keeps every listing it finds, but on a capped plan only as many as the plan allows are active; the rest are held back inactive and keep syncing. The same responses also carry the `X-Repull-Listings-Held-Back` and `X-Repull-Active-Listing-Limit` headers. Using a held-back listing answers `403 listing_inactive` with `reason: &quot;plan_limit&quot;`. Tell the user: they can see the held-back listings with `GET /v1/listings?status=all`, choose which are active with `POST /v1/listings/status`, or upgrade.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.PlanNotice? PlanNotice { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.PlanNotice PlanNotice { get; set; }
 #endif
         /// <summary>The range property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -118,6 +127,7 @@ namespace Repull.SDK.V1.Usage.Summary
                 { "breakdown", n => { Breakdown = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "dailyResetsAt", n => { DailyResetsAt = n.GetDateTimeOffsetValue(); } },
                 { "limits", n => { Limits = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits.CreateFromDiscriminatorValue); } },
+                { "planNotice", n => { PlanNotice = n.GetObjectValue<global::Repull.SDK.Models.PlanNotice>(global::Repull.SDK.Models.PlanNotice.CreateFromDiscriminatorValue); } },
                 { "range", n => { Range = n.GetStringValue(); } },
                 { "remaining", n => { Remaining = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining.CreateFromDiscriminatorValue); } },
                 { "resetsAt", n => { ResetsAt = n.GetDateTimeOffsetValue(); } },
@@ -138,6 +148,7 @@ namespace Repull.SDK.V1.Usage.Summary
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>("breakdown", Breakdown);
             writer.WriteDateTimeOffsetValue("dailyResetsAt", DailyResetsAt);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>("limits", Limits);
+            writer.WriteObjectValue<global::Repull.SDK.Models.PlanNotice>("planNotice", PlanNotice);
             writer.WriteStringValue("range", Range);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining>("remaining", Remaining);
             writer.WriteDateTimeOffsetValue("resetsAt", ResetsAt);

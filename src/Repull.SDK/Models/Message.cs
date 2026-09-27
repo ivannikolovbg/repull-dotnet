@@ -15,7 +15,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>`true` when the body was authored by Vanio AI (autopilot, draft).</summary>
+        /// <summary>`true` when the body was written by AI (autopilot, draft).</summary>
         public bool? AiGenerated { get; set; }
         /// <summary>Files on this message, inbound or outbound. Empty array when there are none. A file-only message has an empty `body`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -61,7 +61,7 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>`true` when the message was sent by a Vanio automation (template, schedule, etc.).</summary>
+        /// <summary>`true` when the message was sent by an automation (template, schedule, etc.).</summary>
         public bool? IsAutomated { get; set; }
         /// <summary>The readAt property</summary>
         public DateTimeOffset? ReadAt { get; set; }

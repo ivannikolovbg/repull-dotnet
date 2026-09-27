@@ -7,12 +7,14 @@ using Repull.SDK.Models;
 using Repull.SDK.V1.Connect.Beds24;
 using Repull.SDK.V1.Connect.Booking;
 using Repull.SDK.V1.Connect.Bookingsync;
+using Repull.SDK.V1.Connect.Cloudbeds;
 using Repull.SDK.V1.Connect.Guesty;
 using Repull.SDK.V1.Connect.Hospitable;
 using Repull.SDK.V1.Connect.Hostaway;
 using Repull.SDK.V1.Connect.Igms;
 using Repull.SDK.V1.Connect.Item;
 using Repull.SDK.V1.Connect.Lodgify;
+using Repull.SDK.V1.Connect.Mews;
 using Repull.SDK.V1.Connect.Ownerrez;
 using Repull.SDK.V1.Connect.Providers;
 using Repull.SDK.V1.Connect.Sessions;
@@ -46,6 +48,11 @@ namespace Repull.SDK.V1.Connect
         {
             get => new global::Repull.SDK.V1.Connect.Bookingsync.BookingsyncRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The cloudbeds property</summary>
+        public global::Repull.SDK.V1.Connect.Cloudbeds.CloudbedsRequestBuilder Cloudbeds
+        {
+            get => new global::Repull.SDK.V1.Connect.Cloudbeds.CloudbedsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The guesty property</summary>
         public global::Repull.SDK.V1.Connect.Guesty.GuestyRequestBuilder Guesty
         {
@@ -70,6 +77,11 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.Lodgify.LodgifyRequestBuilder Lodgify
         {
             get => new global::Repull.SDK.V1.Connect.Lodgify.LodgifyRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The mews property</summary>
+        public global::Repull.SDK.V1.Connect.Mews.MewsRequestBuilder Mews
+        {
+            get => new global::Repull.SDK.V1.Connect.Mews.MewsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The ownerrez property</summary>
         public global::Repull.SDK.V1.Connect.Ownerrez.OwnerrezRequestBuilder Ownerrez

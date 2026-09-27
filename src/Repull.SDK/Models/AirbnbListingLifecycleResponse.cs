@@ -37,7 +37,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Whether the Airbnb listing is taking bookings after this call. `false` after `unlist`, `true` after `relist`.</summary>
         public bool? Live { get; set; }
-        /// <summary>True when the result was confirmed by reading the listing back from Airbnb (done on `unlist`: Airbnb accepting the call is not proof the listing came down).</summary>
+        /// <summary>True when the result was confirmed by reading the listing back from Airbnb, on `unlist` and `relist` alike: Airbnb accepting the call is not proof the listing came down or went live. `false` means the read-back could not run — an unknown, not a success. A read-back that shows the wrong state is returned as an error, not as `verified: false`.</summary>
         public bool? Verified { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/> and sets the default values.

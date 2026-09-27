@@ -49,7 +49,15 @@ namespace Repull.SDK.Models
 #else
         public string Platform { get; set; }
 #endif
-        /// <summary>The status property</summary>
+        /// <summary>Mews or Cloudbeds listings only: the booking was made in the PMS first, and this is what it applied.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationCreateResponse_pms? Pms { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationCreateResponse_pms Pms { get; set; }
+#endif
+        /// <summary>Same vocabulary as `GET /v1/reservations/{id}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Status { get; set; }
@@ -57,8 +65,16 @@ namespace Repull.SDK.Models
 #else
         public string Status { get; set; }
 #endif
-        /// <summary>The price the pricing engine derived for the stay. Reservations created through this endpoint are NOT priced from the request — see the operation description.</summary>
+        /// <summary>The price the pricing engine derived for the stay. Reservations created through this endpoint are NOT priced from the request — see the operation description. On a Mews or Cloudbeds listing, the PMS prices it from its own rate.</summary>
         public double? TotalPrice { get; set; }
+        /// <summary>Mews or Cloudbeds listings only: the room the PMS assigned. Absent for every other listing.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationCreateResponse_unit? Unit { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationCreateResponse_unit Unit { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCreateResponse"/> and sets the default values.
         /// </summary>
@@ -92,8 +108,10 @@ namespace Repull.SDK.Models
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "listingId", n => { ListingId = n.GetIntValue(); } },
                 { "platform", n => { Platform = n.GetStringValue(); } },
+                { "pms", n => { Pms = n.GetObjectValue<global::Repull.SDK.Models.ReservationCreateResponse_pms>(global::Repull.SDK.Models.ReservationCreateResponse_pms.CreateFromDiscriminatorValue); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "totalPrice", n => { TotalPrice = n.GetDoubleValue(); } },
+                { "unit", n => { Unit = n.GetObjectValue<global::Repull.SDK.Models.ReservationCreateResponse_unit>(global::Repull.SDK.Models.ReservationCreateResponse_unit.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -111,8 +129,10 @@ namespace Repull.SDK.Models
             writer.WriteIntValue("id", Id);
             writer.WriteIntValue("listingId", ListingId);
             writer.WriteStringValue("platform", Platform);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationCreateResponse_pms>("pms", Pms);
             writer.WriteStringValue("status", Status);
             writer.WriteDoubleValue("totalPrice", TotalPrice);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationCreateResponse_unit>("unit", Unit);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

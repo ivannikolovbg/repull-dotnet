@@ -12,9 +12,17 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
     public partial class TransactionsPostResponse : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>The accounts property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts>? Accounts { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts> Accounts { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Number of transactions upserted.</summary>
+        /// <summary>Ledger lines written, Payout rows included.</summary>
         public int? Count { get; set; }
         /// <summary>The synced property</summary>
         public bool? Synced { get; set; }
@@ -43,6 +51,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accounts", n => { Accounts = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts>(global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "count", n => { Count = n.GetIntValue(); } },
                 { "synced", n => { Synced = n.GetBoolValue(); } },
             };
@@ -54,6 +63,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts>("accounts", Accounts);
             writer.WriteIntValue("count", Count);
             writer.WriteBoolValue("synced", Synced);
             writer.WriteAdditionalData(AdditionalData);

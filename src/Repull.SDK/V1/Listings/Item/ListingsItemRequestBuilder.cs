@@ -16,6 +16,7 @@ using Repull.SDK.V1.Listings.Item.Publish;
 using Repull.SDK.V1.Listings.Item.PublishStatus;
 using Repull.SDK.V1.Listings.Item.Pull;
 using Repull.SDK.V1.Listings.Item.Segments;
+using Repull.SDK.V1.Listings.Item.Units;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -88,6 +89,11 @@ namespace Repull.SDK.V1.Listings.Item
         public global::Repull.SDK.V1.Listings.Item.Segments.SegmentsRequestBuilder Segments
         {
             get => new global::Repull.SDK.V1.Listings.Item.Segments.SegmentsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The units property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Units.UnitsRequestBuilder Units
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Units.UnitsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.ListingsItemRequestBuilder"/> and sets the default values.

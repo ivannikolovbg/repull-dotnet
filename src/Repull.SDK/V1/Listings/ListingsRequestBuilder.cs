@@ -97,7 +97,7 @@ namespace Repull.SDK.V1.Listings
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ListingListResponse>(requestInfo, global::Repull.SDK.Models.ListingListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create a new vacation-rental listing under the authenticated workspace. The listing is stored in the canonical Vanio listings tables and can be published to multiple channels (Airbnb, Booking.com) via the publish endpoints.
+        /// Create a new vacation-rental listing under the authenticated workspace. The listing is stored as a canonical Repull listing and can be published to multiple channels (Airbnb, Booking.com) via the publish endpoints.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ListingCreateResponse"/></returns>
         /// <param name="body">Inputs for `POST /v1/listings`.**Address requirements — read this before you build the payload.** Publishing to Airbnb runs a create preflight that refuses the listing outright if the address is incomplete, and the refusal only surfaces later, at publish time. Airbnb requires `street` and `city` for every country. For a **US** property it additionally requires `state` and `postalCode`. Crucially, **omitting `countryCode` makes the listing behave as US**, so a listing created without a country needs `state` and `postalCode` too. Send `countryCode` explicitly for a non-US property. `lat`/`lng` alone are not enough — Airbnb rejects coordinates that are not backed by a full postal address. Use `GET /v1/listings/{id}/publish-status` to see which parts are still missing before you attempt a publish.</param>
@@ -143,7 +143,7 @@ namespace Repull.SDK.V1.Listings
             return requestInfo;
         }
         /// <summary>
-        /// Create a new vacation-rental listing under the authenticated workspace. The listing is stored in the canonical Vanio listings tables and can be published to multiple channels (Airbnb, Booking.com) via the publish endpoints.
+        /// Create a new vacation-rental listing under the authenticated workspace. The listing is stored as a canonical Repull listing and can be published to multiple channels (Airbnb, Booking.com) via the publish endpoints.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Inputs for `POST /v1/listings`.**Address requirements — read this before you build the payload.** Publishing to Airbnb runs a create preflight that refuses the listing outright if the address is incomplete, and the refusal only surfaces later, at publish time. Airbnb requires `street` and `city` for every country. For a **US** property it additionally requires `state` and `postalCode`. Crucially, **omitting `countryCode` makes the listing behave as US**, so a listing created without a country needs `state` and `postalCode` too. Send `countryCode` explicitly for a non-US property. `lat`/`lng` alone are not enough — Airbnb rejects coordinates that are not backed by a full postal address. Use `GET /v1/listings/{id}/publish-status` to see which parts are still missing before you attempt a publish.</param>

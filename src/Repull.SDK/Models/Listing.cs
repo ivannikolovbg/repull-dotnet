@@ -83,6 +83,14 @@ namespace Repull.SDK.Models
 #else
         public string ThumbnailUrl { get; set; }
 #endif
+        /// <summary>`GET /v1/listings/{id}` only. The physical rooms under a hotel-model listing (a Mews or Cloudbeds room type); empty for a single home. Same items as `GET /v1/listings/{id}/units`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.Listing_units>? Units { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.Listing_units> Units { get; set; }
+#endif
         /// <summary>The updatedAt property</summary>
         public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
@@ -120,6 +128,7 @@ namespace Repull.SDK.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Listing_status>(); } },
                 { "thumbnailUrl", n => { ThumbnailUrl = n.GetStringValue(); } },
+                { "units", n => { Units = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Listing_units>(global::Repull.SDK.Models.Listing_units.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
@@ -140,6 +149,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("name", Name);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_status>("status", Status);
             writer.WriteStringValue("thumbnailUrl", ThumbnailUrl);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Listing_units>("units", Units);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
