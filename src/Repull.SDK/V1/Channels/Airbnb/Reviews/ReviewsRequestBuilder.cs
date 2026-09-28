@@ -72,7 +72,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReviewListResponse>(requestInfo, global::Repull.SDK.Models.AirbnbReviewListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Legacy action-based shape. Body `{ action: &quot;respond&quot;|&quot;submit&quot;, reviewId, response?, review? }`. Kept for backwards compatibility — prefer `PUT /v1/channels/airbnb/reviews/{id}` (edit) and `POST /v1/channels/airbnb/reviews/{id}/respond` (reply) for new integrations.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Legacy action-based shape. Body `{ action: &quot;respond&quot;|&quot;submit&quot;, reviewId, response?, review? }`. Kept for backwards compatibility — prefer `POST /v1/reviews/{id}/guest-review` (review a guest) and `POST /v1/reviews/{id}/reply` (reply) for new integrations.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -120,7 +120,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
             return requestInfo;
         }
         /// <summary>
-        /// Legacy action-based shape. Body `{ action: &quot;respond&quot;|&quot;submit&quot;, reviewId, response?, review? }`. Kept for backwards compatibility — prefer `PUT /v1/channels/airbnb/reviews/{id}` (edit) and `POST /v1/channels/airbnb/reviews/{id}/respond` (reply) for new integrations.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Legacy action-based shape. Body `{ action: &quot;respond&quot;|&quot;submit&quot;, reviewId, response?, review? }`. Kept for backwards compatibility — prefer `POST /v1/reviews/{id}/guest-review` (review a guest) and `POST /v1/reviews/{id}/reply` (reply) for new integrations.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond
         {
         }
         /// <summary>
-        /// Post a public host response to a guest review. Airbnb allows one response per review — repeated POSTs return 409. Response text is capped at 1000 characters.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// **Deprecated — use `POST /v1/reviews/{id}/reply`**, which replies to a review from any channel. This route keeps working unchanged.Post a public host response to a guest review. Airbnb allows one response per review — repeated POSTs return 409. Response text is capped at 1000 characters.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbReview"/></returns>
         /// <param name="body">The request body</param>
@@ -47,6 +47,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.AirbnbReview?> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond.RespondPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -71,11 +72,12 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReview>(requestInfo, global::Repull.SDK.Models.AirbnbReview.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Post a public host response to a guest review. Airbnb allows one response per review — repeated POSTs return 409. Response text is capped at 1000 characters.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// **Deprecated — use `POST /v1/reviews/{id}/reply`**, which replies to a review from any channel. This route keeps working unchanged.Post a public host response to a guest review. Airbnb allows one response per review — repeated POSTs return 409. Response text is capped at 1000 characters.Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond.RespondPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
@@ -97,6 +99,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond.RespondRequestBuilder"/></returns>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
+        [Obsolete("")]
         public global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond.RespondRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.Respond.RespondRequestBuilder(rawUrl, RequestAdapter);

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
         {
         }
         /// <summary>
-        /// Resolves the review, reads its channel and dispatches the reply. Channel-neutral: you do not need to know where the review came from.Replies are available on Airbnb today; a review from a channel without a reply API returns `422 unsupported_channel` naming the channels that do work.**Inactive listings:** a review of an inactive listing returns `403 listing_inactive` and no reply reaches the channel. Activate the listing first.
+        /// Resolves the review, reads its channel and dispatches the reply. Channel-neutral: you do not need to know where the review came from.Replies work on Airbnb and Booking.com. Each channel accepts one reply per review. A review from a channel without a reply API returns `422 unsupported_channel` naming the channels that do work.To review a guest (Airbnb only), use `POST /v1/reviews/{id}/guest-review`.**Inactive listings:** a review of an inactive listing returns `403 listing_inactive` and no reply reaches the channel. Activate the listing first.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -69,7 +69,7 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse>(requestInfo, global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Resolves the review, reads its channel and dispatches the reply. Channel-neutral: you do not need to know where the review came from.Replies are available on Airbnb today; a review from a channel without a reply API returns `422 unsupported_channel` naming the channels that do work.**Inactive listings:** a review of an inactive listing returns `403 listing_inactive` and no reply reaches the channel. Activate the listing first.
+        /// Resolves the review, reads its channel and dispatches the reply. Channel-neutral: you do not need to know where the review came from.Replies work on Airbnb and Booking.com. Each channel accepts one reply per review. A review from a channel without a reply API returns `422 unsupported_channel` naming the channels that do work.To review a guest (Airbnb only), use `POST /v1/reviews/{id}/guest-review`.**Inactive listings:** a review of an inactive listing returns `403 listing_inactive` and no reply reaches the channel. Activate the listing first.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Reviews.Item.Reply.ReplyResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -105,7 +105,7 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Reviews.Item.Reply.ReplyResponse>(requestInfo, global::Repull.SDK.V1.Reviews.Item.Reply.ReplyResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Resolves the review, reads its channel and dispatches the reply. Channel-neutral: you do not need to know where the review came from.Replies are available on Airbnb today; a review from a channel without a reply API returns `422 unsupported_channel` naming the channels that do work.**Inactive listings:** a review of an inactive listing returns `403 listing_inactive` and no reply reaches the channel. Activate the listing first.
+        /// Resolves the review, reads its channel and dispatches the reply. Channel-neutral: you do not need to know where the review came from.Replies work on Airbnb and Booking.com. Each channel accepts one reply per review. A review from a channel without a reply API returns `422 unsupported_channel` naming the channels that do work.To review a guest (Airbnb only), use `POST /v1/reviews/{id}/guest-review`.**Inactive listings:** a review of an inactive listing returns `403 listing_inactive` and no reply reaches the channel. Activate the listing first.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
