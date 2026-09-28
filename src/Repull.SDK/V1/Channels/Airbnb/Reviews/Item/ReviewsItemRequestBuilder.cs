@@ -40,10 +40,10 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews.Item
         {
         }
         /// <summary>
-        /// Edit a host-side review for an Airbnb stay. Airbnb collapses POST + PUT into the same upstream call (`PUT /v2/listing_reviews/{id}`), so this endpoint covers both initial submit and subsequent edits while the review window is open.Body is a partial `AirbnbReview` — pass the fields you want to change (rating, public review, private feedback, category ratings).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Submit your review of a guest — the review with `reviewerRole: &quot;host&quot;`. **Submitting publishes it and is final:** Airbnb has no draft and does not allow edits; a second submission is `409 review_already_submitted`. Airbnb accepts it up to 14 days after checkout (`expiresAt`).Required: `publicReview`, `isRevieweeRecommended` (whether you would host the guest again), and a 1–5 rating for **each** of `cleanliness`, `communication` and `respect_house_rules` — send `rating` to use one score for all three, `categoryRatings` to score them individually, or both (`rating` fills any category you did not rate). Optional: `privateFeedback`, a note to the guest that is not published. A request missing a required piece is refused with `422 invalid_params` naming it, before anything is sent to Airbnb.```json{  &quot;publicReview&quot;: &quot;Joanne was a great guest.&quot;,  &quot;rating&quot;: 5,  &quot;privateFeedback&quot;: &quot;Thanks for leaving the place so tidy!&quot;,  &quot;isRevieweeRecommended&quot;: true}```A guest&apos;s review of you (`reviewerRole: &quot;guest&quot;`) cannot be written here — `409 not_host_review`; reply to it with `POST /v1/channels/airbnb/reviews/{id}/respond`. After the window closes: `409 review_window_closed`. Full guide: https://repull.dev/docs/channels/airbnb/reviews
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.AirbnbReview"/></returns>
-        /// <param name="body">An Airbnb review (guest → host or host → guest).</param>
+        /// <param name="body">Your review of a guest. Airbnb requires `publicReview`, `isRevieweeRecommended`, and a rating for each of cleanliness, communication and respect_house_rules — through `rating`, `categoryRatings`, or both. Submitting publishes it and is final.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
@@ -55,11 +55,11 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews.Item
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.AirbnbReview?> PutAsync(global::Repull.SDK.Models.AirbnbReview body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbReview?> PutAsync(global::Repull.SDK.Models.AirbnbHostReviewSubmit body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.AirbnbReview> PutAsync(global::Repull.SDK.Models.AirbnbReview body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.AirbnbReview> PutAsync(global::Repull.SDK.Models.AirbnbHostReviewSubmit body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -77,18 +77,18 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AirbnbReview>(requestInfo, global::Repull.SDK.Models.AirbnbReview.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Edit a host-side review for an Airbnb stay. Airbnb collapses POST + PUT into the same upstream call (`PUT /v2/listing_reviews/{id}`), so this endpoint covers both initial submit and subsequent edits while the review window is open.Body is a partial `AirbnbReview` — pass the fields you want to change (rating, public review, private feedback, category ratings).Returns `403 listing_inactive` when the listing this resolves to is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Submit your review of a guest — the review with `reviewerRole: &quot;host&quot;`. **Submitting publishes it and is final:** Airbnb has no draft and does not allow edits; a second submission is `409 review_already_submitted`. Airbnb accepts it up to 14 days after checkout (`expiresAt`).Required: `publicReview`, `isRevieweeRecommended` (whether you would host the guest again), and a 1–5 rating for **each** of `cleanliness`, `communication` and `respect_house_rules` — send `rating` to use one score for all three, `categoryRatings` to score them individually, or both (`rating` fills any category you did not rate). Optional: `privateFeedback`, a note to the guest that is not published. A request missing a required piece is refused with `422 invalid_params` naming it, before anything is sent to Airbnb.```json{  &quot;publicReview&quot;: &quot;Joanne was a great guest.&quot;,  &quot;rating&quot;: 5,  &quot;privateFeedback&quot;: &quot;Thanks for leaving the place so tidy!&quot;,  &quot;isRevieweeRecommended&quot;: true}```A guest&apos;s review of you (`reviewerRole: &quot;guest&quot;`) cannot be written here — `409 not_host_review`; reply to it with `POST /v1/channels/airbnb/reviews/{id}/respond`. After the window closes: `409 review_window_closed`. Full guide: https://repull.dev/docs/channels/airbnb/reviews
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">An Airbnb review (guest → host or host → guest).</param>
+        /// <param name="body">Your review of a guest. Airbnb requires `publicReview`, `isRevieweeRecommended`, and a rating for each of cleanliness, communication and respect_house_rules — through `rating`, `categoryRatings`, or both. Submitting publishes it and is final.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.AirbnbReview body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.AirbnbHostReviewSubmit body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.AirbnbReview body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.Models.AirbnbHostReviewSubmit body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

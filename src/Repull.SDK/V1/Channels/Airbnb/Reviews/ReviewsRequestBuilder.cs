@@ -19,7 +19,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reviews
     public partial class ReviewsRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Repull.SDK.v1.channels.airbnb.reviews.item collection</summary>
-        /// <param name="position">Airbnb review id (`HRabc123` style).</param>
+        /// <param name="position">The review&apos;s `id` or `externalReviewId`, both as returned by `GET /v1/reviews`.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.ReviewsItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Channels.Airbnb.Reviews.Item.ReviewsItemRequestBuilder this[string position]
         {
