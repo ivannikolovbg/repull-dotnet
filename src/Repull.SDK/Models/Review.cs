@@ -13,6 +13,14 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Review : IAdditionalDataHolder, IParsable
     {
+        /// <summary>The connected account this review belongs to. List endpoint.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.RecordAccount? Account { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.RecordAccount Account { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The categories property</summary>
@@ -168,6 +176,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "account", n => { Account = n.GetObjectValue<global::Repull.SDK.Models.RecordAccount>(global::Repull.SDK.Models.RecordAccount.CreateFromDiscriminatorValue); } },
                 { "categories", n => { Categories = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ReviewCategory>(global::Repull.SDK.Models.ReviewCategory.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "expiresAt", n => { ExpiresAt = n.GetDateTimeOffsetValue(); } },
                 { "externalId", n => { ExternalId = n.GetStringValue(); } },
@@ -199,6 +208,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.RecordAccount>("account", Account);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ReviewCategory>("categories", Categories);
             writer.WriteDateTimeOffsetValue("expiresAt", ExpiresAt);
             writer.WriteStringValue("externalId", ExternalId);

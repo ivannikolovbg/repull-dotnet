@@ -58,7 +58,7 @@ namespace Repull.SDK.V1.Connect
 #else
         public List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?> Scope { get; set; }
 #endif
-        /// <summary>Opaque pass-through correlation token. Echoed back in the response.</summary>
+        /// <summary>Your own correlation token, e.g. your user id (at most 500 characters). Echoed in this response, on the redirect back (`&amp;state=`), in the popup message, and in the `connect.session.completed` webhook.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? State { get; set; }

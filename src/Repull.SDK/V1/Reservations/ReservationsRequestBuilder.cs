@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*,updated_since*}", pathParameters)
+        public ReservationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?account*,checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*,updated_since*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace Repull.SDK.V1.Reservations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*,updated_since*}", rawUrl)
+        public ReservationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/reservations{?account*,checkInAfter*,checkInBefore*,checkInFrom*,checkInTo*,checkOutAfter*,checkOutBefore*,check_in_after*,check_in_before*,check_out_after*,check_out_before*,cursor*,include_total*,limit*,listingId*,offset*,platform*,status*,updated_since*}", rawUrl)
         {
         }
         /// <summary>
@@ -173,6 +173,16 @@ namespace Repull.SDK.V1.Reservations
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ReservationsRequestBuilderGetQueryParameters 
         {
+            /// <summary>Only the records of one connected account, as `provider:externalAccountId` — the pair from a webhook `account` block, `connect.session.completed`, or `GET /v1/connect/{provider}` → `accounts`. A record belongs to an account when it is on that account&apos;s listings and on its channel (a PMS account: came in through that PMS). An account with no listings returns an empty page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("account")]
+            public string? Account { get; set; }
+#nullable restore
+#else
+            [QueryParameter("account")]
+            public string Account { get; set; }
+#endif
             /// <summary>Check-in date &gt;= this value</summary>
             public Date? Check_in_after { get; set; }
             /// <summary>Check-in date &lt;= this value</summary>

@@ -17,14 +17,6 @@ namespace Repull.SDK.V1.Connect.Item
         public global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType? AccessType { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>PMS providers — API key.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ApiKey { get; set; }
-#nullable restore
-#else
-        public string ApiKey { get; set; }
-#endif
         /// <summary>Plumguide — client ID.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,6 +49,14 @@ namespace Repull.SDK.V1.Connect.Item
 #else
         public string RedirectUrl { get; set; }
 #endif
+        /// <summary>Airbnb + Booking.com — your own correlation token, e.g. your user id (at most 500 characters). Echoed on the redirect back (`&amp;state=`) and in the `connect.session.completed` webhook.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? State { get; set; }
+#nullable restore
+#else
+        public string State { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody"/> and sets the default values.
         /// </summary>
@@ -84,11 +84,11 @@ namespace Repull.SDK.V1.Connect.Item
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType>(); } },
-                { "apiKey", n => { ApiKey = n.GetStringValue(); } },
                 { "clientId", n => { ClientId = n.GetStringValue(); } },
                 { "clientSecret", n => { ClientSecret = n.GetStringValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
+                { "state", n => { State = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -99,11 +99,11 @@ namespace Repull.SDK.V1.Connect.Item
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType>("accessType", AccessType);
-            writer.WriteStringValue("apiKey", ApiKey);
             writer.WriteStringValue("clientId", ClientId);
             writer.WriteStringValue("clientSecret", ClientSecret);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("redirectUrl", RedirectUrl);
+            writer.WriteStringValue("state", State);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

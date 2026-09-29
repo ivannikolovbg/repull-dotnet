@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Conversations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?cursor*,limit*,offset*,platform*,status*}", pathParameters)
+        public ConversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?account*,cursor*,limit*,offset*,platform*,status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace Repull.SDK.V1.Conversations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?cursor*,limit*,offset*,platform*,status*}", rawUrl)
+        public ConversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?account*,cursor*,limit*,offset*,platform*,status*}", rawUrl)
         {
         }
         /// <summary>
@@ -122,6 +122,16 @@ namespace Repull.SDK.V1.Conversations
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ConversationsRequestBuilderGetQueryParameters 
         {
+            /// <summary>Only the records of one connected account, as `provider:externalAccountId` — the pair from a webhook `account` block, `connect.session.completed`, or `GET /v1/connect/{provider}` → `accounts`. A record belongs to an account when it is on that account&apos;s listings and on its channel (a PMS account: came in through that PMS). An account with no listings returns an empty page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("account")]
+            public string? Account { get; set; }
+#nullable restore
+#else
+            [QueryParameter("account")]
+            public string Account { get; set; }
+#endif
             /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Reservations
         {
         }
         /// <summary>
-        /// Cursor-paginated list of VRBO reservations sourced from the public booking feed. Lag is typically 5-10 minutes vs. Airbnb / Booking.com. `?offset=` is accepted as a first-class alias for `?cursor=` (mutually exclusive; offset capped at 10000).Reservations on inactive listings are left out (counts and cursors included); they keep syncing and reappear once the listing is activated.
+        /// Cursor-paginated list of Vrbo reservations imported from the host&apos;s connected Vrbo account (host sign-in, beta). The full normalised record — guest, price breakdown, policy — is on `GET /v1/reservations?platform=vrbo`. `?offset=` is accepted as a first-class alias for `?cursor=` (mutually exclusive; offset capped at 10000).Reservations on inactive listings are left out (counts and cursors included); they keep syncing and reappear once the listing is activated.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.VrboReservationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -52,7 +52,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Reservations
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.VrboReservationListResponse>(requestInfo, global::Repull.SDK.Models.VrboReservationListResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated list of VRBO reservations sourced from the public booking feed. Lag is typically 5-10 minutes vs. Airbnb / Booking.com. `?offset=` is accepted as a first-class alias for `?cursor=` (mutually exclusive; offset capped at 10000).Reservations on inactive listings are left out (counts and cursors included); they keep syncing and reappear once the listing is activated.
+        /// Cursor-paginated list of Vrbo reservations imported from the host&apos;s connected Vrbo account (host sign-in, beta). The full normalised record — guest, price breakdown, policy — is on `GET /v1/reservations?platform=vrbo`. `?offset=` is accepted as a first-class alias for `?cursor=` (mutually exclusive; offset capped at 10000).Reservations on inactive listings are left out (counts and cursors included); they keep syncing and reappear once the listing is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -80,7 +80,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Reservations
             return new global::Repull.SDK.V1.Channels.Vrbo.Reservations.ReservationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of VRBO reservations sourced from the public booking feed. Lag is typically 5-10 minutes vs. Airbnb / Booking.com. `?offset=` is accepted as a first-class alias for `?cursor=` (mutually exclusive; offset capped at 10000).Reservations on inactive listings are left out (counts and cursors included); they keep syncing and reappear once the listing is activated.
+        /// Cursor-paginated list of Vrbo reservations imported from the host&apos;s connected Vrbo account (host sign-in, beta). The full normalised record — guest, price breakdown, policy — is on `GET /v1/reservations?platform=vrbo`. `?offset=` is accepted as a first-class alias for `?cursor=` (mutually exclusive; offset capped at 10000).Reservations on inactive listings are left out (counts and cursors included); they keep syncing and reappear once the listing is activated.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ReservationsRequestBuilderGetQueryParameters 
