@@ -12,6 +12,8 @@ namespace Repull.SDK.V1.Connect
     public partial class ConnectPostRequestBody : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>What the connection may do. Airbnb: the OAuth scope tier. Vrbo: `messaging` (or `read_only`) imports bookings and messages and never pushes the calendar; `full_access` also pushes prices and availability. Setting it locks the choice; omit it to let the host choose on the hosted page (default `full_access`).</summary>
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_accessType? AccessType { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Optional whitelist of provider IDs the picker should expose. Omit to show every channel in the registry.</summary>
@@ -98,6 +100,7 @@ namespace Repull.SDK.V1.Connect
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_accessType>(); } },
                 { "allowedProviders", n => { AllowedProviders = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "copy", n => { Copy = n.GetObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>(global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy.CreateFromDiscriminatorValue); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
@@ -115,6 +118,7 @@ namespace Repull.SDK.V1.Connect
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_accessType>("accessType", AccessType);
             writer.WriteCollectionOfPrimitiveValues<string>("allowedProviders", AllowedProviders);
             writer.WriteObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>("copy", Copy);
             writer.WriteStringValue("locale", Locale);

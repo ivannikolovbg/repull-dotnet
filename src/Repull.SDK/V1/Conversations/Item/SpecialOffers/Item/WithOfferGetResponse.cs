@@ -23,6 +23,8 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
 #else
         public string AirbnbListingId { get; set; }
 #endif
+        /// <summary>The channel the offer is on.</summary>
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_channel? Channel { get; set; }
         /// <summary>The checkIn property</summary>
         public Date? CheckIn { get; set; }
         /// <summary>The checkOut property</summary>
@@ -37,8 +39,28 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
 #endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>Currency of the amounts, when the channel states it (VRBO).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Currency { get; set; }
+#nullable restore
+#else
+        public string Currency { get; set; }
+#endif
+        /// <summary>VRBO: refundable damage deposit; null for none.</summary>
+        public double? DamageDeposit { get; set; }
+        /// <summary>VRBO: its automatic stay discount on the rent, when the offer carries one.</summary>
+        public double? Discount { get; set; }
         /// <summary>When the guest can no longer book the offer (Airbnb gives them 24 hours).</summary>
         public DateTimeOffset? ExpiresAt { get; set; }
+        /// <summary>VRBO: the offer’s fees by type. Empty on Airbnb.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees>? Fees { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees> Fees { get; set; }
+#endif
         /// <summary>Guests on the offer. Airbnb counts adults + children as guests; infants and pets are extra.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -47,13 +69,21 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
 #else
         public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests Guests { get; set; }
 #endif
-        /// <summary>Airbnb special-offer id. Use it to read or withdraw the offer.</summary>
+        /// <summary>The offer id — use it to read or withdraw the offer. Airbnb’s special-offer id; on VRBO, where a conversation has one live offer, `current`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get; set; }
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>VRBO: its offer summary line by line, in VRBO’s words (nights, fees, taxes, total traveler payment, payout).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines>? Lines { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines> Lines { get; set; }
 #endif
         /// <summary>Repull listing id, when known.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -63,9 +93,19 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
 #else
         public string ListingId { get; set; }
 #endif
+        /// <summary>The message sent to the guest with the offer (VRBO).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Message { get; set; }
+#nullable restore
+#else
+        public string Message { get; set; }
+#endif
         /// <summary>The nights property</summary>
         public int? Nights { get; set; }
-        /// <summary>Airbnb’s status for the offer: `active` (the guest can book it), `accepted`, `declined`, `expired` or `voided` (withdrawn).</summary>
+        /// <summary>VRBO: rent for the stay, excluding fees and taxes. Null on Airbnb (priced by one total).</summary>
+        public double? RentalAmount { get; set; }
+        /// <summary>Airbnb: its status for the offer — `active` (the guest can book it), `accepted`, `declined`, `expired` or `voided` (withdrawn). VRBO: `sent` (just sent), `current` (the live offer) or `preview` (recalculated, not sent).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Status { get; set; }
@@ -73,7 +113,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
 #else
         public string Status { get; set; }
 #endif
-        /// <summary>Total for the stay, in the listing’s Airbnb currency.</summary>
+        /// <summary>What the guest pays for the stay. Airbnb: the total you set. VRBO: VRBO’s own total, including its taxes and service fee.</summary>
         public double? TotalPrice { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse"/> and sets the default values.
@@ -101,15 +141,23 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "airbnbListingId", n => { AirbnbListingId = n.GetStringValue(); } },
+                { "channel", n => { Channel = n.GetEnumValue<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_channel>(); } },
                 { "checkIn", n => { CheckIn = n.GetDateValue(); } },
                 { "checkOut", n => { CheckOut = n.GetDateValue(); } },
                 { "conversationId", n => { ConversationId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "currency", n => { Currency = n.GetStringValue(); } },
+                { "damageDeposit", n => { DamageDeposit = n.GetDoubleValue(); } },
+                { "discount", n => { Discount = n.GetDoubleValue(); } },
                 { "expiresAt", n => { ExpiresAt = n.GetDateTimeOffsetValue(); } },
+                { "fees", n => { Fees = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees>(global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "guests", n => { Guests = n.GetObjectValue<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests>(global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "lines", n => { Lines = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines>(global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "message", n => { Message = n.GetStringValue(); } },
                 { "nights", n => { Nights = n.GetIntValue(); } },
+                { "rentalAmount", n => { RentalAmount = n.GetDoubleValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "totalPrice", n => { TotalPrice = n.GetDoubleValue(); } },
             };
@@ -122,15 +170,23 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("airbnbListingId", AirbnbListingId);
+            writer.WriteEnumValue<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_channel>("channel", Channel);
             writer.WriteDateValue("checkIn", CheckIn);
             writer.WriteDateValue("checkOut", CheckOut);
             writer.WriteStringValue("conversationId", ConversationId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteStringValue("currency", Currency);
+            writer.WriteDoubleValue("damageDeposit", DamageDeposit);
+            writer.WriteDoubleValue("discount", Discount);
             writer.WriteDateTimeOffsetValue("expiresAt", ExpiresAt);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees>("fees", Fees);
             writer.WriteObjectValue<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests>("guests", Guests);
             writer.WriteStringValue("id", Id);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines>("lines", Lines);
             writer.WriteStringValue("listingId", ListingId);
+            writer.WriteStringValue("message", Message);
             writer.WriteIntValue("nights", Nights);
+            writer.WriteDoubleValue("rentalAmount", RentalAmount);
             writer.WriteStringValue("status", Status);
             writer.WriteDoubleValue("totalPrice", TotalPrice);
             writer.WriteAdditionalData(AdditionalData);

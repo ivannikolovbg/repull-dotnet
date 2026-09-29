@@ -22,6 +22,14 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
 #else
         public string Message { get; set; }
 #endif
+        /// <summary>VRBO: the name the response is signed with (the connected account&apos;s host name otherwise). Ignored on other channels.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Name { get; set; }
+#nullable restore
+#else
+        public string Name { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostRequestBody"/> and sets the default values.
         /// </summary>
@@ -48,6 +56,7 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "message", n => { Message = n.GetStringValue(); } },
+                { "name", n => { Name = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -58,6 +67,7 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("message", Message);
+            writer.WriteStringValue("name", Name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

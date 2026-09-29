@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
         {
         }
         /// <summary>
-        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
+        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked (VRBO: `offerId` = `current`, the same as `DELETE /v1/conversations/{id}/pre-approval`). An offer the guest already booked cannot be withdrawn — the channel refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -71,7 +71,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferDeleteResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
+        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked (VRBO: `offerId` = `current`, the same as `DELETE /v1/conversations/{id}/pre-approval`). An offer the guest already booked cannot be withdrawn — the channel refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -109,7 +109,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Read a special offer on this conversation back from Airbnb — typically to check its `status` (`active` until the guest books it, it expires, or you withdraw it). Read live from Airbnb with the conversation’s own Airbnb account.
+        /// Read a special offer on this conversation — typically to check its `status`. Airbnb: read live with the conversation’s own Airbnb account (`active` until the guest books it, it expires, or you withdraw it). VRBO (`offerId` = `current`): the live offer as last synced from VRBO, priced by its parts with VRBO’s total.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -144,7 +144,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Read a special offer on this conversation back from Airbnb — typically to check its `status` (`active` until the guest books it, it expires, or you withdraw it). Read live from Airbnb with the conversation’s own Airbnb account.
+        /// Read a special offer on this conversation — typically to check its `status`. Airbnb: read live with the conversation’s own Airbnb account (`active` until the guest books it, it expires, or you withdraw it). VRBO (`offerId` = `current`): the live offer as last synced from VRBO, priced by its parts with VRBO’s total.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -180,7 +180,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked. An offer the guest already booked cannot be withdrawn — Airbnb refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
+        /// Withdraw a special offer the guest has not booked yet, so it can no longer be booked (VRBO: `offerId` = `current`, the same as `DELETE /v1/conversations/{id}/pre-approval`). An offer the guest already booked cannot be withdrawn — the channel refuses with `409 inquiry_no_longer_open`; cancel the booking instead.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -199,7 +199,7 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
             return requestInfo;
         }
         /// <summary>
-        /// Read a special offer on this conversation back from Airbnb — typically to check its `status` (`active` until the guest books it, it expires, or you withdraw it). Read live from Airbnb with the conversation’s own Airbnb account.
+        /// Read a special offer on this conversation — typically to check its `status`. Airbnb: read live with the conversation’s own Airbnb account (`active` until the guest books it, it expires, or you withdraw it). VRBO (`offerId` = `current`): the live offer as last synced from VRBO, priced by its parts with VRBO’s total.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

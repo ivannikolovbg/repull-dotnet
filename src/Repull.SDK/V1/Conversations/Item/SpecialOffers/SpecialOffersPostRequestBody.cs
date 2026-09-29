@@ -8,15 +8,26 @@ using System.IO;
 using System;
 namespace Repull.SDK.V1.Conversations.Item.SpecialOffers
 {
+    /// <summary>
+    /// Priced by `totalPrice` (Airbnb) OR by its parts — `rentalAmount`, `fees`, `damageDeposit` (VRBO) — never both. With `totalPrice`, `checkIn`, `checkOut` and `guests` are required.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class SpecialOffersPostRequestBody : IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>The checkIn property</summary>
         public Date? CheckIn { get; set; }
         /// <summary>Must be after `checkIn`.</summary>
         public Date? CheckOut { get; set; }
+        /// <summary>VRBO: refundable damage deposit; `null` for none.</summary>
+        public double? DamageDeposit { get; set; }
+        /// <summary>VRBO: the offer’s fees — replaces its fee list. `type` is VRBO’s fee type (`CLEANING`, `PET`, …).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees>? Fees { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees> Fees { get; set; }
+#endif
         /// <summary>The guests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -27,7 +38,17 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers
 #endif
         /// <summary>Repull listing id to offer. Defaults to the listing the conversation is about.</summary>
         public int? ListingId { get; set; }
-        /// <summary>Total the guest pays for the whole stay, in the listing’s Airbnb currency.</summary>
+        /// <summary>VRBO: the message sent to the guest with the offer (a friendly default otherwise).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Message { get; set; }
+#nullable restore
+#else
+        public string Message { get; set; }
+#endif
+        /// <summary>VRBO: rent for the whole stay, excluding fees and taxes.</summary>
+        public double? RentalAmount { get; set; }
+        /// <summary>Airbnb: the total the guest pays for the whole stay, in the listing’s Airbnb currency.</summary>
         public double? TotalPrice { get; set; }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -49,8 +70,12 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers
             {
                 { "checkIn", n => { CheckIn = n.GetDateValue(); } },
                 { "checkOut", n => { CheckOut = n.GetDateValue(); } },
+                { "damageDeposit", n => { DamageDeposit = n.GetDoubleValue(); } },
+                { "fees", n => { Fees = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees>(global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "guests", n => { Guests = n.GetObjectValue<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests>(global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests.CreateFromDiscriminatorValue); } },
                 { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "message", n => { Message = n.GetStringValue(); } },
+                { "rentalAmount", n => { RentalAmount = n.GetDoubleValue(); } },
                 { "totalPrice", n => { TotalPrice = n.GetDoubleValue(); } },
             };
         }
@@ -63,8 +88,12 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDateValue("checkIn", CheckIn);
             writer.WriteDateValue("checkOut", CheckOut);
+            writer.WriteDoubleValue("damageDeposit", DamageDeposit);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees>("fees", Fees);
             writer.WriteObjectValue<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests>("guests", Guests);
             writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("message", Message);
+            writer.WriteDoubleValue("rentalAmount", RentalAmount);
             writer.WriteDoubleValue("totalPrice", TotalPrice);
         }
     }

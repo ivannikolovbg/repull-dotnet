@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Connect.Beds24;
 using Repull.SDK.V1.Connect.Booking;
+using Repull.SDK.V1.Connect.BookingExtranetLogin;
 using Repull.SDK.V1.Connect.Bookingsync;
 using Repull.SDK.V1.Connect.Cloudbeds;
 using Repull.SDK.V1.Connect.Guesty;
@@ -20,6 +21,7 @@ using Repull.SDK.V1.Connect.Providers;
 using Repull.SDK.V1.Connect.Sessions;
 using Repull.SDK.V1.Connect.Smoobu;
 using Repull.SDK.V1.Connect.Vrbo;
+using Repull.SDK.V1.Connect.VrboLogin;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -42,6 +44,11 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.Booking.BookingRequestBuilder Booking
         {
             get => new global::Repull.SDK.V1.Connect.Booking.BookingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The bookingExtranetLogin property</summary>
+        public global::Repull.SDK.V1.Connect.BookingExtranetLogin.BookingExtranetLoginRequestBuilder BookingExtranetLogin
+        {
+            get => new global::Repull.SDK.V1.Connect.BookingExtranetLogin.BookingExtranetLoginRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The bookingsync property</summary>
         public global::Repull.SDK.V1.Connect.Bookingsync.BookingsyncRequestBuilder Bookingsync
@@ -107,6 +114,11 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.Vrbo.VrboRequestBuilder Vrbo
         {
             get => new global::Repull.SDK.V1.Connect.Vrbo.VrboRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The vrboLogin property</summary>
+        public global::Repull.SDK.V1.Connect.VrboLogin.VrboLoginRequestBuilder VrboLogin
+        {
+            get => new global::Repull.SDK.V1.Connect.VrboLogin.VrboLoginRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Repull.SDK.v1.connect.item collection</summary>
         /// <param name="position">PMS provider slug (e.g., hostaway, guesty, ownerrez)</param>

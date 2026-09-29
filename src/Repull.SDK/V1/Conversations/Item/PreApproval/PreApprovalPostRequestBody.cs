@@ -12,8 +12,16 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
     public partial class PreApprovalPostRequestBody : IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>When `true`, the guest cannot Instant Book the listing and must book through this pre-approval. Leave `false` unless you need that.</summary>
+        /// <summary>Airbnb: when `true`, the guest cannot Instant Book the listing and must book through this pre-approval. Leave `false` unless you need that.</summary>
         public bool? BlockInstantBooking { get; set; }
+        /// <summary>VRBO: the message sent to the guest with the pre-approval (a friendly default otherwise).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Message { get; set; }
+#nullable restore
+#else
+        public string Message { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostRequestBody"/> and sets the default values.
         /// </summary>
@@ -40,6 +48,7 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "blockInstantBooking", n => { BlockInstantBooking = n.GetBoolValue(); } },
+                { "message", n => { Message = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -50,6 +59,7 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("blockInstantBooking", BlockInstantBooking);
+            writer.WriteStringValue("message", Message);
         }
     }
 }

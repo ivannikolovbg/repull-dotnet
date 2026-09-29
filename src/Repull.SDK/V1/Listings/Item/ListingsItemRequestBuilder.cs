@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Listings.Item.CalendarSync;
 using Repull.SDK.V1.Listings.Item.Comps;
 using Repull.SDK.V1.Listings.Item.Content;
 using Repull.SDK.V1.Listings.Item.GenerateContent;
@@ -30,6 +31,11 @@ namespace Repull.SDK.V1.Listings.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ListingsItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The calendarSync property</summary>
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncRequestBuilder CalendarSync
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The comps property</summary>
         public global::Repull.SDK.V1.Listings.Item.Comps.CompsRequestBuilder Comps
         {

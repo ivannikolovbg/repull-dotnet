@@ -34,7 +34,78 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
         {
         }
         /// <summary>
-        /// Pre-approve the Airbnb inquiry on this conversation: the guest who asked about dates may now book them at the listed price, without waiting on you. To change the dates, guests or price, send a special offer instead (`POST /v1/conversations/{id}/special-offers`).Find inquiries that need an answer with `GET /v1/inquiries` (default `status=open`); each carries the `conversationId` to use here.**Airbnb only**, and only for listings connected to Airbnb directly. A Booking.com, VRBO or direct-booking conversation, or an Airbnb one relayed through a PMS (Hostaway, Guesty), returns `422 channel_not_supported` and nothing is sent.The inquiry is marked `pre_approved` everywhere, the same as pre-approving in Airbnb.An Airbnb refusal is never reported as a success: an inquiry that already moved on is `409 inquiry_no_longer_open`, an expired one `409 inquiry_expired`, a conversation that already has a booking `409 conversation_already_booked`.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
+        /// Withdraw the live pre-approval (or offer) on this conversation: the guest can no longer book on it, and the inquiry is open again. **VRBO**. On Airbnb a pre-approval is a special offer — withdraw it with `DELETE /v1/conversations/{id}/special-offers/{offerId}`; here it is `422 channel_not_supported`.`GET /v1/conversations/{id}` → `capabilities.canWithdraw` says whether there is something to withdraw.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalDeleteResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalDeleteResponse?> DeleteAsPreApprovalDeleteResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalDeleteResponse> DeleteAsPreApprovalDeleteResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalDeleteResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Withdraw the live pre-approval (or offer) on this conversation: the guest can no longer book on it, and the inquiry is open again. **VRBO**. On Airbnb a pre-approval is a special offer — withdraw it with `DELETE /v1/conversations/{id}/special-offers/{offerId}`; here it is `422 channel_not_supported`.`GET /v1/conversations/{id}` → `capabilities.canWithdraw` says whether there is something to withdraw.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("This method is obsolete. Use DeleteAsPreApprovalDeleteResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalResponse?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalResponse> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Pre-approve the inquiry on this conversation: the guest who asked about dates may now book them at the listed price, without waiting on you. To change the dates, guests or price, send a special offer instead (`POST /v1/conversations/{id}/special-offers`).Find inquiries that need an answer with `GET /v1/inquiries` (default `status=open`); each carries the `conversationId` to use here.One endpoint for every channel with pre-approvals: **Airbnb** (listings connected directly) and **VRBO**. A Booking.com or direct-booking conversation, or an Airbnb one relayed through a PMS (Hostaway, Guesty), returns `422 channel_not_supported` and nothing is sent — `GET /v1/conversations/{id}` → `capabilities.canPreApprove` says where it works.`blockInstantBooking` is Airbnb only (VRBO has no such switch: `422 invalid_params`). `message` is sent to the guest with a VRBO pre-approval (a friendly default otherwise).The inquiry is marked `pre_approved` everywhere, the same as pre-approving on the channel. Withdraw it with `DELETE /v1/conversations/{id}/pre-approval` (VRBO).A channel’s refusal is never reported as a success: an inquiry that already moved on is `409 inquiry_no_longer_open`, an expired one `409 inquiry_expired`, a conversation that already has a booking `409 conversation_already_booked`.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -73,7 +144,7 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Pre-approve the Airbnb inquiry on this conversation: the guest who asked about dates may now book them at the listed price, without waiting on you. To change the dates, guests or price, send a special offer instead (`POST /v1/conversations/{id}/special-offers`).Find inquiries that need an answer with `GET /v1/inquiries` (default `status=open`); each carries the `conversationId` to use here.**Airbnb only**, and only for listings connected to Airbnb directly. A Booking.com, VRBO or direct-booking conversation, or an Airbnb one relayed through a PMS (Hostaway, Guesty), returns `422 channel_not_supported` and nothing is sent.The inquiry is marked `pre_approved` everywhere, the same as pre-approving in Airbnb.An Airbnb refusal is never reported as a success: an inquiry that already moved on is `409 inquiry_no_longer_open`, an expired one `409 inquiry_expired`, a conversation that already has a booking `409 conversation_already_booked`.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
+        /// Pre-approve the inquiry on this conversation: the guest who asked about dates may now book them at the listed price, without waiting on you. To change the dates, guests or price, send a special offer instead (`POST /v1/conversations/{id}/special-offers`).Find inquiries that need an answer with `GET /v1/inquiries` (default `status=open`); each carries the `conversationId` to use here.One endpoint for every channel with pre-approvals: **Airbnb** (listings connected directly) and **VRBO**. A Booking.com or direct-booking conversation, or an Airbnb one relayed through a PMS (Hostaway, Guesty), returns `422 channel_not_supported` and nothing is sent — `GET /v1/conversations/{id}` → `capabilities.canPreApprove` says where it works.`blockInstantBooking` is Airbnb only (VRBO has no such switch: `422 invalid_params`). `message` is sent to the guest with a VRBO pre-approval (a friendly default otherwise).The inquiry is marked `pre_approved` everywhere, the same as pre-approving on the channel. Withdraw it with `DELETE /v1/conversations/{id}/pre-approval` (VRBO).A channel’s refusal is never reported as a success: an inquiry that already moved on is `409 inquiry_no_longer_open`, an expired one `409 inquiry_expired`, a conversation that already has a booking `409 conversation_already_booked`.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -113,7 +184,26 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalResponse>(requestInfo, global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Pre-approve the Airbnb inquiry on this conversation: the guest who asked about dates may now book them at the listed price, without waiting on you. To change the dates, guests or price, send a special offer instead (`POST /v1/conversations/{id}/special-offers`).Find inquiries that need an answer with `GET /v1/inquiries` (default `status=open`); each carries the `conversationId` to use here.**Airbnb only**, and only for listings connected to Airbnb directly. A Booking.com, VRBO or direct-booking conversation, or an Airbnb one relayed through a PMS (Hostaway, Guesty), returns `422 channel_not_supported` and nothing is sent.The inquiry is marked `pre_approved` everywhere, the same as pre-approving in Airbnb.An Airbnb refusal is never reported as a success: an inquiry that already moved on is `409 inquiry_no_longer_open`, an expired one `409 inquiry_expired`, a conversation that already has a booking `409 conversation_already_booked`.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
+        /// Withdraw the live pre-approval (or offer) on this conversation: the guest can no longer book on it, and the inquiry is open again. **VRBO**. On Airbnb a pre-approval is a special offer — withdraw it with `DELETE /v1/conversations/{id}/special-offers/{offerId}`; here it is `422 channel_not_supported`.`GET /v1/conversations/{id}` → `capabilities.canWithdraw` says whether there is something to withdraw.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Pre-approve the inquiry on this conversation: the guest who asked about dates may now book them at the listed price, without waiting on you. To change the dates, guests or price, send a special offer instead (`POST /v1/conversations/{id}/special-offers`).Find inquiries that need an answer with `GET /v1/inquiries` (default `status=open`); each carries the `conversationId` to use here.One endpoint for every channel with pre-approvals: **Airbnb** (listings connected directly) and **VRBO**. A Booking.com or direct-booking conversation, or an Airbnb one relayed through a PMS (Hostaway, Guesty), returns `422 channel_not_supported` and nothing is sent — `GET /v1/conversations/{id}` → `capabilities.canPreApprove` says where it works.`blockInstantBooking` is Airbnb only (VRBO has no such switch: `422 invalid_params`). `message` is sent to the guest with a VRBO pre-approval (a friendly default otherwise).The inquiry is marked `pre_approved` everywhere, the same as pre-approving on the channel. Withdraw it with `DELETE /v1/conversations/{id}/pre-approval` (VRBO).A channel’s refusal is never reported as a success: an inquiry that already moved on is `409 inquiry_no_longer_open`, an expired one `409 inquiry_expired`, a conversation that already has a booking `409 conversation_already_booked`.Send `Idempotency-Key`: a repeat with the same key replays the first response instead of acting twice (a `409 idempotency_key_in_use` while the first is still running). A 5xx, a `429 airbnb_rate_limited` or a `403 connection_reauth_required` is not stored — nothing was done — so retrying with the same key reaches Airbnb again.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -142,6 +232,14 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
         public global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class PreApprovalRequestBuilderDeleteRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        {
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.

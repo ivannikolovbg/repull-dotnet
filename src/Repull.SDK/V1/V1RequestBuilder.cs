@@ -6,6 +6,7 @@ using Repull.SDK.V1.Availability;
 using Repull.SDK.V1.Billing;
 using Repull.SDK.V1.Channels;
 using Repull.SDK.V1.Connect;
+using Repull.SDK.V1.Connections;
 using Repull.SDK.V1.Conversations;
 using Repull.SDK.V1.Guests;
 using Repull.SDK.V1.Health;
@@ -52,6 +53,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Connect.ConnectRequestBuilder Connect
         {
             get => new global::Repull.SDK.V1.Connect.ConnectRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The connections property</summary>
+        public global::Repull.SDK.V1.Connections.ConnectionsRequestBuilder Connections
+        {
+            get => new global::Repull.SDK.V1.Connections.ConnectionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The conversations property</summary>
         public global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder Conversations

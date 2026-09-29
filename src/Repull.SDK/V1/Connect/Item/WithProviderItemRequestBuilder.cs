@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Connect.Item.WritePolicy;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace Repull.SDK.V1.Connect.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithProviderItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The writePolicy property</summary>
+        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyRequestBuilder WritePolicy
+        {
+            get => new global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Item.WithProviderItemRequestBuilder"/> and sets the default values.
         /// </summary>

@@ -14,6 +14,16 @@ namespace Repull.SDK.V1.Health.Channels.Item
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The status property</summary>
+        public global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_status? Status { get; set; }
+        /// <summary>VRBO only — the connector&apos;s own signals.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_vrbo? Vrbo { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_vrbo Vrbo { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse"/> and sets the default values.
         /// </summary>
@@ -39,6 +49,8 @@ namespace Repull.SDK.V1.Health.Channels.Item
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_status>(); } },
+                { "vrbo", n => { Vrbo = n.GetObjectValue<global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_vrbo>(global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_vrbo.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -48,6 +60,8 @@ namespace Repull.SDK.V1.Health.Channels.Item
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteEnumValue<global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_status>("status", Status);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_vrbo>("vrbo", Vrbo);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

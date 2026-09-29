@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// `message`, `attachments`, or both. Per-channel limits for `attachments`:| Channel | Accepted types | Per file | Per request | Text ||---|---|---|---|---|| Airbnb | JPEG, PNG, GIF, WebP (sent as JPEG), MP4, QuickTime | 10 MB | 5 | optional — each file is sent as its own message, then the text || Booking.com | JPEG, PNG | 10 MB | 5 | **required** — all files ride on the one text message || SMS, email, direct-booking site chat | — | — | — | `422 attachments_not_supported`; nothing is sent |
+    /// `message`, `attachments`, or both. Per-channel limits for `attachments`:| Channel | Accepted types | Per file | Per request | Text ||---|---|---|---|---|| Airbnb | JPEG, PNG, GIF, WebP (sent as JPEG), MP4, QuickTime | 10 MB | 5 | optional — each file is sent as its own message, then the text || Booking.com | JPEG, PNG | 10 MB | 5 | **required** — all files ride on the one text message || VRBO, SMS, email, direct-booking site chat | — | — | — | `422 attachments_not_supported`; nothing is sent |
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SendMessageRequest : IAdditionalDataHolder, IParsable

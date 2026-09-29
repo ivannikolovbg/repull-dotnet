@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -58,6 +59,14 @@ namespace Repull.SDK.V1.Connect.Cloudbeds.Credentials
 #else
         public global::Repull.SDK.V1.Connect.Cloudbeds.Credentials.CredentialsPostResponse_webhooks Webhooks { get; set; }
 #endif
+        /// <summary>What the app may change in a connected PMS. Hotel PMSs (Cloudbeds, Mews) start with every `calendar` switch off, because the PMS owns its room inventory; every other PMS starts with everything on. Reading from the PMS is never affected.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.PmsWritePolicy? WritePolicy { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.PmsWritePolicy WritePolicy { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Cloudbeds.Credentials.CredentialsPostResponse"/> and sets the default values.
         /// </summary>
@@ -90,6 +99,7 @@ namespace Repull.SDK.V1.Connect.Cloudbeds.Credentials
                 { "provider", n => { Provider = n.GetStringValue(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "webhooks", n => { Webhooks = n.GetObjectValue<global::Repull.SDK.V1.Connect.Cloudbeds.Credentials.CredentialsPostResponse_webhooks>(global::Repull.SDK.V1.Connect.Cloudbeds.Credentials.CredentialsPostResponse_webhooks.CreateFromDiscriminatorValue); } },
+                { "writePolicy", n => { WritePolicy = n.GetObjectValue<global::Repull.SDK.Models.PmsWritePolicy>(global::Repull.SDK.Models.PmsWritePolicy.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -106,6 +116,7 @@ namespace Repull.SDK.V1.Connect.Cloudbeds.Credentials
             writer.WriteStringValue("provider", Provider);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteObjectValue<global::Repull.SDK.V1.Connect.Cloudbeds.Credentials.CredentialsPostResponse_webhooks>("webhooks", Webhooks);
+            writer.WriteObjectValue<global::Repull.SDK.Models.PmsWritePolicy>("writePolicy", WritePolicy);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

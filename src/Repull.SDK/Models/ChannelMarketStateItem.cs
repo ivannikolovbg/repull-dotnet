@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// What happened on ONE channel item — one Airbnb connection, or one Booking.com property. A listing can carry several Airbnb connections (a re-list, or a move between host accounts) and each gets its own entry.
+    /// What happened on ONE channel item — one Airbnb connection, one Booking.com property, or one VRBO unit. A listing can carry several Airbnb connections (a re-list, or a move between host accounts) and each gets its own entry.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ChannelMarketStateItem : IAdditionalDataHolder, IParsable
@@ -17,7 +17,7 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The channel property</summary>
         public global::Repull.SDK.Models.ChannelMarketStateItem_channel? Channel { get; set; }
-        /// <summary>Error code when `ok` is false — the SAME code the channel-specific endpoint returns for this failure, so one vocabulary covers both surfaces. Absent when `ok` is true.The channel codes come in pairs, and the pair is the retryable split — the most useful bit in the whole item:- `airbnb_rejected` / `booking_rejected` — the channel refused the request AS SENT. `message` carries its own reason. Correct it and send again; resending the same thing is refused again.- `airbnb_error` / `booking_error` — the channel did not complete the request (outage, timeout, server error). Nothing about the request needs to change: retry with backoff.Plus `ambiguous_booking_mapping` (name the property with `hotelId`) and `payment_required` (a billing refusal, which keeps its own code rather than being buried under a channel one).</summary>
+        /// <summary>Error code when `ok` is false — the SAME code the channel-specific endpoint returns for this failure, so one vocabulary covers both surfaces. Absent when `ok` is true.The channel codes come in pairs, and the pair is the retryable split — the most useful bit in the whole item:- `airbnb_rejected` / `booking_rejected` — the channel refused the request AS SENT. `message` carries its own reason. Correct it and send again; resending the same thing is refused again.- `airbnb_error` / `booking_error` — the channel did not complete the request (outage, timeout, server error). Nothing about the request needs to change: retry with backoff.Plus `ambiguous_booking_mapping` (name the property with `hotelId`) and `payment_required` (a billing refusal, which keeps its own code rather than being buried under a channel one). VRBO items: `vrbo_rejected` (VRBO still shows the unit in the old state after the change), `vrbo_error` (VRBO did not complete it — retry), `vrbo_not_ready` (the unit&apos;s VRBO details have not synced yet — retry in a few minutes), `vrbo_session_expired` (reconnect the VRBO account).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Code { get; set; }
@@ -59,6 +59,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>True only when the channel confirmed the change.</summary>
         public bool? Ok { get; set; }
+        /// <summary>The VRBO listing number of the unit hidden or reactivated. Present on VRBO items.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PlatformId { get; set; }
+#nullable restore
+#else
+        public string PlatformId { get; set; }
+#endif
         /// <summary>The `code` this item used to carry, for callers still branching on the old string. A migration aid with a deprecation window — **`code` is canonical.**This fan-out reaches Airbnb through an internal hop that flattens a refusal into its own 500, so an unambiguous Airbnb 400 (&quot;Please specify a valid room type&quot;) was reported as `airbnb_error` — whose published advice is to retry with backoff, forever, for something Airbnb will never accept. It now reads Airbnb&apos;s real status and answers `airbnb_rejected`, and the classification covers the whole 4xx range rather than only `400`. Items whose code changed carry `previousCode`. **Removed in v2.**</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -70,7 +78,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>**What is now true of this item**, not what you asked for.`offline` — it is off the market. `online` — it is back on. `unchanged` — nothing was sent, or what was sent did not take; `code` and `message` say why.`unchanged` never means &quot;it was already like that&quot;: it means we did not put it there, and it is still in whatever state it was in before the call.</summary>
         public global::Repull.SDK.Models.ChannelMarketStateItem_state? State { get; set; }
-        /// <summary>Airbnb only: the listing was READ BACK afterwards and is in the state asked for — down after `offline`, live after `online`. Airbnb can accept a deactivation and leave a listing live, or accept an activation and keep it offline; either is returned as a failure, never as success. `false` means the read-back could not run — an unknown, not a success.</summary>
+        /// <summary>Airbnb and VRBO: the listing was READ BACK afterwards and is in the state asked for — down after `offline`, live after `online`. Airbnb can accept a deactivation and leave a listing live, or accept an activation and keep it offline; either is returned as a failure, never as success. `false` means the read-back could not run — an unknown, not a success.</summary>
         public bool? Verified { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ChannelMarketStateItem"/> and sets the default values.
@@ -104,6 +112,7 @@ namespace Repull.SDK.Models
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "ok", n => { Ok = n.GetBoolValue(); } },
+                { "platformId", n => { PlatformId = n.GetStringValue(); } },
                 { "previousCode", n => { PreviousCode = n.GetStringValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Repull.SDK.Models.ChannelMarketStateItem_state>(); } },
                 { "verified", n => { Verified = n.GetBoolValue(); } },
@@ -123,6 +132,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteStringValue("message", Message);
             writer.WriteBoolValue("ok", Ok);
+            writer.WriteStringValue("platformId", PlatformId);
             writer.WriteStringValue("previousCode", PreviousCode);
             writer.WriteEnumValue<global::Repull.SDK.Models.ChannelMarketStateItem_state>("state", State);
             writer.WriteBoolValue("verified", Verified);

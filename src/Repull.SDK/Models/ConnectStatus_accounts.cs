@@ -12,10 +12,20 @@ namespace Repull.SDK.Models
     public partial class ConnectStatus_accounts : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Vrbo only.</summary>
+        public global::Repull.SDK.Models.ConnectStatus_accounts_accessType? AccessType { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>True while the account is active and its authorization is usable.</summary>
         public bool? Connected { get; set; }
+        /// <summary>Vrbo only: the account email.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Email { get; set; }
+#nullable restore
+#else
+        public string Email { get; set; }
+#endif
         /// <summary>Airbnb host ID, as a string (it can exceed 2^53).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -23,6 +33,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string ExternalAccountId { get; set; }
+#endif
+        /// <summary>Vrbo only: where the account import stands.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.VrboImportStatus? Import { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.VrboImportStatus Import { get; set; }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -73,8 +91,11 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectStatus_accounts_accessType>(); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
+                { "email", n => { Email = n.GetStringValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
+                { "import", n => { Import = n.GetObjectValue<global::Repull.SDK.Models.VrboImportStatus>(global::Repull.SDK.Models.VrboImportStatus.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "pictureUrl", n => { PictureUrl = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
@@ -87,8 +108,11 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteEnumValue<global::Repull.SDK.Models.ConnectStatus_accounts_accessType>("accessType", AccessType);
             writer.WriteBoolValue("connected", Connected);
+            writer.WriteStringValue("email", Email);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
+            writer.WriteObjectValue<global::Repull.SDK.Models.VrboImportStatus>("import", Import);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("pictureUrl", PictureUrl);
             writer.WriteStringValue("status", Status);

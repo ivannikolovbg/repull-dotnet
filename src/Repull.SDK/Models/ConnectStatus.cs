@@ -13,7 +13,7 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConnectStatus : IAdditionalDataHolder, IParsable
     {
-        /// <summary>Airbnb only: every Airbnb account this workspace has connected, including ones since disconnected. Pass `externalAccountId` as `accountId` to `DELETE /v1/connect/airbnb` to disconnect one account.</summary>
+        /// <summary>Airbnb: every Airbnb account this workspace has connected, including ones since disconnected. Pass `externalAccountId` as `accountId` to `DELETE /v1/connect/airbnb` to disconnect one account. Vrbo (`GET /v1/connect/vrbo-login`): every signed-in Vrbo account, each with `accessType` and `import` (a `VrboImportStatus`), plus a top-level `dataFreshness`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.ConnectStatus_accounts>? Accounts { get; set; }
@@ -27,6 +27,14 @@ namespace Repull.SDK.Models
         public bool? Connected { get; set; }
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>Vrbo only: the same freshness envelope the Airbnb read endpoints return, per account and in aggregate. Its reason is never_synced until a mapping is confirmed and importing while upcoming bookings come in.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ConnectStatus_dataFreshness? DataFreshness { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ConnectStatus_dataFreshness DataFreshness { get; set; }
+#endif
         /// <summary>Provider-side account ID (e.g. the Airbnb host ID).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -61,6 +69,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The status property</summary>
         public global::Repull.SDK.Models.ConnectStatus_status? Status { get; set; }
+        /// <summary>PMS connections only: what the app may change in the PMS. Change it with `PATCH /v1/connect/{provider}/write-policy`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.PmsWritePolicy? WritePolicy { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.PmsWritePolicy WritePolicy { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectStatus"/> and sets the default values.
         /// </summary>
@@ -89,11 +105,13 @@ namespace Repull.SDK.Models
                 { "accounts", n => { Accounts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConnectStatus_accounts>(global::Repull.SDK.Models.ConnectStatus_accounts.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.ConnectStatus_dataFreshness>(global::Repull.SDK.Models.ConnectStatus_dataFreshness.CreateFromDiscriminatorValue); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
                 { "host", n => { Host = n.GetObjectValue<global::Repull.SDK.Models.ConnectHost>(global::Repull.SDK.Models.ConnectHost.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.ConnectStatus_status>(); } },
+                { "writePolicy", n => { WritePolicy = n.GetObjectValue<global::Repull.SDK.Models.PmsWritePolicy>(global::Repull.SDK.Models.PmsWritePolicy.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -106,11 +124,13 @@ namespace Repull.SDK.Models
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConnectStatus_accounts>("accounts", Accounts);
             writer.WriteBoolValue("connected", Connected);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ConnectStatus_dataFreshness>("dataFreshness", DataFreshness);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectHost>("host", Host);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("provider", Provider);
             writer.WriteEnumValue<global::Repull.SDK.Models.ConnectStatus_status>("status", Status);
+            writer.WriteObjectValue<global::Repull.SDK.Models.PmsWritePolicy>("writePolicy", WritePolicy);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Connect.Sessions.Item.ListingOptions;
 using Repull.SDK.V1.Connect.Sessions.Item.SelectProvider;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,11 @@ namespace Repull.SDK.V1.Connect.Sessions.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithSessionItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The listingOptions property</summary>
+        public global::Repull.SDK.V1.Connect.Sessions.Item.ListingOptions.ListingOptionsRequestBuilder ListingOptions
+        {
+            get => new global::Repull.SDK.V1.Connect.Sessions.Item.ListingOptions.ListingOptionsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The selectProvider property</summary>
         public global::Repull.SDK.V1.Connect.Sessions.Item.SelectProvider.SelectProviderRequestBuilder SelectProvider
         {

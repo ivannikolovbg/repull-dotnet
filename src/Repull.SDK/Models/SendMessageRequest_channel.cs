@@ -15,6 +15,10 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         Booking,
         #pragma warning restore CS1591
+        [EnumMember(Value = "vrbo")]
+        #pragma warning disable CS1591
+        Vrbo,
+        #pragma warning restore CS1591
         [EnumMember(Value = "sms")]
         #pragma warning disable CS1591
         Sms,

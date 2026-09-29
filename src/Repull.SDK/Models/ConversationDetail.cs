@@ -13,6 +13,14 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationDetail : global::Repull.SDK.Models.Conversation, IParsable
     {
+        /// <summary>What the inquiry actions can do on this conversation right now — one set of endpoints for every channel, so an app shows the right actions instead of learning from a `422`. All `false` / `null` when nothing applies (a booked or closed inquiry, Booking.com, direct, an Airbnb inquiry relayed by a PMS).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ConversationCapabilities? Capabilities { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ConversationCapabilities Capabilities { get; set; }
+#endif
         /// <summary>The guest property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -47,6 +55,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
             {
+                { "capabilities", n => { Capabilities = n.GetObjectValue<global::Repull.SDK.Models.ConversationCapabilities>(global::Repull.SDK.Models.ConversationCapabilities.CreateFromDiscriminatorValue); } },
                 { "guest", n => { Guest = n.GetObjectValue<global::Repull.SDK.Models.ConversationGuest>(global::Repull.SDK.Models.ConversationGuest.CreateFromDiscriminatorValue); } },
                 { "host", n => { Host = n.GetObjectValue<global::Repull.SDK.Models.ConversationHost>(global::Repull.SDK.Models.ConversationHost.CreateFromDiscriminatorValue); } },
             };
@@ -59,6 +68,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             base.Serialize(writer);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ConversationCapabilities>("capabilities", Capabilities);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConversationGuest>("guest", Guest);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConversationHost>("host", Host);
         }

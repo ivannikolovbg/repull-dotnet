@@ -30,6 +30,14 @@ namespace Repull.SDK.V1.Connect.Mews.Credentials
 #else
         public string SessionId { get; set; }
 #endif
+        /// <summary>Optional: what the app may change in the PMS, set before the first sync. Same shape as `PATCH /v1/connect/{provider}/write-policy`; switches you leave out keep the provider default (calendar off for hotel PMSs, bookings on).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody_writePolicy? WritePolicy { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody_writePolicy WritePolicy { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody"/> and sets the default values.
         /// </summary>
@@ -57,6 +65,7 @@ namespace Repull.SDK.V1.Connect.Mews.Credentials
             {
                 { "credentials", n => { Credentials = n.GetObjectValue<global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody_credentials>(global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody_credentials.CreateFromDiscriminatorValue); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
+                { "writePolicy", n => { WritePolicy = n.GetObjectValue<global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody_writePolicy>(global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody_writePolicy.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -68,6 +77,7 @@ namespace Repull.SDK.V1.Connect.Mews.Credentials
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody_credentials>("credentials", Credentials);
             writer.WriteStringValue("sessionId", SessionId);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostRequestBody_writePolicy>("writePolicy", WritePolicy);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

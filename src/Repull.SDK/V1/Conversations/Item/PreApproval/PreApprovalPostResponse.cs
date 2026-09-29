@@ -16,6 +16,8 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The blockInstantBooking property</summary>
         public bool? BlockInstantBooking { get; set; }
+        /// <summary>The channel property</summary>
+        public global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_channel? Channel { get; set; }
         /// <summary>The conversationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -24,8 +26,16 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
 #else
         public string ConversationId { get; set; }
 #endif
-        /// <summary>When the guest can no longer book on the pre-approval, if Airbnb reported it.</summary>
+        /// <summary>When the guest can no longer book on the pre-approval, if the channel reported it.</summary>
         public DateTimeOffset? ExpiresAt { get; set; }
+        /// <summary>The message sent to the guest with the pre-approval (VRBO).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Message { get; set; }
+#nullable restore
+#else
+        public string Message { get; set; }
+#endif
         /// <summary>The status property</summary>
         public global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_status? Status { get; set; }
         /// <summary>
@@ -54,8 +64,10 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "blockInstantBooking", n => { BlockInstantBooking = n.GetBoolValue(); } },
+                { "channel", n => { Channel = n.GetEnumValue<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_channel>(); } },
                 { "conversationId", n => { ConversationId = n.GetStringValue(); } },
                 { "expiresAt", n => { ExpiresAt = n.GetDateTimeOffsetValue(); } },
+                { "message", n => { Message = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_status>(); } },
             };
         }
@@ -67,8 +79,10 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("blockInstantBooking", BlockInstantBooking);
+            writer.WriteEnumValue<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_channel>("channel", Channel);
             writer.WriteStringValue("conversationId", ConversationId);
             writer.WriteDateTimeOffsetValue("expiresAt", ExpiresAt);
+            writer.WriteStringValue("message", Message);
             writer.WriteEnumValue<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_status>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }
