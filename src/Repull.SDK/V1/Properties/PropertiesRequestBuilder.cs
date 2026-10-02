@@ -181,7 +181,7 @@ namespace Repull.SDK.V1.Properties
             [QueryParameter("q")]
             public string Q { get; set; }
 #endif
-            /// <summary>Filter by status. Default returns active only; pass `inactive` to invert or `all` to include both. Inactive properties carry identity fields only — `id`, `name`, `status`, `lifecycleStatus`, `channels` and `updatedAt` — never `address`, `city` or `currency`.</summary>
+            /// <summary>Filter by status. Default returns active only; pass `inactive` to invert or `all` to include both. Inactive properties carry identity fields only — `id`, `name`, `city`, `status`, `inactiveReason` (`plan_limit`, `unlisted_on_airbnb` or `deactivated`), `lifecycleStatus`, `channels` and `updatedAt` — never `address` or `currency`.</summary>
             [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -192,7 +192,7 @@ namespace Repull.SDK.V1.Properties
             [QueryParameter("status")]
             public string Status { get; set; }
 #endif
-            /// <summary>Filter by status. Default returns active only; pass `inactive` to invert or `all` to include both. Inactive properties carry identity fields only — `id`, `name`, `status`, `lifecycleStatus`, `channels` and `updatedAt` — never `address`, `city` or `currency`.</summary>
+            /// <summary>Filter by status. Default returns active only; pass `inactive` to invert or `all` to include both. Inactive properties carry identity fields only — `id`, `name`, `city`, `status`, `inactiveReason` (`plan_limit`, `unlisted_on_airbnb` or `deactivated`), `lifecycleStatus`, `channels` and `updatedAt` — never `address` or `currency`.</summary>
             [QueryParameter("status")]
             public global::Repull.SDK.V1.Properties.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
             /// <summary>Incremental sync: return only records whose `updatedAt` is at or after this instant. This is the only filter on record **mutation** time — every `check_*` filter targets guest **stay** dates.**Accepted formats.** ISO 8601, with `Z` or a numeric offset — both work:- `2026-08-01T00:00:00Z`- `2026-08-01T00:00:00.123Z`- `2026-08-01T00:00:00+00:00`- `2026-08-01T02:30:00-07:00` (offset colon optional: `-0700`)- `2026-08-01T00:00` (seconds optional)- `2026-08-01T00:00:00` — no zone designator, interpreted as **UTC**- `2026-08-01` — date only, means midnight UTCAnything else returns 422 `invalid_params` naming the field; the value is never silently ignored.**Ordering changes when you pass this.** Results are ordered `updatedAt ASC, id ASC` (instead of the endpoint default) and the cursor keys on the same pair. That is required for correctness: under the default ordering a record amended mid-walk can move behind the cursor and never be emitted — which is exactly the event you are polling for. Ascending mutation time is monotonic with the cursor, so anything touched during a walk resurfaces later in it or on the next poll.**Cursors are not interchangeable between the two orderings.** Keep `updated_since` on every page of an incremental walk; replaying a cursor from the other ordering returns 422 rather than a page that silently skips rows.**Watermark.** The bound is inclusive (`updatedAt &gt;= value`), so the last row of the final page is the watermark for the next poll — re-polling with it re-emits that row. Delivery is at-least-once; upsert by `id`.</summary>

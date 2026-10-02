@@ -225,7 +225,7 @@ namespace Repull.SDK.V1.Listings
             [QueryParameter("q")]
             public string Q { get; set; }
 #endif
-            /// <summary>Filter by listing status. Defaults to `active`. Pass `inactive` to list the listings you can activate, `archived` for archived ones, or `all` for every status. Inactive listings are returned with identity fields only — `id`, `name`, `status` and `channels` — and never with `address`, `content` or `details`; activate one to see the rest. The only field you can add to an inactive row is `thumbnailUrl`, via `?include=thumbnail`.</summary>
+            /// <summary>Filter by listing status. Defaults to `active`. Pass `inactive` to list the listings you can activate, `archived` for archived ones, or `all` for every status. Inactive listings are returned with identity fields only — `id`, `name`, `status`, `inactiveReason` (`plan_limit`, `unlisted_on_airbnb` or `deactivated`), `address.city` and `channels` — and never with the street, `content` or `details`; activate one to see the rest. The only field you can add to an inactive row is `thumbnailUrl`, via `?include=thumbnail`.</summary>
             [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -236,7 +236,7 @@ namespace Repull.SDK.V1.Listings
             [QueryParameter("status")]
             public string Status { get; set; }
 #endif
-            /// <summary>Filter by listing status. Defaults to `active`. Pass `inactive` to list the listings you can activate, `archived` for archived ones, or `all` for every status. Inactive listings are returned with identity fields only — `id`, `name`, `status` and `channels` — and never with `address`, `content` or `details`; activate one to see the rest. The only field you can add to an inactive row is `thumbnailUrl`, via `?include=thumbnail`.</summary>
+            /// <summary>Filter by listing status. Defaults to `active`. Pass `inactive` to list the listings you can activate, `archived` for archived ones, or `all` for every status. Inactive listings are returned with identity fields only — `id`, `name`, `status`, `inactiveReason` (`plan_limit`, `unlisted_on_airbnb` or `deactivated`), `address.city` and `channels` — and never with the street, `content` or `details`; activate one to see the rest. The only field you can add to an inactive row is `thumbnailUrl`, via `?include=thumbnail`.</summary>
             [QueryParameter("status")]
             public global::Repull.SDK.V1.Listings.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
         }

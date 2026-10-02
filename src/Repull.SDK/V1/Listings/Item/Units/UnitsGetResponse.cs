@@ -22,8 +22,14 @@ namespace Repull.SDK.V1.Listings.Item.Units
 #else
         public List<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data> Data { get; set; }
 #endif
-        /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        /// <summary>Repull listing id (numeric string, like every `*Id` on the wire).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
         /// <summary>The total property</summary>
         public int? Total { get; set; }
         /// <summary>
@@ -52,7 +58,7 @@ namespace Repull.SDK.V1.Listings.Item.Units
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data>(global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "total", n => { Total = n.GetIntValue(); } },
             };
         }
@@ -64,7 +70,7 @@ namespace Repull.SDK.V1.Listings.Item.Units
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data>("data", Data);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteIntValue("total", Total);
             writer.WriteAdditionalData(AdditionalData);
         }

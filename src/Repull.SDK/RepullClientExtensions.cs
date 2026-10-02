@@ -29,4 +29,41 @@ public static class RepullClientExtensions
             }
         }, cancellationToken);
     }
+
+    /// <summary>
+    /// Price a stay and check its availability in the PMS that manages the
+    /// listing, without booking anything (<c>POST /v1/reservations/quote</c>).
+    /// <c>Available == false</c> is an answer, not an error: the PMS's reasons
+    /// are in <c>Restrictions</c>. A listing not managed in a PMS answers
+    /// <c>422 pms_not_linked</c>; a PMS without a quote API answers
+    /// <c>422 pms_write_unsupported</c>.
+    /// </summary>
+    public static Task<ReservationQuoteResponse?> QuoteReservationAsync(
+        this RepullClient client,
+        ReservationQuoteRequest body,
+        CancellationToken cancellationToken = default)
+    {
+        if (client == null) throw new ArgumentNullException(nameof(client));
+        if (body == null) throw new ArgumentNullException(nameof(body));
+
+        return client.V1.Reservations.Quote.PostAsync(body, cancellationToken: cancellationToken);
+    }
+
+    /// <summary>
+    /// Create a reservation (<c>POST /v1/reservations</c>). On a listing
+    /// managed in a PMS the booking is written to the PMS: set
+    /// <c>Adults</c>/<c>Children</c>, <c>TotalPrice</c>, <c>Notes</c>,
+    /// <c>UnitId</c>, <c>Status</c> and <c>SendConfirmationEmail</c> as
+    /// needed, and read the <c>Pms</c> block on the response.
+    /// </summary>
+    public static Task<ReservationCreateResponse?> CreateReservationAsync(
+        this RepullClient client,
+        ReservationCreateRequest body,
+        CancellationToken cancellationToken = default)
+    {
+        if (client == null) throw new ArgumentNullException(nameof(client));
+        if (body == null) throw new ArgumentNullException(nameof(body));
+
+        return client.V1.Reservations.PostAsync(body, cancellationToken: cancellationToken);
+    }
 }

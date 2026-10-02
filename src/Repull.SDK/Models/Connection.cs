@@ -12,6 +12,14 @@ namespace Repull.SDK.Models
     public partial class Connection : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Set when the host must do something before the connection works (e.g. grant the invited Booking.com Extranet user full access). `null` when no action is pending.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ConnectionAction? Action { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ConnectionAction Action { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The createdAt property</summary>
@@ -23,6 +31,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string ExternalAccountId { get; set; }
+#endif
+        /// <summary>Durable link that reopens the hosted Connect flow bound to this account on the fix screen — send the host here to resolve `action`. Present only when `action.required` is true; `null` otherwise.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FixUrl { get; set; }
+#nullable restore
+#else
+        public string FixUrl { get; set; }
 #endif
         /// <summary>Host metadata for the linked account. Currently populated for Airbnb only; null for other providers.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -48,7 +64,7 @@ namespace Repull.SDK.Models
 #else
         public string Provider { get; set; }
 #endif
-        /// <summary>The status property</summary>
+        /// <summary>`active` — connected and working. `pending` — still settling. `needs_permissions` — connected but the host must grant more access before it works (see `action`/`fixUrl`). An `active` connection can also carry an `action` (e.g. a Smoobu legacy API key that must be replaced with a key + secret before October 31, 2026). `error` — the last operation failed. `disconnected` — revoked or superseded.</summary>
         public global::Repull.SDK.Models.Connection_status? Status { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Connection"/> and sets the default values.
@@ -75,8 +91,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "action", n => { Action = n.GetObjectValue<global::Repull.SDK.Models.ConnectionAction>(global::Repull.SDK.Models.ConnectionAction.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
+                { "fixUrl", n => { FixUrl = n.GetStringValue(); } },
                 { "host", n => { Host = n.GetObjectValue<global::Repull.SDK.Models.ConnectHost>(global::Repull.SDK.Models.ConnectHost.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
@@ -90,8 +108,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.ConnectionAction>("action", Action);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
+            writer.WriteStringValue("fixUrl", FixUrl);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectHost>("host", Host);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("provider", Provider);

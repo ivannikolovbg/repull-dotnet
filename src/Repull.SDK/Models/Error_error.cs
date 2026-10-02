@@ -86,6 +86,14 @@ namespace Repull.SDK.Models
 #else
         public List<string> ListingIds { get; set; }
 #endif
+        /// <summary>The same inactive listings with their names, so you can show the user which ones to activate. Present on `code: &quot;listing_inactive&quot;` (HTTP 403). `name` is null only when the request did not resolve it.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.Error_error_listings>? Listings { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.Error_error_listings> Listings { get; set; }
+#endif
         /// <summary>Human-readable cause. Echoes the offending value when relevant.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -187,6 +195,7 @@ namespace Repull.SDK.Models
                 { "fix", n => { Fix = n.GetStringValue(); } },
                 { "listing_id", n => { ListingId = n.GetStringValue(); } },
                 { "listing_ids", n => { ListingIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "listings", n => { Listings = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Error_error_listings>(global::Repull.SDK.Models.Error_error_listings.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "previous_code", n => { PreviousCode = n.GetStringValue(); } },
                 { "request_id", n => { RequestId = n.GetStringValue(); } },
@@ -214,6 +223,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("fix", Fix);
             writer.WriteStringValue("listing_id", ListingId);
             writer.WriteCollectionOfPrimitiveValues<string>("listing_ids", ListingIds);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Error_error_listings>("listings", Listings);
             writer.WriteStringValue("message", Message);
             writer.WriteStringValue("previous_code", PreviousCode);
             writer.WriteStringValue("request_id", RequestId);

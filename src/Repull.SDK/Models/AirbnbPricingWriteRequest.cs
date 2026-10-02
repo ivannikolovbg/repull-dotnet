@@ -23,6 +23,14 @@ namespace Repull.SDK.Models
 #else
         public string Currency { get; set; }
 #endif
+        /// <summary>With `type: &quot;fees&quot;` — the fee changes to apply. **Merged by `fee_type`**: fees you do not mention are kept, the ones you send are set, and `amount: null` removes that fee. (Airbnb itself replaces the whole fee list on every write, so Repull reads the listing&apos;s current fees, applies your changes and writes the full set.) The response is the listing&apos;s fees as Airbnb holds them afterwards.**Units — the same as `GET …/pricing` returns:** a `flat` fee is the amount in the listing currency × 1,000,000 (`160000000` = 160.00); a `percent` fee is a whole percent of the rent (`10` = 10%).Example — add a 10% management fee and keep everything else: `{&quot;type&quot;:&quot;fees&quot;,&quot;fees&quot;:[{&quot;fee_type&quot;:&quot;PASS_THROUGH_MANAGEMENT_FEE&quot;,&quot;amount&quot;:10,&quot;amount_type&quot;:&quot;percent&quot;}]}`. Remove the pet fee: `{&quot;type&quot;:&quot;fees&quot;,&quot;fees&quot;:[{&quot;fee_type&quot;:&quot;PASS_THROUGH_PET_FEE&quot;,&quot;amount&quot;:null}]}`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees>? Fees { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees> Fees { get; set; }
+#endif
         /// <summary>Required when `type: &quot;model&quot;` — the pricing-availability model to switch the listing to.</summary>
         public global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType? ModelType { get; set; }
         /// <summary>Required when `type: &quot;calendar&quot;`. Batch of per-date price + restriction operations.</summary>
@@ -49,7 +57,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule Rule { get; set; }
 #endif
-        /// <summary>Required for `type: &quot;standard&quot; | &quot;rate-plan&quot; | &quot;fees&quot;` — the pricing-settings object to PUT.</summary>
+        /// <summary>Required for `type: &quot;standard&quot; | &quot;rate-plan&quot;` — the pricing-settings object to PUT. With `type: &quot;fees&quot;` it is the raw alternative to `fees`: `{&quot;standard_fees&quot;: [...]}` **replaces every fee** on the listing (Airbnb does not merge), so send the complete list. Prefer `fees`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.AirbnbPricingWriteRequest_settings? Settings { get; set; }
@@ -85,6 +93,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "currency", n => { Currency = n.GetStringValue(); } },
+                { "fees", n => { Fees = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees>(global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "modelType", n => { ModelType = n.GetEnumValue<global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType>(); } },
                 { "operations", n => { Operations = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbCalendarOperation>(global::Repull.SDK.Models.AirbnbCalendarOperation.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "records", n => { Records = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records>(global::Repull.SDK.Models.AirbnbPricingWriteRequest_records.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -101,6 +110,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("currency", Currency);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees>("fees", Fees);
             writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType>("modelType", ModelType);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbCalendarOperation>("operations", Operations);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records>("records", Records);

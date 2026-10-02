@@ -8,16 +8,17 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Which fields a listing takes depends on whether it is managed in a PMS — see the operation description and `GET /v1/listings/{id}` → `capabilities.reservations`. A field the listing cannot take is refused by name (`422 unsupported_field`), never dropped.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class ReservationCreateRequest : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class ReservationCreateRequest : IParsable
     {
-        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The adults property</summary>
+        public int? Adults { get; set; }
         /// <summary>The checkIn property</summary>
         public Date? CheckIn { get; set; }
-        /// <summary>The checkInTime property</summary>
+        /// <summary>Listings not managed in a PMS only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CheckInTime { get; set; }
@@ -27,7 +28,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Must be after `checkIn`.</summary>
         public Date? CheckOut { get; set; }
-        /// <summary>The checkOutTime property</summary>
+        /// <summary>Listings not managed in a PMS only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CheckOutTime { get; set; }
@@ -35,7 +36,9 @@ namespace Repull.SDK.Models
 #else
         public string CheckOutTime { get; set; }
 #endif
-        /// <summary>The currency property</summary>
+        /// <summary>The children property</summary>
+        public int? Children { get; set; }
+        /// <summary>Listings not managed in a PMS only (a PMS books in the property&apos;s currency).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Currency { get; set; }
@@ -51,30 +54,43 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ReservationGuestInput Guest { get; set; }
 #endif
-        /// <summary>The guestCount property</summary>
+        /// <summary>Total guests. On a PMS listing without `adults`, used as the adult count.</summary>
         public int? GuestCount { get; set; }
-        /// <summary>Attach an existing guest instead of matching/creating one. Must belong to this workspace.</summary>
+        /// <summary>Listings not managed in a PMS only: attach an existing guest instead of matching/creating one. Must belong to this workspace.</summary>
         public int? GuestId { get; set; }
         /// <summary>Internal Repull property id — see `GET /v1/properties`.</summary>
         public int? ListingId { get; set; }
-        /// <summary>OTA platforms are deliberately absent — those reservations are owned by the channel and arrive through sync.</summary>
-        public global::Repull.SDK.Models.ReservationCreateRequest_platform? Platform { get; set; }
-        /// <summary>Lifecycle status to open the reservation in. Defaults to confirmed.</summary>
+        /// <summary>PMS listings only: booking notes stored in the PMS.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Notes { get; set; }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Notes { get; set; }
+#endif
+        /// <summary>OTA platforms are deliberately absent — those reservations are owned by the channel and arrive through sync. `owner` is refused on a PMS listing (block owner stays in the PMS).</summary>
+        public global::Repull.SDK.Models.ReservationCreateRequest_platform? Platform { get; set; }
+        /// <summary>PMS listings only: ask the PMS to email the guest its own confirmation, where the PMS supports it.</summary>
+        public bool? SendConfirmationEmail { get; set; }
+        /// <summary>`confirmed` (default) or `tentative` (an optional hold, where the PMS has one). On a listing not managed in a PMS the value is passed to the reservation pipeline as before.</summary>
+        public global::Repull.SDK.Models.ReservationCreateRequest_status? Status { get; set; }
+        /// <summary>PMS listings only: the total for the whole stay, in the listing&apos;s currency. Honoured where `capabilities.reservations.customPrice` is true; omit it and the PMS prices the stay (from its quote where it has one). Refused on a listing not managed in a PMS, whose rate engine prices the stay.</summary>
+        public double? TotalPrice { get; set; }
+        /// <summary>PMS listings only: book this unit (`GET /v1/listings/{id}` → `units[].id`). Refused by PMSs that cannot target a unit.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UnitId { get; set; }
+#nullable restore
+#else
+        public string UnitId { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCreateRequest"/> and sets the default values.
         /// </summary>
         public ReservationCreateRequest()
         {
-            AdditionalData = new Dictionary<string, object>();
             Platform = global::Repull.SDK.Models.ReservationCreateRequest_platform.Direct;
-            Status = "accept";
+            Status = global::Repull.SDK.Models.ReservationCreateRequest_status.Confirmed;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -94,17 +110,23 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "adults", n => { Adults = n.GetIntValue(); } },
                 { "checkIn", n => { CheckIn = n.GetDateValue(); } },
                 { "checkInTime", n => { CheckInTime = n.GetStringValue(); } },
                 { "checkOut", n => { CheckOut = n.GetDateValue(); } },
                 { "checkOutTime", n => { CheckOutTime = n.GetStringValue(); } },
+                { "children", n => { Children = n.GetIntValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
                 { "guest", n => { Guest = n.GetObjectValue<global::Repull.SDK.Models.ReservationGuestInput>(global::Repull.SDK.Models.ReservationGuestInput.CreateFromDiscriminatorValue); } },
                 { "guestCount", n => { GuestCount = n.GetIntValue(); } },
                 { "guestId", n => { GuestId = n.GetIntValue(); } },
                 { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "notes", n => { Notes = n.GetStringValue(); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.ReservationCreateRequest_platform>(); } },
-                { "status", n => { Status = n.GetStringValue(); } },
+                { "sendConfirmationEmail", n => { SendConfirmationEmail = n.GetBoolValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.ReservationCreateRequest_status>(); } },
+                { "totalPrice", n => { TotalPrice = n.GetDoubleValue(); } },
+                { "unitId", n => { UnitId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -114,18 +136,23 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("adults", Adults);
             writer.WriteDateValue("checkIn", CheckIn);
             writer.WriteStringValue("checkInTime", CheckInTime);
             writer.WriteDateValue("checkOut", CheckOut);
             writer.WriteStringValue("checkOutTime", CheckOutTime);
+            writer.WriteIntValue("children", Children);
             writer.WriteStringValue("currency", Currency);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationGuestInput>("guest", Guest);
             writer.WriteIntValue("guestCount", GuestCount);
             writer.WriteIntValue("guestId", GuestId);
             writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("notes", Notes);
             writer.WriteEnumValue<global::Repull.SDK.Models.ReservationCreateRequest_platform>("platform", Platform);
-            writer.WriteStringValue("status", Status);
-            writer.WriteAdditionalData(AdditionalData);
+            writer.WriteBoolValue("sendConfirmationEmail", SendConfirmationEmail);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ReservationCreateRequest_status>("status", Status);
+            writer.WriteDoubleValue("totalPrice", TotalPrice);
+            writer.WriteStringValue("unitId", UnitId);
         }
     }
 }

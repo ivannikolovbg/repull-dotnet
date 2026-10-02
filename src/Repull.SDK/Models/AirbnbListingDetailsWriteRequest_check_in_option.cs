@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// How the guest lets themselves in — Airbnb&apos;s `check_in_option`.
+    /// How the guest lets themselves in — Airbnb&apos;s `check_in_option`. `instruction` is the arrival instructions the guest sees.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbListingDetailsWriteRequest_check_in_option : IParsable

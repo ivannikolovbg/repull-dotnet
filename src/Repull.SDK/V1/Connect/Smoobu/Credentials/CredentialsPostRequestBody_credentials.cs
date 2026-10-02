@@ -8,13 +8,29 @@ using System;
 namespace Repull.SDK.V1.Connect.Smoobu.Credentials
 {
     /// <summary>
-    /// API key from Smoobu → Settings → For developers.
+    /// HMAC API key + secret from Smoobu → Settings → Advanced → API Keys.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CredentialsPostRequestBody_credentials : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Smoobu API key.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ApiKey { get; set; }
+#nullable restore
+#else
+        public string ApiKey { get; set; }
+#endif
+        /// <summary>Smoobu API secret (shown once when generated).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ApiSecret { get; set; }
+#nullable restore
+#else
+        public string ApiSecret { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Smoobu.Credentials.CredentialsPostRequestBody_credentials"/> and sets the default values.
         /// </summary>
@@ -40,6 +56,8 @@ namespace Repull.SDK.V1.Connect.Smoobu.Credentials
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "apiKey", n => { ApiKey = n.GetStringValue(); } },
+                { "apiSecret", n => { ApiSecret = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -49,6 +67,8 @@ namespace Repull.SDK.V1.Connect.Smoobu.Credentials
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("apiKey", ApiKey);
+            writer.WriteStringValue("apiSecret", ApiSecret);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

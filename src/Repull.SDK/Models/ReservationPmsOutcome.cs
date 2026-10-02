@@ -8,10 +8,10 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Mews or Cloudbeds listings only: the booking was made in the PMS first, and this is what it applied.
+    /// Present when the write was made in a PMS: what the PMS applied. `partial: true` means the booking exists in the PMS but the steps in `failedSections` (e.g. notes, a tentative state) did not apply — do not create it again.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationCreateResponse_pms : IAdditionalDataHolder, IParsable
+    public partial class ReservationPmsOutcome : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -26,11 +26,21 @@ namespace Repull.SDK.Models
         /// <summary>The errors property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationCreateResponse_pms_errors>? Errors { get; set; }
+        public List<global::Repull.SDK.Models.ReservationPmsSectionError>? Errors { get; set; }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationCreateResponse_pms_errors> Errors { get; set; }
+        public List<global::Repull.SDK.Models.ReservationPmsSectionError> Errors { get; set; }
 #endif
+        /// <summary>The failedSections property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ReservationPmsSectionError>? FailedSections { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ReservationPmsSectionError> FailedSections { get; set; }
+#endif
+        /// <summary>The partial property</summary>
+        public bool? Partial { get; set; }
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -38,6 +48,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Provider { get; set; }
+#endif
+        /// <summary>Create only: the PMS quote the booking was priced from, when no `totalPrice` was sent.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationPmsOutcome_quote? Quote { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationPmsOutcome_quote Quote { get; set; }
 #endif
         /// <summary>The PMS&apos;s own id for the booking.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -48,21 +66,21 @@ namespace Repull.SDK.Models
         public string ReservationId { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCreateResponse_pms"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationPmsOutcome"/> and sets the default values.
         /// </summary>
-        public ReservationCreateResponse_pms()
+        public ReservationPmsOutcome()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.ReservationCreateResponse_pms"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ReservationPmsOutcome"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.ReservationCreateResponse_pms CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.ReservationPmsOutcome CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.ReservationCreateResponse_pms();
+            return new global::Repull.SDK.Models.ReservationPmsOutcome();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -73,8 +91,11 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "applied", n => { Applied = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ReservationCreateResponse_pms_errors>(global::Repull.SDK.Models.ReservationCreateResponse_pms_errors.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ReservationPmsSectionError>(global::Repull.SDK.Models.ReservationPmsSectionError.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "failedSections", n => { FailedSections = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ReservationPmsSectionError>(global::Repull.SDK.Models.ReservationPmsSectionError.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "partial", n => { Partial = n.GetBoolValue(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
+                { "quote", n => { Quote = n.GetObjectValue<global::Repull.SDK.Models.ReservationPmsOutcome_quote>(global::Repull.SDK.Models.ReservationPmsOutcome_quote.CreateFromDiscriminatorValue); } },
                 { "reservationId", n => { ReservationId = n.GetStringValue(); } },
             };
         }
@@ -86,8 +107,11 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<string>("applied", Applied);
-            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ReservationCreateResponse_pms_errors>("errors", Errors);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ReservationPmsSectionError>("errors", Errors);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ReservationPmsSectionError>("failedSections", FailedSections);
+            writer.WriteBoolValue("partial", Partial);
             writer.WriteStringValue("provider", Provider);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationPmsOutcome_quote>("quote", Quote);
             writer.WriteStringValue("reservationId", ReservationId);
             writer.WriteAdditionalData(AdditionalData);
         }

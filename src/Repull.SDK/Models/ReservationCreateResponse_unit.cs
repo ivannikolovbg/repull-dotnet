@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Mews or Cloudbeds listings only: the room the PMS assigned. Absent for every other listing.
+    /// PMS listings: the unit the PMS assigned (hotel-model PMSs), or null. Absent for direct bookings.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationCreateResponse_unit : IAdditionalDataHolder, IParsable

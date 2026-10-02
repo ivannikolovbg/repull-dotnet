@@ -12,7 +12,7 @@ namespace Repull.SDK.Models
     public partial class AirbnbPermitsWriteRequest_permits : IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>Keyed by each question&apos;s `answer_key`. Each value carries exactly one field, chosen by the question&apos;s `type`: TEXT → `text_value`, ATTESTATION → `attestation_value`, RADIO → `radio_value`, DATE → `date_value`, SELECT → `selected_options_value`.</summary>
+        /// <summary>Keyed by each question&apos;s `answer_key`. Each value carries exactly one `&lt;type&gt;_value` field named after the question&apos;s `type` (lower-case): `text_value`, `attestation_value` (boolean), `radio_value`, `dropdown_value`, `email_value`, `future_date_value` (YYYY-MM-DD) and `file_upload_value` (object with the base64 file) are the ones Airbnb returns in production; other question types follow the same pattern. Airbnb validates the value against its question. Example: `{&quot;email&quot;: {&quot;email_value&quot;: &quot;host@example.com&quot;}, &quot;expiration_date&quot;: {&quot;future_date_value&quot;: &quot;2029-02-04&quot;}, &quot;attestation&quot;: {&quot;attestation_value&quot;: true}}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers? Answers { get; set; }

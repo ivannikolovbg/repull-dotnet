@@ -49,6 +49,8 @@ namespace Repull.SDK.V1.Connect.Item
 #else
         public string RedirectUrl { get; set; }
 #endif
+        /// <summary>Airbnb — how many months of past reservations the first import pulls (1–60). Omit it for the default window. Upcoming stays are always imported. A wider window takes longer to import, because every extra month is more stays to fetch.</summary>
+        public int? ReservationHistoryMonths { get; set; }
         /// <summary>Airbnb + Booking.com — your own correlation token, e.g. your user id (at most 500 characters). Echoed on the redirect back (`&amp;state=`) and in the `connect.session.completed` webhook.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -88,6 +90,7 @@ namespace Repull.SDK.V1.Connect.Item
                 { "clientSecret", n => { ClientSecret = n.GetStringValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
+                { "reservationHistoryMonths", n => { ReservationHistoryMonths = n.GetIntValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
             };
         }
@@ -103,6 +106,7 @@ namespace Repull.SDK.V1.Connect.Item
             writer.WriteStringValue("clientSecret", ClientSecret);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("redirectUrl", RedirectUrl);
+            writer.WriteIntValue("reservationHistoryMonths", ReservationHistoryMonths);
             writer.WriteStringValue("state", State);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -3,10 +3,9 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>`active` — connected and working. `pending` — still settling. `needs_permissions` — connected but the host must grant more access before it works (see `action`/`fixUrl`). An `active` connection can also carry an `action` (e.g. a Smoobu legacy API key that must be replaced with a key + secret before October 31, 2026). `error` — the last operation failed. `disconnected` — revoked or superseded.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public enum Connection_status
-    #pragma warning restore CS1591
     {
         [EnumMember(Value = "active")]
         #pragma warning disable CS1591
@@ -19,6 +18,18 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "error")]
         #pragma warning disable CS1591
         Error,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "pending")]
+        #pragma warning disable CS1591
+        Pending,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "disconnected")]
+        #pragma warning disable CS1591
+        Disconnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "needs_permissions")]
+        #pragma warning disable CS1591
+        Needs_permissions,
         #pragma warning restore CS1591
     }
 }

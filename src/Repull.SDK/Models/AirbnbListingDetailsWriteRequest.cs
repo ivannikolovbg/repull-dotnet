@@ -8,18 +8,34 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Update what kind of property this is, when the quiet hours are, or how the guest gets in. At least one field required. These are among the attributes Airbnb locks on established listings — see `blockedFields` on the response.
+    /// Update what kind of property this is, when the quiet hours are, how the guest gets in, the house manual, directions or Wi-Fi details. At least one field required. These are among the attributes Airbnb locks on established listings — see `blockedFields` on the response.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbListingDetailsWriteRequest : IParsable
     {
-        /// <summary>How the guest lets themselves in — Airbnb&apos;s `check_in_option`.</summary>
+        /// <summary>How the guest lets themselves in — Airbnb&apos;s `check_in_option`. `instruction` is the arrival instructions the guest sees.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option? CheckInOption { get; set; }
 #nullable restore
 #else
         public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option CheckInOption { get; set; }
+#endif
+        /// <summary>Directions to the property, shown to booked guests.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Directions { get; set; }
+#nullable restore
+#else
+        public string Directions { get; set; }
+#endif
+        /// <summary>The house manual guests see after booking.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HouseManual { get; set; }
+#nullable restore
+#else
+        public string HouseManual { get; set; }
 #endif
         /// <summary>The specific type inside the group, e.g. `apartment`, `condominium`, `townhouse`, `guesthouse`. Airbnb validates it against the group, so send both when you are changing the kind of property.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -41,6 +57,22 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>What the guest gets of the property.</summary>
         public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_room_type_category? RoomTypeCategory { get; set; }
+        /// <summary>Wi-Fi network name.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WifiNetwork { get; set; }
+#nullable restore
+#else
+        public string WifiNetwork { get; set; }
+#endif
+        /// <summary>Wi-Fi password.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WifiPassword { get; set; }
+#nullable restore
+#else
+        public string WifiPassword { get; set; }
+#endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -60,10 +92,14 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "check_in_option", n => { CheckInOption = n.GetObjectValue<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option>(global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option.CreateFromDiscriminatorValue); } },
+                { "directions", n => { Directions = n.GetStringValue(); } },
+                { "house_manual", n => { HouseManual = n.GetStringValue(); } },
                 { "property_type_category", n => { PropertyTypeCategory = n.GetStringValue(); } },
                 { "property_type_group", n => { PropertyTypeGroup = n.GetEnumValue<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_property_type_group>(); } },
                 { "quiet_hours", n => { QuietHours = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours>(global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "room_type_category", n => { RoomTypeCategory = n.GetEnumValue<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_room_type_category>(); } },
+                { "wifi_network", n => { WifiNetwork = n.GetStringValue(); } },
+                { "wifi_password", n => { WifiPassword = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -74,10 +110,14 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option>("check_in_option", CheckInOption);
+            writer.WriteStringValue("directions", Directions);
+            writer.WriteStringValue("house_manual", HouseManual);
             writer.WriteStringValue("property_type_category", PropertyTypeCategory);
             writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_property_type_group>("property_type_group", PropertyTypeGroup);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours>("quiet_hours", QuietHours);
             writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_room_type_category>("room_type_category", RoomTypeCategory);
+            writer.WriteStringValue("wifi_network", WifiNetwork);
+            writer.WriteStringValue("wifi_password", WifiPassword);
         }
     }
 }

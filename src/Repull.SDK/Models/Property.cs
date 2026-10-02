@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A vacation rental property in your Repull workspace. Backed by the core `listings` row — enriched per-PMS fields (bedrooms, property type, provider id, etc.) live in provider-specific detail tables and are NOT returned here.Field availability differs by endpoint:- `channels` is returned by the list endpoint (`GET /v1/properties`) only.- `latitude`, `longitude`, `createdAt`, and `amenities` are returned by the detail endpoint (`GET /v1/properties/{id}`) only. `amenities` requires `?include=amenities`.An **inactive** property (`status: inactive`) appears only in the list endpoint, and only when `?status=inactive|all` asks for it. Such a row carries identity fields only — `id`, `name`, `status`, `lifecycleStatus`, `channels`, `accounts`, `updatedAt` — so every other field is absent until the property is activated. Every other endpoint answers `403 listing_inactive` for it.
+    /// A vacation rental property in your Repull workspace. Backed by the core `listings` row — enriched per-PMS fields (bedrooms, property type, provider id, etc.) live in provider-specific detail tables and are NOT returned here.Field availability differs by endpoint:- `channels` is returned by the list endpoint (`GET /v1/properties`) only.- `latitude`, `longitude`, `createdAt`, and `amenities` are returned by the detail endpoint (`GET /v1/properties/{id}`) only. `amenities` requires `?include=amenities`.An **inactive** property (`status: inactive`) appears only in the list endpoint, and only when `?status=inactive|all` asks for it. Such a row carries identity fields only — `id`, `name`, `city`, `status`, `inactiveReason`, `lifecycleStatus`, `channels`, `accounts`, `updatedAt` — so every other field is absent until the property is activated. `inactiveReason` is `plan_limit` (held back by the plan; activating needs a free slot or an upgrade), `unlisted_on_airbnb`, or `deactivated` (switched off by you). Every other endpoint answers `403 listing_inactive` for it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Property : IAdditionalDataHolder, IParsable
@@ -97,13 +97,21 @@ namespace Repull.SDK.Models
 #else
         public string Longitude { get; set; }
 #endif
-        /// <summary>Property name</summary>
+        /// <summary>Property name — the host&apos;s internal nickname.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
 #nullable restore
 #else
         public string Name { get; set; }
+#endif
+        /// <summary>The title guests see on the channel (e.g. the Airbnb listing title). `name` is the host&apos;s internal nickname for the listing; show `publicName` in anything a guest or end user reads. Present on inactive rows too.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PublicName { get; set; }
+#nullable restore
+#else
+        public string PublicName { get; set; }
 #endif
         /// <summary>Derived from `listings.active`.</summary>
         public global::Repull.SDK.Models.Property_status? Status { get; set; }
@@ -146,6 +154,7 @@ namespace Repull.SDK.Models
                 { "lifecycleStatus", n => { LifecycleStatus = n.GetStringValue(); } },
                 { "longitude", n => { Longitude = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "publicName", n => { PublicName = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Property_status>(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
@@ -169,6 +178,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("lifecycleStatus", LifecycleStatus);
             writer.WriteStringValue("longitude", Longitude);
             writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("publicName", PublicName);
             writer.WriteEnumValue<global::Repull.SDK.Models.Property_status>("status", Status);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);

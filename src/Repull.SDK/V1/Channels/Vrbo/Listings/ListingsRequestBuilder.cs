@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings", pathParameters)
+        public ListingsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings{?status*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,22 +30,22 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ListingsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings", rawUrl)
+        public ListingsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings{?status*}", rawUrl)
         {
         }
         /// <summary>
-        /// List the Vrbo units linked to this workspace&apos;s listings, from the host&apos;s connected Vrbo account (host sign-in, beta).Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List the Vrbo units linked to this workspace&apos;s listings, from the host&apos;s connected Vrbo account (host sign-in, beta).Inactive listings are left out unless `?status=inactive|all` asks for them; they then come back with identity fields only (ids, `listingName`, `listingCity`, `status`, `inactiveReason`). They keep syncing and are complete again once activated.
         /// </summary>
         /// <returns>A List&lt;global::Repull.SDK.Models.VrboListing&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<List<global::Repull.SDK.Models.VrboListing>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Repull.SDK.Models.VrboListing>?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<List<global::Repull.SDK.Models.VrboListing>> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Repull.SDK.Models.VrboListing>> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -53,17 +53,17 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// List the Vrbo units linked to this workspace&apos;s listings, from the host&apos;s connected Vrbo account (host sign-in, beta).Inactive listings are left out; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List the Vrbo units linked to this workspace&apos;s listings, from the host&apos;s connected Vrbo account (host sign-in, beta).Inactive listings are left out unless `?status=inactive|all` asks for them; they then come back with identity fields only (ids, `listingName`, `listingCity`, `status`, `inactiveReason`). They keep syncing and are complete again once activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -81,11 +81,32 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
             return new global::Repull.SDK.V1.Channels.Vrbo.Listings.ListingsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// List the Vrbo units linked to this workspace&apos;s listings, from the host&apos;s connected Vrbo account (host sign-in, beta).Inactive listings are left out unless `?status=inactive|all` asks for them; they then come back with identity fields only (ids, `listingName`, `listingCity`, `status`, `inactiveReason`). They keep syncing and are complete again once activated.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ListingsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>`active` (default) leaves inactive listings out. `inactive` returns only them and `all` returns both. An inactive listing comes back with identity fields only (ids, `name`, `city`, `status`, `inactiveReason`, its account), which is enough to show what can be activated. Every row carries `status`.</summary>
+            [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("status")]
+            public string? Status { get; set; }
+#nullable restore
+#else
+            [QueryParameter("status")]
+            public string Status { get; set; }
+#endif
+            /// <summary>`active` (default) leaves inactive listings out. `inactive` returns only them and `all` returns both. An inactive listing comes back with identity fields only (ids, `name`, `city`, `status`, `inactiveReason`, its account), which is enough to show what can be activated. Every row carries `status`.</summary>
+            [QueryParameter("status")]
+            public global::Repull.SDK.V1.Channels.Vrbo.Listings.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ListingsRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class ListingsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.ListingsRequestBuilder.ListingsRequestBuilderGetQueryParameters>
         {
         }
     }

@@ -5,6 +5,18 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.24] - 2026-10-02
+
+Regenerated against the live `https://api.repull.dev/openapi.json`:
+
+- New `RepullClientExtensions.QuoteReservationAsync(ReservationQuoteRequest)` (and the generated `client.V1.Reservations.Quote.PostAsync`) — `POST /v1/reservations/quote`: price a stay and check availability in the PMS without booking. `Available == false` is an answer; read `Restrictions`.
+- New `RepullClientExtensions.CreateReservationAsync(ReservationCreateRequest)`; `ReservationCreateRequest` gains the PMS booking fields `Adults`, `Children`, `Notes`, `TotalPrice`, `UnitId`, `Status` (`Confirmed` / `Tentative`), `SendConfirmationEmail`.
+- Reservation write responses (create / update / cancel) carry a `pms` block describing what the PMS did with the write.
+- `capabilities.reservations` on listing and connection responses (`create`, `change`, `cancel`, `quote`…).
+- Connections expose `action` and `fixUrl`; Smoobu credentials accept `apiSecret`; new error codes (`pms_not_linked`, `pms_write_unsupported`, …).
+
+**Type change (patch release):** reservation, listing and guest ids on reservation write responses (`id`, `listingId`, `guestId`) are now `string?`, where they were `int?`. The API returns them as strings; code that read them as integers must convert (e.g. `int.Parse`).
+
 ## [0.2.18] - 2026-09-25
 
 Regenerated against the live `https://api.repull.dev/openapi.json`:

@@ -97,9 +97,10 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Upsert the check-in guide for one locale on an Airbnb listing. **Write-side** — calls Airbnb upstream; the DB mirror is reconciled by the sync worker once the upstream call returns. Target the locale with `?locale=en` (defaults to `en`). Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Write the check-in guide guests see before arrival: an ordered list of text steps. **Replaces** every existing step, so send the whole guide; `{&quot;steps&quot;: []}` removes them all. The response is the guide re-read from Airbnb after the write.If the listing has no guide yet, one is created in `locale` (default: the existing guide&apos;s, else `en`).Safe on failure: the new steps are created before the old ones are removed, and if a create fails the steps this call added are removed again, so the guide is never left emptier than it was.Text steps only. Steps with photos need Airbnb&apos;s media upload and are not supported here yet. For the other arrival details use `PUT /v1/channels/airbnb/listings/{id}/details`: `check_in_option.instruction` (arrival instructions), `house_manual`, `directions`, `wifi_network`, `wifi_password`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
@@ -111,14 +112,15 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PutAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideRequestBuilder.CheckinGuideRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse?> PutAsCheckinGuidePutResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PutAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideRequestBuilder.CheckinGuideRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse> PutAsCheckinGuidePutResponseAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
-            var requestInfo = ToPutRequestInformation(requestConfiguration);
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
@@ -129,7 +131,45 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Write the check-in guide guests see before arrival: an ordered list of text steps. **Replaces** every existing step, so send the whole guide; `{&quot;steps&quot;: []}` removes them all. The response is the guide re-read from Airbnb after the write.If the listing has no guide yet, one is created in `locale` (default: the existing guide&apos;s, else `en`).Safe on failure: the new steps are created before the old ones are removed, and if a create fails the steps this call added are removed again, so the guide is never left emptier than it was.Text steps only. Steps with photos need Airbnb&apos;s media upload and are not supported here yet. For the other arrival details use `PUT /v1/channels/airbnb/listings/{id}/details`: `check_in_option.instruction` (arrival instructions), `house_manual`, `directions`, `wifi_network`, `wifi_password`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("This method is obsolete. Use PutAsCheckinGuidePutResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideResponse?> PutAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideResponse> PutAsync(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideResponse>(requestInfo, global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Return every published locale variant of an Airbnb listing&apos;s check-in guide. **Pure DB read** from `listings_airbnb_check_in_guides`. Pass `?locale=en` to filter to one locale (prefix match). Returns `404` when the listing has no Airbnb connection in this workspace.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
@@ -151,22 +191,25 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide
             return requestInfo;
         }
         /// <summary>
-        /// Upsert the check-in guide for one locale on an Airbnb listing. **Write-side** — calls Airbnb upstream; the DB mirror is reconciled by the sync worker once the upstream call returns. Target the locale with `?locale=en` (defaults to `en`). Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Write the check-in guide guests see before arrival: an ordered list of text steps. **Replaces** every existing step, so send the whole guide; `{&quot;steps&quot;: []}` removes them all. The response is the guide re-read from Airbnb after the write.If the listing has no guide yet, one is created in `locale` (default: the existing guide&apos;s, else `en`).Safe on failure: the new steps are created before the old ones are removed, and if a create fails the steps this call added are removed again, so the guide is never left emptier than it was.Text steps only. Steps with photos need Airbnb&apos;s media upload and are not supported here yet. For the other arrival details use `PUT /v1/channels/airbnb/listings/{id}/details`: `check_in_option.instruction` (arrival instructions), `house_manual`, `directions`, `wifi_network`, `wifi_password`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideRequestBuilder.CheckinGuideRequestBuilderPutQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideRequestBuilder.CheckinGuideRequestBuilderPutQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>
@@ -204,28 +247,11 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide
         {
         }
         /// <summary>
-        /// Upsert the check-in guide for one locale on an Airbnb listing. **Write-side** — calls Airbnb upstream; the DB mirror is reconciled by the sync worker once the upstream call returns. Target the locale with `?locale=en` (defaults to `en`). Requires a connected Airbnb host, else `404 no_connection`.Returns `403 listing_inactive` when the listing is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class CheckinGuideRequestBuilderPutQueryParameters 
-        {
-            /// <summary>Locale to upsert. Defaults to `en`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("locale")]
-            public string? Locale { get; set; }
-#nullable restore
-#else
-            [QueryParameter("locale")]
-            public string Locale { get; set; }
-#endif
-        }
-        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class CheckinGuideRequestBuilderPutRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideRequestBuilder.CheckinGuideRequestBuilderPutQueryParameters>
+        public partial class CheckinGuideRequestBuilderPutRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }

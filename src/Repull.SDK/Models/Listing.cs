@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// A vacation rental listing in your Repull workspace.An **inactive** listing appears only in `GET /v1/listings`, and only when `?status=` asks for it. Such a row carries identity fields only — `id`, `name`, `status`, `channels` — so `address`, `content`, `details`, `createdAt` and `updatedAt` are absent until the listing is activated. `GET /v1/listings/{id}` and every other listing endpoint answer `403 listing_inactive` for it. The one field you can add back is `thumbnailUrl`, by passing `?include=thumbnail` — enough to render an activate/deactivate picker with pictures from a single request.
+    /// A vacation rental listing in your Repull workspace.An **inactive** listing appears only in `GET /v1/listings`, and only when `?status=` asks for it. Such a row carries identity fields only — `id`, `name`, `status`, `inactiveReason`, `address.city`, `channels` — so the street, `content`, `details`, `createdAt` and `updatedAt` are absent until the listing is activated. `inactiveReason` is `plan_limit` (held back by the plan; activating needs a free slot or an upgrade), `unlisted_on_airbnb`, or `deactivated` (switched off by you). `GET /v1/listings/{id}` and every other listing endpoint answer `403 listing_inactive` for it. The one field you can add back is `thumbnailUrl`, by passing `?include=thumbnail` — enough to render an activate/deactivate picker with pictures from a single request.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Listing : IAdditionalDataHolder, IParsable
@@ -30,6 +30,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public List<global::Repull.SDK.Models.ListingAmenity> Amenities { get; set; }
+#endif
+        /// <summary>`GET /v1/listings/{id}` only. What the API can do with this listing.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Listing_capabilities? Capabilities { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Listing_capabilities Capabilities { get; set; }
 #endif
         /// <summary>Channels (Airbnb, Booking, VRBO, etc.) the listing is connected to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -65,13 +73,21 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The name property</summary>
+        /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
 #nullable restore
 #else
         public string Name { get; set; }
+#endif
+        /// <summary>The title guests see on the channel (e.g. the Airbnb listing title). `name` is the host&apos;s internal nickname for the listing; show `publicName` in anything a guest or end user reads. Present on inactive rows too.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PublicName { get; set; }
+#nullable restore
+#else
+        public string PublicName { get; set; }
 #endif
         /// <summary>The status property</summary>
         public global::Repull.SDK.Models.Listing_status? Status { get; set; }
@@ -120,12 +136,14 @@ namespace Repull.SDK.Models
             {
                 { "address", n => { Address = n.GetObjectValue<global::Repull.SDK.Models.Listing_address>(global::Repull.SDK.Models.Listing_address.CreateFromDiscriminatorValue); } },
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>(global::Repull.SDK.Models.ListingAmenity.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "capabilities", n => { Capabilities = n.GetObjectValue<global::Repull.SDK.Models.Listing_capabilities>(global::Repull.SDK.Models.Listing_capabilities.CreateFromDiscriminatorValue); } },
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>(global::Repull.SDK.Models.ListingChannel.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "content", n => { Content = n.GetObjectValue<global::Repull.SDK.Models.ListingContent>(global::Repull.SDK.Models.ListingContent.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "details", n => { Details = n.GetObjectValue<global::Repull.SDK.Models.ListingDetails>(global::Repull.SDK.Models.ListingDetails.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "publicName", n => { PublicName = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Listing_status>(); } },
                 { "thumbnailUrl", n => { ThumbnailUrl = n.GetStringValue(); } },
                 { "units", n => { Units = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Listing_units>(global::Repull.SDK.Models.Listing_units.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -141,12 +159,14 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_address>("address", Address);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>("amenities", Amenities);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Listing_capabilities>("capabilities", Capabilities);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>("channels", Channels);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContent>("content", Content);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingDetails>("details", Details);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("publicName", PublicName);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_status>("status", Status);
             writer.WriteStringValue("thumbnailUrl", ThumbnailUrl);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Listing_units>("units", Units);

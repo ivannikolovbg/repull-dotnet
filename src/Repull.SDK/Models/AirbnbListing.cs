@@ -39,13 +39,21 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
-        /// <summary>Listing title</summary>
+        /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
 #nullable restore
 #else
         public string Name { get; set; }
+#endif
+        /// <summary>The title guests see on the channel (e.g. the Airbnb listing title). `name` is the host&apos;s internal nickname for the listing; show `publicName` in anything a guest or end user reads. Present on inactive rows too.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PublicName { get; set; }
+#nullable restore
+#else
+        public string PublicName { get; set; }
 #endif
         /// <summary>Cover photo URL for the listing. **Only present when the caller passes `?include=thumbnail`.** `null` when the listing has no cover photo stored — the listing is still returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -84,6 +92,7 @@ namespace Repull.SDK.Models
                 { "connections", n => { Connections = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection>(global::Repull.SDK.Models.AirbnbConnection.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "publicName", n => { PublicName = n.GetStringValue(); } },
                 { "thumbnailUrl", n => { ThumbnailUrl = n.GetStringValue(); } },
             };
         }
@@ -98,6 +107,7 @@ namespace Repull.SDK.Models
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AirbnbConnection>("connections", Connections);
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("publicName", PublicName);
             writer.WriteStringValue("thumbnailUrl", ThumbnailUrl);
             writer.WriteAdditionalData(AdditionalData);
         }

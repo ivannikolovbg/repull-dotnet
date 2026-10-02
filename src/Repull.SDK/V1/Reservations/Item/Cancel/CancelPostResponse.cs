@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -45,13 +46,13 @@ namespace Repull.SDK.V1.Reservations.Item.Cancel
 #else
         public string ListingId { get; set; }
 #endif
-        /// <summary>Present when the cancellation was made in a PMS.</summary>
+        /// <summary>Present when the write was made in a PMS: what the PMS applied. `partial: true` means the booking exists in the PMS but the steps in `failedSections` (e.g. notes, a tentative state) did not apply — do not create it again.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_pms? Pms { get; set; }
+        public global::Repull.SDK.Models.ReservationPmsOutcome? Pms { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_pms Pms { get; set; }
+        public global::Repull.SDK.Models.ReservationPmsOutcome Pms { get; set; }
 #endif
         /// <summary>The status property</summary>
         public global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_status? Status { get; set; }
@@ -94,7 +95,7 @@ namespace Repull.SDK.V1.Reservations.Item.Cancel
                 { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
-                { "pms", n => { Pms = n.GetObjectValue<global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_pms>(global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_pms.CreateFromDiscriminatorValue); } },
+                { "pms", n => { Pms = n.GetObjectValue<global::Repull.SDK.Models.ReservationPmsOutcome>(global::Repull.SDK.Models.ReservationPmsOutcome.CreateFromDiscriminatorValue); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_status>(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetStringValue(); } },
             };
@@ -112,7 +113,7 @@ namespace Repull.SDK.V1.Reservations.Item.Cancel
             writer.WriteStringValue("confirmationCode", ConfirmationCode);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("listingId", ListingId);
-            writer.WriteObjectValue<global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_pms>("pms", Pms);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationPmsOutcome>("pms", Pms);
             writer.WriteEnumValue<global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_status>("status", Status);
             writer.WriteStringValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);

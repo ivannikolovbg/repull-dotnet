@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PropertiesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/properties", pathParameters)
+        public PropertiesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/properties{?status*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,22 +56,22 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PropertiesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/properties", rawUrl)
+        public PropertiesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/booking/properties{?status*}", rawUrl)
         {
         }
         /// <summary>
-        /// List every Booking.com property this workspace holds. Each property is returned ONCE, with the Repull listings mapped under it.A Booking.com property is a building; its rooms are what guests book, and each room is mapped to one Repull listing — so one property routinely carries many listings. `listings[].roomBookingId` is the Booking.com room id an ARI write takes.A property whose rooms are not mapped yet is still listed, with `mappingStatus: &quot;unmapped&quot;` and an empty `listings` array. That is a real mid-onboarding state, not an error: finish `POST /v1/connect/booking/map-rooms` and the listings appear. Such a property used to be dropped silently, which made a mapped-but-unreadable workspace indistinguishable from one with no Booking connection at all.Inactive listings are left out of `listings`; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List every Booking.com property this workspace holds. Each property is returned ONCE, with the Repull listings mapped under it.A Booking.com property is a building; its rooms are what guests book, and each room is mapped to one Repull listing — so one property routinely carries many listings. `listings[].roomBookingId` is the Booking.com room id an ARI write takes.A property whose rooms are not mapped yet is still listed, with `mappingStatus: &quot;unmapped&quot;` and an empty `listings` array. That is a real mid-onboarding state, not an error: finish `POST /v1/connect/booking/map-rooms` and the listings appear. Such a property used to be dropped silently, which made a mapped-but-unreadable workspace indistinguishable from one with no Booking connection at all.Inactive listings are left out of `listings` unless `?status=inactive|all` asks for them; they then appear with identity fields only (`listingId`, `name`, `city`, `status`, `inactiveReason`, room). `mappingStatus` counts every mapped listing, inactive ones included, so a property whose listings are all inactive is still `mapped`.
         /// </summary>
         /// <returns>A List&lt;global::Repull.SDK.Models.BookingProperty&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<List<global::Repull.SDK.Models.BookingProperty>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Repull.SDK.Models.BookingProperty>?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<List<global::Repull.SDK.Models.BookingProperty>> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Repull.SDK.Models.BookingProperty>> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -79,17 +79,17 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// List every Booking.com property this workspace holds. Each property is returned ONCE, with the Repull listings mapped under it.A Booking.com property is a building; its rooms are what guests book, and each room is mapped to one Repull listing — so one property routinely carries many listings. `listings[].roomBookingId` is the Booking.com room id an ARI write takes.A property whose rooms are not mapped yet is still listed, with `mappingStatus: &quot;unmapped&quot;` and an empty `listings` array. That is a real mid-onboarding state, not an error: finish `POST /v1/connect/booking/map-rooms` and the listings appear. Such a property used to be dropped silently, which made a mapped-but-unreadable workspace indistinguishable from one with no Booking connection at all.Inactive listings are left out of `listings`; they keep syncing and reappear once activated. Use `GET /v1/listings?status=inactive` to find them.
+        /// List every Booking.com property this workspace holds. Each property is returned ONCE, with the Repull listings mapped under it.A Booking.com property is a building; its rooms are what guests book, and each room is mapped to one Repull listing — so one property routinely carries many listings. `listings[].roomBookingId` is the Booking.com room id an ARI write takes.A property whose rooms are not mapped yet is still listed, with `mappingStatus: &quot;unmapped&quot;` and an empty `listings` array. That is a real mid-onboarding state, not an error: finish `POST /v1/connect/booking/map-rooms` and the listings appear. Such a property used to be dropped silently, which made a mapped-but-unreadable workspace indistinguishable from one with no Booking connection at all.Inactive listings are left out of `listings` unless `?status=inactive|all` asks for them; they then appear with identity fields only (`listingId`, `name`, `city`, `status`, `inactiveReason`, room). `mappingStatus` counts every mapped listing, inactive ones included, so a property whose listings are all inactive is still `mapped`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -107,11 +107,32 @@ namespace Repull.SDK.V1.Channels.Booking.Properties
             return new global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// List every Booking.com property this workspace holds. Each property is returned ONCE, with the Repull listings mapped under it.A Booking.com property is a building; its rooms are what guests book, and each room is mapped to one Repull listing — so one property routinely carries many listings. `listings[].roomBookingId` is the Booking.com room id an ARI write takes.A property whose rooms are not mapped yet is still listed, with `mappingStatus: &quot;unmapped&quot;` and an empty `listings` array. That is a real mid-onboarding state, not an error: finish `POST /v1/connect/booking/map-rooms` and the listings appear. Such a property used to be dropped silently, which made a mapped-but-unreadable workspace indistinguishable from one with no Booking connection at all.Inactive listings are left out of `listings` unless `?status=inactive|all` asks for them; they then appear with identity fields only (`listingId`, `name`, `city`, `status`, `inactiveReason`, room). `mappingStatus` counts every mapped listing, inactive ones included, so a property whose listings are all inactive is still `mapped`.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class PropertiesRequestBuilderGetQueryParameters 
+        {
+            /// <summary>`active` (default) leaves inactive listings out. `inactive` returns only them and `all` returns both. An inactive listing comes back with identity fields only (ids, `name`, `city`, `status`, `inactiveReason`, its account), which is enough to show what can be activated. Every row carries `status`.</summary>
+            [Obsolete("This property is deprecated, use StatusAsGetStatusQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("status")]
+            public string? Status { get; set; }
+#nullable restore
+#else
+            [QueryParameter("status")]
+            public string Status { get; set; }
+#endif
+            /// <summary>`active` (default) leaves inactive listings out. `inactive` returns only them and `all` returns both. An inactive listing comes back with identity fields only (ids, `name`, `city`, `status`, `inactiveReason`, its account), which is enough to show what can be activated. Every row carries `status`.</summary>
+            [QueryParameter("status")]
+            public global::Repull.SDK.V1.Channels.Booking.Properties.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class PropertiesRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class PropertiesRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Booking.Properties.PropertiesRequestBuilder.PropertiesRequestBuilderGetQueryParameters>
         {
         }
     }

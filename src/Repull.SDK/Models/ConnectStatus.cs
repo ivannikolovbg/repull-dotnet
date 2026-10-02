@@ -21,8 +21,24 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.ConnectStatus_accounts> Accounts { get; set; }
 #endif
+        /// <summary>Smoobu only: set to `{ required: true, reason: &quot;reauth_required&quot;, message }` when the connection still uses a legacy single API key, which Smoobu stops accepting on October 31, 2026. `null` once it is on an API key + secret.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ConnectionAction? Action { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ConnectionAction Action { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>PMS providers only. `reservations`: which reservation writes the API performs on this connection&apos;s listings — the connector&apos;s support combined with `writePolicy`. When `connected` is false, what the connector supports once connected.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ConnectStatus_capabilities? Capabilities { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ConnectStatus_capabilities Capabilities { get; set; }
+#endif
         /// <summary>The connected property</summary>
         public bool? Connected { get; set; }
         /// <summary>The createdAt property</summary>
@@ -42,6 +58,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string ExternalAccountId { get; set; }
+#endif
+        /// <summary>Smoobu only: durable link to the hosted Smoobu form where the host pastes a new API key + secret. Submitting it updates this same connection (`id` unchanged). Present only when `action.required` is true.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FixUrl { get; set; }
+#nullable restore
+#else
+        public string FixUrl { get; set; }
 #endif
         /// <summary>Host metadata, populated for Airbnb when the host row exists. Null for other providers (per-provider enrichment is incremental).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -103,10 +127,13 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "accounts", n => { Accounts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConnectStatus_accounts>(global::Repull.SDK.Models.ConnectStatus_accounts.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "action", n => { Action = n.GetObjectValue<global::Repull.SDK.Models.ConnectionAction>(global::Repull.SDK.Models.ConnectionAction.CreateFromDiscriminatorValue); } },
+                { "capabilities", n => { Capabilities = n.GetObjectValue<global::Repull.SDK.Models.ConnectStatus_capabilities>(global::Repull.SDK.Models.ConnectStatus_capabilities.CreateFromDiscriminatorValue); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.ConnectStatus_dataFreshness>(global::Repull.SDK.Models.ConnectStatus_dataFreshness.CreateFromDiscriminatorValue); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
+                { "fixUrl", n => { FixUrl = n.GetStringValue(); } },
                 { "host", n => { Host = n.GetObjectValue<global::Repull.SDK.Models.ConnectHost>(global::Repull.SDK.Models.ConnectHost.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
@@ -122,10 +149,13 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConnectStatus_accounts>("accounts", Accounts);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ConnectionAction>("action", Action);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ConnectStatus_capabilities>("capabilities", Capabilities);
             writer.WriteBoolValue("connected", Connected);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectStatus_dataFreshness>("dataFreshness", DataFreshness);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
+            writer.WriteStringValue("fixUrl", FixUrl);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectHost>("host", Host);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("provider", Provider);

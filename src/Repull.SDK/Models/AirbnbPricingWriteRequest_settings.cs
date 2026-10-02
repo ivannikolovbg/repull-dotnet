@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Required for `type: &quot;standard&quot; | &quot;rate-plan&quot; | &quot;fees&quot;` — the pricing-settings object to PUT.
+    /// Required for `type: &quot;standard&quot; | &quot;rate-plan&quot;` — the pricing-settings object to PUT. With `type: &quot;fees&quot;` it is the raw alternative to `fees`: `{&quot;standard_fees&quot;: [...]}` **replaces every fee** on the listing (Airbnb does not merge), so send the complete list. Prefer `fees`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbPricingWriteRequest_settings : IAdditionalDataHolder, IParsable

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>OTA platforms are deliberately absent — those reservations are owned by the channel and arrive through sync.</summary>
+    /// <summary>OTA platforms are deliberately absent — those reservations are owned by the channel and arrive through sync. `owner` is refused on a PMS listing (block owner stays in the PMS).</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ReservationCreateRequest_platform
     {

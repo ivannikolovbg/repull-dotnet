@@ -34,15 +34,19 @@ namespace Repull.SDK.V1.Reservations.Item.Cancel
         {
         }
         /// <summary>
-        /// Cancels a reservation where it lives.- **Mews or Cloudbeds** (hotel-model PMS): cancelled in the PMS, then read back, so Repull and the PMS agree. No cancellation fee is charged.- **Direct, website or owner bookings**: cancelled in Repull — the nights are released and `reservation.cancelled` fires.- **A channel booking** (Airbnb, Booking.com, VRBO) or a booking owned by another PMS: `409 reservation_owned_by_channel`. Cancel it there; the cancellation reaches Repull with the next sync.Cancelling an already-cancelled reservation is not an error: the response carries `alreadyCancelled: true`.Returns `403 listing_inactive` when the listing is inactive.
+        /// Cancels a reservation where it lives.- **A booking managed in a connected PMS** (Mews, Cloudbeds, Hostaway, Guesty, Beds24, BookingSync, Lodgify, Smoobu, Hospitable, iGMS): cancelled in the PMS, then read back, so Repull and the PMS agree. No cancellation fee is charged. Lodgify *declines* the booking rather than deleting it. **OwnerRez&apos;s API cannot cancel** — `422 pms_write_unsupported`; cancel it in OwnerRez. `GET /v1/listings/{id}` → `capabilities.reservations.cancel` says which applies.- **Direct, website or owner bookings**: cancelled in Repull — the nights are released and `reservation.cancelled` fires.- **A channel booking** (Airbnb, Booking.com, VRBO), including one that came in through a PMS: `409 reservation_owned_by_channel`. Cancel it on the channel; the cancellation reaches Repull with the next sync.Cancelling an already-cancelled reservation is not an error: the response carries `alreadyCancelled: true`.PMS integrations other than Mews and Cloudbeds are verified against the vendor&apos;s API documentation only.`X-Account-Id` restricts the reservation to one connected account. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse?> PostAsCancelPostResponseAsync(global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -56,22 +60,30 @@ namespace Repull.SDK.V1.Reservations.Item.Cancel
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse>(requestInfo, global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cancels a reservation where it lives.- **Mews or Cloudbeds** (hotel-model PMS): cancelled in the PMS, then read back, so Repull and the PMS agree. No cancellation fee is charged.- **Direct, website or owner bookings**: cancelled in Repull — the nights are released and `reservation.cancelled` fires.- **A channel booking** (Airbnb, Booking.com, VRBO) or a booking owned by another PMS: `409 reservation_owned_by_channel`. Cancel it there; the cancellation reaches Repull with the next sync.Cancelling an already-cancelled reservation is not an error: the response carries `alreadyCancelled: true`.Returns `403 listing_inactive` when the listing is inactive.
+        /// Cancels a reservation where it lives.- **A booking managed in a connected PMS** (Mews, Cloudbeds, Hostaway, Guesty, Beds24, BookingSync, Lodgify, Smoobu, Hospitable, iGMS): cancelled in the PMS, then read back, so Repull and the PMS agree. No cancellation fee is charged. Lodgify *declines* the booking rather than deleting it. **OwnerRez&apos;s API cannot cancel** — `422 pms_write_unsupported`; cancel it in OwnerRez. `GET /v1/listings/{id}` → `capabilities.reservations.cancel` says which applies.- **Direct, website or owner bookings**: cancelled in Repull — the nights are released and `reservation.cancelled` fires.- **A channel booking** (Airbnb, Booking.com, VRBO), including one that came in through a PMS: `409 reservation_owned_by_channel`. Cancel it on the channel; the cancellation reaches Repull with the next sync.Cancelling an already-cancelled reservation is not an error: the response carries `alreadyCancelled: true`.PMS integrations other than Mews and Cloudbeds are verified against the vendor&apos;s API documentation only.`X-Account-Id` restricts the reservation to one connected account. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Reservations.Item.Cancel.CancelResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
         [Obsolete("This method is obsolete. Use PostAsCancelPostResponseAsync instead.")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -86,14 +98,18 @@ namespace Repull.SDK.V1.Reservations.Item.Cancel
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Reservations.Item.Cancel.CancelResponse>(requestInfo, global::Repull.SDK.V1.Reservations.Item.Cancel.CancelResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cancels a reservation where it lives.- **Mews or Cloudbeds** (hotel-model PMS): cancelled in the PMS, then read back, so Repull and the PMS agree. No cancellation fee is charged.- **Direct, website or owner bookings**: cancelled in Repull — the nights are released and `reservation.cancelled` fires.- **A channel booking** (Airbnb, Booking.com, VRBO) or a booking owned by another PMS: `409 reservation_owned_by_channel`. Cancel it there; the cancellation reaches Repull with the next sync.Cancelling an already-cancelled reservation is not an error: the response carries `alreadyCancelled: true`.Returns `403 listing_inactive` when the listing is inactive.
+        /// Cancels a reservation where it lives.- **A booking managed in a connected PMS** (Mews, Cloudbeds, Hostaway, Guesty, Beds24, BookingSync, Lodgify, Smoobu, Hospitable, iGMS): cancelled in the PMS, then read back, so Repull and the PMS agree. No cancellation fee is charged. Lodgify *declines* the booking rather than deleting it. **OwnerRez&apos;s API cannot cancel** — `422 pms_write_unsupported`; cancel it in OwnerRez. `GET /v1/listings/{id}` → `capabilities.reservations.cancel` says which applies.- **Direct, website or owner bookings**: cancelled in Repull — the nights are released and `reservation.cancelled` fires.- **A channel booking** (Airbnb, Booking.com, VRBO), including one that came in through a PMS: `409 reservation_owned_by_channel`. Cancel it on the channel; the cancellation reaches Repull with the next sync.Cancelling an already-cancelled reservation is not an error: the response carries `alreadyCancelled: true`.PMS integrations other than Mews and Cloudbeds are verified against the vendor&apos;s API documentation only.`X-Account-Id` restricts the reservation to one connected account. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

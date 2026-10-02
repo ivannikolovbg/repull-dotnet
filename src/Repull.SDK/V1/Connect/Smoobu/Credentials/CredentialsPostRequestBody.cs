@@ -14,7 +14,7 @@ namespace Repull.SDK.V1.Connect.Smoobu.Credentials
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>API key from Smoobu → Settings → For developers.</summary>
+        /// <summary>HMAC API key + secret from Smoobu → Settings → Advanced → API Keys.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.V1.Connect.Smoobu.Credentials.CredentialsPostRequestBody_credentials? Credentials { get; set; }

@@ -22,6 +22,8 @@ namespace Repull.SDK.Models
 #else
         public string City { get; set; }
 #endif
+        /// <summary>On inactive listings only: why it is inactive.</summary>
+        public global::Repull.SDK.Models.BookingProperty_listings_inactiveReason? InactiveReason { get; set; }
         /// <summary>Repull listing id — what `/v1/channels/booking/properties/{id}` and `/v1/channels/booking/listings/{id}/pricing` take.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -32,13 +34,21 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Which record carries the mapping: the room mapping written by Connect, or the legacy property-level link.</summary>
         public global::Repull.SDK.Models.BookingProperty_listings_mappedVia? MappedVia { get; set; }
-        /// <summary>The name property</summary>
+        /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
 #nullable restore
 #else
         public string Name { get; set; }
+#endif
+        /// <summary>The title guests see on the channel; show this to end users.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PublicName { get; set; }
+#nullable restore
+#else
+        public string PublicName { get; set; }
 #endif
         /// <summary>Booking.com&apos;s own room id — the `roomId` an ARI write takes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -64,6 +74,8 @@ namespace Repull.SDK.Models
 #else
         public string RoomName { get; set; }
 #endif
+        /// <summary>Inactive listings appear only with `?status=inactive|all`, with identity fields only.</summary>
+        public global::Repull.SDK.Models.BookingProperty_listings_status? Status { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingProperty_listings"/> and sets the default values.
         /// </summary>
@@ -90,12 +102,15 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "city", n => { City = n.GetStringValue(); } },
+                { "inactiveReason", n => { InactiveReason = n.GetEnumValue<global::Repull.SDK.Models.BookingProperty_listings_inactiveReason>(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "mappedVia", n => { MappedVia = n.GetEnumValue<global::Repull.SDK.Models.BookingProperty_listings_mappedVia>(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "publicName", n => { PublicName = n.GetStringValue(); } },
                 { "roomBookingId", n => { RoomBookingId = n.GetStringValue(); } },
                 { "roomId", n => { RoomId = n.GetStringValue(); } },
                 { "roomName", n => { RoomName = n.GetStringValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.BookingProperty_listings_status>(); } },
             };
         }
         /// <summary>
@@ -106,12 +121,15 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("city", City);
+            writer.WriteEnumValue<global::Repull.SDK.Models.BookingProperty_listings_inactiveReason>("inactiveReason", InactiveReason);
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteEnumValue<global::Repull.SDK.Models.BookingProperty_listings_mappedVia>("mappedVia", MappedVia);
             writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("publicName", PublicName);
             writer.WriteStringValue("roomBookingId", RoomBookingId);
             writer.WriteStringValue("roomId", RoomId);
             writer.WriteStringValue("roomName", RoomName);
+            writer.WriteEnumValue<global::Repull.SDK.Models.BookingProperty_listings_status>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -51,10 +51,30 @@ namespace Repull.SDK.Models
 #else
         public string ConfirmationCode { get; set; }
 #endif
-        /// <summary>The id property</summary>
-        public int? Id { get; set; }
+        /// <summary>A string, like every id in API responses.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
+#endif
+        /// <summary>Present when the write was made in a PMS: what the PMS applied. `partial: true` means the booking exists in the PMS but the steps in `failedSections` (e.g. notes, a tentative state) did not apply — do not create it again.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ReservationPmsOutcome? Pms { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ReservationPmsOutcome Pms { get; set; }
+#endif
         /// <summary>A move forces the reservation to a confirmed status — read it back rather than assuming it is unchanged.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -96,8 +116,9 @@ namespace Repull.SDK.Models
                 { "checkOut", n => { CheckOut = n.GetDateValue(); } },
                 { "checkOutTime", n => { CheckOutTime = n.GetStringValue(); } },
                 { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
-                { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "pms", n => { Pms = n.GetObjectValue<global::Repull.SDK.Models.ReservationPmsOutcome>(global::Repull.SDK.Models.ReservationPmsOutcome.CreateFromDiscriminatorValue); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
@@ -115,8 +136,9 @@ namespace Repull.SDK.Models
             writer.WriteDateValue("checkOut", CheckOut);
             writer.WriteStringValue("checkOutTime", CheckOutTime);
             writer.WriteStringValue("confirmationCode", ConfirmationCode);
-            writer.WriteIntValue("id", Id);
-            writer.WriteIntValue("listingId", ListingId);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("listingId", ListingId);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ReservationPmsOutcome>("pms", Pms);
             writer.WriteStringValue("status", Status);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
