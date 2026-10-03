@@ -9,20 +9,12 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class GuestCreateRequest : IAdditionalDataHolder, IParsable
+    public partial class GuestUpdateRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The currency property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Currency { get; set; }
-#nullable restore
-#else
-        public string Currency { get; set; }
-#endif
-        /// <summary>The email property</summary>
+        /// <summary>Added as the guest&apos;s newest email; earlier ones are kept.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Email { get; set; }
@@ -38,8 +30,6 @@ namespace Repull.SDK.Models
 #else
         public string FirstName { get; set; }
 #endif
-        /// <summary>The isBusinessTraveler property</summary>
-        public bool? IsBusinessTraveler { get; set; }
         /// <summary>BCP-47 tag.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -56,7 +46,7 @@ namespace Repull.SDK.Models
 #else
         public string LastName { get; set; }
 #endif
-        /// <summary>E.164 preferred. Stored normalised.</summary>
+        /// <summary>E.164 preferred. Added as the guest&apos;s newest phone; earlier ones are kept.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Phone { get; set; }
@@ -64,31 +54,22 @@ namespace Repull.SDK.Models
 #else
         public string Phone { get; set; }
 #endif
-        /// <summary>A connected PMS to create the guest in as well. The guest is created there FIRST; a PMS that cannot create guest profiles returns `422 pms_write_unsupported` and nothing is created. The PMS&apos;s guest id comes back as `pms.externalId`, and later `PATCH /v1/guests/{id}` changes reach it.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Provider { get; set; }
-#nullable restore
-#else
-        public string Provider { get; set; }
-#endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestCreateRequest"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestUpdateRequest"/> and sets the default values.
         /// </summary>
-        public GuestCreateRequest()
+        public GuestUpdateRequest()
         {
             AdditionalData = new Dictionary<string, object>();
-            IsBusinessTraveler = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.GuestCreateRequest"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.GuestUpdateRequest"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.GuestCreateRequest CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.GuestUpdateRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.GuestCreateRequest();
+            return new global::Repull.SDK.Models.GuestUpdateRequest();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -98,14 +79,11 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "currency", n => { Currency = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
-                { "isBusinessTraveler", n => { IsBusinessTraveler = n.GetBoolValue(); } },
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "lastName", n => { LastName = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
-                { "provider", n => { Provider = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -115,14 +93,11 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("currency", Currency);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("firstName", FirstName);
-            writer.WriteBoolValue("isBusinessTraveler", IsBusinessTraveler);
             writer.WriteStringValue("language", Language);
             writer.WriteStringValue("lastName", LastName);
             writer.WriteStringValue("phone", Phone);
-            writer.WriteStringValue("provider", Provider);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

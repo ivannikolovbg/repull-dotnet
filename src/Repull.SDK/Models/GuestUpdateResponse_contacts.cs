@@ -5,63 +5,43 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Repull.SDK.V1.Reviews.Item.Reply
+namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReplyPostResponse : IAdditionalDataHolder, IParsable
+    public partial class GuestUpdateResponse_contacts : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The id property</summary>
+        /// <summary>The isPrimary property</summary>
+        public bool? IsPrimary { get; set; }
+        /// <summary>The type property</summary>
+        public global::Repull.SDK.Models.GuestUpdateResponse_contacts_type? Type { get; set; }
+        /// <summary>The value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Value { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
-#endif
-        /// <summary>The platform property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Platform { get; set; }
-#nullable restore
-#else
-        public string Platform { get; set; }
-#endif
-        /// <summary>The PMS the reply went through, when the review came from one.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Pms { get; set; }
-#nullable restore
-#else
-        public string Pms { get; set; }
-#endif
-        /// <summary>The response property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Response { get; set; }
-#nullable restore
-#else
-        public string Response { get; set; }
+        public string Value { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestUpdateResponse_contacts"/> and sets the default values.
         /// </summary>
-        public ReplyPostResponse()
+        public GuestUpdateResponse_contacts()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.GuestUpdateResponse_contacts"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.GuestUpdateResponse_contacts CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse();
+            return new global::Repull.SDK.Models.GuestUpdateResponse_contacts();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -71,10 +51,9 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "platform", n => { Platform = n.GetStringValue(); } },
-                { "pms", n => { Pms = n.GetStringValue(); } },
-                { "response", n => { Response = n.GetStringValue(); } },
+                { "isPrimary", n => { IsPrimary = n.GetBoolValue(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Repull.SDK.Models.GuestUpdateResponse_contacts_type>(); } },
+                { "value", n => { Value = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -84,10 +63,9 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("platform", Platform);
-            writer.WriteStringValue("pms", Pms);
-            writer.WriteStringValue("response", Response);
+            writer.WriteBoolValue("isPrimary", IsPrimary);
+            writer.WriteEnumValue<global::Repull.SDK.Models.GuestUpdateResponse_contacts_type>("type", Type);
+            writer.WriteStringValue("value", Value);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

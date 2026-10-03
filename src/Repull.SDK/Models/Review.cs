@@ -95,6 +95,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The platform property</summary>
         public global::Repull.SDK.Models.Review_platform? Platform { get; set; }
+        /// <summary>The PMS this review was read from (`guesty`, `hostaway`, …) when it came through one — `platform` is still the channel the guest wrote it on. A reply (`POST /v1/reviews/{id}/reply`) goes through this PMS; `GET /v1/connect/{provider}` → `capabilities.pms.reviews.reply` says whether it can. `null` for a review from a directly connected channel.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Pms { get; set; }
+#nullable restore
+#else
+        public string Pms { get; set; }
+#endif
         /// <summary>Private feedback the reviewer sent only to the host.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -189,6 +197,7 @@ namespace Repull.SDK.Models
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Review_platform>(); } },
+                { "pms", n => { Pms = n.GetStringValue(); } },
                 { "privateFeedback", n => { PrivateFeedback = n.GetStringValue(); } },
                 { "providerPropertyId", n => { ProviderPropertyId = n.GetStringValue(); } },
                 { "publicReview", n => { PublicReview = n.GetStringValue(); } },
@@ -221,6 +230,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("language", Language);
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteEnumValue<global::Repull.SDK.Models.Review_platform>("platform", Platform);
+            writer.WriteStringValue("pms", Pms);
             writer.WriteStringValue("privateFeedback", PrivateFeedback);
             writer.WriteStringValue("providerPropertyId", ProviderPropertyId);
             writer.WriteStringValue("publicReview", PublicReview);

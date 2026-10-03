@@ -8,13 +8,21 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// `GET /v1/listings/{id}` only. What the API can do with this listing.
+    /// `GET /v1/listings/{id}` only. What the API can do with this listing. `pms` is present when a connected PMS manages it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Listing_capabilities : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>What the API does through a connected PMS beyond reservation writes, read from the same connector table the router uses — a `false` flag is a `422 pms_write_unsupported` naming the PMS.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.PmsCapabilities? Pms { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.PmsCapabilities Pms { get; set; }
+#endif
         /// <summary>Which reservation writes the API performs for this listing (or, on `GET /v1/connect/{provider}`, for any listing of that connection). Derived from the PMS connector, the connection, and its write policy — a flag is true only when all three allow it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -48,6 +56,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "pms", n => { Pms = n.GetObjectValue<global::Repull.SDK.Models.PmsCapabilities>(global::Repull.SDK.Models.PmsCapabilities.CreateFromDiscriminatorValue); } },
                 { "reservations", n => { Reservations = n.GetObjectValue<global::Repull.SDK.Models.ReservationCapabilities>(global::Repull.SDK.Models.ReservationCapabilities.CreateFromDiscriminatorValue); } },
             };
         }
@@ -58,6 +67,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.PmsCapabilities>("pms", Pms);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationCapabilities>("reservations", Reservations);
             writer.WriteAdditionalData(AdditionalData);
         }

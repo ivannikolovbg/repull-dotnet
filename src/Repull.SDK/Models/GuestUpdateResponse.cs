@@ -9,30 +9,18 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class GuestCreateResponse : IAdditionalDataHolder, IParsable
+    public partial class GuestUpdateResponse : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>One entry per stored contact. Email and phone are separate records.</summary>
+        /// <summary>The contacts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.GuestCreateResponse_contacts>? Contacts { get; set; }
+        public List<global::Repull.SDK.Models.GuestUpdateResponse_contacts>? Contacts { get; set; }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.GuestCreateResponse_contacts> Contacts { get; set; }
-#endif
-        /// <summary>`true` when a new guest was written, `false` when an existing guest matched on email/phone plus name. Read this rather than assuming a 2xx means a new record.</summary>
-        public bool? Created { get; set; }
-        /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>The currency property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Currency { get; set; }
-#nullable restore
-#else
-        public string Currency { get; set; }
+        public List<global::Repull.SDK.Models.GuestUpdateResponse_contacts> Contacts { get; set; }
 #endif
         /// <summary>The firstName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -42,10 +30,8 @@ namespace Repull.SDK.Models
 #else
         public string FirstName { get; set; }
 #endif
-        /// <summary>Pass to `GET /v1/guests/{id}` for the full profile.</summary>
+        /// <summary>The id property</summary>
         public int? Id { get; set; }
-        /// <summary>The isBusinessTraveler property</summary>
-        public bool? IsBusinessTraveler { get; set; }
         /// <summary>The language property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -62,30 +48,32 @@ namespace Repull.SDK.Models
 #else
         public string LastName { get; set; }
 #endif
-        /// <summary>Set when `provider` was sent: the PMS the guest was also created in, and its id there.</summary>
+        /// <summary>Each PMS the change was written to first (the guest&apos;s linked PMSs), with the sections it applied.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.GuestCreateResponse_pms? Pms { get; set; }
+        public List<global::Repull.SDK.Models.GuestUpdateResponse_pms>? Pms { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.GuestCreateResponse_pms Pms { get; set; }
+        public List<global::Repull.SDK.Models.GuestUpdateResponse_pms> Pms { get; set; }
 #endif
+        /// <summary>The updatedAt property</summary>
+        public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestCreateResponse"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestUpdateResponse"/> and sets the default values.
         /// </summary>
-        public GuestCreateResponse()
+        public GuestUpdateResponse()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.GuestCreateResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.GuestUpdateResponse"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.Models.GuestCreateResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.GuestUpdateResponse CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.Models.GuestCreateResponse();
+            return new global::Repull.SDK.Models.GuestUpdateResponse();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -95,16 +83,13 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.GuestCreateResponse_contacts>(global::Repull.SDK.Models.GuestCreateResponse_contacts.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "created", n => { Created = n.GetBoolValue(); } },
-                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
-                { "currency", n => { Currency = n.GetStringValue(); } },
+                { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.GuestUpdateResponse_contacts>(global::Repull.SDK.Models.GuestUpdateResponse_contacts.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
-                { "isBusinessTraveler", n => { IsBusinessTraveler = n.GetBoolValue(); } },
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "lastName", n => { LastName = n.GetStringValue(); } },
-                { "pms", n => { Pms = n.GetObjectValue<global::Repull.SDK.Models.GuestCreateResponse_pms>(global::Repull.SDK.Models.GuestCreateResponse_pms.CreateFromDiscriminatorValue); } },
+                { "pms", n => { Pms = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.GuestUpdateResponse_pms>(global::Repull.SDK.Models.GuestUpdateResponse_pms.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -114,16 +99,13 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.GuestCreateResponse_contacts>("contacts", Contacts);
-            writer.WriteBoolValue("created", Created);
-            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
-            writer.WriteStringValue("currency", Currency);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.GuestUpdateResponse_contacts>("contacts", Contacts);
             writer.WriteStringValue("firstName", FirstName);
             writer.WriteIntValue("id", Id);
-            writer.WriteBoolValue("isBusinessTraveler", IsBusinessTraveler);
             writer.WriteStringValue("language", Language);
             writer.WriteStringValue("lastName", LastName);
-            writer.WriteObjectValue<global::Repull.SDK.Models.GuestCreateResponse_pms>("pms", Pms);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.GuestUpdateResponse_pms>("pms", Pms);
+            writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

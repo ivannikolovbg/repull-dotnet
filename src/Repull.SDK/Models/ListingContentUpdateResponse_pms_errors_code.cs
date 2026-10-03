@@ -3,33 +3,34 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>Force a channel. Omit to send on whichever channel the conversation already uses, which is the right default.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public enum SendMessageRequest_channel
+    #pragma warning disable CS1591
+    public enum ListingContentUpdateResponse_pms_errors_code
+    #pragma warning restore CS1591
     {
-        [EnumMember(Value = "airbnb")]
+        [EnumMember(Value = "rejected")]
         #pragma warning disable CS1591
-        Airbnb,
+        Rejected,
         #pragma warning restore CS1591
-        [EnumMember(Value = "booking")]
+        [EnumMember(Value = "unavailable")]
         #pragma warning disable CS1591
-        Booking,
+        Unavailable,
         #pragma warning restore CS1591
-        [EnumMember(Value = "vrbo")]
+        [EnumMember(Value = "unsupported")]
         #pragma warning disable CS1591
-        Vrbo,
+        Unsupported,
         #pragma warning restore CS1591
-        [EnumMember(Value = "sms")]
+        [EnumMember(Value = "not_found")]
         #pragma warning disable CS1591
-        Sms,
+        Not_found,
         #pragma warning restore CS1591
-        [EnumMember(Value = "email")]
+        [EnumMember(Value = "reauth_required")]
         #pragma warning disable CS1591
-        Email,
+        Reauth_required,
         #pragma warning restore CS1591
-        [EnumMember(Value = "website")]
+        [EnumMember(Value = "duplicate")]
         #pragma warning disable CS1591
-        Website,
+        Duplicate,
         #pragma warning restore CS1591
     }
 }

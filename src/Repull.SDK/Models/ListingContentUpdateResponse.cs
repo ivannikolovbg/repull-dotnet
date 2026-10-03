@@ -22,7 +22,7 @@ namespace Repull.SDK.Models
 #else
         public List<string> Changed { get; set; }
 #endif
-        /// <summary>Provided-but-not-applied fields — e.g. &quot;photos&quot; when a non-empty photos array carried no valid http(s) URL.</summary>
+        /// <summary>Provided-but-not-applied fields — e.g. &quot;photos&quot; when a non-empty photos array carried no valid http(s) URL. On a listing a PMS manages, also the content sections the PMS refused (`title`, `descriptions`, `times`, `capacity`, `amenities`, `houseRules`, `address`, `photos`), which are then not written here either.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Deferred { get; set; }
@@ -37,6 +37,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>Present when the listing is managed in a PMS: the PMS-owned fields were written there first, and this is its per-section outcome.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingContentUpdateResponse_pms? Pms { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingContentUpdateResponse_pms Pms { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateResponse"/> and sets the default values.
@@ -66,6 +74,7 @@ namespace Repull.SDK.Models
                 { "changed", n => { Changed = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "deferred", n => { Deferred = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "pms", n => { Pms = n.GetObjectValue<global::Repull.SDK.Models.ListingContentUpdateResponse_pms>(global::Repull.SDK.Models.ListingContentUpdateResponse_pms.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -78,6 +87,7 @@ namespace Repull.SDK.Models
             writer.WriteCollectionOfPrimitiveValues<string>("changed", Changed);
             writer.WriteCollectionOfPrimitiveValues<string>("deferred", Deferred);
             writer.WriteStringValue("id", Id);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingContentUpdateResponse_pms>("pms", Pms);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

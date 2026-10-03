@@ -15,7 +15,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Files to send. See the per-channel table above.</summary>
+        /// <summary>Files to send. See the per-channel table above. On a conversation a connected PMS relays, files go through the PMS — `422 pms_write_unsupported` when its API cannot send them (`capabilities.pms.conversations.attachments` on `GET /v1/connect/{provider}`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.SendMessageAttachment>? Attachments { get; set; }
@@ -23,8 +23,14 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.SendMessageAttachment> Attachments { get; set; }
 #endif
-        /// <summary>Force a channel. Omit to send on whichever channel the conversation already uses, which is the right default.</summary>
-        public global::Repull.SDK.Models.SendMessageRequest_channel? Channel { get; set; }
+        /// <summary>Force a channel. Omit to send on whichever channel the conversation already uses, which is the right default. One of `airbnb`, `booking`, `vrbo`, `sms`, `email`, `website` — except on a conversation a connected PMS relays (Guesty, Hostaway, …), where the message is sent through the PMS and `channel` is passed to it: the PMS&apos;s own channel/module name (Guesty `airbnb2`, `bookingCom`, `email`, `sms`, …) or one of Repull&apos;s names, which the PMS maps. A PMS that cannot choose a channel returns `422 pms_write_unsupported`; `GET /v1/connect/{provider}` → `capabilities.pms.conversations.channelSelect` says so beforehand.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Channel { get; set; }
+#nullable restore
+#else
+        public string Channel { get; set; }
+#endif
         /// <summary>The text to send the guest. Required unless `attachments` is present.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -59,7 +65,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.SendMessageAttachment>(global::Repull.SDK.Models.SendMessageAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "channel", n => { Channel = n.GetEnumValue<global::Repull.SDK.Models.SendMessageRequest_channel>(); } },
+                { "channel", n => { Channel = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
             };
         }
@@ -71,7 +77,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.SendMessageAttachment>("attachments", Attachments);
-            writer.WriteEnumValue<global::Repull.SDK.Models.SendMessageRequest_channel>("channel", Channel);
+            writer.WriteStringValue("channel", Channel);
             writer.WriteStringValue("message", Message);
             writer.WriteAdditionalData(AdditionalData);
         }

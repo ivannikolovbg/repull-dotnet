@@ -5,63 +5,48 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Repull.SDK.V1.Reviews.Item.Reply
+namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// Set when `provider` was sent: the PMS the guest was also created in, and its id there.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
-    public partial class ReplyPostResponse : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
+    public partial class GuestCreateResponse_pms : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The id property</summary>
+        /// <summary>The externalId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? ExternalId { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string ExternalId { get; set; }
 #endif
-        /// <summary>The platform property</summary>
+        /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Platform { get; set; }
+        public string? Provider { get; set; }
 #nullable restore
 #else
-        public string Platform { get; set; }
-#endif
-        /// <summary>The PMS the reply went through, when the review came from one.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Pms { get; set; }
-#nullable restore
-#else
-        public string Pms { get; set; }
-#endif
-        /// <summary>The response property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Response { get; set; }
-#nullable restore
-#else
-        public string Response { get; set; }
+        public string Provider { get; set; }
 #endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestCreateResponse_pms"/> and sets the default values.
         /// </summary>
-        public ReplyPostResponse()
+        public GuestCreateResponse_pms()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.GuestCreateResponse_pms"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.GuestCreateResponse_pms CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.V1.Reviews.Item.Reply.ReplyPostResponse();
+            return new global::Repull.SDK.Models.GuestCreateResponse_pms();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -71,10 +56,8 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "platform", n => { Platform = n.GetStringValue(); } },
-                { "pms", n => { Pms = n.GetStringValue(); } },
-                { "response", n => { Response = n.GetStringValue(); } },
+                { "externalId", n => { ExternalId = n.GetStringValue(); } },
+                { "provider", n => { Provider = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -84,10 +67,8 @@ namespace Repull.SDK.V1.Reviews.Item.Reply
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("platform", Platform);
-            writer.WriteStringValue("pms", Pms);
-            writer.WriteStringValue("response", Response);
+            writer.WriteStringValue("externalId", ExternalId);
+            writer.WriteStringValue("provider", Provider);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

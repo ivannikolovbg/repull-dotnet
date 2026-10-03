@@ -31,7 +31,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.ListingAmenity> Amenities { get; set; }
 #endif
-        /// <summary>`GET /v1/listings/{id}` only. What the API can do with this listing.</summary>
+        /// <summary>`GET /v1/listings/{id}` only. What the API can do with this listing. `pms` is present when a connected PMS manages it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.Listing_capabilities? Capabilities { get; set; }

@@ -31,7 +31,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>PMS providers only. `reservations`: which reservation writes the API performs on this connection&apos;s listings — the connector&apos;s support combined with `writePolicy`. When `connected` is false, what the connector supports once connected.</summary>
+        /// <summary>PMS providers only. `reservations`: which reservation writes the API performs on this connection&apos;s listings — the connector&apos;s support combined with `writePolicy`. `pms`: everything else the API does through this PMS (review replies, request answers, listing content, guests, message channel/attachments, calendar). When `connected` is false, what the connector supports once connected.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ConnectStatus_capabilities? Capabilities { get; set; }

@@ -65,6 +65,37 @@ namespace Repull.SDK.V1.Guests.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.GuestProfile>(requestInfo, global::Repull.SDK.Models.GuestProfile.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Change a guest&apos;s name, email, phone or language. Email and phone are added as the guest&apos;s newest contact; earlier ones are kept.**Guests linked to a connected PMS** (created with `provider`, or imported from one) are changed in that PMS first. A PMS whose API cannot change guest profiles returns `422 pms_write_unsupported` naming it (Hostaway today) and nothing is written; `GET /v1/connect/{provider}` → `capabilities.pms.guests.update` says so beforehand. A revoked PMS connection is `403 connection_reauth_required`.Send `Idempotency-Key` to make a retry safe.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.Models.GuestUpdateResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.Models.GuestUpdateResponse?> PatchAsync(global::Repull.SDK.Models.GuestUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.Models.GuestUpdateResponse> PatchAsync(global::Repull.SDK.Models.GuestUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.GuestUpdateResponse>(requestInfo, global::Repull.SDK.Models.GuestUpdateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// Returns the full guest profile — base list-row fields plus contacts, flags, notes, risk metadata, and reservation aggregates.**Inactive listings:** a guest whose every reservation is on an inactive listing returns `403 listing_inactive` naming those listings (the guest is kept, so this is not a 404). Otherwise the reservation aggregates exclude reservations on inactive listings. A guest with no reservations is always readable.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -84,6 +115,28 @@ namespace Repull.SDK.V1.Guests.Item
             return requestInfo;
         }
         /// <summary>
+        /// Change a guest&apos;s name, email, phone or language. Email and phone are added as the guest&apos;s newest contact; earlier ones are kept.**Guests linked to a connected PMS** (created with `provider`, or imported from one) are changed in that PMS first. A PMS whose API cannot change guest profiles returns `422 pms_write_unsupported` naming it (Hostaway today) and nothing is written; `GET /v1/connect/{provider}` → `capabilities.pms.guests.update` says so beforehand. A revoked PMS connection is `403 connection_reauth_required`.Send `Idempotency-Key` to make a retry safe.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPatchRequestInformation(global::Repull.SDK.Models.GuestUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPatchRequestInformation(global::Repull.SDK.Models.GuestUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.PATCH, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
+            return requestInfo;
+        }
+        /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Guests.Item.GuestsItemRequestBuilder"/></returns>
@@ -98,6 +151,14 @@ namespace Repull.SDK.V1.Guests.Item
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class GuestsItemRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class GuestsItemRequestBuilderPatchRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }
