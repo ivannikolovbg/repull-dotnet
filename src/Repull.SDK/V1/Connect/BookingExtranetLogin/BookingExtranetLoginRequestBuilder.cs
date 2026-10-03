@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Connect.BookingExtranetLogin.Invite;
+using Repull.SDK.V1.Connect.BookingExtranetLogin.Recheck;
 using Repull.SDK.V1.Connect.BookingExtranetLogin.Session;
 using Repull.SDK.V1.Connect.BookingExtranetLogin.Status;
 using System.Collections.Generic;
@@ -21,6 +22,11 @@ namespace Repull.SDK.V1.Connect.BookingExtranetLogin
         public global::Repull.SDK.V1.Connect.BookingExtranetLogin.Invite.InviteRequestBuilder Invite
         {
             get => new global::Repull.SDK.V1.Connect.BookingExtranetLogin.Invite.InviteRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The recheck property</summary>
+        public global::Repull.SDK.V1.Connect.BookingExtranetLogin.Recheck.RecheckRequestBuilder Recheck
+        {
+            get => new global::Repull.SDK.V1.Connect.BookingExtranetLogin.Recheck.RecheckRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The session property</summary>
         public global::Repull.SDK.V1.Connect.BookingExtranetLogin.Session.SessionRequestBuilder Session

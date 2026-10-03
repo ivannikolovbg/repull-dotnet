@@ -18,8 +18,10 @@ using Repull.SDK.V1.Connect.Lodgify;
 using Repull.SDK.V1.Connect.Mews;
 using Repull.SDK.V1.Connect.Ownerrez;
 using Repull.SDK.V1.Connect.Providers;
+using Repull.SDK.V1.Connect.Resume;
 using Repull.SDK.V1.Connect.Sessions;
 using Repull.SDK.V1.Connect.Smoobu;
+using Repull.SDK.V1.Connect.Track;
 using Repull.SDK.V1.Connect.Vrbo;
 using Repull.SDK.V1.Connect.VrboLogin;
 using System.Collections.Generic;
@@ -100,6 +102,11 @@ namespace Repull.SDK.V1.Connect
         {
             get => new global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The resume property</summary>
+        public global::Repull.SDK.V1.Connect.Resume.ResumeRequestBuilder Resume
+        {
+            get => new global::Repull.SDK.V1.Connect.Resume.ResumeRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The sessions property</summary>
         public global::Repull.SDK.V1.Connect.Sessions.SessionsRequestBuilder Sessions
         {
@@ -109,6 +116,11 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.Smoobu.SmoobuRequestBuilder Smoobu
         {
             get => new global::Repull.SDK.V1.Connect.Smoobu.SmoobuRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The track property</summary>
+        public global::Repull.SDK.V1.Connect.Track.TrackRequestBuilder Track
+        {
+            get => new global::Repull.SDK.V1.Connect.Track.TrackRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The vrbo property</summary>
         public global::Repull.SDK.V1.Connect.Vrbo.VrboRequestBuilder Vrbo

@@ -5,6 +5,14 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.25] - 2026-10-03
+
+Regenerated against the live `https://api.repull.dev/openapi.json`:
+
+- New `client.V1.Connect.Track.Credentials.PostAsCredentialsPostResponseAsync(CredentialsPostRequestBody)` — `POST /v1/connect/track/credentials`: connect a Track (TRACK Hospitality Software) account with `Credentials.Domain`, `ApiKey`, `ApiSecret` and optional `KeyType` (`Server` / `Channel`), `AuthMode` (`Hmac` / `Basic`), `HmacRealm`, `SecretIsBase64`, `PaymentTypeId`, `MoveReasonId`.
+- New `client.V1.Connect.BookingExtranetLogin.Recheck` (`POST /v1/connect/booking-extranet-login/recheck`) and `client.V1.Connect.Resume` (`GET /v1/connect/resume`).
+- Track listed in the per-PMS reservation write tables.
+
 ## [0.2.24] - 2026-10-02
 
 Regenerated against the live `https://api.repull.dev/openapi.json`:
