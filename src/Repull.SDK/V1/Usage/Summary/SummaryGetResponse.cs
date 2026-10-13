@@ -23,6 +23,14 @@ namespace Repull.SDK.V1.Usage.Summary
 #else
         public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown> Breakdown { get; set; }
 #endif
+        /// <summary>Pay-as-you-go wallet. Requests beyond your plan&apos;s monthly quota keep being served while `active`, billed at `usdPer1000Requests`. Top up at https://repull.dev/dashboard/billing.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits? Credits { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits Credits { get; set; }
+#endif
         /// <summary>The dailyResetsAt property</summary>
         public DateTimeOffset? DailyResetsAt { get; set; }
         /// <summary>The limits property</summary>
@@ -125,6 +133,7 @@ namespace Repull.SDK.V1.Usage.Summary
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "breakdown", n => { Breakdown = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "credits", n => { Credits = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits.CreateFromDiscriminatorValue); } },
                 { "dailyResetsAt", n => { DailyResetsAt = n.GetDateTimeOffsetValue(); } },
                 { "limits", n => { Limits = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits.CreateFromDiscriminatorValue); } },
                 { "planNotice", n => { PlanNotice = n.GetObjectValue<global::Repull.SDK.Models.PlanNotice>(global::Repull.SDK.Models.PlanNotice.CreateFromDiscriminatorValue); } },
@@ -146,6 +155,7 @@ namespace Repull.SDK.V1.Usage.Summary
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>("breakdown", Breakdown);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits>("credits", Credits);
             writer.WriteDateTimeOffsetValue("dailyResetsAt", DailyResetsAt);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>("limits", Limits);
             writer.WriteObjectValue<global::Repull.SDK.Models.PlanNotice>("planNotice", PlanNotice);

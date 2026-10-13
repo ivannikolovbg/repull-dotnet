@@ -32,6 +32,8 @@ namespace Repull.SDK.V1.Connect
 #else
         public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy Copy { get; set; }
 #endif
+        /// <summary>Also list PMSes Repull doesn&apos;t connect yet (`status: request-only` in `GET /v1/connect/providers?includeRequestOnly=true`), plus an Other PMS card. Picking one opens a form that collects the host&apos;s contact and access details for the Repull team and ends with &quot;A team member will contact you&quot;. No connection is made: the redirect carries `status=requested&amp;provider=&lt;id&gt;`, and no `connect.session.completed` webhook fires. Naming a request-only id in `allowedProviders` offers it without this flag.</summary>
+        public bool? IncludeRequestOnly { get; set; }
         /// <summary>Optional UI language for the hosted Connect pages. Accepts any supported locale code (currently `en`, `fr`). When set it pins the language for the whole flow, overriding the workspace `default_language`. Unknown codes are ignored and the page falls back to the workspace default, then `Accept-Language`, then `en`. The end user can still override per-visit with a `?locale=` query param on the hosted page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -68,7 +70,7 @@ namespace Repull.SDK.V1.Connect
 #else
         public string State { get; set; }
 #endif
-        /// <summary>Migrate only — the property manager being moved. Required unless you send `X-Workspace-Id` to reconnect an existing migration.</summary>
+        /// <summary>Opens a new sub-workspace for this customer of yours and lands the connection there; the response returns its `workspaceId`, which you then send as `X-Workspace-Id`. Works with both purposes: a plain `connect` keeps the normal onboarding pages. Required for `migrate` unless you send `X-Workspace-Id` to reconnect an existing one. Don&apos;t send it together with `X-Workspace-Id`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace? Workspace { get; set; }
@@ -82,6 +84,7 @@ namespace Repull.SDK.V1.Connect
         public ConnectPostRequestBody()
         {
             AdditionalData = new Dictionary<string, object>();
+            IncludeRequestOnly = false;
             Purpose = global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose.Connect;
         }
         /// <summary>
@@ -105,6 +108,7 @@ namespace Repull.SDK.V1.Connect
                 { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_accessType>(); } },
                 { "allowedProviders", n => { AllowedProviders = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "copy", n => { Copy = n.GetObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>(global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy.CreateFromDiscriminatorValue); } },
+                { "includeRequestOnly", n => { IncludeRequestOnly = n.GetBoolValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "purpose", n => { Purpose = n.GetEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose>(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
@@ -124,6 +128,7 @@ namespace Repull.SDK.V1.Connect
             writer.WriteEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_accessType>("accessType", AccessType);
             writer.WriteCollectionOfPrimitiveValues<string>("allowedProviders", AllowedProviders);
             writer.WriteObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>("copy", Copy);
+            writer.WriteBoolValue("includeRequestOnly", IncludeRequestOnly);
             writer.WriteStringValue("locale", Locale);
             writer.WriteEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose>("purpose", Purpose);
             writer.WriteStringValue("redirectUrl", RedirectUrl);

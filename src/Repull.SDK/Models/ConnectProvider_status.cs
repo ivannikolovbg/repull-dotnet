@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>Pickers should hide / disable `coming-soon` cards. `beta` cards are clickable but show a Beta pill.</summary>
+    /// <summary>Pickers should hide / disable `coming-soon` cards. `beta` cards are clickable but show a Beta pill. `request-only` is a PMS Repull doesn&apos;t connect yet, listed only with `includeRequestOnly`: picking it collects the host&apos;s access details for the Repull team, and the session ends as `requested` instead of connecting.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ConnectProvider_status
     {
@@ -18,6 +18,10 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "coming-soon")]
         #pragma warning disable CS1591
         ComingSoon,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "request-only")]
+        #pragma warning disable CS1591
+        RequestOnly,
         #pragma warning restore CS1591
     }
 }

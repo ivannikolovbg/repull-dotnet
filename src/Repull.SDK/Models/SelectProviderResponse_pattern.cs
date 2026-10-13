@@ -24,5 +24,9 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         Claim,
         #pragma warning restore CS1591
+        [EnumMember(Value = "extranet")]
+        #pragma warning disable CS1591
+        Extranet,
+        #pragma warning restore CS1591
     }
 }

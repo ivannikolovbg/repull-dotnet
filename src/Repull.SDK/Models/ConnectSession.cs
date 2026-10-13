@@ -17,6 +17,8 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The expiresAt property</summary>
         public DateTimeOffset? ExpiresAt { get; set; }
+        /// <summary>Present (`true`) when the session also lists PMSes Repull doesn&apos;t connect yet.</summary>
+        public bool? IncludeRequestOnly { get; set; }
         /// <summary>Present only on a Repull Migrate session.</summary>
         public global::Repull.SDK.Models.ConnectSession_purpose? Purpose { get; set; }
         /// <summary>The sessionId property</summary>
@@ -43,7 +45,7 @@ namespace Repull.SDK.Models
 #else
         public string Url { get; set; }
 #endif
-        /// <summary>Repull Migrate only: the workspace the property manager&apos;s data lands in. Read it with `X-Workspace-Id`, track it with `GET /v1/migrations/{workspaceId}`.</summary>
+        /// <summary>Present when the session lands on a sub-workspace (`workspace` or `X-Workspace-Id` on the request): the workspace the connection lands in. Read and write it with `X-Workspace-Id`; on a migrate session, track the import with `GET /v1/migrations/{workspaceId}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? WorkspaceId { get; set; }
@@ -77,6 +79,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "expiresAt", n => { ExpiresAt = n.GetDateTimeOffsetValue(); } },
+                { "includeRequestOnly", n => { IncludeRequestOnly = n.GetBoolValue(); } },
                 { "purpose", n => { Purpose = n.GetEnumValue<global::Repull.SDK.Models.ConnectSession_purpose>(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
@@ -92,6 +95,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDateTimeOffsetValue("expiresAt", ExpiresAt);
+            writer.WriteBoolValue("includeRequestOnly", IncludeRequestOnly);
             writer.WriteEnumValue<global::Repull.SDK.Models.ConnectSession_purpose>("purpose", Purpose);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteStringValue("state", State);

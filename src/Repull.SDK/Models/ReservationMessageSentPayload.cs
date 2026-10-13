@@ -59,6 +59,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ReservationMessageSentPayload_from From { get; set; }
 #endif
+        /// <summary>Booking.com only: the hotel (property) id of the conversation&apos;s listing. Absent on other channels. A Booking.com Extranet login can cover several hotels, so use this to route the message.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HotelId { get; set; }
+#nullable restore
+#else
+        public string HotelId { get; set; }
+#endif
         /// <summary>The isAutomated property</summary>
         public bool? IsAutomated { get; set; }
         /// <summary>Repull message id, as `GET /v1/conversations/{id}/messages` returns it.</summary>
@@ -115,6 +123,7 @@ namespace Repull.SDK.Models
                 { "direction", n => { Direction = n.GetEnumValue<global::Repull.SDK.Models.ReservationMessageSentPayload_direction>(); } },
                 { "externalMessageId", n => { ExternalMessageId = n.GetStringValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Repull.SDK.Models.ReservationMessageSentPayload_from>(global::Repull.SDK.Models.ReservationMessageSentPayload_from.CreateFromDiscriminatorValue); } },
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "isAutomated", n => { IsAutomated = n.GetBoolValue(); } },
                 { "messageId", n => { MessageId = n.GetStringValue(); } },
                 { "reservationId", n => { ReservationId = n.GetIntValue(); } },
@@ -137,6 +146,7 @@ namespace Repull.SDK.Models
             writer.WriteEnumValue<global::Repull.SDK.Models.ReservationMessageSentPayload_direction>("direction", Direction);
             writer.WriteStringValue("externalMessageId", ExternalMessageId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationMessageSentPayload_from>("from", From);
+            writer.WriteStringValue("hotelId", HotelId);
             writer.WriteBoolValue("isAutomated", IsAutomated);
             writer.WriteStringValue("messageId", MessageId);
             writer.WriteIntValue("reservationId", ReservationId);

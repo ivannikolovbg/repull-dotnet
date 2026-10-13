@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.V1.Connect
 {
     /// <summary>
-    /// Migrate only — the property manager being moved. Required unless you send `X-Workspace-Id` to reconnect an existing migration.
+    /// Opens a new sub-workspace for this customer of yours and lands the connection there; the response returns its `workspaceId`, which you then send as `X-Workspace-Id`. Works with both purposes: a plain `connect` keeps the normal onboarding pages. Required for `migrate` unless you send `X-Workspace-Id` to reconnect an existing one. Don&apos;t send it together with `X-Workspace-Id`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConnectPostRequestBody_workspace : IAdditionalDataHolder, IParsable

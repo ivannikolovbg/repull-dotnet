@@ -65,6 +65,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ListingDetails Details { get; set; }
 #endif
+        /// <summary>The hotel the listing belongs to: a hotel PMS hotel (Cloudbeds, Mews) or a Booking.com property with several room types or rooms. `null` for a standalone home. `GET /v1/hotels/{id}` lists its room types.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Listing_hotel? Hotel { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Listing_hotel Hotel { get; set; }
+#endif
         /// <summary>Repull listing id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -73,6 +81,8 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
+        /// <summary>`room_type` when the listing sells several identical units (a hotel room type: `unitCount` &gt; 1) or is a hotel PMS room type; `home` otherwise. See the Hotels &amp; multi-unit guide.</summary>
+        public global::Repull.SDK.Models.Listing_kind? Kind { get; set; }
         /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -99,6 +109,8 @@ namespace Repull.SDK.Models
 #else
         public string ThumbnailUrl { get; set; }
 #endif
+        /// <summary>How many identical units (rooms) this listing sells: the hotel PMS rooms of the room type, the room count on Booking.com, or 1 for a home. Rooms left per night are `availableUnits` on `GET /v1/availability/{propertyId}`.</summary>
+        public int? UnitCount { get; set; }
         /// <summary>`GET /v1/listings/{id}` only. The physical rooms under a hotel-model listing (a Mews or Cloudbeds room type); empty for a single home. Same items as `GET /v1/listings/{id}/units`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -141,11 +153,14 @@ namespace Repull.SDK.Models
                 { "content", n => { Content = n.GetObjectValue<global::Repull.SDK.Models.ListingContent>(global::Repull.SDK.Models.ListingContent.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "details", n => { Details = n.GetObjectValue<global::Repull.SDK.Models.ListingDetails>(global::Repull.SDK.Models.ListingDetails.CreateFromDiscriminatorValue); } },
+                { "hotel", n => { Hotel = n.GetObjectValue<global::Repull.SDK.Models.Listing_hotel>(global::Repull.SDK.Models.Listing_hotel.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "kind", n => { Kind = n.GetEnumValue<global::Repull.SDK.Models.Listing_kind>(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "publicName", n => { PublicName = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Listing_status>(); } },
                 { "thumbnailUrl", n => { ThumbnailUrl = n.GetStringValue(); } },
+                { "unitCount", n => { UnitCount = n.GetIntValue(); } },
                 { "units", n => { Units = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Listing_units>(global::Repull.SDK.Models.Listing_units.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
@@ -164,11 +179,14 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContent>("content", Content);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingDetails>("details", Details);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Listing_hotel>("hotel", Hotel);
             writer.WriteStringValue("id", Id);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Listing_kind>("kind", Kind);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("publicName", PublicName);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_status>("status", Status);
             writer.WriteStringValue("thumbnailUrl", ThumbnailUrl);
+            writer.WriteIntValue("unitCount", UnitCount);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Listing_units>("units", Units);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);

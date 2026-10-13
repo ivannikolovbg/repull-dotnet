@@ -48,7 +48,7 @@ namespace Repull.SDK.V1.Conversations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?account*,cursor*,limit*,offset*,platform*,status*}", pathParameters)
+        public ConversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?account*,cursor*,limit*,offset*,platform*,status*,updated_since*}", pathParameters)
         {
         }
         /// <summary>
@@ -56,11 +56,11 @@ namespace Repull.SDK.V1.Conversations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?account*,cursor*,limit*,offset*,platform*,status*}", rawUrl)
+        public ConversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/conversations{?account*,cursor*,limit*,offset*,platform*,status*,updated_since*}", rawUrl)
         {
         }
         /// <summary>
-        /// Cursor-paginated list of message threads owned by the workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).**Inactive listings:** conversations that belong to an inactive listing (by the thread&apos;s listing or its reservation&apos;s listing) are left out of the page and of `pagination.total`. Inactive listings keep syncing; activate the listing to use it here.
+        /// Cursor-paginated list of message threads owned by the workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).**Inactive listings:** conversations that belong to an inactive listing (by the thread&apos;s listing or its reservation&apos;s listing) are left out of the page and of `pagination.total`. Inactive listings keep syncing; activate the listing to use it here.**Order:** newest conversation first (by when the conversation started), unless you pass `updated_since`.**Incremental sync (`?updated_since=&lt;ISO8601&gt;`):** only conversations with activity (a new message or another change) at or after that instant, ordered oldest change first (`updatedAt ASC`). Walk every page with `cursor`, keeping `updated_since` on each request; the last row&apos;s `updatedAt` is your next watermark. A cursor from one kind of walk is refused on the other.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ConversationListResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Conversations
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.ConversationListResponse>(requestInfo, global::Repull.SDK.Models.ConversationListResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Cursor-paginated list of message threads owned by the workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).**Inactive listings:** conversations that belong to an inactive listing (by the thread&apos;s listing or its reservation&apos;s listing) are left out of the page and of `pagination.total`. Inactive listings keep syncing; activate the listing to use it here.
+        /// Cursor-paginated list of message threads owned by the workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).**Inactive listings:** conversations that belong to an inactive listing (by the thread&apos;s listing or its reservation&apos;s listing) are left out of the page and of `pagination.total`. Inactive listings keep syncing; activate the listing to use it here.**Order:** newest conversation first (by when the conversation started), unless you pass `updated_since`.**Incremental sync (`?updated_since=&lt;ISO8601&gt;`):** only conversations with activity (a new message or another change) at or after that instant, ordered oldest change first (`updatedAt ASC`). Walk every page with `cursor`, keeping `updated_since` on each request; the last row&apos;s `updatedAt` is your next watermark. A cursor from one kind of walk is refused on the other.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -117,7 +117,7 @@ namespace Repull.SDK.V1.Conversations
             return new global::Repull.SDK.V1.Conversations.ConversationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Cursor-paginated list of message threads owned by the workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).**Inactive listings:** conversations that belong to an inactive listing (by the thread&apos;s listing or its reservation&apos;s listing) are left out of the page and of `pagination.total`. Inactive listings keep syncing; activate the listing to use it here.
+        /// Cursor-paginated list of message threads owned by the workspace. Use `pagination.nextCursor` from one response as the `cursor` query param of the next request.`?offset=` is also accepted as a first-class alias for shallow paging (0..10000) — see the `offset` parameter below. Mutually exclusive with `cursor`.Filters: `platform` (`airbnb`|`booking`|`vrbo`|`website`|`email`), `status` (`open`|`archived` — `archived` is a stable no-op until the bit lands on `message_threads`).**Inactive listings:** conversations that belong to an inactive listing (by the thread&apos;s listing or its reservation&apos;s listing) are left out of the page and of `pagination.total`. Inactive listings keep syncing; activate the listing to use it here.**Order:** newest conversation first (by when the conversation started), unless you pass `updated_since`.**Incremental sync (`?updated_since=&lt;ISO8601&gt;`):** only conversations with activity (a new message or another change) at or after that instant, ordered oldest change first (`updatedAt ASC`). Walk every page with `cursor`, keeping `updated_since` on each request; the last row&apos;s `updatedAt` is your next watermark. A cursor from one kind of walk is refused on the other.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ConversationsRequestBuilderGetQueryParameters 
@@ -176,6 +176,9 @@ namespace Repull.SDK.V1.Conversations
             /// <summary>Filter by archive status. `archived` currently always returns an empty page — kept for forward-compat.</summary>
             [QueryParameter("status")]
             public global::Repull.SDK.V1.Conversations.GetStatusQueryParameterType? StatusAsGetStatusQueryParameterType { get; set; }
+            /// <summary>ISO 8601 instant. Only conversations with activity at or after it, oldest change first. Keep it on every page of the walk; use the last row&apos;s `updatedAt` as the next value.</summary>
+            [QueryParameter("updated_since")]
+            public DateTimeOffset? UpdatedSince { get; set; }
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.

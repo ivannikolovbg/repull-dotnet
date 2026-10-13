@@ -15,7 +15,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Where to send the user next — OAuth consent, credentials form, activation checklist, or claim form.</summary>
+        /// <summary>Where to send the user next — OAuth consent, credentials form, activation checklist, claim form, or (for a `request-only` PMS) the request form.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? NextUrl { get; set; }

@@ -31,6 +31,14 @@ namespace Repull.SDK.Models
 #else
         public string ExternalAccountId { get; set; }
 #endif
+        /// <summary>Booking.com only: the hotel (property) id the record belongs to. On a `booking_extranet` account, `externalAccountId` is the login, which can cover several hotels.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HotelId { get; set; }
+#nullable restore
+#else
+        public string HotelId { get; set; }
+#endif
         /// <summary>airbnb, booking, booking_extranet, vrbo, or the PMS id (hostaway, cloudbeds, …).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -66,6 +74,7 @@ namespace Repull.SDK.Models
             {
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
             };
         }
@@ -78,6 +87,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
+            writer.WriteStringValue("hotelId", HotelId);
             writer.WriteStringValue("provider", Provider);
             writer.WriteAdditionalData(AdditionalData);
         }

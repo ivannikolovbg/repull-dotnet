@@ -18,12 +18,14 @@ using Repull.SDK.V1.Connect.Lodgify;
 using Repull.SDK.V1.Connect.Mews;
 using Repull.SDK.V1.Connect.Ownerrez;
 using Repull.SDK.V1.Connect.Providers;
+using Repull.SDK.V1.Connect.Rentalready;
 using Repull.SDK.V1.Connect.Resume;
 using Repull.SDK.V1.Connect.Sessions;
 using Repull.SDK.V1.Connect.Smoobu;
 using Repull.SDK.V1.Connect.Track;
 using Repull.SDK.V1.Connect.Vrbo;
 using Repull.SDK.V1.Connect.VrboLogin;
+using Repull.SDK.V1.Connect.Zeevou;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -102,6 +104,11 @@ namespace Repull.SDK.V1.Connect
         {
             get => new global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The rentalready property</summary>
+        public global::Repull.SDK.V1.Connect.Rentalready.RentalreadyRequestBuilder Rentalready
+        {
+            get => new global::Repull.SDK.V1.Connect.Rentalready.RentalreadyRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The resume property</summary>
         public global::Repull.SDK.V1.Connect.Resume.ResumeRequestBuilder Resume
         {
@@ -131,6 +138,11 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.VrboLogin.VrboLoginRequestBuilder VrboLogin
         {
             get => new global::Repull.SDK.V1.Connect.VrboLogin.VrboLoginRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The zeevou property</summary>
+        public global::Repull.SDK.V1.Connect.Zeevou.ZeevouRequestBuilder Zeevou
+        {
+            get => new global::Repull.SDK.V1.Connect.Zeevou.ZeevouRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Repull.SDK.v1.connect.item collection</summary>
         /// <param name="position">PMS provider slug (e.g., hostaway, guesty, ownerrez)</param>

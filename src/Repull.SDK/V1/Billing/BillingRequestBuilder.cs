@@ -33,27 +33,104 @@ namespace Repull.SDK.V1.Billing
         {
         }
         /// <summary>
-        /// Redirect user to Stripe checkout.
+        /// The workspace&apos;s plan, its request limits, usage this period, and where the owner manages the plan. Same numbers as `GET /v1/usage/tier`.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Billing.BillingGetResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Billing.BillingGetResponse?> GetAsBillingGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Billing.BillingGetResponse> GetAsBillingGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToGetRequestInformation(requestConfiguration);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Billing.BillingGetResponse>(requestInfo, global::Repull.SDK.V1.Billing.BillingGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// The workspace&apos;s plan, its request limits, usage this period, and where the owner manages the plan. Same numbers as `GET /v1/usage/tier`.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Billing.BillingResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("This method is obsolete. Use GetAsBillingGetResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Billing.BillingResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Billing.BillingResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToGetRequestInformation(requestConfiguration);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Billing.BillingResponse>(requestInfo, global::Repull.SDK.V1.Billing.BillingResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Returns the URL where the workspace owner upgrades to Starter. Plans above Starter are set up with the Repull team and return `422 billing_error` with the next step.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Billing.BillingPostResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PostAsync(global::Repull.SDK.V1.Billing.BillingPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Billing.BillingPostResponse?> PostAsBillingPostResponseAsync(global::Repull.SDK.V1.Billing.BillingPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PostAsync(global::Repull.SDK.V1.Billing.BillingPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Billing.BillingPostResponse> PostAsBillingPostResponseAsync(global::Repull.SDK.V1.Billing.BillingPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Billing.BillingPostResponse>(requestInfo, global::Repull.SDK.V1.Billing.BillingPostResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Redirect user to Stripe checkout.
+        /// Returns the URL where the workspace owner upgrades to Starter. Plans above Starter are set up with the Repull team and return `422 billing_error` with the next step.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Billing.BillingResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("This method is obsolete. Use PostAsBillingPostResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Billing.BillingResponse?> PostAsync(global::Repull.SDK.V1.Billing.BillingPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Billing.BillingResponse> PostAsync(global::Repull.SDK.V1.Billing.BillingPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Billing.BillingResponse>(requestInfo, global::Repull.SDK.V1.Billing.BillingResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// The workspace&apos;s plan, its request limits, usage this period, and where the owner manages the plan. Same numbers as `GET /v1/usage/tier`.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Returns the URL where the workspace owner upgrades to Starter. Plans above Starter are set up with the Repull team and return `422 billing_error` with the next step.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -70,6 +147,7 @@ namespace Repull.SDK.V1.Billing
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
             requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
@@ -81,6 +159,14 @@ namespace Repull.SDK.V1.Billing
         public global::Repull.SDK.V1.Billing.BillingRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Repull.SDK.V1.Billing.BillingRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class BillingRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        {
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.

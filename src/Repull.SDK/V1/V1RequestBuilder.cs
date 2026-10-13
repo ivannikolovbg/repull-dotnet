@@ -10,6 +10,7 @@ using Repull.SDK.V1.Connections;
 using Repull.SDK.V1.Conversations;
 using Repull.SDK.V1.Guests;
 using Repull.SDK.V1.Health;
+using Repull.SDK.V1.Hotels;
 using Repull.SDK.V1.Inquiries;
 using Repull.SDK.V1.Kv;
 using Repull.SDK.V1.Listings;
@@ -22,6 +23,7 @@ using Repull.SDK.V1.Reviews;
 using Repull.SDK.V1.Schema;
 using Repull.SDK.V1.Usage;
 using Repull.SDK.V1.Webhooks;
+using Repull.SDK.V1.Workspaces;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -73,6 +75,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Health.HealthRequestBuilder Health
         {
             get => new global::Repull.SDK.V1.Health.HealthRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The hotels property</summary>
+        public global::Repull.SDK.V1.Hotels.HotelsRequestBuilder Hotels
+        {
+            get => new global::Repull.SDK.V1.Hotels.HotelsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The inquiries property</summary>
         public global::Repull.SDK.V1.Inquiries.InquiriesRequestBuilder Inquiries
@@ -133,6 +140,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Webhooks.WebhooksRequestBuilder Webhooks
         {
             get => new global::Repull.SDK.V1.Webhooks.WebhooksRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The workspaces property</summary>
+        public global::Repull.SDK.V1.Workspaces.WorkspacesRequestBuilder Workspaces
+        {
+            get => new global::Repull.SDK.V1.Workspaces.WorkspacesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.V1RequestBuilder"/> and sets the default values.

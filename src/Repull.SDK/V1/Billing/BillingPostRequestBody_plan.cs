@@ -12,13 +12,5 @@ namespace Repull.SDK.V1.Billing
         #pragma warning disable CS1591
         Starter,
         #pragma warning restore CS1591
-        [EnumMember(Value = "growth")]
-        #pragma warning disable CS1591
-        Growth,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "scale")]
-        #pragma warning disable CS1591
-        Scale,
-        #pragma warning restore CS1591
     }
 }

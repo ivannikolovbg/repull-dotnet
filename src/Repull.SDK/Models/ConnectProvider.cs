@@ -25,7 +25,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Channel category — OTAs are listing marketplaces; PMSes are property management systems.</summary>
         public global::Repull.SDK.Models.ConnectProvider_category? Category { get; set; }
-        /// <summary>How the host is connected. `oauth`: provider-side consent screen. `credentials`: hosted form collects API keys. `activation`: push-only handshake (Vrbo). `claim`: connectivity-provider designation in the channel&apos;s Extranet (Booking.com).</summary>
+        /// <summary>How the host is connected. `oauth`: provider-side consent screen. `credentials`: hosted form collects API keys. `activation`: push-only handshake. `claim`: connectivity-provider designation in the channel&apos;s Extranet (Booking.com). `extranet`: the host signs in with their Booking.com Extranet user.</summary>
         public global::Repull.SDK.Models.ConnectProvider_connectPattern? ConnectPattern { get; set; }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -75,7 +75,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ConnectProvider_migrationCapabilities MigrationCapabilities { get; set; }
 #endif
-        /// <summary>Pickers should hide / disable `coming-soon` cards. `beta` cards are clickable but show a Beta pill.</summary>
+        /// <summary>Pickers should hide / disable `coming-soon` cards. `beta` cards are clickable but show a Beta pill. `request-only` is a PMS Repull doesn&apos;t connect yet, listed only with `includeRequestOnly`: picking it collects the host&apos;s access details for the Repull team, and the session ends as `requested` instead of connecting.</summary>
         public global::Repull.SDK.Models.ConnectProvider_status? Status { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectProvider"/> and sets the default values.

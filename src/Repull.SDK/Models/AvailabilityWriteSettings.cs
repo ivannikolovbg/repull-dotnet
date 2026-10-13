@@ -17,6 +17,8 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Block or unblock the dates.</summary>
         public bool? Available { get; set; }
+        /// <summary>Rooms to sell on these dates, for a listing that sells several identical rooms (`unitCount` &gt; 1, e.g. a Booking.com room type). Up to the listing&apos;s `unitCount`. Refused with `409 managed_by_pms` on a hotel PMS room type (Cloudbeds, Mews) — its PMS owns the room count.</summary>
+        public int? AvailableUnits { get; set; }
         /// <summary>The maxNights property</summary>
         public int? MaxNights { get; set; }
         /// <summary>The minNights property</summary>
@@ -49,6 +51,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "available", n => { Available = n.GetBoolValue(); } },
+                { "availableUnits", n => { AvailableUnits = n.GetIntValue(); } },
                 { "maxNights", n => { MaxNights = n.GetIntValue(); } },
                 { "minNights", n => { MinNights = n.GetIntValue(); } },
                 { "price", n => { Price = n.GetDoubleValue(); } },
@@ -62,6 +65,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("available", Available);
+            writer.WriteIntValue("availableUnits", AvailableUnits);
             writer.WriteIntValue("maxNights", MaxNights);
             writer.WriteIntValue("minNights", MinNights);
             writer.WriteDoubleValue("price", Price);

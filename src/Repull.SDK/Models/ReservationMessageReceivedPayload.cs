@@ -39,6 +39,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ReservationMessageReceivedPayload_from From { get; set; }
 #endif
+        /// <summary>Booking.com only: the hotel (property) id of the conversation&apos;s listing. Absent on other channels. A Booking.com Extranet login can cover several hotels, so use this to route the message.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HotelId { get; set; }
+#nullable restore
+#else
+        public string HotelId { get; set; }
+#endif
         /// <summary>The reservationId property</summary>
         public int? ReservationId { get; set; }
         /// <summary>The sentAt property</summary>
@@ -79,6 +87,7 @@ namespace Repull.SDK.Models
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>(global::Repull.SDK.Models.ConversationMessageAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Repull.SDK.Models.ReservationMessageReceivedPayload_from>(global::Repull.SDK.Models.ReservationMessageReceivedPayload_from.CreateFromDiscriminatorValue); } },
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "reservationId", n => { ReservationId = n.GetIntValue(); } },
                 { "sentAt", n => { SentAt = n.GetDateTimeOffsetValue(); } },
                 { "threadId", n => { ThreadId = n.GetStringValue(); } },
@@ -94,6 +103,7 @@ namespace Repull.SDK.Models
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>("attachments", Attachments);
             writer.WriteStringValue("body", Body);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationMessageReceivedPayload_from>("from", From);
+            writer.WriteStringValue("hotelId", HotelId);
             writer.WriteIntValue("reservationId", ReservationId);
             writer.WriteDateTimeOffsetValue("sentAt", SentAt);
             writer.WriteStringValue("threadId", ThreadId);

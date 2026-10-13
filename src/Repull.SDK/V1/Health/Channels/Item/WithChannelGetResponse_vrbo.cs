@@ -23,6 +23,8 @@ namespace Repull.SDK.V1.Health.Channels.Item
         public int? CalendarOldestWaitMinutes { get; set; }
         /// <summary>Listings with a calendar push waiting.</summary>
         public int? CalendarQueueBacklog { get; set; }
+        /// <summary>Failed pushes in the window caused by Repull&apos;s own VRBO connector (a timeout, a browser session in use), not by VRBO. They are retried and never set `status`.</summary>
+        public int? ConnectorErrors { get; set; }
         /// <summary>Accounts whose last full inbox sync is older than 30 minutes (it runs every 5).</summary>
         public int? InboxSyncLate { get; set; }
         /// <summary>Hours the push failure rate is judged over.</summary>
@@ -56,6 +58,7 @@ namespace Repull.SDK.V1.Health.Channels.Item
                 { "accounts_signed_out", n => { AccountsSignedOut = n.GetIntValue(); } },
                 { "calendar_oldest_wait_minutes", n => { CalendarOldestWaitMinutes = n.GetIntValue(); } },
                 { "calendar_queue_backlog", n => { CalendarQueueBacklog = n.GetIntValue(); } },
+                { "connector_errors", n => { ConnectorErrors = n.GetIntValue(); } },
                 { "inbox_sync_late", n => { InboxSyncLate = n.GetIntValue(); } },
                 { "window_hours", n => { WindowHours = n.GetIntValue(); } },
             };
@@ -71,6 +74,7 @@ namespace Repull.SDK.V1.Health.Channels.Item
             writer.WriteIntValue("accounts_signed_out", AccountsSignedOut);
             writer.WriteIntValue("calendar_oldest_wait_minutes", CalendarOldestWaitMinutes);
             writer.WriteIntValue("calendar_queue_backlog", CalendarQueueBacklog);
+            writer.WriteIntValue("connector_errors", ConnectorErrors);
             writer.WriteIntValue("inbox_sync_late", InboxSyncLate);
             writer.WriteIntValue("window_hours", WindowHours);
             writer.WriteAdditionalData(AdditionalData);

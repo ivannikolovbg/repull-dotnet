@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Connect.Providers
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ProvidersRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/connect/providers", pathParameters)
+        public ProvidersRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/connect/providers{?includeRequestOnly*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Repull.SDK.V1.Connect.Providers
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ProvidersRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/connect/providers", rawUrl)
+        public ProvidersRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/connect/providers{?includeRequestOnly*}", rawUrl)
         {
         }
         /// <summary>
@@ -41,11 +41,11 @@ namespace Repull.SDK.V1.Connect.Providers
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.ConnectProviderListResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ConnectProviderListResponse?> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder.ProvidersRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.ConnectProviderListResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.Models.ConnectProviderListResponse> GetAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder.ProvidersRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -58,11 +58,11 @@ namespace Repull.SDK.V1.Connect.Providers
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder.ProvidersRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder.ProvidersRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -80,11 +80,21 @@ namespace Repull.SDK.V1.Connect.Providers
             return new global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
+        /// Returns the public registry of every channel the picker supports. No customer-specific data — display metadata only. Cached for 5 minutes at the edge.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ProvidersRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Also return the PMSes Repull doesn&apos;t connect yet (`status: request-only`), for a picker you render yourself for a session created with `includeRequestOnly`.</summary>
+            [QueryParameter("includeRequestOnly")]
+            public bool? IncludeRequestOnly { get; set; }
+        }
+        /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ProvidersRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class ProvidersRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder.ProvidersRequestBuilderGetQueryParameters>
         {
         }
     }

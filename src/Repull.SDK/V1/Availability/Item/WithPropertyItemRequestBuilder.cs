@@ -70,6 +70,7 @@ namespace Repull.SDK.V1.Availability.Item
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -87,6 +88,7 @@ namespace Repull.SDK.V1.Availability.Item
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.AvailabilityWriteResult>(requestInfo, global::Repull.SDK.Models.AvailabilityWriteResult.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);

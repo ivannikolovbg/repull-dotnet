@@ -51,6 +51,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ReservationMessageUpdatedPayload_from From { get; set; }
 #endif
+        /// <summary>Booking.com only: the hotel (property) id of the conversation&apos;s listing. Absent on other channels. A Booking.com Extranet login can cover several hotels, so use this to route the message.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HotelId { get; set; }
+#nullable restore
+#else
+        public string HotelId { get; set; }
+#endif
         /// <summary>The messageId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -110,6 +118,7 @@ namespace Repull.SDK.Models
                 { "editedAt", n => { EditedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalMessageId", n => { ExternalMessageId = n.GetStringValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Repull.SDK.Models.ReservationMessageUpdatedPayload_from>(global::Repull.SDK.Models.ReservationMessageUpdatedPayload_from.CreateFromDiscriminatorValue); } },
+                { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "messageId", n => { MessageId = n.GetStringValue(); } },
                 { "previousBody", n => { PreviousBody = n.GetStringValue(); } },
                 { "reservationId", n => { ReservationId = n.GetIntValue(); } },
@@ -130,6 +139,7 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("editedAt", EditedAt);
             writer.WriteStringValue("externalMessageId", ExternalMessageId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationMessageUpdatedPayload_from>("from", From);
+            writer.WriteStringValue("hotelId", HotelId);
             writer.WriteStringValue("messageId", MessageId);
             writer.WriteStringValue("previousBody", PreviousBody);
             writer.WriteIntValue("reservationId", ReservationId);
