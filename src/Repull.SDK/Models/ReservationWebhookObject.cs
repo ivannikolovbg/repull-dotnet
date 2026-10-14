@@ -52,10 +52,42 @@ namespace Repull.SDK.Models
 #else
         public string CheckOutTime { get; set; }
 #endif
+        /// <summary>The conversation with this guest — pass it to `GET /v1/conversations/{id}` and `/v1/conversations/{id}/messages`. It is the same conversation from inquiry through pre-approval to the confirmed booking, and the same id the message webhooks carry, so a booking links straight to the messages that led to it. `null` when the channel has no conversation for this booking.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConversationId { get; set; }
+#nullable restore
+#else
+        public string ConversationId { get; set; }
+#endif
         /// <summary>Workspace (customer) id this reservation belongs to.</summary>
         public int? CustomerId { get; set; }
+        /// <summary>The channel&apos;s own id for that conversation (Airbnb thread id, Booking.com conversation id, …). `null` when there is none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExternalThreadId { get; set; }
+#nullable restore
+#else
+        public string ExternalThreadId { get; set; }
+#endif
+        /// <summary>What the guest wrote with the booking — on Booking.com, the estimated arrival time and special requests. Free text. `null` when there were none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestNotes { get; set; }
+#nullable restore
+#else
+        public string GuestNotes { get; set; }
+#endif
         /// <summary>Repull-internal reservation id. Pass to `GET /v1/reservations/{id}`.</summary>
         public int? Id { get; set; }
+        /// <summary>The inquiry this booking came from (`GET /v1/inquiries`), when the guest asked before booking. When an inquiry turns into a booking, `inquiry.updated` fires with `status: &quot;booked&quot;` and this reservation&apos;s id. `null` for bookings with no inquiry.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InquiryId { get; set; }
+#nullable restore
+#else
+        public string InquiryId { get; set; }
+#endif
         /// <summary>Repull listing id this reservation is on.</summary>
         public int? ListingId { get; set; }
         /// <summary>Lifecycle status — typically `confirmed`, `cancelled`, `pending`, `inquiry`.</summary>
@@ -105,8 +137,12 @@ namespace Repull.SDK.Models
                 { "checkOutTime", n => { CheckOutTime = n.GetStringValue(); } },
                 { "checkinDate", n => { CheckinDate = n.GetDateValue(); } },
                 { "checkoutDate", n => { CheckoutDate = n.GetDateValue(); } },
+                { "conversationId", n => { ConversationId = n.GetStringValue(); } },
                 { "customerId", n => { CustomerId = n.GetIntValue(); } },
+                { "externalThreadId", n => { ExternalThreadId = n.GetStringValue(); } },
+                { "guestNotes", n => { GuestNotes = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
+                { "inquiryId", n => { InquiryId = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetIntValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "uid", n => { Uid = n.GetStringValue(); } },
@@ -125,8 +161,12 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("checkInTime", CheckInTime);
             writer.WriteDateValue("checkoutDate", CheckoutDate);
             writer.WriteStringValue("checkOutTime", CheckOutTime);
+            writer.WriteStringValue("conversationId", ConversationId);
             writer.WriteIntValue("customerId", CustomerId);
+            writer.WriteStringValue("externalThreadId", ExternalThreadId);
+            writer.WriteStringValue("guestNotes", GuestNotes);
             writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("inquiryId", InquiryId);
             writer.WriteIntValue("listingId", ListingId);
             writer.WriteStringValue("status", Status);
             writer.WriteStringValue("uid", Uid);

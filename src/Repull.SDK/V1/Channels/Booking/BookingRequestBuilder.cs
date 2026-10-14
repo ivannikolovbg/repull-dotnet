@@ -11,6 +11,7 @@ using Repull.SDK.V1.Channels.Booking.Properties;
 using Repull.SDK.V1.Channels.Booking.Reservations;
 using Repull.SDK.V1.Channels.Booking.Reviews;
 using Repull.SDK.V1.Channels.Booking.Setup;
+using Repull.SDK.V1.Channels.Booking.Transactions;
 using Repull.SDK.V1.Channels.Booking.Webhooks;
 using System.Collections.Generic;
 using System.IO;
@@ -68,6 +69,11 @@ namespace Repull.SDK.V1.Channels.Booking
         public global::Repull.SDK.V1.Channels.Booking.Setup.SetupRequestBuilder Setup
         {
             get => new global::Repull.SDK.V1.Channels.Booking.Setup.SetupRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The transactions property</summary>
+        public global::Repull.SDK.V1.Channels.Booking.Transactions.TransactionsRequestBuilder Transactions
+        {
+            get => new global::Repull.SDK.V1.Channels.Booking.Transactions.TransactionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The webhooks property</summary>
         public global::Repull.SDK.V1.Channels.Booking.Webhooks.WebhooksRequestBuilder Webhooks

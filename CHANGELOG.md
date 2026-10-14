@@ -5,6 +5,14 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.29] - 2026-10-14
+
+Regenerated against the live `https://api.repull.dev/openapi.json`:
+
+- Reservations (`Reservation` and the `ReservationWebhookObject` on every `reservation.*` webhook) now carry `conversationId`, `externalThreadId` and `inquiryId`: the conversation the booking belongs to (the same id from inquiry through pre-approval to the confirmed booking) and the inquiry it came from.
+- Reservations also carry `guestNotes`: what the guest wrote with the booking (on Booking.com, the estimated arrival time and special requests).
+- Picks up any other spec changes since the previous release.
+
 ## [0.2.28] - 2026-10-13
 
 Regenerated against the live `https://api.repull.dev/openapi.json`:

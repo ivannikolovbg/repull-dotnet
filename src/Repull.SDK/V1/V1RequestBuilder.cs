@@ -21,6 +21,7 @@ using Repull.SDK.V1.Quotes;
 using Repull.SDK.V1.Reservations;
 using Repull.SDK.V1.Reviews;
 using Repull.SDK.V1.Schema;
+using Repull.SDK.V1.Transactions;
 using Repull.SDK.V1.Usage;
 using Repull.SDK.V1.Webhooks;
 using Repull.SDK.V1.Workspaces;
@@ -130,6 +131,11 @@ namespace Repull.SDK.V1
         public global::Repull.SDK.V1.Schema.SchemaRequestBuilder Schema
         {
             get => new global::Repull.SDK.V1.Schema.SchemaRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The transactions property</summary>
+        public global::Repull.SDK.V1.Transactions.TransactionsRequestBuilder Transactions
+        {
+            get => new global::Repull.SDK.V1.Transactions.TransactionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The usage property</summary>
         public global::Repull.SDK.V1.Usage.UsageRequestBuilder Usage

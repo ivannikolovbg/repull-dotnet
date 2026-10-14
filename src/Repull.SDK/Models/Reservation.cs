@@ -54,6 +54,14 @@ namespace Repull.SDK.Models
 #else
         public string ConfirmationCode { get; set; }
 #endif
+        /// <summary>The conversation with this guest — pass it to `GET /v1/conversations/{id}` and `/v1/conversations/{id}/messages`. It is the same conversation from inquiry through pre-approval to the confirmed booking, and the same id the message webhooks carry, so a booking links straight to the messages that led to it. `null` when the channel has no conversation for this booking.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConversationId { get; set; }
+#nullable restore
+#else
+        public string ConversationId { get; set; }
+#endif
         /// <summary>When the reservation row was created in Repull (not the booking-on-channel timestamp).</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>DEPRECATED — use `financials.currency`. ISO 4217 currency code.</summary>
@@ -64,6 +72,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Currency { get; set; }
+#endif
+        /// <summary>The channel&apos;s own id for that conversation (Airbnb thread id, Booking.com conversation id, …). `null` when there is none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExternalThreadId { get; set; }
+#nullable restore
+#else
+        public string ExternalThreadId { get; set; }
 #endif
         /// <summary>Normalized money block. Always populated for paid reservations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -99,6 +115,14 @@ namespace Repull.SDK.Models
 #else
         public string GuestName { get; set; }
 #endif
+        /// <summary>What the guest wrote with the booking, as the channel sent it. Booking.com puts the estimated arrival time and special requests here. Free text, never parsed. `null` when the guest left none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestNotes { get; set; }
+#nullable restore
+#else
+        public string GuestNotes { get; set; }
+#endif
         /// <summary>Internal Repull reservation ID</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -106,6 +130,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>The inquiry this booking came from (`GET /v1/inquiries`), when the guest asked before booking. When an inquiry turns into a booking, `inquiry.updated` fires with `status: &quot;booked&quot;` and this reservation&apos;s id. `null` for bookings with no inquiry.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InquiryId { get; set; }
+#nullable restore
+#else
+        public string InquiryId { get; set; }
 #endif
         /// <summary>Internal Repull listing ID this reservation is on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -195,13 +227,17 @@ namespace Repull.SDK.Models
                 { "checkOut", n => { CheckOut = n.GetDateValue(); } },
                 { "checkOutTime", n => { CheckOutTime = n.GetStringValue(); } },
                 { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
+                { "conversationId", n => { ConversationId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
+                { "externalThreadId", n => { ExternalThreadId = n.GetStringValue(); } },
                 { "financials", n => { Financials = n.GetObjectValue<global::Repull.SDK.Models.ReservationFinancials>(global::Repull.SDK.Models.ReservationFinancials.CreateFromDiscriminatorValue); } },
                 { "guestDetails", n => { GuestDetails = n.GetObjectValue<global::Repull.SDK.Models.Reservation_guestDetails>(global::Repull.SDK.Models.Reservation_guestDetails.CreateFromDiscriminatorValue); } },
                 { "guestId", n => { GuestId = n.GetStringValue(); } },
                 { "guestName", n => { GuestName = n.GetStringValue(); } },
+                { "guestNotes", n => { GuestNotes = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "inquiryId", n => { InquiryId = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "occupancy", n => { Occupancy = n.GetObjectValue<global::Repull.SDK.Models.ReservationOccupancy>(global::Repull.SDK.Models.ReservationOccupancy.CreateFromDiscriminatorValue); } },
                 { "pendingReason", n => { PendingReason = n.GetEnumValue<global::Repull.SDK.Models.Reservation_pendingReason>(); } },
@@ -230,13 +266,17 @@ namespace Repull.SDK.Models
             writer.WriteDateValue("checkOut", CheckOut);
             writer.WriteStringValue("checkOutTime", CheckOutTime);
             writer.WriteStringValue("confirmationCode", ConfirmationCode);
+            writer.WriteStringValue("conversationId", ConversationId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("currency", Currency);
+            writer.WriteStringValue("externalThreadId", ExternalThreadId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationFinancials>("financials", Financials);
             writer.WriteObjectValue<global::Repull.SDK.Models.Reservation_guestDetails>("guestDetails", GuestDetails);
             writer.WriteStringValue("guestId", GuestId);
             writer.WriteStringValue("guestName", GuestName);
+            writer.WriteStringValue("guestNotes", GuestNotes);
             writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("inquiryId", InquiryId);
             writer.WriteStringValue("listingId", ListingId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationOccupancy>("occupancy", Occupancy);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_pendingReason>("pendingReason", PendingReason);
