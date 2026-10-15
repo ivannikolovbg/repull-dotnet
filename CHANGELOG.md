@@ -5,6 +5,10 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.30] - 2026-10-15
+
+- Docs and package description: Repull-only branding.
+
 ## [0.2.29] - 2026-10-14
 
 Regenerated against the live `https://api.repull.dev/openapi.json`:
