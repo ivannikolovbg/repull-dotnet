@@ -104,4 +104,4 @@ MIT — see [LICENSE](LICENSE).
 
 ---
 
-Powered by Repull. AI features powered by [Vanio AI](https://www.vanio.ai).
+Powered by Repull.
