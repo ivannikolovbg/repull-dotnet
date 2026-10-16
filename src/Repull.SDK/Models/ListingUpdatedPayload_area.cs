@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>Which part moved. Airbnb sends one notification per area rather than a diff, so this is the signal for what to re-read.</summary>
+    /// <summary>Which part moved. Airbnb sends one notification per area rather than a diff, so this is the signal for what to re-read. `promotions`: the listing’s Airbnb or Booking.com promotions changed — re-read `GET /v1/listings/{id}/promotions`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ListingUpdatedPayload_area
     {
@@ -30,6 +30,10 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "sync_settings")]
         #pragma warning disable CS1591
         Sync_settings,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "promotions")]
+        #pragma warning disable CS1591
+        Promotions,
         #pragma warning restore CS1591
     }
 }

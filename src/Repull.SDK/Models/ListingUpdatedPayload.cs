@@ -8,14 +8,14 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Payload for `listing.updated`. Something about the listing changed on the channel — content, pricing, booking settings, house rules, availability or sync settings.
+    /// Payload for `listing.updated`. Something about the listing changed on the channel — content, pricing, booking settings, house rules, availability, sync settings or promotions.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ListingUpdatedPayload : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Which part moved. Airbnb sends one notification per area rather than a diff, so this is the signal for what to re-read.</summary>
+        /// <summary>Which part moved. Airbnb sends one notification per area rather than a diff, so this is the signal for what to re-read. `promotions`: the listing’s Airbnb or Booking.com promotions changed — re-read `GET /v1/listings/{id}/promotions`.</summary>
         public global::Repull.SDK.Models.ListingUpdatedPayload_area? Area { get; set; }
         /// <summary>The listing, in the shape `GET /v1/listings/{id}` returns. Hydrated at delivery, so a receiver gets the listing rather than a reason to fetch one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

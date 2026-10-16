@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Listings.Item;
 using Repull.SDK.V1.Listings.Pricing;
+using Repull.SDK.V1.Listings.Promotions;
 using Repull.SDK.V1.Listings.Status;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,11 @@ namespace Repull.SDK.V1.Listings
         public global::Repull.SDK.V1.Listings.Pricing.PricingRequestBuilder Pricing
         {
             get => new global::Repull.SDK.V1.Listings.Pricing.PricingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The promotions property</summary>
+        public global::Repull.SDK.V1.Listings.Promotions.PromotionsRequestBuilder Promotions
+        {
+            get => new global::Repull.SDK.V1.Listings.Promotions.PromotionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The status property</summary>
         public global::Repull.SDK.V1.Listings.Status.StatusRequestBuilder Status

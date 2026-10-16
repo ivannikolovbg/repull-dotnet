@@ -5,6 +5,13 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.32] - 2026-10-16
+
+### Added
+- Listing promotions — Airbnb and Booking.com in one model: `client.V1.Listings[id].Promotions` (list, create, `[promotionId]` get/patch/delete, `.Catalog`, `.Refresh`) and `client.V1.Listings.Promotions.Bulk`. Guide: https://repull.dev/docs/promotions
+- `listing.updated` area `promotions`.
+- `ReservationMoneyLine.PromotionType` on discount lines produced by an Airbnb promotion.
+
 ## [0.2.31] - 2026-10-16
 
 ### Added

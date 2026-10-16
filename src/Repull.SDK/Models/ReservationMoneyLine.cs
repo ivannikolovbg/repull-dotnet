@@ -33,6 +33,8 @@ namespace Repull.SDK.Models
 #else
         public string Name { get; set; }
 #endif
+        /// <summary>Discount lines only: the listing promotion that produced the discount, named as in `GET /v1/listings/{id}/promotions` (Airbnb reports each applied promotion as its own line). `custom` is an Airbnb Custom promotion.</summary>
+        public global::Repull.SDK.Models.ReservationMoneyLine_promotionType? PromotionType { get; set; }
         /// <summary>Units billed, when the channel reports a quantity (Booking.com add-ons).</summary>
         public double? Quantity { get; set; }
         /// <summary>Channel-reported classifier. NOT an enum — new channels introduce new values. Observed on fees: `cleaning`, `extra_guest`, `service`, `guest_service`, `pet`, `fixed`, `add_on`, `host_service`, `platform`, `processing`. Observed on taxes: `airbnb_collected` (channel collected AND remitted it), `pass_through` (reaches the host to remit), `tax`, `custom`.</summary>
@@ -73,6 +75,7 @@ namespace Repull.SDK.Models
                 { "amount", n => { Amount = n.GetDoubleValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "promotionType", n => { PromotionType = n.GetEnumValue<global::Repull.SDK.Models.ReservationMoneyLine_promotionType>(); } },
                 { "quantity", n => { Quantity = n.GetDoubleValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "vat", n => { Vat = n.GetDoubleValue(); } },
@@ -88,6 +91,7 @@ namespace Repull.SDK.Models
             writer.WriteDoubleValue("amount", Amount);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("name", Name);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ReservationMoneyLine_promotionType>("promotionType", PromotionType);
             writer.WriteDoubleValue("quantity", Quantity);
             writer.WriteStringValue("type", Type);
             writer.WriteDoubleValue("vat", Vat);

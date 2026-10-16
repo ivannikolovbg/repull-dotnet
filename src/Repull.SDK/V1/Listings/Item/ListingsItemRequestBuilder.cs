@@ -13,6 +13,7 @@ using Repull.SDK.V1.Listings.Item.Offline;
 using Repull.SDK.V1.Listings.Item.Online;
 using Repull.SDK.V1.Listings.Item.Photos;
 using Repull.SDK.V1.Listings.Item.Pricing;
+using Repull.SDK.V1.Listings.Item.Promotions;
 using Repull.SDK.V1.Listings.Item.Publish;
 using Repull.SDK.V1.Listings.Item.PublishStatus;
 using Repull.SDK.V1.Listings.Item.Pull;
@@ -75,6 +76,11 @@ namespace Repull.SDK.V1.Listings.Item
         public global::Repull.SDK.V1.Listings.Item.Pricing.PricingRequestBuilder Pricing
         {
             get => new global::Repull.SDK.V1.Listings.Item.Pricing.PricingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The promotions property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Promotions.PromotionsRequestBuilder Promotions
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Promotions.PromotionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The publish property</summary>
         public global::Repull.SDK.V1.Listings.Item.Publish.PublishRequestBuilder Publish
