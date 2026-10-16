@@ -91,6 +91,18 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         AccountDisconnected,
         #pragma warning restore CS1591
+        [EnumMember(Value = "account.import.started")]
+        #pragma warning disable CS1591
+        AccountImportStarted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "account.import.completed")]
+        #pragma warning disable CS1591
+        AccountImportCompleted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "account.import.failed")]
+        #pragma warning disable CS1591
+        AccountImportFailed,
+        #pragma warning restore CS1591
         [EnumMember(Value = "review.created")]
         #pragma warning disable CS1591
         ReviewCreated,

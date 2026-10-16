@@ -8,6 +8,7 @@ using Repull.SDK.V1.Channels.Airbnb.Listings;
 using Repull.SDK.V1.Channels.Airbnb.Messaging;
 using Repull.SDK.V1.Channels.Airbnb.Offers;
 using Repull.SDK.V1.Channels.Airbnb.Reservations;
+using Repull.SDK.V1.Channels.Airbnb.Resolutions;
 using Repull.SDK.V1.Channels.Airbnb.Reviews;
 using Repull.SDK.V1.Channels.Airbnb.Transactions;
 using System.Collections.Generic;
@@ -51,6 +52,11 @@ namespace Repull.SDK.V1.Channels.Airbnb
         public global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder Reservations
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Reservations.ReservationsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The resolutions property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Resolutions.ResolutionsRequestBuilder Resolutions
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Resolutions.ResolutionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The reviews property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Reviews.ReviewsRequestBuilder Reviews

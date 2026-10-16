@@ -56,6 +56,14 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
+        /// <summary>The account&apos;s latest import — `status: running` while the first sync (or a later one) is going, then `completed` or `failed`. `null` when no import has been recorded. The same run is announced by the `account.import.*` webhooks; the history is on `GET /v1/connections/{id}/imports`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.AccountImport? Import { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.AccountImport Import { get; set; }
+#endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -97,6 +105,7 @@ namespace Repull.SDK.Models
                 { "fixUrl", n => { FixUrl = n.GetStringValue(); } },
                 { "host", n => { Host = n.GetObjectValue<global::Repull.SDK.Models.ConnectHost>(global::Repull.SDK.Models.ConnectHost.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "import", n => { Import = n.GetObjectValue<global::Repull.SDK.Models.AccountImport>(global::Repull.SDK.Models.AccountImport.CreateFromDiscriminatorValue); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Connection_status>(); } },
             };
@@ -114,6 +123,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("fixUrl", FixUrl);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectHost>("host", Host);
             writer.WriteStringValue("id", Id);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AccountImport>("import", Import);
             writer.WriteStringValue("provider", Provider);
             writer.WriteEnumValue<global::Repull.SDK.Models.Connection_status>("status", Status);
             writer.WriteAdditionalData(AdditionalData);

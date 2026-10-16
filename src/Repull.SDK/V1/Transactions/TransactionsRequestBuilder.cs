@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Transactions.Item;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,6 +17,18 @@ namespace Repull.SDK.V1.Transactions
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class TransactionsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>Gets an item from the Repull.SDK.v1.transactions.item collection</summary>
+        /// <param name="position">The payout transaction id (`transactionId`).</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Transactions.Item.TransactionsItemRequestBuilder"/></returns>
+        public global::Repull.SDK.V1.Transactions.Item.TransactionsItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                urlTplParams.Add("id", position);
+                return new global::Repull.SDK.V1.Transactions.Item.TransactionsItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Transactions.TransactionsRequestBuilder"/> and sets the default values.
         /// </summary>

@@ -5,6 +5,15 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.31] - 2026-10-16
+
+### Added
+- Account import status: `Connection.import` carries each connected account's latest import run, and `GET /v1/connections/{id}/imports` lists an account's runs (`AccountImport`, `AccountImportStage`, `AccountImportCounts`). New webhook events `account.import.started`, `account.import.completed` and `account.import.failed`.
+- Airbnb resolutions: `GET` and `POST /v1/channels/airbnb/resolutions`, `GET /v1/channels/airbnb/resolutions/{id}` (`Resolution`).
+- `GET /v1/transactions/{id}/statement`.
+
+Regenerated from the live spec.
+
 ## [0.2.30] - 2026-10-15
 
 - Docs and package description: Repull-only branding.

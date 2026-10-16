@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Connections.Item.Imports;
 using Repull.SDK.V1.Connections.Item.ListingOptions;
 using Repull.SDK.V1.Connections.Item.Mappings;
 using Repull.SDK.V1.Connections.Item.Units;
@@ -17,6 +18,11 @@ namespace Repull.SDK.V1.Connections.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConnectionsItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The imports property</summary>
+        public global::Repull.SDK.V1.Connections.Item.Imports.ImportsRequestBuilder Imports
+        {
+            get => new global::Repull.SDK.V1.Connections.Item.Imports.ImportsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The listingOptions property</summary>
         public global::Repull.SDK.V1.Connections.Item.ListingOptions.ListingOptionsRequestBuilder ListingOptions
         {

@@ -40,7 +40,15 @@ namespace Repull.SDK.Models
 #else
         public string PayoutId { get; set; }
 #endif
-        /// <summary>Link to the channel&apos;s original payout statement PDF — the authoritative settlement record (Booking.com). Null when none.</summary>
+        /// <summary>The channel&apos;s own numeric statement id (Booking.com, e.g. &quot;010747030095&quot;). Null when none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? StatementId { get; set; }
+#nullable restore
+#else
+        public string StatementId { get; set; }
+#endif
+        /// <summary>Repull-hosted download link for the original payout statement PDF (the authoritative settlement record). Add `?format=csv` for the CSV. Served by `GET /v1/transactions/{id}/statement` — no channel session needed. Null when none is stored.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? StatementUrl { get; set; }
@@ -77,6 +85,7 @@ namespace Repull.SDK.Models
                 { "paidOutAmount", n => { PaidOutAmount = n.GetDoubleValue(); } },
                 { "payoutDate", n => { PayoutDate = n.GetStringValue(); } },
                 { "payoutId", n => { PayoutId = n.GetStringValue(); } },
+                { "statementId", n => { StatementId = n.GetStringValue(); } },
                 { "statementUrl", n => { StatementUrl = n.GetStringValue(); } },
             };
         }
@@ -91,6 +100,7 @@ namespace Repull.SDK.Models
             writer.WriteDoubleValue("paidOutAmount", PaidOutAmount);
             writer.WriteStringValue("payoutDate", PayoutDate);
             writer.WriteStringValue("payoutId", PayoutId);
+            writer.WriteStringValue("statementId", StatementId);
             writer.WriteStringValue("statementUrl", StatementUrl);
             writer.WriteAdditionalData(AdditionalData);
         }
