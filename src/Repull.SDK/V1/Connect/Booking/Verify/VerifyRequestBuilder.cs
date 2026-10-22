@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Connect.Booking.Verify
         {
         }
         /// <summary>
-        /// Manual-paste fallback that closes the Booking.com claim flow. Call this after the customer completes Stage 1 designation in their Booking Extranet (ticking FantasticStay/Repull as their connectivity provider) and pastes their Hotel ID into the hosted picker.Validates the hotel against Booking&apos;s property API, persists the `pms_connections` row, kicks off the room import, and transitions the Connect session to `awaiting_room_mapping`.No API key required — the `sessionId` is the capability token. Sessions in any terminal state are rejected.
+        /// Manual-paste fallback that closes the Booking.com claim flow. Call this after the customer completes Stage 1 designation in their Booking Extranet (selecting our connectivity provider, named on the hosted Connect page) and pastes their Hotel ID into the hosted picker.Validates the hotel against Booking&apos;s property API, persists the `pms_connections` row, kicks off the room import, and transitions the Connect session to `awaiting_room_mapping`.No API key required — the `sessionId` is the capability token. Sessions in any terminal state are rejected.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.BookingVerifyHotelResponse"/></returns>
         /// <param name="body">Body for `POST /v1/connect/booking/verify`. Manual-paste fallback that closes a Booking.com Connect session after the customer completes Stage 1 designation in the Extranet.</param>
@@ -71,7 +71,7 @@ namespace Repull.SDK.V1.Connect.Booking.Verify
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingVerifyHotelResponse>(requestInfo, global::Repull.SDK.Models.BookingVerifyHotelResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Manual-paste fallback that closes the Booking.com claim flow. Call this after the customer completes Stage 1 designation in their Booking Extranet (ticking FantasticStay/Repull as their connectivity provider) and pastes their Hotel ID into the hosted picker.Validates the hotel against Booking&apos;s property API, persists the `pms_connections` row, kicks off the room import, and transitions the Connect session to `awaiting_room_mapping`.No API key required — the `sessionId` is the capability token. Sessions in any terminal state are rejected.
+        /// Manual-paste fallback that closes the Booking.com claim flow. Call this after the customer completes Stage 1 designation in their Booking Extranet (selecting our connectivity provider, named on the hosted Connect page) and pastes their Hotel ID into the hosted picker.Validates the hotel against Booking&apos;s property API, persists the `pms_connections` row, kicks off the room import, and transitions the Connect session to `awaiting_room_mapping`.No API key required — the `sessionId` is the capability token. Sessions in any terminal state are rejected.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Body for `POST /v1/connect/booking/verify`. Manual-paste fallback that closes a Booking.com Connect session after the customer completes Stage 1 designation in the Extranet.</param>

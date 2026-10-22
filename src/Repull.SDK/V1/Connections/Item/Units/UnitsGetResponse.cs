@@ -48,6 +48,14 @@ namespace Repull.SDK.V1.Connections.Item.Units
 #else
         public List<string> MissingCapabilities { get; set; }
 #endif
+        /// <summary>Vrbo only. Ask the host to add this address on Vrbo as a secondary email, with message and reservation notifications on. It is how new bookings, inquiries and guest messages reach Repull within a minute; without it they arrive at the next scheduled check. Hosted Connect asks for it on its mapping screen, so show it in your own flow when you map with `mapping: &quot;api&quot;`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? NotificationEmail { get; set; }
+#nullable restore
+#else
+        public string NotificationEmail { get; set; }
+#endif
         /// <summary>The status property</summary>
         public global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_status? Status { get; set; }
         /// <summary>The units property</summary>
@@ -88,6 +96,7 @@ namespace Repull.SDK.V1.Connections.Item.Units
                 { "listing_options", n => { ListingOptions = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options>(global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "listing_options_total", n => { ListingOptionsTotal = n.GetIntValue(); } },
                 { "missing_capabilities", n => { MissingCapabilities = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "notification_email", n => { NotificationEmail = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_status>(); } },
                 { "units", n => { Units = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units>(global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units.CreateFromDiscriminatorValue)?.AsList(); } },
             };
@@ -104,6 +113,7 @@ namespace Repull.SDK.V1.Connections.Item.Units
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options>("listing_options", ListingOptions);
             writer.WriteIntValue("listing_options_total", ListingOptionsTotal);
             writer.WriteCollectionOfPrimitiveValues<string>("missing_capabilities", MissingCapabilities);
+            writer.WriteStringValue("notification_email", NotificationEmail);
             writer.WriteEnumValue<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_status>("status", Status);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units>("units", Units);
             writer.WriteAdditionalData(AdditionalData);

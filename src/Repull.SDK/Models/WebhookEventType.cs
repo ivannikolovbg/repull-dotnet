@@ -75,10 +75,6 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ListingReactivated,
         #pragma warning restore CS1591
-        [EnumMember(Value = "calendar.updated")]
-        #pragma warning disable CS1591
-        CalendarUpdated,
-        #pragma warning restore CS1591
         [EnumMember(Value = "account.created")]
         #pragma warning disable CS1591
         AccountCreated,

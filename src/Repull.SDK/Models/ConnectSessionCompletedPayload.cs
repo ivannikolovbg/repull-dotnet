@@ -27,7 +27,7 @@ namespace Repull.SDK.Models
 #else
         public string ExternalAccountId { get; set; }
 #endif
-        /// <summary>Channel or PMS: airbnb, booking, booking_extranet, vrbo, plumguide, hostaway, …</summary>
+        /// <summary>Channel or PMS: airbnb, booking, booking_extranet, vrbo, hostaway, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Provider { get; set; }

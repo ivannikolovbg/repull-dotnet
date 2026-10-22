@@ -13,26 +13,10 @@ namespace Repull.SDK.V1.Connect.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithProviderPostRequestBody : IAdditionalDataHolder, IParsable
     {
-        /// <summary>Airbnb only — selects the OAuth scope set. &apos;read_only&apos; grants read-only scopes; &apos;messaging&apos; grants read scopes plus message read/send but NOT property management, so it can coexist with another app (e.g. an existing PMS) that already holds property management on the same Airbnb account; &apos;full_access&apos; (default) grants full host scopes including the exclusive property management (only one app per Airbnb account can hold it). The hosted consent screen normally lets the host pick a tier; passing `accessType` explicitly fixes the tier and hides that choice, so the host can only continue with the tier you requested. Omit it to let the host choose.</summary>
+        /// <summary>Airbnb only — selects the OAuth scope set. &apos;read_only&apos; grants read-only scopes; &apos;messaging&apos; (shown to hosts as &quot;Messaging &amp; reviews&quot;) grants read scopes plus message read/send and review writes (reply to guest reviews, submit host reviews — Airbnb&apos;s reviews_write) but NOT property management, so it can coexist with another app (e.g. an existing PMS) that already holds property management on the same Airbnb account; &apos;full_access&apos; (default) grants full host scopes including the exclusive property management (only one app per Airbnb account can hold it). The hosted consent screen normally lets the host pick a tier; passing `accessType` explicitly fixes the tier and hides that choice, so the host can only continue with the tier you requested. Omit it to let the host choose.</summary>
         public global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType? AccessType { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Plumguide — client ID.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ClientId { get; set; }
-#nullable restore
-#else
-        public string ClientId { get; set; }
-#endif
-        /// <summary>Plumguide — client secret.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ClientSecret { get; set; }
-#nullable restore
-#else
-        public string ClientSecret { get; set; }
-#endif
         /// <summary>Airbnb only — optional UI language for the hosted Connect pages. Accepts any supported locale code (currently `en`, `fr`); unknown codes are ignored and resolution falls back to the workspace `default_language`, then `Accept-Language`, then `en`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -86,8 +70,6 @@ namespace Repull.SDK.V1.Connect.Item
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType>(); } },
-                { "clientId", n => { ClientId = n.GetStringValue(); } },
-                { "clientSecret", n => { ClientSecret = n.GetStringValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
                 { "reservationHistoryMonths", n => { ReservationHistoryMonths = n.GetIntValue(); } },
@@ -102,8 +84,6 @@ namespace Repull.SDK.V1.Connect.Item
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType>("accessType", AccessType);
-            writer.WriteStringValue("clientId", ClientId);
-            writer.WriteStringValue("clientSecret", ClientSecret);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("redirectUrl", RedirectUrl);
             writer.WriteIntValue("reservationHistoryMonths", ReservationHistoryMonths);

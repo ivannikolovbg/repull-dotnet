@@ -7,10 +7,11 @@ using System.IO;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>
+    /// The listing&apos;s postal address, unit included. Each part is read from the listing first, then from the connected channels (Airbnb, Vrbo, Booking.com). On an inactive row only `city` is present.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class Listing_address : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -22,7 +23,47 @@ namespace Repull.SDK.Models
 #else
         public string City { get; set; }
 #endif
-        /// <summary>The street property</summary>
+        /// <summary>ISO 3166-1 alpha-2 country code.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CountryCode { get; set; }
+#nullable restore
+#else
+        public string CountryCode { get; set; }
+#endif
+        /// <summary>Street address: number and street.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Line1 { get; set; }
+#nullable restore
+#else
+        public string Line1 { get; set; }
+#endif
+        /// <summary>Apartment, unit, suite or building.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Line2 { get; set; }
+#nullable restore
+#else
+        public string Line2 { get; set; }
+#endif
+        /// <summary>Postal or ZIP code.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PostalCode { get; set; }
+#nullable restore
+#else
+        public string PostalCode { get; set; }
+#endif
+        /// <summary>State, province or region.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? State { get; set; }
+#nullable restore
+#else
+        public string State { get; set; }
+#endif
+        /// <summary>Street line as stored on the listing. Kept for existing integrations; same value as `line1` unless the listing has no street of its own.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Street { get; set; }
@@ -56,6 +97,11 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "city", n => { City = n.GetStringValue(); } },
+                { "countryCode", n => { CountryCode = n.GetStringValue(); } },
+                { "line1", n => { Line1 = n.GetStringValue(); } },
+                { "line2", n => { Line2 = n.GetStringValue(); } },
+                { "postalCode", n => { PostalCode = n.GetStringValue(); } },
+                { "state", n => { State = n.GetStringValue(); } },
                 { "street", n => { Street = n.GetStringValue(); } },
             };
         }
@@ -67,6 +113,11 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("city", City);
+            writer.WriteStringValue("countryCode", CountryCode);
+            writer.WriteStringValue("line1", Line1);
+            writer.WriteStringValue("line2", Line2);
+            writer.WriteStringValue("postalCode", PostalCode);
+            writer.WriteStringValue("state", State);
             writer.WriteStringValue("street", Street);
             writer.WriteAdditionalData(AdditionalData);
         }

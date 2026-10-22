@@ -15,7 +15,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The address property</summary>
+        /// <summary>The listing&apos;s postal address, unit included. Each part is read from the listing first, then from the connected channels (Airbnb, Vrbo, Booking.com). On an inactive row only `city` is present.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.Listing_address? Address { get; set; }

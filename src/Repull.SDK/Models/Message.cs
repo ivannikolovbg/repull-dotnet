@@ -41,7 +41,7 @@ namespace Repull.SDK.Models
 #else
         public string Channel { get; set; }
 #endif
-        /// <summary>The deliveredAt property</summary>
+        /// <summary>When the message reached the channel. `null` while it is `sending` or when it `failed`.</summary>
         public DateTimeOffset? DeliveredAt { get; set; }
         /// <summary>The direction property</summary>
         public global::Repull.SDK.Models.Message_direction? Direction { get; set; }
@@ -91,6 +91,16 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The sentAt property</summary>
         public DateTimeOffset? SentAt { get; set; }
+        /// <summary>Delivery state. Inbound messages are `received`. An outbound message is `sending` while it is queued to the channel, `sent` once the channel accepted it, or `failed`. Only `sent` (or `received`) means the guest can see it.</summary>
+        public global::Repull.SDK.Models.Message_status? Status { get; set; }
+        /// <summary>Why a message is still `sending` or `failed`, in plain words. `null` otherwise.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? StatusReason { get; set; }
+#nullable restore
+#else
+        public string StatusReason { get; set; }
+#endif
         /// <summary>English translation when the original language is non-English and a translation has been computed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -138,6 +148,8 @@ namespace Repull.SDK.Models
                 { "senderName", n => { SenderName = n.GetStringValue(); } },
                 { "senderType", n => { SenderType = n.GetStringValue(); } },
                 { "sentAt", n => { SentAt = n.GetDateTimeOffsetValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Message_status>(); } },
+                { "statusReason", n => { StatusReason = n.GetStringValue(); } },
                 { "translatedBody", n => { TranslatedBody = n.GetStringValue(); } },
             };
         }
@@ -162,6 +174,8 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("senderName", SenderName);
             writer.WriteStringValue("senderType", SenderType);
             writer.WriteDateTimeOffsetValue("sentAt", SentAt);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Message_status>("status", Status);
+            writer.WriteStringValue("statusReason", StatusReason);
             writer.WriteStringValue("translatedBody", TranslatedBody);
             writer.WriteAdditionalData(AdditionalData);
         }

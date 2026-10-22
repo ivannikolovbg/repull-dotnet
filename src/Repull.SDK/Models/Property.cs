@@ -23,13 +23,21 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Street address (from the listing&apos;s `street` field).</summary>
+        /// <summary>Street line only, as stored on the listing — no unit, state or postal code. Kept for existing integrations; read `addressDetails` for the full postal address.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Address { get; set; }
 #nullable restore
 #else
         public string Address { get; set; }
+#endif
+        /// <summary>The full postal address, unit included. Returned on every active row of `GET /v1/properties`, `GET /v1/properties/{id}`, `GET /v1/listings` and `GET /v1/listings/{id}` (on listings, these fields sit inside `address`). Each part is read from the listing first, then from the connected channels (Airbnb, Vrbo, Booking.com), so `line2` carries the apartment or unit number that tells units in the same building apart. A part nobody has stored is `null`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.PostalAddress? AddressDetails { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.PostalAddress AddressDetails { get; set; }
 #endif
         /// <summary>Amenity rows for the property. Detail endpoint only, and **only present when the caller passes `?include=amenities`.** Empty array (`[]`) when the property has no amenity rows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -47,7 +55,7 @@ namespace Repull.SDK.Models
 #else
         public List<string> Channels { get; set; }
 #endif
-        /// <summary>The city property</summary>
+        /// <summary>City as stored on the listing. Kept for existing integrations; `addressDetails.city` is the resolved city.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? City { get; set; }
@@ -144,6 +152,7 @@ namespace Repull.SDK.Models
             {
                 { "accounts", n => { Accounts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.RecordAccount>(global::Repull.SDK.Models.RecordAccount.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "address", n => { Address = n.GetStringValue(); } },
+                { "addressDetails", n => { AddressDetails = n.GetObjectValue<global::Repull.SDK.Models.PostalAddress>(global::Repull.SDK.Models.PostalAddress.CreateFromDiscriminatorValue); } },
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>(global::Repull.SDK.Models.ListingAmenity.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "channels", n => { Channels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "city", n => { City = n.GetStringValue(); } },
@@ -168,6 +177,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.RecordAccount>("accounts", Accounts);
             writer.WriteStringValue("address", Address);
+            writer.WriteObjectValue<global::Repull.SDK.Models.PostalAddress>("addressDetails", AddressDetails);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>("amenities", Amenities);
             writer.WriteCollectionOfPrimitiveValues<string>("channels", Channels);
             writer.WriteStringValue("city", City);

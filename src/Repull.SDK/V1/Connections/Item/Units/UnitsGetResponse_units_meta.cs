@@ -7,10 +7,11 @@ using System.IO;
 using System;
 namespace Repull.SDK.V1.Connections.Item.Units
 {
+    /// <summary>
+    /// Channel details that identify the unit. Booking.com Extranet: `hotel` (property name), `hotelId` (Booking.com property ID), `roomId` (Booking.com room ID), `city`. Vrbo: `headline`, `address`, `vrboStatus`; the Vrbo listing ID is `unit_id`.
+    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public partial class UnitsGetResponse_units_meta : IAdditionalDataHolder, IParsable
-    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
