@@ -42,6 +42,8 @@ namespace Repull.SDK.V1.Connect
 #else
         public string Locale { get; set; }
 #endif
+        /// <summary>Where the channel&apos;s units get linked to listings. `hosted` (default): after a Vrbo or Booking.com Extranet sign-in, Connect shows a mapping step and returns to `redirectUrl` when it&apos;s confirmed. `api`: Connect skips that step and finishes right after sign-in. The connection reaches you in the `connect.session.completed` webhook (and as `connectionId` in the popup message), its handle is `vrbo:{connectionId}` or `booking_extranet:{connectionId}`; you list the units with `GET /v1/connections/{id}/units` and link them with `POST /v1/connections/{id}/mappings`. Nothing is imported until you post the mappings. Other providers ignore it.</summary>
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_mapping? Mapping { get; set; }
         /// <summary>`migrate` starts a Repull Migrate session: the property manager connects their current PMS (or channel) and their data is copied into a new workspace of theirs, which you read with `X-Workspace-Id`. The hosted pages use migration wording, and after connecting they show the import&apos;s progress.</summary>
         public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose? Purpose { get; set; }
         /// <summary>Where to send the user after they finish (or cancel). Status query params are appended.</summary>
@@ -85,6 +87,7 @@ namespace Repull.SDK.V1.Connect
         {
             AdditionalData = new Dictionary<string, object>();
             IncludeRequestOnly = false;
+            Mapping = global::Repull.SDK.V1.Connect.ConnectPostRequestBody_mapping.Hosted;
             Purpose = global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose.Connect;
         }
         /// <summary>
@@ -110,6 +113,7 @@ namespace Repull.SDK.V1.Connect
                 { "copy", n => { Copy = n.GetObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>(global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy.CreateFromDiscriminatorValue); } },
                 { "includeRequestOnly", n => { IncludeRequestOnly = n.GetBoolValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
+                { "mapping", n => { Mapping = n.GetEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_mapping>(); } },
                 { "purpose", n => { Purpose = n.GetEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose>(); } },
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
                 { "reservationHistoryMonths", n => { ReservationHistoryMonths = n.GetIntValue(); } },
@@ -130,6 +134,7 @@ namespace Repull.SDK.V1.Connect
             writer.WriteObjectValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>("copy", Copy);
             writer.WriteBoolValue("includeRequestOnly", IncludeRequestOnly);
             writer.WriteStringValue("locale", Locale);
+            writer.WriteEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_mapping>("mapping", Mapping);
             writer.WriteEnumValue<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose>("purpose", Purpose);
             writer.WriteStringValue("redirectUrl", RedirectUrl);
             writer.WriteIntValue("reservationHistoryMonths", ReservationHistoryMonths);

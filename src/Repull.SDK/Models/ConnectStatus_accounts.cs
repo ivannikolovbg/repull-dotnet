@@ -50,6 +50,14 @@ namespace Repull.SDK.Models
 #else
         public string Name { get; set; }
 #endif
+        /// <summary>Vrbo only. The address the host can add on Vrbo as a secondary email (with message and reservation notifications on) so new bookings, inquiries and messages arrive within a minute instead of at the scheduled check. Ask every host to add it: notifications are how Vrbo updates reach Repull, the scheduled check is the backup. Hosted Connect shows it on its mapping screen; show it in your own app when you create sessions with `mapping: &quot;api&quot;`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? NotificationEmail { get; set; }
+#nullable restore
+#else
+        public string NotificationEmail { get; set; }
+#endif
         /// <summary>The pictureUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -97,6 +105,7 @@ namespace Repull.SDK.Models
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
                 { "import", n => { Import = n.GetObjectValue<global::Repull.SDK.Models.VrboImportStatus>(global::Repull.SDK.Models.VrboImportStatus.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "notificationEmail", n => { NotificationEmail = n.GetStringValue(); } },
                 { "pictureUrl", n => { PictureUrl = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
             };
@@ -114,6 +123,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
             writer.WriteObjectValue<global::Repull.SDK.Models.VrboImportStatus>("import", Import);
             writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("notificationEmail", NotificationEmail);
             writer.WriteStringValue("pictureUrl", PictureUrl);
             writer.WriteStringValue("status", Status);
             writer.WriteAdditionalData(AdditionalData);
