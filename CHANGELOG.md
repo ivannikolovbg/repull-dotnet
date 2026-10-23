@@ -5,6 +5,14 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.34] - 2026-10-23
+
+### Added
+- Listing expansions on `client.V1.Listings.GetAsync(...)` / `client.V1.Listings[id].GetAsync(...)`: set `QueryParameters.Include = "rooms,policies,rules,pricing,fees,taxes,photos"` (comma-separated, combinable with `content` / `details`). `Listing` gains `Rooms` (`List<ListingRoom>`), `Policies` (`ListingPolicies`), `Rules` (`ListingRules`), `Pricing` (`ListingPricingSettings`), `Fees` (`List<ListingFee>`), `Taxes` (`List<ListingTax>`) and `Photos` (`List<ListingContentPhoto>`). Fees and taxes carry `ChargedPer` (`ChargePer`: `Stay`, `Night`, `Guest`, `Guest_night`); rules carry `AllowsBookingRequests` and `InstantBook`.
+
+### Changed
+- Regenerated from the live spec (also picks up `POST /v1/migrations/channex` and the `booking.unacknowledged`, `channel.degraded`, `channel.sync.failed` and `reservation.thread.assigned` webhook events).
+
 ## [0.2.33] - 2026-10-22
 
 ### Added

@@ -65,6 +65,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ListingDetails Details { get; set; }
 #endif
+        /// <summary>**Only present with `?include=fees`.** Every fee, the cleaning fee included, whatever channel or PMS it came from. `[]` when none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingFee>? Fees { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingFee> Fees { get; set; }
+#endif
         /// <summary>The hotel the listing belongs to: a hotel PMS hotel (Cloudbeds, Mews) or a Booking.com property with several room types or rooms. `null` for a standalone home. `GET /v1/hotels/{id}` lists its room types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -91,6 +99,30 @@ namespace Repull.SDK.Models
 #else
         public string Name { get; set; }
 #endif
+        /// <summary>**Only present with `?include=photos`.** The listing photos in display order.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingContentPhoto>? Photos { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingContentPhoto> Photos { get; set; }
+#endif
+        /// <summary>**Only present with `?include=policies`.** Cancellation, house rules, check-in and check-out, pets/smoking/events/children, quiet hours, deposit.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingPolicies? Policies { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingPolicies Policies { get; set; }
+#endif
+        /// <summary>**Only present with `?include=pricing`.** Standing prices: base and weekend rate, cleaning and extra-guest fees, deposit, weekly/monthly discounts. `null` when none are stored.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingPricingSettings? Pricing { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingPricingSettings Pricing { get; set; }
+#endif
         /// <summary>The title guests see on the channel (e.g. the Airbnb listing title). `name` is the host&apos;s internal nickname for the listing; show `publicName` in anything a guest or end user reads. Present on inactive rows too.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -99,8 +131,32 @@ namespace Repull.SDK.Models
 #else
         public string PublicName { get; set; }
 #endif
+        /// <summary>**Only present with `?include=rooms`.** Each room and its beds. `[]` when none are stored.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingRoom>? Rooms { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingRoom> Rooms { get; set; }
+#endif
+        /// <summary>**Only present with `?include=rules`.** Stay rules: min/max nights, booking window, advance notice, preparation time, and whether booking requests are allowed.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ListingRules? Rules { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ListingRules Rules { get; set; }
+#endif
         /// <summary>The status property</summary>
         public global::Repull.SDK.Models.Listing_status? Status { get; set; }
+        /// <summary>**Only present with `?include=taxes`.** Taxes charged to the guest. `[]` when none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ListingTax>? Taxes { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ListingTax> Taxes { get; set; }
+#endif
         /// <summary>Cover photo URL. Always present on an active listing. On an **inactive** one it is present only when the caller passes `?include=thumbnail`; `null` means the listing has no cover photo stored, absent means the expansion was not requested.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -153,12 +209,19 @@ namespace Repull.SDK.Models
                 { "content", n => { Content = n.GetObjectValue<global::Repull.SDK.Models.ListingContent>(global::Repull.SDK.Models.ListingContent.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "details", n => { Details = n.GetObjectValue<global::Repull.SDK.Models.ListingDetails>(global::Repull.SDK.Models.ListingDetails.CreateFromDiscriminatorValue); } },
+                { "fees", n => { Fees = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingFee>(global::Repull.SDK.Models.ListingFee.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "hotel", n => { Hotel = n.GetObjectValue<global::Repull.SDK.Models.Listing_hotel>(global::Repull.SDK.Models.Listing_hotel.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "kind", n => { Kind = n.GetEnumValue<global::Repull.SDK.Models.Listing_kind>(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "photos", n => { Photos = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentPhoto>(global::Repull.SDK.Models.ListingContentPhoto.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "policies", n => { Policies = n.GetObjectValue<global::Repull.SDK.Models.ListingPolicies>(global::Repull.SDK.Models.ListingPolicies.CreateFromDiscriminatorValue); } },
+                { "pricing", n => { Pricing = n.GetObjectValue<global::Repull.SDK.Models.ListingPricingSettings>(global::Repull.SDK.Models.ListingPricingSettings.CreateFromDiscriminatorValue); } },
                 { "publicName", n => { PublicName = n.GetStringValue(); } },
+                { "rooms", n => { Rooms = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingRoom>(global::Repull.SDK.Models.ListingRoom.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "rules", n => { Rules = n.GetObjectValue<global::Repull.SDK.Models.ListingRules>(global::Repull.SDK.Models.ListingRules.CreateFromDiscriminatorValue); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Listing_status>(); } },
+                { "taxes", n => { Taxes = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingTax>(global::Repull.SDK.Models.ListingTax.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "thumbnailUrl", n => { ThumbnailUrl = n.GetStringValue(); } },
                 { "unitCount", n => { UnitCount = n.GetIntValue(); } },
                 { "units", n => { Units = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Listing_units>(global::Repull.SDK.Models.Listing_units.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -179,12 +242,19 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingContent>("content", Content);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingDetails>("details", Details);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingFee>("fees", Fees);
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_hotel>("hotel", Hotel);
             writer.WriteStringValue("id", Id);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_kind>("kind", Kind);
             writer.WriteStringValue("name", Name);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentPhoto>("photos", Photos);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingPolicies>("policies", Policies);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingPricingSettings>("pricing", Pricing);
             writer.WriteStringValue("publicName", PublicName);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingRoom>("rooms", Rooms);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ListingRules>("rules", Rules);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_status>("status", Status);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingTax>("taxes", Taxes);
             writer.WriteStringValue("thumbnailUrl", ThumbnailUrl);
             writer.WriteIntValue("unitCount", UnitCount);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Listing_units>("units", Units);

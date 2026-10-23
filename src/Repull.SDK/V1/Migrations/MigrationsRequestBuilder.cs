@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Migrations.Channex;
 using Repull.SDK.V1.Migrations.Item;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,11 @@ namespace Repull.SDK.V1.Migrations
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class MigrationsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The channex property</summary>
+        public global::Repull.SDK.V1.Migrations.Channex.ChannexRequestBuilder Channex
+        {
+            get => new global::Repull.SDK.V1.Migrations.Channex.ChannexRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>Gets an item from the Repull.SDK.v1.migrations.item collection</summary>
         /// <param name="position">The migration&apos;s workspace id (from `POST /v1/connect` with `purpose: &quot;migrate&quot;`, or `GET /v1/migrations`).</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Migrations.Item.WithWorkspaceItemRequestBuilder"/></returns>

@@ -47,6 +47,22 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ReservationRequestUpdated,
         #pragma warning restore CS1591
+        [EnumMember(Value = "booking.unacknowledged")]
+        #pragma warning disable CS1591
+        BookingUnacknowledged,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "channel.sync.failed")]
+        #pragma warning disable CS1591
+        ChannelSyncFailed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "channel.degraded")]
+        #pragma warning disable CS1591
+        ChannelDegraded,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.thread.assigned")]
+        #pragma warning disable CS1591
+        ReservationThreadAssigned,
+        #pragma warning restore CS1591
         [EnumMember(Value = "inquiry.created")]
         #pragma warning disable CS1591
         InquiryCreated,
