@@ -45,6 +45,14 @@ namespace Repull.SDK.V1.Inquiries
 #else
         public global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_expectedPayout ExpectedPayout { get; set; }
 #endif
+        /// <summary>Who asked. Airbnb shares only the guest’s first name before they book; the last name and phone number arrive on the reservation (`GET /v1/reservations/{id}`) once they do.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_guest? Guest { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_guest Guest { get; set; }
+#endif
         /// <summary>The guests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -124,6 +132,7 @@ namespace Repull.SDK.V1.Inquiries
                 { "conversationId", n => { ConversationId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "expectedPayout", n => { ExpectedPayout = n.GetObjectValue<global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_expectedPayout>(global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_expectedPayout.CreateFromDiscriminatorValue); } },
+                { "guest", n => { Guest = n.GetObjectValue<global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_guest>(global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_guest.CreateFromDiscriminatorValue); } },
                 { "guests", n => { Guests = n.GetObjectValue<global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_guests>(global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_guests.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
@@ -148,6 +157,7 @@ namespace Repull.SDK.V1.Inquiries
             writer.WriteStringValue("conversationId", ConversationId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteObjectValue<global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_expectedPayout>("expectedPayout", ExpectedPayout);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_guest>("guest", Guest);
             writer.WriteObjectValue<global::Repull.SDK.V1.Inquiries.InquiriesGetResponse_data_guests>("guests", Guests);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("listingId", ListingId);

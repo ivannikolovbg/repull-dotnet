@@ -33,6 +33,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The disconnectedAt property</summary>
         public DateTimeOffset? DisconnectedAt { get; set; }
+        /// <summary>The listings this account holds in your workspace — the ones that stop syncing until it is reconnected. Identity only; inactive listings included. Matches `channels[].account` on `GET /v1/listings`. Empty when the account has no listings here.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings>? Listings { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings> Listings { get; set; }
+#endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -73,6 +81,7 @@ namespace Repull.SDK.Models
                 { "accountId", n => { AccountId = n.GetStringValue(); } },
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "disconnectedAt", n => { DisconnectedAt = n.GetDateTimeOffsetValue(); } },
+                { "listings", n => { Listings = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AccountDisconnectedPayload_listings>(global::Repull.SDK.Models.AccountDisconnectedPayload_listings.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
                 { "reason", n => { Reason = n.GetEnumValue<global::Repull.SDK.Models.AccountDisconnectedPayload_reason>(); } },
                 { "workspaceId", n => { WorkspaceId = n.GetGuidValue(); } },
@@ -88,6 +97,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("accountId", AccountId);
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteDateTimeOffsetValue("disconnectedAt", DisconnectedAt);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AccountDisconnectedPayload_listings>("listings", Listings);
             writer.WriteStringValue("provider", Provider);
             writer.WriteEnumValue<global::Repull.SDK.Models.AccountDisconnectedPayload_reason>("reason", Reason);
             writer.WriteGuidValue("workspaceId", WorkspaceId);

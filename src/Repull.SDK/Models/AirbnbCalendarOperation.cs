@@ -34,9 +34,9 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Inclusive range end, YYYY-MM-DD, on or after `start_date`.</summary>
         public Date? EndDate { get; set; }
-        /// <summary>Maximum length of stay for the date(s); no lower than `min_nights`.</summary>
+        /// <summary>Maximum length of stay for the date(s), 1–1125 and no lower than `min_nights`. Send `-1` to drop the date&apos;s own maximum so it follows the listing default again (`default_max_nights`).</summary>
         public int? MaxNights { get; set; }
-        /// <summary>Minimum length of stay for the date(s).</summary>
+        /// <summary>Minimum length of stay for the date(s), 1–1125. Send `-1` to drop the date&apos;s own minimum so it follows the listing default again (`default_min_nights`). `0` and `null` do not clear it.</summary>
         public int? MinNights { get; set; }
         /// <summary>The notes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

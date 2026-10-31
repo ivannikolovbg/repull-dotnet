@@ -5,6 +5,17 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.35] - 2026-10-31
+
+### Added
+- `Reservation.AccessCodes` (`List<ReservationAccessCode>`): door codes from the PMS's lock manager (Guesty Locks Manager) — `Code`, `Type` (`Guest` / `Backup` / `Other`), `Status`, `ValidFrom`, `ValidUntil`, `Locks`, `Source`, `UpdatedAt`. null when codes are not read for the reservation.
+- `Reservation.PmsReservationId`: the PMS's own reservation id (e.g. Guesty `_id`).
+- `ListingChannel.Account`: which connected account each listing channel belongs to; `account.disconnected` payloads carry the account's `Listings`.
+- `POST /v1/connect/ciirus` (`client.V1.Connect.Ciirus`).
+
+### Changed
+- Regenerated from the live spec.
+
 ## [0.2.34] - 2026-10-23
 
 ### Added

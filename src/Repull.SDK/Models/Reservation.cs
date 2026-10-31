@@ -14,6 +14,14 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Reservation : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Door codes for the stay from the PMS&apos;s lock manager (today: Guesty Locks Manager), refreshed about every 30 minutes for stays checking in within 14 days that have not checked out. `null` when the reservation&apos;s codes are not read from a PMS. `[]` when they are and there is none yet, and for a cancelled stay.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.ReservationAccessCode>? AccessCodes { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.ReservationAccessCode> AccessCodes { get; set; }
+#endif
         /// <summary>The connected account this reservation belongs to. List endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -160,6 +168,14 @@ namespace Repull.SDK.Models
         /// <summary>DEPRECATED alias for `source`. Same value, kept for back-compat.</summary>
         [Obsolete("")]
         public global::Repull.SDK.Models.Reservation_platform? Platform { get; set; }
+        /// <summary>The PMS&apos;s own id for this reservation (for example Guesty&apos;s reservation `_id`), so you can look it up in the PMS. `null` when the reservation did not come from a PMS.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PmsReservationId { get; set; }
+#nullable restore
+#else
+        public string PmsReservationId { get; set; }
+#endif
         /// <summary>Inline guest summary. May be undefined for owner-blocks / pre-arrival rows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -220,6 +236,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accessCodes", n => { AccessCodes = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ReservationAccessCode>(global::Repull.SDK.Models.ReservationAccessCode.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "account", n => { Account = n.GetObjectValue<global::Repull.SDK.Models.RecordAccount>(global::Repull.SDK.Models.RecordAccount.CreateFromDiscriminatorValue); } },
                 { "bookedAt", n => { BookedAt = n.GetDateTimeOffsetValue(); } },
                 { "checkIn", n => { CheckIn = n.GetDateValue(); } },
@@ -242,6 +259,7 @@ namespace Repull.SDK.Models
                 { "occupancy", n => { Occupancy = n.GetObjectValue<global::Repull.SDK.Models.ReservationOccupancy>(global::Repull.SDK.Models.ReservationOccupancy.CreateFromDiscriminatorValue); } },
                 { "pendingReason", n => { PendingReason = n.GetEnumValue<global::Repull.SDK.Models.Reservation_pendingReason>(); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Reservation_platform>(); } },
+                { "pmsReservationId", n => { PmsReservationId = n.GetStringValue(); } },
                 { "primaryGuest", n => { PrimaryGuest = n.GetObjectValue<global::Repull.SDK.Models.ReservationPrimaryGuest>(global::Repull.SDK.Models.ReservationPrimaryGuest.CreateFromDiscriminatorValue); } },
                 { "respondBy", n => { RespondBy = n.GetDateTimeOffsetValue(); } },
                 { "source", n => { Source = n.GetEnumValue<global::Repull.SDK.Models.Reservation_source>(); } },
@@ -259,6 +277,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ReservationAccessCode>("accessCodes", AccessCodes);
             writer.WriteObjectValue<global::Repull.SDK.Models.RecordAccount>("account", Account);
             writer.WriteDateTimeOffsetValue("bookedAt", BookedAt);
             writer.WriteDateValue("checkIn", CheckIn);
@@ -281,6 +300,7 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationOccupancy>("occupancy", Occupancy);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_pendingReason>("pendingReason", PendingReason);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_platform>("platform", Platform);
+            writer.WriteStringValue("pmsReservationId", PmsReservationId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationPrimaryGuest>("primaryGuest", PrimaryGuest);
             writer.WriteDateTimeOffsetValue("respondBy", RespondBy);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_source>("source", Source);

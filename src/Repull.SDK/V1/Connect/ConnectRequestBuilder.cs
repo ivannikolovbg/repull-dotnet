@@ -8,6 +8,7 @@ using Repull.SDK.V1.Connect.Beds24;
 using Repull.SDK.V1.Connect.Booking;
 using Repull.SDK.V1.Connect.BookingExtranetLogin;
 using Repull.SDK.V1.Connect.Bookingsync;
+using Repull.SDK.V1.Connect.Ciirus;
 using Repull.SDK.V1.Connect.Cloudbeds;
 using Repull.SDK.V1.Connect.Guesty;
 using Repull.SDK.V1.Connect.Hospitable;
@@ -58,6 +59,11 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.Bookingsync.BookingsyncRequestBuilder Bookingsync
         {
             get => new global::Repull.SDK.V1.Connect.Bookingsync.BookingsyncRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The ciirus property</summary>
+        public global::Repull.SDK.V1.Connect.Ciirus.CiirusRequestBuilder Ciirus
+        {
+            get => new global::Repull.SDK.V1.Connect.Ciirus.CiirusRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The cloudbeds property</summary>
         public global::Repull.SDK.V1.Connect.Cloudbeds.CloudbedsRequestBuilder Cloudbeds

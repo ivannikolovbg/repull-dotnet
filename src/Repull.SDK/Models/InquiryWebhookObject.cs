@@ -46,6 +46,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout ExpectedPayout { get; set; }
 #endif
+        /// <summary>Who asked. Airbnb shares only the first name before the guest books.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.InquiryWebhookObject_guest? Guest { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.InquiryWebhookObject_guest Guest { get; set; }
+#endif
         /// <summary>The guests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -125,6 +133,7 @@ namespace Repull.SDK.Models
                 { "conversationId", n => { ConversationId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "expectedPayout", n => { ExpectedPayout = n.GetObjectValue<global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout>(global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout.CreateFromDiscriminatorValue); } },
+                { "guest", n => { Guest = n.GetObjectValue<global::Repull.SDK.Models.InquiryWebhookObject_guest>(global::Repull.SDK.Models.InquiryWebhookObject_guest.CreateFromDiscriminatorValue); } },
                 { "guests", n => { Guests = n.GetObjectValue<global::Repull.SDK.Models.InquiryWebhookObject_guests>(global::Repull.SDK.Models.InquiryWebhookObject_guests.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
@@ -149,6 +158,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("conversationId", ConversationId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteObjectValue<global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout>("expectedPayout", ExpectedPayout);
+            writer.WriteObjectValue<global::Repull.SDK.Models.InquiryWebhookObject_guest>("guest", Guest);
             writer.WriteObjectValue<global::Repull.SDK.Models.InquiryWebhookObject_guests>("guests", Guests);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("listingId", ListingId);

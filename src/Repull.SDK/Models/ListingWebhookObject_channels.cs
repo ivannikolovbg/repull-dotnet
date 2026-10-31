@@ -12,6 +12,14 @@ namespace Repull.SDK.Models
     public partial class ListingWebhookObject_channels : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>The connected account this listing belongs to on this channel — for Airbnb the host account (`externalAccountId` is the Airbnb host id). The same account `account.disconnected` names, so a disconnect can be matched to its listings. Null when it cannot be resolved.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.RecordAccount? Account { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.RecordAccount Account { get; set; }
+#endif
         /// <summary>The active property</summary>
         public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -67,6 +75,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "account", n => { Account = n.GetObjectValue<global::Repull.SDK.Models.RecordAccount>(global::Repull.SDK.Models.RecordAccount.CreateFromDiscriminatorValue); } },
                 { "active", n => { Active = n.GetBoolValue(); } },
                 { "externalId", n => { ExternalId = n.GetStringValue(); } },
                 { "platform", n => { Platform = n.GetStringValue(); } },
@@ -81,6 +90,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.RecordAccount>("account", Account);
             writer.WriteBoolValue("active", Active);
             writer.WriteStringValue("externalId", ExternalId);
             writer.WriteStringValue("platform", Platform);
