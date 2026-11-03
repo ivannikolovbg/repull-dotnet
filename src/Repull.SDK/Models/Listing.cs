@@ -89,7 +89,7 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>`room_type` when the listing sells several identical units (a hotel room type: `unitCount` &gt; 1) or is a hotel PMS room type; `home` otherwise. See the Hotels &amp; multi-unit guide.</summary>
+        /// <summary>`room_type` when the listing sells several units (a hotel room type or a Guesty multi-unit listing: `unitCount` &gt; 1) or is a hotel PMS room type; `home` otherwise. See the Hotels &amp; multi-unit guide.</summary>
         public global::Repull.SDK.Models.Listing_kind? Kind { get; set; }
         /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -98,6 +98,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string Name { get; set; }
+#endif
+        /// <summary>The multi-unit listing this listing is one unit of (a Guesty multi-unit listing&apos;s unit, which has its own calendar and stays). The parent lists it in `units[]` with this listing&apos;s id as `units[].listingId`. `null` otherwise.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Listing_parent? Parent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Listing_parent Parent { get; set; }
 #endif
         /// <summary>**Only present with `?include=photos`.** The listing photos in display order.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -165,9 +173,9 @@ namespace Repull.SDK.Models
 #else
         public string ThumbnailUrl { get; set; }
 #endif
-        /// <summary>How many identical units (rooms) this listing sells: the hotel PMS rooms of the room type, the room count on Booking.com, or 1 for a home. Rooms left per night are `availableUnits` on `GET /v1/availability/{propertyId}`.</summary>
+        /// <summary>How many units (rooms) this listing sells: the hotel PMS rooms of the room type, the units of a Guesty multi-unit listing, the room count on Booking.com, or 1 for a home. Units left per night are `availableUnits` on `GET /v1/availability/{propertyId}`, and which unit is free is `units` there.</summary>
         public int? UnitCount { get; set; }
-        /// <summary>`GET /v1/listings/{id}` only. The physical rooms under a hotel-model listing (a Mews or Cloudbeds room type); empty for a single home. Same items as `GET /v1/listings/{id}/units`.</summary>
+        /// <summary>`GET /v1/listings/{id}` only. The units under the listing: a Mews or Cloudbeds room type&apos;s rooms, or a Guesty multi-unit listing&apos;s units; empty for a single home. Same items as `GET /v1/listings/{id}/units`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.Listing_units>? Units { get; set; }
@@ -214,6 +222,7 @@ namespace Repull.SDK.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "kind", n => { Kind = n.GetEnumValue<global::Repull.SDK.Models.Listing_kind>(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "parent", n => { Parent = n.GetObjectValue<global::Repull.SDK.Models.Listing_parent>(global::Repull.SDK.Models.Listing_parent.CreateFromDiscriminatorValue); } },
                 { "photos", n => { Photos = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentPhoto>(global::Repull.SDK.Models.ListingContentPhoto.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "policies", n => { Policies = n.GetObjectValue<global::Repull.SDK.Models.ListingPolicies>(global::Repull.SDK.Models.ListingPolicies.CreateFromDiscriminatorValue); } },
                 { "pricing", n => { Pricing = n.GetObjectValue<global::Repull.SDK.Models.ListingPricingSettings>(global::Repull.SDK.Models.ListingPricingSettings.CreateFromDiscriminatorValue); } },
@@ -247,6 +256,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("id", Id);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_kind>("kind", Kind);
             writer.WriteStringValue("name", Name);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Listing_parent>("parent", Parent);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentPhoto>("photos", Photos);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingPolicies>("policies", Policies);
             writer.WriteObjectValue<global::Repull.SDK.Models.ListingPricingSettings>("pricing", Pricing);

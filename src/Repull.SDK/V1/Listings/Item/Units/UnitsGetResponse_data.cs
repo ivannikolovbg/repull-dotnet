@@ -32,13 +32,21 @@ namespace Repull.SDK.V1.Listings.Item.Units
 #else
         public string HousekeepingStatus { get; set; }
 #endif
-        /// <summary>The PMS&apos;s id for the room; `reservation.unit.id` refers to it.</summary>
+        /// <summary>The PMS&apos;s id for the unit; `reservation.unit.id` and the per-night `units[].id` on `GET /v1/availability/{propertyId}` refer to it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get; set; }
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>The unit&apos;s own Repull listing id when the unit is a listing too (a Guesty multi-unit listing&apos;s units, each with its own calendar and stays), else null.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingId { get; set; }
+#nullable restore
+#else
+        public string ListingId { get; set; }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +64,7 @@ namespace Repull.SDK.V1.Listings.Item.Units
 #else
         public string ParentId { get; set; }
 #endif
-        /// <summary>The source property</summary>
+        /// <summary>The PMS the unit comes from: `cloudbeds`, `mews`, `guesty`, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Source { get; set; }
@@ -93,6 +101,7 @@ namespace Repull.SDK.V1.Listings.Item.Units
                 { "floor", n => { Floor = n.GetStringValue(); } },
                 { "housekeepingStatus", n => { HousekeepingStatus = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "listingId", n => { ListingId = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "parentId", n => { ParentId = n.GetStringValue(); } },
                 { "source", n => { Source = n.GetStringValue(); } },
@@ -109,6 +118,7 @@ namespace Repull.SDK.V1.Listings.Item.Units
             writer.WriteStringValue("floor", Floor);
             writer.WriteStringValue("housekeepingStatus", HousekeepingStatus);
             writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("listingId", ListingId);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("parentId", ParentId);
             writer.WriteStringValue("source", Source);

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Listings.Item.Units
         {
         }
         /// <summary>
-        /// The physical rooms under a listing. For a hotel-model PMS (Mews, Cloudbeds) a listing is a room type: prices, restrictions and availability are set on the room type, and each reservation is assigned one of these rooms (`reservation.unit.id`). A room can belong to more than one room type.Any other listing is a single home, which is its own unit, and returns an empty list.
+        /// The units under a listing.- **Hotel-model PMS (Mews, Cloudbeds):** the listing is a room type and these are its physical rooms. Prices, restrictions and availability are set on the room type, and each reservation is assigned one of these rooms (`reservation.unit.id`). A room can belong to more than one room type.- **Guesty multi-unit listing:** the listing is the parent channels sell, and these are its units. Each unit is also a listing of its own (`listingId`), with its own calendar and stays; a stay on a unit carries `reservation.unit`.Which unit is free on which night: `units` per day on `GET /v1/availability/{propertyId}`. Any other listing is a single home, which is its own unit, and returns an empty list.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -61,7 +61,7 @@ namespace Repull.SDK.V1.Listings.Item.Units
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse>(requestInfo, global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// The physical rooms under a listing. For a hotel-model PMS (Mews, Cloudbeds) a listing is a room type: prices, restrictions and availability are set on the room type, and each reservation is assigned one of these rooms (`reservation.unit.id`). A room can belong to more than one room type.Any other listing is a single home, which is its own unit, and returns an empty list.
+        /// The units under a listing.- **Hotel-model PMS (Mews, Cloudbeds):** the listing is a room type and these are its physical rooms. Prices, restrictions and availability are set on the room type, and each reservation is assigned one of these rooms (`reservation.unit.id`). A room can belong to more than one room type.- **Guesty multi-unit listing:** the listing is the parent channels sell, and these are its units. Each unit is also a listing of its own (`listingId`), with its own calendar and stays; a stay on a unit carries `reservation.unit`.Which unit is free on which night: `units` per day on `GET /v1/availability/{propertyId}`. Any other listing is a single home, which is its own unit, and returns an empty list.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Listings.Item.Units.UnitsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -89,7 +89,7 @@ namespace Repull.SDK.V1.Listings.Item.Units
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Listings.Item.Units.UnitsResponse>(requestInfo, global::Repull.SDK.V1.Listings.Item.Units.UnitsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// The physical rooms under a listing. For a hotel-model PMS (Mews, Cloudbeds) a listing is a room type: prices, restrictions and availability are set on the room type, and each reservation is assigned one of these rooms (`reservation.unit.id`). A room can belong to more than one room type.Any other listing is a single home, which is its own unit, and returns an empty list.
+        /// The units under a listing.- **Hotel-model PMS (Mews, Cloudbeds):** the listing is a room type and these are its physical rooms. Prices, restrictions and availability are set on the room type, and each reservation is assigned one of these rooms (`reservation.unit.id`). A room can belong to more than one room type.- **Guesty multi-unit listing:** the listing is the parent channels sell, and these are its units. Each unit is also a listing of its own (`listingId`), with its own calendar and stays; a stay on a unit carries `reservation.unit`.Which unit is free on which night: `units` per day on `GET /v1/availability/{propertyId}`. Any other listing is a single home, which is its own unit, and returns an empty list.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

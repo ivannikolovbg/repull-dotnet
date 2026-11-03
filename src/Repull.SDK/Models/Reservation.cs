@@ -201,7 +201,7 @@ namespace Repull.SDK.Models
 #else
         public string TotalPrice { get; set; }
 #endif
-        /// <summary>The physical room the stay was assigned, for a hotel-model PMS (Mews, Cloudbeds) where the listing is a room type. `null` when no room is assigned yet, and for every listing that is a single home.</summary>
+        /// <summary>The unit the stay is on: the room assigned by a hotel-model PMS (Mews, Cloudbeds) where the listing is a room type, or the unit of a Guesty multi-unit listing (the stay&apos;s `listingId` is then that unit&apos;s own listing). Matches the listing&apos;s `units[].id` and the per-night `units` on availability. `null` when no unit is assigned yet, and for every listing that is a single home.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.Reservation_unit? Unit { get; set; }

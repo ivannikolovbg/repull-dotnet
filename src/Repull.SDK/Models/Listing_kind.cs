@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>`room_type` when the listing sells several identical units (a hotel room type: `unitCount` &gt; 1) or is a hotel PMS room type; `home` otherwise. See the Hotels &amp; multi-unit guide.</summary>
+    /// <summary>`room_type` when the listing sells several units (a hotel room type or a Guesty multi-unit listing: `unitCount` &gt; 1) or is a hotel PMS room type; `home` otherwise. See the Hotels &amp; multi-unit guide.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum Listing_kind
     {
