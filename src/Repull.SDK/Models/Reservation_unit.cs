@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// The physical room the stay was assigned, for a hotel-model PMS (Mews, Cloudbeds) where the listing is a room type. `null` when no room is assigned yet, and for every listing that is a single home.
+    /// The unit the stay is on: the room assigned by a hotel-model PMS (Mews, Cloudbeds) where the listing is a room type, or the unit of a Guesty multi-unit listing (the stay&apos;s `listingId` is then that unit&apos;s own listing). Matches the listing&apos;s `units[].id` and the per-night `units` on availability. `null` when no unit is assigned yet, and for every listing that is a single home.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Reservation_unit : IAdditionalDataHolder, IParsable

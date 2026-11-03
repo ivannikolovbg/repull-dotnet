@@ -18,7 +18,7 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether the property is bookable on this date. `false` when the calendar marks the date booked or blocked. Only dates we actually hold a calendar row for appear in `days`, so this is never a guess — a date with no data is listed in `coverage.missingDates` instead.</summary>
         public bool? Available { get; set; }
-        /// <summary>Units still sellable that night. 1 or 0 for a single home. For a hotel-model listing (a Mews or Cloudbeds room type) the rooms of that type left, e.g. 3 of 5 — see `GET /v1/listings/{id}/units`. `available` is false whenever this is 0.</summary>
+        /// <summary>Units still sellable that night. 1 or 0 for a single home. For a listing with units (a Mews or Cloudbeds room type, a Guesty multi-unit listing) the units left, e.g. 3 of 5 — see `GET /v1/listings/{id}/units`. `available` is false whenever this is 0.</summary>
         public int? AvailableUnits { get; set; }
         /// <summary>The calendar date, ISO `YYYY-MM-DD`.</summary>
         public Date? Date { get; set; }
@@ -26,6 +26,14 @@ namespace Repull.SDK.Models
         public int? MinNights { get; set; }
         /// <summary>Nightly price for this date in the property currency. Falls back to the property&apos;s default nightly price when the calendar row itself carries no price.</summary>
         public double? Price { get; set; }
+        /// <summary>Only on a listing with units (a Mews or Cloudbeds room type, a Guesty multi-unit listing): each active unit and whether it is free that night. A unit is taken when a stay is on it, a room block covers it, or (for a unit that is a listing of its own) its own calendar is closed. Ids are the listing&apos;s `units[].id` and a reservation&apos;s `unit.id`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.PropertyAvailabilityUnit>? Units { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.PropertyAvailabilityUnit> Units { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PropertyAvailabilityDay"/> and sets the default values.
         /// </summary>
@@ -56,6 +64,7 @@ namespace Repull.SDK.Models
                 { "date", n => { Date = n.GetDateValue(); } },
                 { "minNights", n => { MinNights = n.GetIntValue(); } },
                 { "price", n => { Price = n.GetDoubleValue(); } },
+                { "units", n => { Units = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.PropertyAvailabilityUnit>(global::Repull.SDK.Models.PropertyAvailabilityUnit.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -70,6 +79,7 @@ namespace Repull.SDK.Models
             writer.WriteDateValue("date", Date);
             writer.WriteIntValue("minNights", MinNights);
             writer.WriteDoubleValue("price", Price);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.PropertyAvailabilityUnit>("units", Units);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
