@@ -20,5 +20,9 @@ namespace Repull.SDK.V1.Health.Channels.Item
         #pragma warning disable CS1591
         Down,
         #pragma warning restore CS1591
+        [EnumMember(Value = "unknown")]
+        #pragma warning disable CS1591
+        Unknown,
+        #pragma warning restore CS1591
     }
 }
