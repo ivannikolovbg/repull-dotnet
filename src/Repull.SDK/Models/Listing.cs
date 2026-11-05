@@ -91,6 +91,22 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>`room_type` when the listing sells several units (a hotel room type or a Guesty multi-unit listing: `unitCount` &gt; 1) or is a hotel PMS room type; `home` otherwise. See the Hotels &amp; multi-unit guide.</summary>
         public global::Repull.SDK.Models.Listing_kind? Kind { get; set; }
+        /// <summary>`GET /v1/listings/{id}` only. Map pin latitude in decimal degrees, as a string; the same value as `GET /v1/properties/{id}`. Null when the listing has no coordinates.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Latitude { get; set; }
+#nullable restore
+#else
+        public string Latitude { get; set; }
+#endif
+        /// <summary>`GET /v1/listings/{id}` only. Map pin longitude in decimal degrees, as a string; the same value as `GET /v1/properties/{id}`. Null when the listing has no coordinates.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Longitude { get; set; }
+#nullable restore
+#else
+        public string Longitude { get; set; }
+#endif
         /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -221,6 +237,8 @@ namespace Repull.SDK.Models
                 { "hotel", n => { Hotel = n.GetObjectValue<global::Repull.SDK.Models.Listing_hotel>(global::Repull.SDK.Models.Listing_hotel.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "kind", n => { Kind = n.GetEnumValue<global::Repull.SDK.Models.Listing_kind>(); } },
+                { "latitude", n => { Latitude = n.GetStringValue(); } },
+                { "longitude", n => { Longitude = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "parent", n => { Parent = n.GetObjectValue<global::Repull.SDK.Models.Listing_parent>(global::Repull.SDK.Models.Listing_parent.CreateFromDiscriminatorValue); } },
                 { "photos", n => { Photos = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentPhoto>(global::Repull.SDK.Models.ListingContentPhoto.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -255,6 +273,8 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_hotel>("hotel", Hotel);
             writer.WriteStringValue("id", Id);
             writer.WriteEnumValue<global::Repull.SDK.Models.Listing_kind>("kind", Kind);
+            writer.WriteStringValue("latitude", Latitude);
+            writer.WriteStringValue("longitude", Longitude);
             writer.WriteStringValue("name", Name);
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_parent>("parent", Parent);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingContentPhoto>("photos", Photos);

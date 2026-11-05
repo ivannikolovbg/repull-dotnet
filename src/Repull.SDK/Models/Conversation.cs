@@ -13,7 +13,7 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Conversation : IAdditionalDataHolder, IParsable
     {
-        /// <summary>The connected account this conversation belongs to. List endpoint.</summary>
+        /// <summary>The connected account this conversation belongs to, the same block as the message webhooks. On the list and on `GET /v1/conversations/{id}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.RecordAccount? Account { get; set; }

@@ -107,6 +107,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.Models.SendMessageResponse?> PostAsync(global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -127,6 +128,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
                 { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.SendMessageResponse>(requestInfo, global::Repull.SDK.Models.SendMessageResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
