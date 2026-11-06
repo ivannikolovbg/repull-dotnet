@@ -23,6 +23,14 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.Listing_address Address { get; set; }
 #endif
+        /// <summary>Airbnb listings: every account on the listing (owner and co-hosts), whether each is connected, and which one acts by default. `defaultAccount: null` means no connected account can reach the listing — connect one of `accounts`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.AirbnbAccess? AirbnbAccess { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.AirbnbAccess AirbnbAccess { get; set; }
+#endif
         /// <summary>Amenity rows for the listing. **Only present when the caller passes `?include=amenities`.** Empty array (`[]`) when the listing has no amenity rows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -227,6 +235,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "address", n => { Address = n.GetObjectValue<global::Repull.SDK.Models.Listing_address>(global::Repull.SDK.Models.Listing_address.CreateFromDiscriminatorValue); } },
+                { "airbnbAccess", n => { AirbnbAccess = n.GetObjectValue<global::Repull.SDK.Models.AirbnbAccess>(global::Repull.SDK.Models.AirbnbAccess.CreateFromDiscriminatorValue); } },
                 { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>(global::Repull.SDK.Models.ListingAmenity.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "capabilities", n => { Capabilities = n.GetObjectValue<global::Repull.SDK.Models.Listing_capabilities>(global::Repull.SDK.Models.Listing_capabilities.CreateFromDiscriminatorValue); } },
                 { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>(global::Repull.SDK.Models.ListingChannel.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -263,6 +272,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_address>("address", Address);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbAccess>("airbnbAccess", AirbnbAccess);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingAmenity>("amenities", Amenities);
             writer.WriteObjectValue<global::Repull.SDK.Models.Listing_capabilities>("capabilities", Capabilities);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ListingChannel>("channels", Channels);

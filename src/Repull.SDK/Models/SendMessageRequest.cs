@@ -13,6 +13,14 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SendMessageRequest : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Airbnb conversations: send as exactly this connected account — the listing&apos;s owner or one of its co-hosts — e.g. your team co-host. Never swapped for another account: if it is disconnected or not on the listing, nothing is sent and the error says why. Omit it and the conversation&apos;s own account sends while it is connected, otherwise the listing&apos;s owner, otherwise a connected co-host. Connected accounts are on `GET /v1/connect`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Account { get; set; }
+#nullable restore
+#else
+        public string Account { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Files to send. See the per-channel table above. On a conversation a connected PMS relays, files go through the PMS — `422 pms_write_unsupported` when its API cannot send them (`capabilities.pms.conversations.attachments` on `GET /v1/connect/{provider}`).</summary>
@@ -64,6 +72,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "account", n => { Account = n.GetStringValue(); } },
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.SendMessageAttachment>(global::Repull.SDK.Models.SendMessageAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "channel", n => { Channel = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
@@ -76,6 +85,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("account", Account);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.SendMessageAttachment>("attachments", Attachments);
             writer.WriteStringValue("channel", Channel);
             writer.WriteStringValue("message", Message);

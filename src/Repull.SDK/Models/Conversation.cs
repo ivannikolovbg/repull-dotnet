@@ -23,6 +23,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Airbnb conversations, on `GET /v1/conversations/{id}`: every account on the listing (owner and co-hosts) with its state, and `defaultAccount` — the one a send uses when `account` is not given. Pass any connected one as `account` on `POST /v1/conversations/{id}/messages` to send as it.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.AirbnbAccess? AirbnbAccess { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.AirbnbAccess AirbnbAccess { get; set; }
+#endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>The source channel&apos;s own thread id (Airbnb thread id, Booking conversation id, …). Pass this as the `{threadId}` path param on `POST /v1/channels/airbnb/messaging/{threadId}/messages` to reply — it is the bridge from a unified conversation straight to the provider-specific send call. `null` when the thread has no external id yet (e.g. a website/email thread).</summary>
@@ -117,6 +125,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "account", n => { Account = n.GetObjectValue<global::Repull.SDK.Models.RecordAccount>(global::Repull.SDK.Models.RecordAccount.CreateFromDiscriminatorValue); } },
+                { "airbnbAccess", n => { AirbnbAccess = n.GetObjectValue<global::Repull.SDK.Models.AirbnbAccess>(global::Repull.SDK.Models.AirbnbAccess.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalThreadId", n => { ExternalThreadId = n.GetStringValue(); } },
                 { "guestId", n => { GuestId = n.GetStringValue(); } },
@@ -140,6 +149,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.Models.RecordAccount>("account", Account);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AirbnbAccess>("airbnbAccess", AirbnbAccess);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("externalThreadId", ExternalThreadId);
             writer.WriteStringValue("guestId", GuestId);
