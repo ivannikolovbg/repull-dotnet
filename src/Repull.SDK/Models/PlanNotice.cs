@@ -13,6 +13,8 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PlanNotice : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Active listings right now. Only when the code is &quot;listings_over_plan&quot;.</summary>
+        public int? ActiveListingCount { get; set; }
         /// <summary>The plan&apos;s cap on active listings.</summary>
         public int? ActiveListingLimit { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,7 +27,7 @@ namespace Repull.SDK.Models
 #else
         public string BillingUrl { get; set; }
 #endif
-        /// <summary>The code property</summary>
+        /// <summary>&quot;listings_held_back&quot;: some connected listings are held inactive by the plan. &quot;listings_over_plan&quot;: more listings are active than the plan includes (after a downgrade). Neither blocks any call.</summary>
         public global::Repull.SDK.Models.PlanNotice_code? Code { get; set; }
         /// <summary>The fix property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -70,6 +72,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "activeListingCount", n => { ActiveListingCount = n.GetIntValue(); } },
                 { "activeListingLimit", n => { ActiveListingLimit = n.GetIntValue(); } },
                 { "billingUrl", n => { BillingUrl = n.GetStringValue(); } },
                 { "code", n => { Code = n.GetEnumValue<global::Repull.SDK.Models.PlanNotice_code>(); } },
@@ -85,6 +88,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("activeListingCount", ActiveListingCount);
             writer.WriteIntValue("activeListingLimit", ActiveListingLimit);
             writer.WriteStringValue("billingUrl", BillingUrl);
             writer.WriteEnumValue<global::Repull.SDK.Models.PlanNotice_code>("code", Code);

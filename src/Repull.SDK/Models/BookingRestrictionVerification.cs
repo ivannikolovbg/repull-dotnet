@@ -29,7 +29,7 @@ namespace Repull.SDK.Models
         public int? Mismatched { get; set; }
         /// <summary>The ran property</summary>
         public bool? Ran { get; set; }
-        /// <summary>The rows property</summary>
+        /// <summary>One row per (night, restriction). Above 62 rows only the non-matching ones are listed; `rowsOmitted` counts the rest.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.BookingRestrictionVerificationRow>? Rows { get; set; }
@@ -37,7 +37,9 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.BookingRestrictionVerificationRow> Rows { get; set; }
 #endif
-        /// <summary>`not_requested` (no restrictions were sent, `verify: false`, or Booking.com refused them), `span_too_long`, `all_dates_beyond_booking_horizon`, `read_back_failed`, `nothing_to_verify`.</summary>
+        /// <summary>Matching rows left out of `rows` on a long write.</summary>
+        public int? RowsOmitted { get; set; }
+        /// <summary>`not_requested` (no restrictions were sent, `verify: false`, or Booking.com refused them), `all_dates_beyond_booking_horizon`, `read_back_failed`, `nothing_to_verify`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SkippedReason { get; set; }
@@ -77,6 +79,7 @@ namespace Repull.SDK.Models
                 { "mismatched", n => { Mismatched = n.GetIntValue(); } },
                 { "ran", n => { Ran = n.GetBoolValue(); } },
                 { "rows", n => { Rows = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingRestrictionVerificationRow>(global::Repull.SDK.Models.BookingRestrictionVerificationRow.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "rowsOmitted", n => { RowsOmitted = n.GetIntValue(); } },
                 { "skippedReason", n => { SkippedReason = n.GetStringValue(); } },
                 { "unreported", n => { Unreported = n.GetIntValue(); } },
             };
@@ -93,6 +96,7 @@ namespace Repull.SDK.Models
             writer.WriteIntValue("mismatched", Mismatched);
             writer.WriteBoolValue("ran", Ran);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingRestrictionVerificationRow>("rows", Rows);
+            writer.WriteIntValue("rowsOmitted", RowsOmitted);
             writer.WriteStringValue("skippedReason", SkippedReason);
             writer.WriteIntValue("unreported", Unreported);
             writer.WriteAdditionalData(AdditionalData);

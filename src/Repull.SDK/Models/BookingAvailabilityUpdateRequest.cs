@@ -25,7 +25,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>`rates` → nightly prices (+ any restrictions sent with them), written at an explicit `occupancy`; `availability` → inventory, stop-sell and restrictions; `derived-pricing` → occupancy-derived pricing rules. A rates update may not carry `roomsToSell`: inventory is an `availability` write.</summary>
         public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest_type? Type { get; set; }
-        /// <summary>For `type: &quot;rates&quot;` each item is a `BookingPricingRateUpdate`; for `type: &quot;availability&quot;` a `BookingAvailabilityUpdate`; for `type: &quot;derived-pricing&quot;` a derived-price rule set.</summary>
+        /// <summary>For `type: &quot;rates&quot;` each item is a `BookingPricingRateUpdate`; for `type: &quot;availability&quot;` a `BookingAvailabilityUpdate`; for `type: &quot;derived-pricing&quot;` a `BookingDerivedPricingUpdate`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates>? Updates { get; set; }
@@ -33,7 +33,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates> Updates { get; set; }
 #endif
-        /// <summary>Only for `type: &quot;rates&quot;`. Default `true`: after the write the affected nights are read back off Booking.com so `applied` can say `verified` or `mismatch`. Send `false` to skip the read (one fewer Booking.com call); the response then reports `applied: &quot;unverified&quot;`.</summary>
+        /// <summary>Default `true`, for every `type`: after the write Repull reads the result back off Booking.com so `applied` says `verified` or `mismatch` — prices and restrictions per night (`rates`, `availability`), the rule set per rate plan (`derived-pricing`). Send `false` to skip the read; `applied` is then `unverified` (`acknowledged` for a restriction-only `availability` write).</summary>
         public bool? Verify { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdateRequest"/> and sets the default values.
@@ -141,7 +141,7 @@ namespace Repull.SDK.Models
             }
         }
         /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdate"/>, <see cref="global::Repull.SDK.Models.BookingPricingRateUpdate"/>
+        /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdate"/>, <see cref="global::Repull.SDK.Models.BookingDerivedPricingUpdate"/>, <see cref="global::Repull.SDK.Models.BookingPricingRateUpdate"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class BookingAvailabilityUpdateRequest_updates : IComposedTypeWrapper, IParsable
@@ -153,6 +153,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
             public global::Repull.SDK.Models.BookingAvailabilityUpdate BookingAvailabilityUpdate { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingDerivedPricingUpdate"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.BookingDerivedPricingUpdate? BookingDerivedPricingUpdate { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.BookingDerivedPricingUpdate BookingDerivedPricingUpdate { get; set; }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingPricingRateUpdate"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -176,6 +184,10 @@ namespace Repull.SDK.Models
                 {
                     result.BookingAvailabilityUpdate = new global::Repull.SDK.Models.BookingAvailabilityUpdate();
                 }
+                else if("BookingDerivedPricingUpdate".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.BookingDerivedPricingUpdate = new global::Repull.SDK.Models.BookingDerivedPricingUpdate();
+                }
                 else if("BookingPricingRateUpdate".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
                 {
                     result.BookingPricingRateUpdate = new global::Repull.SDK.Models.BookingPricingRateUpdate();
@@ -191,6 +203,10 @@ namespace Repull.SDK.Models
                 if(BookingAvailabilityUpdate != null)
                 {
                     return BookingAvailabilityUpdate.GetFieldDeserializers();
+                }
+                else if(BookingDerivedPricingUpdate != null)
+                {
+                    return BookingDerivedPricingUpdate.GetFieldDeserializers();
                 }
                 else if(BookingPricingRateUpdate != null)
                 {
@@ -208,6 +224,10 @@ namespace Repull.SDK.Models
                 if(BookingAvailabilityUpdate != null)
                 {
                     writer.WriteObjectValue<global::Repull.SDK.Models.BookingAvailabilityUpdate>(null, BookingAvailabilityUpdate);
+                }
+                else if(BookingDerivedPricingUpdate != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.BookingDerivedPricingUpdate>(null, BookingDerivedPricingUpdate);
                 }
                 else if(BookingPricingRateUpdate != null)
                 {

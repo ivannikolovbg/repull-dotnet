@@ -18,6 +18,14 @@ namespace Repull.SDK.Models
         public bool? IsChildRate { get; set; }
         /// <summary>The party size this rate plan prices. A rate amount must be written at this number: above it Booking.com declines the price in silence, below it answers 400. Null when `source` is `mirror`.</summary>
         public int? MaxPersons { get; set; }
+        /// <summary>The occupancy rules this rate plan holds on Booking.com — what `PUT /v1/channels/booking/availability` with `type: &quot;derived-pricing&quot;` writes, in the same terms (`percentage: -10` is 10% less). Empty when the rate plan has none; `null` when `source` is `mirror`. The price for a party of `persons` is the nightly price plus `additional` (or changed by `percentage`), on every night.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.BookingOccupancyRule>? OccupancyPricing { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.BookingOccupancyRule> OccupancyPricing { get; set; }
+#endif
         /// <summary>Cancellation policy name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -85,6 +93,7 @@ namespace Repull.SDK.Models
             {
                 { "isChildRate", n => { IsChildRate = n.GetBoolValue(); } },
                 { "maxPersons", n => { MaxPersons = n.GetIntValue(); } },
+                { "occupancyPricing", n => { OccupancyPricing = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingOccupancyRule>(global::Repull.SDK.Models.BookingOccupancyRule.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "policy", n => { Policy = n.GetStringValue(); } },
                 { "policyId", n => { PolicyId = n.GetStringValue(); } },
                 { "pricingType", n => { PricingType = n.GetStringValue(); } },
@@ -101,6 +110,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("isChildRate", IsChildRate);
             writer.WriteIntValue("maxPersons", MaxPersons);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingOccupancyRule>("occupancyPricing", OccupancyPricing);
             writer.WriteStringValue("policy", Policy);
             writer.WriteStringValue("policyId", PolicyId);
             writer.WriteStringValue("pricingType", PricingType);

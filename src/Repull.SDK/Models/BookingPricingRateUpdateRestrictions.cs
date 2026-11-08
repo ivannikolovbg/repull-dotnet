@@ -31,9 +31,9 @@ namespace Repull.SDK.Models
 #else
         public string MaxAdvanceRes { get; set; }
 #endif
-        /// <summary>Maximum length of stay.</summary>
+        /// <summary>Stay-through maximum length of stay — no stay covering these nights may be longer. `1`–`90`; `0` removes the maximum. Above `90` returns `422 restriction_out_of_range`: Booking.com acknowledges a larger value and then stores no maximum, so send `0` for &quot;no limit&quot;.</summary>
         public int? MaxStay { get; set; }
-        /// <summary>Arrival-based maximum length of stay.</summary>
+        /// <summary>Arrival-based maximum length of stay — the longest stay that may START on these nights. `1`–`90`; `0` removes the maximum. Above `90` (for example `365`) returns `422 restriction_out_of_range`: Booking.com acknowledges it and then stores no maximum (`0`), so send `0` for &quot;no limit&quot;.</summary>
         public int? MaxStayArrival { get; set; }
         /// <summary>Refused, for the same reason as `exactStayArrival` — returns `422 restriction_not_supported`. Set the minimum advance-reservation window on the rate plan in the Booking.com Extranet.</summary>
         [Obsolete("")]
@@ -44,9 +44,9 @@ namespace Repull.SDK.Models
 #else
         public string MinAdvanceRes { get; set; }
 #endif
-        /// <summary>Minimum length of stay. Booking.com stores a 1-night minimum as no minimum at all, so `minStay: 1` reads back as `0` and is reported as applied.</summary>
+        /// <summary>Stay-through minimum length of stay — every stay that covers these nights must be at least this long. `1`–`91`; `0` removes the minimum. Booking.com stores a 1-night minimum as no minimum at all, so `minStay: 1` reads back as `0` and is reported as applied. Above `91` returns `422 restriction_out_of_range` (Booking.com would store 91).</summary>
         public int? MinStay { get; set; }
-        /// <summary>Arrival-based minimum length of stay — applies to stays that START on these nights, rather than any stay covering them.</summary>
+        /// <summary>Arrival-based minimum length of stay — applies to stays that START on these nights, rather than any stay covering them. `1`–`91`; `0` removes it. Above `91` returns `422 restriction_out_of_range`.</summary>
         public int? MinStayArrival { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions"/> and sets the default values.

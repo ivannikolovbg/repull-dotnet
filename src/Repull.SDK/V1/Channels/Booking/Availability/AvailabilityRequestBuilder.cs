@@ -67,9 +67,9 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
             return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingAvailabilityStateResponse>(requestInfo, global::Repull.SDK.Models.BookingAvailabilityStateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Write rates, availability and restrictions to a Booking.com property. `type` selects the write:- `rates` — nightly prices, plus any length-of-stay / arrival restrictions sent with them.- `availability` — inventory (`availableRooms`), the stop-sell flag (`closed`), and restrictions. Omit `availableRooms` and `closed` for a restriction-only write.- `derived-pricing` — occupancy-derived pricing rules.**Dates are inclusive at both ends.** `{ &quot;start&quot;: &quot;2026-11-04&quot;, &quot;end&quot;: &quot;2026-11-04&quot; }` is exactly one night.**A rate amount needs an occupancy.** Booking.com stores the amount against the party size the rate plan prices: sent above that number it declines the price in silence, sent below it it answers 400. Send `occupancy`, or omit it and Repull resolves it from Booking.com&apos;s own data and echoes the value and its `source` back in `occupancy[]`. If it cannot be resolved the write is refused with `422` naming `updates[N].occupancy`.**Restrictions are sent in the same call, on their own wire.** A price and a minimum stay are two writes on Booking.com&apos;s side. Send them together and the response reports each separately: `price` and `restrictions` carry their own state, their own read-back, and — when refused — Booking.com&apos;s own reason. The top-level `applied` is `partial` when they disagree, so a price that landed is never reported as a failure. `minStay`, `maxStay`, `minStayArrival`, `maxStayArrival`, `closedToArrival` and `closedToDeparture` are written; `exactStayArrival`, `minAdvanceRes` and `maxAdvanceRes` are refused with `422 restriction_not_supported` because Booking.com&apos;s notification has no element for them — set those on the rate plan in the Extranet. Nothing you send is ever silently ignored.**Inventory is not part of a rate update.** `roomsToSell` on a `rates` update returns `422 inventory_not_in_rate_update`; send it as `type: &quot;availability&quot;` instead.**The response says what is known.** Booking.com acknowledges a write with no per-date status, so the nights are read back — prices and restrictions out of the same read: `applied` is `verified`, `mismatch`, `partial`, `rejected` or `unverified` (send `verify: false` to skip the read-back). A bare acknowledgement is never reported as &quot;all updates applied&quot;. Booking.com stores a 1-night minimum as no minimum, so `minStay: 1` reads back as `0` and still counts as applied.Restrictions never leak across channels — this endpoint writes only to Booking.com. When Booking.com refuses a write outright, their own reason comes back as `422 booking_rejected` with `booking_ruid`; a genuine outage on their side is `502 booking_error`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Write rates, availability and restrictions to a Booking.com property. `type` selects the write:- `rates` — nightly prices, plus any length-of-stay / arrival restrictions sent with them.- `availability` — inventory (`availableRooms`), the stop-sell flag (`closed`), and restrictions. Omit `availableRooms` and `closed` for a restriction-only write.- `derived-pricing` — occupancy-based pricing: what a smaller party pays relative to the nightly price (see below).**Dates are inclusive at both ends.** `{ &quot;start&quot;: &quot;2026-11-04&quot;, &quot;end&quot;: &quot;2026-11-04&quot; }` is exactly one night.**A rate amount needs an occupancy.** Booking.com stores the amount against the party size the rate plan prices: sent above that number it declines the price in silence, sent below it it answers 400. Send `occupancy`, or omit it and Repull resolves it from Booking.com&apos;s own data and echoes the value and its `source` back in `occupancy[]`. If it cannot be resolved the write is refused with `422` naming `updates[N].occupancy`.**Restrictions are sent in the same call, on their own wire.** A price and a minimum stay are two writes on Booking.com&apos;s side. Send them together and the response reports each separately: `price` and `restrictions` carry their own state, their own read-back, and — when refused — Booking.com&apos;s own reason. The top-level `applied` is `partial` when they disagree, so a price that landed is never reported as a failure. `minStay`, `maxStay`, `minStayArrival`, `maxStayArrival`, `closedToArrival` and `closedToDeparture` are written; `exactStayArrival`, `minAdvanceRes` and `maxAdvanceRes` are refused with `422 restriction_not_supported` because Booking.com&apos;s notification has no element for them — set those on the rate plan in the Extranet. Nothing you send is ever silently ignored.**Length-of-stay limits.** Booking.com keeps a maximum stay of 1–90 nights and a minimum of 1–91; `0` removes the limit. A value outside that is refused with `422 restriction_out_of_range` naming the field — Booking.com would acknowledge it and then store something else (a `maxStayArrival` of 365 is stored as no maximum), so send `0` for &quot;no limit&quot;. `minStay`/`maxStay` are stay-through limits (any stay covering the night); `minStayArrival`/`maxStayArrival` apply only to stays that start on the night.**Occupancy-based pricing (`type: &quot;derived-pricing&quot;`).** The nightly price you write with `type: &quot;rates&quot;` is the price for `leadingOccupancy` guests (the rate plan&apos;s `maxPersons`). Each item in `occupancies` prices another party size relative to it: `additional` is a signed amount in the rate currency, `percentage` a signed percent. The rule applies to every night, date-specific prices included. A write replaces the rate plan&apos;s whole rule set; `&quot;occupancies&quot;: []` removes every rule. Example — EUR 12.01 off for 1 and 2 guests on a 3-guest rate: `{&quot;type&quot;:&quot;derived-pricing&quot;,&quot;property_id&quot;:&quot;17610853&quot;,&quot;updates&quot;:[{&quot;roomId&quot;:&quot;1761085301&quot;,&quot;rateId&quot;:&quot;70596570&quot;,&quot;leadingOccupancy&quot;:3,&quot;occupancies&quot;:[{&quot;persons&quot;:2,&quot;additional&quot;:-12.01},{&quot;persons&quot;:1,&quot;additional&quot;:-12.01}]}]}`. The rules are read back after the write, and at any time on `GET /v1/channels/booking/properties/{id}/rooms` (`rates[].occupancyPricing`). A wrong shape is `422 invalid_params` naming the field; a rule Booking.com refuses is `422 booking_rejected` with its code.**Inventory is not part of a rate update.** `roomsToSell` on a `rates` update returns `422 inventory_not_in_rate_update`; send it as `type: &quot;availability&quot;` instead.**The response says what is known.** Booking.com acknowledges a write with no per-date status, so the nights are read back — prices and restrictions out of the same read: `applied` is `verified`, `mismatch`, `partial`, `rejected` or `unverified` (send `verify: false` to skip the read-back). A restriction-only `availability` write is read back the same way. Every night is read, however long the range. A bare acknowledgement is never reported as &quot;all updates applied&quot;. Booking.com stores a 1-night minimum as no minimum, so `minStay: 1` reads back as `0` and still counts as applied.Restrictions never leak across channels — this endpoint writes only to Booking.com. When Booking.com refuses a write outright, their own reason comes back as `422 booking_rejected` with `booking_ruid`; a genuine outage on their side is `502 booking_error`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse"/></returns>
         /// <param name="body">Body for `PUT /v1/channels/booking/availability`. `type` selects which of Booking.com&apos;s writes to perform. Date ranges are inclusive at both ends everywhere in this body.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -83,11 +83,11 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.Models.BookingPricingUpdateResponse?> PutAsync(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse?> PutAsAvailabilityPutResponseAsync(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.Models.BookingPricingUpdateResponse> PutAsync(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse> PutAsAvailabilityPutResponseAsync(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -103,7 +103,47 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
                 { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Repull.SDK.Models.BookingPricingUpdateResponse>(requestInfo, global::Repull.SDK.Models.BookingPricingUpdateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse>(requestInfo, global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Write rates, availability and restrictions to a Booking.com property. `type` selects the write:- `rates` — nightly prices, plus any length-of-stay / arrival restrictions sent with them.- `availability` — inventory (`availableRooms`), the stop-sell flag (`closed`), and restrictions. Omit `availableRooms` and `closed` for a restriction-only write.- `derived-pricing` — occupancy-based pricing: what a smaller party pays relative to the nightly price (see below).**Dates are inclusive at both ends.** `{ &quot;start&quot;: &quot;2026-11-04&quot;, &quot;end&quot;: &quot;2026-11-04&quot; }` is exactly one night.**A rate amount needs an occupancy.** Booking.com stores the amount against the party size the rate plan prices: sent above that number it declines the price in silence, sent below it it answers 400. Send `occupancy`, or omit it and Repull resolves it from Booking.com&apos;s own data and echoes the value and its `source` back in `occupancy[]`. If it cannot be resolved the write is refused with `422` naming `updates[N].occupancy`.**Restrictions are sent in the same call, on their own wire.** A price and a minimum stay are two writes on Booking.com&apos;s side. Send them together and the response reports each separately: `price` and `restrictions` carry their own state, their own read-back, and — when refused — Booking.com&apos;s own reason. The top-level `applied` is `partial` when they disagree, so a price that landed is never reported as a failure. `minStay`, `maxStay`, `minStayArrival`, `maxStayArrival`, `closedToArrival` and `closedToDeparture` are written; `exactStayArrival`, `minAdvanceRes` and `maxAdvanceRes` are refused with `422 restriction_not_supported` because Booking.com&apos;s notification has no element for them — set those on the rate plan in the Extranet. Nothing you send is ever silently ignored.**Length-of-stay limits.** Booking.com keeps a maximum stay of 1–90 nights and a minimum of 1–91; `0` removes the limit. A value outside that is refused with `422 restriction_out_of_range` naming the field — Booking.com would acknowledge it and then store something else (a `maxStayArrival` of 365 is stored as no maximum), so send `0` for &quot;no limit&quot;. `minStay`/`maxStay` are stay-through limits (any stay covering the night); `minStayArrival`/`maxStayArrival` apply only to stays that start on the night.**Occupancy-based pricing (`type: &quot;derived-pricing&quot;`).** The nightly price you write with `type: &quot;rates&quot;` is the price for `leadingOccupancy` guests (the rate plan&apos;s `maxPersons`). Each item in `occupancies` prices another party size relative to it: `additional` is a signed amount in the rate currency, `percentage` a signed percent. The rule applies to every night, date-specific prices included. A write replaces the rate plan&apos;s whole rule set; `&quot;occupancies&quot;: []` removes every rule. Example — EUR 12.01 off for 1 and 2 guests on a 3-guest rate: `{&quot;type&quot;:&quot;derived-pricing&quot;,&quot;property_id&quot;:&quot;17610853&quot;,&quot;updates&quot;:[{&quot;roomId&quot;:&quot;1761085301&quot;,&quot;rateId&quot;:&quot;70596570&quot;,&quot;leadingOccupancy&quot;:3,&quot;occupancies&quot;:[{&quot;persons&quot;:2,&quot;additional&quot;:-12.01},{&quot;persons&quot;:1,&quot;additional&quot;:-12.01}]}]}`. The rules are read back after the write, and at any time on `GET /v1/channels/booking/properties/{id}/rooms` (`rates[].occupancyPricing`). A wrong shape is `422 invalid_params` naming the field; a rule Booking.com refuses is `422 booking_rejected` with its code.**Inventory is not part of a rate update.** `roomsToSell` on a `rates` update returns `422 inventory_not_in_rate_update`; send it as `type: &quot;availability&quot;` instead.**The response says what is known.** Booking.com acknowledges a write with no per-date status, so the nights are read back — prices and restrictions out of the same read: `applied` is `verified`, `mismatch`, `partial`, `rejected` or `unverified` (send `verify: false` to skip the read-back). A restriction-only `availability` write is read back the same way. Every night is read, however long the range. A bare acknowledgement is never reported as &quot;all updates applied&quot;. Booking.com stores a 1-night minimum as no minimum, so `minStay: 1` reads back as `0` and still counts as applied.Restrictions never leak across channels — this endpoint writes only to Booking.com. When Booking.com refuses a write outright, their own reason comes back as `422 booking_rejected` with `booking_ruid`; a genuine outage on their side is `502 booking_error`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse"/></returns>
+        /// <param name="body">Body for `PUT /v1/channels/booking/availability`. `type` selects which of Booking.com&apos;s writes to perform. Date ranges are inclusive at both ends everywhere in this body.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 429 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        [Obsolete("This method is obsolete. Use PutAsAvailabilityPutResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse?> PutAsync(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse> PutAsync(global::Repull.SDK.Models.BookingAvailabilityUpdateRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse>(requestInfo, global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Read the current rate, availability, and restriction state for a Booking.com property so you can reconcile before writing with the PUT on this path. Keyed by `property_id` (the Booking hotel id), symmetric with the PUT.Proxies Booking&apos;s `getRoomRateAvailability` — the returned fields (price, rooms-to-sell, min/max stay, closed-to-arrival/departure, stop-sell) are whatever Booking.com emits for the window. A listing-id-keyed equivalent is available at `GET /v1/channels/booking/listings/{id}/pricing`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
@@ -125,7 +165,7 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
             return requestInfo;
         }
         /// <summary>
-        /// Write rates, availability and restrictions to a Booking.com property. `type` selects the write:- `rates` — nightly prices, plus any length-of-stay / arrival restrictions sent with them.- `availability` — inventory (`availableRooms`), the stop-sell flag (`closed`), and restrictions. Omit `availableRooms` and `closed` for a restriction-only write.- `derived-pricing` — occupancy-derived pricing rules.**Dates are inclusive at both ends.** `{ &quot;start&quot;: &quot;2026-11-04&quot;, &quot;end&quot;: &quot;2026-11-04&quot; }` is exactly one night.**A rate amount needs an occupancy.** Booking.com stores the amount against the party size the rate plan prices: sent above that number it declines the price in silence, sent below it it answers 400. Send `occupancy`, or omit it and Repull resolves it from Booking.com&apos;s own data and echoes the value and its `source` back in `occupancy[]`. If it cannot be resolved the write is refused with `422` naming `updates[N].occupancy`.**Restrictions are sent in the same call, on their own wire.** A price and a minimum stay are two writes on Booking.com&apos;s side. Send them together and the response reports each separately: `price` and `restrictions` carry their own state, their own read-back, and — when refused — Booking.com&apos;s own reason. The top-level `applied` is `partial` when they disagree, so a price that landed is never reported as a failure. `minStay`, `maxStay`, `minStayArrival`, `maxStayArrival`, `closedToArrival` and `closedToDeparture` are written; `exactStayArrival`, `minAdvanceRes` and `maxAdvanceRes` are refused with `422 restriction_not_supported` because Booking.com&apos;s notification has no element for them — set those on the rate plan in the Extranet. Nothing you send is ever silently ignored.**Inventory is not part of a rate update.** `roomsToSell` on a `rates` update returns `422 inventory_not_in_rate_update`; send it as `type: &quot;availability&quot;` instead.**The response says what is known.** Booking.com acknowledges a write with no per-date status, so the nights are read back — prices and restrictions out of the same read: `applied` is `verified`, `mismatch`, `partial`, `rejected` or `unverified` (send `verify: false` to skip the read-back). A bare acknowledgement is never reported as &quot;all updates applied&quot;. Booking.com stores a 1-night minimum as no minimum, so `minStay: 1` reads back as `0` and still counts as applied.Restrictions never leak across channels — this endpoint writes only to Booking.com. When Booking.com refuses a write outright, their own reason comes back as `422 booking_rejected` with `booking_ruid`; a genuine outage on their side is `502 booking_error`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
+        /// Write rates, availability and restrictions to a Booking.com property. `type` selects the write:- `rates` — nightly prices, plus any length-of-stay / arrival restrictions sent with them.- `availability` — inventory (`availableRooms`), the stop-sell flag (`closed`), and restrictions. Omit `availableRooms` and `closed` for a restriction-only write.- `derived-pricing` — occupancy-based pricing: what a smaller party pays relative to the nightly price (see below).**Dates are inclusive at both ends.** `{ &quot;start&quot;: &quot;2026-11-04&quot;, &quot;end&quot;: &quot;2026-11-04&quot; }` is exactly one night.**A rate amount needs an occupancy.** Booking.com stores the amount against the party size the rate plan prices: sent above that number it declines the price in silence, sent below it it answers 400. Send `occupancy`, or omit it and Repull resolves it from Booking.com&apos;s own data and echoes the value and its `source` back in `occupancy[]`. If it cannot be resolved the write is refused with `422` naming `updates[N].occupancy`.**Restrictions are sent in the same call, on their own wire.** A price and a minimum stay are two writes on Booking.com&apos;s side. Send them together and the response reports each separately: `price` and `restrictions` carry their own state, their own read-back, and — when refused — Booking.com&apos;s own reason. The top-level `applied` is `partial` when they disagree, so a price that landed is never reported as a failure. `minStay`, `maxStay`, `minStayArrival`, `maxStayArrival`, `closedToArrival` and `closedToDeparture` are written; `exactStayArrival`, `minAdvanceRes` and `maxAdvanceRes` are refused with `422 restriction_not_supported` because Booking.com&apos;s notification has no element for them — set those on the rate plan in the Extranet. Nothing you send is ever silently ignored.**Length-of-stay limits.** Booking.com keeps a maximum stay of 1–90 nights and a minimum of 1–91; `0` removes the limit. A value outside that is refused with `422 restriction_out_of_range` naming the field — Booking.com would acknowledge it and then store something else (a `maxStayArrival` of 365 is stored as no maximum), so send `0` for &quot;no limit&quot;. `minStay`/`maxStay` are stay-through limits (any stay covering the night); `minStayArrival`/`maxStayArrival` apply only to stays that start on the night.**Occupancy-based pricing (`type: &quot;derived-pricing&quot;`).** The nightly price you write with `type: &quot;rates&quot;` is the price for `leadingOccupancy` guests (the rate plan&apos;s `maxPersons`). Each item in `occupancies` prices another party size relative to it: `additional` is a signed amount in the rate currency, `percentage` a signed percent. The rule applies to every night, date-specific prices included. A write replaces the rate plan&apos;s whole rule set; `&quot;occupancies&quot;: []` removes every rule. Example — EUR 12.01 off for 1 and 2 guests on a 3-guest rate: `{&quot;type&quot;:&quot;derived-pricing&quot;,&quot;property_id&quot;:&quot;17610853&quot;,&quot;updates&quot;:[{&quot;roomId&quot;:&quot;1761085301&quot;,&quot;rateId&quot;:&quot;70596570&quot;,&quot;leadingOccupancy&quot;:3,&quot;occupancies&quot;:[{&quot;persons&quot;:2,&quot;additional&quot;:-12.01},{&quot;persons&quot;:1,&quot;additional&quot;:-12.01}]}]}`. The rules are read back after the write, and at any time on `GET /v1/channels/booking/properties/{id}/rooms` (`rates[].occupancyPricing`). A wrong shape is `422 invalid_params` naming the field; a rule Booking.com refuses is `422 booking_rejected` with its code.**Inventory is not part of a rate update.** `roomsToSell` on a `rates` update returns `422 inventory_not_in_rate_update`; send it as `type: &quot;availability&quot;` instead.**The response says what is known.** Booking.com acknowledges a write with no per-date status, so the nights are read back — prices and restrictions out of the same read: `applied` is `verified`, `mismatch`, `partial`, `rejected` or `unverified` (send `verify: false` to skip the read-back). A restriction-only `availability` write is read back the same way. Every night is read, however long the range. A bare acknowledgement is never reported as &quot;all updates applied&quot;. Booking.com stores a 1-night minimum as no minimum, so `minStay: 1` reads back as `0` and still counts as applied.Restrictions never leak across channels — this endpoint writes only to Booking.com. When Booking.com refuses a write outright, their own reason comes back as `422 booking_rejected` with `booking_ruid`; a genuine outage on their side is `502 booking_error`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Body for `PUT /v1/channels/booking/availability`. `type` selects which of Booking.com&apos;s writes to perform. Date ranges are inclusive at both ends everywhere in this body.</param>
@@ -154,6 +194,101 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         public global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/>, <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/>, <see cref="global::Repull.SDK.Models.BookingRestrictionWriteResponse"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class AvailabilityPutResponse : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse? BookingDerivedPricingWriteResponse { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse BookingDerivedPricingWriteResponse { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.BookingPricingUpdateResponse? BookingPricingUpdateResponse { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.BookingPricingUpdateResponse BookingPricingUpdateResponse { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingRestrictionWriteResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.BookingRestrictionWriteResponse? BookingRestrictionWriteResponse { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.BookingRestrictionWriteResponse BookingRestrictionWriteResponse { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse();
+                if("BookingDerivedPricingWriteResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.BookingDerivedPricingWriteResponse = new global::Repull.SDK.Models.BookingDerivedPricingWriteResponse();
+                }
+                else if("BookingPricingUpdateResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.BookingPricingUpdateResponse = new global::Repull.SDK.Models.BookingPricingUpdateResponse();
+                }
+                else if("BookingRestrictionWriteResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.BookingRestrictionWriteResponse = new global::Repull.SDK.Models.BookingRestrictionWriteResponse();
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                if(BookingDerivedPricingWriteResponse != null)
+                {
+                    return BookingDerivedPricingWriteResponse.GetFieldDeserializers();
+                }
+                else if(BookingPricingUpdateResponse != null)
+                {
+                    return BookingPricingUpdateResponse.GetFieldDeserializers();
+                }
+                else if(BookingRestrictionWriteResponse != null)
+                {
+                    return BookingRestrictionWriteResponse.GetFieldDeserializers();
+                }
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(BookingDerivedPricingWriteResponse != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse>(null, BookingDerivedPricingWriteResponse);
+                }
+                else if(BookingPricingUpdateResponse != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.BookingPricingUpdateResponse>(null, BookingPricingUpdateResponse);
+                }
+                else if(BookingRestrictionWriteResponse != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.BookingRestrictionWriteResponse>(null, BookingRestrictionWriteResponse);
+                }
+            }
         }
         /// <summary>
         /// Read the current rate, availability, and restriction state for a Booking.com property so you can reconcile before writing with the PUT on this path. Keyed by `property_id` (the Booking hotel id), symmetric with the PUT.Proxies Booking&apos;s `getRoomRateAvailability` — the returned fields (price, rooms-to-sell, min/max stay, closed-to-arrival/departure, stop-sell) are whatever Booking.com emits for the window. A listing-id-keyed equivalent is available at `GET /v1/channels/booking/listings/{id}/pricing`.`property_id` must be a Booking.com property connected to this workspace (`GET /v1/channels/booking/properties` lists them). Any other id — including one connected to a different workspace — returns `404 not_found`, the same answer as an id that does not exist.Returns `403 listing_inactive` when any listing mapped to the Booking.com property is inactive. An inactive listing keeps syncing, but cannot be read or changed through the API until it is activated.
@@ -206,6 +341,101 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class AvailabilityRequestBuilderPutRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/>, <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/>, <see cref="global::Repull.SDK.Models.BookingRestrictionWriteResponse"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class AvailabilityResponse : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse? BookingDerivedPricingWriteResponse { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse BookingDerivedPricingWriteResponse { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.BookingPricingUpdateResponse? BookingPricingUpdateResponse { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.BookingPricingUpdateResponse BookingPricingUpdateResponse { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingRestrictionWriteResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Repull.SDK.Models.BookingRestrictionWriteResponse? BookingRestrictionWriteResponse { get; set; }
+#nullable restore
+#else
+            public global::Repull.SDK.Models.BookingRestrictionWriteResponse BookingRestrictionWriteResponse { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse();
+                if("BookingDerivedPricingWriteResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.BookingDerivedPricingWriteResponse = new global::Repull.SDK.Models.BookingDerivedPricingWriteResponse();
+                }
+                else if("BookingPricingUpdateResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.BookingPricingUpdateResponse = new global::Repull.SDK.Models.BookingPricingUpdateResponse();
+                }
+                else if("BookingRestrictionWriteResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.BookingRestrictionWriteResponse = new global::Repull.SDK.Models.BookingRestrictionWriteResponse();
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                if(BookingDerivedPricingWriteResponse != null)
+                {
+                    return BookingDerivedPricingWriteResponse.GetFieldDeserializers();
+                }
+                else if(BookingPricingUpdateResponse != null)
+                {
+                    return BookingPricingUpdateResponse.GetFieldDeserializers();
+                }
+                else if(BookingRestrictionWriteResponse != null)
+                {
+                    return BookingRestrictionWriteResponse.GetFieldDeserializers();
+                }
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(BookingDerivedPricingWriteResponse != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse>(null, BookingDerivedPricingWriteResponse);
+                }
+                else if(BookingPricingUpdateResponse != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.BookingPricingUpdateResponse>(null, BookingPricingUpdateResponse);
+                }
+                else if(BookingRestrictionWriteResponse != null)
+                {
+                    writer.WriteObjectValue<global::Repull.SDK.Models.BookingRestrictionWriteResponse>(null, BookingRestrictionWriteResponse);
+                }
+            }
         }
     }
 }

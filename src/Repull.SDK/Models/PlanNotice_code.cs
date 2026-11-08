@@ -3,14 +3,17 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>&quot;listings_held_back&quot;: some connected listings are held inactive by the plan. &quot;listings_over_plan&quot;: more listings are active than the plan includes (after a downgrade). Neither blocks any call.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public enum PlanNotice_code
-    #pragma warning restore CS1591
     {
         [EnumMember(Value = "listings_held_back")]
         #pragma warning disable CS1591
         Listings_held_back,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "listings_over_plan")]
+        #pragma warning disable CS1591
+        Listings_over_plan,
         #pragma warning restore CS1591
     }
 }

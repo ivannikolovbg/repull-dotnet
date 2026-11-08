@@ -29,7 +29,7 @@ namespace Repull.SDK.Models
         public int? Mismatched { get; set; }
         /// <summary>Whether the read-back happened.</summary>
         public bool? Ran { get; set; }
-        /// <summary>The rows property</summary>
+        /// <summary>One row per night. When a write covers more than 62 rows, only the nights that did NOT match are listed and `rowsOmitted` counts the rest — `matched` and `mismatched` always cover every night.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.BookingRateWriteVerificationRow>? Rows { get; set; }
@@ -37,7 +37,9 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.BookingRateWriteVerificationRow> Rows { get; set; }
 #endif
-        /// <summary>Why it did not: `not_requested` (you sent `verify: false`), `span_too_long`, `all_dates_beyond_booking_horizon`, `read_back_failed`, `nothing_to_verify`.</summary>
+        /// <summary>Matching nights left out of `rows` on a long write. Absent when every row is listed.</summary>
+        public int? RowsOmitted { get; set; }
+        /// <summary>Why it did not: `not_requested` (you sent `verify: false`), `all_dates_beyond_booking_horizon`, `read_back_failed`, `nothing_to_verify`. Every night of a write is read back, however long the range (a year is read in 31-day chunks, in parallel).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? SkippedReason { get; set; }
@@ -75,6 +77,7 @@ namespace Repull.SDK.Models
                 { "mismatched", n => { Mismatched = n.GetIntValue(); } },
                 { "ran", n => { Ran = n.GetBoolValue(); } },
                 { "rows", n => { Rows = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingRateWriteVerificationRow>(global::Repull.SDK.Models.BookingRateWriteVerificationRow.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "rowsOmitted", n => { RowsOmitted = n.GetIntValue(); } },
                 { "skippedReason", n => { SkippedReason = n.GetStringValue(); } },
             };
         }
@@ -90,6 +93,7 @@ namespace Repull.SDK.Models
             writer.WriteIntValue("mismatched", Mismatched);
             writer.WriteBoolValue("ran", Ran);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingRateWriteVerificationRow>("rows", Rows);
+            writer.WriteIntValue("rowsOmitted", RowsOmitted);
             writer.WriteStringValue("skippedReason", SkippedReason);
             writer.WriteAdditionalData(AdditionalData);
         }
