@@ -27,6 +27,14 @@ namespace Repull.SDK.Models
 #else
         public string BillingUrl { get; set; }
 #endif
+        /// <summary>Opens Starter checkout at `starterMonthlyPrice`. Present up to 100 listings.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CheckoutUrl { get; set; }
+#nullable restore
+#else
+        public string CheckoutUrl { get; set; }
+#endif
         /// <summary>&quot;listings_held_back&quot;: some connected listings are held inactive by the plan. &quot;listings_over_plan&quot;: more listings are active than the plan includes (after a downgrade). Neither blocks any call.</summary>
         public global::Repull.SDK.Models.PlanNotice_code? Code { get; set; }
         /// <summary>The fix property</summary>
@@ -47,6 +55,10 @@ namespace Repull.SDK.Models
 #else
         public string Message { get; set; }
 #endif
+        /// <summary>On a free plan: the listings Starter would serve and bill, active plus held back, across the plan&apos;s workspaces.</summary>
+        public int? StarterListings { get; set; }
+        /// <summary>Starter&apos;s monthly price in USD for `starterListings` — exactly what checkout charges. Present up to 100 listings; above that the message says how to ask for a plan.</summary>
+        public double? StarterMonthlyPrice { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PlanNotice"/> and sets the default values.
         /// </summary>
@@ -75,10 +87,13 @@ namespace Repull.SDK.Models
                 { "activeListingCount", n => { ActiveListingCount = n.GetIntValue(); } },
                 { "activeListingLimit", n => { ActiveListingLimit = n.GetIntValue(); } },
                 { "billingUrl", n => { BillingUrl = n.GetStringValue(); } },
+                { "checkoutUrl", n => { CheckoutUrl = n.GetStringValue(); } },
                 { "code", n => { Code = n.GetEnumValue<global::Repull.SDK.Models.PlanNotice_code>(); } },
                 { "fix", n => { Fix = n.GetStringValue(); } },
                 { "listingsHeldBack", n => { ListingsHeldBack = n.GetIntValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
+                { "starterListings", n => { StarterListings = n.GetIntValue(); } },
+                { "starterMonthlyPrice", n => { StarterMonthlyPrice = n.GetDoubleValue(); } },
             };
         }
         /// <summary>
@@ -91,10 +106,13 @@ namespace Repull.SDK.Models
             writer.WriteIntValue("activeListingCount", ActiveListingCount);
             writer.WriteIntValue("activeListingLimit", ActiveListingLimit);
             writer.WriteStringValue("billingUrl", BillingUrl);
+            writer.WriteStringValue("checkoutUrl", CheckoutUrl);
             writer.WriteEnumValue<global::Repull.SDK.Models.PlanNotice_code>("code", Code);
             writer.WriteStringValue("fix", Fix);
             writer.WriteIntValue("listingsHeldBack", ListingsHeldBack);
             writer.WriteStringValue("message", Message);
+            writer.WriteIntValue("starterListings", StarterListings);
+            writer.WriteDoubleValue("starterMonthlyPrice", StarterMonthlyPrice);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

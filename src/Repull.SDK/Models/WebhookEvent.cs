@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportFailedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportStartedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.BookingUnacknowledgedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelDegradedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelSyncFailedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionCompletedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.PayoutCompletedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReactionEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReadEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageSentEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationThreadAssignedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
+    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportFailedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportStartedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.BookingUnacknowledgedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelDegradedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelSyncFailedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionAbandonedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionCompletedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.PayoutCompletedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReactionEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReadEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageSentEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationThreadAssignedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WebhookEvent : IComposedTypeWrapper, IParsable
@@ -92,6 +92,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public global::Repull.SDK.Models.ChannelSyncFailedEvent ChannelSyncFailedEvent { get; set; }
+#endif
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ConnectSessionAbandonedEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ConnectSessionAbandonedEvent? ConnectSessionAbandonedEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ConnectSessionAbandonedEvent ConnectSessionAbandonedEvent { get; set; }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ConnectSessionCompletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -383,6 +391,10 @@ namespace Repull.SDK.Models
             {
                 result.ChannelSyncFailedEvent = new global::Repull.SDK.Models.ChannelSyncFailedEvent();
             }
+            else if("connect.session.abandoned".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.ConnectSessionAbandonedEvent = new global::Repull.SDK.Models.ConnectSessionAbandonedEvent();
+            }
             else if("connect.session.completed".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ConnectSessionCompletedEvent = new global::Repull.SDK.Models.ConnectSessionCompletedEvent();
@@ -550,6 +562,10 @@ namespace Repull.SDK.Models
             else if(ChannelSyncFailedEvent != null)
             {
                 return ChannelSyncFailedEvent.GetFieldDeserializers();
+            }
+            else if(ConnectSessionAbandonedEvent != null)
+            {
+                return ConnectSessionAbandonedEvent.GetFieldDeserializers();
             }
             else if(ConnectSessionCompletedEvent != null)
             {
@@ -719,6 +735,10 @@ namespace Repull.SDK.Models
             else if(ChannelSyncFailedEvent != null)
             {
                 writer.WriteObjectValue<global::Repull.SDK.Models.ChannelSyncFailedEvent>(null, ChannelSyncFailedEvent);
+            }
+            else if(ConnectSessionAbandonedEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.ConnectSessionAbandonedEvent>(null, ConnectSessionAbandonedEvent);
             }
             else if(ConnectSessionCompletedEvent != null)
             {

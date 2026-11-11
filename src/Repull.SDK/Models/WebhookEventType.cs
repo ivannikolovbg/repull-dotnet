@@ -107,6 +107,10 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ConnectSessionCompleted,
         #pragma warning restore CS1591
+        [EnumMember(Value = "connect.session.abandoned")]
+        #pragma warning disable CS1591
+        ConnectSessionAbandoned,
+        #pragma warning restore CS1591
         [EnumMember(Value = "account.disconnected")]
         #pragma warning disable CS1591
         AccountDisconnected,
