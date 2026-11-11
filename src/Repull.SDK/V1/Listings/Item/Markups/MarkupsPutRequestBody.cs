@@ -12,6 +12,14 @@ namespace Repull.SDK.V1.Listings.Item.Markups
     public partial class MarkupsPutRequestBody : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Vrbo account (`vrbo:13`) — required when the listing is linked on more than one.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountId { get; set; }
+#nullable restore
+#else
+        public string AccountId { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The channel property</summary>
@@ -51,6 +59,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accountId", n => { AccountId = n.GetStringValue(); } },
                 { "channel", n => { Channel = n.GetEnumValue<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsPutRequestBody_channel>(); } },
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "markupPercent", n => { MarkupPercent = n.GetDoubleValue(); } },
@@ -63,6 +72,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("accountId", AccountId);
             writer.WriteEnumValue<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsPutRequestBody_channel>("channel", Channel);
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteDoubleValue("markupPercent", MarkupPercent);

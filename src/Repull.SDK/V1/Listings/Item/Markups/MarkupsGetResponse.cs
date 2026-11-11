@@ -38,6 +38,14 @@ namespace Repull.SDK.V1.Listings.Item.Markups
 #else
         public string Id { get; set; }
 #endif
+        /// <summary>The vrbo property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_vrbo>? Vrbo { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_vrbo> Vrbo { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse"/> and sets the default values.
         /// </summary>
@@ -66,6 +74,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
                 { "airbnb", n => { Airbnb = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_airbnb>(global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_airbnb.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "booking", n => { Booking = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_booking>(global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_booking.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "vrbo", n => { Vrbo = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_vrbo>(global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_vrbo.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -78,6 +87,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_airbnb>("airbnb", Airbnb);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_booking>("booking", Booking);
             writer.WriteStringValue("id", Id);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsGetResponse_vrbo>("vrbo", Vrbo);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

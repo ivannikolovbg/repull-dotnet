@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Reservations.Item;
 using Repull.SDK.V1.Reservations.Quote;
+using Repull.SDK.V1.Reservations.Summary;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace Repull.SDK.V1.Reservations
         public global::Repull.SDK.V1.Reservations.Quote.QuoteRequestBuilder Quote
         {
             get => new global::Repull.SDK.V1.Reservations.Quote.QuoteRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The summary property</summary>
+        public global::Repull.SDK.V1.Reservations.Summary.SummaryRequestBuilder Summary
+        {
+            get => new global::Repull.SDK.V1.Reservations.Summary.SummaryRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Repull.SDK.v1.reservations.item collection</summary>
         /// <param name="position">Internal Repull reservation ID.</param>

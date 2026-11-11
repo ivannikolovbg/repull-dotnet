@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Listings.Item.Publish.Airbnb;
 using Repull.SDK.V1.Listings.Item.Publish.Booking;
+using Repull.SDK.V1.Listings.Item.Publish.Vrbo;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace Repull.SDK.V1.Listings.Item.Publish
         public global::Repull.SDK.V1.Listings.Item.Publish.Booking.BookingRequestBuilder Booking
         {
             get => new global::Repull.SDK.V1.Listings.Item.Publish.Booking.BookingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The vrbo property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboRequestBuilder Vrbo
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Publish.PublishRequestBuilder"/> and sets the default values.

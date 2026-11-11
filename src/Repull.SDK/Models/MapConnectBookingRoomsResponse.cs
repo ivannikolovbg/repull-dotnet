@@ -14,6 +14,14 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Plain-language explanation of `needsCalendar`, present only when it is non-empty.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CalendarNote { get; set; }
+#nullable restore
+#else
+        public string CalendarNote { get; set; }
+#endif
         /// <summary>The connectionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -24,6 +32,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Rooms now linked to a listing.</summary>
         public int? Mapped { get; set; }
+        /// <summary>Ids of the listings this call created from Booking.com rooms (`create: true`). They start without a calendar: Booking.com shows those rooms closed and nothing is sent to Booking.com for them until they have one. Give a listing a calendar by setting its prices and availability with `PUT /v1/availability/{propertyId}`, or by mapping the same home from Airbnb so its calendar is used. Rooms mapped to an existing listing are not listed: that listing&apos;s calendar is pushed as before.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? NeedsCalendar { get; set; }
+#nullable restore
+#else
+        public List<string> NeedsCalendar { get; set; }
+#endif
         /// <summary>How many reservations Booking.com returned for the property. Equal to `reservationsImported` unless some could not be attached to a listing — so `0` here means Booking.com had none. `null` when the sync could not run.</summary>
         public int? ReservationsFound { get; set; }
         /// <summary>Reservations pulled from Booking.com once the rooms were mapped. Mapping triggers the same full property sync the dashboard&apos;s Sync button runs, because a reservation can only be resolved to a listing through a mapped room. `0` without a sync when no room was mapped. `null` means the sync could not be run — the connection and mapping are still good, and the property can be synced from the dashboard.</summary>
@@ -65,8 +81,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "calendarNote", n => { CalendarNote = n.GetStringValue(); } },
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "mapped", n => { Mapped = n.GetIntValue(); } },
+                { "needsCalendar", n => { NeedsCalendar = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "reservationsFound", n => { ReservationsFound = n.GetIntValue(); } },
                 { "reservationsImported", n => { ReservationsImported = n.GetIntValue(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
@@ -81,8 +99,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("calendarNote", CalendarNote);
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteIntValue("mapped", Mapped);
+            writer.WriteCollectionOfPrimitiveValues<string>("needsCalendar", NeedsCalendar);
             writer.WriteIntValue("reservationsFound", ReservationsFound);
             writer.WriteIntValue("reservationsImported", ReservationsImported);
             writer.WriteStringValue("sessionId", SessionId);

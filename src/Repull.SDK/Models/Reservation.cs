@@ -155,6 +155,14 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
+        /// <summary>Name of the listing this reservation is on, so a report or message can name it without a second lookup.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingName { get; set; }
+#nullable restore
+#else
+        public string ListingName { get; set; }
+#endif
         /// <summary>Normalized guest counts. May be undefined when the source channel did not provide counts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -256,6 +264,7 @@ namespace Repull.SDK.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "inquiryId", n => { InquiryId = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "listingName", n => { ListingName = n.GetStringValue(); } },
                 { "occupancy", n => { Occupancy = n.GetObjectValue<global::Repull.SDK.Models.ReservationOccupancy>(global::Repull.SDK.Models.ReservationOccupancy.CreateFromDiscriminatorValue); } },
                 { "pendingReason", n => { PendingReason = n.GetEnumValue<global::Repull.SDK.Models.Reservation_pendingReason>(); } },
                 { "platform", n => { Platform = n.GetEnumValue<global::Repull.SDK.Models.Reservation_platform>(); } },
@@ -297,6 +306,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("inquiryId", InquiryId);
             writer.WriteStringValue("listingId", ListingId);
+            writer.WriteStringValue("listingName", ListingName);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationOccupancy>("occupancy", Occupancy);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_pendingReason>("pendingReason", PendingReason);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_platform>("platform", Platform);

@@ -53,6 +53,8 @@ namespace Repull.SDK.Models
 #else
         public string ExternalMessageId { get; set; }
 #endif
+        /// <summary>Inbound messages only: when the host or a co-host first read it on the channel, from the channel&apos;s read receipts (Airbnb reports them). `null` for your own messages, on other channels, and until your side has opened the conversation since it arrived.</summary>
+        public DateTimeOffset? HostReadAt { get; set; }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -63,7 +65,15 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>`true` when the message was sent by an automation (template, schedule, etc.).</summary>
         public bool? IsAutomated { get; set; }
-        /// <summary>The readAt property</summary>
+        /// <summary>Reactions on this message, oldest first. Airbnb reports them; empty on other channels. Added and removed reactions are sent as `reservation.message.reaction`. To react, `PATCH /v1/channels/airbnb/messaging/{threadId}/messages/{messageId}` with `action: &quot;react&quot;`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.MessageReaction>? Reactions { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.MessageReaction> Reactions { get; set; }
+#endif
+        /// <summary>Who read it depends on `direction`. **Outbound** (your message): when the guest first read it, from the channel&apos;s read receipts — Airbnb reports them; on other channels it stays `null`. Changes are sent as `reservation.message.read`. **Inbound** (the guest&apos;s message): when your team answered it or marked it handled.</summary>
         public DateTimeOffset? ReadAt { get; set; }
         /// <summary>The senderAvatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -141,8 +151,10 @@ namespace Repull.SDK.Models
                 { "deliveredAt", n => { DeliveredAt = n.GetDateTimeOffsetValue(); } },
                 { "direction", n => { Direction = n.GetEnumValue<global::Repull.SDK.Models.Message_direction>(); } },
                 { "externalMessageId", n => { ExternalMessageId = n.GetStringValue(); } },
+                { "hostReadAt", n => { HostReadAt = n.GetDateTimeOffsetValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "isAutomated", n => { IsAutomated = n.GetBoolValue(); } },
+                { "reactions", n => { Reactions = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.MessageReaction>(global::Repull.SDK.Models.MessageReaction.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "readAt", n => { ReadAt = n.GetDateTimeOffsetValue(); } },
                 { "senderAvatar", n => { SenderAvatar = n.GetStringValue(); } },
                 { "senderName", n => { SenderName = n.GetStringValue(); } },
@@ -167,8 +179,10 @@ namespace Repull.SDK.Models
             writer.WriteDateTimeOffsetValue("deliveredAt", DeliveredAt);
             writer.WriteEnumValue<global::Repull.SDK.Models.Message_direction>("direction", Direction);
             writer.WriteStringValue("externalMessageId", ExternalMessageId);
+            writer.WriteDateTimeOffsetValue("hostReadAt", HostReadAt);
             writer.WriteStringValue("id", Id);
             writer.WriteBoolValue("isAutomated", IsAutomated);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.MessageReaction>("reactions", Reactions);
             writer.WriteDateTimeOffsetValue("readAt", ReadAt);
             writer.WriteStringValue("senderAvatar", SenderAvatar);
             writer.WriteStringValue("senderName", SenderName);

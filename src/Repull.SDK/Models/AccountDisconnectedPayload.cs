@@ -8,7 +8,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Payload for `account.disconnected`. A PMS or channel connection was revoked, expired, or rejected by the upstream provider.
+    /// Payload for `account.disconnected`. A PMS or channel connection was revoked, expired, or rejected by the upstream provider. Sent for Airbnb, Booking.com Extranet logins, Vrbo logins and PMS connections (Hostaway, Guesty, Smoobu, Lodgify, Beds24, Hospitable, OwnerRez, iGMS, BookingSync, Track, Mews, Cloudbeds, Zeevou, RentalReady, CiiRUS, …). A PMS connection is reported when the PMS refuses its credentials (API key revoked or invalid, 401/403, token refresh refused); timeouts, rate limits and 5xx errors are retried and never reported. Sent once per disconnect, not on every failed sync. When the connection works again — credentials fixed in the PMS, or reconnected — Repull re-imports the changes made while it was down and sends their `reservation.*` events, so nothing missed has to be fetched by hand.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AccountDisconnectedPayload : IAdditionalDataHolder, IParsable
@@ -41,7 +41,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings> Listings { get; set; }
 #endif
-        /// <summary>The provider property</summary>
+        /// <summary>Channel or PMS id: `airbnb`, `booking_extranet`, `vrbo`, or the PMS (`hostaway`, `guesty`, `smoobu`, …).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Provider { get; set; }
@@ -49,7 +49,7 @@ namespace Repull.SDK.Models
 #else
         public string Provider { get; set; }
 #endif
-        /// <summary>Why the connection was lost. `refresh_token_rejected` — upstream OAuth refresh endpoint returned a hard rejection. `manual_disconnect` — host/admin disconnected via the dashboard. `auth_expired` — credentials aged out without ever being used. `revoked_upstream` — provider notified us the user revoked access.</summary>
+        /// <summary>Why the connection was lost. `refresh_token_rejected` — upstream OAuth refresh endpoint returned a hard rejection. `manual_disconnect` — host/admin disconnected via the dashboard. `auth_expired` — the saved credentials stopped working: an Extranet or Vrbo login was signed out, or a PMS rejected its API key or token (401/403). `revoked_upstream` — provider notified us the user revoked access.</summary>
         public global::Repull.SDK.Models.AccountDisconnectedPayload_reason? Reason { get; set; }
         /// <summary>The workspaceId property</summary>
         public Guid? WorkspaceId { get; set; }

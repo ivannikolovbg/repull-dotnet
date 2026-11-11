@@ -31,6 +31,14 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ReservationMessageUpdated,
         #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.message.read")]
+        #pragma warning disable CS1591
+        ReservationMessageRead,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reservation.message.reaction")]
+        #pragma warning disable CS1591
+        ReservationMessageReaction,
+        #pragma warning restore CS1591
         [EnumMember(Value = "reservation.alteration.created")]
         #pragma warning disable CS1591
         ReservationAlterationCreated,

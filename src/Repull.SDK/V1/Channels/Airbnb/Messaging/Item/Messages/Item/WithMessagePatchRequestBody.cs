@@ -24,7 +24,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.Item
 #else
         public string Message { get; set; }
 #endif
-        /// <summary>Reaction to add. Required when `action` is `react`.</summary>
+        /// <summary>Reaction to add, e.g. `👍`. Required when `action` is `react`. At most 32 characters; Airbnb decides which reactions it accepts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Reaction { get; set; }
