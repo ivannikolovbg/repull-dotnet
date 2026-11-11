@@ -14,8 +14,8 @@
     <Authors>Repull</Authors>
     <Company>Repull</Company>
     <Product>Repull .NET SDK</Product>
-    <Description>.NET SDK for Repull — the unified API for vacation rental tech. Generated from OpenAPI via Kiota.</Description>
-    <PackageTags>repull;vacation-rental;hospitality;pms;airbnb;booking;ota;sdk</PackageTags>
+    <Description>.NET SDK for Repull — one API for vacation-rental tech: Airbnb, Booking.com, Vrbo and more channels, plus 15 PMS platforms. Generated from OpenAPI via Kiota.</Description>
+    <PackageTags>repull;vacation-rental;short-term-rental;hospitality;pms;airbnb;booking;vrbo;channel-manager;ota;sdk</PackageTags>
     <PackageProjectUrl>https://github.com/ivannikolovbg/repull-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ivannikolovbg/repull-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
