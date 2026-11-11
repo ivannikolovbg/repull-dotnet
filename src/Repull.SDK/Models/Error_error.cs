@@ -30,6 +30,14 @@ namespace Repull.SDK.Models
 #else
         public string Code { get; set; }
 #endif
+        /// <summary>Pay-as-you-go credits, the alternative to a plan change: past your plan&apos;s monthly quota, requests are served while the wallet has a balance. Present with `upgrade`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Error_error_credits? Credits { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Error_error_credits Credits { get; set; }
+#endif
         /// <summary>Suggestion for typos and near-matches. Present when the server can guess the intent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -70,6 +78,8 @@ namespace Repull.SDK.Models
 #else
         public string Fix { get; set; }
 #endif
+        /// <summary>The limit that was reached. Present on quota refusals.</summary>
+        public int? Limit { get; set; }
         /// <summary>The single Repull listing the error is about. Present on `code: &quot;listing_not_api_connected&quot;` (HTTP 403).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -111,6 +121,8 @@ namespace Repull.SDK.Models
 #else
         public string PreviousCode { get; set; }
 #endif
+        /// <summary>This month&apos;s requests extrapolated to the whole month — the usage `upgrade` was sized for. Present with `upgrade`.</summary>
+        public int? ProjectedMonthlyRequests { get; set; }
         /// <summary>Opaque per-request id. Mirrors the `x-request-id` response header. Capture it before retrying so logs can be correlated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -119,8 +131,18 @@ namespace Repull.SDK.Models
 #else
         public string RequestId { get; set; }
 #endif
+        /// <summary>When the refused quota resets. Present on quota refusals.</summary>
+        public DateTimeOffset? ResetsAt { get; set; }
         /// <summary>Seconds the client should wait before retrying. Mirrors the `Retry-After` HTTP header. Present on rate-limit responses and on transient upstream failures that are safe to retry.</summary>
         public int? RetryAfter { get; set; }
+        /// <summary>Which limit refused the request: `monthly` (the plan&apos;s request quota), `daily` (the daily loop guard), the daily AI quota, or `per_api_key` (the per-minute limiter: wait `Retry-After`, nothing else).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Scope { get; set; }
+#nullable restore
+#else
+        public string Scope { get; set; }
+#endif
         /// <summary>LAST-RESORT contact handle. Only set on errors that genuinely cannot be self-fixed (billing dispute, account-state corruption, OAuth partner intervention). Never fall back to support before trying `fix` and `docs_url`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -137,6 +159,24 @@ namespace Repull.SDK.Models
 #else
         public string SyncCategory { get; set; }
 #endif
+        /// <summary>The plan the request was counted against. Present on quota refusals (`rate_limit_exceeded`, `daily_limit_exceeded`, `credits_exhausted`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Tier { get; set; }
+#nullable restore
+#else
+        public string Tier { get; set; }
+#endif
+        /// <summary>The cheapest plan that covers your usage. Present on the monthly quota refusal (`rate_limit_exceeded`, `scope: &quot;monthly&quot;`), `credits_exhausted` and `daily_limit_exceeded`. `monthly_price_usd` is exactly what `checkout_url` charges for `listings`. `plan: &quot;custom&quot;` means no self-serve plan covers the usage (already on Starter, more than Starter&apos;s quotas, or more than 100 listings): email `contact_email`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Error_error_upgrade? Upgrade { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Error_error_upgrade Upgrade { get; set; }
+#endif
+        /// <summary>How much of `limit` is used. Present on quota refusals.</summary>
+        public int? Used { get; set; }
         /// <summary>Sorted list of every query param this endpoint accepts. Present on `code: &quot;unknown_params&quot;` (HTTP 422) so SDK consumers can self-correct without reading docs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -188,20 +228,28 @@ namespace Repull.SDK.Models
             {
                 { "airbnb_listing_id", n => { AirbnbListingId = n.GetStringValue(); } },
                 { "code", n => { Code = n.GetStringValue(); } },
+                { "credits", n => { Credits = n.GetObjectValue<global::Repull.SDK.Models.Error_error_credits>(global::Repull.SDK.Models.Error_error_credits.CreateFromDiscriminatorValue); } },
                 { "did_you_mean", n => { DidYouMean = n.GetStringValue(); } },
                 { "docs_url", n => { DocsUrl = n.GetStringValue(); } },
                 { "endpoint", n => { Endpoint = n.GetStringValue(); } },
                 { "field", n => { Field = n.GetStringValue(); } },
                 { "fix", n => { Fix = n.GetStringValue(); } },
+                { "limit", n => { Limit = n.GetIntValue(); } },
                 { "listing_id", n => { ListingId = n.GetStringValue(); } },
                 { "listing_ids", n => { ListingIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "listings", n => { Listings = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Error_error_listings>(global::Repull.SDK.Models.Error_error_listings.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
                 { "previous_code", n => { PreviousCode = n.GetStringValue(); } },
+                { "projected_monthly_requests", n => { ProjectedMonthlyRequests = n.GetIntValue(); } },
                 { "request_id", n => { RequestId = n.GetStringValue(); } },
+                { "resets_at", n => { ResetsAt = n.GetDateTimeOffsetValue(); } },
                 { "retry_after", n => { RetryAfter = n.GetIntValue(); } },
+                { "scope", n => { Scope = n.GetStringValue(); } },
                 { "support", n => { Support = n.GetObjectValue<global::Repull.SDK.Models.Error_error_support>(global::Repull.SDK.Models.Error_error_support.CreateFromDiscriminatorValue); } },
                 { "sync_category", n => { SyncCategory = n.GetStringValue(); } },
+                { "tier", n => { Tier = n.GetStringValue(); } },
+                { "upgrade", n => { Upgrade = n.GetObjectValue<global::Repull.SDK.Models.Error_error_upgrade>(global::Repull.SDK.Models.Error_error_upgrade.CreateFromDiscriminatorValue); } },
+                { "used", n => { Used = n.GetIntValue(); } },
                 { "validParams", n => { ValidParams = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "valid_values", n => { ValidValues = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "value_received", n => { ValueReceived = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
@@ -216,20 +264,28 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("airbnb_listing_id", AirbnbListingId);
             writer.WriteStringValue("code", Code);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Error_error_credits>("credits", Credits);
             writer.WriteStringValue("did_you_mean", DidYouMean);
             writer.WriteStringValue("docs_url", DocsUrl);
             writer.WriteStringValue("endpoint", Endpoint);
             writer.WriteStringValue("field", Field);
             writer.WriteStringValue("fix", Fix);
+            writer.WriteIntValue("limit", Limit);
             writer.WriteStringValue("listing_id", ListingId);
             writer.WriteCollectionOfPrimitiveValues<string>("listing_ids", ListingIds);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Error_error_listings>("listings", Listings);
             writer.WriteStringValue("message", Message);
             writer.WriteStringValue("previous_code", PreviousCode);
+            writer.WriteIntValue("projected_monthly_requests", ProjectedMonthlyRequests);
             writer.WriteStringValue("request_id", RequestId);
+            writer.WriteDateTimeOffsetValue("resets_at", ResetsAt);
             writer.WriteIntValue("retry_after", RetryAfter);
+            writer.WriteStringValue("scope", Scope);
             writer.WriteObjectValue<global::Repull.SDK.Models.Error_error_support>("support", Support);
             writer.WriteStringValue("sync_category", SyncCategory);
+            writer.WriteStringValue("tier", Tier);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Error_error_upgrade>("upgrade", Upgrade);
+            writer.WriteIntValue("used", Used);
             writer.WriteCollectionOfPrimitiveValues<string>("validParams", ValidParams);
             writer.WriteCollectionOfPrimitiveValues<string>("valid_values", ValidValues);
             writer.WriteObjectValue<UntypedNode>("value_received", ValueReceived);
