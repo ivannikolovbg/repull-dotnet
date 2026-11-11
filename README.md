@@ -2,7 +2,7 @@
 
 .NET SDK for [Repull](https://repull.dev). Generated from OpenAPI via [Kiota](https://github.com/microsoft/kiota). .NET 8.0+.
 
-Build vacation-rental tech in .NET — one API for Airbnb, Booking.com, Vrbo and more channels, plus 15 PMS platforms, behind one key, with white-label Connect for linking your users' accounts.
+Build vacation-rental tech in .NET — one API for Airbnb, Booking.com, Vrbo and more channels, plus 14 PMS platforms, behind one key, with white-label Connect for linking your users' accounts.
 
 ## Status
 
