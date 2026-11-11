@@ -22,7 +22,7 @@ namespace Repull.SDK.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>Message author (guest, host, system).</summary>
+        /// <summary>Who wrote it: `guest`, `booker`, `cotraveler`, or `airbnb` (Airbnb Support writing on the thread).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Type { get; set; }

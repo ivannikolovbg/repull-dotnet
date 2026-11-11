@@ -30,7 +30,7 @@ namespace Repull.SDK.Models
 #else
         public string ApiVersion { get; set; }
 #endif
-        /// <summary>Payload for `reservation.message.received`. A new inbound message arrived on a reservation thread.</summary>
+        /// <summary>Payload for `reservation.message.received`. A new inbound message arrived on a reservation thread: from the guest, a co-traveler, the booker, or Airbnb Support (`from.type: &quot;airbnb&quot;`). The whole message, the same as `GET /v1/conversations/{threadId}/messages` returns it, plus where it belongs. Dedupe on `externalMessageId` (or `messageId`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ReservationMessageReceivedPayload? Data { get; set; }

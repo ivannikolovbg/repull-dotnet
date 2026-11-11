@@ -41,6 +41,14 @@ namespace Repull.SDK.Models
 #else
         public string Channel { get; set; }
 #endif
+        /// <summary>The confirmationCode property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConfirmationCode { get; set; }
+#nullable restore
+#else
+        public string ConfirmationCode { get; set; }
+#endif
         /// <summary>The direction property</summary>
         public global::Repull.SDK.Models.ReservationMessageSentPayload_direction? Direction { get; set; }
         /// <summary>The channel&apos;s own message id. Dedupe on it.</summary>
@@ -50,6 +58,14 @@ namespace Repull.SDK.Models
 #nullable restore
 #else
         public string ExternalMessageId { get; set; }
+#endif
+        /// <summary>The channel&apos;s own thread id.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExternalThreadId { get; set; }
+#nullable restore
+#else
+        public string ExternalThreadId { get; set; }
 #endif
         /// <summary>The from property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -69,6 +85,8 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The isAutomated property</summary>
         public bool? IsAutomated { get; set; }
+        /// <summary>The listingId property</summary>
+        public int? ListingId { get; set; }
         /// <summary>Repull message id, as `GET /v1/conversations/{id}/messages` returns it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -79,17 +97,59 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The reservationId property</summary>
         public int? ReservationId { get; set; }
+        /// <summary>The revision property</summary>
+        public DateTimeOffset? Revision { get; set; }
+        /// <summary>The senderAvatar property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SenderAvatar { get; set; }
+#nullable restore
+#else
+        public string SenderAvatar { get; set; }
+#endif
+        /// <summary>The senderName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SenderName { get; set; }
+#nullable restore
+#else
+        public string SenderName { get; set; }
+#endif
+        /// <summary>Sender role as stored, the same as on `GET /v1/conversations/{id}/messages` (`user` for a message sent through Repull).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SenderType { get; set; }
+#nullable restore
+#else
+        public string SenderType { get; set; }
+#endif
         /// <summary>The sentAt property</summary>
         public DateTimeOffset? SentAt { get; set; }
         /// <summary>`channel`: sent in the channel&apos;s own app (e.g. the Airbnb app). `repull`: sent through Repull — the API, the dashboard, an automation or AI.</summary>
         public global::Repull.SDK.Models.ReservationMessageSentPayload_source? Source { get; set; }
-        /// <summary>The threadId property</summary>
+        /// <summary>Delivery state: `sending`, `sent` or `failed`, as on `GET /v1/conversations/{id}/messages`. `null` for a message sent in the channel&apos;s app.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Status { get; set; }
+#nullable restore
+#else
+        public string Status { get; set; }
+#endif
+        /// <summary>The Repull conversation id (numeric, as a string), for `GET /v1/conversations/{id}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ThreadId { get; set; }
 #nullable restore
 #else
         public string ThreadId { get; set; }
+#endif
+        /// <summary>The translatedBody property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TranslatedBody { get; set; }
+#nullable restore
+#else
+        public string TranslatedBody { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationMessageSentPayload"/> and sets the default values.
@@ -120,16 +180,25 @@ namespace Repull.SDK.Models
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>(global::Repull.SDK.Models.ConversationMessageAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "channel", n => { Channel = n.GetStringValue(); } },
+                { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
                 { "direction", n => { Direction = n.GetEnumValue<global::Repull.SDK.Models.ReservationMessageSentPayload_direction>(); } },
                 { "externalMessageId", n => { ExternalMessageId = n.GetStringValue(); } },
+                { "externalThreadId", n => { ExternalThreadId = n.GetStringValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Repull.SDK.Models.ReservationMessageSentPayload_from>(global::Repull.SDK.Models.ReservationMessageSentPayload_from.CreateFromDiscriminatorValue); } },
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "isAutomated", n => { IsAutomated = n.GetBoolValue(); } },
+                { "listingId", n => { ListingId = n.GetIntValue(); } },
                 { "messageId", n => { MessageId = n.GetStringValue(); } },
                 { "reservationId", n => { ReservationId = n.GetIntValue(); } },
+                { "revision", n => { Revision = n.GetDateTimeOffsetValue(); } },
+                { "senderAvatar", n => { SenderAvatar = n.GetStringValue(); } },
+                { "senderName", n => { SenderName = n.GetStringValue(); } },
+                { "senderType", n => { SenderType = n.GetStringValue(); } },
                 { "sentAt", n => { SentAt = n.GetDateTimeOffsetValue(); } },
                 { "source", n => { Source = n.GetEnumValue<global::Repull.SDK.Models.ReservationMessageSentPayload_source>(); } },
+                { "status", n => { Status = n.GetStringValue(); } },
                 { "threadId", n => { ThreadId = n.GetStringValue(); } },
+                { "translatedBody", n => { TranslatedBody = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -143,16 +212,25 @@ namespace Repull.SDK.Models
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConversationMessageAttachment>("attachments", Attachments);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("channel", Channel);
+            writer.WriteStringValue("confirmationCode", ConfirmationCode);
             writer.WriteEnumValue<global::Repull.SDK.Models.ReservationMessageSentPayload_direction>("direction", Direction);
             writer.WriteStringValue("externalMessageId", ExternalMessageId);
+            writer.WriteStringValue("externalThreadId", ExternalThreadId);
             writer.WriteObjectValue<global::Repull.SDK.Models.ReservationMessageSentPayload_from>("from", From);
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteBoolValue("isAutomated", IsAutomated);
+            writer.WriteIntValue("listingId", ListingId);
             writer.WriteStringValue("messageId", MessageId);
             writer.WriteIntValue("reservationId", ReservationId);
+            writer.WriteDateTimeOffsetValue("revision", Revision);
+            writer.WriteStringValue("senderAvatar", SenderAvatar);
+            writer.WriteStringValue("senderName", SenderName);
+            writer.WriteStringValue("senderType", SenderType);
             writer.WriteDateTimeOffsetValue("sentAt", SentAt);
             writer.WriteEnumValue<global::Repull.SDK.Models.ReservationMessageSentPayload_source>("source", Source);
+            writer.WriteStringValue("status", Status);
             writer.WriteStringValue("threadId", ThreadId);
+            writer.WriteStringValue("translatedBody", TranslatedBody);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
