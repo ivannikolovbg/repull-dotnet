@@ -126,7 +126,7 @@ namespace Repull.SDK.V1.Reservations.Summary
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class SummaryRequestBuilderGetQueryParameters 
         {
-            /// <summary>Only the records of one connected account, as `provider:externalAccountId` — the pair from a webhook `account` block, `connect.session.completed`, or `GET /v1/connect/{provider}` → `accounts`. A record belongs to an account when it is on that account&apos;s listings and on its channel (a PMS account: came in through that PMS). An account with no listings returns an empty page.</summary>
+            /// <summary>Only the records of one connected account, as `provider:externalAccountId` — the pair from a webhook `account` block, `connect.session.completed`, or `GET /v1/connect/{provider}` → `accounts`. `externalAccountId` is the platform&apos;s own id (e.g. `airbnb:79730216`, `booking:17627428`, `booking_extranet:20123456`). The old Extranet / Vrbo login ids (`booking_extranet:88`, `vrbo:46`) still work until 2027-02-12. A record belongs to an account when it is on that account&apos;s listings and on its channel (a PMS account: came in through that PMS). An account with no listings returns an empty page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("account")]

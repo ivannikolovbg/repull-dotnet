@@ -12,7 +12,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
     public partial class MarkupsGetResponse_vrbo : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>The Vrbo account, as its connection id (`vrbo:13`).</summary>
+        /// <summary>The Vrbo account, as its handle `vrbo:{Vrbo account id}`. `null` until Vrbo&apos;s account id is captured for the sign-in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AccountId { get; set; }

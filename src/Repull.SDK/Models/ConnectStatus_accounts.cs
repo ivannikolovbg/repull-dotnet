@@ -18,6 +18,14 @@ namespace Repull.SDK.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>True while the account is active and its authorization is usable.</summary>
         public bool? Connected { get; set; }
+        /// <summary>Our connection record (`X-Account-Id`). Airbnb: the workspace&apos;s Airbnb connection. Vrbo: the workspace&apos;s Vrbo connection, `null` when it has none.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConnectionId { get; set; }
+#nullable restore
+#else
+        public string ConnectionId { get; set; }
+#endif
         /// <summary>Vrbo only: the account email.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -26,7 +34,7 @@ namespace Repull.SDK.Models
 #else
         public string Email { get; set; }
 #endif
-        /// <summary>Airbnb host ID, as a string (it can exceed 2^53).</summary>
+        /// <summary>Airbnb: the host id, as a string (it can exceed 2^53). Vrbo: Vrbo&apos;s own account id; `null` until it is captured at sign-in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ExternalAccountId { get; set; }
@@ -101,6 +109,7 @@ namespace Repull.SDK.Models
             {
                 { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectStatus_accounts_accessType>(); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
+                { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
                 { "import", n => { Import = n.GetObjectValue<global::Repull.SDK.Models.VrboImportStatus>(global::Repull.SDK.Models.VrboImportStatus.CreateFromDiscriminatorValue); } },
@@ -119,6 +128,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.Models.ConnectStatus_accounts_accessType>("accessType", AccessType);
             writer.WriteBoolValue("connected", Connected);
+            writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
             writer.WriteObjectValue<global::Repull.SDK.Models.VrboImportStatus>("import", Import);

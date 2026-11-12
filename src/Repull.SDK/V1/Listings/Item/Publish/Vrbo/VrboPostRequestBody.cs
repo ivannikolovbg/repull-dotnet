@@ -12,7 +12,7 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
     public partial class VrboPostRequestBody : IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>The Vrbo account, as its connection id (`&quot;vrbo:13&quot;`) or the bare number. Needed only when the workspace has several.</summary>
+        /// <summary>The Vrbo account, as its handle (`&quot;vrbo:7001234&quot;`, Vrbo&apos;s own account id) or the bare id. Needed only when the workspace has several. The old sign-in ids (`&quot;vrbo:13&quot;`) still resolve until 2027-02-12.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AccountId { get; set; }

@@ -12,8 +12,14 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
     public partial class VrboGetResponse_job : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>The Vrbo account (connection `vrbo:&lt;accountId&gt;`) the listing is created in.</summary>
-        public int? AccountId { get; set; }
+        /// <summary>The Vrbo account the listing is created in, as its handle `vrbo:{Vrbo account id}`. `null` until Vrbo&apos;s account id is captured for the sign-in.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AccountId { get; set; }
+#nullable restore
+#else
+        public string AccountId { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>POST only: where the Vrbo listing departs from the listing&apos;s content because of a Vrbo rule.</summary>
@@ -111,7 +117,7 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "accountId", n => { AccountId = n.GetIntValue(); } },
+                { "accountId", n => { AccountId = n.GetStringValue(); } },
                 { "adjustments", n => { Adjustments = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "error", n => { Error = n.GetStringValue(); } },
                 { "jobId", n => { JobId = n.GetStringValue(); } },
@@ -132,7 +138,7 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("accountId", AccountId);
+            writer.WriteStringValue("accountId", AccountId);
             writer.WriteCollectionOfPrimitiveValues<string>("adjustments", Adjustments);
             writer.WriteStringValue("error", Error);
             writer.WriteStringValue("jobId", JobId);

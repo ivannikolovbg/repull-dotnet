@@ -8,14 +8,14 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// The connected account a record belongs to — keyed exactly like the webhook `account` block and `connect.session.completed`, so one `provider:externalAccountId` key routes reads and events to the same user. `null` when it cannot be resolved (never guessed).
+    /// The connected account a record belongs to — keyed exactly like the webhook `account` block and `connect.session.completed`, so one `provider:externalAccountId` key routes reads and events to the same user. `null` when it cannot be resolved (never guessed). Until 2027-02-12 the `?account=` filter and connection handles also accept the old Extranet / Vrbo login ids (e.g. `booking_extranet:88`); they are never sent.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class RecordAccount : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Repull connection id (`X-Account-Id`), when the account has one. A string, like every id in API responses.</summary>
+        /// <summary>Our connection record id: the `X-Account-Id` value, the same as `account.id`. `null` only when the account has no connection record (e.g. a Vrbo sign-in in a workspace with no Vrbo connection). A string, like every id in API responses.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ConnectionId { get; set; }
@@ -23,7 +23,7 @@ namespace Repull.SDK.Models
 #else
         public string ConnectionId { get; set; }
 #endif
-        /// <summary>The provider&apos;s own account id — Airbnb host id, Booking.com hotel id, Extranet login, Vrbo account, or the PMS account.</summary>
+        /// <summary>The platform&apos;s own account id: Airbnb host id; Booking.com hotel id (`booking`); the Booking.com account id behind the Extranet login (`booking_extranet`); Vrbo&apos;s account id (`vrbo`); the PMS&apos;s own account or company id. `null` when the platform id is not known yet (a Vrbo sign-in before its account id is captured, a PMS that does not expose one); never a Repull id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ExternalAccountId { get; set; }
@@ -31,7 +31,7 @@ namespace Repull.SDK.Models
 #else
         public string ExternalAccountId { get; set; }
 #endif
-        /// <summary>Booking.com only: the hotel (property) id the record belongs to. On a `booking_extranet` account, `externalAccountId` is the login, which can cover several hotels.</summary>
+        /// <summary>Booking.com only: the hotel (property) id the record belongs to. A `booking_extranet` account (a Booking.com account) can cover several hotels; this says which one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? HotelId { get; set; }

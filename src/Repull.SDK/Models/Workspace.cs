@@ -13,7 +13,7 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Workspace : IAdditionalDataHolder, IParsable
     {
-        /// <summary>The active property</summary>
+        /// <summary>`false` once the workspace was deactivated (`POST /v1/workspaces/{workspaceId}/deactivate`, or a deleted migration). Its data is kept.</summary>
         public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -21,6 +21,8 @@ namespace Repull.SDK.Models
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>`connect` — opened by a Connect session; `migrate` — opened by Repull Migrate.</summary>
         public global::Repull.SDK.Models.Workspace_createdVia? CreatedVia { get; set; }
+        /// <summary>When the workspace was deactivated; null while active.</summary>
+        public DateTimeOffset? DeactivatedAt { get; set; }
         /// <summary>Your own id for this customer, as you sent it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -73,6 +75,7 @@ namespace Repull.SDK.Models
                 { "active", n => { Active = n.GetBoolValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "createdVia", n => { CreatedVia = n.GetEnumValue<global::Repull.SDK.Models.Workspace_createdVia>(); } },
+                { "deactivatedAt", n => { DeactivatedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalRef", n => { ExternalRef = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "workspaceId", n => { WorkspaceId = n.GetStringValue(); } },
@@ -88,6 +91,7 @@ namespace Repull.SDK.Models
             writer.WriteBoolValue("active", Active);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteEnumValue<global::Repull.SDK.Models.Workspace_createdVia>("createdVia", CreatedVia);
+            writer.WriteDateTimeOffsetValue("deactivatedAt", DeactivatedAt);
             writer.WriteStringValue("externalRef", ExternalRef);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("workspaceId", WorkspaceId);

@@ -55,9 +55,9 @@ namespace Repull.SDK.Models
 #else
         public string Message { get; set; }
 #endif
-        /// <summary>On a free plan: the listings Starter would serve and bill, active plus held back, across the plan&apos;s workspaces.</summary>
+        /// <summary>On a free plan: the listings Starter checkout bills today, the active ones across the plan&apos;s workspaces. Held-back listings are not included: upgrading does not switch them on.</summary>
         public int? StarterListings { get; set; }
-        /// <summary>Starter&apos;s monthly price in USD for `starterListings` — exactly what checkout charges. Present up to 100 listings; above that the message says how to ask for a plan.</summary>
+        /// <summary>Starter&apos;s monthly price in USD for `starterListings` — exactly what checkout charges. Each listing switched on afterwards adds Starter&apos;s per-listing price ($5 a month from the 11th to the 100th). Present up to 100 connected listings; above that the message says how to ask for a plan.</summary>
         public double? StarterMonthlyPrice { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PlanNotice"/> and sets the default values.

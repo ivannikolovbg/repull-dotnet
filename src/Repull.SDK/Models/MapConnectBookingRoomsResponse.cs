@@ -40,6 +40,22 @@ namespace Repull.SDK.Models
 #else
         public List<string> NeedsCalendar { get; set; }
 #endif
+        /// <summary>`propertyStatus.message`, present only when the property is not open.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PropertyNote { get; set; }
+#nullable restore
+#else
+        public string PropertyNote { get; set; }
+#endif
+        /// <summary>Whether Booking.com has the property open for bookings. A property still being built on Booking.com is checked and opened as the last Connect step; one that is already open, or that its host closed, is left as it is. `null` when no room was mapped.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus? PropertyStatus { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus PropertyStatus { get; set; }
+#endif
         /// <summary>How many reservations Booking.com returned for the property. Equal to `reservationsImported` unless some could not be attached to a listing — so `0` here means Booking.com had none. `null` when the sync could not run.</summary>
         public int? ReservationsFound { get; set; }
         /// <summary>Reservations pulled from Booking.com once the rooms were mapped. Mapping triggers the same full property sync the dashboard&apos;s Sync button runs, because a reservation can only be resolved to a listing through a mapped room. `0` without a sync when no room was mapped. `null` means the sync could not be run — the connection and mapping are still good, and the property can be synced from the dashboard.</summary>
@@ -85,6 +101,8 @@ namespace Repull.SDK.Models
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "mapped", n => { Mapped = n.GetIntValue(); } },
                 { "needsCalendar", n => { NeedsCalendar = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "propertyNote", n => { PropertyNote = n.GetStringValue(); } },
+                { "propertyStatus", n => { PropertyStatus = n.GetObjectValue<global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus>(global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus.CreateFromDiscriminatorValue); } },
                 { "reservationsFound", n => { ReservationsFound = n.GetIntValue(); } },
                 { "reservationsImported", n => { ReservationsImported = n.GetIntValue(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
@@ -103,6 +121,8 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteIntValue("mapped", Mapped);
             writer.WriteCollectionOfPrimitiveValues<string>("needsCalendar", NeedsCalendar);
+            writer.WriteStringValue("propertyNote", PropertyNote);
+            writer.WriteObjectValue<global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus>("propertyStatus", PropertyStatus);
             writer.WriteIntValue("reservationsFound", ReservationsFound);
             writer.WriteIntValue("reservationsImported", ReservationsImported);
             writer.WriteStringValue("sessionId", SessionId);

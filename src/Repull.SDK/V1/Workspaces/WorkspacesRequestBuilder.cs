@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Workspaces.Item;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +18,18 @@ namespace Repull.SDK.V1.Workspaces
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WorkspacesRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>Gets an item from the Repull.SDK.v1.workspaces.item collection</summary>
+        /// <param name="position">A `workspaceId` from `GET /v1/workspaces`.</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Workspaces.Item.WithWorkspaceItemRequestBuilder"/></returns>
+        public global::Repull.SDK.V1.Workspaces.Item.WithWorkspaceItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                urlTplParams.Add("workspaceId", position);
+                return new global::Repull.SDK.V1.Workspaces.Item.WithWorkspaceItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Workspaces.WorkspacesRequestBuilder"/> and sets the default values.
         /// </summary>

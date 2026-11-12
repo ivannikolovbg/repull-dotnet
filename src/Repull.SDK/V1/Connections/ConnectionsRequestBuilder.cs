@@ -16,7 +16,7 @@ namespace Repull.SDK.V1.Connections
     public partial class ConnectionsRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Repull.SDK.v1.connections.item collection</summary>
-        /// <param name="position">Connection handle `{channel}:{externalAccountId}`, e.g. `vrbo:12` or `booking_extranet:36`.</param>
+        /// <param name="position">Connection handle `{channel}:{externalAccountId}`, where `externalAccountId` is the platform&apos;s own account id: `booking_extranet:20123456` (the Booking.com account id) or `vrbo:7001234` (the Vrbo account id). The old forms with our login id (`booking_extranet:88`, `vrbo:46`) still resolve until 2027-02-12 and are never returned.</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Connections.Item.ConnectionsItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Connections.Item.ConnectionsItemRequestBuilder this[string position]
         {

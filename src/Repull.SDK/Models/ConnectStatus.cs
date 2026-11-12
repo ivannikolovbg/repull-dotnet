@@ -13,7 +13,7 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConnectStatus : IAdditionalDataHolder, IParsable
     {
-        /// <summary>Airbnb: every Airbnb account this workspace has connected, including ones since disconnected. Pass `externalAccountId` as `accountId` to `DELETE /v1/connect/airbnb` to disconnect one account. Vrbo (`GET /v1/connect/vrbo-login`): every signed-in Vrbo account, each with `accessType` and `import` (a `VrboImportStatus`), plus a top-level `dataFreshness`.</summary>
+        /// <summary>Airbnb: every Airbnb account this workspace has connected, including ones since disconnected. Pass `externalAccountId` as `accountId` to `DELETE /v1/connect/airbnb` to disconnect one account. Vrbo (`GET /v1/connect/vrbo-login`): every signed-in Vrbo account, each with `accessType` and `import` (a `VrboImportStatus`), plus a top-level `dataFreshness`. `externalAccountId` is the platform&apos;s own id (Airbnb host id, Vrbo account id; `null` for a Vrbo sign-in whose account id is not captured yet) and `connectionId` our connection record.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.ConnectStatus_accounts>? Accounts { get; set; }
@@ -41,6 +41,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The connected property</summary>
         public bool? Connected { get; set; }
+        /// <summary>Same as `id`: our connection record.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConnectionId { get; set; }
+#nullable restore
+#else
+        public string ConnectionId { get; set; }
+#endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
         /// <summary>Vrbo only: the same freshness envelope the Airbnb read endpoints return, per account and in aggregate. Its reason is never_synced until a mapping is confirmed and importing while upcoming bookings come in.</summary>
@@ -51,7 +59,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ConnectStatus_dataFreshness DataFreshness { get; set; }
 #endif
-        /// <summary>Provider-side account ID (e.g. the Airbnb host ID).</summary>
+        /// <summary>The platform&apos;s own account id: Airbnb host id; Booking.com hotel id (`booking`); the Booking.com account id behind the Extranet login (`booking_extranet`); Vrbo&apos;s account id (`vrbo`); the PMS&apos;s own account or company id. `null` when the platform id is not known yet (a Vrbo sign-in before its account id is captured, a PMS that does not expose one); never a Repull id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ExternalAccountId { get; set; }
@@ -75,7 +83,7 @@ namespace Repull.SDK.Models
 #else
         public global::Repull.SDK.Models.ConnectHost Host { get; set; }
 #endif
-        /// <summary>Repull-side connection ID. Stable across token refreshes.</summary>
+        /// <summary>Repull-side connection ID (the `X-Account-Id`). Stable across token refreshes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get; set; }
@@ -130,6 +138,7 @@ namespace Repull.SDK.Models
                 { "action", n => { Action = n.GetObjectValue<global::Repull.SDK.Models.ConnectionAction>(global::Repull.SDK.Models.ConnectionAction.CreateFromDiscriminatorValue); } },
                 { "capabilities", n => { Capabilities = n.GetObjectValue<global::Repull.SDK.Models.ConnectStatus_capabilities>(global::Repull.SDK.Models.ConnectStatus_capabilities.CreateFromDiscriminatorValue); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
+                { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.Models.ConnectStatus_dataFreshness>(global::Repull.SDK.Models.ConnectStatus_dataFreshness.CreateFromDiscriminatorValue); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
@@ -152,6 +161,7 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectionAction>("action", Action);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectStatus_capabilities>("capabilities", Capabilities);
             writer.WriteBoolValue("connected", Connected);
+            writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectStatus_dataFreshness>("dataFreshness", DataFreshness);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);

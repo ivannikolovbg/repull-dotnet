@@ -33,7 +33,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The plan&apos;s daily request cap. Null for `custom`.</summary>
         public int? DailyRequests { get; set; }
-        /// <summary>Listings the price covers: active plus held back by your plan, across your workspaces.</summary>
+        /// <summary>Listings the price covers: your active ones, across your workspaces (what checkout bills). Held-back listings are not included; upgrading does not switch them on.</summary>
         public int? Listings { get; set; }
         /// <summary>Monthly price in USD for `listings`: Starter&apos;s base plus its per-listing price. Null for `custom`.</summary>
         public double? MonthlyPriceUsd { get; set; }
