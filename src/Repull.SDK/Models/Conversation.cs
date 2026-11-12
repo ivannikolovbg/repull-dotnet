@@ -57,7 +57,7 @@ namespace Repull.SDK.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The lastMessageAt property</summary>
+        /// <summary>The conversation&apos;s newest activity: the time of its newest message (after an import, the newest imported message&apos;s own time, not the import time), or of a later change to the conversation. `GET /v1/conversations` sorts on it by default.</summary>
         public DateTimeOffset? LastMessageAt { get; set; }
         /// <summary>Short preview of the most recent message body for list-UI rendering.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -97,7 +97,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The unreadCount property</summary>
         public int? UnreadCount { get; set; }
-        /// <summary>The updatedAt property</summary>
+        /// <summary>When the conversation record last changed; the watermark for `updated_since`.</summary>
         public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Conversation"/> and sets the default values.

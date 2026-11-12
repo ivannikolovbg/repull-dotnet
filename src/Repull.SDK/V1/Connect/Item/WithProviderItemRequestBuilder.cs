@@ -99,7 +99,7 @@ namespace Repull.SDK.V1.Connect.Item
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connect.Item.WithProviderResponse>(requestInfo, global::Repull.SDK.V1.Connect.Item.WithProviderResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns the current connection status for a provider, including host metadata (display name + avatar) for Airbnb so clients can render an account-level confirmation UI.
+        /// Returns the current connection status for a provider, including host metadata (display name + avatar) for Airbnb so clients can render an account-level confirmation UI.**Access level.** `accessType` says what the connection may do: `read_only`, `messaging` or `full_access` (`null` when unknown). Airbnb reports it per host on `accounts[]` (the tier each host&apos;s token was granted with) and at the top level for the host in `externalAccountId`; Vrbo (`vrbo-login`) per account; Booking.com is always `full_access`, the Booking.com Extranet always `messaging`; a PMS is `read_only` when every `writePolicy` switch is off, else `full_access`. See the `ConnectionAccessType` schema for the meaning per provider.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.Models.ConnectStatus"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -156,7 +156,7 @@ namespace Repull.SDK.V1.Connect.Item
             return requestInfo;
         }
         /// <summary>
-        /// Returns the current connection status for a provider, including host metadata (display name + avatar) for Airbnb so clients can render an account-level confirmation UI.
+        /// Returns the current connection status for a provider, including host metadata (display name + avatar) for Airbnb so clients can render an account-level confirmation UI.**Access level.** `accessType` says what the connection may do: `read_only`, `messaging` or `full_access` (`null` when unknown). Airbnb reports it per host on `accounts[]` (the tier each host&apos;s token was granted with) and at the top level for the host in `externalAccountId`; Vrbo (`vrbo-login`) per account; Booking.com is always `full_access`, the Booking.com Extranet always `messaging`; a PMS is `read_only` when every `writePolicy` switch is off, else `full_access`. See the `ConnectionAccessType` schema for the meaning per provider.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

@@ -12,8 +12,8 @@ namespace Repull.SDK.Models
     public partial class ConnectStatus_accounts : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>Vrbo only.</summary>
-        public global::Repull.SDK.Models.ConnectStatus_accounts_accessType? AccessType { get; set; }
+        /// <summary>What this account may do. Airbnb: the tier the host&apos;s token was granted with (`read_only`, `messaging`, `full_access`). Vrbo: `messaging` (bookings and messages, no calendar push) or `full_access` (also pushes prices and availability). `null` when unknown.</summary>
+        public global::Repull.SDK.Models.ConnectionAccessType? AccessType { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>True while the account is active and its authorization is usable.</summary>
@@ -107,7 +107,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectStatus_accounts_accessType>(); } },
+                { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectionAccessType>(); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
@@ -126,7 +126,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Repull.SDK.Models.ConnectStatus_accounts_accessType>("accessType", AccessType);
+            writer.WriteEnumValue<global::Repull.SDK.Models.ConnectionAccessType>("accessType", AccessType);
             writer.WriteBoolValue("connected", Connected);
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteStringValue("email", Email);

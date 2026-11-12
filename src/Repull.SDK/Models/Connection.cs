@@ -12,6 +12,8 @@ namespace Repull.SDK.Models
     public partial class Connection : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>What this connection may do: `read_only`, `messaging` or `full_access` (see `ConnectionAccessType` for the meaning per provider). Airbnb: the tier of the host in `externalAccountId`. `null` when unknown.</summary>
+        public global::Repull.SDK.Models.ConnectionAccessType? AccessType { get; set; }
         /// <summary>Set when the host must do something before the connection works (e.g. grant the invited Booking.com Extranet user full access). `null` when no action is pending.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -99,6 +101,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectionAccessType>(); } },
                 { "action", n => { Action = n.GetObjectValue<global::Repull.SDK.Models.ConnectionAction>(global::Repull.SDK.Models.ConnectionAction.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
@@ -117,6 +120,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteEnumValue<global::Repull.SDK.Models.ConnectionAccessType>("accessType", AccessType);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectionAction>("action", Action);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);

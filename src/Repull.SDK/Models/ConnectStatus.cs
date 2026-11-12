@@ -13,7 +13,9 @@ namespace Repull.SDK.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConnectStatus : IAdditionalDataHolder, IParsable
     {
-        /// <summary>Airbnb: every Airbnb account this workspace has connected, including ones since disconnected. Pass `externalAccountId` as `accountId` to `DELETE /v1/connect/airbnb` to disconnect one account. Vrbo (`GET /v1/connect/vrbo-login`): every signed-in Vrbo account, each with `accessType` and `import` (a `VrboImportStatus`), plus a top-level `dataFreshness`. `externalAccountId` is the platform&apos;s own id (Airbnb host id, Vrbo account id; `null` for a Vrbo sign-in whose account id is not captured yet) and `connectionId` our connection record.</summary>
+        /// <summary>What the connection may do: `read_only`, `messaging` or `full_access` (see `ConnectionAccessType` for the meaning per provider). Airbnb: the tier of the host in `externalAccountId`; each host&apos;s own is on `accounts[].accessType`. Absent when `connected` is false and on `GET /v1/connect/vrbo-login` (per account there); `null` when unknown.</summary>
+        public global::Repull.SDK.Models.ConnectionAccessType? AccessType { get; set; }
+        /// <summary>Airbnb: every Airbnb account this workspace has connected, including ones since disconnected, each with its own `accessType`. Pass `externalAccountId` as `accountId` to `DELETE /v1/connect/airbnb` to disconnect one account. Vrbo (`GET /v1/connect/vrbo-login`): every signed-in Vrbo account, each with `accessType` and `import` (a `VrboImportStatus`), plus a top-level `dataFreshness`. `externalAccountId` is the platform&apos;s own id (Airbnb host id, Vrbo account id; `null` for a Vrbo sign-in whose account id is not captured yet) and `connectionId` our connection record.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.Models.ConnectStatus_accounts>? Accounts { get; set; }
@@ -134,6 +136,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectionAccessType>(); } },
                 { "accounts", n => { Accounts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.ConnectStatus_accounts>(global::Repull.SDK.Models.ConnectStatus_accounts.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "action", n => { Action = n.GetObjectValue<global::Repull.SDK.Models.ConnectionAction>(global::Repull.SDK.Models.ConnectionAction.CreateFromDiscriminatorValue); } },
                 { "capabilities", n => { Capabilities = n.GetObjectValue<global::Repull.SDK.Models.ConnectStatus_capabilities>(global::Repull.SDK.Models.ConnectStatus_capabilities.CreateFromDiscriminatorValue); } },
@@ -157,6 +160,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteEnumValue<global::Repull.SDK.Models.ConnectionAccessType>("accessType", AccessType);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.ConnectStatus_accounts>("accounts", Accounts);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectionAction>("action", Action);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectStatus_capabilities>("capabilities", Capabilities);
