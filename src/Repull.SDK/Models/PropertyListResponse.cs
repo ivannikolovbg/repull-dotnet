@@ -14,6 +14,14 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Added to the body of every successful (2xx) JSON object response while the plan&apos;s last renewal payment failed (the subscription is past_due or unpaid). It never blocks a request: API access keeps working while Stripe retries the card. Tell the user: pay the invoice at `payUrl`, or update the card at `billingUrl`. It disappears once the invoice is paid.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.BillingNotice? BillingNotice { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.BillingNotice BillingNotice { get; set; }
+#endif
         /// <summary>The data property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -63,6 +71,7 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "billingNotice", n => { BillingNotice = n.GetObjectValue<global::Repull.SDK.Models.BillingNotice>(global::Repull.SDK.Models.BillingNotice.CreateFromDiscriminatorValue); } },
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.Property>(global::Repull.SDK.Models.Property.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pagination", n => { Pagination = n.GetObjectValue<global::Repull.SDK.Models.Pagination>(global::Repull.SDK.Models.Pagination.CreateFromDiscriminatorValue); } },
                 { "planNotice", n => { PlanNotice = n.GetObjectValue<global::Repull.SDK.Models.PlanNotice>(global::Repull.SDK.Models.PlanNotice.CreateFromDiscriminatorValue); } },
@@ -75,6 +84,7 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.BillingNotice>("billingNotice", BillingNotice);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.Property>("data", Data);
             writer.WriteObjectValue<global::Repull.SDK.Models.Pagination>("pagination", Pagination);
             writer.WriteObjectValue<global::Repull.SDK.Models.PlanNotice>("planNotice", PlanNotice);

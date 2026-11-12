@@ -15,6 +15,14 @@ namespace Repull.SDK.V1.Usage.Summary
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Added to the body of every successful (2xx) JSON object response while the plan&apos;s last renewal payment failed (the subscription is past_due or unpaid). It never blocks a request: API access keeps working while Stripe retries the card. Tell the user: pay the invoice at `payUrl`, or update the card at `billingUrl`. It disappears once the invoice is paid.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.BillingNotice? BillingNotice { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.BillingNotice BillingNotice { get; set; }
+#endif
         /// <summary>The breakdown property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -132,6 +140,7 @@ namespace Repull.SDK.V1.Usage.Summary
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "billingNotice", n => { BillingNotice = n.GetObjectValue<global::Repull.SDK.Models.BillingNotice>(global::Repull.SDK.Models.BillingNotice.CreateFromDiscriminatorValue); } },
                 { "breakdown", n => { Breakdown = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "credits", n => { Credits = n.GetObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits>(global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits.CreateFromDiscriminatorValue); } },
                 { "dailyResetsAt", n => { DailyResetsAt = n.GetDateTimeOffsetValue(); } },
@@ -154,6 +163,7 @@ namespace Repull.SDK.V1.Usage.Summary
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.BillingNotice>("billingNotice", BillingNotice);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>("breakdown", Breakdown);
             writer.WriteObjectValue<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits>("credits", Credits);
             writer.WriteDateTimeOffsetValue("dailyResetsAt", DailyResetsAt);
