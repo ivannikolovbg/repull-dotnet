@@ -5,6 +5,10 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.43 — 2026-11-12
+
+- Regenerated from the live spec (automated spec refresh).
+
 ## 0.2.42 — 2026-11-11
 
 - Message webhooks (`reservation.message.received`, `reservation.message.sent`, `reservation.message.updated`) now type every field they deliver: `externalThreadId`, `listingId`, `channel`, `messageId`, `externalMessageId`, `confirmationCode`, `direction`, `senderType`, `senderName`, `senderAvatar`, `translatedBody`, `isAutomated`, `aiGenerated`, `status` and `revision`. `threadId` is the numeric conversation id as a string (the old example showed `thr_…`); `reservationId` can be null.
