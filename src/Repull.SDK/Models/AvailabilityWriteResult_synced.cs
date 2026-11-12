@@ -19,6 +19,14 @@ namespace Repull.SDK.Models
         public int? Attempted { get; set; }
         /// <summary>Channels whose token has expired — these need reconnecting, not retrying.</summary>
         public int? AuthErrors { get; set; }
+        /// <summary>One entry per listing per connected channel: which channel took the write and which refused it.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels>? Channels { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels> Channels { get; set; }
+#endif
         /// <summary>The failed property</summary>
         public int? Failed { get; set; }
         /// <summary>The succeeded property</summary>
@@ -50,6 +58,7 @@ namespace Repull.SDK.Models
             {
                 { "attempted", n => { Attempted = n.GetIntValue(); } },
                 { "authErrors", n => { AuthErrors = n.GetIntValue(); } },
+                { "channels", n => { Channels = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels>(global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "failed", n => { Failed = n.GetIntValue(); } },
                 { "succeeded", n => { Succeeded = n.GetIntValue(); } },
             };
@@ -63,6 +72,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("attempted", Attempted);
             writer.WriteIntValue("authErrors", AuthErrors);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels>("channels", Channels);
             writer.WriteIntValue("failed", Failed);
             writer.WriteIntValue("succeeded", Succeeded);
             writer.WriteAdditionalData(AdditionalData);
