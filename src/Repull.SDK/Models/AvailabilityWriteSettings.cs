@@ -19,7 +19,11 @@ namespace Repull.SDK.Models
         public bool? Available { get; set; }
         /// <summary>Rooms to sell on these dates, for a listing that sells several identical rooms (`unitCount` &gt; 1, e.g. a Booking.com room type). Up to the listing&apos;s `unitCount`. Refused with `409 managed_by_pms` on a hotel PMS room type (Cloudbeds, Mews) — its PMS owns the room count.</summary>
         public int? AvailableUnits { get; set; }
-        /// <summary>The maxNights property</summary>
+        /// <summary>No check-in on these dates (`true`), or check-in allowed again (`false`). Sent to Airbnb, Booking.com and Vrbo. Leaving it out keeps the current value.</summary>
+        public bool? ClosedToArrival { get; set; }
+        /// <summary>No check-out on these dates (`true`), or check-out allowed again (`false`). Sent to Airbnb, Booking.com and Vrbo. Leaving it out keeps the current value.</summary>
+        public bool? ClosedToDeparture { get; set; }
+        /// <summary>Maximum stay for an arrival on these dates. Sent to Airbnb and Booking.com. Vrbo has no per-date maximum stay, so it is not sent there.</summary>
         public int? MaxNights { get; set; }
         /// <summary>The minNights property</summary>
         public int? MinNights { get; set; }
@@ -52,6 +56,8 @@ namespace Repull.SDK.Models
             {
                 { "available", n => { Available = n.GetBoolValue(); } },
                 { "availableUnits", n => { AvailableUnits = n.GetIntValue(); } },
+                { "closedToArrival", n => { ClosedToArrival = n.GetBoolValue(); } },
+                { "closedToDeparture", n => { ClosedToDeparture = n.GetBoolValue(); } },
                 { "maxNights", n => { MaxNights = n.GetIntValue(); } },
                 { "minNights", n => { MinNights = n.GetIntValue(); } },
                 { "price", n => { Price = n.GetDoubleValue(); } },
@@ -66,6 +72,8 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("available", Available);
             writer.WriteIntValue("availableUnits", AvailableUnits);
+            writer.WriteBoolValue("closedToArrival", ClosedToArrival);
+            writer.WriteBoolValue("closedToDeparture", ClosedToDeparture);
             writer.WriteIntValue("maxNights", MaxNights);
             writer.WriteIntValue("minNights", MinNights);
             writer.WriteDoubleValue("price", Price);
