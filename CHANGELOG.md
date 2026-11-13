@@ -5,6 +5,11 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.45 — 2026-11-13
+
+- New: `POST /v1/connections/{id}/imports`
+- Regenerated from the live spec (automated spec refresh).
+
 ## 0.2.44 — 2026-11-12
 
 - New: `POST /v1/workspaces/{workspaceId}/deactivate`
