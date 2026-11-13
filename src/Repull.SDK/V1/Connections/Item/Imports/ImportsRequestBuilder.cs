@@ -85,6 +85,69 @@ namespace Repull.SDK.V1.Connections.Item.Imports
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connections.Item.Imports.ImportsResponse>(requestInfo, global::Repull.SDK.V1.Connections.Item.Imports.ImportsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Refresh listings: picks up listings you&apos;ve added on Airbnb since you connected. Re-reads the connected account&apos;s listings and their calendars (pricing and availability) now; a new property comes in as a new listing and existing listings are refreshed. Nothing else is re-imported: no reservations, conversations, reviews or payouts.The same import runs on its own once a day for every connected Airbnb account, and when the host reconnects. Call this when you know a property was just added and do not want to wait.New listings obey your plan&apos;s active-listing limit: past it, and when the property is unlisted on Airbnb, they arrive inactive. Existing listings keep their status.The import runs in the background (`202`). It is recorded like any other import (trigger `resync`, one `listings` stage): follow it on `GET /v1/connections/{id}/imports` or wait for `account.import.completed`, then read the new listings with `GET /v1/listings`.Airbnb connections only for now. Returns `409 conflict` while a listings import of the account is already running, and `409 connection_reauth_required` when the account is disconnected.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse?> PostAsImportsPostResponseAsync(global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse> PostAsImportsPostResponseAsync(global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse>(requestInfo, global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Refresh listings: picks up listings you&apos;ve added on Airbnb since you connected. Re-reads the connected account&apos;s listings and their calendars (pricing and availability) now; a new property comes in as a new listing and existing listings are refreshed. Nothing else is re-imported: no reservations, conversations, reviews or payouts.The same import runs on its own once a day for every connected Airbnb account, and when the host reconnects. Call this when you know a property was just added and do not want to wait.New listings obey your plan&apos;s active-listing limit: past it, and when the property is unlisted on Airbnb, they arrive inactive. Existing listings keep their status.The import runs in the background (`202`). It is recorded like any other import (trigger `resync`, one `listings` stage): follow it on `GET /v1/connections/{id}/imports` or wait for `account.import.completed`, then read the new listings with `GET /v1/listings`.Airbnb connections only for now. Returns `409 conflict` while a listings import of the account is already running, and `409 connection_reauth_required` when the account is disconnected.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Connections.Item.Imports.ImportsResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        [Obsolete("This method is obsolete. Use PostAsImportsPostResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Connections.Item.Imports.ImportsResponse?> PostAsync(global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Connections.Item.Imports.ImportsResponse> PostAsync(global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connections.Item.Imports.ImportsResponse>(requestInfo, global::Repull.SDK.V1.Connections.Item.Imports.ImportsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// The import runs of one connected account, newest first: the first sync after connecting, a room or unit mapped later, a reconnect, a re-sync. Each run says where it stands (`running`, `completed`, `failed`), its stages and what it imported.To know when an account&apos;s first sync is done, wait for the `account.import.completed` webhook, or poll this endpoint (or `GET /v1/connect`, whose connections carry their latest `import`) until the newest run is no longer `running`.Auth: a Repull API key, or a Connect session token (`sessionId`).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -101,6 +164,28 @@ namespace Repull.SDK.V1.Connections.Item.Imports
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Refresh listings: picks up listings you&apos;ve added on Airbnb since you connected. Re-reads the connected account&apos;s listings and their calendars (pricing and availability) now; a new property comes in as a new listing and existing listings are refreshed. Nothing else is re-imported: no reservations, conversations, reviews or payouts.The same import runs on its own once a day for every connected Airbnb account, and when the host reconnects. Call this when you know a property was just added and do not want to wait.New listings obey your plan&apos;s active-listing limit: past it, and when the property is unlisted on Airbnb, they arrive inactive. Existing listings keep their status.The import runs in the background (`202`). It is recorded like any other import (trigger `resync`, one `listings` stage): follow it on `GET /v1/connections/{id}/imports` or wait for `account.import.completed`, then read the new listings with `GET /v1/listings`.Airbnb connections only for now. Returns `409 conflict` while a listings import of the account is already running, and `409 connection_reauth_required` when the account is disconnected.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>
@@ -138,6 +223,14 @@ namespace Repull.SDK.V1.Connections.Item.Imports
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ImportsRequestBuilderGetRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Connections.Item.Imports.ImportsRequestBuilder.ImportsRequestBuilderGetQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ImportsRequestBuilderPostRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }
