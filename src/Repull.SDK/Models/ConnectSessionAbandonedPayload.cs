@@ -15,15 +15,31 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Booking.com Extranet in `awaiting_room_mapping`: the connection record of the connected login (the `X-Account-Id`). Absent otherwise.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConnectionId { get; set; }
+#nullable restore
+#else
+        public string ConnectionId { get; set; }
+#endif
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
-        /// <summary>Booking.com: the Hotel ID the user entered while waiting for the Extranet approval.</summary>
+        /// <summary>Booking.com: the Hotel ID the user entered while waiting for the Extranet approval. Booking.com Extranet in `awaiting_room_mapping`: the Booking.com account id of the connected login.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ExternalAccountId { get; set; }
 #nullable restore
 #else
         public string ExternalAccountId { get; set; }
+#endif
+        /// <summary>Booking.com Extranet in `awaiting_room_mapping`: a durable link that reopens Connect on the room-mapping step for this login. Send the host there to finish. `null` when there is nothing to resume.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FixUrl { get; set; }
+#nullable restore
+#else
+        public string FixUrl { get; set; }
 #endif
         /// <summary>The lastActivityAt property</summary>
         public DateTimeOffset? LastActivityAt { get; set; }
@@ -96,8 +112,10 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
+                { "fixUrl", n => { FixUrl = n.GetStringValue(); } },
                 { "lastActivityAt", n => { LastActivityAt = n.GetDateTimeOffsetValue(); } },
                 { "lastErrorCode", n => { LastErrorCode = n.GetStringValue(); } },
                 { "nextStep", n => { NextStep = n.GetStringValue(); } },
@@ -115,8 +133,10 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
+            writer.WriteStringValue("fixUrl", FixUrl);
             writer.WriteDateTimeOffsetValue("lastActivityAt", LastActivityAt);
             writer.WriteStringValue("lastErrorCode", LastErrorCode);
             writer.WriteStringValue("nextStep", NextStep);
