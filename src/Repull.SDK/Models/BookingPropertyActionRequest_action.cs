@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>`unlist` closes the room&apos;s availability across the whole forward window, so the property stops selling. `relist` re-syncs the real calendar: dates that are genuinely blocked (a reservation, an owner stay) stay blocked, and only the closure `unlist` wrote lifts. They are not mirror images, and that is deliberate.</summary>
+    /// <summary>`unlist` closes the room&apos;s availability across the whole forward window, so the property stops selling. `relist` re-syncs the real calendar: dates that are genuinely blocked (a reservation, an owner stay) stay blocked, and only the closure `unlist` wrote lifts. They are not mirror images, and that is deliberate.`open` runs Booking.com&apos;s readiness check and opens the property only if it passes — on a property that is not ready it changes nothing and answers `422 booking_rejected` with Booking.com&apos;s reasons in `blockers`. It opens a property Booking.com has in a build stage (`XML: Being built`, `XML: Ready to open`) or closed. `close` closes the property on Booking.com with `reason`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum BookingPropertyActionRequest_action
     {
@@ -14,6 +14,14 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "relist")]
         #pragma warning disable CS1591
         Relist,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "open")]
+        #pragma warning disable CS1591
+        Open,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "close")]
+        #pragma warning disable CS1591
+        Close,
         #pragma warning restore CS1591
     }
 }

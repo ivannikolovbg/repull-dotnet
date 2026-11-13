@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>`opened`: it was being built and is now open. `not_needed`: it was already past that stage. `blocked`: Booking.com will not open it yet — see `blockers`. `status_unknown`: its status could not be read. `failed`: Booking.com did not answer the open request.</summary>
+    /// <summary>`opened`: it was being built and is now open. `not_needed`: it was already past that stage. `blocked`: Booking.com will not open it yet — see `blockers`. `status_unknown`: its status could not be read. `failed`: Booking.com did not answer the open request. `listing_inactive`: a listing mapped to the property is inactive, so it was not opened — activate it when it is ready and Repull opens the property. `no_listing`: no listing is mapped to it.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum MapConnectBookingRoomsResponse_propertyStatus_outcome
     {
@@ -26,6 +26,14 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "failed")]
         #pragma warning disable CS1591
         Failed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "listing_inactive")]
+        #pragma warning disable CS1591
+        Listing_inactive,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "no_listing")]
+        #pragma warning disable CS1591
+        No_listing,
         #pragma warning restore CS1591
     }
 }

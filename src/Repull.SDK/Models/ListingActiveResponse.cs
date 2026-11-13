@@ -16,6 +16,14 @@ namespace Repull.SDK.Models
         public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Only when activating: what happened to the Booking.com properties this listing is mapped to. Activating a listing opens its Booking.com property if Booking.com still has it in a build stage. Empty when the listing has no Booking.com property.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.BookingPropertyOpenResult>? BookingProperties { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.BookingPropertyOpenResult> BookingProperties { get; set; }
+#endif
         /// <summary>The listing id (id fields are serialized as strings to preserve precision).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -50,6 +58,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "active", n => { Active = n.GetBoolValue(); } },
+                { "bookingProperties", n => { BookingProperties = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingPropertyOpenResult>(global::Repull.SDK.Models.BookingPropertyOpenResult.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
             };
         }
@@ -61,6 +70,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("active", Active);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingPropertyOpenResult>("bookingProperties", BookingProperties);
             writer.WriteStringValue("id", Id);
             writer.WriteAdditionalData(AdditionalData);
         }

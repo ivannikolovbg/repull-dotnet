@@ -16,6 +16,14 @@ namespace Repull.SDK.Models
         public bool? Active { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Only when `active` is true: one entry per Booking.com property the listings in the request are mapped to, saying whether it was opened. Every listing in the request counts, including those in `unchanged`, so sending `active: true` again retries an open Booking.com refused. Empty when none of the listings has a Booking.com property.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.Models.BookingPropertyOpenResult>? BookingProperties { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.Models.BookingPropertyOpenResult> BookingProperties { get; set; }
+#endif
         /// <summary>Listing ids that were already in the requested state, in request order.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -58,6 +66,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "active", n => { Active = n.GetBoolValue(); } },
+                { "bookingProperties", n => { BookingProperties = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.BookingPropertyOpenResult>(global::Repull.SDK.Models.BookingPropertyOpenResult.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "unchanged", n => { Unchanged = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "updated", n => { Updated = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
@@ -70,6 +79,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("active", Active);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.BookingPropertyOpenResult>("bookingProperties", BookingProperties);
             writer.WriteCollectionOfPrimitiveValues<string>("unchanged", Unchanged);
             writer.WriteCollectionOfPrimitiveValues<string>("updated", Updated);
             writer.WriteAdditionalData(AdditionalData);

@@ -8,12 +8,12 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Take this listing&apos;s Booking.com property off sale, or put it back.
+    /// Take this listing&apos;s Booking.com property off sale or put it back (`unlist` / `relist`), or open or close the property itself on Booking.com (`open` / `close`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingPropertyActionRequest : IAdditionalDataHolder, IParsable
     {
-        /// <summary>`unlist` closes the room&apos;s availability across the whole forward window, so the property stops selling. `relist` re-syncs the real calendar: dates that are genuinely blocked (a reservation, an owner stay) stay blocked, and only the closure `unlist` wrote lifts. They are not mirror images, and that is deliberate.</summary>
+        /// <summary>`unlist` closes the room&apos;s availability across the whole forward window, so the property stops selling. `relist` re-syncs the real calendar: dates that are genuinely blocked (a reservation, an owner stay) stay blocked, and only the closure `unlist` wrote lifts. They are not mirror images, and that is deliberate.`open` runs Booking.com&apos;s readiness check and opens the property only if it passes — on a property that is not ready it changes nothing and answers `422 booking_rejected` with Booking.com&apos;s reasons in `blockers`. It opens a property Booking.com has in a build stage (`XML: Being built`, `XML: Ready to open`) or closed. `close` closes the property on Booking.com with `reason`.</summary>
         public global::Repull.SDK.Models.BookingPropertyActionRequest_action? Action { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -25,6 +25,8 @@ namespace Repull.SDK.Models
 #else
         public string HotelId { get; set; }
 #endif
+        /// <summary>`close` only: the reason Booking.com records for closing the property. Default `PROPERTY_NOT_AVAILABLE`.</summary>
+        public global::Repull.SDK.Models.BookingPropertyActionRequest_reason? Reason { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPropertyActionRequest"/> and sets the default values.
         /// </summary>
@@ -52,6 +54,7 @@ namespace Repull.SDK.Models
             {
                 { "action", n => { Action = n.GetEnumValue<global::Repull.SDK.Models.BookingPropertyActionRequest_action>(); } },
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
+                { "reason", n => { Reason = n.GetEnumValue<global::Repull.SDK.Models.BookingPropertyActionRequest_reason>(); } },
             };
         }
         /// <summary>
@@ -63,6 +66,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.Models.BookingPropertyActionRequest_action>("action", Action);
             writer.WriteStringValue("hotelId", HotelId);
+            writer.WriteEnumValue<global::Repull.SDK.Models.BookingPropertyActionRequest_reason>("reason", Reason);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

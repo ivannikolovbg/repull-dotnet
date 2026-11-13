@@ -16,5 +16,13 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         Relist,
         #pragma warning restore CS1591
+        [EnumMember(Value = "open")]
+        #pragma warning disable CS1591
+        Open,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "close")]
+        #pragma warning disable CS1591
+        Close,
+        #pragma warning restore CS1591
     }
 }

@@ -16,6 +16,16 @@ namespace Repull.SDK.Models
         public global::Repull.SDK.Models.BookingPropertyActionResponse_action? Action { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>`open` / `close` only: Booking.com&apos;s status for the property before the call, e.g. `XML: Ready to open`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BookingStatus { get; set; }
+#nullable restore
+#else
+        public string BookingStatus { get; set; }
+#endif
+        /// <summary>`open` / `close` only: false when the property was already in that state, so nothing was sent.</summary>
+        public bool? Changed { get; set; }
         /// <summary>The channel property</summary>
         public global::Repull.SDK.Models.BookingPropertyActionResponse_channel? Channel { get; set; }
         /// <summary>The Booking.com property that was acted on. Always read it back — a listing can be mapped to several, and this states which one changed.</summary>
@@ -34,6 +44,8 @@ namespace Repull.SDK.Models
 #else
         public string ListingId { get; set; }
 #endif
+        /// <summary>`open` / `close` only: the property&apos;s state on Booking.com after the call.</summary>
+        public global::Repull.SDK.Models.BookingPropertyActionResponse_propertyStatus? PropertyStatus { get; set; }
         /// <summary>Booking.com&apos;s own room id the availability write addressed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -42,7 +54,7 @@ namespace Repull.SDK.Models
 #else
         public string RoomBookingId { get; set; }
 #endif
-        /// <summary>Whether the property is now on sale. **This is the state of the property on Booking.com, not of the listing in Repull** — `active` (what Repull bills and serves) is untouched by both actions and is deliberately not echoed here so the two can never be read as one field.</summary>
+        /// <summary>`unlist` / `relist` only. Whether the property is now on sale. **This is the state of the property on Booking.com, not of the listing in Repull** — `active` (what Repull bills and serves) is untouched by both actions and is deliberately not echoed here so the two can never be read as one field.</summary>
         public bool? Selling { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPropertyActionResponse"/> and sets the default values.
@@ -70,9 +82,12 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "action", n => { Action = n.GetEnumValue<global::Repull.SDK.Models.BookingPropertyActionResponse_action>(); } },
+                { "bookingStatus", n => { BookingStatus = n.GetStringValue(); } },
+                { "changed", n => { Changed = n.GetBoolValue(); } },
                 { "channel", n => { Channel = n.GetEnumValue<global::Repull.SDK.Models.BookingPropertyActionResponse_channel>(); } },
                 { "hotelId", n => { HotelId = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "propertyStatus", n => { PropertyStatus = n.GetEnumValue<global::Repull.SDK.Models.BookingPropertyActionResponse_propertyStatus>(); } },
                 { "roomBookingId", n => { RoomBookingId = n.GetStringValue(); } },
                 { "selling", n => { Selling = n.GetBoolValue(); } },
             };
@@ -85,9 +100,12 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.Models.BookingPropertyActionResponse_action>("action", Action);
+            writer.WriteStringValue("bookingStatus", BookingStatus);
+            writer.WriteBoolValue("changed", Changed);
             writer.WriteEnumValue<global::Repull.SDK.Models.BookingPropertyActionResponse_channel>("channel", Channel);
             writer.WriteStringValue("hotelId", HotelId);
             writer.WriteStringValue("listingId", ListingId);
+            writer.WriteEnumValue<global::Repull.SDK.Models.BookingPropertyActionResponse_propertyStatus>("propertyStatus", PropertyStatus);
             writer.WriteStringValue("roomBookingId", RoomBookingId);
             writer.WriteBoolValue("selling", Selling);
             writer.WriteAdditionalData(AdditionalData);
