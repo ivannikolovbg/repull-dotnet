@@ -16,5 +16,9 @@ namespace Repull.SDK.V1.Connect.VrboLogin.Session
         #pragma warning disable CS1591
         Otp,
         #pragma warning restore CS1591
+        [EnumMember(Value = "resend")]
+        #pragma warning disable CS1591
+        Resend,
+        #pragma warning restore CS1591
     }
 }

@@ -14,7 +14,7 @@ namespace Repull.SDK.Models
     {
         /// <summary>What this connection may do: `read_only`, `messaging` or `full_access` (see `ConnectionAccessType` for the meaning per provider). Airbnb: the tier of the host in `externalAccountId`. `null` when unknown.</summary>
         public global::Repull.SDK.Models.ConnectionAccessType? AccessType { get; set; }
-        /// <summary>Set when the host must do something before the connection works (e.g. grant the invited Booking.com Extranet user full access). `null` when no action is pending.</summary>
+        /// <summary>Set when the host must do something before the connection works (e.g. grant the invited Booking.com Extranet user full access), or has units still to map (`reason: needs_mapping` — Booking.com Extranet rooms, Vrbo units; `required` is false when only some Vrbo units are left). `null` when no action is pending.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.Models.ConnectionAction? Action { get; set; }
@@ -34,7 +34,7 @@ namespace Repull.SDK.Models
 #else
         public string ExternalAccountId { get; set; }
 #endif
-        /// <summary>Durable link that reopens the hosted Connect flow bound to this account on the fix screen — send the host here to resolve `action`. Present only when `action.required` is true; `null` otherwise.</summary>
+        /// <summary>Durable link that reopens the hosted Connect flow bound to this account on the fix screen — send the host here to resolve `action`. For `needs_mapping` it opens the unit mapping directly (no new sign-in). Present whenever `action` is set; `null` otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? FixUrl { get; set; }
