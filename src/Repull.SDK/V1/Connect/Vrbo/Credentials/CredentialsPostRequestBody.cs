@@ -14,14 +14,24 @@ namespace Repull.SDK.V1.Connect.Vrbo.Credentials
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Activation handshake — Repull mints the Basic-Auth pair the host pastes into Vrbo Partner Central.</summary>
+        /// <summary>The host&apos;s Vrbo advertiser id. Repull mints the Basic-Auth pair for it, which the host pastes into Vrbo Partner Central.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials? Credentials { get; set; }
+        public string? AdvertiserExternalId { get; set; }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials Credentials { get; set; }
+        public string AdvertiserExternalId { get; set; }
 #endif
+        /// <summary>Optional. Vrbo Partner Central sets this itself.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? EndpointUrl { get; set; }
+#nullable restore
+#else
+        public string EndpointUrl { get; set; }
+#endif
+        /// <summary>Replace the advertiser&apos;s existing password and return the new one. The old password stops working.</summary>
+        public bool? Rotate { get; set; }
         /// <summary>Connect session id from `POST /v1/connect/vrbo`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -55,7 +65,9 @@ namespace Repull.SDK.V1.Connect.Vrbo.Credentials
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "credentials", n => { Credentials = n.GetObjectValue<global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials>(global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials.CreateFromDiscriminatorValue); } },
+                { "advertiserExternalId", n => { AdvertiserExternalId = n.GetStringValue(); } },
+                { "endpointUrl", n => { EndpointUrl = n.GetStringValue(); } },
+                { "rotate", n => { Rotate = n.GetBoolValue(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
             };
         }
@@ -66,7 +78,9 @@ namespace Repull.SDK.V1.Connect.Vrbo.Credentials
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials>("credentials", Credentials);
+            writer.WriteStringValue("advertiserExternalId", AdvertiserExternalId);
+            writer.WriteStringValue("endpointUrl", EndpointUrl);
+            writer.WriteBoolValue("rotate", Rotate);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteAdditionalData(AdditionalData);
         }

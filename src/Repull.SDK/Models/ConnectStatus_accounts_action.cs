@@ -5,32 +5,32 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using System.Collections.Generic;
 using System.IO;
 using System;
-namespace Repull.SDK.V1.Connect.Vrbo.Credentials
+namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Activation handshake — Repull mints the Basic-Auth pair the host pastes into Vrbo Partner Central.
+    /// Booking.com: `{ required, reason: &quot;needs_mapping&quot;, message }` while a room of this hotel is matched to no listing (nothing syncs for that room). Null when nothing is needed.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class CredentialsPostRequestBody_credentials : IAdditionalDataHolder, IParsable
+    public partial class ConnectStatus_accounts_action : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectStatus_accounts_action"/> and sets the default values.
         /// </summary>
-        public CredentialsPostRequestBody_credentials()
+        public ConnectStatus_accounts_action()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.Models.ConnectStatus_accounts_action"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Repull.SDK.Models.ConnectStatus_accounts_action CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Repull.SDK.V1.Connect.Vrbo.Credentials.CredentialsPostRequestBody_credentials();
+            return new global::Repull.SDK.Models.ConnectStatus_accounts_action();
         }
         /// <summary>
         /// The deserialization information for the current model

@@ -14,6 +14,14 @@ namespace Repull.SDK.Models
     {
         /// <summary>What this account may do. Airbnb: the tier the host&apos;s token was granted with (`read_only`, `messaging`, `full_access`). Vrbo: `messaging` (bookings and messages, no calendar push) or `full_access` (also pushes prices and availability). `null` when unknown.</summary>
         public global::Repull.SDK.Models.ConnectionAccessType? AccessType { get; set; }
+        /// <summary>Booking.com: `{ required, reason: &quot;needs_mapping&quot;, message }` while a room of this hotel is matched to no listing (nothing syncs for that room). Null when nothing is needed.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.ConnectStatus_accounts_action? Action { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.ConnectStatus_accounts_action Action { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>True while the account is active and its authorization is usable.</summary>
@@ -34,13 +42,21 @@ namespace Repull.SDK.Models
 #else
         public string Email { get; set; }
 #endif
-        /// <summary>Airbnb: the host id, as a string (it can exceed 2^53). Vrbo: Vrbo&apos;s own account id; `null` until it is captured at sign-in.</summary>
+        /// <summary>Airbnb: the host id, as a string (it can exceed 2^53). Booking.com: the hotel id. Vrbo: Vrbo&apos;s own account id; `null` until it is captured at sign-in. Extranet: the Booking.com account id. PMS: the PMS account id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ExternalAccountId { get; set; }
 #nullable restore
 #else
         public string ExternalAccountId { get; set; }
+#endif
+        /// <summary>Booking.com: a link that opens room mapping for this hotel (no new Connect session needed). Send the host to it when `action` is set.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FixUrl { get; set; }
+#nullable restore
+#else
+        public string FixUrl { get; set; }
 #endif
         /// <summary>Vrbo only: where the account import stands.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -108,10 +124,12 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectionAccessType>(); } },
+                { "action", n => { Action = n.GetObjectValue<global::Repull.SDK.Models.ConnectStatus_accounts_action>(global::Repull.SDK.Models.ConnectStatus_accounts_action.CreateFromDiscriminatorValue); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
+                { "fixUrl", n => { FixUrl = n.GetStringValue(); } },
                 { "import", n => { Import = n.GetObjectValue<global::Repull.SDK.Models.VrboImportStatus>(global::Repull.SDK.Models.VrboImportStatus.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "notificationEmail", n => { NotificationEmail = n.GetStringValue(); } },
@@ -127,10 +145,12 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.Models.ConnectionAccessType>("accessType", AccessType);
+            writer.WriteObjectValue<global::Repull.SDK.Models.ConnectStatus_accounts_action>("action", Action);
             writer.WriteBoolValue("connected", Connected);
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
+            writer.WriteStringValue("fixUrl", FixUrl);
             writer.WriteObjectValue<global::Repull.SDK.Models.VrboImportStatus>("import", Import);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("notificationEmail", NotificationEmail);
