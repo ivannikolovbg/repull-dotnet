@@ -82,6 +82,8 @@ namespace Repull.SDK.Models
 #else
         public string NotificationEmail { get; set; }
 #endif
+        /// <summary>Vrbo only. When Vrbo&apos;s first notification reached `notificationEmail`, i.e. the host added it with notifications on. `null` until then.</summary>
+        public DateTimeOffset? NotificationReceivedAt { get; set; }
         /// <summary>The pictureUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -133,6 +135,7 @@ namespace Repull.SDK.Models
                 { "import", n => { Import = n.GetObjectValue<global::Repull.SDK.Models.VrboImportStatus>(global::Repull.SDK.Models.VrboImportStatus.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "notificationEmail", n => { NotificationEmail = n.GetStringValue(); } },
+                { "notificationReceivedAt", n => { NotificationReceivedAt = n.GetDateTimeOffsetValue(); } },
                 { "pictureUrl", n => { PictureUrl = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
             };
@@ -154,6 +157,7 @@ namespace Repull.SDK.Models
             writer.WriteObjectValue<global::Repull.SDK.Models.VrboImportStatus>("import", Import);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("notificationEmail", NotificationEmail);
+            writer.WriteDateTimeOffsetValue("notificationReceivedAt", NotificationReceivedAt);
             writer.WriteStringValue("pictureUrl", PictureUrl);
             writer.WriteStringValue("status", Status);
             writer.WriteAdditionalData(AdditionalData);
