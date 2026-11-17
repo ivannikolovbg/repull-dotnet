@@ -17,10 +17,18 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether a guest may still REQUEST to book inside the notice window.</summary>
         public bool? AllowRequestToBook { get; set; }
-        /// <summary>Whole hours of notice. `0` allows same-day bookings.</summary>
+        /// <summary>Airbnb&apos;s advance notice: 0-24, 48, 72 or 168. Airbnb counts it back from 11:59 PM on the check-in day, in the listing&apos;s time zone, so 0-23 is a same-day cutoff: `0` = same-day bookings until midnight, `1` = until 11 PM, `3` = until 9 PM. `24` and above = no same-day bookings.</summary>
         public int? Hours { get; set; }
-        /// <summary>Derived: `hours === 0`.</summary>
+        /// <summary>Derived: `hours &lt; 24`.</summary>
         public bool? SameDayBookingsAllowed { get; set; }
+        /// <summary>Derived: the last time a same-day booking is accepted, `HH:mm` in the listing&apos;s time (`00:00` = midnight). `null` when same-day bookings are off.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SameDayCutoff { get; set; }
+#nullable restore
+#else
+        public string SameDayCutoff { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutResponse_data_settings_advanceNotice"/> and sets the default values.
         /// </summary>
@@ -49,6 +57,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
                 { "allowRequestToBook", n => { AllowRequestToBook = n.GetBoolValue(); } },
                 { "hours", n => { Hours = n.GetIntValue(); } },
                 { "sameDayBookingsAllowed", n => { SameDayBookingsAllowed = n.GetBoolValue(); } },
+                { "sameDayCutoff", n => { SameDayCutoff = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -61,6 +70,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
             writer.WriteBoolValue("allowRequestToBook", AllowRequestToBook);
             writer.WriteIntValue("hours", Hours);
             writer.WriteBoolValue("sameDayBookingsAllowed", SameDayBookingsAllowed);
+            writer.WriteStringValue("sameDayCutoff", SameDayCutoff);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

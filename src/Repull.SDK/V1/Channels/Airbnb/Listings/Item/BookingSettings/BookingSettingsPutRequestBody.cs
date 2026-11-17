@@ -13,7 +13,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingSettingsPutRequestBody : IParsable
     {
-        /// <summary>Send `hours`, `allowRequestToBook`, or both. The half you omit keeps the value Airbnb currently holds.</summary>
+        /// <summary>Send `hours` (or `sameDayCutoff`), `allowRequestToBook`, or both. The half you omit keeps the value Airbnb currently holds. `hours` and `sameDayCutoff` are the same setting: send one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_advanceNotice? AdvanceNotice { get; set; }

@@ -55,7 +55,7 @@ namespace Repull.SDK.Models
 #else
         public string LastName { get; set; }
 #endif
-        /// <summary>Primary phone contact (or first non-primary if no primary set).</summary>
+        /// <summary>Primary phone contact (or first non-primary if no primary set). For an Airbnb stay this may be an Airbnb relay number — check `phoneType`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Phone { get; set; }
@@ -63,6 +63,10 @@ namespace Repull.SDK.Models
 #else
         public string Phone { get; set; }
 #endif
+        /// <summary>Only next to an Airbnb relay number: when it stops working (checkout + 48 hours). `null` when Airbnb did not give the checkout time with its offset. A cancelled reservation&apos;s relay number stops working at cancellation, whatever this says.</summary>
+        public DateTimeOffset? PhoneExpiresAt { get; set; }
+        /// <summary>Present whenever `phone` is. `airbnb_relay` when `phone` is a temporary Airbnb relay number (SMS only, expires 48h after checkout, shared across hosts, never a guest identifier); `guest` otherwise.</summary>
+        public global::Repull.SDK.Models.GuestPhoneType? PhoneType { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationPrimaryGuest"/> and sets the default values.
         /// </summary>
@@ -94,6 +98,8 @@ namespace Repull.SDK.Models
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "lastName", n => { LastName = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
+                { "phoneExpiresAt", n => { PhoneExpiresAt = n.GetDateTimeOffsetValue(); } },
+                { "phoneType", n => { PhoneType = n.GetEnumValue<global::Repull.SDK.Models.GuestPhoneType>(); } },
             };
         }
         /// <summary>
@@ -109,6 +115,8 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("language", Language);
             writer.WriteStringValue("lastName", LastName);
             writer.WriteStringValue("phone", Phone);
+            writer.WriteDateTimeOffsetValue("phoneExpiresAt", PhoneExpiresAt);
+            writer.WriteEnumValue<global::Repull.SDK.Models.GuestPhoneType>("phoneType", PhoneType);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

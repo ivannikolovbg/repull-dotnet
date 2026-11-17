@@ -77,7 +77,7 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The lastStayedAt property</summary>
         public DateTimeOffset? LastStayedAt { get; set; }
-        /// <summary>Primary phone contact (or first non-primary if no primary set).</summary>
+        /// <summary>Primary phone contact (or first non-primary if no primary set). May be an Airbnb relay number — check `phoneType`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Phone { get; set; }
@@ -85,6 +85,8 @@ namespace Repull.SDK.Models
 #else
         public string Phone { get; set; }
 #endif
+        /// <summary>`airbnb_relay` when `phone` is a temporary Airbnb relay number (SMS only, expires 48h after checkout, shared across hosts, never a guest identifier); `guest` otherwise; `null` when there is no phone.</summary>
+        public global::Repull.SDK.Models.GuestPhoneType? PhoneType { get; set; }
         /// <summary>Lifetime reservation count.</summary>
         public int? TotalReservations { get; set; }
         /// <summary>Decimal-as-string to preserve precision across mixed-currency totals.</summary>
@@ -131,6 +133,7 @@ namespace Repull.SDK.Models
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "lastStayedAt", n => { LastStayedAt = n.GetDateTimeOffsetValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
+                { "phoneType", n => { PhoneType = n.GetEnumValue<global::Repull.SDK.Models.GuestPhoneType>(); } },
                 { "totalReservations", n => { TotalReservations = n.GetIntValue(); } },
                 { "totalRevenue", n => { TotalRevenue = n.GetStringValue(); } },
             };
@@ -153,6 +156,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("language", Language);
             writer.WriteDateTimeOffsetValue("lastStayedAt", LastStayedAt);
             writer.WriteStringValue("phone", Phone);
+            writer.WriteEnumValue<global::Repull.SDK.Models.GuestPhoneType>("phoneType", PhoneType);
             writer.WriteIntValue("totalReservations", TotalReservations);
             writer.WriteStringValue("totalRevenue", TotalRevenue);
             writer.WriteAdditionalData(AdditionalData);

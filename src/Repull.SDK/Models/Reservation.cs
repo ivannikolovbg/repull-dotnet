@@ -200,6 +200,14 @@ namespace Repull.SDK.Models
         public global::Repull.SDK.Models.Reservation_status? Status { get; set; }
         /// <summary>On a `cancelled` reservation: how it ended. `request_expired` — a booking request nobody answered in time (Airbnb&apos;s 24-hour window passed, or the check-in did), whether the channel reported it or we derived it. `declined` — the host declined the request. `request_voided` — the request was withdrawn or voided before anyone answered it. `verification_failed` — the guest failed Airbnb&apos;s identity verification. `hold_voided` — Airbnb voided a booking it was holding for the guest&apos;s payment or verification. `cancelled_by_guest` / `cancelled_by_host` / `cancelled_by_platform` — a booking cancelled by that party (`platform` is the channel itself, e.g. Airbnb support). Matches what the webhooks report for the same change. Absent on every other status, and on a cancellation whose channel gives no reason.</summary>
         public global::Repull.SDK.Models.Reservation_statusDetail? StatusDetail { get; set; }
+        /// <summary>Airbnb reservations only, when Airbnb sends it: the door code Airbnb suggests — the last 4 digits of the booker&apos;s verified phone number, or random digits when there is none. Use it instead of deriving a code from the guest&apos;s phone, which Airbnb no longer shares. Omitted on every other reservation.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SuggestedDoorCode { get; set; }
+#nullable restore
+#else
+        public string SuggestedDoorCode { get; set; }
+#endif
         /// <summary>DEPRECATED — use `financials.totalPrice` (a number). Decimal-as-string (precision 10, scale 2) kept for back-compat.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -274,6 +282,7 @@ namespace Repull.SDK.Models
                 { "source", n => { Source = n.GetEnumValue<global::Repull.SDK.Models.Reservation_source>(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Reservation_status>(); } },
                 { "statusDetail", n => { StatusDetail = n.GetEnumValue<global::Repull.SDK.Models.Reservation_statusDetail>(); } },
+                { "suggestedDoorCode", n => { SuggestedDoorCode = n.GetStringValue(); } },
                 { "totalPrice", n => { TotalPrice = n.GetStringValue(); } },
                 { "unit", n => { Unit = n.GetObjectValue<global::Repull.SDK.Models.Reservation_unit>(global::Repull.SDK.Models.Reservation_unit.CreateFromDiscriminatorValue); } },
                 { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
@@ -316,6 +325,7 @@ namespace Repull.SDK.Models
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_source>("source", Source);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_status>("status", Status);
             writer.WriteEnumValue<global::Repull.SDK.Models.Reservation_statusDetail>("statusDetail", StatusDetail);
+            writer.WriteStringValue("suggestedDoorCode", SuggestedDoorCode);
             writer.WriteStringValue("totalPrice", TotalPrice);
             writer.WriteObjectValue<global::Repull.SDK.Models.Reservation_unit>("unit", Unit);
             writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);

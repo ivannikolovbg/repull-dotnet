@@ -8,15 +8,23 @@ using System;
 namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
 {
     /// <summary>
-    /// Send `hours`, `allowRequestToBook`, or both. The half you omit keeps the value Airbnb currently holds.
+    /// Send `hours` (or `sameDayCutoff`), `allowRequestToBook`, or both. The half you omit keeps the value Airbnb currently holds. `hours` and `sameDayCutoff` are the same setting: send one.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingSettingsPutRequestBody_advanceNotice : IParsable
     {
         /// <summary>The allowRequestToBook property</summary>
         public bool? AllowRequestToBook { get; set; }
-        /// <summary>The hours property</summary>
+        /// <summary>Counted back from 11:59 PM on the check-in day (listing time): `0` = same-day bookings until midnight, `1` = until 11 PM, `24` = no same-day bookings.</summary>
         public int? Hours { get; set; }
+        /// <summary>The last time a same-day booking is accepted, whole hours in the listing&apos;s time (`23:00` = 11 PM, `00:00` = midnight). Converted to `hours` (`23:00` = 1).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SameDayCutoff { get; set; }
+#nullable restore
+#else
+        public string SameDayCutoff { get; set; }
+#endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -37,6 +45,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
             {
                 { "allowRequestToBook", n => { AllowRequestToBook = n.GetBoolValue(); } },
                 { "hours", n => { Hours = n.GetIntValue(); } },
+                { "sameDayCutoff", n => { SameDayCutoff = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -48,6 +57,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("allowRequestToBook", AllowRequestToBook);
             writer.WriteIntValue("hours", Hours);
+            writer.WriteStringValue("sameDayCutoff", SameDayCutoff);
         }
     }
 }

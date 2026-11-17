@@ -115,7 +115,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.GuestNote> Notes { get; set; }
 #endif
-        /// <summary>The phone property</summary>
+        /// <summary>Primary phone contact. May be an Airbnb relay number — check `phoneType`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Phone { get; set; }
@@ -123,6 +123,8 @@ namespace Repull.SDK.Models
 #else
         public string Phone { get; set; }
 #endif
+        /// <summary>`airbnb_relay` when `phone` is a temporary Airbnb relay number; `guest` otherwise; `null` when there is no phone.</summary>
+        public global::Repull.SDK.Models.GuestPhoneType? PhoneType { get; set; }
         /// <summary>Aggregate counts of reservations attached to the guest. `future` is derived from `total - past - cancelled`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -197,6 +199,7 @@ namespace Repull.SDK.Models
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "notes", n => { Notes = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.GuestNote>(global::Repull.SDK.Models.GuestNote.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
+                { "phoneType", n => { PhoneType = n.GetEnumValue<global::Repull.SDK.Models.GuestPhoneType>(); } },
                 { "reservationsSummary", n => { ReservationsSummary = n.GetObjectValue<global::Repull.SDK.Models.GuestReservationsSummary>(global::Repull.SDK.Models.GuestReservationsSummary.CreateFromDiscriminatorValue); } },
                 { "riskLevel", n => { RiskLevel = n.GetStringValue(); } },
                 { "totalReservations", n => { TotalReservations = n.GetIntValue(); } },
@@ -226,6 +229,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("language", Language);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.GuestNote>("notes", Notes);
             writer.WriteStringValue("phone", Phone);
+            writer.WriteEnumValue<global::Repull.SDK.Models.GuestPhoneType>("phoneType", PhoneType);
             writer.WriteObjectValue<global::Repull.SDK.Models.GuestReservationsSummary>("reservationsSummary", ReservationsSummary);
             writer.WriteStringValue("riskLevel", RiskLevel);
             writer.WriteIntValue("totalReservations", TotalReservations);

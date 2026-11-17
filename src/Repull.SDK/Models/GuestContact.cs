@@ -19,6 +19,8 @@ namespace Repull.SDK.Models
         public bool? IsPrimary { get; set; }
         /// <summary>The lastUsed property</summary>
         public DateTimeOffset? LastUsed { get; set; }
+        /// <summary>Phone contacts only: `airbnb_relay` when this is a temporary Airbnb relay number (SMS only, expires 48h after checkout, shared across hosts, never a guest identifier); `guest` otherwise.</summary>
+        public global::Repull.SDK.Models.GuestPhoneType? PhoneType { get; set; }
         /// <summary>Contact channel type (`phone`, `email`, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -64,6 +66,7 @@ namespace Repull.SDK.Models
             {
                 { "isPrimary", n => { IsPrimary = n.GetBoolValue(); } },
                 { "lastUsed", n => { LastUsed = n.GetDateTimeOffsetValue(); } },
+                { "phoneType", n => { PhoneType = n.GetEnumValue<global::Repull.SDK.Models.GuestPhoneType>(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "value", n => { Value = n.GetStringValue(); } },
                 { "verified", n => { Verified = n.GetBoolValue(); } },
@@ -78,6 +81,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("isPrimary", IsPrimary);
             writer.WriteDateTimeOffsetValue("lastUsed", LastUsed);
+            writer.WriteEnumValue<global::Repull.SDK.Models.GuestPhoneType>("phoneType", PhoneType);
             writer.WriteStringValue("type", Type);
             writer.WriteStringValue("value", Value);
             writer.WriteBoolValue("verified", Verified);
