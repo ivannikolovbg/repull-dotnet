@@ -101,9 +101,9 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>The sentAt property</summary>
         public DateTimeOffset? SentAt { get; set; }
-        /// <summary>Delivery state. Inbound messages are `received`. An outbound message is `sending` while it is queued to the channel, `sent` once the channel accepted it, or `failed`. Only `sent` (or `received`) means the guest can see it.</summary>
+        /// <summary>Delivery state. Inbound messages are `received`. An outbound message is `sending` while it is handed to the channel, `queued` when the channel was busy and Repull is still delivering it in the background (Vrbo), `sent` once the channel accepted it, or `failed`. Only `sent` (or `received`) means the guest can see it. A change from `queued` is sent as `conversation.message.status_changed`.</summary>
         public global::Repull.SDK.Models.Message_status? Status { get; set; }
-        /// <summary>Why a message is still `sending` or `failed`, in plain words. `null` otherwise.</summary>
+        /// <summary>Why a message is still `sending` or `queued`, or why it `failed`, in plain words. `null` otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? StatusReason { get; set; }

@@ -68,7 +68,7 @@ namespace Repull.SDK.Models
 #else
         public List<global::Repull.SDK.Models.SendMessagePart> Parts { get; set; }
 #endif
-        /// <summary>The status property</summary>
+        /// <summary>`sent`: delivered. `queued` (with HTTP `202`): recorded, and still being delivered in the background because the channel was busy (Vrbo) — do not resend; the outcome arrives as the message&apos;s `status` on `GET /v1/conversations/{id}/messages` and as `conversation.message.status_changed`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Status { get; set; }

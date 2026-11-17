@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>Delivery state. Inbound messages are `received`. An outbound message is `sending` while it is queued to the channel, `sent` once the channel accepted it, or `failed`. Only `sent` (or `received`) means the guest can see it.</summary>
+    /// <summary>Delivery state. Inbound messages are `received`. An outbound message is `sending` while it is handed to the channel, `queued` when the channel was busy and Repull is still delivering it in the background (Vrbo), `sent` once the channel accepted it, or `failed`. Only `sent` (or `received`) means the guest can see it. A change from `queued` is sent as `conversation.message.status_changed`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum Message_status
     {
@@ -14,6 +14,10 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "sending")]
         #pragma warning disable CS1591
         Sending,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "queued")]
+        #pragma warning disable CS1591
+        Queued,
         #pragma warning restore CS1591
         [EnumMember(Value = "sent")]
         #pragma warning disable CS1591

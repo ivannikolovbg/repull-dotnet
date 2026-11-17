@@ -23,6 +23,10 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ReservationMessageReceived,
         #pragma warning restore CS1591
+        [EnumMember(Value = "conversation.message.status_changed")]
+        #pragma warning disable CS1591
+        ConversationMessageStatus_changed,
+        #pragma warning restore CS1591
         [EnumMember(Value = "reservation.message.sent")]
         #pragma warning disable CS1591
         ReservationMessageSent,
@@ -134,6 +138,10 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "account.calendar_access_changed")]
         #pragma warning disable CS1591
         AccountCalendar_access_changed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "account.notifications_missing")]
+        #pragma warning disable CS1591
+        AccountNotifications_missing,
         #pragma warning restore CS1591
         [EnumMember(Value = "review.created")]
         #pragma warning disable CS1591

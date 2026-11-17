@@ -90,8 +90,17 @@ namespace Repull.SDK.Models
 #else
         public string NotificationEmail { get; set; }
 #endif
-        /// <summary>Vrbo only. When Vrbo&apos;s first notification reached `notificationEmail`, i.e. the host added it with notifications on. `null` until then.</summary>
+        /// <summary>Deprecated: use `notifications`. Vrbo only. When Vrbo&apos;s FIRST notification reached `notificationEmail`; it stays set even if notifications later stop. `null` until then.</summary>
+        [Obsolete("")]
         public DateTimeOffset? NotificationReceivedAt { get; set; }
+        /// <summary>Vrbo only. Whether Vrbo&apos;s notification emails reach Repull now (`state`), when the last one did, and the address to add. When `state` is `missing`, ask the host to add `address` on Vrbo; `account.notifications_missing` is sent when that happens.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.VrboNotifications? Notifications { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.VrboNotifications Notifications { get; set; }
+#endif
         /// <summary>The pictureUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -145,6 +154,7 @@ namespace Repull.SDK.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "notificationEmail", n => { NotificationEmail = n.GetStringValue(); } },
                 { "notificationReceivedAt", n => { NotificationReceivedAt = n.GetDateTimeOffsetValue(); } },
+                { "notifications", n => { Notifications = n.GetObjectValue<global::Repull.SDK.Models.VrboNotifications>(global::Repull.SDK.Models.VrboNotifications.CreateFromDiscriminatorValue); } },
                 { "pictureUrl", n => { PictureUrl = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
             };
@@ -168,6 +178,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("notificationEmail", NotificationEmail);
             writer.WriteDateTimeOffsetValue("notificationReceivedAt", NotificationReceivedAt);
+            writer.WriteObjectValue<global::Repull.SDK.Models.VrboNotifications>("notifications", Notifications);
             writer.WriteStringValue("pictureUrl", PictureUrl);
             writer.WriteStringValue("status", Status);
             writer.WriteAdditionalData(AdditionalData);
