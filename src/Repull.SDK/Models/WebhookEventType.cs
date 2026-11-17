@@ -131,6 +131,10 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         AccountUnitsAdded,
         #pragma warning restore CS1591
+        [EnumMember(Value = "account.calendar_access_changed")]
+        #pragma warning disable CS1591
+        AccountCalendar_access_changed,
+        #pragma warning restore CS1591
         [EnumMember(Value = "review.created")]
         #pragma warning disable CS1591
         ReviewCreated,

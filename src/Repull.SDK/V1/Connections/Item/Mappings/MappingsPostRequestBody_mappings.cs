@@ -14,7 +14,7 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Vrbo: push this listing&apos;s prices and availability to Vrbo. Omit to follow the connection&apos;s access type (`messaging` = off, `full_access` = on). A new listing (`create`) always follows the access type. Other channels ignore it.</summary>
+        /// <summary>Vrbo: push this listing&apos;s prices and availability to Vrbo. Omit to follow the connection&apos;s access type (`messaging` = off, `full_access` = on). A new listing (`create`) always follows the access type. Other channels ignore it. `true` returns `409 calendar_managed_elsewhere` while Vrbo says another tool (such as a PMS) manages the account&apos;s calendar (`calendar.managedBy` on `GET /v1/connect/vrbo-login`); see https://repull.dev/docs/channels/vrbo/calendar-managed-elsewhere.</summary>
         public bool? CalendarSync { get; set; }
         /// <summary>The create property</summary>
         public bool? Create { get; set; }

@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.Models;
 using Repull.SDK.V1.Connections.Item.Mappings.Automap;
 using System.Collections.Generic;
 using System.IO;
@@ -45,6 +46,7 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Repull.SDK.V1.Connections.Item.Mappings.MappingsPostResponse?> PostAsMappingsPostResponseAsync(global::Repull.SDK.V1.Connections.Item.Mappings.MappingsPostRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -56,7 +58,11 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connections.Item.Mappings.MappingsPostResponse>(requestInfo, global::Repull.SDK.V1.Connections.Item.Mappings.MappingsPostResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connections.Item.Mappings.MappingsPostResponse>(requestInfo, global::Repull.SDK.V1.Connections.Item.Mappings.MappingsPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// One instruction per unit: `{unitId, listingId}` maps, `{unitId, listingId: null}` unmaps, `{unitId, create: true}` creates a listing. Answers per unit.Vrbo: nothing is imported when the account is signed in. Applying a mapping that maps at least one unit starts the import: upcoming bookings and the last 30 days of messages first, then the whole account history. Follow it on `GET /v1/connect/vrbo-login` (`accounts[].import`).Auth: a Repull API key, or a Connect session token (`sessionId`) while the hosted flow is mapping.
@@ -65,6 +71,7 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
         [Obsolete("This method is obsolete. Use PostAsMappingsPostResponseAsync instead.")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -77,7 +84,11 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connections.Item.Mappings.MappingsResponse>(requestInfo, global::Repull.SDK.V1.Connections.Item.Mappings.MappingsResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connections.Item.Mappings.MappingsResponse>(requestInfo, global::Repull.SDK.V1.Connections.Item.Mappings.MappingsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// One instruction per unit: `{unitId, listingId}` maps, `{unitId, listingId: null}` unmaps, `{unitId, create: true}` creates a listing. Answers per unit.Vrbo: nothing is imported when the account is signed in. Applying a mapping that maps at least one unit starts the import: upcoming bookings and the last 30 days of messages first, then the whole account history. Follow it on `GET /v1/connect/vrbo-login` (`accounts[].import`).Auth: a Repull API key, or a Connect session token (`sessionId`) while the hosted flow is mapping.

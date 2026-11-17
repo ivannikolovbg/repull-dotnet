@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -14,6 +15,14 @@ namespace Repull.SDK.V1.Connections.Item.Units
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Whether another tool manages a Vrbo account&apos;s calendar. Vrbo reports it per account; Repull asks when the account connects and once a day. While `managedBy` is set, Vrbo refuses price and availability changes from anyone else, so calendar sync is off for every unit of the account and turning it on returns `409 calendar_managed_elsewhere`. Bookings and messages keep working.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.VrboCalendarAccess? Calendar { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.VrboCalendarAccess Calendar { get; set; }
+#endif
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -91,6 +100,7 @@ namespace Repull.SDK.V1.Connections.Item.Units
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "calendar", n => { Calendar = n.GetObjectValue<global::Repull.SDK.Models.VrboCalendarAccess>(global::Repull.SDK.Models.VrboCalendarAccess.CreateFromDiscriminatorValue); } },
                 { "channel", n => { Channel = n.GetStringValue(); } },
                 { "connection_id", n => { ConnectionId = n.GetStringValue(); } },
                 { "listing_options", n => { ListingOptions = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options>(global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -108,6 +118,7 @@ namespace Repull.SDK.V1.Connections.Item.Units
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Repull.SDK.Models.VrboCalendarAccess>("calendar", Calendar);
             writer.WriteStringValue("channel", Channel);
             writer.WriteStringValue("connection_id", ConnectionId);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options>("listing_options", ListingOptions);

@@ -8,11 +8,19 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportFailedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportStartedEvent"/>, <see cref="global::Repull.SDK.Models.AccountUnitsAddedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.BookingUnacknowledgedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelDegradedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelSyncFailedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionAbandonedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionCompletedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.PayoutCompletedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReactionEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReadEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageSentEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationThreadAssignedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
+    /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCalendarAccessChangedEvent"/>, <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportFailedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportStartedEvent"/>, <see cref="global::Repull.SDK.Models.AccountUnitsAddedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.BookingUnacknowledgedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelDegradedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelSyncFailedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionAbandonedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionCompletedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.PayoutCompletedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReactionEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReadEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageSentEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationThreadAssignedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WebhookEvent : IComposedTypeWrapper, IParsable
     {
+        /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountCalendarAccessChangedEvent"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.AccountCalendarAccessChangedEvent? AccountCalendarAccessChangedEvent { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.AccountCalendarAccessChangedEvent AccountCalendarAccessChangedEvent { get; set; }
+#endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -359,7 +367,11 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("event")?.GetStringValue();
             var result = new global::Repull.SDK.Models.WebhookEvent();
-            if("account.created".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("account.calendar_access_changed".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.AccountCalendarAccessChangedEvent = new global::Repull.SDK.Models.AccountCalendarAccessChangedEvent();
+            }
+            else if("account.created".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.AccountCreatedEvent = new global::Repull.SDK.Models.AccountCreatedEvent();
             }
@@ -535,7 +547,11 @@ namespace Repull.SDK.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(AccountCreatedEvent != null)
+            if(AccountCalendarAccessChangedEvent != null)
+            {
+                return AccountCalendarAccessChangedEvent.GetFieldDeserializers();
+            }
+            else if(AccountCreatedEvent != null)
             {
                 return AccountCreatedEvent.GetFieldDeserializers();
             }
@@ -712,7 +728,11 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(AccountCreatedEvent != null)
+            if(AccountCalendarAccessChangedEvent != null)
+            {
+                writer.WriteObjectValue<global::Repull.SDK.Models.AccountCalendarAccessChangedEvent>(null, AccountCalendarAccessChangedEvent);
+            }
+            else if(AccountCreatedEvent != null)
             {
                 writer.WriteObjectValue<global::Repull.SDK.Models.AccountCreatedEvent>(null, AccountCreatedEvent);
             }

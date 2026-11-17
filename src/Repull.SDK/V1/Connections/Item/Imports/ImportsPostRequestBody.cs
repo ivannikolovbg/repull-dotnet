@@ -14,7 +14,7 @@ namespace Repull.SDK.V1.Connections.Item.Imports
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>What to import. `listings` = the account&apos;s listings and their calendars (pricing and availability). The only scope; the full import runs when an account is connected.</summary>
+        /// <summary>What to import. `listings` = the account&apos;s listings. New listings come in with their calendar (pricing and availability); on a full-access connection, calendars of listings already in Repull are not re-read. The only scope; the full import runs when an account is connected.</summary>
         public global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody_scope? Scope { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody"/> and sets the default values.

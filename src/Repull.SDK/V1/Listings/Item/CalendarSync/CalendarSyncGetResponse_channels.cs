@@ -22,10 +22,20 @@ namespace Repull.SDK.V1.Listings.Item.CalendarSync
 #else
         public string Channel { get; set; }
 #endif
+        /// <summary>Explains `offReason` and how to turn calendar sync back on.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DocsUrl { get; set; }
+#nullable restore
+#else
+        public string DocsUrl { get; set; }
+#endif
         /// <summary>When a push last wrote to this listing&apos;s calendar.</summary>
         public DateTimeOffset? LastSyncAt { get; set; }
         /// <summary>The nightsWithProblems property</summary>
         public int? NightsWithProblems { get; set; }
+        /// <summary>Vrbo only, when Repull turned calendar sync off: Vrbo says another tool (such as a PMS) manages the account&apos;s calendar. Absent when the host turned it off.</summary>
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_offReason? OffReason { get; set; }
         /// <summary>The listing&apos;s id on the channel.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -80,8 +90,10 @@ namespace Repull.SDK.V1.Listings.Item.CalendarSync
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "channel", n => { Channel = n.GetStringValue(); } },
+                { "docsUrl", n => { DocsUrl = n.GetStringValue(); } },
                 { "lastSyncAt", n => { LastSyncAt = n.GetDateTimeOffsetValue(); } },
                 { "nightsWithProblems", n => { NightsWithProblems = n.GetIntValue(); } },
+                { "offReason", n => { OffReason = n.GetEnumValue<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_offReason>(); } },
                 { "platformId", n => { PlatformId = n.GetStringValue(); } },
                 { "problems", n => { Problems = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems>(global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "queue", n => { Queue = n.GetObjectValue<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue>(global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue.CreateFromDiscriminatorValue); } },
@@ -97,8 +109,10 @@ namespace Repull.SDK.V1.Listings.Item.CalendarSync
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("channel", Channel);
+            writer.WriteStringValue("docsUrl", DocsUrl);
             writer.WriteDateTimeOffsetValue("lastSyncAt", LastSyncAt);
             writer.WriteIntValue("nightsWithProblems", NightsWithProblems);
+            writer.WriteEnumValue<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_offReason>("offReason", OffReason);
             writer.WriteStringValue("platformId", PlatformId);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems>("problems", Problems);
             writer.WriteObjectValue<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue>("queue", Queue);

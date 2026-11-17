@@ -24,6 +24,14 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Vrbo only. Whether another tool (such as a PMS) manages this account&apos;s calendar; while `calendar.managedBy` is set, calendar sync is off for all its units.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.VrboCalendarAccess? Calendar { get; set; }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.VrboCalendarAccess Calendar { get; set; }
+#endif
         /// <summary>True while the account is active and its authorization is usable.</summary>
         public bool? Connected { get; set; }
         /// <summary>Our connection record (`X-Account-Id`). Airbnb: the workspace&apos;s Airbnb connection. Vrbo: the workspace&apos;s Vrbo connection, `null` when it has none.</summary>
@@ -127,6 +135,7 @@ namespace Repull.SDK.Models
             {
                 { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectionAccessType>(); } },
                 { "action", n => { Action = n.GetObjectValue<global::Repull.SDK.Models.ConnectStatus_accounts_action>(global::Repull.SDK.Models.ConnectStatus_accounts_action.CreateFromDiscriminatorValue); } },
+                { "calendar", n => { Calendar = n.GetObjectValue<global::Repull.SDK.Models.VrboCalendarAccess>(global::Repull.SDK.Models.VrboCalendarAccess.CreateFromDiscriminatorValue); } },
                 { "connected", n => { Connected = n.GetBoolValue(); } },
                 { "connectionId", n => { ConnectionId = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
@@ -149,6 +158,7 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteEnumValue<global::Repull.SDK.Models.ConnectionAccessType>("accessType", AccessType);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectStatus_accounts_action>("action", Action);
+            writer.WriteObjectValue<global::Repull.SDK.Models.VrboCalendarAccess>("calendar", Calendar);
             writer.WriteBoolValue("connected", Connected);
             writer.WriteStringValue("connectionId", ConnectionId);
             writer.WriteStringValue("email", Email);

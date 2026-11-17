@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.V1.Connections.Item.Imports
 {
-    /// <summary>What to import. `listings` = the account&apos;s listings and their calendars (pricing and availability). The only scope; the full import runs when an account is connected.</summary>
+    /// <summary>What to import. `listings` = the account&apos;s listings. New listings come in with their calendar (pricing and availability); on a full-access connection, calendars of listings already in Repull are not re-read. The only scope; the full import runs when an account is connected.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ImportsPostRequestBody_scope
     {
