@@ -24,6 +24,14 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
 #else
         public string Error { get; set; }
 #endif
+        /// <summary>Vrbo, for a mapped unit: the listing&apos;s Repull iCal backup feed (`GET /v1/listings/{id}/ical`). With calendar sync on, Repull imports it into the Vrbo unit by itself (Vrbo → Calendar → Import calendar, named &quot;Repull&quot;) and removes other tools&apos; imported feeds; `listing.ical_feed_changed` reports it. Only if that fails does the host add it by hand.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? IcalFeedUrl { get; set; }
+#nullable restore
+#else
+        public string IcalFeedUrl { get; set; }
+#endif
         /// <summary>The listing_id property</summary>
         public int? ListingId { get; set; }
         /// <summary>The ok property</summary>
@@ -63,6 +71,7 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
             {
                 { "created", n => { Created = n.GetBoolValue(); } },
                 { "error", n => { Error = n.GetStringValue(); } },
+                { "ical_feed_url", n => { IcalFeedUrl = n.GetStringValue(); } },
                 { "listing_id", n => { ListingId = n.GetIntValue(); } },
                 { "ok", n => { Ok = n.GetBoolValue(); } },
                 { "unit_id", n => { UnitId = n.GetStringValue(); } },
@@ -77,6 +86,7 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("created", Created);
             writer.WriteStringValue("error", Error);
+            writer.WriteStringValue("ical_feed_url", IcalFeedUrl);
             writer.WriteIntValue("listing_id", ListingId);
             writer.WriteBoolValue("ok", Ok);
             writer.WriteStringValue("unit_id", UnitId);

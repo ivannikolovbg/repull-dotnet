@@ -16,6 +16,14 @@ namespace Repull.SDK.V1.Usage.Logs
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The createdAt property</summary>
         public DateTimeOffset? CreatedAt { get; set; }
+        /// <summary>The repull.dev dashboard page this call was run from (`keys`, `playground`, `quickstart`, `connect`, `settings/connect`), or null for a call your own code made. Dashboard calls don&apos;t count toward your plan&apos;s request quota.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DashboardSurface { get; set; }
+#nullable restore
+#else
+        public string DashboardSurface { get; set; }
+#endif
         /// <summary>The errorCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -114,6 +122,7 @@ namespace Repull.SDK.V1.Usage.Logs
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "dashboardSurface", n => { DashboardSurface = n.GetStringValue(); } },
                 { "errorCode", n => { ErrorCode = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "ipAddress", n => { IpAddress = n.GetStringValue(); } },
@@ -136,6 +145,7 @@ namespace Repull.SDK.V1.Usage.Logs
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteStringValue("dashboardSurface", DashboardSurface);
             writer.WriteStringValue("errorCode", ErrorCode);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("ipAddress", IpAddress);

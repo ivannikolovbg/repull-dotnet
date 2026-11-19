@@ -103,6 +103,10 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         ListingReactivated,
         #pragma warning restore CS1591
+        [EnumMember(Value = "listing.ical_feed_changed")]
+        #pragma warning disable CS1591
+        ListingIcal_feed_changed,
+        #pragma warning restore CS1591
         [EnumMember(Value = "account.created")]
         #pragma warning disable CS1591
         AccountCreated,

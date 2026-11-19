@@ -24,7 +24,7 @@ namespace Repull.SDK.V1.Connections.Item.Units
 #else
         public string Grain { get; set; }
 #endif
-        /// <summary>Channel details that identify the unit. Booking.com Extranet: `hotel` (property name), `hotelId` (Booking.com property ID), `roomId` (Booking.com room ID), `city`. Vrbo: `headline`, `address`, `vrboStatus`, `calendarSync` (whether the unit&apos;s prices and availability are pushed to Vrbo) and, while Vrbo says another tool manages the account&apos;s calendar, `calendarSyncBlocked: &quot;calendar_managed_elsewhere&quot;`; the Vrbo listing ID is `unit_id`.</summary>
+        /// <summary>Channel details that identify the unit. Booking.com Extranet: `hotel` (property name), `hotelId` (Booking.com property ID), `roomId` (Booking.com room ID), `city`. Vrbo: `headline`, `address`, `vrboStatus`, `calendarSync` (whether the unit&apos;s prices and availability are pushed to Vrbo) and, while Vrbo says another tool manages the account&apos;s calendar, `calendarSyncBlocked: &quot;calendar_managed_elsewhere&quot;`, and for a mapped unit `icalBackup`: `{ feedUrl, status, otherFeeds }` — the listing&apos;s Repull iCal backup feed and whether Vrbo imports it (`status` as on `GET /v1/listings/{id}/ical`: `imported`, `pending`, `failed`, `not_imported`, `off`; Repull adds it itself, so only on `failed` does the host add `feedUrl` in Vrbo → Calendar → Import calendar, named &quot;Repull&quot;); the Vrbo listing ID is `unit_id`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units_meta? Meta { get; set; }
