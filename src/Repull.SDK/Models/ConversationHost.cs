@@ -23,14 +23,6 @@ namespace Repull.SDK.Models
 #else
         public string AirbnbId { get; set; }
 #endif
-        /// <summary>The avatarUrl property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? AvatarUrl { get; set; }
-#nullable restore
-#else
-        public string AvatarUrl { get; set; }
-#endif
         /// <summary>The displayName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -81,7 +73,6 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "airbnbId", n => { AirbnbId = n.GetStringValue(); } },
-                { "avatarUrl", n => { AvatarUrl = n.GetStringValue(); } },
                 { "displayName", n => { DisplayName = n.GetStringValue(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
@@ -95,7 +86,6 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("airbnbId", AirbnbId);
-            writer.WriteStringValue("avatarUrl", AvatarUrl);
             writer.WriteStringValue("displayName", DisplayName);
             writer.WriteStringValue("firstName", FirstName);
             writer.WriteStringValue("id", Id);

@@ -15,14 +15,6 @@ namespace Repull.SDK.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The avatarUrl property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? AvatarUrl { get; set; }
-#nullable restore
-#else
-        public string AvatarUrl { get; set; }
-#endif
         /// <summary>The blacklistedReason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -184,7 +176,6 @@ namespace Repull.SDK.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "avatarUrl", n => { AvatarUrl = n.GetStringValue(); } },
                 { "blacklistedReason", n => { BlacklistedReason = n.GetStringValue(); } },
                 { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Repull.SDK.Models.GuestContact>(global::Repull.SDK.Models.GuestContact.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
@@ -214,7 +205,6 @@ namespace Repull.SDK.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("avatarUrl", AvatarUrl);
             writer.WriteStringValue("blacklistedReason", BlacklistedReason);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.Models.GuestContact>("contacts", Contacts);
             writer.WriteStringValue("country", Country);
