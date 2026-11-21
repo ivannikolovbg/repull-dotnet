@@ -9,7 +9,7 @@ using System;
 namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.BookingSettings
 {
     /// <summary>
-    /// The section as Vrbo has it now.
+    /// The section as Vrbo has it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BookingSettingsGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable

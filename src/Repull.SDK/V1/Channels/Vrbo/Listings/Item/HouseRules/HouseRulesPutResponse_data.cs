@@ -9,7 +9,7 @@ using System;
 namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules
 {
     /// <summary>
-    /// What Vrbo has stored for the section, read back after the write.
+    /// What Vrbo has after the write, read back from Vrbo.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class HouseRulesPutResponse_data : IAdditionalDataHolder, IBackedModel, IParsable

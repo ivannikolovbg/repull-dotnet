@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public VideosRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/videos{?vrboListingNumber*}", pathParameters)
+        public VideosRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/videos{?source*,vrboListingNumber*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public VideosRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/videos{?vrboListingNumber*}", rawUrl)
+        public VideosRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/videos{?source*,vrboListingNumber*}", rawUrl)
         {
         }
         /// <summary>
@@ -113,7 +113,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos.VideosResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos.VideosResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// The listing&apos;s videos with their file name, Vrbo&apos;s processing and review status, player and thumbnail URLs, upload time and any reasons Vrbo rejected them.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// The listing&apos;s videos with their file name, Vrbo&apos;s processing and review status, player and thumbnail URLs, upload time and any reasons Vrbo rejected them.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos.VideosGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -152,7 +152,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos.VideosGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos.VideosGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// The listing&apos;s videos with their file name, Vrbo&apos;s processing and review status, player and thumbnail URLs, upload time and any reasons Vrbo rejected them.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// The listing&apos;s videos with their file name, Vrbo&apos;s processing and review status, player and thumbnail URLs, upload time and any reasons Vrbo rejected them.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos.VideosResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -294,7 +294,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos
             return requestInfo;
         }
         /// <summary>
-        /// The listing&apos;s videos with their file name, Vrbo&apos;s processing and review status, player and thumbnail URLs, upload time and any reasons Vrbo rejected them.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// The listing&apos;s videos with their file name, Vrbo&apos;s processing and review status, player and thumbnail URLs, upload time and any reasons Vrbo rejected them.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -379,11 +379,25 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos
         {
         }
         /// <summary>
-        /// The listing&apos;s videos with their file name, Vrbo&apos;s processing and review status, player and thumbnail URLs, upload time and any reasons Vrbo rejected them.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// The listing&apos;s videos with their file name, Vrbo&apos;s processing and review status, player and thumbnail URLs, upload time and any reasons Vrbo rejected them.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class VideosRequestBuilderGetQueryParameters 
         {
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [Obsolete("This property is deprecated, use SourceAsGetSourceQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("source")]
+            public string? Source { get; set; }
+#nullable restore
+#else
+            [QueryParameter("source")]
+            public string Source { get; set; }
+#endif
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [QueryParameter("source")]
+            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos.GetSourceQueryParameterType? SourceAsGetSourceQueryParameterType { get; set; }
             /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

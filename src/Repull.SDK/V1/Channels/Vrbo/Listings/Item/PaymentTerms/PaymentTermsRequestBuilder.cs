@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PaymentTermsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/payment-terms{?vrboListingNumber*}", pathParameters)
+        public PaymentTermsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/payment-terms{?source*,vrboListingNumber*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PaymentTermsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/payment-terms{?vrboListingNumber*}", rawUrl)
+        public PaymentTermsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/payment-terms{?source*,vrboListingNumber*}", rawUrl)
         {
         }
         /// <summary>
-        /// How much the guest pays at booking and when the rest is due.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// How much the guest pays at booking and when the rest is due.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -73,7 +73,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// How much the guest pays at booking and when the rest is due.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// How much the guest pays at booking and when the rest is due.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -113,7 +113,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Change the payment terms of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `percentDueNow` and `payments: [{percent, daysBeforeArrival}]`, adding up to 100.**Cost:** 1 call + 1 to read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change the payment terms of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `percentDueNow` and `payments: [{percent, daysBeforeArrival}]`, adding up to 100.**Cost:** 1 call + 1 to read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsPutResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -154,7 +154,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsPutResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsPutResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Change the payment terms of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `percentDueNow` and `payments: [{percent, daysBeforeArrival}]`, adding up to 100.**Cost:** 1 call + 1 to read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change the payment terms of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `percentDueNow` and `payments: [{percent, daysBeforeArrival}]`, adding up to 100.**Cost:** 1 call + 1 to read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -196,7 +196,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// How much the guest pays at booking and when the rest is due.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// How much the guest pays at booking and when the rest is due.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -215,7 +215,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
             return requestInfo;
         }
         /// <summary>
-        /// Change the payment terms of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `percentDueNow` and `payments: [{percent, daysBeforeArrival}]`, adding up to 100.**Cost:** 1 call + 1 to read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change the payment terms of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `percentDueNow` and `payments: [{percent, daysBeforeArrival}]`, adding up to 100.**Cost:** 1 call + 1 to read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -246,11 +246,25 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
             return new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.PaymentTermsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// How much the guest pays at booking and when the rest is due.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// How much the guest pays at booking and when the rest is due.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call on Vrbo, spaced ~3 s apart per account — a few seconds.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PaymentTermsRequestBuilderGetQueryParameters 
         {
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [Obsolete("This property is deprecated, use SourceAsGetSourceQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("source")]
+            public string? Source { get; set; }
+#nullable restore
+#else
+            [QueryParameter("source")]
+            public string Source { get; set; }
+#endif
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [QueryParameter("source")]
+            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms.GetSourceQueryParameterType? SourceAsGetSourceQueryParameterType { get; set; }
             /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -271,7 +285,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.PaymentTerms
         {
         }
         /// <summary>
-        /// Change the payment terms of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `percentDueNow` and `payments: [{percent, daysBeforeArrival}]`, adding up to 100.**Cost:** 1 call + 1 to read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change the payment terms of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `percentDueNow` and `payments: [{percent, daysBeforeArrival}]`, adding up to 100.**Cost:** 1 call + 1 to read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PaymentTermsRequestBuilderPutQueryParameters 

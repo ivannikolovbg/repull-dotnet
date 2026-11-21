@@ -5,6 +5,47 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.54 — 2026-11-21
+
+Vrbo listing content on the Airbnb endpoints' names and verbs: `descriptions` (every language, `locale`), `details`, `permits`, `checkin-guide`, `checkout-guide`, `safety-disclosures`; photos (add, caption / move, delete, cover, order) and rooms (add, update, delete) as separate calls; the listing itself with its actions (push, unlist, relist, delete), `listings/map`, the Vrbo-only calendar (`availability`) and `connection`. Reads answer `{ data, dataFreshness }` from Repull's copy. The old section names (`description`, `property`, `registration`, `welcome-guide`, `translations`) are gone.
+
+- New: `GET /v1/channels/vrbo/connection`
+- New: `POST /v1/channels/vrbo/listings/map`
+- New: `GET /v1/channels/vrbo/listings/{id}`
+- New: `POST /v1/channels/vrbo/listings/{id}`
+- New: `GET /v1/channels/vrbo/listings/{id}/availability`
+- New: `PUT /v1/channels/vrbo/listings/{id}/availability`
+- New: `GET /v1/channels/vrbo/listings/{id}/checkin-guide`
+- New: `PUT /v1/channels/vrbo/listings/{id}/checkin-guide`
+- New: `GET /v1/channels/vrbo/listings/{id}/checkout-guide`
+- New: `DELETE /v1/channels/vrbo/listings/{id}/descriptions`
+- New: `GET /v1/channels/vrbo/listings/{id}/descriptions`
+- New: `PUT /v1/channels/vrbo/listings/{id}/descriptions`
+- New: `GET /v1/channels/vrbo/listings/{id}/details`
+- New: `PUT /v1/channels/vrbo/listings/{id}/details`
+- New: `GET /v1/channels/vrbo/listings/{id}/permits`
+- New: `PUT /v1/channels/vrbo/listings/{id}/permits`
+- New: `DELETE /v1/channels/vrbo/listings/{id}/photos`
+- New: `PATCH /v1/channels/vrbo/listings/{id}/photos`
+- New: `POST /v1/channels/vrbo/listings/{id}/photos`
+- New: `PUT /v1/channels/vrbo/listings/{id}/photos/cover`
+- New: `PUT /v1/channels/vrbo/listings/{id}/photos/order`
+- New: `DELETE /v1/channels/vrbo/listings/{id}/rooms`
+- New: `POST /v1/channels/vrbo/listings/{id}/rooms`
+- New: `GET /v1/channels/vrbo/listings/{id}/safety-disclosures`
+- New: `PUT /v1/channels/vrbo/listings/{id}/safety-disclosures`
+- Removed: `GET /v1/channels/vrbo/listings/{id}/description`
+- Removed: `PUT /v1/channels/vrbo/listings/{id}/description`
+- Removed: `PUT /v1/channels/vrbo/listings/{id}/photos`
+- Removed: `GET /v1/channels/vrbo/listings/{id}/property`
+- Removed: `PUT /v1/channels/vrbo/listings/{id}/property`
+- Removed: `GET /v1/channels/vrbo/listings/{id}/registration`
+- Removed: `PUT /v1/channels/vrbo/listings/{id}/registration`
+- Removed: `GET /v1/channels/vrbo/listings/{id}/translations`
+- Removed: `PUT /v1/channels/vrbo/listings/{id}/translations`
+- Removed: `GET /v1/channels/vrbo/listings/{id}/welcome-guide`
+- Removed: `PUT /v1/channels/vrbo/listings/{id}/welcome-guide`
+
 ## 0.2.53 — 2026-11-21
 
 - Fix: an explicit `null` is now sent. Kiota left null properties out of the body, so e.g. Vrbo fees `"pets": null` (remove the pet fee), protection `"damageDeposit": null`, listing markups `"markupPercent": null` and webhook `"description": null` could not be sent. Models now use a backing store (`RepullBackingStore`) that records which properties were set; a property you never set is still left out, and every set value is sent (no change tracking). Nulls read from JSON (`KiotaJsonSerializer.DeserializeAsync`, responses) are kept too (`RepullJsonParseNodeFactory`).

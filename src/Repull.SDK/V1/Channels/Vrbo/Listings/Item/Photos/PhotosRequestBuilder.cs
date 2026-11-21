@@ -4,6 +4,8 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.Cover;
+using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.Order;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,12 +19,22 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class PhotosRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The cover property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.Cover.CoverRequestBuilder Cover
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.Cover.CoverRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The order property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.Order.OrderRequestBuilder Order
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.Order.OrderRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PhotosRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/photos{?vrboListingNumber*}", pathParameters)
+        public PhotosRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/photos{?source*,vrboListingNumber*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +42,90 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public PhotosRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/photos{?vrboListingNumber*}", rawUrl)
+        public PhotosRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/photos{?source*,vrboListingNumber*}", rawUrl)
         {
         }
         /// <summary>
-        /// Photos in order (id, url, caption, Vrbo&apos;s own tags, rank, rooms), plus any Vrbo moderation rejected and why.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 2 Vrbo calls on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Remove photos by `photoId` (comma-separated for several). Photo ids are the `id`s of GET …/photos.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosDeleteResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosDeleteResponse?> DeleteAsPhotosDeleteResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosDeleteResponse> DeleteAsPhotosDeleteResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosDeleteResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Remove photos by `photoId` (comma-separated for several). Photo ids are the `id`s of GET …/photos.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
+        [Obsolete("This method is obsolete. Use DeleteAsPhotosDeleteResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse?> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Photos in order (id, url, caption, Vrbo&apos;s own tags, rank, rooms), plus any Vrbo moderation rejected and why.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 2 Vrbo calls on Vrbo, spaced ~3 s apart per account — a few seconds.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -73,7 +164,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Photos in order (id, url, caption, Vrbo&apos;s own tags, rank, rooms), plus any Vrbo moderation rejected and why.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 2 Vrbo calls on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Photos in order (id, url, caption, Vrbo&apos;s own tags, rank, rooms), plus any Vrbo moderation rejected and why.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 2 Vrbo calls on Vrbo, spaced ~3 s apart per account — a few seconds.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -113,9 +204,9 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Change the photos of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `add: [{url, caption?}]` (https URLs Vrbo downloads), `delete: [id]`, `captions: {id: caption}`, `order: [id…]`, `cover: id`. Applied in that order. `order` may list only the first photos; the rest keep their order, and every photo is sent with its new position (as Vrbo&apos;s own page does). **Captions are one-way:** Vrbo has not been shown to clear a caption once set, so an empty caption is refused. Each `add` uploads a photo again — it is the one write that is not idempotent.**Cost:** about 2 calls per photo added, 1 per delete/caption/reorder, plus reads on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change one photo&apos;s `caption` and/or its position (`sort_order`, 1 = first). Photo ids are the `id`s of GET …/photos. Vrbo cannot clear a caption once set.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
-        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutResponse"/></returns>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -130,15 +221,15 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutResponse?> PutAsPhotosPutResponseAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchResponse?> PatchAsPhotosPatchResponseAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPatchQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutResponse> PutAsPhotosPutResponseAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchResponse> PatchAsPhotosPatchResponseAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPatchQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
@@ -151,10 +242,10 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
                 { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
                 { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Change the photos of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `add: [{url, caption?}]` (https URLs Vrbo downloads), `delete: [id]`, `captions: {id: caption}`, `order: [id…]`, `cover: id`. Applied in that order. `order` may list only the first photos; the rest keep their order, and every photo is sent with its new position (as Vrbo&apos;s own page does). **Captions are one-way:** Vrbo has not been shown to clear a caption once set, so an empty caption is refused. Each `add` uploads a photo again — it is the one write that is not idempotent.**Cost:** about 2 calls per photo added, 1 per delete/caption/reorder, plus reads on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change one photo&apos;s `caption` and/or its position (`sort_order`, 1 = first). Photo ids are the `id`s of GET …/photos. Vrbo cannot clear a caption once set.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -169,18 +260,18 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
         /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
-        [Obsolete("This method is obsolete. Use PutAsPhotosPutResponseAsync instead.")]
+        [Obsolete("This method is obsolete. Use PatchAsPhotosPatchResponseAsync instead.")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse?> PutAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse?> PatchAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPatchQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse> PutAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse> PatchAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPatchQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
@@ -196,7 +287,109 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Photos in order (id, url, caption, Vrbo&apos;s own tags, rank, rooms), plus any Vrbo moderation rejected and why.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 2 Vrbo calls on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Add 1–20 photos, each from an https `url` Vrbo downloads or as base64 `image` data (like Airbnb&apos;s upload), with an optional `caption`. New photos go to the end; move them with PATCH or PUT …/photos/order.**Cost:** about 2 Vrbo calls per photo, then the photos are read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostResponse?> PostAsPhotosPostResponseAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostResponse> PostAsPhotosPostResponseAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Add 1–20 photos, each from an https `url` Vrbo downloads or as base64 `image` data (like Airbnb&apos;s upload), with an optional `caption`. New photos go to the end; move them with PATCH or PUT …/photos/order.**Cost:** about 2 Vrbo calls per photo, then the photos are read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
+        [Obsolete("This method is obsolete. Use PostAsPhotosPostResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse?> PostAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse> PostAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Remove photos by `photoId` (comma-separated for several). Photo ids are the `id`s of GET …/photos.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderDeleteQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderDeleteQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            var requestInfo = new RequestInformation(Method.DELETE, "{+baseurl}/v1/channels/vrbo/listings/{id}/photos?photoId={photoId}{&vrboListingNumber*}", PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Photos in order (id, url, caption, Vrbo&apos;s own tags, rank, rooms), plus any Vrbo moderation rejected and why.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 2 Vrbo calls on Vrbo, spaced ~3 s apart per account — a few seconds.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -215,22 +408,44 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
             return requestInfo;
         }
         /// <summary>
-        /// Change the photos of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `add: [{url, caption?}]` (https URLs Vrbo downloads), `delete: [id]`, `captions: {id: caption}`, `order: [id…]`, `cover: id`. Applied in that order. `order` may list only the first photos; the rest keep their order, and every photo is sent with its new position (as Vrbo&apos;s own page does). **Captions are one-way:** Vrbo has not been shown to clear a caption once set, so an empty caption is refused. Each `add` uploads a photo again — it is the one write that is not idempotent.**Cost:** about 2 calls per photo added, 1 per delete/caption/reorder, plus reads on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change one photo&apos;s `caption` and/or its position (`sort_order`, 1 = first). Photo ids are the `id`s of GET …/photos. Vrbo cannot clear a caption once set.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPutQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPatchRequestInformation(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPatchQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPutQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPatchRequestInformation(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPatchRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPatchQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.PATCH, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
+            return requestInfo;
+        }
+        /// <summary>
+        /// Add 1–20 photos, each from an https `url` Vrbo downloads or as base64 `image` data (like Airbnb&apos;s upload), with an optional `caption`. New photos go to the end; move them with PATCH or PUT …/photos/order.**Cost:** about 2 Vrbo calls per photo, then the photos are read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPostQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPostQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
@@ -246,11 +461,60 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
             return new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Photos in order (id, url, caption, Vrbo&apos;s own tags, rank, rooms), plus any Vrbo moderation rejected and why.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 2 Vrbo calls on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Remove photos by `photoId` (comma-separated for several). Photo ids are the `id`s of GET …/photos.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class PhotosRequestBuilderDeleteQueryParameters 
+        {
+            /// <summary>The `id` of the photo to remove (comma-separated for several).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("photoId")]
+            public string? PhotoId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("photoId")]
+            public string PhotoId { get; set; }
+#endif
+            /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("vrboListingNumber")]
+            public string? VrboListingNumber { get; set; }
+#nullable restore
+#else
+            [QueryParameter("vrboListingNumber")]
+            public string VrboListingNumber { get; set; }
+#endif
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class PhotosRequestBuilderDeleteRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderDeleteQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Photos in order (id, url, caption, Vrbo&apos;s own tags, rank, rooms), plus any Vrbo moderation rejected and why.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 2 Vrbo calls on Vrbo, spaced ~3 s apart per account — a few seconds.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class PhotosRequestBuilderGetQueryParameters 
         {
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [Obsolete("This property is deprecated, use SourceAsGetSourceQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("source")]
+            public string? Source { get; set; }
+#nullable restore
+#else
+            [QueryParameter("source")]
+            public string Source { get; set; }
+#endif
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [QueryParameter("source")]
+            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.GetSourceQueryParameterType? SourceAsGetSourceQueryParameterType { get; set; }
             /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -271,10 +535,10 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
         {
         }
         /// <summary>
-        /// Change the photos of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `add: [{url, caption?}]` (https URLs Vrbo downloads), `delete: [id]`, `captions: {id: caption}`, `order: [id…]`, `cover: id`. Applied in that order. `order` may list only the first photos; the rest keep their order, and every photo is sent with its new position (as Vrbo&apos;s own page does). **Captions are one-way:** Vrbo has not been shown to clear a caption once set, so an empty caption is refused. Each `add` uploads a photo again — it is the one write that is not idempotent.**Cost:** about 2 calls per photo added, 1 per delete/caption/reorder, plus reads on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change one photo&apos;s `caption` and/or its position (`sort_order`, 1 = first). Photo ids are the `id`s of GET …/photos. Vrbo cannot clear a caption once set.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class PhotosRequestBuilderPutQueryParameters 
+        public partial class PhotosRequestBuilderPatchQueryParameters 
         {
             /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -292,7 +556,32 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class PhotosRequestBuilderPutRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPutQueryParameters>
+        public partial class PhotosRequestBuilderPatchRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPatchQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Add 1–20 photos, each from an https `url` Vrbo downloads or as base64 `image` data (like Airbnb&apos;s upload), with an optional `caption`. New photos go to the end; move them with PATCH or PUT …/photos/order.**Cost:** about 2 Vrbo calls per photo, then the photos are read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class PhotosRequestBuilderPostQueryParameters 
+        {
+            /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("vrboListingNumber")]
+            public string? VrboListingNumber { get; set; }
+#nullable restore
+#else
+            [QueryParameter("vrboListingNumber")]
+            public string VrboListingNumber { get; set; }
+#endif
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class PhotosRequestBuilderPostRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosRequestBuilder.PhotosRequestBuilderPostQueryParameters>
         {
         }
     }

@@ -13,54 +13,86 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
     public partial class RoomsPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>The add property</summary>
+        /// <summary>`{amenityId: true|false}` or `[{id, selected, detail?}]` — only the ones given change. Ids are in GET …/rooms.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add>? Add
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_amenities>? Amenities
         {
-            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add>?>("add"); }
-            set { BackingStore?.Set("add", value); }
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_amenities>?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
         }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add> Add
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_amenities> Amenities
         {
-            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add>>("add"); }
-            set { BackingStore?.Set("add", value); }
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_amenities>>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
         }
 #endif
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
-        /// <summary>The delete property</summary>
+        /// <summary>The room&apos;s whole sleeping arrangement: every bed, not just the changed one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Delete
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_beds>? Beds
         {
-            get { return BackingStore?.Get<List<string>?>("delete"); }
-            set { BackingStore?.Set("delete", value); }
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_beds>?>("beds"); }
+            set { BackingStore?.Set("beds", value); }
         }
 #nullable restore
 #else
-        public List<string> Delete
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_beds> Beds
         {
-            get { return BackingStore?.Get<List<string>>("delete"); }
-            set { BackingStore?.Set("delete", value); }
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_beds>>("beds"); }
+            set { BackingStore?.Set("beds", value); }
         }
 #endif
-        /// <summary>The update property</summary>
+        /// <summary>Vrbo cannot clear a room description once set.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_update>? Update
+        public string? Description
         {
-            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_update>?>("update"); }
-            set { BackingStore?.Set("update", value); }
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
         }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_update> Update
+        public string Description
         {
-            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_update>>("update"); }
-            set { BackingStore?.Set("update", value); }
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
+#endif
+        /// <summary>The name property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
+#nullable restore
+#else
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
+#endif
+        /// <summary>Bathrooms: FULL_BATH (default) or NO_TUB_OR_SHOWER (half bath).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SubType
+        {
+            get { return BackingStore?.Get<string?>("sub_type"); }
+            set { BackingStore?.Set("sub_type", value); }
+        }
+#nullable restore
+#else
+        public string SubType
+        {
+            get { return BackingStore?.Get<string>("sub_type"); }
+            set { BackingStore?.Set("sub_type", value); }
         }
 #endif
         /// <summary>
@@ -88,9 +120,11 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "add", n => { Add = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "delete", n => { Delete = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "update", n => { Update = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_update>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_update.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "amenities", n => { Amenities = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_amenities>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_amenities.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "beds", n => { Beds = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_beds>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_beds.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "description", n => { Description = n.GetStringValue(); } },
+                { "name", n => { Name = n.GetStringValue(); } },
+                { "sub_type", n => { SubType = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -100,9 +134,11 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add>("add", Add);
-            writer.WriteCollectionOfPrimitiveValues<string>("delete", Delete);
-            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_update>("update", Update);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_amenities>("amenities", Amenities);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_beds>("beds", Beds);
+            writer.WriteStringValue("description", Description);
+            writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("sub_type", SubType);
         }
     }
 }

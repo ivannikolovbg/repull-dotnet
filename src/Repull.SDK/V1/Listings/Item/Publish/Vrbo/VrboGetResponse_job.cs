@@ -173,7 +173,7 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
             set { BackingStore?.Set("sections", value); }
         }
 #endif
-        /// <summary>Update only: sections the push leaves as they are on Vrbo, and why (rooms, photos, registration, or no value in the listing content).</summary>
+        /// <summary>Update only: sections the push leaves as they are on Vrbo, and why (rooms, photos, permits, or no value in the listing content).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped>? Skipped

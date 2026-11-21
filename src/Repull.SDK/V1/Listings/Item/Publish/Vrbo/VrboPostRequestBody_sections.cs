@@ -8,13 +8,13 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
     public enum VrboPostRequestBody_sections
     #pragma warning restore CS1591
     {
-        [EnumMember(Value = "description")]
+        [EnumMember(Value = "descriptions")]
         #pragma warning disable CS1591
-        Description,
+        Descriptions,
         #pragma warning restore CS1591
-        [EnumMember(Value = "property")]
+        [EnumMember(Value = "details")]
         #pragma warning disable CS1591
-        Property,
+        Details,
         #pragma warning restore CS1591
         [EnumMember(Value = "amenities")]
         #pragma warning disable CS1591
