@@ -6,6 +6,7 @@ using Repull.SDK.V1.Channels.Vrbo.Alterations;
 using Repull.SDK.V1.Channels.Vrbo.Connection;
 using Repull.SDK.V1.Channels.Vrbo.Listings;
 using Repull.SDK.V1.Channels.Vrbo.Reservations;
+using Repull.SDK.V1.Channels.Vrbo.Transactions;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -37,6 +38,11 @@ namespace Repull.SDK.V1.Channels.Vrbo
         public global::Repull.SDK.V1.Channels.Vrbo.Reservations.ReservationsRequestBuilder Reservations
         {
             get => new global::Repull.SDK.V1.Channels.Vrbo.Reservations.ReservationsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The transactions property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Transactions.TransactionsRequestBuilder Transactions
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Transactions.TransactionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.VrboRequestBuilder"/> and sets the default values.
