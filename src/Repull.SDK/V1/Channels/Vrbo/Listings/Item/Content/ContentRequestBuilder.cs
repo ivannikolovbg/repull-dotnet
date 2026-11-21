@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContentRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/content?sections={sections}{&vrboListingNumber*}", pathParameters)
+        public ContentRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/content?sections={sections}{&source*,vrboListingNumber*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContentRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/content?sections={sections}{&vrboListingNumber*}", rawUrl)
+        public ContentRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/content?sections={sections}{&source*,vrboListingNumber*}", rawUrl)
         {
         }
         /// <summary>
-        /// Read several sections of the listing&apos;s Vrbo listing in one call. `sections` is required: name them (`?sections=description,house-rules,fees`) or ask for `all`.**Cost:** each section is read live on Vrbo, with calls spaced ~3 s apart per account — `all` is about 45 Vrbo calls, **around 2.5 minutes**. Prefer the one-section endpoints (`GET /v1/channels/vrbo/listings/{id}/{section}`) and never poll this one. A section that fails carries `{ error: { code, message } }`; the others still answer.Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Read several sections of the listing&apos;s Vrbo listing in one call. `sections` is required: name them (`?sections=descriptions,house-rules,fees`) or ask for `all`. Each section is the `data` of its own endpoint.Sections Repull holds answer from its copy; only the others are read on Vrbo, in one pass (`?source=live` reads them all on Vrbo: about 45 calls, **around 2.5 minutes** for `all`). A section Vrbo fails to return carries `{ error: { code, message } }`; the others still answer. `dataFreshness.lastSyncedAt` is the oldest section&apos;s.Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -73,7 +73,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Read several sections of the listing&apos;s Vrbo listing in one call. `sections` is required: name them (`?sections=description,house-rules,fees`) or ask for `all`.**Cost:** each section is read live on Vrbo, with calls spaced ~3 s apart per account — `all` is about 45 Vrbo calls, **around 2.5 minutes**. Prefer the one-section endpoints (`GET /v1/channels/vrbo/listings/{id}/{section}`) and never poll this one. A section that fails carries `{ error: { code, message } }`; the others still answer.Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Read several sections of the listing&apos;s Vrbo listing in one call. `sections` is required: name them (`?sections=descriptions,house-rules,fees`) or ask for `all`. Each section is the `data` of its own endpoint.Sections Repull holds answer from its copy; only the others are read on Vrbo, in one pass (`?source=live` reads them all on Vrbo: about 45 calls, **around 2.5 minutes** for `all`). A section Vrbo fails to return carries `{ error: { code, message } }`; the others still answer. `dataFreshness.lastSyncedAt` is the oldest section&apos;s.Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -113,7 +113,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Read several sections of the listing&apos;s Vrbo listing in one call. `sections` is required: name them (`?sections=description,house-rules,fees`) or ask for `all`.**Cost:** each section is read live on Vrbo, with calls spaced ~3 s apart per account — `all` is about 45 Vrbo calls, **around 2.5 minutes**. Prefer the one-section endpoints (`GET /v1/channels/vrbo/listings/{id}/{section}`) and never poll this one. A section that fails carries `{ error: { code, message } }`; the others still answer.Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Read several sections of the listing&apos;s Vrbo listing in one call. `sections` is required: name them (`?sections=descriptions,house-rules,fees`) or ask for `all`. Each section is the `data` of its own endpoint.Sections Repull holds answer from its copy; only the others are read on Vrbo, in one pass (`?source=live` reads them all on Vrbo: about 45 calls, **around 2.5 minutes** for `all`). A section Vrbo fails to return carries `{ error: { code, message } }`; the others still answer. `dataFreshness.lastSyncedAt` is the oldest section&apos;s.Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -141,12 +141,12 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             return new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Read several sections of the listing&apos;s Vrbo listing in one call. `sections` is required: name them (`?sections=description,house-rules,fees`) or ask for `all`.**Cost:** each section is read live on Vrbo, with calls spaced ~3 s apart per account — `all` is about 45 Vrbo calls, **around 2.5 minutes**. Prefer the one-section endpoints (`GET /v1/channels/vrbo/listings/{id}/{section}`) and never poll this one. A section that fails carries `{ error: { code, message } }`; the others still answer.Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Read several sections of the listing&apos;s Vrbo listing in one call. `sections` is required: name them (`?sections=descriptions,house-rules,fees`) or ask for `all`. Each section is the `data` of its own endpoint.Sections Repull holds answer from its copy; only the others are read on Vrbo, in one pass (`?source=live` reads them all on Vrbo: about 45 calls, **around 2.5 minutes** for `all`). A section Vrbo fails to return carries `{ error: { code, message } }`; the others still answer. `dataFreshness.lastSyncedAt` is the oldest section&apos;s.Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ContentRequestBuilderGetQueryParameters 
         {
-            /// <summary>Comma-separated sections, or `all`: description, property, story, additional-info, translations, photos, amenities, rooms, location, house-rules, booking-settings, cancellation, fees, pricing, rates, payment-terms, protection, taxes, registration, welcome-guide, videos.</summary>
+            /// <summary>Comma-separated sections, or `all`: descriptions, details, story, additional-info, photos, amenities, rooms, location, house-rules, booking-settings, cancellation, fees, pricing, payment-terms, protection, taxes, permits, checkin-guide, videos.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("sections")]
@@ -156,6 +156,20 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             [QueryParameter("sections")]
             public string Sections { get; set; }
 #endif
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [Obsolete("This property is deprecated, use SourceAsGetSourceQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("source")]
+            public string? Source { get; set; }
+#nullable restore
+#else
+            [QueryParameter("source")]
+            public string Source { get; set; }
+#endif
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [QueryParameter("source")]
+            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.GetSourceQueryParameterType? SourceAsGetSourceQueryParameterType { get; set; }
             /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

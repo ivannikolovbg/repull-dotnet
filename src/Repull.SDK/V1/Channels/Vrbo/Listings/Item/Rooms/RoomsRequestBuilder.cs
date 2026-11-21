@@ -22,7 +22,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RoomsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/rooms{?vrboListingNumber*}", pathParameters)
+        public RoomsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/rooms{?source*,vrboListingNumber*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,90 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RoomsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/rooms{?vrboListingNumber*}", rawUrl)
+        public RoomsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/v1/channels/vrbo/listings/{id}/rooms{?source*,vrboListingNumber*}", rawUrl)
         {
         }
         /// <summary>
-        /// Bedrooms, bathrooms, living rooms and other spaces with their beds and room amenities; the space, bed and bathroom types Vrbo offers.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call + 1 per room on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Remove the room `roomId`.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsDeleteResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsDeleteResponse?> DeleteAsRoomsDeleteResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsDeleteResponse> DeleteAsRoomsDeleteResponseAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsDeleteResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Remove the room `roomId`.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
+        [Obsolete("This method is obsolete. Use DeleteAsRoomsDeleteResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse?> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse> DeleteAsync(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Bedrooms, bathrooms, living rooms and other spaces with their beds and room amenities; the space, bed and bathroom types Vrbo offers.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call + 1 per room on Vrbo, spaced ~3 s apart per account — a few seconds.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -73,7 +152,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Bedrooms, bathrooms, living rooms and other spaces with their beds and room amenities; the space, bed and bathroom types Vrbo offers.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call + 1 per room on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Bedrooms, bathrooms, living rooms and other spaces with their beds and room amenities; the space, bed and bathroom types Vrbo offers.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call + 1 per room on Vrbo, spaced ~3 s apart per account — a few seconds.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -113,7 +192,90 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Change the rooms and spaces of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `add: [{type, name?, subType?, description?, beds?, amenities?}]`, `update: [{spaceId, …}]`, `delete: [spaceId]`. Beds `{type, size?, quantity 1–99}`: `type` one of the read&apos;s `bedTypes`, and `size` is required where that bed type lists `sizes` (bunk, sofa…). **A room description can be replaced but not cleared** (Vrbo never saves an empty one), so an empty `description` is refused.**Cost:** 1 call per room changed + the read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Add one room with its beds. Room types: Airbnb&apos;s words (`bedroom`, `bathroom`, `living_room`, `office`) or Vrbo&apos;s (BEDROOM, BATHROOM, LIVING_ROOM, OFFICE) — Vrbo has no other room types; describe a kitchen or outdoor space with the amenities.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostResponse?> PostAsRoomsPostResponseAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostResponse> PostAsRoomsPostResponseAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Add one room with its beds. Room types: Airbnb&apos;s words (`bedroom`, `bathroom`, `living_room`, `office`) or Vrbo&apos;s (BEDROOM, BATHROOM, LIVING_ROOM, OFFICE) — Vrbo has no other room types; describe a kitchen or outdoor space with the amenities.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 422 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 500 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 502 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 503 status code</exception>
+        /// <exception cref="global::Repull.SDK.Models.Error">When receiving a 504 status code</exception>
+        [Obsolete("This method is obsolete. Use PostAsRoomsPostResponseAsync instead.")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse?> PostAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse> PostAsync(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "500", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "502", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+                { "504", global::Repull.SDK.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Change a room&apos;s name, description, bathroom type, beds or room amenities. Vrbo cannot change the type of a room: delete it and add one. `beds` replaces the room&apos;s beds.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -154,7 +316,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Change the rooms and spaces of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `add: [{type, name?, subType?, description?, beds?, amenities?}]`, `update: [{spaceId, …}]`, `delete: [spaceId]`. Beds `{type, size?, quantity 1–99}`: `type` one of the read&apos;s `bedTypes`, and `size` is required where that bed type lists `sizes` (bunk, sofa…). **A room description can be replaced but not cleared** (Vrbo never saves an empty one), so an empty `description` is refused.**Cost:** 1 call per room changed + the read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Change a room&apos;s name, description, bathroom type, beds or room amenities. Vrbo cannot change the type of a room: delete it and add one. `beds` replaces the room&apos;s beds.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -196,7 +358,26 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse>(requestInfo, global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Bedrooms, bathrooms, living rooms and other spaces with their beds and room amenities; the space, bed and bathroom types Vrbo offers.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call + 1 per room on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Remove the room `roomId`.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderDeleteQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderDeleteQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            var requestInfo = new RequestInformation(Method.DELETE, "{+baseurl}/v1/channels/vrbo/listings/{id}/rooms?roomId={roomId}{&vrboListingNumber*}", PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Bedrooms, bathrooms, living rooms and other spaces with their beds and room amenities; the space, bed and bathroom types Vrbo offers.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call + 1 per room on Vrbo, spaced ~3 s apart per account — a few seconds.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -215,7 +396,29 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
             return requestInfo;
         }
         /// <summary>
-        /// Change the rooms and spaces of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `add: [{type, name?, subType?, description?, beds?, amenities?}]`, `update: [{spaceId, …}]`, `delete: [spaceId]`. Beds `{type, size?, quantity 1–99}`: `type` one of the read&apos;s `bedTypes`, and `size` is required where that bed type lists `sizes` (bunk, sofa…). **A room description can be replaced but not cleared** (Vrbo never saves an empty one), so an empty `description` is refused.**Cost:** 1 call per room changed + the read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Add one room with its beds. Room types: Airbnb&apos;s words (`bedroom`, `bathroom`, `living_room`, `office`) or Vrbo&apos;s (BEDROOM, BATHROOM, LIVING_ROOM, OFFICE) — Vrbo has no other room types; describe a kitchen or outdoor space with the amenities.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request body</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPostQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPostRequestInformation(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPostRequestBody body, Action<RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPostQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
+            return requestInfo;
+        }
+        /// <summary>
+        /// Change a room&apos;s name, description, bathroom type, beds or room amenities. Vrbo cannot change the type of a room: delete it and add one. `beds` replaces the room&apos;s beds.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -230,7 +433,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.PUT, "{+baseurl}/v1/channels/vrbo/listings/{id}/rooms?roomId={roomId}{&vrboListingNumber*}", PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
@@ -246,11 +449,60 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
             return new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Bedrooms, bathrooms, living rooms and other spaces with their beds and room amenities; the space, bed and bathroom types Vrbo offers.Read live from the listing&apos;s Vrbo listing in the host&apos;s connected Vrbo account. **Cost:** 1 Vrbo call + 1 per room on Vrbo, spaced ~3 s apart per account — a few seconds. Vrbo is read live on every request (nothing is cached), so read the section you need rather than polling.Works with messaging or full access. Returns `404` when the listing is not linked to Vrbo, and `403 listing_inactive` when the listing is inactive.
+        /// Remove the room `roomId`.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RoomsRequestBuilderDeleteQueryParameters 
+        {
+            /// <summary>The room&apos;s `spaceId` from GET …/rooms.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("roomId")]
+            public string? RoomId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("roomId")]
+            public string RoomId { get; set; }
+#endif
+            /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("vrboListingNumber")]
+            public string? VrboListingNumber { get; set; }
+#nullable restore
+#else
+            [QueryParameter("vrboListingNumber")]
+            public string VrboListingNumber { get; set; }
+#endif
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RoomsRequestBuilderDeleteRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderDeleteQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Bedrooms, bathrooms, living rooms and other spaces with their beds and room amenities; the space, bed and bathroom types Vrbo offers.Answers from Repull&apos;s stored copy of the listing&apos;s Vrbo content, like the Airbnb endpoints (`dataFreshness.lastSyncedAt` says when it was read from Vrbo). The first read of a section reads Vrbo and stores it; a copy over 24 h old answers and is refreshed in the background (`reason: refreshing`); every write through Repull stores what Vrbo has after it. `?source=live` reads Vrbo now. **Cost:** from the copy, milliseconds. A live read is 1 Vrbo call + 1 per room on Vrbo, spaced ~3 s apart per account — a few seconds.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class RoomsRequestBuilderGetQueryParameters 
         {
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [Obsolete("This property is deprecated, use SourceAsGetSourceQueryParameterType instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("source")]
+            public string? Source { get; set; }
+#nullable restore
+#else
+            [QueryParameter("source")]
+            public string Source { get; set; }
+#endif
+            /// <summary>`stored` (default): Repull&apos;s copy, in milliseconds. `live`: read Vrbo now (seconds) and refresh the copy.</summary>
+            [QueryParameter("source")]
+            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.GetSourceQueryParameterType? SourceAsGetSourceQueryParameterType { get; set; }
             /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -271,11 +523,46 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
         {
         }
         /// <summary>
-        /// Change the rooms and spaces of the listing&apos;s existing Vrbo listing. **Partial:** send only the fields to change; a field you leave out is never changed on Vrbo, and a field sent as `null` means &quot;none&quot; (where the field can be cleared). Fields Vrbo can change but never empty once set are refused with `422 invalid_params` when sent empty or `null`, rather than answering OK while Vrbo keeps the old value. `add: [{type, name?, subType?, description?, beds?, amenities?}]`, `update: [{spaceId, …}]`, `delete: [spaceId]`. Beds `{type, size?, quantity 1–99}`: `type` one of the read&apos;s `bedTypes`, and `size` is required where that bed type lists `sizes` (bunk, sofa…). **A room description can be replaced but not cleared** (Vrbo never saves an empty one), so an empty `description` is refused.**Cost:** 1 call per room changed + the read back on Vrbo, spaced ~3 s apart per account. The answer comes once Vrbo has saved and the section has been read back.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data` (fields Vrbo accepted in the same request are saved). A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// Add one room with its beds. Room types: Airbnb&apos;s words (`bedroom`, `bathroom`, `living_room`, `office`) or Vrbo&apos;s (BEDROOM, BATHROOM, LIVING_ROOM, OFFICE) — Vrbo has no other room types; describe a kitchen or outdoor space with the amenities.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RoomsRequestBuilderPostQueryParameters 
+        {
+            /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("vrboListingNumber")]
+            public string? VrboListingNumber { get; set; }
+#nullable restore
+#else
+            [QueryParameter("vrboListingNumber")]
+            public string VrboListingNumber { get; set; }
+#endif
+        }
+        /// <summary>
+        /// Configuration for the request such as headers, query parameters, and middleware options.
+        /// </summary>
+        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RoomsRequestBuilderPostRequestConfiguration : RequestConfiguration<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsRequestBuilder.RoomsRequestBuilderPostQueryParameters>
+        {
+        }
+        /// <summary>
+        /// Change a room&apos;s name, description, bathroom type, beds or room amenities. Vrbo cannot change the type of a room: delete it and add one. `beds` replaces the room&apos;s beds.**When Vrbo refuses** a value the answer is `422 vrbo_rejected` with Vrbo&apos;s own message, the refused fields in `errors` and what Vrbo has now in `data`. A malformed body is `422 invalid_params` naming the field, and nothing is sent to Vrbo.Needs a Vrbo account connected with full access: one connected with messaging access answers `403 vrbo_messaging_access`. Returns `403 listing_inactive` when the listing is inactive.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class RoomsRequestBuilderPutQueryParameters 
         {
+            /// <summary>The room&apos;s `spaceId` from GET …/rooms.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("roomId")]
+            public string? RoomId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("roomId")]
+            public string RoomId { get; set; }
+#endif
             /// <summary>The Vrbo listing number to work on, when the listing is linked to more than one Vrbo unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

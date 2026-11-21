@@ -21,55 +21,23 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
         }
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
-        /// <summary>The listing property</summary>
+        /// <summary>The dataFreshness property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_listing? Listing
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_dataFreshness? DataFreshness
         {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_listing?>("listing"); }
-            set { BackingStore?.Set("listing", value); }
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_dataFreshness?>("dataFreshness"); }
+            set { BackingStore?.Set("dataFreshness", value); }
         }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_listing Listing
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_dataFreshness DataFreshness
         {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_listing>("listing"); }
-            set { BackingStore?.Set("listing", value); }
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_dataFreshness>("dataFreshness"); }
+            set { BackingStore?.Set("dataFreshness", value); }
         }
 #endif
-        /// <summary>The listingId property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ListingId
-        {
-            get { return BackingStore?.Get<string?>("listingId"); }
-            set { BackingStore?.Set("listingId", value); }
-        }
-#nullable restore
-#else
-        public string ListingId
-        {
-            get { return BackingStore?.Get<string>("listingId"); }
-            set { BackingStore?.Set("listingId", value); }
-        }
-#endif
-        /// <summary>The propertyId property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? PropertyId
-        {
-            get { return BackingStore?.Get<string?>("propertyId"); }
-            set { BackingStore?.Set("propertyId", value); }
-        }
-#nullable restore
-#else
-        public string PropertyId
-        {
-            get { return BackingStore?.Get<string>("propertyId"); }
-            set { BackingStore?.Set("propertyId", value); }
-        }
-#endif
-        /// <summary>Keyed by section; each is the data of `GET /v1/channels/vrbo/listings/{id}/{section}`, or `{ error: { code, message } }` when that section failed.</summary>
+        /// <summary>Keyed by section; each is the `data` of `GET /v1/channels/vrbo/listings/{id}/{section}`, or `{ error: { code, message } }` when that section failed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections? Sections
@@ -127,9 +95,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "listing", n => { Listing = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_listing>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_listing.CreateFromDiscriminatorValue); } },
-                { "listingId", n => { ListingId = n.GetStringValue(); } },
-                { "propertyId", n => { PropertyId = n.GetStringValue(); } },
+                { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_dataFreshness>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_dataFreshness.CreateFromDiscriminatorValue); } },
                 { "sections", n => { Sections = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections.CreateFromDiscriminatorValue); } },
                 { "vrboListingNumber", n => { VrboListingNumber = n.GetStringValue(); } },
             };
@@ -141,9 +107,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_listing>("listing", Listing);
-            writer.WriteStringValue("listingId", ListingId);
-            writer.WriteStringValue("propertyId", PropertyId);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_dataFreshness>("dataFreshness", DataFreshness);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections>("sections", Sections);
             writer.WriteStringValue("vrboListingNumber", VrboListingNumber);
             writer.WriteAdditionalData(AdditionalData);

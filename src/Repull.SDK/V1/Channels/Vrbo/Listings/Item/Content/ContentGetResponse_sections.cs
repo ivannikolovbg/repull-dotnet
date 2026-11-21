@@ -9,7 +9,7 @@ using System;
 namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
 {
     /// <summary>
-    /// Keyed by section; each is the data of `GET /v1/channels/vrbo/listings/{id}/{section}`, or `{ error: { code, message } }` when that section failed.
+    /// Keyed by section; each is the `data` of `GET /v1/channels/vrbo/listings/{id}/{section}`, or `{ error: { code, message } }` when that section failed.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContentGetResponse_sections : IAdditionalDataHolder, IBackedModel, IParsable
@@ -86,20 +86,52 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             set { BackingStore?.Set("cancellation", value); }
         }
 #endif
-        /// <summary>The description property</summary>
+        /// <summary>The checkinGuide property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_description? Description
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_checkinGuide? CheckinGuide
         {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_description?>("description"); }
-            set { BackingStore?.Set("description", value); }
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_checkinGuide?>("checkin-guide"); }
+            set { BackingStore?.Set("checkin-guide", value); }
         }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_description Description
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_checkinGuide CheckinGuide
         {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_description>("description"); }
-            set { BackingStore?.Set("description", value); }
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_checkinGuide>("checkin-guide"); }
+            set { BackingStore?.Set("checkin-guide", value); }
+        }
+#endif
+        /// <summary>The descriptions property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_descriptions>? Descriptions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_descriptions>?>("descriptions"); }
+            set { BackingStore?.Set("descriptions", value); }
+        }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_descriptions> Descriptions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_descriptions>>("descriptions"); }
+            set { BackingStore?.Set("descriptions", value); }
+        }
+#endif
+        /// <summary>The details property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_details? Details
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_details?>("details"); }
+            set { BackingStore?.Set("details", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_details Details
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_details>("details"); }
+            set { BackingStore?.Set("details", value); }
         }
 #endif
         /// <summary>The fees property</summary>
@@ -166,6 +198,22 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             set { BackingStore?.Set("payment-terms", value); }
         }
 #endif
+        /// <summary>The permits property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_permits? Permits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_permits?>("permits"); }
+            set { BackingStore?.Set("permits", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_permits Permits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_permits>("permits"); }
+            set { BackingStore?.Set("permits", value); }
+        }
+#endif
         /// <summary>The photos property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -198,22 +246,6 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             set { BackingStore?.Set("pricing", value); }
         }
 #endif
-        /// <summary>The property property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_property? Property
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_property?>("property"); }
-            set { BackingStore?.Set("property", value); }
-        }
-#nullable restore
-#else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_property Property
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_property>("property"); }
-            set { BackingStore?.Set("property", value); }
-        }
-#endif
         /// <summary>The protection property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -228,38 +260,6 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
         {
             get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_protection>("protection"); }
             set { BackingStore?.Set("protection", value); }
-        }
-#endif
-        /// <summary>The rates property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rates? Rates
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rates?>("rates"); }
-            set { BackingStore?.Set("rates", value); }
-        }
-#nullable restore
-#else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rates Rates
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rates>("rates"); }
-            set { BackingStore?.Set("rates", value); }
-        }
-#endif
-        /// <summary>The registration property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_registration? Registration
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_registration?>("registration"); }
-            set { BackingStore?.Set("registration", value); }
-        }
-#nullable restore
-#else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_registration Registration
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_registration>("registration"); }
-            set { BackingStore?.Set("registration", value); }
         }
 #endif
         /// <summary>The rooms property</summary>
@@ -310,22 +310,6 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             set { BackingStore?.Set("taxes", value); }
         }
 #endif
-        /// <summary>The translations property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_translations? Translations
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_translations?>("translations"); }
-            set { BackingStore?.Set("translations", value); }
-        }
-#nullable restore
-#else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_translations Translations
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_translations>("translations"); }
-            set { BackingStore?.Set("translations", value); }
-        }
-#endif
         /// <summary>The videos property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -340,22 +324,6 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
         {
             get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_videos>("videos"); }
             set { BackingStore?.Set("videos", value); }
-        }
-#endif
-        /// <summary>The welcomeGuide property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide? WelcomeGuide
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide?>("welcome-guide"); }
-            set { BackingStore?.Set("welcome-guide", value); }
-        }
-#nullable restore
-#else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide WelcomeGuide
-        {
-            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide>("welcome-guide"); }
-            set { BackingStore?.Set("welcome-guide", value); }
         }
 #endif
         /// <summary>
@@ -388,23 +356,21 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
                 { "amenities", n => { Amenities = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_amenities>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_amenities.CreateFromDiscriminatorValue); } },
                 { "booking-settings", n => { BookingSettings = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings.CreateFromDiscriminatorValue); } },
                 { "cancellation", n => { Cancellation = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_cancellation>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_cancellation.CreateFromDiscriminatorValue); } },
-                { "description", n => { Description = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_description>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_description.CreateFromDiscriminatorValue); } },
+                { "checkin-guide", n => { CheckinGuide = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_checkinGuide>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_checkinGuide.CreateFromDiscriminatorValue); } },
+                { "descriptions", n => { Descriptions = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_descriptions>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_descriptions.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "details", n => { Details = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_details>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_details.CreateFromDiscriminatorValue); } },
                 { "fees", n => { Fees = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees.CreateFromDiscriminatorValue); } },
                 { "house-rules", n => { HouseRules = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_houseRules>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_houseRules.CreateFromDiscriminatorValue); } },
                 { "location", n => { Location = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_location>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_location.CreateFromDiscriminatorValue); } },
                 { "payment-terms", n => { PaymentTerms = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_paymentTerms>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_paymentTerms.CreateFromDiscriminatorValue); } },
+                { "permits", n => { Permits = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_permits>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_permits.CreateFromDiscriminatorValue); } },
                 { "photos", n => { Photos = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_photos>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_photos.CreateFromDiscriminatorValue); } },
                 { "pricing", n => { Pricing = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_pricing>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_pricing.CreateFromDiscriminatorValue); } },
-                { "property", n => { Property = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_property>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_property.CreateFromDiscriminatorValue); } },
                 { "protection", n => { Protection = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_protection>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_protection.CreateFromDiscriminatorValue); } },
-                { "rates", n => { Rates = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rates>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rates.CreateFromDiscriminatorValue); } },
-                { "registration", n => { Registration = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_registration>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_registration.CreateFromDiscriminatorValue); } },
                 { "rooms", n => { Rooms = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms.CreateFromDiscriminatorValue); } },
                 { "story", n => { Story = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_story>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_story.CreateFromDiscriminatorValue); } },
                 { "taxes", n => { Taxes = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_taxes>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_taxes.CreateFromDiscriminatorValue); } },
-                { "translations", n => { Translations = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_translations>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_translations.CreateFromDiscriminatorValue); } },
                 { "videos", n => { Videos = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_videos>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_videos.CreateFromDiscriminatorValue); } },
-                { "welcome-guide", n => { WelcomeGuide = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -418,23 +384,21 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_amenities>("amenities", Amenities);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings>("booking-settings", BookingSettings);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_cancellation>("cancellation", Cancellation);
-            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_description>("description", Description);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_checkinGuide>("checkin-guide", CheckinGuide);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_descriptions>("descriptions", Descriptions);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_details>("details", Details);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees>("fees", Fees);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_houseRules>("house-rules", HouseRules);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_location>("location", Location);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_paymentTerms>("payment-terms", PaymentTerms);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_permits>("permits", Permits);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_photos>("photos", Photos);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_pricing>("pricing", Pricing);
-            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_property>("property", Property);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_protection>("protection", Protection);
-            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rates>("rates", Rates);
-            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_registration>("registration", Registration);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms>("rooms", Rooms);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_story>("story", Story);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_taxes>("taxes", Taxes);
-            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_translations>("translations", Translations);
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_videos>("videos", Videos);
-            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide>("welcome-guide", WelcomeGuide);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Channels.Vrbo.Listings.Item;
+using Repull.SDK.V1.Channels.Vrbo.Listings.Map;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,8 +19,13 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ListingsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The map property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Map.MapRequestBuilder Map
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Listings.Map.MapRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>Gets an item from the Repull.SDK.v1.channels.vrbo.listings.item collection</summary>
-        /// <param name="position">Repull listing id (numeric string) of a listing linked to Vrbo.</param>
+        /// <param name="position">Repull listing id (numeric string).</param>
         /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.ListingsItemRequestBuilder"/></returns>
         public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.ListingsItemRequestBuilder this[string position]
         {

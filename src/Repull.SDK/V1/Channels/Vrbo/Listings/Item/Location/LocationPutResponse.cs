@@ -21,7 +21,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location
         }
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
-        /// <summary>What Vrbo has stored for the section, read back after the write.</summary>
+        /// <summary>What Vrbo has after the write, read back from Vrbo.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_data? Data
@@ -37,52 +37,20 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location
             set { BackingStore?.Set("data", value); }
         }
 #endif
-        /// <summary>The listingId property</summary>
+        /// <summary>The dataFreshness property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_dataFreshness? DataFreshness
         {
-            get { return BackingStore?.Get<string?>("listingId"); }
-            set { BackingStore?.Set("listingId", value); }
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_dataFreshness?>("dataFreshness"); }
+            set { BackingStore?.Set("dataFreshness", value); }
         }
 #nullable restore
 #else
-        public string ListingId
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_dataFreshness DataFreshness
         {
-            get { return BackingStore?.Get<string>("listingId"); }
-            set { BackingStore?.Set("listingId", value); }
-        }
-#endif
-        /// <summary>Vrbo&apos;s property id for the unit.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? PropertyId
-        {
-            get { return BackingStore?.Get<string?>("propertyId"); }
-            set { BackingStore?.Set("propertyId", value); }
-        }
-#nullable restore
-#else
-        public string PropertyId
-        {
-            get { return BackingStore?.Get<string>("propertyId"); }
-            set { BackingStore?.Set("propertyId", value); }
-        }
-#endif
-        /// <summary>The section property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Section
-        {
-            get { return BackingStore?.Get<string?>("section"); }
-            set { BackingStore?.Set("section", value); }
-        }
-#nullable restore
-#else
-        public string Section
-        {
-            get { return BackingStore?.Get<string>("section"); }
-            set { BackingStore?.Set("section", value); }
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_dataFreshness>("dataFreshness"); }
+            set { BackingStore?.Set("dataFreshness", value); }
         }
 #endif
         /// <summary>The vrboListingNumber property</summary>
@@ -144,9 +112,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_data>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_data.CreateFromDiscriminatorValue); } },
-                { "listingId", n => { ListingId = n.GetStringValue(); } },
-                { "propertyId", n => { PropertyId = n.GetStringValue(); } },
-                { "section", n => { Section = n.GetStringValue(); } },
+                { "dataFreshness", n => { DataFreshness = n.GetObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_dataFreshness>(global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_dataFreshness.CreateFromDiscriminatorValue); } },
                 { "vrboListingNumber", n => { VrboListingNumber = n.GetStringValue(); } },
                 { "written", n => { Written = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
@@ -159,9 +125,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_data>("data", Data);
-            writer.WriteStringValue("listingId", ListingId);
-            writer.WriteStringValue("propertyId", PropertyId);
-            writer.WriteStringValue("section", Section);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_dataFreshness>("dataFreshness", DataFreshness);
             writer.WriteStringValue("vrboListingNumber", VrboListingNumber);
             writer.WriteCollectionOfPrimitiveValues<string>("written", Written);
             writer.WriteAdditionalData(AdditionalData);
