@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Repull.SDK.V1.Channels.Vrbo.Alterations;
 using Repull.SDK.V1.Channels.Vrbo.Connection;
 using Repull.SDK.V1.Channels.Vrbo.Listings;
 using Repull.SDK.V1.Channels.Vrbo.Reservations;
@@ -17,6 +18,11 @@ namespace Repull.SDK.V1.Channels.Vrbo
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class VrboRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The alterations property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Alterations.AlterationsRequestBuilder Alterations
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Alterations.AlterationsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The connection property</summary>
         public global::Repull.SDK.V1.Channels.Vrbo.Connection.ConnectionRequestBuilder Connection
         {

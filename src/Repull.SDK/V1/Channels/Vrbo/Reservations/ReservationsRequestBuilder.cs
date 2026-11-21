@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
+using Repull.SDK.V1.Channels.Vrbo.Reservations.Item;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +18,18 @@ namespace Repull.SDK.V1.Channels.Vrbo.Reservations
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReservationsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>Gets an item from the Repull.SDK.v1.channels.vrbo.reservations.item collection</summary>
+        /// <param name="position">The Vrbo confirmation code (`HA-…`), as in `GET /v1/channels/vrbo/reservations`.</param>
+        /// <returns>A <see cref="global::Repull.SDK.V1.Channels.Vrbo.Reservations.Item.WithCodeItemRequestBuilder"/></returns>
+        public global::Repull.SDK.V1.Channels.Vrbo.Reservations.Item.WithCodeItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                urlTplParams.Add("code", position);
+                return new global::Repull.SDK.V1.Channels.Vrbo.Reservations.Item.WithCodeItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Reservations.ReservationsRequestBuilder"/> and sets the default values.
         /// </summary>

@@ -53,6 +53,38 @@ namespace Repull.SDK.V1.Reviews.Item.GuestReview
             set { BackingStore?.Set("id", value); }
         }
 #endif
+        /// <summary>`vrbo` for a Vrbo rating.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Platform
+        {
+            get { return BackingStore?.Get<string?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
+#nullable restore
+#else
+        public string Platform
+        {
+            get { return BackingStore?.Get<string>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
+#endif
+        /// <summary>Vrbo: the rating as sent to Vrbo.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating? Rating
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating?>("rating"); }
+            set { BackingStore?.Set("rating", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating Rating
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating>("rating"); }
+            set { BackingStore?.Set("rating", value); }
+        }
+#endif
         /// <summary>The submitted property</summary>
         public bool? Submitted
         {
@@ -87,6 +119,8 @@ namespace Repull.SDK.V1.Reviews.Item.GuestReview
             {
                 { "externalReviewId", n => { ExternalReviewId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "platform", n => { Platform = n.GetStringValue(); } },
+                { "rating", n => { Rating = n.GetObjectValue<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating>(global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating.CreateFromDiscriminatorValue); } },
                 { "submitted", n => { Submitted = n.GetBoolValue(); } },
             };
         }
@@ -99,6 +133,8 @@ namespace Repull.SDK.V1.Reviews.Item.GuestReview
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("externalReviewId", ExternalReviewId);
             writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("platform", Platform);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating>("rating", Rating);
             writer.WriteBoolValue("submitted", Submitted);
             writer.WriteAdditionalData(AdditionalData);
         }
