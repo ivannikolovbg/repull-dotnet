@@ -38,7 +38,9 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
 #else
         public string Error { get; set; }
 #endif
-        /// <summary>Pass to `GET /v1/listings/{id}/publish/vrbo?jobId=`.</summary>
+        /// <summary>Update only.</summary>
+        public DateTimeOffset? FinishedAt { get; set; }
+        /// <summary>Pass to `GET /v1/listings/{id}/publish/vrbo?jobId=`. A creation is `vrbo_&lt;n&gt;_&lt;n&gt;`, a push onto an existing Vrbo listing `vrbo_push_&lt;n&gt;_&lt;n&gt;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? JobId { get; set; }
@@ -50,6 +52,8 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
         public bool? Linked { get; set; }
         /// <summary>The listingId property</summary>
         public int? ListingId { get; set; }
+        /// <summary>`create`: the listing is being created on Vrbo. `update`: it was already on Vrbo and its content is being pushed onto that listing.</summary>
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_mode? Mode { get; set; }
         /// <summary>The Vrbo property being built. Send it back as `propertyId` to finish a run that failed part-way.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -74,6 +78,24 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
 #else
         public string ResumedPropertyId { get; set; }
 #endif
+        /// <summary>Update only: each section pushed, in order, with what was sent, Vrbo&apos;s refusals and what Vrbo has stored after the write.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections>? Sections { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections> Sections { get; set; }
+#endif
+        /// <summary>Update only: sections the push leaves as they are on Vrbo, and why (rooms, photos, registration, or no value in the listing content).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped>? Skipped { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped> Skipped { get; set; }
+#endif
+        /// <summary>Update only.</summary>
+        public DateTimeOffset? StartedAt { get; set; }
         /// <summary>The status property</summary>
         public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_status? Status { get; set; }
         /// <summary>Steps Vrbo has finished, in order: create, amenities, property type, rooms, photos, headline + description, house rules, rate, booking options, publish, fees, cancellation policy, …</summary>
@@ -120,12 +142,17 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
                 { "accountId", n => { AccountId = n.GetStringValue(); } },
                 { "adjustments", n => { Adjustments = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "error", n => { Error = n.GetStringValue(); } },
+                { "finishedAt", n => { FinishedAt = n.GetDateTimeOffsetValue(); } },
                 { "jobId", n => { JobId = n.GetStringValue(); } },
                 { "linked", n => { Linked = n.GetBoolValue(); } },
                 { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "mode", n => { Mode = n.GetEnumValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_mode>(); } },
                 { "propertyId", n => { PropertyId = n.GetStringValue(); } },
                 { "rejectedPhotos", n => { RejectedPhotos = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos>(global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "resumedPropertyId", n => { ResumedPropertyId = n.GetStringValue(); } },
+                { "sections", n => { Sections = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections>(global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "skipped", n => { Skipped = n.GetCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped>(global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "startedAt", n => { StartedAt = n.GetDateTimeOffsetValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_status>(); } },
                 { "steps", n => { Steps = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "vrboListingNumber", n => { VrboListingNumber = n.GetStringValue(); } },
@@ -141,12 +168,17 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
             writer.WriteStringValue("accountId", AccountId);
             writer.WriteCollectionOfPrimitiveValues<string>("adjustments", Adjustments);
             writer.WriteStringValue("error", Error);
+            writer.WriteDateTimeOffsetValue("finishedAt", FinishedAt);
             writer.WriteStringValue("jobId", JobId);
             writer.WriteBoolValue("linked", Linked);
             writer.WriteIntValue("listingId", ListingId);
+            writer.WriteEnumValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_mode>("mode", Mode);
             writer.WriteStringValue("propertyId", PropertyId);
             writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos>("rejectedPhotos", RejectedPhotos);
             writer.WriteStringValue("resumedPropertyId", ResumedPropertyId);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections>("sections", Sections);
+            writer.WriteCollectionOfObjectValues<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped>("skipped", Skipped);
+            writer.WriteDateTimeOffsetValue("startedAt", StartedAt);
             writer.WriteEnumValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_status>("status", Status);
             writer.WriteCollectionOfPrimitiveValues<string>("steps", Steps);
             writer.WriteStringValue("vrboListingNumber", VrboListingNumber);

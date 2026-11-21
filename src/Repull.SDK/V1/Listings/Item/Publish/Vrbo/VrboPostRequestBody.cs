@@ -28,6 +28,22 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
 #else
         public string PropertyId { get; set; }
 #endif
+        /// <summary>Update only: push just these sections (default: all of them).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections?>? Sections { get; set; }
+#nullable restore
+#else
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections?> Sections { get; set; }
+#endif
+        /// <summary>Update only: the Vrbo listing to push to, when the listing is linked to several.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? VrboListingNumber { get; set; }
+#nullable restore
+#else
+        public string VrboListingNumber { get; set; }
+#endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -48,6 +64,8 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
             {
                 { "accountId", n => { AccountId = n.GetStringValue(); } },
                 { "propertyId", n => { PropertyId = n.GetStringValue(); } },
+                { "sections", n => { Sections = n.GetCollectionOfEnumValues<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections>()?.AsList(); } },
+                { "vrboListingNumber", n => { VrboListingNumber = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -59,6 +77,8 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("accountId", AccountId);
             writer.WriteStringValue("propertyId", PropertyId);
+            writer.WriteCollectionOfEnumValues<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections>("sections", Sections);
+            writer.WriteStringValue("vrboListingNumber", VrboListingNumber);
         }
     }
 }

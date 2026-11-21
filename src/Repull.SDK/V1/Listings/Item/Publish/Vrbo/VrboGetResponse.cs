@@ -26,6 +26,8 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
 #endif
         /// <summary>The listingId property</summary>
         public int? ListingId { get; set; }
+        /// <summary>The mode property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_mode? Mode { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse"/> and sets the default values.
         /// </summary>
@@ -54,6 +56,7 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
                 { "channel", n => { Channel = n.GetEnumValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_channel>(); } },
                 { "job", n => { Job = n.GetObjectValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job>(global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job.CreateFromDiscriminatorValue); } },
                 { "listingId", n => { ListingId = n.GetIntValue(); } },
+                { "mode", n => { Mode = n.GetEnumValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_mode>(); } },
             };
         }
         /// <summary>
@@ -66,6 +69,7 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
             writer.WriteEnumValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_channel>("channel", Channel);
             writer.WriteObjectValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job>("job", Job);
             writer.WriteIntValue("listingId", ListingId);
+            writer.WriteEnumValue<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_mode>("mode", Mode);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
