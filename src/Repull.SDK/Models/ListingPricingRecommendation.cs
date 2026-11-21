@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,59 +13,130 @@ namespace Repull.SDK.Models
     /// A pricing recommendation for one date in the listing&apos;s calendar window.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPricingRecommendation : IAdditionalDataHolder, IParsable
+    public partial class ListingPricingRecommendation : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Expected booking probability for the date at the recommended price.</summary>
-        public double? BookingProbability { get; set; }
+        public double? BookingProbability
+        {
+            get { return BackingStore?.Get<double?>("bookingProbability"); }
+            set { BackingStore?.Set("bookingProbability", value); }
+        }
         /// <summary>Model confidence in [0, 1].</summary>
-        public double? Confidence { get; set; }
+        public double? Confidence
+        {
+            get { return BackingStore?.Get<double?>("confidence"); }
+            set { BackingStore?.Set("confidence", value); }
+        }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>Current calendar price before applying the recommendation.</summary>
-        public double? CurrentPrice { get; set; }
+        public double? CurrentPrice
+        {
+            get { return BackingStore?.Get<double?>("currentPrice"); }
+            set { BackingStore?.Set("currentPrice", value); }
+        }
         /// <summary>The date property</summary>
-        public Date? Date { get; set; }
+        public Date? Date
+        {
+            get { return BackingStore?.Get<Date?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
         /// <summary>The expectedRevenue property</summary>
-        public double? ExpectedRevenue { get; set; }
+        public double? ExpectedRevenue
+        {
+            get { return BackingStore?.Get<double?>("expectedRevenue"); }
+            set { BackingStore?.Set("expectedRevenue", value); }
+        }
         /// <summary>Free-form JSON of model factors (comp distance, event boost, weekend, demand, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPricingRecommendation_factors? Factors { get; set; }
+        public global::Repull.SDK.Models.ListingPricingRecommendation_factors? Factors
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingRecommendation_factors?>("factors"); }
+            set { BackingStore?.Set("factors", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPricingRecommendation_factors Factors { get; set; }
+        public global::Repull.SDK.Models.ListingPricingRecommendation_factors Factors
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingRecommendation_factors>("factors"); }
+            set { BackingStore?.Set("factors", value); }
+        }
 #endif
         /// <summary>The generatedAt property</summary>
-        public DateTimeOffset? GeneratedAt { get; set; }
+        public DateTimeOffset? GeneratedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("generatedAt"); }
+            set { BackingStore?.Set("generatedAt", value); }
+        }
         /// <summary>The maxPrice property</summary>
-        public double? MaxPrice { get; set; }
+        public double? MaxPrice
+        {
+            get { return BackingStore?.Get<double?>("maxPrice"); }
+            set { BackingStore?.Set("maxPrice", value); }
+        }
         /// <summary>The minPrice property</summary>
-        public double? MinPrice { get; set; }
+        public double? MinPrice
+        {
+            get { return BackingStore?.Get<double?>("minPrice"); }
+            set { BackingStore?.Set("minPrice", value); }
+        }
         /// <summary>The modelVersion property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ModelVersion { get; set; }
+        public string? ModelVersion
+        {
+            get { return BackingStore?.Get<string?>("modelVersion"); }
+            set { BackingStore?.Set("modelVersion", value); }
+        }
 #nullable restore
 #else
-        public string ModelVersion { get; set; }
+        public string ModelVersion
+        {
+            get { return BackingStore?.Get<string>("modelVersion"); }
+            set { BackingStore?.Set("modelVersion", value); }
+        }
 #endif
         /// <summary>Atlas model&apos;s recommended price.</summary>
-        public double? RecommendedPrice { get; set; }
+        public double? RecommendedPrice
+        {
+            get { return BackingStore?.Get<double?>("recommendedPrice"); }
+            set { BackingStore?.Set("recommendedPrice", value); }
+        }
         /// <summary>Lifecycle state.</summary>
-        public global::Repull.SDK.Models.ListingPricingRecommendation_status? Status { get; set; }
+        public global::Repull.SDK.Models.ListingPricingRecommendation_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingRecommendation_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPricingRecommendation"/> and sets the default values.
         /// </summary>
         public ListingPricingRecommendation()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

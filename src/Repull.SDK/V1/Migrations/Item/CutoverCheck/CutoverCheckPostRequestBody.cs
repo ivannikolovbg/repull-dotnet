@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,17 +10,34 @@ namespace Repull.SDK.V1.Migrations.Item.CutoverCheck
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CutoverCheckPostRequestBody : IParsable
+    public partial class CutoverCheckPostRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The reservations property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Migrations.Item.CutoverCheck.CutoverCheckPostRequestBody_reservations>? Reservations { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Item.CutoverCheck.CutoverCheckPostRequestBody_reservations>? Reservations
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Item.CutoverCheck.CutoverCheckPostRequestBody_reservations>?>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Migrations.Item.CutoverCheck.CutoverCheckPostRequestBody_reservations> Reservations { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Item.CutoverCheck.CutoverCheckPostRequestBody_reservations> Reservations
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Item.CutoverCheck.CutoverCheckPostRequestBody_reservations>>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Migrations.Item.CutoverCheck.CutoverCheckPostRequestBody"/> and sets the default values.
+        /// </summary>
+        public CutoverCheckPostRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

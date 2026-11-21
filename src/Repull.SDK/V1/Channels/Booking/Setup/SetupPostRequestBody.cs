@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,50 +10,101 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class SetupPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class SetupPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The action property</summary>
-        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_action? Action { get; set; }
+        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Contacts payload for `set-contacts`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts>? Contacts { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts>? Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts>?>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts> Contacts { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts> Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_contacts>>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #endif
         /// <summary>Used by `create-property` ONLY when this workspace has no legal entity yet — one is registered with Booking.com from these details and used for the property. Ignored when the workspace already has one, so a second is never registered.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity? LegalEntity { get; set; }
+        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity? LegalEntity
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity?>("legal_entity"); }
+            set { BackingStore?.Set("legal_entity", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity LegalEntity { get; set; }
+        public global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity LegalEntity
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity>("legal_entity"); }
+            set { BackingStore?.Set("legal_entity", value); }
+        }
 #endif
         /// <summary>Optional override for `create-property`. Omit it: the legal entity this workspace already uses is resolved automatically. An id that carries another workspace&apos;s properties is refused with `403 legal_entity_not_yours`. `legalEntityId` is accepted as an alias.</summary>
-        public int? LegalEntityId { get; set; }
+        public int? LegalEntityId
+        {
+            get { return BackingStore?.Get<int?>("legal_entity_id"); }
+            set { BackingStore?.Set("legal_entity_id", value); }
+        }
         /// <summary>Legal entity id — required for `check-legal-status`, which always answers 404.</summary>
-        public int? Leid { get; set; }
+        public int? Leid
+        {
+            get { return BackingStore?.Get<int?>("leid"); }
+            set { BackingStore?.Set("leid", value); }
+        }
         /// <summary>Repull listing id — required for `create-property`, `add-room` and `add-unit`. NOT a Booking.com Hotel ID. `listingId` is accepted as an alias.</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
         /// <summary>Booking.com Hotel ID — required for `add-room`, `add-unit`, `advance`, and the readiness/open/contacts/policies actions.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
 #endif
         /// <summary>Booking.com room id — required for `add-unit`. `GET /v1/channels/booking/properties/{listingId}/rooms` lists them. `roomId` is accepted as an alias.</summary>
-        public int? RoomId { get; set; }
+        public int? RoomId
+        {
+            get { return BackingStore?.Get<int?>("room_id"); }
+            set { BackingStore?.Set("room_id", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody"/> and sets the default values.
         /// </summary>
         public SetupPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,36 +10,67 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CheckinGuidePutResponse_data : IAdditionalDataHolder, IParsable
+    public partial class CheckinGuidePutResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>The locale property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Locale { get; set; }
+        public string? Locale
+        {
+            get { return BackingStore?.Get<string?>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #nullable restore
 #else
-        public string Locale { get; set; }
+        public string Locale
+        {
+            get { return BackingStore?.Get<string>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #endif
         /// <summary>The published property</summary>
-        public bool? Published { get; set; }
+        public bool? Published
+        {
+            get { return BackingStore?.Get<bool?>("published"); }
+            set { BackingStore?.Set("published", value); }
+        }
         /// <summary>The steps property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse_data_steps>? Steps { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse_data_steps>? Steps
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse_data_steps>?>("steps"); }
+            set { BackingStore?.Set("steps", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse_data_steps> Steps { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse_data_steps> Steps
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse_data_steps>>("steps"); }
+            set { BackingStore?.Set("steps", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutResponse_data"/> and sets the default values.
         /// </summary>
         public CheckinGuidePutResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

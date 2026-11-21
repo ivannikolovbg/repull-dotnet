@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,25 +10,50 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CheckinGuidePutRequestBody : IParsable
+    public partial class CheckinGuidePutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Language of the guide when one has to be created. Ignored when the listing already has a guide.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Locale { get; set; }
+        public string? Locale
+        {
+            get { return BackingStore?.Get<string?>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #nullable restore
 #else
-        public string Locale { get; set; }
+        public string Locale
+        {
+            get { return BackingStore?.Get<string>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #endif
         /// <summary>The guide&apos;s steps, in the order guests see them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody_steps>? Steps { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody_steps>? Steps
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody_steps>?>("steps"); }
+            set { BackingStore?.Set("steps", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody_steps> Steps { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody_steps> Steps
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody_steps>>("steps"); }
+            set { BackingStore?.Set("steps", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuidePutRequestBody"/> and sets the default values.
+        /// </summary>
+        public CheckinGuidePutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

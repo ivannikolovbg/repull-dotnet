@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,28 +10,51 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingGenerateContentRequest : IAdditionalDataHolder, IParsable
+    public partial class ListingGenerateContentRequest : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Save the generated content to the listing (so subsequent publishes pick it up).</summary>
-        public bool? Persist { get; set; }
+        public bool? Persist
+        {
+            get { return BackingStore?.Get<bool?>("persist"); }
+            set { BackingStore?.Set("persist", value); }
+        }
         /// <summary>Up to 8 reference photos. When present, Repull AI vision is used for grounded copy.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Photos { get; set; }
+        public List<string>? Photos
+        {
+            get { return BackingStore?.Get<List<string>?>("photos"); }
+            set { BackingStore?.Set("photos", value); }
+        }
 #nullable restore
 #else
-        public List<string> Photos { get; set; }
+        public List<string> Photos
+        {
+            get { return BackingStore?.Get<List<string>>("photos"); }
+            set { BackingStore?.Set("photos", value); }
+        }
 #endif
         /// <summary>The style property</summary>
-        public global::Repull.SDK.Models.ListingGenerateContentRequest_style? Style { get; set; }
+        public global::Repull.SDK.Models.ListingGenerateContentRequest_style? Style
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingGenerateContentRequest_style?>("style"); }
+            set { BackingStore?.Set("style", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingGenerateContentRequest"/> and sets the default values.
         /// </summary>
         public ListingGenerateContentRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
             Persist = true;
             Style = global::Repull.SDK.Models.ListingGenerateContentRequest_style.Warm;

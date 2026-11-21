@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,59 +12,114 @@ namespace Repull.SDK.Models
     /// The restrictions: the same report as the price half, for the other write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingRateWriteRestrictionHalf : IAdditionalDataHolder, IParsable
+    public partial class BookingRateWriteRestrictionHalf : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>`not_requested` means no update carried a restriction and nothing was sent.</summary>
-        public global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_applied? Applied { get; set; }
+        public global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_applied? Applied
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_applied?>("applied"); }
+            set { BackingStore?.Set("applied", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Per update, the nights and the restrictions asked for them — so a partial result names exactly what did and did not change.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingRestrictionRequestRow>? Dates { get; set; }
+        public List<global::Repull.SDK.Models.BookingRestrictionRequestRow>? Dates
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRestrictionRequestRow>?>("dates"); }
+            set { BackingStore?.Set("dates", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingRestrictionRequestRow> Dates { get; set; }
+        public List<global::Repull.SDK.Models.BookingRestrictionRequestRow> Dates
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRestrictionRequestRow>>("dates"); }
+            set { BackingStore?.Set("dates", value); }
+        }
 #endif
         /// <summary>The errors property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_errors>? Errors { get; set; }
+        public List<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_errors>? Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_errors>?>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_errors> Errors { get; set; }
+        public List<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_errors> Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf_errors>>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #endif
         /// <summary>Every restriction asked for, across all updates.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Fields { get; set; }
+        public List<string>? Fields
+        {
+            get { return BackingStore?.Get<List<string>?>("fields"); }
+            set { BackingStore?.Set("fields", value); }
+        }
 #nullable restore
 #else
-        public List<string> Fields { get; set; }
+        public List<string> Fields
+        {
+            get { return BackingStore?.Get<List<string>>("fields"); }
+            set { BackingStore?.Set("fields", value); }
+        }
 #endif
         /// <summary>Why Booking.com refused one half of a write, in their words. Present on the half that was refused.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingUpstreamFailure? Rejection { get; set; }
+        public global::Repull.SDK.Models.BookingUpstreamFailure? Rejection
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingUpstreamFailure?>("rejection"); }
+            set { BackingStore?.Set("rejection", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingUpstreamFailure Rejection { get; set; }
+        public global::Repull.SDK.Models.BookingUpstreamFailure Rejection
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingUpstreamFailure>("rejection"); }
+            set { BackingStore?.Set("rejection", value); }
+        }
 #endif
         /// <summary>How many updates carried a restriction. `0` when none did.</summary>
-        public int? Requested { get; set; }
+        public int? Requested
+        {
+            get { return BackingStore?.Get<int?>("requested"); }
+            set { BackingStore?.Set("requested", value); }
+        }
         /// <summary>The restriction read-back. It runs out of the SAME call that reads the prices back, so proving a restriction costs no extra request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingRestrictionVerification? Verification { get; set; }
+        public global::Repull.SDK.Models.BookingRestrictionVerification? Verification
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionVerification?>("verification"); }
+            set { BackingStore?.Set("verification", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingRestrictionVerification Verification { get; set; }
+        public global::Repull.SDK.Models.BookingRestrictionVerification Verification
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionVerification>("verification"); }
+            set { BackingStore?.Set("verification", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRateWriteRestrictionHalf"/> and sets the default values.
         /// </summary>
         public BookingRateWriteRestrictionHalf()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

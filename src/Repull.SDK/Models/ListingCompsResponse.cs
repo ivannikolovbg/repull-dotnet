@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.Models
     /// Returned by `GET /v1/listings/{id}/comps`. Comps without coordinates are excluded — there&apos;s no way to rank them by distance. May include a `warning` field when the source listing itself has no coordinates.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingCompsResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingCompsResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The data property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingComp>? Data { get; set; }
+        public List<global::Repull.SDK.Models.ListingComp>? Data
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingComp>?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingComp> Data { get; set; }
+        public List<global::Repull.SDK.Models.ListingComp> Data
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingComp>>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>The dateRange property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingCompsResponse_dateRange? DateRange { get; set; }
+        public global::Repull.SDK.Models.ListingCompsResponse_dateRange? DateRange
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingCompsResponse_dateRange?>("dateRange"); }
+            set { BackingStore?.Set("dateRange", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingCompsResponse_dateRange DateRange { get; set; }
+        public global::Repull.SDK.Models.ListingCompsResponse_dateRange DateRange
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingCompsResponse_dateRange>("dateRange"); }
+            set { BackingStore?.Set("dateRange", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The radiusKm property</summary>
-        public double? RadiusKm { get; set; }
+        public double? RadiusKm
+        {
+            get { return BackingStore?.Get<double?>("radiusKm"); }
+            set { BackingStore?.Set("radiusKm", value); }
+        }
         /// <summary>The total property</summary>
-        public int? Total { get; set; }
+        public int? Total
+        {
+            get { return BackingStore?.Get<int?>("total"); }
+            set { BackingStore?.Set("total", value); }
+        }
         /// <summary>Present (and `data` empty) when the source listing has no coordinates.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Warning { get; set; }
+        public string? Warning
+        {
+            get { return BackingStore?.Get<string?>("warning"); }
+            set { BackingStore?.Set("warning", value); }
+        }
 #nullable restore
 #else
-        public string Warning { get; set; }
+        public string Warning
+        {
+            get { return BackingStore?.Get<string>("warning"); }
+            set { BackingStore?.Set("warning", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingCompsResponse"/> and sets the default values.
         /// </summary>
         public ListingCompsResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

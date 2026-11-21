@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,37 +10,78 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class HouseRulesPutRequestBody_pets : IParsable
+    public partial class HouseRulesPutRequestBody_pets : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The allowed property</summary>
-        public bool? Allowed { get; set; }
+        public bool? Allowed
+        {
+            get { return BackingStore?.Get<bool?>("allowed"); }
+            set { BackingStore?.Set("allowed", value); }
+        }
         /// <summary>The allowedPets property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_allowedPets? AllowedPets { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_allowedPets? AllowedPets
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_allowedPets?>("allowedPets"); }
+            set { BackingStore?.Set("allowedPets", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_allowedPets AllowedPets { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_allowedPets AllowedPets
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_allowedPets>("allowedPets"); }
+            set { BackingStore?.Set("allowedPets", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The max property</summary>
-        public int? Max { get; set; }
+        public int? Max
+        {
+            get { return BackingStore?.Get<int?>("max"); }
+            set { BackingStore?.Set("max", value); }
+        }
         /// <summary>The maxWeight property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_maxWeight? MaxWeight { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_maxWeight? MaxWeight
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_maxWeight?>("maxWeight"); }
+            set { BackingStore?.Set("maxWeight", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_maxWeight MaxWeight { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_maxWeight MaxWeight
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_maxWeight>("maxWeight"); }
+            set { BackingStore?.Set("maxWeight", value); }
+        }
 #endif
         /// <summary>The note property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Note { get; set; }
+        public string? Note
+        {
+            get { return BackingStore?.Get<string?>("note"); }
+            set { BackingStore?.Set("note", value); }
+        }
 #nullable restore
 #else
-        public string Note { get; set; }
+        public string Note
+        {
+            get { return BackingStore?.Get<string>("note"); }
+            set { BackingStore?.Set("note", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets"/> and sets the default values.
+        /// </summary>
+        public HouseRulesPutRequestBody_pets()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -82,24 +124,49 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules
         /// Composed type wrapper for classes <see cref="string"/>, List&lt;string&gt;
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class HouseRulesPutRequestBody_pets_allowedPets : IComposedTypeWrapper, IParsable
+        public partial class HouseRulesPutRequestBody_pets_allowedPets : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="string"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public string? HouseRulesPutRequestBodyPetsAllowedPetsString { get; set; }
+            public string? HouseRulesPutRequestBodyPetsAllowedPetsString
+            {
+                get { return BackingStore?.Get<string?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public string HouseRulesPutRequestBodyPetsAllowedPetsString { get; set; }
+            public string HouseRulesPutRequestBodyPetsAllowedPetsString
+            {
+                get { return BackingStore?.Get<string>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
             /// <summary>Composed type representation for type List&lt;string&gt;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public List<string>? String { get; set; }
+            public List<string>? String
+            {
+                get { return BackingStore?.Get<List<string>?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public List<string> String { get; set; }
+            public List<string> String
+            {
+                get { return BackingStore?.Get<List<string>>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_allowedPets"/> and sets the default values.
+            /// </summary>
+            public HouseRulesPutRequestBody_pets_allowedPets()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>
@@ -149,18 +216,39 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules
         /// Composed type wrapper for classes <see cref="double"/>, <see cref="string"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class HouseRulesPutRequestBody_pets_maxWeight : IComposedTypeWrapper, IParsable
+        public partial class HouseRulesPutRequestBody_pets_maxWeight : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="double"/></summary>
-            public double? Double { get; set; }
+            public double? Double
+            {
+                get { return BackingStore?.Get<double?>("double"); }
+                set { BackingStore?.Set("double", value); }
+            }
             /// <summary>Composed type representation for type <see cref="string"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public string? String { get; set; }
+            public string? String
+            {
+                get { return BackingStore?.Get<string?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public string String { get; set; }
+            public string String
+            {
+                get { return BackingStore?.Get<string>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesPutRequestBody_pets.HouseRulesPutRequestBody_pets_maxWeight"/> and sets the default values.
+            /// </summary>
+            public HouseRulesPutRequestBody_pets_maxWeight()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

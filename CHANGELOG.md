@@ -5,6 +5,13 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.53 — 2026-11-21
+
+- Fix: an explicit `null` is now sent. Kiota left null properties out of the body, so e.g. Vrbo fees `"pets": null` (remove the pet fee), protection `"damageDeposit": null`, listing markups `"markupPercent": null` and webhook `"description": null` could not be sent. Models now use a backing store (`RepullBackingStore`) that records which properties were set; a property you never set is still left out, and every set value is sent (no change tracking). Nulls read from JSON (`KiotaJsonSerializer.DeserializeAsync`, responses) are kept too (`RepullJsonParseNodeFactory`).
+- Fix: Vrbo protection `damageDeposit` given as an object (`{"amount": 500}`) wrote invalid JSON (the property name with no value) and the call threw. The object|number field is now generated as anyOf (`scripts/prepare-spec.py`), so both shapes read and write correctly.
+- Models now implement `IBackedModel` (generated with `--backing-store`).
+- Tests: new `tests/Repull.SDK.Tests` asserts the exact request (method, path, query, JSON body); CI, release and spec refresh run it.
+
 ## 0.2.52 — 2026-11-21
 
 - New: `DELETE /v1/channels/vrbo/listings/{id}/videos`

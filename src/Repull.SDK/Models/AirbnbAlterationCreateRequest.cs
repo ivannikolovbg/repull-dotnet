@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,34 +13,79 @@ namespace Repull.SDK.Models
     /// A proposed change to an existing Airbnb reservation. `confirmation_code` names the reservation; at least one of `check_in`, `check_out`, `number_of_guests`, `total_price` or `listing_id` must be sent with it, because an alteration that changes nothing is not something Airbnb can act on (it is refused with `422 invalid_params`).Unknown fields are refused rather than silently dropped. The older connector-native spellings (`start_date`, `end_date`, `total_price_override`, and an Airbnb guest-details object in place of `number_of_guests`) are still accepted for existing integrations; send the canonical names above in new code, and never a canonical field and its older spelling with different values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbAlterationCreateRequest : IParsable
+    public partial class AirbnbAlterationCreateRequest : IBackedModel, IParsable
     {
         /// <summary>The transfer target as the **Airbnb** listing id, for callers who hold that instead of the Repull id. Prefer `listing_id`. Sending both is allowed only when they name the same listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbListingId { get; set; }
+        public string? AirbnbListingId
+        {
+            get { return BackingStore?.Get<string?>("airbnb_listing_id"); }
+            set { BackingStore?.Set("airbnb_listing_id", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbListingId { get; set; }
+        public string AirbnbListingId
+        {
+            get { return BackingStore?.Get<string>("airbnb_listing_id"); }
+            set { BackingStore?.Set("airbnb_listing_id", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>New check-in date, `YYYY-MM-DD`.</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("check_in"); }
+            set { BackingStore?.Set("check_in", value); }
+        }
         /// <summary>New check-out date, `YYYY-MM-DD`. Must be after `check_in` when both are sent.</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("check_out"); }
+            set { BackingStore?.Set("check_out", value); }
+        }
         /// <summary>Airbnb confirmation code of the reservation to alter. `GET /v1/channels/airbnb/reservations` lists them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmation_code"); }
+            set { BackingStore?.Set("confirmation_code", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmation_code"); }
+            set { BackingStore?.Set("confirmation_code", value); }
+        }
 #endif
         /// <summary>Move the reservation to this listing — a **listing transfer**. This is the **Repull** listing id (the `id` from `GET /v1/properties`), the same id every other Airbnb channel route takes; Repull verifies you own it, that it is active and connected to Airbnb, and translates it to the Airbnb listing id before sending it. Airbnb decides whether to honour the move.</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
         /// <summary>New guest count for the stay.</summary>
-        public int? NumberOfGuests { get; set; }
+        public int? NumberOfGuests
+        {
+            get { return BackingStore?.Get<int?>("number_of_guests"); }
+            set { BackingStore?.Set("number_of_guests", value); }
+        }
         /// <summary>New total for the whole stay, in the listing currency. Sent to Airbnb as the alteration&apos;s price override.</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("total_price"); }
+            set { BackingStore?.Set("total_price", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbAlterationCreateRequest"/> and sets the default values.
+        /// </summary>
+        public AirbnbAlterationCreateRequest()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

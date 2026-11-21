@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,109 +12,216 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules
     /// The section as Vrbo has it now.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class HouseRulesGetResponse_data : IAdditionalDataHolder, IParsable
+    public partial class HouseRulesGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkInTime property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTime { get; set; }
+        public string? CheckInTime
+        {
+            get { return BackingStore?.Get<string?>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTime { get; set; }
+        public string CheckInTime
+        {
+            get { return BackingStore?.Get<string>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #endif
         /// <summary>The checkOutTime property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckOutTime { get; set; }
+        public string? CheckOutTime
+        {
+            get { return BackingStore?.Get<string?>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckOutTime { get; set; }
+        public string CheckOutTime
+        {
+            get { return BackingStore?.Get<string>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #endif
         /// <summary>The children property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_children? Children { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_children? Children
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_children?>("children"); }
+            set { BackingStore?.Set("children", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_children Children { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_children Children
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_children>("children"); }
+            set { BackingStore?.Set("children", value); }
+        }
 #endif
         /// <summary>The customRules property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? CustomRules { get; set; }
+        public List<string>? CustomRules
+        {
+            get { return BackingStore?.Get<List<string>?>("customRules"); }
+            set { BackingStore?.Set("customRules", value); }
+        }
 #nullable restore
 #else
-        public List<string> CustomRules { get; set; }
+        public List<string> CustomRules
+        {
+            get { return BackingStore?.Get<List<string>>("customRules"); }
+            set { BackingStore?.Set("customRules", value); }
+        }
 #endif
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_events? Events { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_events? Events
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_events?>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_events Events { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_events Events
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_events>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #endif
         /// <summary>The maxAdults property</summary>
-        public int? MaxAdults { get; set; }
+        public int? MaxAdults
+        {
+            get { return BackingStore?.Get<int?>("maxAdults"); }
+            set { BackingStore?.Set("maxAdults", value); }
+        }
         /// <summary>The maxGuests property</summary>
-        public int? MaxGuests { get; set; }
+        public int? MaxGuests
+        {
+            get { return BackingStore?.Get<int?>("maxGuests"); }
+            set { BackingStore?.Set("maxGuests", value); }
+        }
         /// <summary>The minimumAge property</summary>
-        public int? MinimumAge { get; set; }
+        public int? MinimumAge
+        {
+            get { return BackingStore?.Get<int?>("minimumAge"); }
+            set { BackingStore?.Set("minimumAge", value); }
+        }
         /// <summary>The minimumAgeNote property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MinimumAgeNote { get; set; }
+        public string? MinimumAgeNote
+        {
+            get { return BackingStore?.Get<string?>("minimumAgeNote"); }
+            set { BackingStore?.Set("minimumAgeNote", value); }
+        }
 #nullable restore
 #else
-        public string MinimumAgeNote { get; set; }
+        public string MinimumAgeNote
+        {
+            get { return BackingStore?.Get<string>("minimumAgeNote"); }
+            set { BackingStore?.Set("minimumAgeNote", value); }
+        }
 #endif
         /// <summary>The occupancyNote property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? OccupancyNote { get; set; }
+        public string? OccupancyNote
+        {
+            get { return BackingStore?.Get<string?>("occupancyNote"); }
+            set { BackingStore?.Set("occupancyNote", value); }
+        }
 #nullable restore
 #else
-        public string OccupancyNote { get; set; }
+        public string OccupancyNote
+        {
+            get { return BackingStore?.Get<string>("occupancyNote"); }
+            set { BackingStore?.Set("occupancyNote", value); }
+        }
 #endif
         /// <summary>The pets property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_pets? Pets { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_pets? Pets
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_pets?>("pets"); }
+            set { BackingStore?.Set("pets", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_pets Pets { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_pets Pets
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_pets>("pets"); }
+            set { BackingStore?.Set("pets", value); }
+        }
 #endif
         /// <summary>The rentalAgreement property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? RentalAgreement { get; set; }
+        public UntypedNode? RentalAgreement
+        {
+            get { return BackingStore?.Get<UntypedNode?>("rentalAgreement"); }
+            set { BackingStore?.Set("rentalAgreement", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode RentalAgreement { get; set; }
+        public UntypedNode RentalAgreement
+        {
+            get { return BackingStore?.Get<UntypedNode>("rentalAgreement"); }
+            set { BackingStore?.Set("rentalAgreement", value); }
+        }
 #endif
         /// <summary>The smoking property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_smoking? Smoking { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_smoking? Smoking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_smoking?>("smoking"); }
+            set { BackingStore?.Set("smoking", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_smoking Smoking { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_smoking Smoking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data_smoking>("smoking"); }
+            set { BackingStore?.Set("smoking", value); }
+        }
 #endif
         /// <summary>The timeOptions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? TimeOptions { get; set; }
+        public List<string>? TimeOptions
+        {
+            get { return BackingStore?.Get<List<string>?>("timeOptions"); }
+            set { BackingStore?.Set("timeOptions", value); }
+        }
 #nullable restore
 #else
-        public List<string> TimeOptions { get; set; }
+        public List<string> TimeOptions
+        {
+            get { return BackingStore?.Get<List<string>>("timeOptions"); }
+            set { BackingStore?.Set("timeOptions", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.HouseRules.HouseRulesGetResponse_data"/> and sets the default values.
         /// </summary>
         public HouseRulesGetResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

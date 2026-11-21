@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,55 +12,102 @@ namespace Repull.SDK.V1.Channels.Booking.Setup
     /// Used by `create-property` ONLY when this workspace has no legal entity yet — one is registered with Booking.com from these details and used for the property. Ignored when the workspace already has one, so a second is never registered.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class SetupPostRequestBody_legal_entity : IAdditionalDataHolder, IParsable
+    public partial class SetupPostRequestBody_legal_entity : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>The company_name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompanyName { get; set; }
+        public string? CompanyName
+        {
+            get { return BackingStore?.Get<string?>("company_name"); }
+            set { BackingStore?.Set("company_name", value); }
+        }
 #nullable restore
 #else
-        public string CompanyName { get; set; }
+        public string CompanyName
+        {
+            get { return BackingStore?.Get<string>("company_name"); }
+            set { BackingStore?.Set("company_name", value); }
+        }
 #endif
         /// <summary>The country property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Country { get; set; }
+        public string? Country
+        {
+            get { return BackingStore?.Get<string?>("country"); }
+            set { BackingStore?.Set("country", value); }
+        }
 #nullable restore
 #else
-        public string Country { get; set; }
+        public string Country
+        {
+            get { return BackingStore?.Get<string>("country"); }
+            set { BackingStore?.Set("country", value); }
+        }
 #endif
         /// <summary>The legal_contact_email property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LegalContactEmail { get; set; }
+        public string? LegalContactEmail
+        {
+            get { return BackingStore?.Get<string?>("legal_contact_email"); }
+            set { BackingStore?.Set("legal_contact_email", value); }
+        }
 #nullable restore
 #else
-        public string LegalContactEmail { get; set; }
+        public string LegalContactEmail
+        {
+            get { return BackingStore?.Get<string>("legal_contact_email"); }
+            set { BackingStore?.Set("legal_contact_email", value); }
+        }
 #endif
         /// <summary>The legal_contact_name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LegalContactName { get; set; }
+        public string? LegalContactName
+        {
+            get { return BackingStore?.Get<string?>("legal_contact_name"); }
+            set { BackingStore?.Set("legal_contact_name", value); }
+        }
 #nullable restore
 #else
-        public string LegalContactName { get; set; }
+        public string LegalContactName
+        {
+            get { return BackingStore?.Get<string>("legal_contact_name"); }
+            set { BackingStore?.Set("legal_contact_name", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.Setup.SetupPostRequestBody_legal_entity"/> and sets the default values.
         /// </summary>
         public SetupPostRequestBody_legal_entity()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

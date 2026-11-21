@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,89 +12,180 @@ namespace Repull.SDK.Models
     /// A single reserved room within a Booking.com reservation. Raw Booking OTA shape — passed through unmodified from the connector.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingReservationRoom : IAdditionalDataHolder, IParsable
+    public partial class BookingReservationRoom : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The adults property</summary>
-        public int? Adults { get; set; }
+        public int? Adults
+        {
+            get { return BackingStore?.Get<int?>("adults"); }
+            set { BackingStore?.Set("adults", value); }
+        }
         /// <summary>Room arrival date (YYYY-MM-DD).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ArrivalDate { get; set; }
+        public string? ArrivalDate
+        {
+            get { return BackingStore?.Get<string?>("arrival_date"); }
+            set { BackingStore?.Set("arrival_date", value); }
+        }
 #nullable restore
 #else
-        public string ArrivalDate { get; set; }
+        public string ArrivalDate
+        {
+            get { return BackingStore?.Get<string>("arrival_date"); }
+            set { BackingStore?.Set("arrival_date", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The children property</summary>
-        public int? Children { get; set; }
+        public int? Children
+        {
+            get { return BackingStore?.Get<int?>("children"); }
+            set { BackingStore?.Set("children", value); }
+        }
         /// <summary>The currencycode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currencycode { get; set; }
+        public string? Currencycode
+        {
+            get { return BackingStore?.Get<string?>("currencycode"); }
+            set { BackingStore?.Set("currencycode", value); }
+        }
 #nullable restore
 #else
-        public string Currencycode { get; set; }
+        public string Currencycode
+        {
+            get { return BackingStore?.Get<string>("currencycode"); }
+            set { BackingStore?.Set("currencycode", value); }
+        }
 #endif
         /// <summary>Room departure date (YYYY-MM-DD).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DepartureDate { get; set; }
+        public string? DepartureDate
+        {
+            get { return BackingStore?.Get<string?>("departure_date"); }
+            set { BackingStore?.Set("departure_date", value); }
+        }
 #nullable restore
 #else
-        public string DepartureDate { get; set; }
+        public string DepartureDate
+        {
+            get { return BackingStore?.Get<string>("departure_date"); }
+            set { BackingStore?.Set("departure_date", value); }
+        }
 #endif
         /// <summary>The guest_name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestName { get; set; }
+        public string? GuestName
+        {
+            get { return BackingStore?.Get<string?>("guest_name"); }
+            set { BackingStore?.Set("guest_name", value); }
+        }
 #nullable restore
 #else
-        public string GuestName { get; set; }
+        public string GuestName
+        {
+            get { return BackingStore?.Get<string>("guest_name"); }
+            set { BackingStore?.Set("guest_name", value); }
+        }
 #endif
         /// <summary>Room id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The meal_plan property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MealPlan { get; set; }
+        public string? MealPlan
+        {
+            get { return BackingStore?.Get<string?>("meal_plan"); }
+            set { BackingStore?.Set("meal_plan", value); }
+        }
 #nullable restore
 #else
-        public string MealPlan { get; set; }
+        public string MealPlan
+        {
+            get { return BackingStore?.Get<string>("meal_plan"); }
+            set { BackingStore?.Set("meal_plan", value); }
+        }
 #endif
         /// <summary>The numberofguests property</summary>
-        public int? Numberofguests { get; set; }
+        public int? Numberofguests
+        {
+            get { return BackingStore?.Get<int?>("numberofguests"); }
+            set { BackingStore?.Set("numberofguests", value); }
+        }
         /// <summary>Per-room reservation id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomreservationId { get; set; }
+        public string? RoomreservationId
+        {
+            get { return BackingStore?.Get<string?>("roomreservation_id"); }
+            set { BackingStore?.Set("roomreservation_id", value); }
+        }
 #nullable restore
 #else
-        public string RoomreservationId { get; set; }
+        public string RoomreservationId
+        {
+            get { return BackingStore?.Get<string>("roomreservation_id"); }
+            set { BackingStore?.Set("roomreservation_id", value); }
+        }
 #endif
         /// <summary>The special_requests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? SpecialRequests { get; set; }
+        public List<string>? SpecialRequests
+        {
+            get { return BackingStore?.Get<List<string>?>("special_requests"); }
+            set { BackingStore?.Set("special_requests", value); }
+        }
 #nullable restore
 #else
-        public List<string> SpecialRequests { get; set; }
+        public List<string> SpecialRequests
+        {
+            get { return BackingStore?.Get<List<string>>("special_requests"); }
+            set { BackingStore?.Set("special_requests", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.Models.BookingReservationRoom_status? Status { get; set; }
+        public global::Repull.SDK.Models.BookingReservationRoom_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingReservationRoom_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The totalprice property</summary>
-        public double? Totalprice { get; set; }
+        public double? Totalprice
+        {
+            get { return BackingStore?.Get<double?>("totalprice"); }
+            set { BackingStore?.Set("totalprice", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingReservationRoom"/> and sets the default values.
         /// </summary>
         public BookingReservationRoom()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

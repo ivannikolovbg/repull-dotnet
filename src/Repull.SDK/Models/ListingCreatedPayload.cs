@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,41 +12,84 @@ namespace Repull.SDK.Models
     /// Payload for `listing.created`. A new property was synced into Repull from a connected PMS or channel.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingCreatedPayload : IAdditionalDataHolder, IParsable
+    public partial class ListingCreatedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The address property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingCreatedPayload_address? Address { get; set; }
+        public global::Repull.SDK.Models.ListingCreatedPayload_address? Address
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingCreatedPayload_address?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingCreatedPayload_address Address { get; set; }
+        public global::Repull.SDK.Models.ListingCreatedPayload_address Address
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingCreatedPayload_address>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bathrooms property</summary>
-        public double? Bathrooms { get; set; }
+        public double? Bathrooms
+        {
+            get { return BackingStore?.Get<double?>("bathrooms"); }
+            set { BackingStore?.Set("bathrooms", value); }
+        }
         /// <summary>The bedrooms property</summary>
-        public int? Bedrooms { get; set; }
+        public int? Bedrooms
+        {
+            get { return BackingStore?.Get<int?>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+        public int? Id
+        {
+            get { return BackingStore?.Get<int?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>The maxGuests property</summary>
-        public int? MaxGuests { get; set; }
+        public int? MaxGuests
+        {
+            get { return BackingStore?.Get<int?>("maxGuests"); }
+            set { BackingStore?.Set("maxGuests", value); }
+        }
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingCreatedPayload"/> and sets the default values.
         /// </summary>
         public ListingCreatedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,25 +10,50 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ProtectionPutRequestBody : IParsable
+    public partial class ProtectionPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The damageDeposit property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit? DamageDeposit { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit? DamageDeposit
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit?>("damageDeposit"); }
+            set { BackingStore?.Set("damageDeposit", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit DamageDeposit { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit DamageDeposit
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit>("damageDeposit"); }
+            set { BackingStore?.Set("damageDeposit", value); }
+        }
 #endif
         /// <summary>In Vrbo&apos;s shape, as the read returns it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? DamageProtection { get; set; }
+        public UntypedNode? DamageProtection
+        {
+            get { return BackingStore?.Get<UntypedNode?>("damageProtection"); }
+            set { BackingStore?.Set("damageProtection", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode DamageProtection { get; set; }
+        public UntypedNode DamageProtection
+        {
+            get { return BackingStore?.Get<UntypedNode>("damageProtection"); }
+            set { BackingStore?.Set("damageProtection", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public ProtectionPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -64,18 +90,39 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection
         /// Composed type wrapper for classes <see cref="double"/>, <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ProtectionPutRequestBody_damageDeposit : IComposedTypeWrapper, IParsable
+        public partial class ProtectionPutRequestBody_damageDeposit : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="double"/></summary>
-            public double? Double { get; set; }
+            public double? Double
+            {
+                get { return BackingStore?.Get<double?>("double"); }
+                set { BackingStore?.Set("double", value); }
+            }
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1? ProtectionPutRequestBodyDamageDepositMember1 { get; set; }
+            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1? ProtectionPutRequestBodyDamageDepositMember1
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1?>("protectionPutRequestBody_damageDepositMember1"); }
+                set { BackingStore?.Set("protectionPutRequestBody_damageDepositMember1", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1 ProtectionPutRequestBodyDamageDepositMember1 { get; set; }
+            public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1 ProtectionPutRequestBodyDamageDepositMember1
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1>("protectionPutRequestBody_damageDepositMember1"); }
+                set { BackingStore?.Set("protectionPutRequestBody_damageDepositMember1", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit"/> and sets the default values.
+            /// </summary>
+            public ProtectionPutRequestBody_damageDeposit()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>
@@ -84,11 +131,13 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection
             public static global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit CreateFromDiscriminatorValue(IParseNode parseNode)
             {
                 if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
                 var result = new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody.ProtectionPutRequestBody_damageDeposit();
                 if(parseNode.GetDoubleValue() is double doubleValue)
                 {
                     result.Double = doubleValue;
+                }
+                else {
+                    result.ProtectionPutRequestBodyDamageDepositMember1 = new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1();
                 }
                 return result;
             }
@@ -100,7 +149,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection
             {
                 if(ProtectionPutRequestBodyDamageDepositMember1 != null)
                 {
-                    return ProtectionPutRequestBodyDamageDepositMember1.GetFieldDeserializers();
+                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ProtectionPutRequestBodyDamageDepositMember1);
                 }
                 return new Dictionary<string, Action<IParseNode>>();
             }
@@ -111,13 +160,12 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection
             public virtual void Serialize(ISerializationWriter writer)
             {
                 if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(ProtectionPutRequestBodyDamageDepositMember1 != null)
-                {
-                    writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1>(null, ProtectionPutRequestBodyDamageDepositMember1);
-                }
-                else if(Double != null)
+                if(Double != null)
                 {
                     writer.WriteDoubleValue(null, Double);
+                }
+                else {
+                    writer.WriteObjectValue<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionPutRequestBody_damageDepositMember1>(null, ProtectionPutRequestBodyDamageDepositMember1);
                 }
             }
         }

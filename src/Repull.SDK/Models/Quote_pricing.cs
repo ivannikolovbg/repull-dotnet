@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,32 +10,71 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class Quote_pricing : IAdditionalDataHolder, IParsable
+    public partial class Quote_pricing : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cleaningFee property</summary>
-        public double? CleaningFee { get; set; }
+        public double? CleaningFee
+        {
+            get { return BackingStore?.Get<double?>("cleaningFee"); }
+            set { BackingStore?.Set("cleaningFee", value); }
+        }
         /// <summary>The lengthOfStayDiscount property</summary>
-        public double? LengthOfStayDiscount { get; set; }
+        public double? LengthOfStayDiscount
+        {
+            get { return BackingStore?.Get<double?>("lengthOfStayDiscount"); }
+            set { BackingStore?.Set("lengthOfStayDiscount", value); }
+        }
         /// <summary>The lengthOfStayDiscountPercent property</summary>
-        public double? LengthOfStayDiscountPercent { get; set; }
+        public double? LengthOfStayDiscountPercent
+        {
+            get { return BackingStore?.Get<double?>("lengthOfStayDiscountPercent"); }
+            set { BackingStore?.Set("lengthOfStayDiscountPercent", value); }
+        }
         /// <summary>The nightlyTotal property</summary>
-        public double? NightlyTotal { get; set; }
+        public double? NightlyTotal
+        {
+            get { return BackingStore?.Get<double?>("nightlyTotal"); }
+            set { BackingStore?.Set("nightlyTotal", value); }
+        }
         /// <summary>The otherFees property</summary>
-        public double? OtherFees { get; set; }
+        public double? OtherFees
+        {
+            get { return BackingStore?.Get<double?>("otherFees"); }
+            set { BackingStore?.Set("otherFees", value); }
+        }
         /// <summary>The petFee property</summary>
-        public double? PetFee { get; set; }
+        public double? PetFee
+        {
+            get { return BackingStore?.Get<double?>("petFee"); }
+            set { BackingStore?.Set("petFee", value); }
+        }
         /// <summary>The taxes property</summary>
-        public double? Taxes { get; set; }
+        public double? Taxes
+        {
+            get { return BackingStore?.Get<double?>("taxes"); }
+            set { BackingStore?.Set("taxes", value); }
+        }
         /// <summary>The total property</summary>
-        public double? Total { get; set; }
+        public double? Total
+        {
+            get { return BackingStore?.Get<double?>("total"); }
+            set { BackingStore?.Set("total", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Quote_pricing"/> and sets the default values.
         /// </summary>
         public Quote_pricing()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

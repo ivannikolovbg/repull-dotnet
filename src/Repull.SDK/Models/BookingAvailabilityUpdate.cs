@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,53 +12,104 @@ namespace Repull.SDK.Models
     /// One (room, rate-plan, date-range) availability update. Carries inventory (`availableRooms`), the dedicated stop-sell flag (`closed`), and length-of-stay / arrival restrictions. Omit `availableRooms` and `closed` for a restriction-only write — inventory is then left untouched.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingAvailabilityUpdate : IAdditionalDataHolder, IParsable
+    public partial class BookingAvailabilityUpdate : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Rooms to sell (`roomstosell`). `0` blocks the room for the range. Omit it to leave inventory alone — `0` is a stop-sell, not a no-op.</summary>
-        public int? AvailableRooms { get; set; }
+        public int? AvailableRooms
+        {
+            get { return BackingStore?.Get<int?>("availableRooms"); }
+            set { BackingStore?.Set("availableRooms", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Dedicated stop-sell flag (`&lt;closed&gt;` in Booking&apos;s XML). `true` fully stops sale for the room/date-range regardless of `availableRooms`.</summary>
-        public bool? Closed { get; set; }
+        public bool? Closed
+        {
+            get { return BackingStore?.Get<bool?>("closed"); }
+            set { BackingStore?.Set("closed", value); }
+        }
         /// <summary>The nights this update applies to. **Both ends are inclusive** — `start` equal to `end` is one night.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingAvailabilityUpdate_dateRange? DateRange { get; set; }
+        public global::Repull.SDK.Models.BookingAvailabilityUpdate_dateRange? DateRange
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingAvailabilityUpdate_dateRange?>("dateRange"); }
+            set { BackingStore?.Set("dateRange", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingAvailabilityUpdate_dateRange DateRange { get; set; }
+        public global::Repull.SDK.Models.BookingAvailabilityUpdate_dateRange DateRange
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingAvailabilityUpdate_dateRange>("dateRange"); }
+            set { BackingStore?.Set("dateRange", value); }
+        }
 #endif
         /// <summary>Booking.com rate-plan id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RateId { get; set; }
+        public string? RateId
+        {
+            get { return BackingStore?.Get<string?>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #nullable restore
 #else
-        public string RateId { get; set; }
+        public string RateId
+        {
+            get { return BackingStore?.Get<string>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #endif
         /// <summary>Length-of-stay and arrival restrictions for the nights in this update. Omit a field to leave that restriction untouched — nothing you do not state is changed.These are written on Booking.com&apos;s availability notification, which is the wire that carries a restriction when no inventory changes hands. Sending them alongside a price is supported: the prices and the restrictions are two writes, and the response reports each one separately (`price` and `restrictions`), so a half that lands is never reported as a failure and a half that is refused is never reported as applied.Three restrictions are refused with `422 restriction_not_supported` naming the field: Booking.com&apos;s notification has no element for them, and dropping a restriction you stated would be worse than refusing it. Set those on the rate plan in the Booking.com Extranet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions? Restrictions { get; set; }
+        public global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions? Restrictions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions?>("restrictions"); }
+            set { BackingStore?.Set("restrictions", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions Restrictions { get; set; }
+        public global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions Restrictions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions>("restrictions"); }
+            set { BackingStore?.Set("restrictions", value); }
+        }
 #endif
         /// <summary>Booking.com room id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.Models.BookingAvailabilityUpdate_status? Status { get; set; }
+        public global::Repull.SDK.Models.BookingAvailabilityUpdate_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingAvailabilityUpdate_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdate"/> and sets the default values.
         /// </summary>
         public BookingAvailabilityUpdate()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

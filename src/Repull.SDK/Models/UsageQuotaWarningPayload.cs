@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,106 @@ namespace Repull.SDK.Models
     /// Payload for `usage.quota.warning`. Sent once per account per window when usage crosses 80% of a request quota — a heads-up, not a refusal. `topOperation` names the operation driving the traffic so a runaway loop can be found before the cap stops it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class UsageQuotaWarningPayload : IAdditionalDataHolder, IParsable
+    public partial class UsageQuotaWarningPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The limit property</summary>
-        public int? Limit { get; set; }
+        public int? Limit
+        {
+            get { return BackingStore?.Get<int?>("limit"); }
+            set { BackingStore?.Set("limit", value); }
+        }
         /// <summary>The percentUsed property</summary>
-        public int? PercentUsed { get; set; }
+        public int? PercentUsed
+        {
+            get { return BackingStore?.Get<int?>("percentUsed"); }
+            set { BackingStore?.Set("percentUsed", value); }
+        }
         /// <summary>The remaining property</summary>
-        public int? Remaining { get; set; }
+        public int? Remaining
+        {
+            get { return BackingStore?.Get<int?>("remaining"); }
+            set { BackingStore?.Set("remaining", value); }
+        }
         /// <summary>When the window resets and the counter returns to zero.</summary>
-        public DateTimeOffset? ResetsAt { get; set; }
+        public DateTimeOffset? ResetsAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("resetsAt"); }
+            set { BackingStore?.Set("resetsAt", value); }
+        }
         /// <summary>Which quota this warning is about.</summary>
-        public global::Repull.SDK.Models.UsageQuotaWarningPayload_scope? Scope { get; set; }
+        public global::Repull.SDK.Models.UsageQuotaWarningPayload_scope? Scope
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.UsageQuotaWarningPayload_scope?>("scope"); }
+            set { BackingStore?.Set("scope", value); }
+        }
         /// <summary>The tier property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Tier { get; set; }
+        public string? Tier
+        {
+            get { return BackingStore?.Get<string?>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #nullable restore
 #else
-        public string Tier { get; set; }
+        public string Tier
+        {
+            get { return BackingStore?.Get<string>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #endif
         /// <summary>The operation responsible for the largest share of the window so far. Absent when it could not be determined.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.UsageQuotaWarningPayload_topOperation? TopOperation { get; set; }
+        public global::Repull.SDK.Models.UsageQuotaWarningPayload_topOperation? TopOperation
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.UsageQuotaWarningPayload_topOperation?>("topOperation"); }
+            set { BackingStore?.Set("topOperation", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.UsageQuotaWarningPayload_topOperation TopOperation { get; set; }
+        public global::Repull.SDK.Models.UsageQuotaWarningPayload_topOperation TopOperation
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.UsageQuotaWarningPayload_topOperation>("topOperation"); }
+            set { BackingStore?.Set("topOperation", value); }
+        }
 #endif
         /// <summary>The used property</summary>
-        public int? Used { get; set; }
+        public int? Used
+        {
+            get { return BackingStore?.Get<int?>("used"); }
+            set { BackingStore?.Set("used", value); }
+        }
         /// <summary>The window the warning covers — the UTC date when scope is &quot;daily_requests&quot;. Stable dedupe key.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WindowKey { get; set; }
+        public string? WindowKey
+        {
+            get { return BackingStore?.Get<string?>("windowKey"); }
+            set { BackingStore?.Set("windowKey", value); }
+        }
 #nullable restore
 #else
-        public string WindowKey { get; set; }
+        public string WindowKey
+        {
+            get { return BackingStore?.Get<string>("windowKey"); }
+            set { BackingStore?.Set("windowKey", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.UsageQuotaWarningPayload"/> and sets the default values.
         /// </summary>
         public UsageQuotaWarningPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

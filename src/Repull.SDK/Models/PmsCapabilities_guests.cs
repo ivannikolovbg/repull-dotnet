@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,20 +10,35 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PmsCapabilities_guests : IAdditionalDataHolder, IParsable
+    public partial class PmsCapabilities_guests : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`POST /v1/guests` with `provider`.</summary>
-        public bool? Create { get; set; }
+        public bool? Create
+        {
+            get { return BackingStore?.Get<bool?>("create"); }
+            set { BackingStore?.Set("create", value); }
+        }
         /// <summary>`PATCH /v1/guests/{id}` on a guest linked to this PMS.</summary>
-        public bool? Update { get; set; }
+        public bool? Update
+        {
+            get { return BackingStore?.Get<bool?>("update"); }
+            set { BackingStore?.Set("update", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PmsCapabilities_guests"/> and sets the default values.
         /// </summary>
         public PmsCapabilities_guests()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

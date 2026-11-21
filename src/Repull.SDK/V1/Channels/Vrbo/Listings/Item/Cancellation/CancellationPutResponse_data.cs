@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,86 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation
     /// What Vrbo has stored for the section, read back after the write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class CancellationPutResponse_data : IAdditionalDataHolder, IParsable
+    public partial class CancellationPutResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The options property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_options>? Options { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_options>? Options
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_options>?>("options"); }
+            set { BackingStore?.Set("options", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_options> Options { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_options> Options
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_options>>("options"); }
+            set { BackingStore?.Set("options", value); }
+        }
 #endif
         /// <summary>The policyType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PolicyType { get; set; }
+        public string? PolicyType
+        {
+            get { return BackingStore?.Get<string?>("policyType"); }
+            set { BackingStore?.Set("policyType", value); }
+        }
 #nullable restore
 #else
-        public string PolicyType { get; set; }
+        public string PolicyType
+        {
+            get { return BackingStore?.Get<string>("policyType"); }
+            set { BackingStore?.Set("policyType", value); }
+        }
 #endif
         /// <summary>The seasonal property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_seasonal>? Seasonal { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_seasonal>? Seasonal
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_seasonal>?>("seasonal"); }
+            set { BackingStore?.Set("seasonal", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_seasonal> Seasonal { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_seasonal> Seasonal
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_seasonal>>("seasonal"); }
+            set { BackingStore?.Set("seasonal", value); }
+        }
 #endif
         /// <summary>The tiers property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_tiers>? Tiers { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_tiers>? Tiers
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_tiers>?>("tiers"); }
+            set { BackingStore?.Set("tiers", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_tiers> Tiers { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_tiers> Tiers
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data_tiers>>("tiers"); }
+            set { BackingStore?.Set("tiers", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutResponse_data"/> and sets the default values.
         /// </summary>
         public CancellationPutResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,86 @@ namespace Repull.SDK.Models
     /// `message`, `attachments`, or both. Per-channel limits for `attachments`:| Channel | Accepted types | Per file | Per request | Text ||---|---|---|---|---|| Airbnb | JPEG, PNG, GIF, WebP (sent as JPEG), MP4, QuickTime | 10 MB | 5 | optional — each file is sent as its own message, then the text || Booking.com | JPEG, PNG | 10 MB | 5 | **required** — all files ride on the one text message || VRBO, SMS, email, direct-booking site chat | — | — | — | `422 attachments_not_supported`; nothing is sent |
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class SendMessageRequest : IAdditionalDataHolder, IParsable
+    public partial class SendMessageRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Airbnb conversations: send as exactly this connected account — the listing&apos;s owner or one of its co-hosts — e.g. your team co-host. Never swapped for another account: if it is disconnected or not on the listing, nothing is sent and the error says why. Omit it and the conversation&apos;s own account sends while it is connected, otherwise the listing&apos;s owner, otherwise a connected co-host. Connected accounts are on `GET /v1/connect`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Account { get; set; }
+        public string? Account
+        {
+            get { return BackingStore?.Get<string?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public string Account { get; set; }
+        public string Account
+        {
+            get { return BackingStore?.Get<string>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Files to send. See the per-channel table above. On a conversation a connected PMS relays, files go through the PMS — `422 pms_write_unsupported` when its API cannot send them (`capabilities.pms.conversations.attachments` on `GET /v1/connect/{provider}`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.SendMessageAttachment>? Attachments { get; set; }
+        public List<global::Repull.SDK.Models.SendMessageAttachment>? Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.SendMessageAttachment>?>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.SendMessageAttachment> Attachments { get; set; }
+        public List<global::Repull.SDK.Models.SendMessageAttachment> Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.SendMessageAttachment>>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Force a channel. Omit to send on whichever channel the conversation already uses, which is the right default. One of `airbnb`, `booking`, `vrbo`, `sms`, `email`, `website` — except on a conversation a connected PMS relays (Guesty, Hostaway, …), where the message is sent through the PMS and `channel` is passed to it: the PMS&apos;s own channel/module name (Guesty `airbnb2`, `bookingCom`, `email`, `sms`, …) or one of Repull&apos;s names, which the PMS maps. A PMS that cannot choose a channel returns `422 pms_write_unsupported`; `GET /v1/connect/{provider}` → `capabilities.pms.conversations.channelSelect` says so beforehand.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The text to send the guest. Required unless `attachments` is present.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.SendMessageRequest"/> and sets the default values.
         /// </summary>
         public SendMessageRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

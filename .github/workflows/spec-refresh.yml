@@ -86,6 +86,7 @@ jobs:
           dotnet restore
           dotnet build --no-restore --configuration Release
           dotnet format --verify-no-changes --severity warn
+          dotnet test --no-build --configuration Release
           dotnet pack src/Repull.SDK/Repull.SDK.csproj --no-build --configuration Release --output "$RUNNER_TEMP/artifacts"
 
       - name: Commit regenerated SDK

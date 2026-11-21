@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,80 +12,159 @@ namespace Repull.SDK.Models
     /// What happened on ONE channel item — one Airbnb connection, one Booking.com property, or one VRBO unit. A listing can carry several Airbnb connections (a re-list, or a move between host accounts) and each gets its own entry.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ChannelMarketStateItem : IAdditionalDataHolder, IParsable
+    public partial class ChannelMarketStateItem : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.Models.ChannelMarketStateItem_channel? Channel { get; set; }
+        public global::Repull.SDK.Models.ChannelMarketStateItem_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelMarketStateItem_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>Error code when `ok` is false — the SAME code the channel-specific endpoint returns for this failure, so one vocabulary covers both surfaces. Absent when `ok` is true.The channel codes come in pairs, and the pair is the retryable split — the most useful bit in the whole item:- `airbnb_rejected` / `booking_rejected` — the channel refused the request AS SENT. `message` carries its own reason. Correct it and send again; resending the same thing is refused again.- `airbnb_error` / `booking_error` — the channel did not complete the request (outage, timeout, server error). Nothing about the request needs to change: retry with backoff.Plus `ambiguous_booking_mapping` (name the property with `hotelId`) and `payment_required` (a billing refusal, which keeps its own code rather than being buried under a channel one). VRBO items: `vrbo_rejected` (VRBO still shows the unit in the old state after the change), `vrbo_error` (VRBO did not complete it — retry), `vrbo_not_ready` (the unit&apos;s VRBO details have not synced yet — retry in a few minutes), `vrbo_session_expired` (reconnect the VRBO account).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Code { get; set; }
+        public string? Code
+        {
+            get { return BackingStore?.Get<string?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #nullable restore
 #else
-        public string Code { get; set; }
+        public string Code
+        {
+            get { return BackingStore?.Get<string>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #endif
         /// <summary>Airbnb connection row id — the `id` from `GET /v1/channels/airbnb/listings/{id}`. Present on Airbnb items.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>What to do about it, phrased for the direction you asked for — &quot;still live and taking bookings&quot; and &quot;still down&quot; call for different reactions. Absent when `ok` is true.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Fix { get; set; }
+        public string? Fix
+        {
+            get { return BackingStore?.Get<string?>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #nullable restore
 #else
-        public string Fix { get; set; }
+        public string Fix
+        {
+            get { return BackingStore?.Get<string>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #endif
         /// <summary>The Booking.com property acted on. Present on Booking.com items; null when the property could not be resolved.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The channel&apos;s own reason, verbatim. Absent when `ok` is true.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>True only when the channel confirmed the change.</summary>
-        public bool? Ok { get; set; }
+        public bool? Ok
+        {
+            get { return BackingStore?.Get<bool?>("ok"); }
+            set { BackingStore?.Set("ok", value); }
+        }
         /// <summary>The VRBO listing number of the unit hidden or reactivated. Present on VRBO items.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PlatformId { get; set; }
+        public string? PlatformId
+        {
+            get { return BackingStore?.Get<string?>("platformId"); }
+            set { BackingStore?.Set("platformId", value); }
+        }
 #nullable restore
 #else
-        public string PlatformId { get; set; }
+        public string PlatformId
+        {
+            get { return BackingStore?.Get<string>("platformId"); }
+            set { BackingStore?.Set("platformId", value); }
+        }
 #endif
         /// <summary>The `code` this item used to carry, for callers still branching on the old string. A migration aid with a deprecation window — **`code` is canonical.**This fan-out reaches Airbnb through an internal hop that flattens a refusal into its own 500, so an unambiguous Airbnb 400 (&quot;Please specify a valid room type&quot;) was reported as `airbnb_error` — whose published advice is to retry with backoff, forever, for something Airbnb will never accept. It now reads Airbnb&apos;s real status and answers `airbnb_rejected`, and the classification covers the whole 4xx range rather than only `400`. Items whose code changed carry `previousCode`. **Removed in v2.**</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PreviousCode { get; set; }
+        public string? PreviousCode
+        {
+            get { return BackingStore?.Get<string?>("previousCode"); }
+            set { BackingStore?.Set("previousCode", value); }
+        }
 #nullable restore
 #else
-        public string PreviousCode { get; set; }
+        public string PreviousCode
+        {
+            get { return BackingStore?.Get<string>("previousCode"); }
+            set { BackingStore?.Set("previousCode", value); }
+        }
 #endif
         /// <summary>**What is now true of this item**, not what you asked for.`offline` — it is off the market. `online` — it is back on. `unchanged` — nothing was sent, or what was sent did not take; `code` and `message` say why.`unchanged` never means &quot;it was already like that&quot;: it means we did not put it there, and it is still in whatever state it was in before the call.</summary>
-        public global::Repull.SDK.Models.ChannelMarketStateItem_state? State { get; set; }
+        public global::Repull.SDK.Models.ChannelMarketStateItem_state? State
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelMarketStateItem_state?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
         /// <summary>Airbnb and VRBO: the listing was READ BACK afterwards and is in the state asked for — down after `offline`, live after `online`. Airbnb can accept a deactivation and leave a listing live, or accept an activation and keep it offline; either is returned as a failure, never as success. `false` means the read-back could not run — an unknown, not a success.</summary>
-        public bool? Verified { get; set; }
+        public bool? Verified
+        {
+            get { return BackingStore?.Get<bool?>("verified"); }
+            set { BackingStore?.Set("verified", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ChannelMarketStateItem"/> and sets the default values.
         /// </summary>
         public ChannelMarketStateItem()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,42 +12,87 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos
     /// `photo_id` plus at least one of `caption`, `sort_order`, `room_id`, `metadata`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PhotosPatchRequestBody : IParsable
+    public partial class PhotosPatchRequestBody : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>New caption, or `null` to clear it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Caption { get; set; }
+        public string? Caption
+        {
+            get { return BackingStore?.Get<string?>("caption"); }
+            set { BackingStore?.Set("caption", value); }
+        }
 #nullable restore
 #else
-        public string Caption { get; set; }
+        public string Caption
+        {
+            get { return BackingStore?.Get<string>("caption"); }
+            set { BackingStore?.Set("caption", value); }
+        }
 #endif
         /// <summary>At most 10 pairs; keys 40 characters or fewer.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPatchRequestBody_metadata? Metadata { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPatchRequestBody_metadata? Metadata
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPatchRequestBody_metadata?>("metadata"); }
+            set { BackingStore?.Set("metadata", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPatchRequestBody_metadata Metadata { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPatchRequestBody_metadata Metadata
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPatchRequestBody_metadata>("metadata"); }
+            set { BackingStore?.Set("metadata", value); }
+        }
 #endif
         /// <summary>Airbnb-side photo id — the `photoAirbnbId` from `GET /photos`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PhotoId { get; set; }
+        public string? PhotoId
+        {
+            get { return BackingStore?.Get<string?>("photo_id"); }
+            set { BackingStore?.Set("photo_id", value); }
+        }
 #nullable restore
 #else
-        public string PhotoId { get; set; }
+        public string PhotoId
+        {
+            get { return BackingStore?.Get<string>("photo_id"); }
+            set { BackingStore?.Set("photo_id", value); }
+        }
 #endif
         /// <summary>Airbnb room id to file the photo under (`roomId` from `GET /rooms`), or `null` to detach it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("room_id"); }
+            set { BackingStore?.Set("room_id", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("room_id"); }
+            set { BackingStore?.Set("room_id", value); }
+        }
 #endif
         /// <summary>Position in the tour. Relative, not absolute — lower sorts earlier.</summary>
-        public int? SortOrder { get; set; }
+        public int? SortOrder
+        {
+            get { return BackingStore?.Get<int?>("sort_order"); }
+            set { BackingStore?.Set("sort_order", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPatchRequestBody"/> and sets the default values.
+        /// </summary>
+        public PhotosPatchRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

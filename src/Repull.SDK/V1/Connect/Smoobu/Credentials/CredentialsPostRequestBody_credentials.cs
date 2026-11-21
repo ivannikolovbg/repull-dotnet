@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,54 @@ namespace Repull.SDK.V1.Connect.Smoobu.Credentials
     /// HMAC API key + secret from Smoobu → Settings → Advanced → API Keys.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class CredentialsPostRequestBody_credentials : IAdditionalDataHolder, IParsable
+    public partial class CredentialsPostRequestBody_credentials : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Smoobu API key.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiKey { get; set; }
+        public string? ApiKey
+        {
+            get { return BackingStore?.Get<string?>("apiKey"); }
+            set { BackingStore?.Set("apiKey", value); }
+        }
 #nullable restore
 #else
-        public string ApiKey { get; set; }
+        public string ApiKey
+        {
+            get { return BackingStore?.Get<string>("apiKey"); }
+            set { BackingStore?.Set("apiKey", value); }
+        }
 #endif
         /// <summary>Smoobu API secret (shown once when generated).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiSecret { get; set; }
+        public string? ApiSecret
+        {
+            get { return BackingStore?.Get<string?>("apiSecret"); }
+            set { BackingStore?.Set("apiSecret", value); }
+        }
 #nullable restore
 #else
-        public string ApiSecret { get; set; }
+        public string ApiSecret
+        {
+            get { return BackingStore?.Get<string>("apiSecret"); }
+            set { BackingStore?.Set("apiSecret", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Smoobu.Credentials.CredentialsPostRequestBody_credentials"/> and sets the default values.
         /// </summary>
         public CredentialsPostRequestBody_credentials()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

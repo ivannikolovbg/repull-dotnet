@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,71 +12,134 @@ namespace Repull.SDK.Models
     /// The listing&apos;s postal address, unit included. Each part is read from the listing first, then from the connected channels (Airbnb, Vrbo, Booking.com). On an inactive row only `city` is present.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Listing_address : IAdditionalDataHolder, IParsable
+    public partial class Listing_address : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>ISO 3166-1 alpha-2 country code.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CountryCode { get; set; }
+        public string? CountryCode
+        {
+            get { return BackingStore?.Get<string?>("countryCode"); }
+            set { BackingStore?.Set("countryCode", value); }
+        }
 #nullable restore
 #else
-        public string CountryCode { get; set; }
+        public string CountryCode
+        {
+            get { return BackingStore?.Get<string>("countryCode"); }
+            set { BackingStore?.Set("countryCode", value); }
+        }
 #endif
         /// <summary>Street address: number and street.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Line1 { get; set; }
+        public string? Line1
+        {
+            get { return BackingStore?.Get<string?>("line1"); }
+            set { BackingStore?.Set("line1", value); }
+        }
 #nullable restore
 #else
-        public string Line1 { get; set; }
+        public string Line1
+        {
+            get { return BackingStore?.Get<string>("line1"); }
+            set { BackingStore?.Set("line1", value); }
+        }
 #endif
         /// <summary>Apartment, unit, suite or building.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Line2 { get; set; }
+        public string? Line2
+        {
+            get { return BackingStore?.Get<string?>("line2"); }
+            set { BackingStore?.Set("line2", value); }
+        }
 #nullable restore
 #else
-        public string Line2 { get; set; }
+        public string Line2
+        {
+            get { return BackingStore?.Get<string>("line2"); }
+            set { BackingStore?.Set("line2", value); }
+        }
 #endif
         /// <summary>Postal or ZIP code.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PostalCode { get; set; }
+        public string? PostalCode
+        {
+            get { return BackingStore?.Get<string?>("postalCode"); }
+            set { BackingStore?.Set("postalCode", value); }
+        }
 #nullable restore
 #else
-        public string PostalCode { get; set; }
+        public string PostalCode
+        {
+            get { return BackingStore?.Get<string>("postalCode"); }
+            set { BackingStore?.Set("postalCode", value); }
+        }
 #endif
         /// <summary>State, province or region.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get; set; }
+        public string? State
+        {
+            get { return BackingStore?.Get<string?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #nullable restore
 #else
-        public string State { get; set; }
+        public string State
+        {
+            get { return BackingStore?.Get<string>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #endif
         /// <summary>Street line as stored on the listing. Kept for existing integrations; same value as `line1` unless the listing has no street of its own.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Street { get; set; }
+        public string? Street
+        {
+            get { return BackingStore?.Get<string?>("street"); }
+            set { BackingStore?.Set("street", value); }
+        }
 #nullable restore
 #else
-        public string Street { get; set; }
+        public string Street
+        {
+            get { return BackingStore?.Get<string>("street"); }
+            set { BackingStore?.Set("street", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Listing_address"/> and sets the default values.
         /// </summary>
         public Listing_address()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

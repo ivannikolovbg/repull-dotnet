@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,151 +12,302 @@ namespace Repull.SDK.Models
     /// Full guest profile returned by `GET /v1/guests/{id}`. Aggregates the base list-row fields plus contacts, flags, notes, risk metadata, and a reservations-summary rollup.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class GuestProfile : IAdditionalDataHolder, IParsable
+    public partial class GuestProfile : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The blacklistedReason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BlacklistedReason { get; set; }
+        public string? BlacklistedReason
+        {
+            get { return BackingStore?.Get<string?>("blacklistedReason"); }
+            set { BackingStore?.Set("blacklistedReason", value); }
+        }
 #nullable restore
 #else
-        public string BlacklistedReason { get; set; }
+        public string BlacklistedReason
+        {
+            get { return BackingStore?.Get<string>("blacklistedReason"); }
+            set { BackingStore?.Set("blacklistedReason", value); }
+        }
 #endif
         /// <summary>The contacts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.GuestContact>? Contacts { get; set; }
+        public List<global::Repull.SDK.Models.GuestContact>? Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestContact>?>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.GuestContact> Contacts { get; set; }
+        public List<global::Repull.SDK.Models.GuestContact> Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestContact>>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #endif
         /// <summary>The country property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Country { get; set; }
+        public string? Country
+        {
+            get { return BackingStore?.Get<string?>("country"); }
+            set { BackingStore?.Set("country", value); }
+        }
 #nullable restore
 #else
-        public string Country { get; set; }
+        public string Country
+        {
+            get { return BackingStore?.Get<string>("country"); }
+            set { BackingStore?.Set("country", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The displayName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DisplayName { get; set; }
+        public string? DisplayName
+        {
+            get { return BackingStore?.Get<string?>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #nullable restore
 #else
-        public string DisplayName { get; set; }
+        public string DisplayName
+        {
+            get { return BackingStore?.Get<string>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #endif
         /// <summary>The displayNameLong property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DisplayNameLong { get; set; }
+        public string? DisplayNameLong
+        {
+            get { return BackingStore?.Get<string?>("displayNameLong"); }
+            set { BackingStore?.Set("displayNameLong", value); }
+        }
 #nullable restore
 #else
-        public string DisplayNameLong { get; set; }
+        public string DisplayNameLong
+        {
+            get { return BackingStore?.Get<string>("displayNameLong"); }
+            set { BackingStore?.Set("displayNameLong", value); }
+        }
 #endif
         /// <summary>The email property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Email { get; set; }
+        public string? Email
+        {
+            get { return BackingStore?.Get<string?>("email"); }
+            set { BackingStore?.Set("email", value); }
+        }
 #nullable restore
 #else
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return BackingStore?.Get<string>("email"); }
+            set { BackingStore?.Set("email", value); }
+        }
 #endif
         /// <summary>The flags property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.GuestFlag>? Flags { get; set; }
+        public List<global::Repull.SDK.Models.GuestFlag>? Flags
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestFlag>?>("flags"); }
+            set { BackingStore?.Set("flags", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.GuestFlag> Flags { get; set; }
+        public List<global::Repull.SDK.Models.GuestFlag> Flags
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestFlag>>("flags"); }
+            set { BackingStore?.Set("flags", value); }
+        }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The isBlacklisted property</summary>
-        public bool? IsBlacklisted { get; set; }
+        public bool? IsBlacklisted
+        {
+            get { return BackingStore?.Get<bool?>("isBlacklisted"); }
+            set { BackingStore?.Set("isBlacklisted", value); }
+        }
         /// <summary>The language property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Language { get; set; }
+        public string? Language
+        {
+            get { return BackingStore?.Get<string?>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #nullable restore
 #else
-        public string Language { get; set; }
+        public string Language
+        {
+            get { return BackingStore?.Get<string>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #endif
         /// <summary>The notes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.GuestNote>? Notes { get; set; }
+        public List<global::Repull.SDK.Models.GuestNote>? Notes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestNote>?>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.GuestNote> Notes { get; set; }
+        public List<global::Repull.SDK.Models.GuestNote> Notes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestNote>>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #endif
         /// <summary>Primary phone contact. May be an Airbnb relay number — check `phoneType`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Phone { get; set; }
+        public string? Phone
+        {
+            get { return BackingStore?.Get<string?>("phone"); }
+            set { BackingStore?.Set("phone", value); }
+        }
 #nullable restore
 #else
-        public string Phone { get; set; }
+        public string Phone
+        {
+            get { return BackingStore?.Get<string>("phone"); }
+            set { BackingStore?.Set("phone", value); }
+        }
 #endif
         /// <summary>`airbnb_relay` when `phone` is a temporary Airbnb relay number; `guest` otherwise; `null` when there is no phone.</summary>
-        public global::Repull.SDK.Models.GuestPhoneType? PhoneType { get; set; }
+        public global::Repull.SDK.Models.GuestPhoneType? PhoneType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.GuestPhoneType?>("phoneType"); }
+            set { BackingStore?.Set("phoneType", value); }
+        }
         /// <summary>Aggregate counts of reservations attached to the guest. `future` is derived from `total - past - cancelled`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.GuestReservationsSummary? ReservationsSummary { get; set; }
+        public global::Repull.SDK.Models.GuestReservationsSummary? ReservationsSummary
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.GuestReservationsSummary?>("reservationsSummary"); }
+            set { BackingStore?.Set("reservationsSummary", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.GuestReservationsSummary ReservationsSummary { get; set; }
+        public global::Repull.SDK.Models.GuestReservationsSummary ReservationsSummary
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.GuestReservationsSummary>("reservationsSummary"); }
+            set { BackingStore?.Set("reservationsSummary", value); }
+        }
 #endif
         /// <summary>Risk score (e.g. `low`, `medium`, `high`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RiskLevel { get; set; }
+        public string? RiskLevel
+        {
+            get { return BackingStore?.Get<string?>("riskLevel"); }
+            set { BackingStore?.Set("riskLevel", value); }
+        }
 #nullable restore
 #else
-        public string RiskLevel { get; set; }
+        public string RiskLevel
+        {
+            get { return BackingStore?.Get<string>("riskLevel"); }
+            set { BackingStore?.Set("riskLevel", value); }
+        }
 #endif
         /// <summary>The totalReservations property</summary>
-        public int? TotalReservations { get; set; }
+        public int? TotalReservations
+        {
+            get { return BackingStore?.Get<int?>("totalReservations"); }
+            set { BackingStore?.Set("totalReservations", value); }
+        }
         /// <summary>Decimal as string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TotalRevenue { get; set; }
+        public string? TotalRevenue
+        {
+            get { return BackingStore?.Get<string?>("totalRevenue"); }
+            set { BackingStore?.Set("totalRevenue", value); }
+        }
 #nullable restore
 #else
-        public string TotalRevenue { get; set; }
+        public string TotalRevenue
+        {
+            get { return BackingStore?.Get<string>("totalRevenue"); }
+            set { BackingStore?.Set("totalRevenue", value); }
+        }
 #endif
         /// <summary>The verificationLevel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? VerificationLevel { get; set; }
+        public string? VerificationLevel
+        {
+            get { return BackingStore?.Get<string?>("verificationLevel"); }
+            set { BackingStore?.Set("verificationLevel", value); }
+        }
 #nullable restore
 #else
-        public string VerificationLevel { get; set; }
+        public string VerificationLevel
+        {
+            get { return BackingStore?.Get<string>("verificationLevel"); }
+            set { BackingStore?.Set("verificationLevel", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestProfile"/> and sets the default values.
         /// </summary>
         public GuestProfile()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

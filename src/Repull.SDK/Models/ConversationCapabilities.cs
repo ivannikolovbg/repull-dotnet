@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,25 +12,52 @@ namespace Repull.SDK.Models
     /// What the inquiry actions can do on this conversation right now — one set of endpoints for every channel, so an app shows the right actions instead of learning from a `422`. All `false` / `null` when nothing applies (a booked or closed inquiry, Booking.com, direct, an Airbnb inquiry relayed by a PMS).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConversationCapabilities : IAdditionalDataHolder, IParsable
+    public partial class ConversationCapabilities : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`POST /v1/conversations/{id}/pre-approval` would pre-approve the open inquiry (Airbnb connected directly, VRBO).</summary>
-        public bool? CanPreApprove { get; set; }
+        public bool? CanPreApprove
+        {
+            get { return BackingStore?.Get<bool?>("canPreApprove"); }
+            set { BackingStore?.Set("canPreApprove", value); }
+        }
         /// <summary>`POST /v1/conversations/{id}/special-offers/preview` returns the channel’s recalculated offer (VRBO).</summary>
-        public bool? CanPreviewOffer { get; set; }
+        public bool? CanPreviewOffer
+        {
+            get { return BackingStore?.Get<bool?>("canPreviewOffer"); }
+            set { BackingStore?.Set("canPreviewOffer", value); }
+        }
         /// <summary>`POST /v1/conversations/{id}/special-offers` would send an offer.</summary>
-        public bool? CanSendOffer { get; set; }
+        public bool? CanSendOffer
+        {
+            get { return BackingStore?.Get<bool?>("canSendOffer"); }
+            set { BackingStore?.Set("canSendOffer", value); }
+        }
         /// <summary>A pre-approval or offer is live and can be withdrawn — `DELETE /v1/conversations/{id}/pre-approval` (VRBO) or `DELETE …/special-offers/{offerId}` (Airbnb).</summary>
-        public bool? CanWithdraw { get; set; }
+        public bool? CanWithdraw
+        {
+            get { return BackingStore?.Get<bool?>("canWithdraw"); }
+            set { BackingStore?.Set("canWithdraw", value); }
+        }
         /// <summary>How an offer is priced here: `total` — one `totalPrice` for the stay (Airbnb); `breakdown` — `rentalAmount`, `fees`, `damageDeposit`, and the channel computes the guest total (VRBO).</summary>
-        public global::Repull.SDK.Models.ConversationCapabilities_offerPrice? OfferPrice { get; set; }
+        public global::Repull.SDK.Models.ConversationCapabilities_offerPrice? OfferPrice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationCapabilities_offerPrice?>("offerPrice"); }
+            set { BackingStore?.Set("offerPrice", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConversationCapabilities"/> and sets the default values.
         /// </summary>
         public ConversationCapabilities()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

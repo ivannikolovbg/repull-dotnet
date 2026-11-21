@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,35 +12,66 @@ namespace Repull.SDK.Models
     /// Payload for `channel.sync.failed`. A push of availability, rates or content to a connected channel did not land.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ChannelSyncFailurePayload : IAdditionalDataHolder, IParsable
+    public partial class ChannelSyncFailurePayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>One entry per channel mapping that refused the push.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ChannelSyncFailurePayload_failures>? Failures { get; set; }
+        public List<global::Repull.SDK.Models.ChannelSyncFailurePayload_failures>? Failures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ChannelSyncFailurePayload_failures>?>("failures"); }
+            set { BackingStore?.Set("failures", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ChannelSyncFailurePayload_failures> Failures { get; set; }
+        public List<global::Repull.SDK.Models.ChannelSyncFailurePayload_failures> Failures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ChannelSyncFailurePayload_failures>>("failures"); }
+            set { BackingStore?.Set("failures", value); }
+        }
 #endif
         /// <summary>The object property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ChannelSyncFailurePayload_object? Object { get; set; }
+        public global::Repull.SDK.Models.ChannelSyncFailurePayload_object? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelSyncFailurePayload_object?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ChannelSyncFailurePayload_object Object { get; set; }
+        public global::Repull.SDK.Models.ChannelSyncFailurePayload_object Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelSyncFailurePayload_object>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>The occurredAt property</summary>
-        public DateTimeOffset? OccurredAt { get; set; }
+        public DateTimeOffset? OccurredAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("occurredAt"); }
+            set { BackingStore?.Set("occurredAt", value); }
+        }
         /// <summary>Set when the push was blocking dates for a booking just taken. Those nights are sold on one channel and still open on another — treat as urgent.</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ChannelSyncFailurePayload"/> and sets the default values.
         /// </summary>
         public ChannelSyncFailurePayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

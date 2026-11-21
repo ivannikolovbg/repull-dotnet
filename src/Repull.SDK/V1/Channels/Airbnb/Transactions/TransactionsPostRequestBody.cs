@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,22 +11,41 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TransactionsPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class TransactionsPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Inclusive upper bound (YYYY-MM-DD).</summary>
-        public Date? EndDate { get; set; }
+        public Date? EndDate
+        {
+            get { return BackingStore?.Get<Date?>("end_date"); }
+            set { BackingStore?.Set("end_date", value); }
+        }
         /// <summary>Inclusive lower bound (YYYY-MM-DD).</summary>
-        public Date? StartDate { get; set; }
+        public Date? StartDate
+        {
+            get { return BackingStore?.Get<Date?>("start_date"); }
+            set { BackingStore?.Set("start_date", value); }
+        }
         /// <summary>Refresh only settled or only upcoming lines. Both when omitted.</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody_transaction_type? TransactionType { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody_transaction_type? TransactionType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody_transaction_type?>("transaction_type"); }
+            set { BackingStore?.Set("transaction_type", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody"/> and sets the default values.
         /// </summary>
         public TransactionsPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

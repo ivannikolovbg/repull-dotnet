@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// Body for `PUT /v1/channels/airbnb/listings/{id}/availability`. `type: &quot;calendar&quot;` carries per-date restrictions (min/max nights, closed-to-arrival/departure, stop-sell); `type: &quot;rules&quot;` carries listing-level availability rules (default min/max nights, booking lead time, turnover days).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbAvailabilityWriteRequest : IAdditionalDataHolder, IParsable
+    public partial class AirbnbAvailabilityWriteRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Required when `type: &quot;calendar&quot;`. Batch of per-date restriction operations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbCalendarOperation>? Operations { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbCalendarOperation>? Operations
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbCalendarOperation>?>("operations"); }
+            set { BackingStore?.Set("operations", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbCalendarOperation> Operations { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbCalendarOperation> Operations
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbCalendarOperation>>("operations"); }
+            set { BackingStore?.Set("operations", value); }
+        }
 #endif
         /// <summary>Required when `type: &quot;rules&quot;`. Airbnb availability-rules object — `default_min_nights`, `default_max_nights`, `booking_lead_time`, `turnover_days`, `day_of_week_min_nights`, `seasonal_min_nights`, etc.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_rules? Rules { get; set; }
+        public global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_rules? Rules
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_rules?>("rules"); }
+            set { BackingStore?.Set("rules", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_rules Rules { get; set; }
+        public global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_rules Rules
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_rules>("rules"); }
+            set { BackingStore?.Set("rules", value); }
+        }
 #endif
         /// <summary>The type property</summary>
-        public global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_type? Type { get; set; }
+        public global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbAvailabilityWriteRequest"/> and sets the default values.
         /// </summary>
         public AirbnbAvailabilityWriteRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

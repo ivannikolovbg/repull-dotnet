@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,34 +12,71 @@ namespace Repull.SDK.Models
     /// Occupancy-based pricing for one rate plan (Booking.com &quot;derived prices&quot;). The nightly price you write with `type: &quot;rates&quot;` is the price for `leadingOccupancy` guests; each rule prices a smaller (or other) party relative to it, on every night — date-specific prices included.**A write replaces the rate plan&apos;s whole rule set.** Rules you leave out are removed. Send `&quot;occupancies&quot;: []` to remove every rule (all party sizes then pay the leading price).Read the rules back with `GET /v1/channels/booking/properties/{id}/rooms` (`rates[].occupancyPricing`); this write also reads them back itself unless you send `verify: false`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingDerivedPricingUpdate : IParsable
+    public partial class BookingDerivedPricingUpdate : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The party size the nightly price is for. Must equal the rate plan&apos;s `maxPersons` (`GET /v1/channels/booking/properties/{id}/rooms`): Booking.com accepts a different value and then drops every nightly price on the rate plan, so any other value is refused with `422`.</summary>
-        public int? LeadingOccupancy { get; set; }
+        public int? LeadingOccupancy
+        {
+            get { return BackingStore?.Get<int?>("leadingOccupancy"); }
+            set { BackingStore?.Set("leadingOccupancy", value); }
+        }
         /// <summary>The rules, one per party size. `rules` is accepted as an alias. Empty removes every rule.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingOccupancyRule>? Occupancies { get; set; }
+        public List<global::Repull.SDK.Models.BookingOccupancyRule>? Occupancies
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingOccupancyRule>?>("occupancies"); }
+            set { BackingStore?.Set("occupancies", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingOccupancyRule> Occupancies { get; set; }
+        public List<global::Repull.SDK.Models.BookingOccupancyRule> Occupancies
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingOccupancyRule>>("occupancies"); }
+            set { BackingStore?.Set("occupancies", value); }
+        }
 #endif
         /// <summary>Booking.com rate-plan id. Its `pricingType` must be `RLO` or `OBP`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RateId { get; set; }
+        public string? RateId
+        {
+            get { return BackingStore?.Get<string?>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #nullable restore
 #else
-        public string RateId { get; set; }
+        public string RateId
+        {
+            get { return BackingStore?.Get<string>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #endif
         /// <summary>Booking.com room id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingDerivedPricingUpdate"/> and sets the default values.
+        /// </summary>
+        public BookingDerivedPricingUpdate()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

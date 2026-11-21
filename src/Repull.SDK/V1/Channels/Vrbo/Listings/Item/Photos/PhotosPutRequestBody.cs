@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,49 +10,98 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PhotosPutRequestBody : IParsable
+    public partial class PhotosPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The add property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_add>? Add { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_add>? Add
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_add>?>("add"); }
+            set { BackingStore?.Set("add", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_add> Add { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_add> Add
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_add>>("add"); }
+            set { BackingStore?.Set("add", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`{photoId: caption}`</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_captions? Captions { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_captions? Captions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_captions?>("captions"); }
+            set { BackingStore?.Set("captions", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_captions Captions { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_captions Captions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody_captions>("captions"); }
+            set { BackingStore?.Set("captions", value); }
+        }
 #endif
         /// <summary>The cover property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Cover { get; set; }
+        public string? Cover
+        {
+            get { return BackingStore?.Get<string?>("cover"); }
+            set { BackingStore?.Set("cover", value); }
+        }
 #nullable restore
 #else
-        public string Cover { get; set; }
+        public string Cover
+        {
+            get { return BackingStore?.Get<string>("cover"); }
+            set { BackingStore?.Set("cover", value); }
+        }
 #endif
         /// <summary>The delete property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Delete { get; set; }
+        public List<string>? Delete
+        {
+            get { return BackingStore?.Get<List<string>?>("delete"); }
+            set { BackingStore?.Set("delete", value); }
+        }
 #nullable restore
 #else
-        public List<string> Delete { get; set; }
+        public List<string> Delete
+        {
+            get { return BackingStore?.Get<List<string>>("delete"); }
+            set { BackingStore?.Set("delete", value); }
+        }
 #endif
         /// <summary>The order property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Order { get; set; }
+        public List<string>? Order
+        {
+            get { return BackingStore?.Get<List<string>?>("order"); }
+            set { BackingStore?.Set("order", value); }
+        }
 #nullable restore
 #else
-        public List<string> Order { get; set; }
+        public List<string> Order
+        {
+            get { return BackingStore?.Get<List<string>>("order"); }
+            set { BackingStore?.Set("order", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Photos.PhotosPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public PhotosPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,86 +10,193 @@ namespace Repull.SDK.V1.Reservations.Summary
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class SummaryGetResponse_totals : IAdditionalDataHolder, IParsable
+    public partial class SummaryGetResponse_totals : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Active listings × days in the period (one listing per row when grouped by `listing`).</summary>
-        public double? AvailableNights { get; set; }
+        public double? AvailableNights
+        {
+            get { return BackingStore?.Get<double?>("availableNights"); }
+            set { BackingStore?.Set("availableNights", value); }
+        }
         /// <summary>Days between booking and check-in.</summary>
-        public double? AverageLeadTimeDays { get; set; }
+        public double? AverageLeadTimeDays
+        {
+            get { return BackingStore?.Get<double?>("averageLeadTimeDays"); }
+            set { BackingStore?.Set("averageLeadTimeDays", value); }
+        }
         /// <summary>Accommodation per night (revenue per night when the accommodation subtotal is unknown).</summary>
-        public double? AverageNightlyRate { get; set; }
+        public double? AverageNightlyRate
+        {
+            get { return BackingStore?.Get<double?>("averageNightlyRate"); }
+            set { BackingStore?.Set("averageNightlyRate", value); }
+        }
         /// <summary>The averageStayNights property</summary>
-        public double? AverageStayNights { get; set; }
+        public double? AverageStayNights
+        {
+            get { return BackingStore?.Get<double?>("averageStayNights"); }
+            set { BackingStore?.Set("averageStayNights", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cancelled property</summary>
-        public int? Cancelled { get; set; }
+        public int? Cancelled
+        {
+            get { return BackingStore?.Get<int?>("cancelled"); }
+            set { BackingStore?.Set("cancelled", value); }
+        }
         /// <summary>The cancelledRevenue property</summary>
-        public double? CancelledRevenue { get; set; }
+        public double? CancelledRevenue
+        {
+            get { return BackingStore?.Get<double?>("cancelledRevenue"); }
+            set { BackingStore?.Set("cancelledRevenue", value); }
+        }
         /// <summary>Present when grouped by `channel`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>Money is never added across currencies: a period with two currencies has one row per currency.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>Present when grouped by `listing`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Present when grouped by `listing`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingName { get; set; }
+        public string? ListingName
+        {
+            get { return BackingStore?.Get<string?>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #nullable restore
 #else
-        public string ListingName { get; set; }
+        public string ListingName
+        {
+            get { return BackingStore?.Get<string>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #endif
         /// <summary>Present when grouped by `month` (YYYY-MM).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Month { get; set; }
+        public string? Month
+        {
+            get { return BackingStore?.Get<string?>("month"); }
+            set { BackingStore?.Set("month", value); }
+        }
 #nullable restore
 #else
-        public string Month { get; set; }
+        public string Month
+        {
+            get { return BackingStore?.Get<string>("month"); }
+            set { BackingStore?.Set("month", value); }
+        }
 #endif
         /// <summary>Guest nights counted.</summary>
-        public int? Nights { get; set; }
+        public int? Nights
+        {
+            get { return BackingStore?.Get<int?>("nights"); }
+            set { BackingStore?.Set("nights", value); }
+        }
         /// <summary>Guest nights / available nights, 0–1. Only with `basis=stay`, and not when grouped by `channel`. Blocked nights are not subtracted from availability.</summary>
-        public double? Occupancy { get; set; }
+        public double? Occupancy
+        {
+            get { return BackingStore?.Get<double?>("occupancy"); }
+            set { BackingStore?.Set("occupancy", value); }
+        }
         /// <summary>The ownerNights property</summary>
-        public int? OwnerNights { get; set; }
+        public int? OwnerNights
+        {
+            get { return BackingStore?.Get<int?>("ownerNights"); }
+            set { BackingStore?.Set("ownerNights", value); }
+        }
         /// <summary>The ownerStays property</summary>
-        public int? OwnerStays { get; set; }
+        public int? OwnerStays
+        {
+            get { return BackingStore?.Get<int?>("ownerStays"); }
+            set { BackingStore?.Set("ownerStays", value); }
+        }
         /// <summary>What the host receives (`financials.host.revenue`), for reservations where it is known.</summary>
-        public double? Payout { get; set; }
+        public double? Payout
+        {
+            get { return BackingStore?.Get<double?>("payout"); }
+            set { BackingStore?.Set("payout", value); }
+        }
         /// <summary>Requests awaiting an answer; not in revenue or nights.</summary>
-        public int? Pending { get; set; }
+        public int? Pending
+        {
+            get { return BackingStore?.Get<int?>("pending"); }
+            set { BackingStore?.Set("pending", value); }
+        }
         /// <summary>Guest stays with at least one night counted (owner stays are in `ownerStays`).</summary>
-        public int? Reservations { get; set; }
+        public int? Reservations
+        {
+            get { return BackingStore?.Get<int?>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
         /// <summary>How many reservations `payout` covers.</summary>
-        public int? ReservationsWithPayout { get; set; }
+        public int? ReservationsWithPayout
+        {
+            get { return BackingStore?.Get<int?>("reservationsWithPayout"); }
+            set { BackingStore?.Set("reservationsWithPayout", value); }
+        }
         /// <summary>What guests paid (`financials.totalPrice`). With `basis=stay`, a stay that crosses the window or a month edge brings only the share of its nights inside.</summary>
-        public double? Revenue { get; set; }
+        public double? Revenue
+        {
+            get { return BackingStore?.Get<double?>("revenue"); }
+            set { BackingStore?.Set("revenue", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Reservations.Summary.SummaryGetResponse_totals"/> and sets the default values.
         /// </summary>
         public SummaryGetResponse_totals()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

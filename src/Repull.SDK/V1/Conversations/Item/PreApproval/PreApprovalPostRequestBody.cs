@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,24 +10,39 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PreApprovalPostRequestBody : IParsable
+    public partial class PreApprovalPostRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb: when `true`, the guest cannot Instant Book the listing and must book through this pre-approval. Leave `false` unless you need that.</summary>
-        public bool? BlockInstantBooking { get; set; }
+        public bool? BlockInstantBooking
+        {
+            get { return BackingStore?.Get<bool?>("blockInstantBooking"); }
+            set { BackingStore?.Set("blockInstantBooking", value); }
+        }
         /// <summary>VRBO: the message sent to the guest with the pre-approval (a friendly default otherwise).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostRequestBody"/> and sets the default values.
         /// </summary>
         public PreApprovalPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             BlockInstantBooking = false;
         }
         /// <summary>

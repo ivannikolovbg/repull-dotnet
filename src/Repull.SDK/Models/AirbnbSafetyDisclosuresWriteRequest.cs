@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,23 +12,38 @@ namespace Repull.SDK.Models
     /// A MERGE, not a replacement: Airbnb keeps one value per disclosure type, a type you leave out keeps the value it has, and to retract a disclosure you send it with `value: false`. A full replacement would let a partial request silently un-declare a security camera — which is a guest-safety statement, not a preference.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbSafetyDisclosuresWriteRequest : IAdditionalDataHolder, IParsable
+    public partial class AirbnbSafetyDisclosuresWriteRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The disclosures property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? Disclosures { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? Disclosures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>?>("disclosures"); }
+            set { BackingStore?.Set("disclosures", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> Disclosures { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> Disclosures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>>("disclosures"); }
+            set { BackingStore?.Set("disclosures", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbSafetyDisclosuresWriteRequest"/> and sets the default values.
         /// </summary>
         public AirbnbSafetyDisclosuresWriteRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

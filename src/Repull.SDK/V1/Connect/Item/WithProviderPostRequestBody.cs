@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,43 +12,82 @@ namespace Repull.SDK.V1.Connect.Item
     /// Provider-specific credentials (apiKey, clientId/clientSecret, etc.) or OAuth init params for Airbnb.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WithProviderPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class WithProviderPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Airbnb only — selects the OAuth scope set. &apos;read_only&apos; grants read-only scopes; &apos;messaging&apos; (shown to hosts as &quot;Messaging &amp; reviews&quot;) grants read scopes plus message read/send and review writes (reply to guest reviews, submit host reviews — Airbnb&apos;s reviews_write) but NOT property management, so it can coexist with another app (e.g. an existing PMS) that already holds property management on the same Airbnb account; &apos;full_access&apos; (default) grants full host scopes including the exclusive property management (only one app per Airbnb account can hold it). The hosted consent screen normally lets the host pick a tier; passing `accessType` explicitly fixes the tier and hides that choice, so the host can only continue with the tier you requested. Omit it to let the host choose.</summary>
-        public global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType? AccessType { get; set; }
+        public global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType? AccessType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType?>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb and Booking.com — optional UI language for the hosted Connect pages. Accepts any supported locale code (currently `en`, `fr`, `de`, `es`, `it`, `nl`); unknown codes are ignored and resolution falls back to the workspace `default_language`, then `Accept-Language`, then `en`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Locale { get; set; }
+        public string? Locale
+        {
+            get { return BackingStore?.Get<string?>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #nullable restore
 #else
-        public string Locale { get; set; }
+        public string Locale
+        {
+            get { return BackingStore?.Get<string>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #endif
         /// <summary>Airbnb + Booking.com — where to redirect the user after they finish the hosted connect flow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RedirectUrl { get; set; }
+        public string? RedirectUrl
+        {
+            get { return BackingStore?.Get<string?>("redirectUrl"); }
+            set { BackingStore?.Set("redirectUrl", value); }
+        }
 #nullable restore
 #else
-        public string RedirectUrl { get; set; }
+        public string RedirectUrl
+        {
+            get { return BackingStore?.Get<string>("redirectUrl"); }
+            set { BackingStore?.Set("redirectUrl", value); }
+        }
 #endif
         /// <summary>Airbnb — how many months of past reservations the first import pulls (1–60). Omit it for the default window. Upcoming stays are always imported. A wider window takes longer to import, because every extra month is more stays to fetch.</summary>
-        public int? ReservationHistoryMonths { get; set; }
+        public int? ReservationHistoryMonths
+        {
+            get { return BackingStore?.Get<int?>("reservationHistoryMonths"); }
+            set { BackingStore?.Set("reservationHistoryMonths", value); }
+        }
         /// <summary>Airbnb + Booking.com — your own correlation token, e.g. your user id (at most 500 characters). Echoed on the redirect back (`&amp;state=`) and in the `connect.session.completed` webhook.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get; set; }
+        public string? State
+        {
+            get { return BackingStore?.Get<string?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #nullable restore
 #else
-        public string State { get; set; }
+        public string State
+        {
+            get { return BackingStore?.Get<string>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody"/> and sets the default values.
         /// </summary>
         public WithProviderPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
             AccessType = global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_accessType.Full_access;
         }

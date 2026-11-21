@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,67 +12,130 @@ namespace Repull.SDK.Models
     /// Id fields are strings (API-wide convention — bigint ids are stringified to avoid 53-bit JS-number precision loss).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MapAirbnbListingResponse : IAdditionalDataHolder, IParsable
+    public partial class MapAirbnbListingResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The airbnbId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbId { get; set; }
+        public string? AirbnbId
+        {
+            get { return BackingStore?.Get<string?>("airbnbId"); }
+            set { BackingStore?.Set("airbnbId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbId { get; set; }
+        public string AirbnbId
+        {
+            get { return BackingStore?.Get<string>("airbnbId"); }
+            set { BackingStore?.Set("airbnbId", value); }
+        }
 #endif
         /// <summary>True when the Airbnb listing was already mapped to this listing (no-op).</summary>
-        public bool? AlreadyMapped { get; set; }
+        public bool? AlreadyMapped
+        {
+            get { return BackingStore?.Get<bool?>("alreadyMapped"); }
+            set { BackingStore?.Set("alreadyMapped", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The hostId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HostId { get; set; }
+        public string? HostId
+        {
+            get { return BackingStore?.Get<string?>("hostId"); }
+            set { BackingStore?.Set("hostId", value); }
+        }
 #nullable restore
 #else
-        public string HostId { get; set; }
+        public string HostId
+        {
+            get { return BackingStore?.Get<string>("hostId"); }
+            set { BackingStore?.Set("hostId", value); }
+        }
 #endif
         /// <summary>Internal id of the `listings_airbnb` record.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingAirbnbId { get; set; }
+        public string? ListingAirbnbId
+        {
+            get { return BackingStore?.Get<string?>("listingAirbnbId"); }
+            set { BackingStore?.Set("listingAirbnbId", value); }
+        }
 #nullable restore
 #else
-        public string ListingAirbnbId { get; set; }
+        public string ListingAirbnbId
+        {
+            get { return BackingStore?.Get<string>("listingAirbnbId"); }
+            set { BackingStore?.Set("listingAirbnbId", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Internal id of the resulting `listing_platform_links` row.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PlatformLinkId { get; set; }
+        public string? PlatformLinkId
+        {
+            get { return BackingStore?.Get<string?>("platformLinkId"); }
+            set { BackingStore?.Set("platformLinkId", value); }
+        }
 #nullable restore
 #else
-        public string PlatformLinkId { get; set; }
+        public string PlatformLinkId
+        {
+            get { return BackingStore?.Get<string>("platformLinkId"); }
+            set { BackingStore?.Set("platformLinkId", value); }
+        }
 #endif
         /// <summary>The listing the Airbnb record pointed at before this call. Omitted on a no-op.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PreviousListingId { get; set; }
+        public string? PreviousListingId
+        {
+            get { return BackingStore?.Get<string?>("previousListingId"); }
+            set { BackingStore?.Set("previousListingId", value); }
+        }
 #nullable restore
 #else
-        public string PreviousListingId { get; set; }
+        public string PreviousListingId
+        {
+            get { return BackingStore?.Get<string>("previousListingId"); }
+            set { BackingStore?.Set("previousListingId", value); }
+        }
 #endif
         /// <summary>The success property</summary>
-        public bool? Success { get; set; }
+        public bool? Success
+        {
+            get { return BackingStore?.Get<bool?>("success"); }
+            set { BackingStore?.Set("success", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MapAirbnbListingResponse"/> and sets the default values.
         /// </summary>
         public MapAirbnbListingResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

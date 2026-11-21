@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,99 +12,202 @@ namespace Repull.SDK.Models
     /// Channel-agnostic message thread between the host workspace and a guest. Returned by `GET /v1/conversations`. The `id` is the internal Repull thread id (integer) — pass it back as the `{id}` path param on detail / messages calls.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Conversation : IAdditionalDataHolder, IParsable
+    public partial class Conversation : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The connected account this conversation belongs to, the same block as the message webhooks. On the list and on `GET /v1/conversations/{id}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.RecordAccount? Account { get; set; }
+        public global::Repull.SDK.Models.RecordAccount? Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RecordAccount?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.RecordAccount Account { get; set; }
+        public global::Repull.SDK.Models.RecordAccount Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RecordAccount>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Airbnb conversations, on `GET /v1/conversations/{id}`: every account on the listing (owner and co-hosts) with its state, and `defaultAccount` — the one a send uses when `account` is not given. Pass any connected one as `account` on `POST /v1/conversations/{id}/messages` to send as it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbAccess? AirbnbAccess { get; set; }
+        public global::Repull.SDK.Models.AirbnbAccess? AirbnbAccess
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAccess?>("airbnbAccess"); }
+            set { BackingStore?.Set("airbnbAccess", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbAccess AirbnbAccess { get; set; }
+        public global::Repull.SDK.Models.AirbnbAccess AirbnbAccess
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAccess>("airbnbAccess"); }
+            set { BackingStore?.Set("airbnbAccess", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The source channel&apos;s own thread id (Airbnb thread id, Booking conversation id, …). Pass this as the `{threadId}` path param on `POST /v1/channels/airbnb/messaging/{threadId}/messages` to reply — it is the bridge from a unified conversation straight to the provider-specific send call. `null` when the thread has no external id yet (e.g. a website/email thread).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalThreadId { get; set; }
+        public string? ExternalThreadId
+        {
+            get { return BackingStore?.Get<string?>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalThreadId { get; set; }
+        public string ExternalThreadId
+        {
+            get { return BackingStore?.Get<string>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #endif
         /// <summary>The guestId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestId { get; set; }
+        public string? GuestId
+        {
+            get { return BackingStore?.Get<string?>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
 #nullable restore
 #else
-        public string GuestId { get; set; }
+        public string GuestId
+        {
+            get { return BackingStore?.Get<string>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The conversation&apos;s newest activity: the time of its newest message (after an import, the newest imported message&apos;s own time, not the import time), or of a later change to the conversation. `GET /v1/conversations` sorts on it by default.</summary>
-        public DateTimeOffset? LastMessageAt { get; set; }
+        public DateTimeOffset? LastMessageAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastMessageAt"); }
+            set { BackingStore?.Set("lastMessageAt", value); }
+        }
         /// <summary>Short preview of the most recent message body for list-UI rendering.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastMessagePreview { get; set; }
+        public string? LastMessagePreview
+        {
+            get { return BackingStore?.Get<string?>("lastMessagePreview"); }
+            set { BackingStore?.Set("lastMessagePreview", value); }
+        }
 #nullable restore
 #else
-        public string LastMessagePreview { get; set; }
+        public string LastMessagePreview
+        {
+            get { return BackingStore?.Get<string>("lastMessagePreview"); }
+            set { BackingStore?.Set("lastMessagePreview", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The platform property</summary>
-        public global::Repull.SDK.Models.Conversation_platform? Platform { get; set; }
+        public global::Repull.SDK.Models.Conversation_platform? Platform
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Conversation_platform?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
         /// <summary>The reservationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReservationId { get; set; }
+        public string? ReservationId
+        {
+            get { return BackingStore?.Get<string?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #nullable restore
 #else
-        public string ReservationId { get; set; }
+        public string ReservationId
+        {
+            get { return BackingStore?.Get<string>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #endif
         /// <summary>`archived` is reserved for a future bit on `message_threads` — currently always `open`.</summary>
-        public global::Repull.SDK.Models.Conversation_status? Status { get; set; }
+        public global::Repull.SDK.Models.Conversation_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Conversation_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>Thread subject (email/website channels) or null when not applicable.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Subject { get; set; }
+        public string? Subject
+        {
+            get { return BackingStore?.Get<string?>("subject"); }
+            set { BackingStore?.Set("subject", value); }
+        }
 #nullable restore
 #else
-        public string Subject { get; set; }
+        public string Subject
+        {
+            get { return BackingStore?.Get<string>("subject"); }
+            set { BackingStore?.Set("subject", value); }
+        }
 #endif
         /// <summary>The unreadCount property</summary>
-        public int? UnreadCount { get; set; }
+        public int? UnreadCount
+        {
+            get { return BackingStore?.Get<int?>("unreadCount"); }
+            set { BackingStore?.Set("unreadCount", value); }
+        }
         /// <summary>When the conversation record last changed; the watermark for `updated_since`.</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Conversation"/> and sets the default values.
         /// </summary>
         public Conversation()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,25 +10,50 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Translations
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TranslationsPutRequestBody : IParsable
+    public partial class TranslationsPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The delete property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Delete { get; set; }
+        public List<string>? Delete
+        {
+            get { return BackingStore?.Get<List<string>?>("delete"); }
+            set { BackingStore?.Set("delete", value); }
+        }
 #nullable restore
 #else
-        public List<string> Delete { get; set; }
+        public List<string> Delete
+        {
+            get { return BackingStore?.Get<List<string>>("delete"); }
+            set { BackingStore?.Set("delete", value); }
+        }
 #endif
         /// <summary>The set property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Translations.TranslationsPutRequestBody_set>? Set { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Translations.TranslationsPutRequestBody_set>? Set
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Translations.TranslationsPutRequestBody_set>?>("set"); }
+            set { BackingStore?.Set("set", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Translations.TranslationsPutRequestBody_set> Set { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Translations.TranslationsPutRequestBody_set> Set
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Translations.TranslationsPutRequestBody_set>>("set"); }
+            set { BackingStore?.Set("set", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Translations.TranslationsPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public TranslationsPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

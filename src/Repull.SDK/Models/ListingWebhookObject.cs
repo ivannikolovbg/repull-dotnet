@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,87 +12,174 @@ namespace Repull.SDK.Models
     /// The listing, in the shape `GET /v1/listings/{id}` returns. Hydrated at delivery, so a receiver gets the listing rather than a reason to fetch one.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingWebhookObject : IAdditionalDataHolder, IParsable
+    public partial class ListingWebhookObject : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The active property</summary>
-        public bool? Active { get; set; }
+        public bool? Active
+        {
+            get { return BackingStore?.Get<bool?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The address property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingWebhookObject_address? Address { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject_address? Address
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject_address?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingWebhookObject_address Address { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject_address Address
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject_address>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>Which channels this listing is on and whether each still accepts writes. `syncEnabled: false` means the channel refuses every write for this listing — the difference between a failing integration and a suspended listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingWebhookObject_channels>? Channels { get; set; }
+        public List<global::Repull.SDK.Models.ListingWebhookObject_channels>? Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingWebhookObject_channels>?>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingWebhookObject_channels> Channels { get; set; }
+        public List<global::Repull.SDK.Models.ListingWebhookObject_channels> Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingWebhookObject_channels>>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The customerId property</summary>
-        public int? CustomerId { get; set; }
+        public int? CustomerId
+        {
+            get { return BackingStore?.Get<int?>("customerId"); }
+            set { BackingStore?.Set("customerId", value); }
+        }
         /// <summary>The channel&apos;s own listing id. Airbnb&apos;s exceed 2^53, so always a string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalListingId { get; set; }
+        public string? ExternalListingId
+        {
+            get { return BackingStore?.Get<string?>("externalListingId"); }
+            set { BackingStore?.Set("externalListingId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalListingId { get; set; }
+        public string ExternalListingId
+        {
+            get { return BackingStore?.Get<string>("externalListingId"); }
+            set { BackingStore?.Set("externalListingId", value); }
+        }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The status property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>The thumbnailUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThumbnailUrl { get; set; }
+        public string? ThumbnailUrl
+        {
+            get { return BackingStore?.Get<string?>("thumbnailUrl"); }
+            set { BackingStore?.Set("thumbnailUrl", value); }
+        }
 #nullable restore
 #else
-        public string ThumbnailUrl { get; set; }
+        public string ThumbnailUrl
+        {
+            get { return BackingStore?.Get<string>("thumbnailUrl"); }
+            set { BackingStore?.Set("thumbnailUrl", value); }
+        }
 #endif
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingWebhookObject"/> and sets the default values.
         /// </summary>
         public ListingWebhookObject()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

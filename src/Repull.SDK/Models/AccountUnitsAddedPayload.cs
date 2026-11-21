@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,69 +12,136 @@ namespace Repull.SDK.Models
     /// Payload for `account.units.added`. A connected Booking.com Extranet login gained a property (the hotel added the same Booking.com user to it) or a room on a property it already had. One event per property; never for the first import of a fresh connection (`connect.session.completed` and `account.import.*` cover that), never twice for the same rooms.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AccountUnitsAddedPayload : IAdditionalDataHolder, IParsable
+    public partial class AccountUnitsAddedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The Booking.com account id behind the Extranet login — the same value as `account.externalAccountId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>When the sync found the new units.</summary>
-        public DateTimeOffset? AddedAt { get; set; }
+        public DateTimeOffset? AddedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("addedAt"); }
+            set { BackingStore?.Set("addedAt", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Our connection record id: the `X-Account-Id` value, the same as `account.id`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The connection handle the units and mappings endpoints take: `booking_extranet:{accountId}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Handle { get; set; }
+        public string? Handle
+        {
+            get { return BackingStore?.Get<string?>("handle"); }
+            set { BackingStore?.Set("handle", value); }
+        }
 #nullable restore
 #else
-        public string Handle { get; set; }
+        public string Handle
+        {
+            get { return BackingStore?.Get<string>("handle"); }
+            set { BackingStore?.Set("handle", value); }
+        }
 #endif
         /// <summary>The property the new units belong to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_hotels>? Hotels { get; set; }
+        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_hotels>? Hotels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountUnitsAddedPayload_hotels>?>("hotels"); }
+            set { BackingStore?.Set("hotels", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_hotels> Hotels { get; set; }
+        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_hotels> Hotels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountUnitsAddedPayload_hotels>>("hotels"); }
+            set { BackingStore?.Set("hotels", value); }
+        }
 #endif
         /// <summary>What to call next: list the units, then map them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_nextSteps>? NextSteps { get; set; }
+        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_nextSteps>? NextSteps
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountUnitsAddedPayload_nextSteps>?>("nextSteps"); }
+            set { BackingStore?.Set("nextSteps", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_nextSteps> NextSteps { get; set; }
+        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_nextSteps> NextSteps
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountUnitsAddedPayload_nextSteps>>("nextSteps"); }
+            set { BackingStore?.Set("nextSteps", value); }
+        }
 #endif
         /// <summary>The channel. Today only Booking.com Extranet logins send this event.</summary>
-        public global::Repull.SDK.Models.AccountUnitsAddedPayload_provider? Provider { get; set; }
+        public global::Repull.SDK.Models.AccountUnitsAddedPayload_provider? Provider
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountUnitsAddedPayload_provider?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
         /// <summary>The new units, as `GET /v1/connections/{id}/units` lists them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_units>? Units { get; set; }
+        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_units>? Units
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountUnitsAddedPayload_units>?>("units"); }
+            set { BackingStore?.Set("units", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_units> Units { get; set; }
+        public List<global::Repull.SDK.Models.AccountUnitsAddedPayload_units> Units
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountUnitsAddedPayload_units>>("units"); }
+            set { BackingStore?.Set("units", value); }
+        }
 #endif
         /// <summary>The workspace the login is connected in.</summary>
-        public int? WorkspaceId { get; set; }
+        public int? WorkspaceId
+        {
+            get { return BackingStore?.Get<int?>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AccountUnitsAddedPayload"/> and sets the default values.
         /// </summary>
         public AccountUnitsAddedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

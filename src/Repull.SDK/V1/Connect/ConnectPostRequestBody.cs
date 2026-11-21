@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,82 +10,165 @@ namespace Repull.SDK.V1.Connect
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ConnectPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class ConnectPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>What the connection may do. Airbnb: the OAuth scope tier. Vrbo: `messaging` (or `read_only`) imports bookings and messages and never pushes the calendar; `full_access` also pushes prices and availability. Setting it locks the choice; omit it to let the host choose on the hosted page (default `full_access`).</summary>
-        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_accessType? AccessType { get; set; }
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_accessType? AccessType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_accessType?>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Optional whitelist of provider IDs the picker should expose. Omit to show every channel in the registry.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? AllowedProviders { get; set; }
+        public List<string>? AllowedProviders
+        {
+            get { return BackingStore?.Get<List<string>?>("allowedProviders"); }
+            set { BackingStore?.Set("allowedProviders", value); }
+        }
 #nullable restore
 #else
-        public List<string> AllowedProviders { get; set; }
+        public List<string> AllowedProviders
+        {
+            get { return BackingStore?.Get<List<string>>("allowedProviders"); }
+            set { BackingStore?.Set("allowedProviders", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Migrate only — your wording for the hosted pages. Anything you leave out uses Repull&apos;s localized migration copy.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy? Copy { get; set; }
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy? Copy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy?>("copy"); }
+            set { BackingStore?.Set("copy", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy Copy { get; set; }
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy Copy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy>("copy"); }
+            set { BackingStore?.Set("copy", value); }
+        }
 #endif
         /// <summary>Also list PMSes Repull doesn&apos;t connect yet (`status: request-only` in `GET /v1/connect/providers?includeRequestOnly=true`), plus an Other PMS card. Picking one opens a form that collects the host&apos;s contact and access details for the Repull team and ends with &quot;A team member will contact you&quot;. No connection is made: the redirect carries `status=requested&amp;provider=&lt;id&gt;`, and no `connect.session.completed` webhook fires. Naming a request-only id in `allowedProviders` offers it without this flag.</summary>
-        public bool? IncludeRequestOnly { get; set; }
+        public bool? IncludeRequestOnly
+        {
+            get { return BackingStore?.Get<bool?>("includeRequestOnly"); }
+            set { BackingStore?.Set("includeRequestOnly", value); }
+        }
         /// <summary>Optional UI language for the hosted Connect pages. Accepts any supported locale code (currently `en`, `fr`, `de`, `es`, `it`, `nl`). When set it pins the language for the whole flow, overriding the workspace `default_language`. Unknown codes are ignored and the page falls back to the workspace default, then `Accept-Language`, then `en`. The end user can still override per-visit with a `?locale=` query param on the hosted page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Locale { get; set; }
+        public string? Locale
+        {
+            get { return BackingStore?.Get<string?>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #nullable restore
 #else
-        public string Locale { get; set; }
+        public string Locale
+        {
+            get { return BackingStore?.Get<string>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #endif
         /// <summary>Where the channel&apos;s units get linked to listings. `hosted` (default): after a Vrbo or Booking.com Extranet sign-in, Connect shows a mapping step and returns to `redirectUrl` when it&apos;s confirmed. `api`: Connect skips that step and finishes right after sign-in. The connection reaches you in the `connect.session.completed` webhook, the popup message and the redirect (`externalAccountId` + `connectionId`): `externalAccountId` is the Vrbo account id or the Booking.com account id, `connectionId` our connection record; its handle is `vrbo:{externalAccountId}` or `booking_extranet:{externalAccountId}`; you list the units with `GET /v1/connections/{id}/units` and link them with `POST /v1/connections/{id}/mappings`. Nothing is imported until you post the mappings. Other providers ignore it.</summary>
-        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_mapping? Mapping { get; set; }
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_mapping? Mapping
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_mapping?>("mapping"); }
+            set { BackingStore?.Set("mapping", value); }
+        }
         /// <summary>`migrate` starts a Repull Migrate session: the property manager connects their current PMS (or channel) and their data is copied into a new workspace of theirs, which you read with `X-Workspace-Id`. The hosted pages use migration wording, and after connecting they show the import&apos;s progress.</summary>
-        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose? Purpose { get; set; }
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose? Purpose
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose?>("purpose"); }
+            set { BackingStore?.Set("purpose", value); }
+        }
         /// <summary>Where to send the user after they finish (or cancel). Status query params are appended.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RedirectUrl { get; set; }
+        public string? RedirectUrl
+        {
+            get { return BackingStore?.Get<string?>("redirectUrl"); }
+            set { BackingStore?.Set("redirectUrl", value); }
+        }
 #nullable restore
 #else
-        public string RedirectUrl { get; set; }
+        public string RedirectUrl
+        {
+            get { return BackingStore?.Get<string>("redirectUrl"); }
+            set { BackingStore?.Set("redirectUrl", value); }
+        }
 #endif
         /// <summary>Airbnb — how many months of past reservations the first import pulls (1–60). Omit it for the default window. Upcoming stays are always imported. A wider window takes longer to import, because every extra month is more stays to fetch.</summary>
-        public int? ReservationHistoryMonths { get; set; }
+        public int? ReservationHistoryMonths
+        {
+            get { return BackingStore?.Get<int?>("reservationHistoryMonths"); }
+            set { BackingStore?.Set("reservationHistoryMonths", value); }
+        }
         /// <summary>Migrate only — what you want brought across, listed to the property manager before they connect.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?>? Scope { get; set; }
+        public List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?>? Scope
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?>?>("scope"); }
+            set { BackingStore?.Set("scope", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?> Scope { get; set; }
+        public List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?> Scope
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_scope?>>("scope"); }
+            set { BackingStore?.Set("scope", value); }
+        }
 #endif
         /// <summary>Your own correlation token, e.g. your user id (at most 500 characters). Echoed in this response, on the redirect back (`&amp;state=`), in the popup message, and in the `connect.session.completed` webhook.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get; set; }
+        public string? State
+        {
+            get { return BackingStore?.Get<string?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #nullable restore
 #else
-        public string State { get; set; }
+        public string State
+        {
+            get { return BackingStore?.Get<string>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #endif
         /// <summary>Opens a new sub-workspace for this customer of yours and lands the connection there; the response returns its `workspaceId`, which you then send as `X-Workspace-Id`. Works with both purposes: a plain `connect` keeps the normal onboarding pages. Required for `migrate` unless you send `X-Workspace-Id` to reconnect an existing one. Don&apos;t send it together with `X-Workspace-Id`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace? Workspace { get; set; }
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace? Workspace
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace?>("workspace"); }
+            set { BackingStore?.Set("workspace", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace Workspace { get; set; }
+        public global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace Workspace
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace>("workspace"); }
+            set { BackingStore?.Set("workspace", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.ConnectPostRequestBody"/> and sets the default values.
         /// </summary>
         public ConnectPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
             IncludeRequestOnly = false;
             Mapping = global::Repull.SDK.V1.Connect.ConnectPostRequestBody_mapping.Hosted;

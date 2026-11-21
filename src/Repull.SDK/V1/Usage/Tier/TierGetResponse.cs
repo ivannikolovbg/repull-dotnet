@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,52 +10,99 @@ namespace Repull.SDK.V1.Usage.Tier
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TierGetResponse : IAdditionalDataHolder, IParsable
+    public partial class TierGetResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The dailyResetsAt property</summary>
-        public DateTimeOffset? DailyResetsAt { get; set; }
+        public DateTimeOffset? DailyResetsAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("dailyResetsAt"); }
+            set { BackingStore?.Set("dailyResetsAt", value); }
+        }
         /// <summary>The limits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits? Limits { get; set; }
+        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits? Limits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits?>("limits"); }
+            set { BackingStore?.Set("limits", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits Limits { get; set; }
+        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits Limits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_limits>("limits"); }
+            set { BackingStore?.Set("limits", value); }
+        }
 #endif
         /// <summary>The remaining property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining? Remaining { get; set; }
+        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining? Remaining
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining?>("remaining"); }
+            set { BackingStore?.Set("remaining", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining Remaining { get; set; }
+        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining Remaining
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_remaining>("remaining"); }
+            set { BackingStore?.Set("remaining", value); }
+        }
 #endif
         /// <summary>The resetsAt property</summary>
-        public DateTimeOffset? ResetsAt { get; set; }
+        public DateTimeOffset? ResetsAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("resetsAt"); }
+            set { BackingStore?.Set("resetsAt", value); }
+        }
         /// <summary>The tier property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Tier { get; set; }
+        public string? Tier
+        {
+            get { return BackingStore?.Get<string?>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #nullable restore
 #else
-        public string Tier { get; set; }
+        public string Tier
+        {
+            get { return BackingStore?.Get<string>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #endif
         /// <summary>The used property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used? Used { get; set; }
+        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used? Used
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used?>("used"); }
+            set { BackingStore?.Set("used", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used Used { get; set; }
+        public global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used Used
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Tier.TierGetResponse_used>("used"); }
+            set { BackingStore?.Set("used", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Usage.Tier.TierGetResponse"/> and sets the default values.
         /// </summary>
         public TierGetResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

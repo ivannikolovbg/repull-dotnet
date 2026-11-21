@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,27 +10,56 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BookingSettingsPutRequestBody_cancellation : IParsable
+    public partial class BookingSettingsPutRequestBody_cancellation : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The longStayPolicy property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LongStayPolicy { get; set; }
+        public string? LongStayPolicy
+        {
+            get { return BackingStore?.Get<string?>("longStayPolicy"); }
+            set { BackingStore?.Set("longStayPolicy", value); }
+        }
 #nullable restore
 #else
-        public string LongStayPolicy { get; set; }
+        public string LongStayPolicy
+        {
+            get { return BackingStore?.Get<string>("longStayPolicy"); }
+            set { BackingStore?.Set("longStayPolicy", value); }
+        }
 #endif
         /// <summary>`enabled: true` requires `discountPercent`; `enabled: false` sets the price factor to 1.0 (no discount). Repull converts the percentage to the factor Airbnb stores — 10% becomes 0.9 — and refuses anything over 30%, which is Airbnb&apos;s 0.7 floor.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_nonRefundable? NonRefundable { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_nonRefundable? NonRefundable
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_nonRefundable?>("nonRefundable"); }
+            set { BackingStore?.Set("nonRefundable", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_nonRefundable NonRefundable { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_nonRefundable NonRefundable
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_nonRefundable>("nonRefundable"); }
+            set { BackingStore?.Set("nonRefundable", value); }
+        }
 #endif
         /// <summary>The shortStayPolicy property</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_shortStayPolicy? ShortStayPolicy { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_shortStayPolicy? ShortStayPolicy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation_shortStayPolicy?>("shortStayPolicy"); }
+            set { BackingStore?.Set("shortStayPolicy", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_cancellation"/> and sets the default values.
+        /// </summary>
+        public BookingSettingsPutRequestBody_cancellation()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

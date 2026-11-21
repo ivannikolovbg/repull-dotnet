@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,131 +12,274 @@ namespace Repull.SDK.Models
     /// Structural detail slab for a listing — bedrooms/bathrooms/beds, person capacity, check-in window, wifi credentials, house manual, directions. Sourced from `listings_details` (one row per listing). Surfaced on `GET /v1/listings/{id}` and `GET /v1/listings` only when the caller passes `?include=details`. All fields are individually nullable.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingDetails : IAdditionalDataHolder, IParsable
+    public partial class ListingDetails : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>How far in advance bookings are allowed.</summary>
-        public int? AdvanceBookingDays { get; set; }
+        public int? AdvanceBookingDays
+        {
+            get { return BackingStore?.Get<int?>("advanceBookingDays"); }
+            set { BackingStore?.Set("advanceBookingDays", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Numeric value carried as a string to preserve fractional bathrooms (e.g. `&quot;1.5&quot;`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Bathrooms { get; set; }
+        public string? Bathrooms
+        {
+            get { return BackingStore?.Get<string?>("bathrooms"); }
+            set { BackingStore?.Set("bathrooms", value); }
+        }
 #nullable restore
 #else
-        public string Bathrooms { get; set; }
+        public string Bathrooms
+        {
+            get { return BackingStore?.Get<string>("bathrooms"); }
+            set { BackingStore?.Set("bathrooms", value); }
+        }
 #endif
         /// <summary>The bedrooms property</summary>
-        public int? Bedrooms { get; set; }
+        public int? Bedrooms
+        {
+            get { return BackingStore?.Get<int?>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
         /// <summary>The beds property</summary>
-        public int? Beds { get; set; }
+        public int? Beds
+        {
+            get { return BackingStore?.Get<int?>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
         /// <summary>Latest check-in time.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTimeEnd { get; set; }
+        public string? CheckInTimeEnd
+        {
+            get { return BackingStore?.Get<string?>("checkInTimeEnd"); }
+            set { BackingStore?.Set("checkInTimeEnd", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTimeEnd { get; set; }
+        public string CheckInTimeEnd
+        {
+            get { return BackingStore?.Get<string>("checkInTimeEnd"); }
+            set { BackingStore?.Set("checkInTimeEnd", value); }
+        }
 #endif
         /// <summary>Earliest check-in time, free-form (e.g. `&quot;15:00&quot;`, `&quot;3 PM&quot;`, `&quot;flexible&quot;`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTimeStart { get; set; }
+        public string? CheckInTimeStart
+        {
+            get { return BackingStore?.Get<string?>("checkInTimeStart"); }
+            set { BackingStore?.Set("checkInTimeStart", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTimeStart { get; set; }
+        public string CheckInTimeStart
+        {
+            get { return BackingStore?.Get<string>("checkInTimeStart"); }
+            set { BackingStore?.Set("checkInTimeStart", value); }
+        }
 #endif
         /// <summary>Check-out time.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckOutTime { get; set; }
+        public string? CheckOutTime
+        {
+            get { return BackingStore?.Get<string?>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckOutTime { get; set; }
+        public string CheckOutTime
+        {
+            get { return BackingStore?.Get<string>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #endif
         /// <summary>Long-form arrival directions.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Directions { get; set; }
+        public string? Directions
+        {
+            get { return BackingStore?.Get<string?>("directions"); }
+            set { BackingStore?.Set("directions", value); }
+        }
 #nullable restore
 #else
-        public string Directions { get; set; }
+        public string Directions
+        {
+            get { return BackingStore?.Get<string>("directions"); }
+            set { BackingStore?.Set("directions", value); }
+        }
 #endif
         /// <summary>Long-form house manual / welcome guide.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HouseManual { get; set; }
+        public string? HouseManual
+        {
+            get { return BackingStore?.Get<string?>("houseManual"); }
+            set { BackingStore?.Set("houseManual", value); }
+        }
 #nullable restore
 #else
-        public string HouseManual { get; set; }
+        public string HouseManual
+        {
+            get { return BackingStore?.Get<string>("houseManual"); }
+            set { BackingStore?.Set("houseManual", value); }
+        }
 #endif
         /// <summary>Which floor the listing is on.</summary>
-        public int? ListingFloor { get; set; }
+        public int? ListingFloor
+        {
+            get { return BackingStore?.Get<int?>("listingFloor"); }
+            set { BackingStore?.Set("listingFloor", value); }
+        }
         /// <summary>The maxNights property</summary>
-        public int? MaxNights { get; set; }
+        public int? MaxNights
+        {
+            get { return BackingStore?.Get<int?>("maxNights"); }
+            set { BackingStore?.Set("maxNights", value); }
+        }
         /// <summary>The minNights property</summary>
-        public int? MinNights { get; set; }
+        public int? MinNights
+        {
+            get { return BackingStore?.Get<int?>("minNights"); }
+            set { BackingStore?.Set("minNights", value); }
+        }
         /// <summary>Total floors in the building.</summary>
-        public int? NumberOfFloors { get; set; }
+        public int? NumberOfFloors
+        {
+            get { return BackingStore?.Get<int?>("numberOfFloors"); }
+            set { BackingStore?.Set("numberOfFloors", value); }
+        }
         /// <summary>Maximum guest capacity.</summary>
-        public int? PersonCapacity { get; set; }
+        public int? PersonCapacity
+        {
+            get { return BackingStore?.Get<int?>("personCapacity"); }
+            set { BackingStore?.Set("personCapacity", value); }
+        }
         /// <summary>Structured size info (JSON; e.g. `{ &quot;value&quot;: 65, &quot;unit&quot;: &quot;sqm&quot; }`). Shape evolves with the listings_details schema.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? PropertySize { get; set; }
+        public UntypedNode? PropertySize
+        {
+            get { return BackingStore?.Get<UntypedNode?>("propertySize"); }
+            set { BackingStore?.Set("propertySize", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode PropertySize { get; set; }
+        public UntypedNode PropertySize
+        {
+            get { return BackingStore?.Get<UntypedNode>("propertySize"); }
+            set { BackingStore?.Set("propertySize", value); }
+        }
 #endif
         /// <summary>Specific property type (e.g. `apartment`, `townhouse`, `cabin`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyType { get; set; }
+        public string? PropertyType
+        {
+            get { return BackingStore?.Get<string?>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #nullable restore
 #else
-        public string PropertyType { get; set; }
+        public string PropertyType
+        {
+            get { return BackingStore?.Get<string>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #endif
         /// <summary>Coarser grouping above propertyType (e.g. `house`, `apartment`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyTypeCategory { get; set; }
+        public string? PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string?>("propertyTypeCategory"); }
+            set { BackingStore?.Set("propertyTypeCategory", value); }
+        }
 #nullable restore
 #else
-        public string PropertyTypeCategory { get; set; }
+        public string PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string>("propertyTypeCategory"); }
+            set { BackingStore?.Set("propertyTypeCategory", value); }
+        }
 #endif
         /// <summary>Sleeping arrangement (e.g. `entire_home`, `private_room`, `shared_room`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomTypeCategory { get; set; }
+        public string? RoomTypeCategory
+        {
+            get { return BackingStore?.Get<string?>("roomTypeCategory"); }
+            set { BackingStore?.Set("roomTypeCategory", value); }
+        }
 #nullable restore
 #else
-        public string RoomTypeCategory { get; set; }
+        public string RoomTypeCategory
+        {
+            get { return BackingStore?.Get<string>("roomTypeCategory"); }
+            set { BackingStore?.Set("roomTypeCategory", value); }
+        }
 #endif
         /// <summary>Required gap (in days) between consecutive bookings.</summary>
-        public int? TurnoverDays { get; set; }
+        public int? TurnoverDays
+        {
+            get { return BackingStore?.Get<int?>("turnoverDays"); }
+            set { BackingStore?.Set("turnoverDays", value); }
+        }
         /// <summary>The wifiNetwork property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WifiNetwork { get; set; }
+        public string? WifiNetwork
+        {
+            get { return BackingStore?.Get<string?>("wifiNetwork"); }
+            set { BackingStore?.Set("wifiNetwork", value); }
+        }
 #nullable restore
 #else
-        public string WifiNetwork { get; set; }
+        public string WifiNetwork
+        {
+            get { return BackingStore?.Get<string>("wifiNetwork"); }
+            set { BackingStore?.Set("wifiNetwork", value); }
+        }
 #endif
         /// <summary>The wifiPassword property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WifiPassword { get; set; }
+        public string? WifiPassword
+        {
+            get { return BackingStore?.Get<string?>("wifiPassword"); }
+            set { BackingStore?.Set("wifiPassword", value); }
+        }
 #nullable restore
 #else
-        public string WifiPassword { get; set; }
+        public string WifiPassword
+        {
+            get { return BackingStore?.Get<string>("wifiPassword"); }
+            set { BackingStore?.Set("wifiPassword", value); }
+        }
 #endif
         /// <summary>The yearBuilt property</summary>
-        public int? YearBuilt { get; set; }
+        public int? YearBuilt
+        {
+            get { return BackingStore?.Get<int?>("yearBuilt"); }
+            set { BackingStore?.Set("yearBuilt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingDetails"/> and sets the default values.
         /// </summary>
         public ListingDetails()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

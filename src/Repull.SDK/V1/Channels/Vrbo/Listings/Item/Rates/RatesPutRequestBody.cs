@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,27 +11,64 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class RatesPutRequestBody : IParsable
+    public partial class RatesPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>On or after `startDate`, at most 3 years later.</summary>
-        public Date? EndDate { get; set; }
+        public Date? EndDate
+        {
+            get { return BackingStore?.Get<Date?>("endDate"); }
+            set { BackingStore?.Set("endDate", value); }
+        }
         /// <summary>Stays of 28 nights or more.</summary>
-        public double? MonthlyDiscountPercent { get; set; }
+        public double? MonthlyDiscountPercent
+        {
+            get { return BackingStore?.Get<double?>("monthlyDiscountPercent"); }
+            set { BackingStore?.Set("monthlyDiscountPercent", value); }
+        }
         /// <summary>One price for every night in the range.</summary>
-        public double? NightlyRate { get; set; }
+        public double? NightlyRate
+        {
+            get { return BackingStore?.Get<double?>("nightlyRate"); }
+            set { BackingStore?.Set("nightlyRate", value); }
+        }
         /// <summary>A price per weekday; every weekday in the range needs one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutRequestBody_nightlyRates? NightlyRates { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutRequestBody_nightlyRates? NightlyRates
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutRequestBody_nightlyRates?>("nightlyRates"); }
+            set { BackingStore?.Set("nightlyRates", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutRequestBody_nightlyRates NightlyRates { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutRequestBody_nightlyRates NightlyRates
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutRequestBody_nightlyRates>("nightlyRates"); }
+            set { BackingStore?.Set("nightlyRates", value); }
+        }
 #endif
         /// <summary>The startDate property</summary>
-        public Date? StartDate { get; set; }
+        public Date? StartDate
+        {
+            get { return BackingStore?.Get<Date?>("startDate"); }
+            set { BackingStore?.Set("startDate", value); }
+        }
         /// <summary>Stays of 7–27 nights.</summary>
-        public double? WeeklyDiscountPercent { get; set; }
+        public double? WeeklyDiscountPercent
+        {
+            get { return BackingStore?.Get<double?>("weeklyDiscountPercent"); }
+            set { BackingStore?.Set("weeklyDiscountPercent", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public RatesPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

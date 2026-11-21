@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,37 +10,78 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PropertyPutRequestBody : IParsable
+    public partial class PropertyPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The interiorSize property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutRequestBody_interiorSize? InteriorSize { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutRequestBody_interiorSize? InteriorSize
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutRequestBody_interiorSize?>("interiorSize"); }
+            set { BackingStore?.Set("interiorSize", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutRequestBody_interiorSize InteriorSize { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutRequestBody_interiorSize InteriorSize
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutRequestBody_interiorSize>("interiorSize"); }
+            set { BackingStore?.Set("interiorSize", value); }
+        }
 #endif
         /// <summary>The longTermRentersWelcome property</summary>
-        public bool? LongTermRentersWelcome { get; set; }
+        public bool? LongTermRentersWelcome
+        {
+            get { return BackingStore?.Get<bool?>("longTermRentersWelcome"); }
+            set { BackingStore?.Set("longTermRentersWelcome", value); }
+        }
         /// <summary>Internal name (not shown to guests).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyName { get; set; }
+        public string? PropertyName
+        {
+            get { return BackingStore?.Get<string?>("propertyName"); }
+            set { BackingStore?.Set("propertyName", value); }
+        }
 #nullable restore
 #else
-        public string PropertyName { get; set; }
+        public string PropertyName
+        {
+            get { return BackingStore?.Get<string>("propertyName"); }
+            set { BackingStore?.Set("propertyName", value); }
+        }
 #endif
         /// <summary>One of the read&apos;s `propertyTypeOptions[].value`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyType { get; set; }
+        public string? PropertyType
+        {
+            get { return BackingStore?.Get<string?>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #nullable restore
 #else
-        public string PropertyType { get; set; }
+        public string PropertyType
+        {
+            get { return BackingStore?.Get<string>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #endif
         /// <summary>The seniorsOnly property</summary>
-        public bool? SeniorsOnly { get; set; }
+        public bool? SeniorsOnly
+        {
+            get { return BackingStore?.Get<bool?>("seniorsOnly"); }
+            set { BackingStore?.Set("seniorsOnly", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public PropertyPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,42 +10,77 @@ namespace Repull.SDK.V1.Migrations.Item.Import
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ImportPostResponse_data_queued : IAdditionalDataHolder, IParsable
+    public partial class ImportPostResponse_data_queued : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The connectionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The queued property</summary>
-        public bool? Queued { get; set; }
+        public bool? Queued
+        {
+            get { return BackingStore?.Get<bool?>("queued"); }
+            set { BackingStore?.Set("queued", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Migrations.Item.Import.ImportPostResponse_data_queued"/> and sets the default values.
         /// </summary>
         public ImportPostResponse_data_queued()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

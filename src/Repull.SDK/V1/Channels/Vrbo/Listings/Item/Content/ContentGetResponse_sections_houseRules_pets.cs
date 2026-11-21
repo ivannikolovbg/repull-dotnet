@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,44 +10,83 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ContentGetResponse_sections_houseRules_pets : IAdditionalDataHolder, IParsable
+    public partial class ContentGetResponse_sections_houseRules_pets : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The allowed property</summary>
-        public bool? Allowed { get; set; }
+        public bool? Allowed
+        {
+            get { return BackingStore?.Get<bool?>("allowed"); }
+            set { BackingStore?.Set("allowed", value); }
+        }
         /// <summary>The allowedPets property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? AllowedPets { get; set; }
+        public UntypedNode? AllowedPets
+        {
+            get { return BackingStore?.Get<UntypedNode?>("allowedPets"); }
+            set { BackingStore?.Set("allowedPets", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode AllowedPets { get; set; }
+        public UntypedNode AllowedPets
+        {
+            get { return BackingStore?.Get<UntypedNode>("allowedPets"); }
+            set { BackingStore?.Set("allowedPets", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The max property</summary>
-        public int? Max { get; set; }
+        public int? Max
+        {
+            get { return BackingStore?.Get<int?>("max"); }
+            set { BackingStore?.Set("max", value); }
+        }
         /// <summary>The maxWeight property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? MaxWeight { get; set; }
+        public UntypedNode? MaxWeight
+        {
+            get { return BackingStore?.Get<UntypedNode?>("maxWeight"); }
+            set { BackingStore?.Set("maxWeight", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode MaxWeight { get; set; }
+        public UntypedNode MaxWeight
+        {
+            get { return BackingStore?.Get<UntypedNode>("maxWeight"); }
+            set { BackingStore?.Set("maxWeight", value); }
+        }
 #endif
         /// <summary>The note property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Note { get; set; }
+        public string? Note
+        {
+            get { return BackingStore?.Get<string?>("note"); }
+            set { BackingStore?.Set("note", value); }
+        }
 #nullable restore
 #else
-        public string Note { get; set; }
+        public string Note
+        {
+            get { return BackingStore?.Get<string>("note"); }
+            set { BackingStore?.Set("note", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_houseRules_pets"/> and sets the default values.
         /// </summary>
         public ContentGetResponse_sections_houseRules_pets()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

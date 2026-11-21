@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -10,48 +11,87 @@ namespace Repull.SDK.V1.Webhooks
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class WebhooksPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class WebhooksPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The apiVersion property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiVersion { get; set; }
+        public string? ApiVersion
+        {
+            get { return BackingStore?.Get<string?>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #nullable restore
 #else
-        public string ApiVersion { get; set; }
+        public string ApiVersion
+        {
+            get { return BackingStore?.Get<string>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.WebhookEventType?>? Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?>? Events
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.WebhookEventType?>?>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.WebhookEventType?> Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?> Events
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.WebhookEventType?>>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #endif
         /// <summary>The url property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url
+        {
+            get { return BackingStore?.Get<string?>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return BackingStore?.Get<string>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Webhooks.WebhooksPostRequestBody"/> and sets the default values.
         /// </summary>
         public WebhooksPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

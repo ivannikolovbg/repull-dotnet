@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,43 +12,98 @@ namespace Repull.SDK.Models
     /// A single delivery attempt for a webhook event. The actual `WebhookEvent` envelope POSTed to the subscription URL is captured on `WebhookDeliveryDetail.payload` (this list view omits the body for size).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WebhookDelivery : IAdditionalDataHolder, IParsable
+    public partial class WebhookDelivery : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The attempt property</summary>
-        public int? Attempt { get; set; }
+        public int? Attempt
+        {
+            get { return BackingStore?.Get<int?>("attempt"); }
+            set { BackingStore?.Set("attempt", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The errorMessage property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ErrorMessage { get; set; }
+        public string? ErrorMessage
+        {
+            get { return BackingStore?.Get<string?>("errorMessage"); }
+            set { BackingStore?.Set("errorMessage", value); }
+        }
 #nullable restore
 #else
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage
+        {
+            get { return BackingStore?.Get<string>("errorMessage"); }
+            set { BackingStore?.Set("errorMessage", value); }
+        }
 #endif
         /// <summary>Stable across retries of the same logical event.</summary>
-        public Guid? EventId { get; set; }
+        public Guid? EventId
+        {
+            get { return BackingStore?.Get<Guid?>("eventId"); }
+            set { BackingStore?.Set("eventId", value); }
+        }
         /// <summary>Canonical event type identifier. Every webhook delivery declares one of these in its `type` field; SDKs key the discriminated `WebhookEvent` union on this value.</summary>
-        public global::Repull.SDK.Models.WebhookEventType? EventType { get; set; }
+        public global::Repull.SDK.Models.WebhookEventType? EventType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventType?>("eventType"); }
+            set { BackingStore?.Set("eventType", value); }
+        }
         /// <summary>The failedAt property</summary>
-        public DateTimeOffset? FailedAt { get; set; }
+        public DateTimeOffset? FailedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("failedAt"); }
+            set { BackingStore?.Set("failedAt", value); }
+        }
         /// <summary>The id property</summary>
-        public Guid? Id { get; set; }
+        public Guid? Id
+        {
+            get { return BackingStore?.Get<Guid?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>The responseTimeMs property</summary>
-        public int? ResponseTimeMs { get; set; }
+        public int? ResponseTimeMs
+        {
+            get { return BackingStore?.Get<int?>("responseTimeMs"); }
+            set { BackingStore?.Set("responseTimeMs", value); }
+        }
         /// <summary>The statusCode property</summary>
-        public int? StatusCode { get; set; }
+        public int? StatusCode
+        {
+            get { return BackingStore?.Get<int?>("statusCode"); }
+            set { BackingStore?.Set("statusCode", value); }
+        }
         /// <summary>The succeededAt property</summary>
-        public DateTimeOffset? SucceededAt { get; set; }
+        public DateTimeOffset? SucceededAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("succeededAt"); }
+            set { BackingStore?.Set("succeededAt", value); }
+        }
         /// <summary>The success property</summary>
-        public bool? Success { get; set; }
+        public bool? Success
+        {
+            get { return BackingStore?.Get<bool?>("success"); }
+            set { BackingStore?.Set("success", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.WebhookDelivery"/> and sets the default values.
         /// </summary>
         public WebhookDelivery()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

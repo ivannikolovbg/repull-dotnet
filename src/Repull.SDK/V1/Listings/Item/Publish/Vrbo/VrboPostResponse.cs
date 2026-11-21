@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,30 +10,57 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class VrboPostResponse : IAdditionalDataHolder, IParsable
+    public partial class VrboPostResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_channel? Channel { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>The job property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job? Job { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job? Job
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job?>("job"); }
+            set { BackingStore?.Set("job", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job Job { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job Job
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job>("job"); }
+            set { BackingStore?.Set("job", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>The mode property</summary>
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_mode? Mode { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_mode? Mode
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_mode?>("mode"); }
+            set { BackingStore?.Set("mode", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse"/> and sets the default values.
         /// </summary>
         public VrboPostResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

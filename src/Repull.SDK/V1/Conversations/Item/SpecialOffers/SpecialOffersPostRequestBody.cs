@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,44 +13,101 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers
     /// Priced by `totalPrice` (Airbnb) OR by its parts — `rentalAmount`, `fees`, `damageDeposit` (VRBO) — never both. With `totalPrice`, `checkIn`, `checkOut` and `guests` are required.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class SpecialOffersPostRequestBody : IParsable
+    public partial class SpecialOffersPostRequestBody : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>Must be after `checkIn`.</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>VRBO: refundable damage deposit; `null` for none.</summary>
-        public double? DamageDeposit { get; set; }
+        public double? DamageDeposit
+        {
+            get { return BackingStore?.Get<double?>("damageDeposit"); }
+            set { BackingStore?.Set("damageDeposit", value); }
+        }
         /// <summary>VRBO: the offer’s fees — replaces its fee list. `type` is VRBO’s fee type (`CLEANING`, `PET`, …).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees>? Fees { get; set; }
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees>? Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees>?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees> Fees { get; set; }
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees> Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_fees>>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #endif
         /// <summary>The guests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests? Guests { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests? Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests?>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests Guests { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody_guests>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #endif
         /// <summary>Repull listing id to offer. Defaults to the listing the conversation is about.</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>VRBO: the message sent to the guest with the offer (a friendly default otherwise).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>VRBO: rent for the whole stay, excluding fees and taxes.</summary>
-        public double? RentalAmount { get; set; }
+        public double? RentalAmount
+        {
+            get { return BackingStore?.Get<double?>("rentalAmount"); }
+            set { BackingStore?.Set("rentalAmount", value); }
+        }
         /// <summary>Airbnb: the total the guest pays for the whole stay, in the listing’s Airbnb currency.</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostRequestBody"/> and sets the default values.
+        /// </summary>
+        public SpecialOffersPostRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

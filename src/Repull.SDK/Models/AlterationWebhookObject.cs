@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,41 +12,84 @@ namespace Repull.SDK.Models
     /// Lightweight alteration snapshot delivered as `data.object` on `reservation.alteration.*` events. Currently Airbnb only. Fetch full state (original vs new dates/guests/price) via `GET /v1/channels/airbnb/alterations` filtered by `reservation_code`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AlterationWebhookObject : IAdditionalDataHolder, IParsable
+    public partial class AlterationWebhookObject : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Provider-side alteration/resolution id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AlterationId { get; set; }
+        public string? AlterationId
+        {
+            get { return BackingStore?.Get<string?>("alterationId"); }
+            set { BackingStore?.Set("alterationId", value); }
+        }
 #nullable restore
 #else
-        public string AlterationId { get; set; }
+        public string AlterationId
+        {
+            get { return BackingStore?.Get<string>("alterationId"); }
+            set { BackingStore?.Set("alterationId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Source channel. Currently always `airbnb`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>Workspace (customer) id.</summary>
-        public int? CustomerId { get; set; }
+        public int? CustomerId
+        {
+            get { return BackingStore?.Get<int?>("customerId"); }
+            set { BackingStore?.Set("customerId", value); }
+        }
         /// <summary>Repull-internal alteration id (`reservation_alterations.id`).</summary>
-        public int? Id { get; set; }
+        public int? Id
+        {
+            get { return BackingStore?.Get<int?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>Who requested the alteration.</summary>
-        public global::Repull.SDK.Models.AlterationWebhookObject_initiator? Initiator { get; set; }
+        public global::Repull.SDK.Models.AlterationWebhookObject_initiator? Initiator
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AlterationWebhookObject_initiator?>("initiator"); }
+            set { BackingStore?.Set("initiator", value); }
+        }
         /// <summary>Repull reservation id the alteration targets. Pass to `GET /v1/reservations/{id}`.</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>Alteration lifecycle status.</summary>
-        public global::Repull.SDK.Models.AlterationWebhookObject_status? Status { get; set; }
+        public global::Repull.SDK.Models.AlterationWebhookObject_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AlterationWebhookObject_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AlterationWebhookObject"/> and sets the default values.
         /// </summary>
         public AlterationWebhookObject()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

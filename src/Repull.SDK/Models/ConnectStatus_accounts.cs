@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,119 +10,234 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ConnectStatus_accounts : IAdditionalDataHolder, IParsable
+    public partial class ConnectStatus_accounts : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>What this account may do. Airbnb: the tier the host&apos;s token was granted with (`read_only`, `messaging`, `full_access`). Vrbo: `messaging` (bookings and messages, no calendar push) or `full_access` (also pushes prices and availability). `null` when unknown.</summary>
-        public global::Repull.SDK.Models.ConnectionAccessType? AccessType { get; set; }
+        public global::Repull.SDK.Models.ConnectionAccessType? AccessType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectionAccessType?>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
         /// <summary>Booking.com: `{ required, reason: &quot;needs_mapping&quot;, message }` while a room of this hotel is matched to no listing (nothing syncs for that room). Null when nothing is needed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConnectStatus_accounts_action? Action { get; set; }
+        public global::Repull.SDK.Models.ConnectStatus_accounts_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectStatus_accounts_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConnectStatus_accounts_action Action { get; set; }
+        public global::Repull.SDK.Models.ConnectStatus_accounts_action Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectStatus_accounts_action>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Vrbo only. Whether another tool (such as a PMS) manages this account&apos;s calendar; while `calendar.managedBy` is set, calendar sync is off for all its units.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.VrboCalendarAccess? Calendar { get; set; }
+        public global::Repull.SDK.Models.VrboCalendarAccess? Calendar
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboCalendarAccess?>("calendar"); }
+            set { BackingStore?.Set("calendar", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.VrboCalendarAccess Calendar { get; set; }
+        public global::Repull.SDK.Models.VrboCalendarAccess Calendar
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboCalendarAccess>("calendar"); }
+            set { BackingStore?.Set("calendar", value); }
+        }
 #endif
         /// <summary>True while the account is active and its authorization is usable.</summary>
-        public bool? Connected { get; set; }
+        public bool? Connected
+        {
+            get { return BackingStore?.Get<bool?>("connected"); }
+            set { BackingStore?.Set("connected", value); }
+        }
         /// <summary>Our connection record (`X-Account-Id`). Airbnb: the workspace&apos;s Airbnb connection. Vrbo: the workspace&apos;s Vrbo connection, `null` when it has none.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>Vrbo only: the account email.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Email { get; set; }
+        public string? Email
+        {
+            get { return BackingStore?.Get<string?>("email"); }
+            set { BackingStore?.Set("email", value); }
+        }
 #nullable restore
 #else
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return BackingStore?.Get<string>("email"); }
+            set { BackingStore?.Set("email", value); }
+        }
 #endif
         /// <summary>Airbnb: the host id, as a string (it can exceed 2^53). Booking.com: the hotel id. Vrbo: Vrbo&apos;s own account id; `null` until it is captured at sign-in. Extranet: the Booking.com account id. PMS: the PMS account id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalAccountId { get; set; }
+        public string? ExternalAccountId
+        {
+            get { return BackingStore?.Get<string?>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalAccountId { get; set; }
+        public string ExternalAccountId
+        {
+            get { return BackingStore?.Get<string>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #endif
         /// <summary>Booking.com: a link that opens room mapping for this hotel (no new Connect session needed). Send the host to it when `action` is set.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FixUrl { get; set; }
+        public string? FixUrl
+        {
+            get { return BackingStore?.Get<string?>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #nullable restore
 #else
-        public string FixUrl { get; set; }
+        public string FixUrl
+        {
+            get { return BackingStore?.Get<string>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #endif
         /// <summary>Vrbo only: where the account import stands.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.VrboImportStatus? Import { get; set; }
+        public global::Repull.SDK.Models.VrboImportStatus? Import
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboImportStatus?>("import"); }
+            set { BackingStore?.Set("import", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.VrboImportStatus Import { get; set; }
+        public global::Repull.SDK.Models.VrboImportStatus Import
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboImportStatus>("import"); }
+            set { BackingStore?.Set("import", value); }
+        }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>Vrbo only. The address the host can add on Vrbo as a secondary email (with message and reservation notifications on) so new bookings, inquiries and messages arrive within a minute instead of at the scheduled check. Ask every host to add it: notifications are how Vrbo updates reach Repull, the scheduled check is the backup. Hosted Connect shows it on its mapping screen; show it in your own app when you create sessions with `mapping: &quot;api&quot;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NotificationEmail { get; set; }
+        public string? NotificationEmail
+        {
+            get { return BackingStore?.Get<string?>("notificationEmail"); }
+            set { BackingStore?.Set("notificationEmail", value); }
+        }
 #nullable restore
 #else
-        public string NotificationEmail { get; set; }
+        public string NotificationEmail
+        {
+            get { return BackingStore?.Get<string>("notificationEmail"); }
+            set { BackingStore?.Set("notificationEmail", value); }
+        }
 #endif
         /// <summary>Deprecated: use `notifications`. Vrbo only. When Vrbo&apos;s FIRST notification reached `notificationEmail`; it stays set even if notifications later stop. `null` until then.</summary>
         [Obsolete("")]
-        public DateTimeOffset? NotificationReceivedAt { get; set; }
+        public DateTimeOffset? NotificationReceivedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("notificationReceivedAt"); }
+            set { BackingStore?.Set("notificationReceivedAt", value); }
+        }
         /// <summary>Vrbo only. Whether Vrbo&apos;s notification emails reach Repull now (`state`), when the last one did, and the address to add. When `state` is `missing`, ask the host to add `address` on Vrbo; `account.notifications_missing` is sent when that happens.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.VrboNotifications? Notifications { get; set; }
+        public global::Repull.SDK.Models.VrboNotifications? Notifications
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboNotifications?>("notifications"); }
+            set { BackingStore?.Set("notifications", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.VrboNotifications Notifications { get; set; }
+        public global::Repull.SDK.Models.VrboNotifications Notifications
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboNotifications>("notifications"); }
+            set { BackingStore?.Set("notifications", value); }
+        }
 #endif
         /// <summary>The pictureUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PictureUrl { get; set; }
+        public string? PictureUrl
+        {
+            get { return BackingStore?.Get<string?>("pictureUrl"); }
+            set { BackingStore?.Set("pictureUrl", value); }
+        }
 #nullable restore
 #else
-        public string PictureUrl { get; set; }
+        public string PictureUrl
+        {
+            get { return BackingStore?.Get<string>("pictureUrl"); }
+            set { BackingStore?.Set("pictureUrl", value); }
+        }
 #endif
         /// <summary>The status property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectStatus_accounts"/> and sets the default values.
         /// </summary>
         public ConnectStatus_accounts()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

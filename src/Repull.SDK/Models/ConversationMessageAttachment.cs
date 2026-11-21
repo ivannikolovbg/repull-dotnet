@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,52 +12,99 @@ namespace Repull.SDK.Models
     /// A file on a message — a photo the guest sent, or a file sent to the guest. Files are copied to durable storage, so `url` keeps working after the channel&apos;s own link expires. Treat `url` as opaque.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConversationMessageAttachment : IAdditionalDataHolder, IParsable
+    public partial class ConversationMessageAttachment : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The contentType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ContentType { get; set; }
+        public string? ContentType
+        {
+            get { return BackingStore?.Get<string?>("contentType"); }
+            set { BackingStore?.Set("contentType", value); }
+        }
 #nullable restore
 #else
-        public string ContentType { get; set; }
+        public string ContentType
+        {
+            get { return BackingStore?.Get<string>("contentType"); }
+            set { BackingStore?.Set("contentType", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Same value as `url` (kept for older clients; it is not image-only). Use `url`.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ImageUrl { get; set; }
+        public string? ImageUrl
+        {
+            get { return BackingStore?.Get<string?>("imageUrl"); }
+            set { BackingStore?.Set("imageUrl", value); }
+        }
 #nullable restore
 #else
-        public string ImageUrl { get; set; }
+        public string ImageUrl
+        {
+            get { return BackingStore?.Get<string>("imageUrl"); }
+            set { BackingStore?.Set("imageUrl", value); }
+        }
 #endif
         /// <summary>Coarse kind, derived from `contentType`.</summary>
-        public global::Repull.SDK.Models.ConversationMessageAttachment_type? Type { get; set; }
+        public global::Repull.SDK.Models.ConversationMessageAttachment_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationMessageAttachment_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>Where to download the file.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url
+        {
+            get { return BackingStore?.Get<string?>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return BackingStore?.Get<string>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConversationMessageAttachment"/> and sets the default values.
         /// </summary>
         public ConversationMessageAttachment()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

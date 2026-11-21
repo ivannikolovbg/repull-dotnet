@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,22 +11,41 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingCompNightly : IAdditionalDataHolder, IParsable
+    public partial class ListingCompNightly : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The available property</summary>
-        public bool? Available { get; set; }
+        public bool? Available
+        {
+            get { return BackingStore?.Get<bool?>("available"); }
+            set { BackingStore?.Set("available", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The date property</summary>
-        public Date? Date { get; set; }
+        public Date? Date
+        {
+            get { return BackingStore?.Get<Date?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
         /// <summary>The rate property</summary>
-        public double? Rate { get; set; }
+        public double? Rate
+        {
+            get { return BackingStore?.Get<double?>("rate"); }
+            set { BackingStore?.Set("rate", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingCompNightly"/> and sets the default values.
         /// </summary>
         public ListingCompNightly()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,22 +12,59 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates
     /// A price per weekday; every weekday in the range needs one.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class RatesPutRequestBody_nightlyRates : IParsable
+    public partial class RatesPutRequestBody_nightlyRates : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The friday property</summary>
-        public double? Friday { get; set; }
+        public double? Friday
+        {
+            get { return BackingStore?.Get<double?>("friday"); }
+            set { BackingStore?.Set("friday", value); }
+        }
         /// <summary>The monday property</summary>
-        public double? Monday { get; set; }
+        public double? Monday
+        {
+            get { return BackingStore?.Get<double?>("monday"); }
+            set { BackingStore?.Set("monday", value); }
+        }
         /// <summary>The saturday property</summary>
-        public double? Saturday { get; set; }
+        public double? Saturday
+        {
+            get { return BackingStore?.Get<double?>("saturday"); }
+            set { BackingStore?.Set("saturday", value); }
+        }
         /// <summary>The sunday property</summary>
-        public double? Sunday { get; set; }
+        public double? Sunday
+        {
+            get { return BackingStore?.Get<double?>("sunday"); }
+            set { BackingStore?.Set("sunday", value); }
+        }
         /// <summary>The thursday property</summary>
-        public double? Thursday { get; set; }
+        public double? Thursday
+        {
+            get { return BackingStore?.Get<double?>("thursday"); }
+            set { BackingStore?.Set("thursday", value); }
+        }
         /// <summary>The tuesday property</summary>
-        public double? Tuesday { get; set; }
+        public double? Tuesday
+        {
+            get { return BackingStore?.Get<double?>("tuesday"); }
+            set { BackingStore?.Set("tuesday", value); }
+        }
         /// <summary>The wednesday property</summary>
-        public double? Wednesday { get; set; }
+        public double? Wednesday
+        {
+            get { return BackingStore?.Get<double?>("wednesday"); }
+            set { BackingStore?.Set("wednesday", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutRequestBody_nightlyRates"/> and sets the default values.
+        /// </summary>
+        public RatesPutRequestBody_nightlyRates()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

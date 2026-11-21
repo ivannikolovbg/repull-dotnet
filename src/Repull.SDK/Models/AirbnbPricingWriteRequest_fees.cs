@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,27 +10,64 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbPricingWriteRequest_fees : IParsable
+    public partial class AirbnbPricingWriteRequest_fees : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>`null` removes the fee. Flat: currency × 1,000,000. Percent: whole percent.</summary>
-        public double? Amount { get; set; }
+        public double? Amount
+        {
+            get { return BackingStore?.Get<double?>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
         /// <summary>Defaults to the existing fee&apos;s, else `flat`. Percent is accepted for management and resort fees.</summary>
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_amount_type? AmountType { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_amount_type? AmountType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_amount_type?>("amount_type"); }
+            set { BackingStore?.Set("amount_type", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Once per booking or per night. Defaults to the existing fee&apos;s, else `PER_BOOKING`.</summary>
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_charge_period? ChargePeriod { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_charge_period? ChargePeriod
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_charge_period?>("charge_period"); }
+            set { BackingStore?.Set("charge_period", value); }
+        }
         /// <summary>Who it is charged per. Defaults to the existing fee&apos;s, else `PER_GROUP`.</summary>
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_charge_type? ChargeType { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_charge_type? ChargeType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees_charge_type?>("charge_type"); }
+            set { BackingStore?.Set("charge_type", value); }
+        }
         /// <summary>Airbnb fee type: `PASS_THROUGH_CLEANING_FEE`, `PASS_THROUGH_SHORT_TERM_CLEANING_FEE`, `PASS_THROUGH_PET_FEE`, `PASS_THROUGH_SECURITY_DEPOSIT`, `PASS_THROUGH_MANAGEMENT_FEE`, `PASS_THROUGH_RESORT_FEE`, `PASS_THROUGH_COMMUNITY_FEE`, `PASS_THROUGH_LINEN_FEE`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FeeType { get; set; }
+        public string? FeeType
+        {
+            get { return BackingStore?.Get<string?>("fee_type"); }
+            set { BackingStore?.Set("fee_type", value); }
+        }
 #nullable restore
 #else
-        public string FeeType { get; set; }
+        public string FeeType
+        {
+            get { return BackingStore?.Get<string>("fee_type"); }
+            set { BackingStore?.Set("fee_type", value); }
+        }
 #endif
         /// <summary>Collected offline by the host rather than through Airbnb. Default `false`.</summary>
-        public bool? Offline { get; set; }
+        public bool? Offline
+        {
+            get { return BackingStore?.Get<bool?>("offline"); }
+            set { BackingStore?.Set("offline", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees"/> and sets the default values.
+        /// </summary>
+        public AirbnbPricingWriteRequest_fees()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

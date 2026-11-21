@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,86 @@ namespace Repull.SDK.Models
     /// Channel-agnostic availability calendar for a property over the requested window. `days` carries only the dates backed by a real calendar row; anything the calendar does not cover is reported in `coverage.missingDates` rather than synthesised as available.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PropertyAvailability : IAdditionalDataHolder, IParsable
+    public partial class PropertyAvailability : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>How much of the requested window we actually hold calendar data for. Read this before treating an absent date as bookable — absence means &quot;no data&quot;, not &quot;available&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PropertyAvailabilityCoverage? Coverage { get; set; }
+        public global::Repull.SDK.Models.PropertyAvailabilityCoverage? Coverage
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PropertyAvailabilityCoverage?>("coverage"); }
+            set { BackingStore?.Set("coverage", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PropertyAvailabilityCoverage Coverage { get; set; }
+        public global::Repull.SDK.Models.PropertyAvailabilityCoverage Coverage
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PropertyAvailabilityCoverage>("coverage"); }
+            set { BackingStore?.Set("coverage", value); }
+        }
 #endif
         /// <summary>ISO 4217 currency code for the nightly prices in `days`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>Per-date calendar for the requested window (capped at 366 days), ordered ascending by date. Contains only dates we hold data for — it may be shorter than the window, or empty.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.PropertyAvailabilityDay>? Days { get; set; }
+        public List<global::Repull.SDK.Models.PropertyAvailabilityDay>? Days
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.PropertyAvailabilityDay>?>("days"); }
+            set { BackingStore?.Set("days", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.PropertyAvailabilityDay> Days { get; set; }
+        public List<global::Repull.SDK.Models.PropertyAvailabilityDay> Days
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.PropertyAvailabilityDay>>("days"); }
+            set { BackingStore?.Set("days", value); }
+        }
 #endif
         /// <summary>Repull property id (equal to `listings.id`), emitted as a string like every other id in the API.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PropertyAvailability"/> and sets the default values.
         /// </summary>
         public PropertyAvailability()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

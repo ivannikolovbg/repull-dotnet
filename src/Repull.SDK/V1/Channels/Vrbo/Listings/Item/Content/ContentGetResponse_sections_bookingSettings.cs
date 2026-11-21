@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,84 +10,171 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ContentGetResponse_sections_bookingSettings : IAdditionalDataHolder, IParsable
+    public partial class ContentGetResponse_sections_bookingSettings : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The accessType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccessType { get; set; }
+        public string? AccessType
+        {
+            get { return BackingStore?.Get<string?>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
 #nullable restore
 #else
-        public string AccessType { get; set; }
+        public string AccessType
+        {
+            get { return BackingStore?.Get<string>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
 #endif
         /// <summary>The accessTypeOptions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_accessTypeOptions>? AccessTypeOptions { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_accessTypeOptions>? AccessTypeOptions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_accessTypeOptions>?>("accessTypeOptions"); }
+            set { BackingStore?.Set("accessTypeOptions", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_accessTypeOptions> AccessTypeOptions { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_accessTypeOptions> AccessTypeOptions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_accessTypeOptions>>("accessTypeOptions"); }
+            set { BackingStore?.Set("accessTypeOptions", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bookingType property</summary>
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_bookingType? BookingType { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_bookingType? BookingType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_bookingType?>("bookingType"); }
+            set { BackingStore?.Set("bookingType", value); }
+        }
         /// <summary>The checkInTime property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTime { get; set; }
+        public string? CheckInTime
+        {
+            get { return BackingStore?.Get<string?>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTime { get; set; }
+        public string CheckInTime
+        {
+            get { return BackingStore?.Get<string>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #endif
         /// <summary>The checkOutTime property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckOutTime { get; set; }
+        public string? CheckOutTime
+        {
+            get { return BackingStore?.Get<string?>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckOutTime { get; set; }
+        public string CheckOutTime
+        {
+            get { return BackingStore?.Get<string>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #endif
         /// <summary>The instantBookingEligible property</summary>
-        public bool? InstantBookingEligible { get; set; }
+        public bool? InstantBookingEligible
+        {
+            get { return BackingStore?.Get<bool?>("instantBookingEligible"); }
+            set { BackingStore?.Set("instantBookingEligible", value); }
+        }
         /// <summary>The maxLengthOfStay property</summary>
-        public int? MaxLengthOfStay { get; set; }
+        public int? MaxLengthOfStay
+        {
+            get { return BackingStore?.Get<int?>("maxLengthOfStay"); }
+            set { BackingStore?.Set("maxLengthOfStay", value); }
+        }
         /// <summary>The maxMonthsBeforeBooking property</summary>
-        public int? MaxMonthsBeforeBooking { get; set; }
+        public int? MaxMonthsBeforeBooking
+        {
+            get { return BackingStore?.Get<int?>("maxMonthsBeforeBooking"); }
+            set { BackingStore?.Set("maxMonthsBeforeBooking", value); }
+        }
         /// <summary>The maxMonthsBeforeBookingOptions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? MaxMonthsBeforeBookingOptions { get; set; }
+        public List<int?>? MaxMonthsBeforeBookingOptions
+        {
+            get { return BackingStore?.Get<List<int?>?>("maxMonthsBeforeBookingOptions"); }
+            set { BackingStore?.Set("maxMonthsBeforeBookingOptions", value); }
+        }
 #nullable restore
 #else
-        public List<int?> MaxMonthsBeforeBookingOptions { get; set; }
+        public List<int?> MaxMonthsBeforeBookingOptions
+        {
+            get { return BackingStore?.Get<List<int?>>("maxMonthsBeforeBookingOptions"); }
+            set { BackingStore?.Set("maxMonthsBeforeBookingOptions", value); }
+        }
 #endif
         /// <summary>The minDaysBeforeBooking property</summary>
-        public int? MinDaysBeforeBooking { get; set; }
+        public int? MinDaysBeforeBooking
+        {
+            get { return BackingStore?.Get<int?>("minDaysBeforeBooking"); }
+            set { BackingStore?.Set("minDaysBeforeBooking", value); }
+        }
         /// <summary>The minDaysBeforeBookingOptions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? MinDaysBeforeBookingOptions { get; set; }
+        public List<int?>? MinDaysBeforeBookingOptions
+        {
+            get { return BackingStore?.Get<List<int?>?>("minDaysBeforeBookingOptions"); }
+            set { BackingStore?.Set("minDaysBeforeBookingOptions", value); }
+        }
 #nullable restore
 #else
-        public List<int?> MinDaysBeforeBookingOptions { get; set; }
+        public List<int?> MinDaysBeforeBookingOptions
+        {
+            get { return BackingStore?.Get<List<int?>>("minDaysBeforeBookingOptions"); }
+            set { BackingStore?.Set("minDaysBeforeBookingOptions", value); }
+        }
 #endif
         /// <summary>The minNights property</summary>
-        public int? MinNights { get; set; }
+        public int? MinNights
+        {
+            get { return BackingStore?.Get<int?>("minNights"); }
+            set { BackingStore?.Set("minNights", value); }
+        }
         /// <summary>The minNightsRange property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_minNightsRange? MinNightsRange { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_minNightsRange? MinNightsRange
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_minNightsRange?>("minNightsRange"); }
+            set { BackingStore?.Set("minNightsRange", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_minNightsRange MinNightsRange { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_minNightsRange MinNightsRange
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings_minNightsRange>("minNightsRange"); }
+            set { BackingStore?.Set("minNightsRange", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_bookingSettings"/> and sets the default values.
         /// </summary>
         public ContentGetResponse_sections_bookingSettings()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

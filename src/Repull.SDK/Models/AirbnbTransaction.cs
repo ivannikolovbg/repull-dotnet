@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,153 +13,316 @@ namespace Repull.SDK.Models
     /// One line of the Airbnb settlement ledger: a Payout row (`isPayout: true`) or a line it paid. Money is in the payout currency; `amount` is signed (negative = taken back, e.g. an adjustment offset against this payout). A payout&apos;s lines sum to its `payout.paidOutAmount`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbTransaction : IAdditionalDataHolder, IParsable
+    public partial class AirbnbTransaction : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The connected Airbnb account (host id, as a string — they exceed 2^53).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>The accountName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountName { get; set; }
+        public string? AccountName
+        {
+            get { return BackingStore?.Get<string?>("accountName"); }
+            set { BackingStore?.Set("accountName", value); }
+        }
 #nullable restore
 #else
-        public string AccountName { get; set; }
+        public string AccountName
+        {
+            get { return BackingStore?.Get<string>("accountName"); }
+            set { BackingStore?.Set("accountName", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Signed amount this line contributes to its payout, after Airbnb&apos;s host service fee. On a Payout row, the amount paid out.</summary>
-        public double? Amount { get; set; }
+        public double? Amount
+        {
+            get { return BackingStore?.Get<double?>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The line&apos;s date as Airbnb reports it. Can be the day before its payout&apos;s date.</summary>
-        public Date? Date { get; set; }
+        public Date? Date
+        {
+            get { return BackingStore?.Get<Date?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
         /// <summary>Airbnb&apos;s description: the stay dates, the resolution, or on a Payout row the payout method.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The fees property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbTransaction_fees? Fees { get; set; }
+        public global::Repull.SDK.Models.AirbnbTransaction_fees? Fees
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbTransaction_fees?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbTransaction_fees Fees { get; set; }
+        public global::Repull.SDK.Models.AirbnbTransaction_fees Fees
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbTransaction_fees>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #endif
         /// <summary>Before Airbnb&apos;s host service fee: `amount - fees.hostServiceFee`.</summary>
-        public double? GrossAmount { get; set; }
+        public double? GrossAmount
+        {
+            get { return BackingStore?.Get<double?>("grossAmount"); }
+            set { BackingStore?.Set("grossAmount", value); }
+        }
         /// <summary>The guestName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestName { get; set; }
+        public string? GuestName
+        {
+            get { return BackingStore?.Get<string?>("guestName"); }
+            set { BackingStore?.Set("guestName", value); }
+        }
 #nullable restore
 #else
-        public string GuestName { get; set; }
+        public string GuestName
+        {
+            get { return BackingStore?.Get<string>("guestName"); }
+            set { BackingStore?.Set("guestName", value); }
+        }
 #endif
         /// <summary>`true` on the Payout row itself.</summary>
-        public bool? IsPayout { get; set; }
+        public bool? IsPayout
+        {
+            get { return BackingStore?.Get<bool?>("isPayout"); }
+            set { BackingStore?.Set("isPayout", value); }
+        }
         /// <summary>Airbnb listing id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The listingName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingName { get; set; }
+        public string? ListingName
+        {
+            get { return BackingStore?.Get<string?>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #nullable restore
 #else
-        public string ListingName { get; set; }
+        public string ListingName
+        {
+            get { return BackingStore?.Get<string>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #endif
         /// <summary>The nights property</summary>
-        public int? Nights { get; set; }
+        public int? Nights
+        {
+            get { return BackingStore?.Get<int?>("nights"); }
+            set { BackingStore?.Set("nights", value); }
+        }
         /// <summary>`true` when the line is on a listing that is inactive in Repull. Still returned, so the payout reconciles.</summary>
-        public bool? OnInactiveListing { get; set; }
+        public bool? OnInactiveListing
+        {
+            get { return BackingStore?.Get<bool?>("onInactiveListing"); }
+            set { BackingStore?.Set("onInactiveListing", value); }
+        }
         /// <summary>The payout property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbTransaction_payout? Payout { get; set; }
+        public global::Repull.SDK.Models.AirbnbTransaction_payout? Payout
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbTransaction_payout?>("payout"); }
+            set { BackingStore?.Set("payout", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbTransaction_payout Payout { get; set; }
+        public global::Repull.SDK.Models.AirbnbTransaction_payout Payout
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbTransaction_payout>("payout"); }
+            set { BackingStore?.Set("payout", value); }
+        }
 #endif
         /// <summary>The resolution id on resolution payouts and adjustments; else `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reference { get; set; }
+        public string? Reference
+        {
+            get { return BackingStore?.Get<string?>("reference"); }
+            set { BackingStore?.Set("reference", value); }
+        }
 #nullable restore
 #else
-        public string Reference { get; set; }
+        public string Reference
+        {
+            get { return BackingStore?.Get<string>("reference"); }
+            set { BackingStore?.Set("reference", value); }
+        }
 #endif
         /// <summary>Repull reservation id when the confirmation code matches a reservation in this workspace; `null` when it does not (explicitly unlinked).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReservationId { get; set; }
+        public string? ReservationId
+        {
+            get { return BackingStore?.Get<string?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #nullable restore
 #else
-        public string ReservationId { get; set; }
+        public string ReservationId
+        {
+            get { return BackingStore?.Get<string>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #endif
         /// <summary>The reservationStartDate property</summary>
-        public Date? ReservationStartDate { get; set; }
+        public Date? ReservationStartDate
+        {
+            get { return BackingStore?.Get<Date?>("reservationStartDate"); }
+            set { BackingStore?.Set("reservationStartDate", value); }
+        }
         /// <summary>`COMPLETED`: settled in a payout. `UPCOMING`: expected, not paid out yet.</summary>
-        public global::Repull.SDK.Models.AirbnbTransaction_status? Status { get; set; }
+        public global::Repull.SDK.Models.AirbnbTransaction_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbTransaction_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The syncedAt property</summary>
-        public DateTimeOffset? SyncedAt { get; set; }
+        public DateTimeOffset? SyncedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("syncedAt"); }
+            set { BackingStore?.Set("syncedAt", value); }
+        }
         /// <summary>Stable id. A Payout row: Airbnb&apos;s payout id. A settled line: `&lt;payoutId&gt;:&lt;type&gt;:&lt;confirmationCode&gt;:&lt;n&gt;`. An upcoming line: `upcoming:&lt;accountId&gt;:&lt;type&gt;:&lt;confirmationCode&gt;:&lt;date&gt;:&lt;n&gt;`. Identical on every refresh; upsert on it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TransactionId { get; set; }
+        public string? TransactionId
+        {
+            get { return BackingStore?.Get<string?>("transactionId"); }
+            set { BackingStore?.Set("transactionId", value); }
+        }
 #nullable restore
 #else
-        public string TransactionId { get; set; }
+        public string TransactionId
+        {
+            get { return BackingStore?.Get<string>("transactionId"); }
+            set { BackingStore?.Set("transactionId", value); }
+        }
 #endif
         /// <summary>Airbnb&apos;s line type, verbatim: `Payout`, `Reservation`, `Adjustment`, `Resolution Payout`, `Resolution Adjustment`, `Cancellation Fee`, `Pass Through Tot`, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
         /// <summary>What Airbnb&apos;s transaction history does not carry, so it is never filled in: `taxes` (those Airbnb remits itself; pass-through tax paid to the host arrives as `Pass Through Tot` lines), `guest_paid_total`, `original_transaction_id`, `currency_conversion`, `management_fee`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? UnavailableFields { get; set; }
+        public List<string>? UnavailableFields
+        {
+            get { return BackingStore?.Get<List<string>?>("unavailableFields"); }
+            set { BackingStore?.Set("unavailableFields", value); }
+        }
 #nullable restore
 #else
-        public List<string> UnavailableFields { get; set; }
+        public List<string> UnavailableFields
+        {
+            get { return BackingStore?.Get<List<string>>("unavailableFields"); }
+            set { BackingStore?.Set("unavailableFields", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbTransaction"/> and sets the default values.
         /// </summary>
         public AirbnbTransaction()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

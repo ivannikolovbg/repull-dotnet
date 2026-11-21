@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,52 +10,99 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class VrboPostResponse_job_sections : IAdditionalDataHolder, IParsable
+    public partial class VrboPostResponse_job_sections : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>What Vrbo has stored for the section after the write.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? Data { get; set; }
+        public UntypedNode? Data
+        {
+            get { return BackingStore?.Get<UntypedNode?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode Data { get; set; }
+        public UntypedNode Data
+        {
+            get { return BackingStore?.Get<UntypedNode>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>The errors property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_errors>? Errors { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_errors>? Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_errors>?>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_errors> Errors { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_errors> Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_errors>>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #endif
         /// <summary>The finishedAt property</summary>
-        public DateTimeOffset? FinishedAt { get; set; }
+        public DateTimeOffset? FinishedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("finishedAt"); }
+            set { BackingStore?.Set("finishedAt", value); }
+        }
         /// <summary>The section property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Section { get; set; }
+        public string? Section
+        {
+            get { return BackingStore?.Get<string?>("section"); }
+            set { BackingStore?.Set("section", value); }
+        }
 #nullable restore
 #else
-        public string Section { get; set; }
+        public string Section
+        {
+            get { return BackingStore?.Get<string>("section"); }
+            set { BackingStore?.Set("section", value); }
+        }
 #endif
         /// <summary>The partial section input sent — the body `PUT /v1/channels/vrbo/listings/{id}/{section}` takes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_sent? Sent { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_sent? Sent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_sent?>("sent"); }
+            set { BackingStore?.Set("sent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_sent Sent { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_sent Sent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_sent>("sent"); }
+            set { BackingStore?.Set("sent", value); }
+        }
 #endif
         /// <summary>`rejected`: Vrbo refused something (its message in `errors`); `failed`: the write did not complete (e.g. Vrbo paused the account).</summary>
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_status? Status { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostResponse_job_sections"/> and sets the default values.
         /// </summary>
         public VrboPostResponse_job_sections()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

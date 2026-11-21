@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,19 +12,34 @@ namespace Repull.SDK.Models
     /// Active per-market unlocks vs the tier quota.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MarketsOverviewResponse_subscriptions : IAdditionalDataHolder, IParsable
+    public partial class MarketsOverviewResponse_subscriptions : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The active property</summary>
-        public int? Active { get; set; }
+        public int? Active
+        {
+            get { return BackingStore?.Get<int?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The limit property</summary>
-        public int? Limit { get; set; }
+        public int? Limit
+        {
+            get { return BackingStore?.Get<int?>("limit"); }
+            set { BackingStore?.Set("limit", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions"/> and sets the default values.
         /// </summary>
         public MarketsOverviewResponse_subscriptions()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,34 +10,61 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingActiveResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingActiveResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The resulting active state after the toggle.</summary>
-        public bool? Active { get; set; }
+        public bool? Active
+        {
+            get { return BackingStore?.Get<bool?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Only when activating: what happened to the Booking.com properties this listing is mapped to. Activating a listing opens its Booking.com property if Booking.com still has it in a build stage. Empty when the listing has no Booking.com property.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingPropertyOpenResult>? BookingProperties { get; set; }
+        public List<global::Repull.SDK.Models.BookingPropertyOpenResult>? BookingProperties
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingPropertyOpenResult>?>("bookingProperties"); }
+            set { BackingStore?.Set("bookingProperties", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingPropertyOpenResult> BookingProperties { get; set; }
+        public List<global::Repull.SDK.Models.BookingPropertyOpenResult> BookingProperties
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingPropertyOpenResult>>("bookingProperties"); }
+            set { BackingStore?.Set("bookingProperties", value); }
+        }
 #endif
         /// <summary>The listing id (id fields are serialized as strings to preserve precision).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingActiveResponse"/> and sets the default values.
         /// </summary>
         public ListingActiveResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

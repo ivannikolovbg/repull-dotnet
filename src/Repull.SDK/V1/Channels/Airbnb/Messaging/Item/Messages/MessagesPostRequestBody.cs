@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,39 +12,70 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
     /// `message`, `mediaUrl`, or both.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MessagesPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class MessagesPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Optional MIME type hint for `mediaUrl` (e.g. `image/jpeg`). The type is read from the file itself; this never overrides it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MediaType { get; set; }
+        public string? MediaType
+        {
+            get { return BackingStore?.Get<string?>("mediaType"); }
+            set { BackingStore?.Set("mediaType", value); }
+        }
 #nullable restore
 #else
-        public string MediaType { get; set; }
+        public string MediaType
+        {
+            get { return BackingStore?.Get<string>("mediaType"); }
+            set { BackingStore?.Set("mediaType", value); }
+        }
 #endif
         /// <summary>Public https URL of one image or video to send (JPEG/PNG/GIF/WebP/MP4/QuickTime, up to 10 MB). Repull uploads it to Airbnb for you.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MediaUrl { get; set; }
+        public string? MediaUrl
+        {
+            get { return BackingStore?.Get<string?>("mediaUrl"); }
+            set { BackingStore?.Set("mediaUrl", value); }
+        }
 #nullable restore
 #else
-        public string MediaUrl { get; set; }
+        public string MediaUrl
+        {
+            get { return BackingStore?.Get<string>("mediaUrl"); }
+            set { BackingStore?.Set("mediaUrl", value); }
+        }
 #endif
         /// <summary>Message body to send to the guest. Optional when `mediaUrl` is set (it is then sent as a separate message after the file).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesPostRequestBody"/> and sets the default values.
         /// </summary>
         public MessagesPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

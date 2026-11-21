@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// The per-item result of a fan-out. **There is deliberately no top-level success flag**: a listing can sit on two Airbnb connections and a Booking.com property, they fail independently, and partial success is the ordinary outcome — any single boolean would be wrong for exactly the calls that need reading. Walk `channels` and check each `ok`.Nothing here is rolled back. What landed stays landed; re-send the same request to retry the items that did not, which is safe.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingMarketStateResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingMarketStateResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>One entry per channel item acted on — Airbnb connections first, then the Booking.com property. Never empty: a listing connected to nothing is refused with `422 no_connected_channels` rather than answered with an empty array.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ChannelMarketStateItem>? Channels { get; set; }
+        public List<global::Repull.SDK.Models.ChannelMarketStateItem>? Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ChannelMarketStateItem>?>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ChannelMarketStateItem> Channels { get; set; }
+        public List<global::Repull.SDK.Models.ChannelMarketStateItem> Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ChannelMarketStateItem>>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The state you asked for. Compare each item&apos;s own `state` against it.</summary>
-        public global::Repull.SDK.Models.ListingMarketStateResponse_state? State { get; set; }
+        public global::Repull.SDK.Models.ListingMarketStateResponse_state? State
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingMarketStateResponse_state?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingMarketStateResponse"/> and sets the default values.
         /// </summary>
         public ListingMarketStateResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

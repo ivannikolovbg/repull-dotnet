@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,35 +12,66 @@ namespace Repull.SDK.Models
     /// Payload for `listing.updated`. Something about the listing changed on the channel — content, pricing, booking settings, house rules, availability, sync settings or promotions.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingUpdatedPayload : IAdditionalDataHolder, IParsable
+    public partial class ListingUpdatedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Which part moved. Airbnb sends one notification per area rather than a diff, so this is the signal for what to re-read. `promotions`: the listing’s Airbnb or Booking.com promotions changed — re-read `GET /v1/listings/{id}/promotions`.</summary>
-        public global::Repull.SDK.Models.ListingUpdatedPayload_area? Area { get; set; }
+        public global::Repull.SDK.Models.ListingUpdatedPayload_area? Area
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingUpdatedPayload_area?>("area"); }
+            set { BackingStore?.Set("area", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The listing, in the shape `GET /v1/listings/{id}` returns. Hydrated at delivery, so a receiver gets the listing rather than a reason to fetch one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingWebhookObject? Object { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingWebhookObject Object { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>Fields that changed and their prior values, when the source reports them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes? PreviousAttributes { get; set; }
+        public global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes? PreviousAttributes
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes?>("previousAttributes"); }
+            set { BackingStore?.Set("previousAttributes", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes PreviousAttributes { get; set; }
+        public global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes PreviousAttributes
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingUpdatedPayload_previousAttributes>("previousAttributes"); }
+            set { BackingStore?.Set("previousAttributes", value); }
+        }
 #endif
         /// <summary>The revision property</summary>
-        public DateTimeOffset? Revision { get; set; }
+        public DateTimeOffset? Revision
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("revision"); }
+            set { BackingStore?.Set("revision", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingUpdatedPayload"/> and sets the default values.
         /// </summary>
         public ListingUpdatedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

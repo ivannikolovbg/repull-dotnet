@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,49 +12,100 @@ namespace Repull.SDK.Models
     /// The restriction read-back. It runs out of the SAME call that reads the prices back, so proving a restriction costs no extra request.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingRestrictionVerification : IAdditionalDataHolder, IParsable
+    public partial class BookingRestrictionVerification : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The matched property</summary>
-        public int? Matched { get; set; }
+        public int? Matched
+        {
+            get { return BackingStore?.Get<int?>("matched"); }
+            set { BackingStore?.Set("matched", value); }
+        }
         /// <summary>The mismatched property</summary>
-        public int? Mismatched { get; set; }
+        public int? Mismatched
+        {
+            get { return BackingStore?.Get<int?>("mismatched"); }
+            set { BackingStore?.Set("mismatched", value); }
+        }
         /// <summary>The ran property</summary>
-        public bool? Ran { get; set; }
+        public bool? Ran
+        {
+            get { return BackingStore?.Get<bool?>("ran"); }
+            set { BackingStore?.Set("ran", value); }
+        }
         /// <summary>One row per (night, restriction). Above 62 rows only the non-matching ones are listed; `rowsOmitted` counts the rest.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingRestrictionVerificationRow>? Rows { get; set; }
+        public List<global::Repull.SDK.Models.BookingRestrictionVerificationRow>? Rows
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRestrictionVerificationRow>?>("rows"); }
+            set { BackingStore?.Set("rows", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingRestrictionVerificationRow> Rows { get; set; }
+        public List<global::Repull.SDK.Models.BookingRestrictionVerificationRow> Rows
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRestrictionVerificationRow>>("rows"); }
+            set { BackingStore?.Set("rows", value); }
+        }
 #endif
         /// <summary>Matching rows left out of `rows` on a long write.</summary>
-        public int? RowsOmitted { get; set; }
+        public int? RowsOmitted
+        {
+            get { return BackingStore?.Get<int?>("rowsOmitted"); }
+            set { BackingStore?.Set("rowsOmitted", value); }
+        }
         /// <summary>`not_requested` (no restrictions were sent, `verify: false`, or Booking.com refused them), `all_dates_beyond_booking_horizon`, `read_back_failed`, `nothing_to_verify`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SkippedReason { get; set; }
+        public string? SkippedReason
+        {
+            get { return BackingStore?.Get<string?>("skippedReason"); }
+            set { BackingStore?.Set("skippedReason", value); }
+        }
 #nullable restore
 #else
-        public string SkippedReason { get; set; }
+        public string SkippedReason
+        {
+            get { return BackingStore?.Get<string>("skippedReason"); }
+            set { BackingStore?.Set("skippedReason", value); }
+        }
 #endif
         /// <summary>Restrictions Booking.com&apos;s read-back did not mention either way. Counted apart from `mismatched`: an unknown is not a failure.</summary>
-        public int? Unreported { get; set; }
+        public int? Unreported
+        {
+            get { return BackingStore?.Get<int?>("unreported"); }
+            set { BackingStore?.Set("unreported", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRestrictionVerification"/> and sets the default values.
         /// </summary>
         public BookingRestrictionVerification()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

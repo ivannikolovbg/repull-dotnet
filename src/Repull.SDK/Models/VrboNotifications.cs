@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,27 +12,50 @@ namespace Repull.SDK.Models
     /// Whether Vrbo&apos;s notification emails for this account reach Repull. Each one brings a new guest message or booking in within about a minute; without them Repull relies on its scheduled check, which is slower.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class VrboNotifications : IAdditionalDataHolder, IParsable
+    public partial class VrboNotifications : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The address the host adds on Vrbo as a secondary email, with message and reservation notifications on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Address { get; set; }
+        public string? Address
+        {
+            get { return BackingStore?.Get<string?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #nullable restore
 #else
-        public string Address { get; set; }
+        public string Address
+        {
+            get { return BackingStore?.Get<string>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>When the last Vrbo notification reached `address`. `null` when none ever has.</summary>
-        public DateTimeOffset? LastReceivedAt { get; set; }
+        public DateTimeOffset? LastReceivedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastReceivedAt"); }
+            set { BackingStore?.Set("lastReceivedAt", value); }
+        }
         /// <summary>`active`: notifications arrive for this account&apos;s guest messages. `missing`: Repull found new guest messages and no notification came for them — ask the host to add `address` on Vrbo (or turn its notifications back on). `unknown`: no guest messages yet to judge by.</summary>
-        public global::Repull.SDK.Models.VrboNotifications_state? State { get; set; }
+        public global::Repull.SDK.Models.VrboNotifications_state? State
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboNotifications_state?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.VrboNotifications"/> and sets the default values.
         /// </summary>
         public VrboNotifications()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

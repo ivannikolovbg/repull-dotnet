@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// GUEST-side view of the stay — what the guest was actually charged. Same non-fabrication rule as `ReservationHostFinancials`: absent components are omitted, never zero-filled.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationGuestFinancials : IAdditionalDataHolder, IParsable
+    public partial class ReservationGuestFinancials : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Every fee line the guest was charged — cleaning, extra guest, pass-through host fees, platform guest service fee, channel add-ons. Deduplicated: channels that report a fee both as an array line and as a scalar (e.g. `cleaning`) yield ONE line.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationMoneyLine>? Fees { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine>? Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationMoneyLine> Fees { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine> Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #endif
         /// <summary>Every tax line the guest was charged. Same collection as `financials.host.taxes`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationMoneyLine>? Taxes { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine>? Taxes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>?>("taxes"); }
+            set { BackingStore?.Set("taxes", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationMoneyLine> Taxes { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine> Taxes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>>("taxes"); }
+            set { BackingStore?.Set("taxes", value); }
+        }
 #endif
         /// <summary>Stay total the guest paid, in `currency`. Taken from the stored breakdown; falls back to the reservation total when the breakdown carries no total of its own.</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationGuestFinancials"/> and sets the default values.
         /// </summary>
         public ReservationGuestFinancials()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

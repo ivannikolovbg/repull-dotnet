@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,72 +10,135 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MigrationChannelMap_listings : IAdditionalDataHolder, IParsable
+    public partial class MigrationChannelMap_listings : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The airbnb property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MigrationChannelMap_listings_airbnb? Airbnb { get; set; }
+        public global::Repull.SDK.Models.MigrationChannelMap_listings_airbnb? Airbnb
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationChannelMap_listings_airbnb?>("airbnb"); }
+            set { BackingStore?.Set("airbnb", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MigrationChannelMap_listings_airbnb Airbnb { get; set; }
+        public global::Repull.SDK.Models.MigrationChannelMap_listings_airbnb Airbnb
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationChannelMap_listings_airbnb>("airbnb"); }
+            set { BackingStore?.Set("airbnb", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The booking property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MigrationChannelMap_listings_booking? Booking { get; set; }
+        public global::Repull.SDK.Models.MigrationChannelMap_listings_booking? Booking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationChannelMap_listings_booking?>("booking"); }
+            set { BackingStore?.Set("booking", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MigrationChannelMap_listings_booking Booking { get; set; }
+        public global::Repull.SDK.Models.MigrationChannelMap_listings_booking Booking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationChannelMap_listings_booking>("booking"); }
+            set { BackingStore?.Set("booking", value); }
+        }
 #endif
         /// <summary>The listing id in the source PMS.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalListingId { get; set; }
+        public string? ExternalListingId
+        {
+            get { return BackingStore?.Get<string?>("externalListingId"); }
+            set { BackingStore?.Set("externalListingId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalListingId { get; set; }
+        public string ExternalListingId
+        {
+            get { return BackingStore?.Get<string>("externalListingId"); }
+            set { BackingStore?.Set("externalListingId", value); }
+        }
 #endif
         /// <summary>The property in this workspace, when it came across.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The vrbo property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MigrationChannelMap_listings_vrbo? Vrbo { get; set; }
+        public global::Repull.SDK.Models.MigrationChannelMap_listings_vrbo? Vrbo
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationChannelMap_listings_vrbo?>("vrbo"); }
+            set { BackingStore?.Set("vrbo", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MigrationChannelMap_listings_vrbo Vrbo { get; set; }
+        public global::Repull.SDK.Models.MigrationChannelMap_listings_vrbo Vrbo
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationChannelMap_listings_vrbo>("vrbo"); }
+            set { BackingStore?.Set("vrbo", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MigrationChannelMap_listings"/> and sets the default values.
         /// </summary>
         public MigrationChannelMap_listings()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

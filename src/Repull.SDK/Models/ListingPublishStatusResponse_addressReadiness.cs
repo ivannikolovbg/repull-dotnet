@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,15 +12,22 @@ namespace Repull.SDK.Models
     /// Address readiness per channel, keyed by channel name (`airbnb` today). Airbnb requires `street` and `city` for every country and additionally `state` and `postalCode` for a **US** property — and a listing with no `countryCode` behaves as US. Check this BEFORE calling a publish endpoint: an incomplete address is refused at the create preflight and never reaches the channel.It sits here rather than inside `channels[]` because `channels` reports sync activity and is empty for a listing that has never been pushed — exactly the listing whose address blocker you need to see. Repair a gap with `PUT /v1/listings/{id}/content`, sending only the missing parts under `address`. An empty object means readiness was not reported; it never means ready.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPublishStatusResponse_addressReadiness : IAdditionalDataHolder, IParsable
+    public partial class ListingPublishStatusResponse_addressReadiness : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness"/> and sets the default values.
         /// </summary>
         public ListingPublishStatusResponse_addressReadiness()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

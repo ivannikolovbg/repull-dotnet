@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,74 +10,141 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class GuestCreateRequest : IAdditionalDataHolder, IParsable
+    public partial class GuestCreateRequest : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The email property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Email { get; set; }
+        public string? Email
+        {
+            get { return BackingStore?.Get<string?>("email"); }
+            set { BackingStore?.Set("email", value); }
+        }
 #nullable restore
 #else
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return BackingStore?.Get<string>("email"); }
+            set { BackingStore?.Set("email", value); }
+        }
 #endif
         /// <summary>The firstName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FirstName { get; set; }
+        public string? FirstName
+        {
+            get { return BackingStore?.Get<string?>("firstName"); }
+            set { BackingStore?.Set("firstName", value); }
+        }
 #nullable restore
 #else
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get { return BackingStore?.Get<string>("firstName"); }
+            set { BackingStore?.Set("firstName", value); }
+        }
 #endif
         /// <summary>The isBusinessTraveler property</summary>
-        public bool? IsBusinessTraveler { get; set; }
+        public bool? IsBusinessTraveler
+        {
+            get { return BackingStore?.Get<bool?>("isBusinessTraveler"); }
+            set { BackingStore?.Set("isBusinessTraveler", value); }
+        }
         /// <summary>BCP-47 tag.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Language { get; set; }
+        public string? Language
+        {
+            get { return BackingStore?.Get<string?>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #nullable restore
 #else
-        public string Language { get; set; }
+        public string Language
+        {
+            get { return BackingStore?.Get<string>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #endif
         /// <summary>The lastName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastName { get; set; }
+        public string? LastName
+        {
+            get { return BackingStore?.Get<string?>("lastName"); }
+            set { BackingStore?.Set("lastName", value); }
+        }
 #nullable restore
 #else
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get { return BackingStore?.Get<string>("lastName"); }
+            set { BackingStore?.Set("lastName", value); }
+        }
 #endif
         /// <summary>E.164 preferred. Stored normalised.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Phone { get; set; }
+        public string? Phone
+        {
+            get { return BackingStore?.Get<string?>("phone"); }
+            set { BackingStore?.Set("phone", value); }
+        }
 #nullable restore
 #else
-        public string Phone { get; set; }
+        public string Phone
+        {
+            get { return BackingStore?.Get<string>("phone"); }
+            set { BackingStore?.Set("phone", value); }
+        }
 #endif
         /// <summary>A connected PMS to create the guest in as well. The guest is created there FIRST; a PMS that cannot create guest profiles returns `422 pms_write_unsupported` and nothing is created. The PMS&apos;s guest id comes back as `pms.externalId`, and later `PATCH /v1/guests/{id}` changes reach it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestCreateRequest"/> and sets the default values.
         /// </summary>
         public GuestCreateRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
             IsBusinessTraveler = false;
         }

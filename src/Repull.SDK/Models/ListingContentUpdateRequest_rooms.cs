@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,44 +10,83 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingContentUpdateRequest_rooms : IAdditionalDataHolder, IParsable
+    public partial class ListingContentUpdateRequest_rooms : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The beds property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms_beds>? Beds { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms_beds>? Beds
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms_beds>?>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms_beds> Beds { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms_beds> Beds
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms_beds>>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
 #endif
         /// <summary>Whether the room is private to the guest.</summary>
-        public bool? IsPrivate { get; set; }
+        public bool? IsPrivate
+        {
+            get { return BackingStore?.Get<bool?>("isPrivate"); }
+            set { BackingStore?.Set("isPrivate", value); }
+        }
         /// <summary>Your own label, e.g. &quot;Primary bedroom&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomName { get; set; }
+        public string? RoomName
+        {
+            get { return BackingStore?.Get<string?>("roomName"); }
+            set { BackingStore?.Set("roomName", value); }
+        }
 #nullable restore
 #else
-        public string RoomName { get; set; }
+        public string RoomName
+        {
+            get { return BackingStore?.Get<string>("roomName"); }
+            set { BackingStore?.Set("roomName", value); }
+        }
 #endif
         /// <summary>Order among rooms of the same type, from 1.</summary>
-        public int? RoomNumber { get; set; }
+        public int? RoomNumber
+        {
+            get { return BackingStore?.Get<int?>("roomNumber"); }
+            set { BackingStore?.Set("roomNumber", value); }
+        }
         /// <summary>e.g. `bedroom`, `full_bathroom`, `half_bathroom`, `living_room`, `kitchen`. Not a closed list — Airbnb validates it at publish and its refusal comes back in the publish result.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomType { get; set; }
+        public string? RoomType
+        {
+            get { return BackingStore?.Get<string?>("roomType"); }
+            set { BackingStore?.Set("roomType", value); }
+        }
 #nullable restore
 #else
-        public string RoomType { get; set; }
+        public string RoomType
+        {
+            get { return BackingStore?.Get<string>("roomType"); }
+            set { BackingStore?.Set("roomType", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest_rooms"/> and sets the default values.
         /// </summary>
         public ListingContentUpdateRequest_rooms()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

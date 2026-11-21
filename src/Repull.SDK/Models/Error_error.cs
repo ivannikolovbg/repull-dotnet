@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,203 +10,406 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class Error_error : IAdditionalDataHolder, IParsable
+    public partial class Error_error : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Airbnb&apos;s own id for that listing, so the host can find it in Airbnb. Present on `code: &quot;listing_not_api_connected&quot;` (HTTP 403).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbListingId { get; set; }
+        public string? AirbnbListingId
+        {
+            get { return BackingStore?.Get<string?>("airbnb_listing_id"); }
+            set { BackingStore?.Set("airbnb_listing_id", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbListingId { get; set; }
+        public string AirbnbListingId
+        {
+            get { return BackingStore?.Get<string>("airbnb_listing_id"); }
+            set { BackingStore?.Set("airbnb_listing_id", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Stable machine-parseable error identifier. Match on this for retry logic. Codes are namespaced and never change meaning.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Code { get; set; }
+        public string? Code
+        {
+            get { return BackingStore?.Get<string?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #nullable restore
 #else
-        public string Code { get; set; }
+        public string Code
+        {
+            get { return BackingStore?.Get<string>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #endif
         /// <summary>Pay-as-you-go credits, the alternative to a plan change: past your plan&apos;s monthly quota, requests are served while the wallet has a balance. Present with `upgrade`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Error_error_credits? Credits { get; set; }
+        public global::Repull.SDK.Models.Error_error_credits? Credits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error_credits?>("credits"); }
+            set { BackingStore?.Set("credits", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Error_error_credits Credits { get; set; }
+        public global::Repull.SDK.Models.Error_error_credits Credits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error_credits>("credits"); }
+            set { BackingStore?.Set("credits", value); }
+        }
 #endif
         /// <summary>Suggestion for typos and near-matches. Present when the server can guess the intent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DidYouMean { get; set; }
+        public string? DidYouMean
+        {
+            get { return BackingStore?.Get<string?>("did_you_mean"); }
+            set { BackingStore?.Set("did_you_mean", value); }
+        }
 #nullable restore
 #else
-        public string DidYouMean { get; set; }
+        public string DidYouMean
+        {
+            get { return BackingStore?.Get<string>("did_you_mean"); }
+            set { BackingStore?.Set("did_you_mean", value); }
+        }
 #endif
         /// <summary>Canonical write-up for this error code. URL pattern: `https://repull.dev/docs/errors/{code}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DocsUrl { get; set; }
+        public string? DocsUrl
+        {
+            get { return BackingStore?.Get<string?>("docs_url"); }
+            set { BackingStore?.Set("docs_url", value); }
+        }
 #nullable restore
 #else
-        public string DocsUrl { get; set; }
+        public string DocsUrl
+        {
+            get { return BackingStore?.Get<string>("docs_url"); }
+            set { BackingStore?.Set("docs_url", value); }
+        }
 #endif
         /// <summary>The endpoint path that produced the error. Present on `code: &quot;unknown_params&quot;` so consumers can match validation failures to the operation they invoked.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Endpoint { get; set; }
+        public string? Endpoint
+        {
+            get { return BackingStore?.Get<string?>("endpoint"); }
+            set { BackingStore?.Set("endpoint", value); }
+        }
 #nullable restore
 #else
-        public string Endpoint { get; set; }
+        public string Endpoint
+        {
+            get { return BackingStore?.Get<string>("endpoint"); }
+            set { BackingStore?.Set("endpoint", value); }
+        }
 #endif
         /// <summary>Body field, query param, or path segment the error is about. Present when the error is parameter-specific.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Field { get; set; }
+        public string? Field
+        {
+            get { return BackingStore?.Get<string?>("field"); }
+            set { BackingStore?.Set("field", value); }
+        }
 #nullable restore
 #else
-        public string Field { get; set; }
+        public string Field
+        {
+            get { return BackingStore?.Get<string>("field"); }
+            set { BackingStore?.Set("field", value); }
+        }
 #endif
         /// <summary>Exact recovery steps. Surface this verbatim in your UI / agent reasoning trace — it is written to be actionable without further reading.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Fix { get; set; }
+        public string? Fix
+        {
+            get { return BackingStore?.Get<string?>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #nullable restore
 #else
-        public string Fix { get; set; }
+        public string Fix
+        {
+            get { return BackingStore?.Get<string>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #endif
         /// <summary>The limit that was reached. Present on quota refusals.</summary>
-        public int? Limit { get; set; }
+        public int? Limit
+        {
+            get { return BackingStore?.Get<int?>("limit"); }
+            set { BackingStore?.Set("limit", value); }
+        }
         /// <summary>The single Repull listing the error is about. Present on `code: &quot;listing_not_api_connected&quot;` (HTTP 403).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
 #endif
         /// <summary>Every inactive listing the request involved. Present on `code: &quot;listing_inactive&quot;` (HTTP 403) — activate these ids and retry.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ListingIds { get; set; }
+        public List<string>? ListingIds
+        {
+            get { return BackingStore?.Get<List<string>?>("listing_ids"); }
+            set { BackingStore?.Set("listing_ids", value); }
+        }
 #nullable restore
 #else
-        public List<string> ListingIds { get; set; }
+        public List<string> ListingIds
+        {
+            get { return BackingStore?.Get<List<string>>("listing_ids"); }
+            set { BackingStore?.Set("listing_ids", value); }
+        }
 #endif
         /// <summary>The same inactive listings with their names, so you can show the user which ones to activate. Present on `code: &quot;listing_inactive&quot;` (HTTP 403). `name` is null only when the request did not resolve it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.Error_error_listings>? Listings { get; set; }
+        public List<global::Repull.SDK.Models.Error_error_listings>? Listings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.Error_error_listings>?>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.Error_error_listings> Listings { get; set; }
+        public List<global::Repull.SDK.Models.Error_error_listings> Listings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.Error_error_listings>>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
 #endif
         /// <summary>Human-readable cause. Echoes the offending value when relevant.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>The `code` THIS response used to carry, for callers whose branch still matches the old string. A migration aid with a deprecation window — **`code` is canonical, always match on that.**Present only where an endpoint&apos;s classification actually changed, never as a permanent synonym, and it disappears from a response as soon as the canonical code and the old one agree.The live case: the reviews, messaging, check-in-guide, alteration-answer and Airbnb-pull endpoints used to report EVERY Airbnb failure as `500 airbnb_error`, including refusals Airbnb will repeat forever. They now classify the same way every other Airbnb write does — an Airbnb 4xx is `422 airbnb_rejected` (fix the request), 5xx and timeouts stay `502 airbnb_error` (retry with backoff), and a dead grant is `403 connection_reauth_required`. Those responses carry `previous_code: &quot;airbnb_error&quot;`. **Removed in v2** — migrate your branches to `code` before then.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PreviousCode { get; set; }
+        public string? PreviousCode
+        {
+            get { return BackingStore?.Get<string?>("previous_code"); }
+            set { BackingStore?.Set("previous_code", value); }
+        }
 #nullable restore
 #else
-        public string PreviousCode { get; set; }
+        public string PreviousCode
+        {
+            get { return BackingStore?.Get<string>("previous_code"); }
+            set { BackingStore?.Set("previous_code", value); }
+        }
 #endif
         /// <summary>This month&apos;s requests extrapolated to the whole month — the usage `upgrade` was sized for. Present with `upgrade`.</summary>
-        public int? ProjectedMonthlyRequests { get; set; }
+        public int? ProjectedMonthlyRequests
+        {
+            get { return BackingStore?.Get<int?>("projected_monthly_requests"); }
+            set { BackingStore?.Set("projected_monthly_requests", value); }
+        }
         /// <summary>Opaque per-request id. Mirrors the `x-request-id` response header. Capture it before retrying so logs can be correlated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RequestId { get; set; }
+        public string? RequestId
+        {
+            get { return BackingStore?.Get<string?>("request_id"); }
+            set { BackingStore?.Set("request_id", value); }
+        }
 #nullable restore
 #else
-        public string RequestId { get; set; }
+        public string RequestId
+        {
+            get { return BackingStore?.Get<string>("request_id"); }
+            set { BackingStore?.Set("request_id", value); }
+        }
 #endif
         /// <summary>When the refused quota resets. Present on quota refusals.</summary>
-        public DateTimeOffset? ResetsAt { get; set; }
+        public DateTimeOffset? ResetsAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("resets_at"); }
+            set { BackingStore?.Set("resets_at", value); }
+        }
         /// <summary>Seconds the client should wait before retrying. Mirrors the `Retry-After` HTTP header. Present on rate-limit responses and on transient upstream failures that are safe to retry.</summary>
-        public int? RetryAfter { get; set; }
+        public int? RetryAfter
+        {
+            get { return BackingStore?.Get<int?>("retry_after"); }
+            set { BackingStore?.Set("retry_after", value); }
+        }
         /// <summary>Which limit refused the request: `monthly` (the plan&apos;s request quota), `daily` (the daily loop guard), the daily AI quota, or `per_api_key` (the per-minute limiter: wait `Retry-After`, nothing else).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Scope { get; set; }
+        public string? Scope
+        {
+            get { return BackingStore?.Get<string?>("scope"); }
+            set { BackingStore?.Set("scope", value); }
+        }
 #nullable restore
 #else
-        public string Scope { get; set; }
+        public string Scope
+        {
+            get { return BackingStore?.Get<string>("scope"); }
+            set { BackingStore?.Set("scope", value); }
+        }
 #endif
         /// <summary>LAST-RESORT contact handle. Only set on errors that genuinely cannot be self-fixed (billing dispute, account-state corruption, OAuth partner intervention). Never fall back to support before trying `fix` and `docs_url`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Error_error_support? Support { get; set; }
+        public global::Repull.SDK.Models.Error_error_support? Support
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error_support?>("support"); }
+            set { BackingStore?.Set("support", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Error_error_support Support { get; set; }
+        public global::Repull.SDK.Models.Error_error_support Support
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error_support>("support"); }
+            set { BackingStore?.Set("support", value); }
+        }
 #endif
         /// <summary>The listing&apos;s current Airbnb API sync category — why the write was refused. Present on `code: &quot;listing_not_api_connected&quot;` (HTTP 403).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SyncCategory { get; set; }
+        public string? SyncCategory
+        {
+            get { return BackingStore?.Get<string?>("sync_category"); }
+            set { BackingStore?.Set("sync_category", value); }
+        }
 #nullable restore
 #else
-        public string SyncCategory { get; set; }
+        public string SyncCategory
+        {
+            get { return BackingStore?.Get<string>("sync_category"); }
+            set { BackingStore?.Set("sync_category", value); }
+        }
 #endif
         /// <summary>The plan the request was counted against. Present on quota refusals (`rate_limit_exceeded`, `daily_limit_exceeded`, `credits_exhausted`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Tier { get; set; }
+        public string? Tier
+        {
+            get { return BackingStore?.Get<string?>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #nullable restore
 #else
-        public string Tier { get; set; }
+        public string Tier
+        {
+            get { return BackingStore?.Get<string>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #endif
         /// <summary>The cheapest plan that covers your usage. Present on the monthly quota refusal (`rate_limit_exceeded`, `scope: &quot;monthly&quot;`), `credits_exhausted` and `daily_limit_exceeded`. `monthly_price_usd` is exactly what `checkout_url` charges for `listings`. `plan: &quot;custom&quot;` means no self-serve plan covers the usage (already on Starter, more than Starter&apos;s quotas, or more than 100 listings): email `contact_email`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Error_error_upgrade? Upgrade { get; set; }
+        public global::Repull.SDK.Models.Error_error_upgrade? Upgrade
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error_upgrade?>("upgrade"); }
+            set { BackingStore?.Set("upgrade", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Error_error_upgrade Upgrade { get; set; }
+        public global::Repull.SDK.Models.Error_error_upgrade Upgrade
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error_upgrade>("upgrade"); }
+            set { BackingStore?.Set("upgrade", value); }
+        }
 #endif
         /// <summary>How much of `limit` is used. Present on quota refusals.</summary>
-        public int? Used { get; set; }
+        public int? Used
+        {
+            get { return BackingStore?.Get<int?>("used"); }
+            set { BackingStore?.Set("used", value); }
+        }
         /// <summary>Sorted list of every query param this endpoint accepts. Present on `code: &quot;unknown_params&quot;` (HTTP 422) so SDK consumers can self-correct without reading docs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ValidParams { get; set; }
+        public List<string>? ValidParams
+        {
+            get { return BackingStore?.Get<List<string>?>("validParams"); }
+            set { BackingStore?.Set("validParams", value); }
+        }
 #nullable restore
 #else
-        public List<string> ValidParams { get; set; }
+        public List<string> ValidParams
+        {
+            get { return BackingStore?.Get<List<string>>("validParams"); }
+            set { BackingStore?.Set("validParams", value); }
+        }
 #endif
         /// <summary>Allowed values when the error is enum-related (e.g. unknown `provider`, unknown `status`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ValidValues { get; set; }
+        public List<string>? ValidValues
+        {
+            get { return BackingStore?.Get<List<string>?>("valid_values"); }
+            set { BackingStore?.Set("valid_values", value); }
+        }
 #nullable restore
 #else
-        public List<string> ValidValues { get; set; }
+        public List<string> ValidValues
+        {
+            get { return BackingStore?.Get<List<string>>("valid_values"); }
+            set { BackingStore?.Set("valid_values", value); }
+        }
 #endif
         /// <summary>Echo of the offending value (truncated to 200 chars). Useful for debugging — helps callers see what the server actually parsed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? ValueReceived { get; set; }
+        public UntypedNode? ValueReceived
+        {
+            get { return BackingStore?.Get<UntypedNode?>("value_received"); }
+            set { BackingStore?.Set("value_received", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode ValueReceived { get; set; }
+        public UntypedNode ValueReceived
+        {
+            get { return BackingStore?.Get<UntypedNode>("value_received"); }
+            set { BackingStore?.Set("value_received", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Error_error"/> and sets the default values.
         /// </summary>
         public Error_error()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

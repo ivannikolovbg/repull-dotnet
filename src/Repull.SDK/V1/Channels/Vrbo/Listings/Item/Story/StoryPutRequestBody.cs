@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,33 +10,66 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class StoryPutRequestBody : IParsable
+    public partial class StoryPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The aboutYou property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AboutYou { get; set; }
+        public string? AboutYou
+        {
+            get { return BackingStore?.Get<string?>("aboutYou"); }
+            set { BackingStore?.Set("aboutYou", value); }
+        }
 #nullable restore
 #else
-        public string AboutYou { get; set; }
+        public string AboutYou
+        {
+            get { return BackingStore?.Get<string>("aboutYou"); }
+            set { BackingStore?.Set("aboutYou", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The uniqueBenefits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UniqueBenefits { get; set; }
+        public string? UniqueBenefits
+        {
+            get { return BackingStore?.Get<string?>("uniqueBenefits"); }
+            set { BackingStore?.Set("uniqueBenefits", value); }
+        }
 #nullable restore
 #else
-        public string UniqueBenefits { get; set; }
+        public string UniqueBenefits
+        {
+            get { return BackingStore?.Get<string>("uniqueBenefits"); }
+            set { BackingStore?.Set("uniqueBenefits", value); }
+        }
 #endif
         /// <summary>The whyThisProperty property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WhyThisProperty { get; set; }
+        public string? WhyThisProperty
+        {
+            get { return BackingStore?.Get<string?>("whyThisProperty"); }
+            set { BackingStore?.Set("whyThisProperty", value); }
+        }
 #nullable restore
 #else
-        public string WhyThisProperty { get; set; }
+        public string WhyThisProperty
+        {
+            get { return BackingStore?.Get<string>("whyThisProperty"); }
+            set { BackingStore?.Set("whyThisProperty", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public StoryPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

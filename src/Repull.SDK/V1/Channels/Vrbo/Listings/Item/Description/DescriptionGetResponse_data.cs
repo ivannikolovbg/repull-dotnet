@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,39 +12,70 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description
     /// The section as Vrbo has it now.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class DescriptionGetResponse_data : IAdditionalDataHolder, IParsable
+    public partial class DescriptionGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The headline property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Headline { get; set; }
+        public string? Headline
+        {
+            get { return BackingStore?.Get<string?>("headline"); }
+            set { BackingStore?.Set("headline", value); }
+        }
 #nullable restore
 #else
-        public string Headline { get; set; }
+        public string Headline
+        {
+            get { return BackingStore?.Get<string>("headline"); }
+            set { BackingStore?.Set("headline", value); }
+        }
 #endif
         /// <summary>The limits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionGetResponse_data_limits? Limits { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionGetResponse_data_limits? Limits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionGetResponse_data_limits?>("limits"); }
+            set { BackingStore?.Set("limits", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionGetResponse_data_limits Limits { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionGetResponse_data_limits Limits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionGetResponse_data_limits>("limits"); }
+            set { BackingStore?.Set("limits", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionGetResponse_data"/> and sets the default values.
         /// </summary>
         public DescriptionGetResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,25 +12,44 @@ namespace Repull.SDK.Models
     /// Payload for `channel.degraded`. A connection is failing repeatedly and will stop working. Sent on the transition into degraded or down, not on every health check.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ChannelDegradedPayload : IAdditionalDataHolder, IParsable
+    public partial class ChannelDegradedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The object property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ChannelDegradedPayload_object? Object { get; set; }
+        public global::Repull.SDK.Models.ChannelDegradedPayload_object? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelDegradedPayload_object?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ChannelDegradedPayload_object Object { get; set; }
+        public global::Repull.SDK.Models.ChannelDegradedPayload_object Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelDegradedPayload_object>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>The occurredAt property</summary>
-        public DateTimeOffset? OccurredAt { get; set; }
+        public DateTimeOffset? OccurredAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("occurredAt"); }
+            set { BackingStore?.Set("occurredAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ChannelDegradedPayload"/> and sets the default values.
         /// </summary>
         public ChannelDegradedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

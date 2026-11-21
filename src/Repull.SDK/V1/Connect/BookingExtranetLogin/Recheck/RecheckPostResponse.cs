@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,26 +10,45 @@ namespace Repull.SDK.V1.Connect.BookingExtranetLogin.Recheck
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class RecheckPostResponse : IAdditionalDataHolder, IParsable
+    public partial class RecheckPostResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Id of the queued import job, when one was queued.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? JobId { get; set; }
+        public string? JobId
+        {
+            get { return BackingStore?.Get<string?>("jobId"); }
+            set { BackingStore?.Set("jobId", value); }
+        }
 #nullable restore
 #else
-        public string JobId { get; set; }
+        public string JobId
+        {
+            get { return BackingStore?.Get<string>("jobId"); }
+            set { BackingStore?.Set("jobId", value); }
+        }
 #endif
         /// <summary>Whether the re-check was queued.</summary>
-        public bool? Ok { get; set; }
+        public bool? Ok
+        {
+            get { return BackingStore?.Get<bool?>("ok"); }
+            set { BackingStore?.Set("ok", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.BookingExtranetLogin.Recheck.RecheckPostResponse"/> and sets the default values.
         /// </summary>
         public RecheckPostResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

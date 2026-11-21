@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,105 +13,212 @@ namespace Repull.SDK.Models
     /// Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.**Stay terms are the one exception to that rule.** `cancellationPolicy`, `checkInTime` and `checkOutTime` ride on every delivery, because the decisions they drive — is a refund owed, when can housekeeping turn the unit over — are made at the moment the webhook lands, not on a follow-up fetch. They are operational parameters of the booking, not contact or payment data. Guest email, payment method and payment reference stay off the snapshot; see `GET /v1/reservations/{id}`.All three are `null` when the source channel did not supply them. They are never defaulted: a fabricated policy is worse than a missing one.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationWebhookObject : IAdditionalDataHolder, IParsable
+    public partial class ReservationWebhookObject : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Cancellation policy the booking was made under, **verbatim from the source channel** — not normalised, because the codes do not mean the same thing across channels.- Airbnb, Vrbo, direct and owner bookings carry a named code: `flexible`, `moderate`, `firm_14`, `strict_14_with_grace_period`, `better_strict_with_grace_period`, `super_strict_30`, `super_strict_60`, `tiered_pricing_non_refundable`, `long_term_flexible`, `flexible_new`.- **Booking.com carries its numeric policy id as a string** (`&quot;1&quot;`, `&quot;74&quot;`, `&quot;121&quot;`). It is not self-describing — resolve it against the property&apos;s policy set on Booking.com.`null` when the channel supplied none (iCal-imported bookings, some legacy direct rows).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CancellationPolicy { get; set; }
+        public string? CancellationPolicy
+        {
+            get { return BackingStore?.Get<string?>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
 #nullable restore
 #else
-        public string CancellationPolicy { get; set; }
+        public string CancellationPolicy
+        {
+            get { return BackingStore?.Get<string>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
 #endif
         /// <summary>Source channel — `airbnb`, `booking`, `vrbo`, `direct`, `owner`, `mid_stay_clean`, etc.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>Check-in date (local property date, no timezone).</summary>
-        public Date? CheckinDate { get; set; }
+        public Date? CheckinDate
+        {
+            get { return BackingStore?.Get<Date?>("checkinDate"); }
+            set { BackingStore?.Set("checkinDate", value); }
+        }
         /// <summary>Local check-in time, `HH:MM` on a 24-hour clock in the **property&apos;s own timezone** — not UTC, and not the subscriber&apos;s. Usually inherited from the listing policy, but per-reservation where the channel or an agreed early check-in overrides it. `null` when unknown.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTime { get; set; }
+        public string? CheckInTime
+        {
+            get { return BackingStore?.Get<string?>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTime { get; set; }
+        public string CheckInTime
+        {
+            get { return BackingStore?.Get<string>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #endif
         /// <summary>Check-out date (local property date, no timezone).</summary>
-        public Date? CheckoutDate { get; set; }
+        public Date? CheckoutDate
+        {
+            get { return BackingStore?.Get<Date?>("checkoutDate"); }
+            set { BackingStore?.Set("checkoutDate", value); }
+        }
         /// <summary>Local check-out time, `HH:MM` on a 24-hour clock in the property&apos;s own timezone. Pair it with `checkoutDate` to schedule the turnover. `null` when unknown.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckOutTime { get; set; }
+        public string? CheckOutTime
+        {
+            get { return BackingStore?.Get<string?>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckOutTime { get; set; }
+        public string CheckOutTime
+        {
+            get { return BackingStore?.Get<string>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #endif
         /// <summary>The conversation with this guest — pass it to `GET /v1/conversations/{id}` and `/v1/conversations/{id}/messages`. It is the same conversation from inquiry through pre-approval to the confirmed booking, and the same id the message webhooks carry, so a booking links straight to the messages that led to it. `null` when the channel has no conversation for this booking.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get; set; }
+        public string? ConversationId
+        {
+            get { return BackingStore?.Get<string?>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #nullable restore
 #else
-        public string ConversationId { get; set; }
+        public string ConversationId
+        {
+            get { return BackingStore?.Get<string>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #endif
         /// <summary>Workspace (customer) id this reservation belongs to.</summary>
-        public int? CustomerId { get; set; }
+        public int? CustomerId
+        {
+            get { return BackingStore?.Get<int?>("customerId"); }
+            set { BackingStore?.Set("customerId", value); }
+        }
         /// <summary>The channel&apos;s own id for that conversation (Airbnb thread id, Booking.com conversation id, …). `null` when there is none.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalThreadId { get; set; }
+        public string? ExternalThreadId
+        {
+            get { return BackingStore?.Get<string?>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalThreadId { get; set; }
+        public string ExternalThreadId
+        {
+            get { return BackingStore?.Get<string>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #endif
         /// <summary>What the guest wrote with the booking — on Booking.com, the estimated arrival time and special requests. Free text. `null` when there were none.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestNotes { get; set; }
+        public string? GuestNotes
+        {
+            get { return BackingStore?.Get<string?>("guestNotes"); }
+            set { BackingStore?.Set("guestNotes", value); }
+        }
 #nullable restore
 #else
-        public string GuestNotes { get; set; }
+        public string GuestNotes
+        {
+            get { return BackingStore?.Get<string>("guestNotes"); }
+            set { BackingStore?.Set("guestNotes", value); }
+        }
 #endif
         /// <summary>Repull-internal reservation id. Pass to `GET /v1/reservations/{id}`.</summary>
-        public int? Id { get; set; }
+        public int? Id
+        {
+            get { return BackingStore?.Get<int?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>The inquiry this booking came from (`GET /v1/inquiries`), when the guest asked before booking. When an inquiry turns into a booking, `inquiry.updated` fires with `status: &quot;booked&quot;` and this reservation&apos;s id. `null` for bookings with no inquiry.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InquiryId { get; set; }
+        public string? InquiryId
+        {
+            get { return BackingStore?.Get<string?>("inquiryId"); }
+            set { BackingStore?.Set("inquiryId", value); }
+        }
 #nullable restore
 #else
-        public string InquiryId { get; set; }
+        public string InquiryId
+        {
+            get { return BackingStore?.Get<string>("inquiryId"); }
+            set { BackingStore?.Set("inquiryId", value); }
+        }
 #endif
         /// <summary>Repull listing id this reservation is on.</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>Lifecycle status — typically `confirmed`, `cancelled`, `pending`, `inquiry`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>Channel-side confirmation code (Airbnb HM-prefixed, Booking.com numeric, etc.). Stable across the lifetime of the reservation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Uid { get; set; }
+        public string? Uid
+        {
+            get { return BackingStore?.Get<string?>("uid"); }
+            set { BackingStore?.Set("uid", value); }
+        }
 #nullable restore
 #else
-        public string Uid { get; set; }
+        public string Uid
+        {
+            get { return BackingStore?.Get<string>("uid"); }
+            set { BackingStore?.Set("uid", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationWebhookObject"/> and sets the default values.
         /// </summary>
         public ReservationWebhookObject()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

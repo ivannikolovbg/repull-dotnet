@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,159 +12,326 @@ namespace Repull.SDK.Models
     /// A guest or host review unified across channels. Returned by `GET /v1/reviews` and `GET /v1/reviews/{id}`. Includes every channel&apos;s reviews once they have been imported.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Review : IAdditionalDataHolder, IParsable
+    public partial class Review : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The connected account this review belongs to. List endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.RecordAccount? Account { get; set; }
+        public global::Repull.SDK.Models.RecordAccount? Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RecordAccount?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.RecordAccount Account { get; set; }
+        public global::Repull.SDK.Models.RecordAccount Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RecordAccount>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The categories property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReviewCategory>? Categories { get; set; }
+        public List<global::Repull.SDK.Models.ReviewCategory>? Categories
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReviewCategory>?>("categories"); }
+            set { BackingStore?.Set("categories", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReviewCategory> Categories { get; set; }
+        public List<global::Repull.SDK.Models.ReviewCategory> Categories
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReviewCategory>>("categories"); }
+            set { BackingStore?.Set("categories", value); }
+        }
 #endif
         /// <summary>When the review window closes (Airbnb has a 14-day window after checkout).</summary>
-        public DateTimeOffset? ExpiresAt { get; set; }
+        public DateTimeOffset? ExpiresAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("expiresAt"); }
+            set { BackingStore?.Set("expiresAt", value); }
+        }
         /// <summary>ID in the source channel (Airbnb review id, Booking review id, etc.). Pass as `review_id` to the provider reply endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalId { get; set; }
+        public string? ExternalId
+        {
+            get { return BackingStore?.Get<string?>("externalId"); }
+            set { BackingStore?.Set("externalId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalId { get; set; }
+        public string ExternalId
+        {
+            get { return BackingStore?.Get<string>("externalId"); }
+            set { BackingStore?.Set("externalId", value); }
+        }
 #endif
         /// <summary>The guestAvatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestAvatar { get; set; }
+        public string? GuestAvatar
+        {
+            get { return BackingStore?.Get<string?>("guestAvatar"); }
+            set { BackingStore?.Set("guestAvatar", value); }
+        }
 #nullable restore
 #else
-        public string GuestAvatar { get; set; }
+        public string GuestAvatar
+        {
+            get { return BackingStore?.Get<string>("guestAvatar"); }
+            set { BackingStore?.Set("guestAvatar", value); }
+        }
 #endif
         /// <summary>The guestId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestId { get; set; }
+        public string? GuestId
+        {
+            get { return BackingStore?.Get<string?>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
 #nullable restore
 #else
-        public string GuestId { get; set; }
+        public string GuestId
+        {
+            get { return BackingStore?.Get<string>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
 #endif
         /// <summary>The guestName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestName { get; set; }
+        public string? GuestName
+        {
+            get { return BackingStore?.Get<string?>("guestName"); }
+            set { BackingStore?.Set("guestName", value); }
+        }
 #nullable restore
 #else
-        public string GuestName { get; set; }
+        public string GuestName
+        {
+            get { return BackingStore?.Get<string>("guestName"); }
+            set { BackingStore?.Set("guestName", value); }
+        }
 #endif
         /// <summary>The hidden property</summary>
-        public bool? Hidden { get; set; }
+        public bool? Hidden
+        {
+            get { return BackingStore?.Get<bool?>("hidden"); }
+            set { BackingStore?.Set("hidden", value); }
+        }
         /// <summary>Internal Repull review id — pass back to `/v1/reviews/{id}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Did the reviewer recommend the reviewee? Used for guest-side reviews.</summary>
-        public bool? IsRevieweeRecommended { get; set; }
+        public bool? IsRevieweeRecommended
+        {
+            get { return BackingStore?.Get<bool?>("isRevieweeRecommended"); }
+            set { BackingStore?.Set("isRevieweeRecommended", value); }
+        }
         /// <summary>Detected language (ISO 639-1) of the review body.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Language { get; set; }
+        public string? Language
+        {
+            get { return BackingStore?.Get<string?>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #nullable restore
 #else
-        public string Language { get; set; }
+        public string Language
+        {
+            get { return BackingStore?.Get<string>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #endif
         /// <summary>Internal Repull listing id the review is attached to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The platform property</summary>
-        public global::Repull.SDK.Models.Review_platform? Platform { get; set; }
+        public global::Repull.SDK.Models.Review_platform? Platform
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Review_platform?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
         /// <summary>The PMS this review was read from (`guesty`, `hostaway`, …) when it came through one — `platform` is still the channel the guest wrote it on. A reply (`POST /v1/reviews/{id}/reply`) goes through this PMS; `GET /v1/connect/{provider}` → `capabilities.pms.reviews.reply` says whether it can. `null` for a review from a directly connected channel.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Pms { get; set; }
+        public string? Pms
+        {
+            get { return BackingStore?.Get<string?>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #nullable restore
 #else
-        public string Pms { get; set; }
+        public string Pms
+        {
+            get { return BackingStore?.Get<string>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #endif
         /// <summary>Private feedback the reviewer sent only to the host.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PrivateFeedback { get; set; }
+        public string? PrivateFeedback
+        {
+            get { return BackingStore?.Get<string?>("privateFeedback"); }
+            set { BackingStore?.Set("privateFeedback", value); }
+        }
 #nullable restore
 #else
-        public string PrivateFeedback { get; set; }
+        public string PrivateFeedback
+        {
+            get { return BackingStore?.Get<string>("privateFeedback"); }
+            set { BackingStore?.Set("privateFeedback", value); }
+        }
 #endif
         /// <summary>The source channel&apos;s own listing/property id for this review (Booking.com hotel/property id, Airbnb listing id, …). Pass this as `property_id` to `POST /v1/channels/booking/reviews` to post a host reply — it is the bridge from a unified review straight to the provider-specific reply call. `null` when the source listing id has not been mirrored yet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ProviderPropertyId { get; set; }
+        public string? ProviderPropertyId
+        {
+            get { return BackingStore?.Get<string?>("providerPropertyId"); }
+            set { BackingStore?.Set("providerPropertyId", value); }
+        }
 #nullable restore
 #else
-        public string ProviderPropertyId { get; set; }
+        public string ProviderPropertyId
+        {
+            get { return BackingStore?.Get<string>("providerPropertyId"); }
+            set { BackingStore?.Set("providerPropertyId", value); }
+        }
 #endif
         /// <summary>Public-facing review text shown on the listing page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PublicReview { get; set; }
+        public string? PublicReview
+        {
+            get { return BackingStore?.Get<string?>("publicReview"); }
+            set { BackingStore?.Set("publicReview", value); }
+        }
 #nullable restore
 #else
-        public string PublicReview { get; set; }
+        public string PublicReview
+        {
+            get { return BackingStore?.Get<string>("publicReview"); }
+            set { BackingStore?.Set("publicReview", value); }
+        }
 #endif
         /// <summary>Overall rating on the platform&apos;s scale (typically 1..5). May be `null` for review types that lack a numeric overall score.</summary>
-        public double? Rating { get; set; }
+        public double? Rating
+        {
+            get { return BackingStore?.Get<double?>("rating"); }
+            set { BackingStore?.Set("rating", value); }
+        }
         /// <summary>Channel-side confirmation code for the reservation being reviewed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReservationConfirmationCode { get; set; }
+        public string? ReservationConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("reservationConfirmationCode"); }
+            set { BackingStore?.Set("reservationConfirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ReservationConfirmationCode { get; set; }
+        public string ReservationConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("reservationConfirmationCode"); }
+            set { BackingStore?.Set("reservationConfirmationCode", value); }
+        }
 #endif
         /// <summary>The reservationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReservationId { get; set; }
+        public string? ReservationId
+        {
+            get { return BackingStore?.Get<string?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #nullable restore
 #else
-        public string ReservationId { get; set; }
+        public string ReservationId
+        {
+            get { return BackingStore?.Get<string>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #endif
         /// <summary>The response property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReviewResponse? Response { get; set; }
+        public global::Repull.SDK.Models.ReviewResponse? Response
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReviewResponse?>("response"); }
+            set { BackingStore?.Set("response", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReviewResponse Response { get; set; }
+        public global::Repull.SDK.Models.ReviewResponse Response
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReviewResponse>("response"); }
+            set { BackingStore?.Set("response", value); }
+        }
 #endif
         /// <summary>Who wrote the review — `guest` (about the host/property) or `host` (about the guest).</summary>
-        public global::Repull.SDK.Models.Review_reviewerRole? ReviewerRole { get; set; }
+        public global::Repull.SDK.Models.Review_reviewerRole? ReviewerRole
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Review_reviewerRole?>("reviewerRole"); }
+            set { BackingStore?.Set("reviewerRole", value); }
+        }
         /// <summary>The submittedAt property</summary>
-        public DateTimeOffset? SubmittedAt { get; set; }
+        public DateTimeOffset? SubmittedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("submittedAt"); }
+            set { BackingStore?.Set("submittedAt", value); }
+        }
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Review"/> and sets the default values.
         /// </summary>
         public Review()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

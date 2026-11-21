@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,125 +12,248 @@ namespace Repull.SDK.Models
     /// A vacation rental property in your Repull workspace. Backed by the core `listings` row — enriched per-PMS fields (bedrooms, property type, provider id, etc.) live in provider-specific detail tables and are NOT returned here.Field availability differs by endpoint:- `channels` is returned by the list endpoint (`GET /v1/properties`) only.- `latitude`, `longitude`, `createdAt`, and `amenities` are returned by the detail endpoint (`GET /v1/properties/{id}`) only. `amenities` requires `?include=amenities`.An **inactive** property (`status: inactive`) appears only in the list endpoint, and only when `?status=inactive|all` asks for it. Such a row carries identity fields only — `id`, `name`, `city`, `status`, `inactiveReason`, `lifecycleStatus`, `channels`, `accounts`, `updatedAt` — so every other field is absent until the property is activated. `inactiveReason` is `plan_limit` (held back by the plan; activating needs a free slot or an upgrade), `unlisted_on_airbnb`, or `deactivated` (switched off by you). Every other endpoint answers `403 listing_inactive` for it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Property : IAdditionalDataHolder, IParsable
+    public partial class Property : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The connected account the property belongs to on each channel it is on. List endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.RecordAccount>? Accounts { get; set; }
+        public List<global::Repull.SDK.Models.RecordAccount>? Accounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.RecordAccount>?>("accounts"); }
+            set { BackingStore?.Set("accounts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.RecordAccount> Accounts { get; set; }
+        public List<global::Repull.SDK.Models.RecordAccount> Accounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.RecordAccount>>("accounts"); }
+            set { BackingStore?.Set("accounts", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Street line only, as stored on the listing — no unit, state or postal code. Kept for existing integrations; read `addressDetails` for the full postal address.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Address { get; set; }
+        public string? Address
+        {
+            get { return BackingStore?.Get<string?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #nullable restore
 #else
-        public string Address { get; set; }
+        public string Address
+        {
+            get { return BackingStore?.Get<string>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #endif
         /// <summary>The full postal address, unit included. Returned on every active row of `GET /v1/properties`, `GET /v1/properties/{id}`, `GET /v1/listings` and `GET /v1/listings/{id}` (on listings, these fields sit inside `address`). Each part is read from the listing first, then from the connected channels (Airbnb, Vrbo, Booking.com), so `line2` carries the apartment or unit number that tells units in the same building apart. A part nobody has stored is `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PostalAddress? AddressDetails { get; set; }
+        public global::Repull.SDK.Models.PostalAddress? AddressDetails
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PostalAddress?>("addressDetails"); }
+            set { BackingStore?.Set("addressDetails", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PostalAddress AddressDetails { get; set; }
+        public global::Repull.SDK.Models.PostalAddress AddressDetails
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PostalAddress>("addressDetails"); }
+            set { BackingStore?.Set("addressDetails", value); }
+        }
 #endif
         /// <summary>Amenity rows for the property. Detail endpoint only, and **only present when the caller passes `?include=amenities`.** Empty array (`[]`) when the property has no amenity rows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingAmenity>? Amenities { get; set; }
+        public List<global::Repull.SDK.Models.ListingAmenity>? Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingAmenity>?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingAmenity> Amenities { get; set; }
+        public List<global::Repull.SDK.Models.ListingAmenity> Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingAmenity>>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>OTAs/channels this property is actively published on, as channel-name strings (e.g. `airbnb`, `booking`, `vrbo`). Empty array when the property has no active channel links. List endpoint (`GET /v1/properties`) only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Channels { get; set; }
+        public List<string>? Channels
+        {
+            get { return BackingStore?.Get<List<string>?>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #nullable restore
 #else
-        public List<string> Channels { get; set; }
+        public List<string> Channels
+        {
+            get { return BackingStore?.Get<List<string>>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #endif
         /// <summary>City as stored on the listing. Kept for existing integrations; `addressDetails.city` is the resolved city.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>When the property was created. Detail endpoint only.</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>ISO 4217 currency code for this property&apos;s pricing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>Internal Repull property ID. Equal to the listing id (`listings.id`); the same integer is used as `listingId` on reservations and `propertyId` on availability.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Detail endpoint only. Decimal degrees, as a string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Latitude { get; set; }
+        public string? Latitude
+        {
+            get { return BackingStore?.Get<string?>("latitude"); }
+            set { BackingStore?.Set("latitude", value); }
+        }
 #nullable restore
 #else
-        public string Latitude { get; set; }
+        public string Latitude
+        {
+            get { return BackingStore?.Get<string>("latitude"); }
+            set { BackingStore?.Set("latitude", value); }
+        }
 #endif
         /// <summary>The listing&apos;s lifecycle state (e.g. `live`, `draft`, `archived`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LifecycleStatus { get; set; }
+        public string? LifecycleStatus
+        {
+            get { return BackingStore?.Get<string?>("lifecycleStatus"); }
+            set { BackingStore?.Set("lifecycleStatus", value); }
+        }
 #nullable restore
 #else
-        public string LifecycleStatus { get; set; }
+        public string LifecycleStatus
+        {
+            get { return BackingStore?.Get<string>("lifecycleStatus"); }
+            set { BackingStore?.Set("lifecycleStatus", value); }
+        }
 #endif
         /// <summary>Detail endpoint only. Decimal degrees, as a string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Longitude { get; set; }
+        public string? Longitude
+        {
+            get { return BackingStore?.Get<string?>("longitude"); }
+            set { BackingStore?.Set("longitude", value); }
+        }
 #nullable restore
 #else
-        public string Longitude { get; set; }
+        public string Longitude
+        {
+            get { return BackingStore?.Get<string>("longitude"); }
+            set { BackingStore?.Set("longitude", value); }
+        }
 #endif
         /// <summary>Property name — the host&apos;s internal nickname.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The title guests see on the channel (e.g. the Airbnb listing title). `name` is the host&apos;s internal nickname for the listing; show `publicName` in anything a guest or end user reads. Present on inactive rows too.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PublicName { get; set; }
+        public string? PublicName
+        {
+            get { return BackingStore?.Get<string?>("publicName"); }
+            set { BackingStore?.Set("publicName", value); }
+        }
 #nullable restore
 #else
-        public string PublicName { get; set; }
+        public string PublicName
+        {
+            get { return BackingStore?.Get<string>("publicName"); }
+            set { BackingStore?.Set("publicName", value); }
+        }
 #endif
         /// <summary>Derived from `listings.active`.</summary>
-        public global::Repull.SDK.Models.Property_status? Status { get; set; }
+        public global::Repull.SDK.Models.Property_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Property_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>Last time this property record changed. Feed the newest value you have seen back as `?updated_since=` to poll for changes only. List endpoint (`GET /v1/properties`) only.</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Property"/> and sets the default values.
         /// </summary>
         public Property()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

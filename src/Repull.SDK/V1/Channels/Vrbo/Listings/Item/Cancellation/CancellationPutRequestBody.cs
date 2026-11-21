@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,25 +10,50 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CancellationPutRequestBody : IParsable
+    public partial class CancellationPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>POLICY_TYPE_VR_RELAXED (14/7 days), _MODERATE (30/14), _FIRM (60/30), _STRICT (60), … or POLICY_TYPE_CUSTOM with `tiers`. The read lists Vrbo&apos;s named policies in `options`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PolicyType { get; set; }
+        public string? PolicyType
+        {
+            get { return BackingStore?.Get<string?>("policyType"); }
+            set { BackingStore?.Set("policyType", value); }
+        }
 #nullable restore
 #else
-        public string PolicyType { get; set; }
+        public string PolicyType
+        {
+            get { return BackingStore?.Get<string>("policyType"); }
+            set { BackingStore?.Set("policyType", value); }
+        }
 #endif
         /// <summary>The tiers property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutRequestBody_tiers>? Tiers { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutRequestBody_tiers>? Tiers
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutRequestBody_tiers>?>("tiers"); }
+            set { BackingStore?.Set("tiers", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutRequestBody_tiers> Tiers { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutRequestBody_tiers> Tiers
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutRequestBody_tiers>>("tiers"); }
+            set { BackingStore?.Set("tiers", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public CancellationPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

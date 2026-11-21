@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,62 @@ namespace Repull.SDK.Models
     /// Payload for `reservation.request.created`. A guest asked to book and the reservation is waiting on the host. `data.object` is the reservation, filled out to the shape `GET /v1/reservations/{id}` returns (its `status` is `pending`). Answer with `POST /v1/reservations/{id}/accept` or `/decline` before `respondBy`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationRequestCreatedPayload : IAdditionalDataHolder, IParsable
+    public partial class ReservationRequestCreatedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.**Stay terms are the one exception to that rule.** `cancellationPolicy`, `checkInTime` and `checkOutTime` ride on every delivery, because the decisions they drive — is a refund owed, when can housekeeping turn the unit over — are made at the moment the webhook lands, not on a follow-up fetch. They are operational parameters of the booking, not contact or payment data. Guest email, payment method and payment reference stay off the snapshot; see `GET /v1/reservations/{id}`.All three are `null` when the source channel did not supply them. They are never defaulted: a fabricated policy is worse than a missing one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationWebhookObject? Object { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationWebhookObject?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationWebhookObject Object { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationWebhookObject>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>When the request was recorded.</summary>
-        public DateTimeOffset? OccurredAt { get; set; }
+        public DateTimeOffset? OccurredAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("occurredAt"); }
+            set { BackingStore?.Set("occurredAt", value); }
+        }
         /// <summary>Always `pending` on this event.</summary>
-        public global::Repull.SDK.Models.ReservationRequestCreatedPayload_requestStatus? RequestStatus { get; set; }
+        public global::Repull.SDK.Models.ReservationRequestCreatedPayload_requestStatus? RequestStatus
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationRequestCreatedPayload_requestStatus?>("requestStatus"); }
+            set { BackingStore?.Set("requestStatus", value); }
+        }
         /// <summary>When the request lapses if nobody answers — Airbnb gives the host 24 hours from the request. `null` on channels without a request clock.</summary>
-        public DateTimeOffset? RespondBy { get; set; }
+        public DateTimeOffset? RespondBy
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("respondBy"); }
+            set { BackingStore?.Set("respondBy", value); }
+        }
         /// <summary>The reservation&apos;s `updatedAt` — order two deliveries about it without parsing the body.</summary>
-        public DateTimeOffset? Revision { get; set; }
+        public DateTimeOffset? Revision
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("revision"); }
+            set { BackingStore?.Set("revision", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationRequestCreatedPayload"/> and sets the default values.
         /// </summary>
         public ReservationRequestCreatedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

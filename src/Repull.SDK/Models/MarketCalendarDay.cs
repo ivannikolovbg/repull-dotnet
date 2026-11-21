@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,46 +11,105 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MarketCalendarDay : IAdditionalDataHolder, IParsable
+    public partial class MarketCalendarDay : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The date property</summary>
-        public Date? Date { get; set; }
+        public Date? Date
+        {
+            get { return BackingStore?.Get<Date?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketCalendarDay_events>? Events { get; set; }
+        public List<global::Repull.SDK.Models.MarketCalendarDay_events>? Events
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketCalendarDay_events>?>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketCalendarDay_events> Events { get; set; }
+        public List<global::Repull.SDK.Models.MarketCalendarDay_events> Events
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketCalendarDay_events>>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #endif
         /// <summary>The marketAvgRate property</summary>
-        public double? MarketAvgRate { get; set; }
+        public double? MarketAvgRate
+        {
+            get { return BackingStore?.Get<double?>("marketAvgRate"); }
+            set { BackingStore?.Set("marketAvgRate", value); }
+        }
         /// <summary>The marketMaxRate property</summary>
-        public double? MarketMaxRate { get; set; }
+        public double? MarketMaxRate
+        {
+            get { return BackingStore?.Get<double?>("marketMaxRate"); }
+            set { BackingStore?.Set("marketMaxRate", value); }
+        }
         /// <summary>The marketMinRate property</summary>
-        public double? MarketMinRate { get; set; }
+        public double? MarketMinRate
+        {
+            get { return BackingStore?.Get<double?>("marketMinRate"); }
+            set { BackingStore?.Set("marketMinRate", value); }
+        }
         /// <summary>Only meaningful when `listingId` is supplied.</summary>
-        public bool? MyAvailable { get; set; }
+        public bool? MyAvailable
+        {
+            get { return BackingStore?.Get<bool?>("myAvailable"); }
+            set { BackingStore?.Set("myAvailable", value); }
+        }
         /// <summary>Only present when `listingId` is supplied.</summary>
-        public double? MyPrice { get; set; }
+        public double? MyPrice
+        {
+            get { return BackingStore?.Get<double?>("myPrice"); }
+            set { BackingStore?.Set("myPrice", value); }
+        }
         /// <summary>The occupancyPct property</summary>
-        public double? OccupancyPct { get; set; }
+        public double? OccupancyPct
+        {
+            get { return BackingStore?.Get<double?>("occupancyPct"); }
+            set { BackingStore?.Set("occupancyPct", value); }
+        }
         /// <summary>The pricedListings property</summary>
-        public int? PricedListings { get; set; }
+        public int? PricedListings
+        {
+            get { return BackingStore?.Get<int?>("pricedListings"); }
+            set { BackingStore?.Set("pricedListings", value); }
+        }
         /// <summary>The totalListings property</summary>
-        public int? TotalListings { get; set; }
+        public int? TotalListings
+        {
+            get { return BackingStore?.Get<int?>("totalListings"); }
+            set { BackingStore?.Set("totalListings", value); }
+        }
         /// <summary>The wheelhouseAdr property</summary>
-        public double? WheelhouseAdr { get; set; }
+        public double? WheelhouseAdr
+        {
+            get { return BackingStore?.Get<double?>("wheelhouseAdr"); }
+            set { BackingStore?.Set("wheelhouseAdr", value); }
+        }
         /// <summary>The wheelhouseOccupancy property</summary>
-        public double? WheelhouseOccupancy { get; set; }
+        public double? WheelhouseOccupancy
+        {
+            get { return BackingStore?.Get<double?>("wheelhouseOccupancy"); }
+            set { BackingStore?.Set("wheelhouseOccupancy", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketCalendarDay"/> and sets the default values.
         /// </summary>
         public MarketCalendarDay()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

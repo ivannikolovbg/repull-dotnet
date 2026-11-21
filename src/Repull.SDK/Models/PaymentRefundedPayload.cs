@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,35 +12,66 @@ namespace Repull.SDK.Models
     /// Payload for `payment.refunded`. Money went back. Covers both a refund-typed movement and any adjustment with a negative amount — the sign on `object.amount` is preserved so the direction never has to be inferred.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PaymentRefundedPayload : IAdditionalDataHolder, IParsable
+    public partial class PaymentRefundedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>A money movement: a guest charge, a host payout, a refund, a tourist-tax pass-through, a resolution payout, or an adjustment that claws money back.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PaymentWebhookObject? Object { get; set; }
+        public global::Repull.SDK.Models.PaymentWebhookObject? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PaymentWebhookObject?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PaymentWebhookObject Object { get; set; }
+        public global::Repull.SDK.Models.PaymentWebhookObject Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PaymentWebhookObject>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>The reason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>The refundedAt property</summary>
-        public DateTimeOffset? RefundedAt { get; set; }
+        public DateTimeOffset? RefundedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("refundedAt"); }
+            set { BackingStore?.Set("refundedAt", value); }
+        }
         /// <summary>The revision property</summary>
-        public DateTimeOffset? Revision { get; set; }
+        public DateTimeOffset? Revision
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("revision"); }
+            set { BackingStore?.Set("revision", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PaymentRefundedPayload"/> and sets the default values.
         /// </summary>
         public PaymentRefundedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

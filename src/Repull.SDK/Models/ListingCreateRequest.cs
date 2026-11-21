@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,151 +12,326 @@ namespace Repull.SDK.Models
     /// Inputs for `POST /v1/listings`.**Address requirements — read this before you build the payload.** Publishing to Airbnb runs a create preflight that refuses the listing outright if the address is incomplete, and the refusal only surfaces later, at publish time. Airbnb requires `street` and `city` for every country. For a **US** property it additionally requires `state` and `postalCode`. Crucially, **omitting `countryCode` makes the listing behave as US**, so a listing created without a country needs `state` and `postalCode` too. Send `countryCode` explicitly for a non-US property. `lat`/`lng` alone are not enough — Airbnb rejects coordinates that are not backed by a full postal address. Use `GET /v1/listings/{id}/publish-status` to see which parts are still missing before you attempt a publish.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingCreateRequest : IAdditionalDataHolder, IParsable
+    public partial class ListingCreateRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The allowsChildren property</summary>
-        public bool? AllowsChildren { get; set; }
+        public bool? AllowsChildren
+        {
+            get { return BackingStore?.Get<bool?>("allowsChildren"); }
+            set { BackingStore?.Set("allowsChildren", value); }
+        }
         /// <summary>The allowsEvents property</summary>
-        public bool? AllowsEvents { get; set; }
+        public bool? AllowsEvents
+        {
+            get { return BackingStore?.Get<bool?>("allowsEvents"); }
+            set { BackingStore?.Set("allowsEvents", value); }
+        }
         /// <summary>The allowsPets property</summary>
-        public bool? AllowsPets { get; set; }
+        public bool? AllowsPets
+        {
+            get { return BackingStore?.Get<bool?>("allowsPets"); }
+            set { BackingStore?.Set("allowsPets", value); }
+        }
         /// <summary>The allowsSmoking property</summary>
-        public bool? AllowsSmoking { get; set; }
+        public bool? AllowsSmoking
+        {
+            get { return BackingStore?.Get<bool?>("allowsSmoking"); }
+            set { BackingStore?.Set("allowsSmoking", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bathrooms property</summary>
-        public double? Bathrooms { get; set; }
+        public double? Bathrooms
+        {
+            get { return BackingStore?.Get<double?>("bathrooms"); }
+            set { BackingStore?.Set("bathrooms", value); }
+        }
         /// <summary>The bedrooms property</summary>
-        public int? Bedrooms { get; set; }
+        public int? Bedrooms
+        {
+            get { return BackingStore?.Get<int?>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
         /// <summary>The beds property</summary>
-        public int? Beds { get; set; }
+        public int? Beds
+        {
+            get { return BackingStore?.Get<int?>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
         /// <summary>The cancellationPolicy property</summary>
-        public global::Repull.SDK.Models.ListingCreateRequest_cancellationPolicy? CancellationPolicy { get; set; }
+        public global::Repull.SDK.Models.ListingCreateRequest_cancellationPolicy? CancellationPolicy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingCreateRequest_cancellationPolicy?>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
         /// <summary>The checkInTimeStart property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTimeStart { get; set; }
+        public string? CheckInTimeStart
+        {
+            get { return BackingStore?.Get<string?>("checkInTimeStart"); }
+            set { BackingStore?.Set("checkInTimeStart", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTimeStart { get; set; }
+        public string CheckInTimeStart
+        {
+            get { return BackingStore?.Get<string>("checkInTimeStart"); }
+            set { BackingStore?.Set("checkInTimeStart", value); }
+        }
 #endif
         /// <summary>The checkOutTime property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckOutTime { get; set; }
+        public string? CheckOutTime
+        {
+            get { return BackingStore?.Get<string?>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckOutTime { get; set; }
+        public string CheckOutTime
+        {
+            get { return BackingStore?.Get<string>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #endif
         /// <summary>City / town. Required by Airbnb for every country — a publish is refused without it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>The cleaningFee property</summary>
-        public double? CleaningFee { get; set; }
+        public double? CleaningFee
+        {
+            get { return BackingStore?.Get<double?>("cleaningFee"); }
+            set { BackingStore?.Set("cleaningFee", value); }
+        }
         /// <summary>ISO-3166 alpha-2 country code. **Send this for any non-US property.** Omitting it does not mean &quot;unknown&quot; — the publish path treats a listing with no country as US, which then requires `state` and `postalCode` and will refuse the listing when they are absent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CountryCode { get; set; }
+        public string? CountryCode
+        {
+            get { return BackingStore?.Get<string?>("countryCode"); }
+            set { BackingStore?.Set("countryCode", value); }
+        }
 #nullable restore
 #else
-        public string CountryCode { get; set; }
+        public string CountryCode
+        {
+            get { return BackingStore?.Get<string>("countryCode"); }
+            set { BackingStore?.Set("countryCode", value); }
+        }
 #endif
         /// <summary>Nightly rate for every night that is not a weekend night. Stating it is what gives the new listing a calendar: 365 nights are written from it, and that calendar is what a publish sends to the channel. Without a price the listing has no availability to publish, which Booking.com refuses with &quot;No availability pushed&quot;.</summary>
-        public double? DefaultDailyPrice { get; set; }
+        public double? DefaultDailyPrice
+        {
+            get { return BackingStore?.Get<double?>("defaultDailyPrice"); }
+            set { BackingStore?.Set("defaultDailyPrice", value); }
+        }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>Latitude. Useful for map search, but never a substitute for the postal address — Airbnb rejects coordinates it cannot reconcile with a full address.</summary>
-        public double? Lat { get; set; }
+        public double? Lat
+        {
+            get { return BackingStore?.Get<double?>("lat"); }
+            set { BackingStore?.Set("lat", value); }
+        }
         /// <summary>Longitude. See `lat`.</summary>
-        public double? Lng { get; set; }
+        public double? Lng
+        {
+            get { return BackingStore?.Get<double?>("lng"); }
+            set { BackingStore?.Set("lng", value); }
+        }
         /// <summary>Public guest-facing title</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The personCapacity property</summary>
-        public int? PersonCapacity { get; set; }
+        public int? PersonCapacity
+        {
+            get { return BackingStore?.Get<int?>("personCapacity"); }
+            set { BackingStore?.Set("personCapacity", value); }
+        }
         /// <summary>Postal code — ZIP in the US, postcode in the UK, and so on. **Required for a US property**, and a listing with no `countryCode` counts as US. Send the complete code: Booking.com rejects a partial postcode such as `SW6` where the full value is `SW6 1EP`. Alias: `zipcode`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PostalCode { get; set; }
+        public string? PostalCode
+        {
+            get { return BackingStore?.Get<string?>("postalCode"); }
+            set { BackingStore?.Set("postalCode", value); }
+        }
 #nullable restore
 #else
-        public string PostalCode { get; set; }
+        public string PostalCode
+        {
+            get { return BackingStore?.Get<string>("postalCode"); }
+            set { BackingStore?.Set("postalCode", value); }
+        }
 #endif
         /// <summary>Charged per guest above the number included in the nightly rate.</summary>
-        public double? PricePerExtraGuest { get; set; }
+        public double? PricePerExtraGuest
+        {
+            get { return BackingStore?.Get<double?>("pricePerExtraGuest"); }
+            set { BackingStore?.Set("pricePerExtraGuest", value); }
+        }
         /// <summary>The propertyType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyType { get; set; }
+        public string? PropertyType
+        {
+            get { return BackingStore?.Get<string?>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #nullable restore
 #else
-        public string PropertyType { get; set; }
+        public string PropertyType
+        {
+            get { return BackingStore?.Get<string>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #endif
         /// <summary>Airbnb&apos;s finer property-type category, when you know it. Optional.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyTypeCategory { get; set; }
+        public string? PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string?>("propertyTypeCategory"); }
+            set { BackingStore?.Set("propertyTypeCategory", value); }
+        }
 #nullable restore
 #else
-        public string PropertyTypeCategory { get; set; }
+        public string PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string>("propertyTypeCategory"); }
+            set { BackingStore?.Set("propertyTypeCategory", value); }
+        }
 #endif
         /// <summary>What the guest actually gets. Airbnb refuses to activate a listing that has not stated one, answering &quot;Please specify a valid room type&quot; — which reads like a beds problem and is not. It is never defaulted: most listings are an entire home, but hundreds are a private or hotel room, and publishing one of those as an entire home is a false claim about someone&apos;s property. Settable later with `PUT /v1/listings/{id}/content` under `details`.</summary>
-        public global::Repull.SDK.Models.ListingCreateRequest_roomTypeCategory? RoomTypeCategory { get; set; }
+        public global::Repull.SDK.Models.ListingCreateRequest_roomTypeCategory? RoomTypeCategory
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingCreateRequest_roomTypeCategory?>("roomTypeCategory"); }
+            set { BackingStore?.Set("roomTypeCategory", value); }
+        }
         /// <summary>State, province or region. **Required for a US property**, and a listing with no `countryCode` counts as US. Optional elsewhere, but stored and used wherever the channel carries it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get; set; }
+        public string? State
+        {
+            get { return BackingStore?.Get<string?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #nullable restore
 #else
-        public string State { get; set; }
+        public string State
+        {
+            get { return BackingStore?.Get<string>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #endif
         /// <summary>Street address including the number. Required by Airbnb for every country — a publish is refused without it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Street { get; set; }
+        public string? Street
+        {
+            get { return BackingStore?.Get<string?>("street"); }
+            set { BackingStore?.Set("street", value); }
+        }
 #nullable restore
 #else
-        public string Street { get; set; }
+        public string Street
+        {
+            get { return BackingStore?.Get<string>("street"); }
+            set { BackingStore?.Set("street", value); }
+        }
 #endif
         /// <summary>The summary property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Summary { get; set; }
+        public string? Summary
+        {
+            get { return BackingStore?.Get<string?>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #nullable restore
 #else
-        public string Summary { get; set; }
+        public string Summary
+        {
+            get { return BackingStore?.Get<string>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #endif
         /// <summary>Nightly rate for Saturday and Sunday nights (UTC). Omit it and those nights take `defaultDailyPrice`. It is the same rate the direct-booking quoter charges for a weekend night, so the calendar and a quote cannot disagree.</summary>
-        public double? WeekendPrice { get; set; }
+        public double? WeekendPrice
+        {
+            get { return BackingStore?.Get<double?>("weekendPrice"); }
+            set { BackingStore?.Set("weekendPrice", value); }
+        }
         /// <summary>Alias for `postalCode`, accepted because it is the field name on the Airbnb mirror. `postalCode` wins if you send both. Prefer `postalCode` — the field holds non-US postcodes too.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Zipcode { get; set; }
+        public string? Zipcode
+        {
+            get { return BackingStore?.Get<string?>("zipcode"); }
+            set { BackingStore?.Set("zipcode", value); }
+        }
 #nullable restore
 #else
-        public string Zipcode { get; set; }
+        public string Zipcode
+        {
+            get { return BackingStore?.Get<string>("zipcode"); }
+            set { BackingStore?.Set("zipcode", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingCreateRequest"/> and sets the default values.
         /// </summary>
         public ListingCreateRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

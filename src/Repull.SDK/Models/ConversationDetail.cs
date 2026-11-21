@@ -16,26 +16,50 @@ namespace Repull.SDK.Models
         /// <summary>What the inquiry actions can do on this conversation right now — one set of endpoints for every channel, so an app shows the right actions instead of learning from a `422`. All `false` / `null` when nothing applies (a booked or closed inquiry, Booking.com, direct, an Airbnb inquiry relayed by a PMS).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConversationCapabilities? Capabilities { get; set; }
+        public global::Repull.SDK.Models.ConversationCapabilities? Capabilities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationCapabilities?>("capabilities"); }
+            set { BackingStore?.Set("capabilities", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConversationCapabilities Capabilities { get; set; }
+        public global::Repull.SDK.Models.ConversationCapabilities Capabilities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationCapabilities>("capabilities"); }
+            set { BackingStore?.Set("capabilities", value); }
+        }
 #endif
         /// <summary>The guest property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConversationGuest? Guest { get; set; }
+        public global::Repull.SDK.Models.ConversationGuest? Guest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationGuest?>("guest"); }
+            set { BackingStore?.Set("guest", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConversationGuest Guest { get; set; }
+        public global::Repull.SDK.Models.ConversationGuest Guest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationGuest>("guest"); }
+            set { BackingStore?.Set("guest", value); }
+        }
 #endif
         /// <summary>The host property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConversationHost? Host { get; set; }
+        public global::Repull.SDK.Models.ConversationHost? Host
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationHost?>("host"); }
+            set { BackingStore?.Set("host", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConversationHost Host { get; set; }
+        public global::Repull.SDK.Models.ConversationHost Host
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationHost>("host"); }
+            set { BackingStore?.Set("host", value); }
+        }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

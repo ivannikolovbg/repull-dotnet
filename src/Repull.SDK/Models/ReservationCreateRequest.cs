@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,83 +13,178 @@ namespace Repull.SDK.Models
     /// Which fields a listing takes depends on whether it is managed in a PMS — see the operation description and `GET /v1/listings/{id}` → `capabilities.reservations`. A field the listing cannot take is refused by name (`422 unsupported_field`), never dropped.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationCreateRequest : IParsable
+    public partial class ReservationCreateRequest : IBackedModel, IParsable
     {
         /// <summary>The adults property</summary>
-        public int? Adults { get; set; }
+        public int? Adults
+        {
+            get { return BackingStore?.Get<int?>("adults"); }
+            set { BackingStore?.Set("adults", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>Listings not managed in a PMS only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTime { get; set; }
+        public string? CheckInTime
+        {
+            get { return BackingStore?.Get<string?>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTime { get; set; }
+        public string CheckInTime
+        {
+            get { return BackingStore?.Get<string>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #endif
         /// <summary>Must be after `checkIn`.</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>Listings not managed in a PMS only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckOutTime { get; set; }
+        public string? CheckOutTime
+        {
+            get { return BackingStore?.Get<string?>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckOutTime { get; set; }
+        public string CheckOutTime
+        {
+            get { return BackingStore?.Get<string>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #endif
         /// <summary>The children property</summary>
-        public int? Children { get; set; }
+        public int? Children
+        {
+            get { return BackingStore?.Get<int?>("children"); }
+            set { BackingStore?.Set("children", value); }
+        }
         /// <summary>Listings not managed in a PMS only (a PMS books in the property&apos;s currency).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The guest on a new reservation. Matched against existing guests on email (then phone) plus name, so repeat guests are not duplicated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationGuestInput? Guest { get; set; }
+        public global::Repull.SDK.Models.ReservationGuestInput? Guest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationGuestInput?>("guest"); }
+            set { BackingStore?.Set("guest", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationGuestInput Guest { get; set; }
+        public global::Repull.SDK.Models.ReservationGuestInput Guest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationGuestInput>("guest"); }
+            set { BackingStore?.Set("guest", value); }
+        }
 #endif
         /// <summary>Total guests. On a PMS listing without `adults`, used as the adult count.</summary>
-        public int? GuestCount { get; set; }
+        public int? GuestCount
+        {
+            get { return BackingStore?.Get<int?>("guestCount"); }
+            set { BackingStore?.Set("guestCount", value); }
+        }
         /// <summary>Listings not managed in a PMS only: attach an existing guest instead of matching/creating one. Must belong to this workspace.</summary>
-        public int? GuestId { get; set; }
+        public int? GuestId
+        {
+            get { return BackingStore?.Get<int?>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
         /// <summary>Internal Repull property id — see `GET /v1/properties`.</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>PMS listings only: booking notes stored in the PMS.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Notes { get; set; }
+        public string? Notes
+        {
+            get { return BackingStore?.Get<string?>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #nullable restore
 #else
-        public string Notes { get; set; }
+        public string Notes
+        {
+            get { return BackingStore?.Get<string>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #endif
         /// <summary>OTA platforms are deliberately absent — those reservations are owned by the channel and arrive through sync. `owner` is refused on a PMS listing (block owner stays in the PMS).</summary>
-        public global::Repull.SDK.Models.ReservationCreateRequest_platform? Platform { get; set; }
+        public global::Repull.SDK.Models.ReservationCreateRequest_platform? Platform
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCreateRequest_platform?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
         /// <summary>PMS listings only: ask the PMS to email the guest its own confirmation, where the PMS supports it.</summary>
-        public bool? SendConfirmationEmail { get; set; }
+        public bool? SendConfirmationEmail
+        {
+            get { return BackingStore?.Get<bool?>("sendConfirmationEmail"); }
+            set { BackingStore?.Set("sendConfirmationEmail", value); }
+        }
         /// <summary>`confirmed` (default) or `tentative` (an optional hold, where the PMS has one). On a listing not managed in a PMS the value is passed to the reservation pipeline as before.</summary>
-        public global::Repull.SDK.Models.ReservationCreateRequest_status? Status { get; set; }
+        public global::Repull.SDK.Models.ReservationCreateRequest_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCreateRequest_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>PMS listings only: the total for the whole stay, in the listing&apos;s currency. Honoured where `capabilities.reservations.customPrice` is true; omit it and the PMS prices the stay (from its quote where it has one). Refused on a listing not managed in a PMS, whose rate engine prices the stay.</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
         /// <summary>PMS listings only: book this unit (`GET /v1/listings/{id}` → `units[].id`). Refused by PMSs that cannot target a unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitId { get; set; }
+        public string? UnitId
+        {
+            get { return BackingStore?.Get<string?>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #nullable restore
 #else
-        public string UnitId { get; set; }
+        public string UnitId
+        {
+            get { return BackingStore?.Get<string>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCreateRequest"/> and sets the default values.
         /// </summary>
         public ReservationCreateRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             Platform = global::Repull.SDK.Models.ReservationCreateRequest_platform.Direct;
             Status = global::Repull.SDK.Models.ReservationCreateRequest_status.Confirmed;
         }

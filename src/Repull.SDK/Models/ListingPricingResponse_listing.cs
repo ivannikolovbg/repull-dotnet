@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,49 +12,92 @@ namespace Repull.SDK.Models
     /// AI-derived base-price context for the listing.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPricingResponse_listing : IAdditionalDataHolder, IParsable
+    public partial class ListingPricingResponse_listing : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The aiBasePrice property</summary>
-        public double? AiBasePrice { get; set; }
+        public double? AiBasePrice
+        {
+            get { return BackingStore?.Get<double?>("aiBasePrice"); }
+            set { BackingStore?.Set("aiBasePrice", value); }
+        }
         /// <summary>The aiBasePriceFactors property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPricingResponse_listing_aiBasePriceFactors? AiBasePriceFactors { get; set; }
+        public global::Repull.SDK.Models.ListingPricingResponse_listing_aiBasePriceFactors? AiBasePriceFactors
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingResponse_listing_aiBasePriceFactors?>("aiBasePriceFactors"); }
+            set { BackingStore?.Set("aiBasePriceFactors", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPricingResponse_listing_aiBasePriceFactors AiBasePriceFactors { get; set; }
+        public global::Repull.SDK.Models.ListingPricingResponse_listing_aiBasePriceFactors AiBasePriceFactors
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingResponse_listing_aiBasePriceFactors>("aiBasePriceFactors"); }
+            set { BackingStore?.Set("aiBasePriceFactors", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The qualityTier property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? QualityTier { get; set; }
+        public string? QualityTier
+        {
+            get { return BackingStore?.Get<string?>("qualityTier"); }
+            set { BackingStore?.Set("qualityTier", value); }
+        }
 #nullable restore
 #else
-        public string QualityTier { get; set; }
+        public string QualityTier
+        {
+            get { return BackingStore?.Get<string>("qualityTier"); }
+            set { BackingStore?.Set("qualityTier", value); }
+        }
 #endif
         /// <summary>The segment property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Segment { get; set; }
+        public string? Segment
+        {
+            get { return BackingStore?.Get<string?>("segment"); }
+            set { BackingStore?.Set("segment", value); }
+        }
 #nullable restore
 #else
-        public string Segment { get; set; }
+        public string Segment
+        {
+            get { return BackingStore?.Get<string>("segment"); }
+            set { BackingStore?.Set("segment", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPricingResponse_listing"/> and sets the default values.
         /// </summary>
         public ListingPricingResponse_listing()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

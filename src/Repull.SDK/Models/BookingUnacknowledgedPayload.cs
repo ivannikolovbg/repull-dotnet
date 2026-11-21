@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,29 +12,56 @@ namespace Repull.SDK.Models
     /// Payload for `booking.unacknowledged`. A booking changed and your system has not acknowledged the change through the revision feed. Sent once per outstanding revision — not once per check — so a booking that keeps waiting does not keep alerting. A booking that changes AGAIN mints a new revision and does alert again, because that is a new thing to acknowledge. Acknowledging the revision stops it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingUnacknowledgedPayload : IAdditionalDataHolder, IParsable
+    public partial class BookingUnacknowledgedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.**Stay terms are the one exception to that rule.** `cancellationPolicy`, `checkInTime` and `checkOutTime` ride on every delivery, because the decisions they drive — is a refund owed, when can housekeeping turn the unit over — are made at the moment the webhook lands, not on a follow-up fetch. They are operational parameters of the booking, not contact or payment data. Guest email, payment method and payment reference stay off the snapshot; see `GET /v1/reservations/{id}`.All three are `null` when the source channel did not supply them. They are never defaulted: a fabricated policy is worse than a missing one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationWebhookObject? Object { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationWebhookObject?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationWebhookObject Object { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationWebhookObject>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>Whole hours since `outstandingSince`, for convenience.</summary>
-        public int? OutstandingHours { get; set; }
+        public int? OutstandingHours
+        {
+            get { return BackingStore?.Get<int?>("outstandingHours"); }
+            set { BackingStore?.Set("outstandingHours", value); }
+        }
         /// <summary>When the booking actually changed — NOT when we noticed. Revisions are minted when you first poll the feed, so a mint timestamp would measure how recently you looked rather than how long the booking has waited.</summary>
-        public DateTimeOffset? OutstandingSince { get; set; }
+        public DateTimeOffset? OutstandingSince
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("outstandingSince"); }
+            set { BackingStore?.Set("outstandingSince", value); }
+        }
         /// <summary>The outstanding revision. Acknowledge this to stop the alert.</summary>
-        public Guid? RevisionId { get; set; }
+        public Guid? RevisionId
+        {
+            get { return BackingStore?.Get<Guid?>("revisionId"); }
+            set { BackingStore?.Set("revisionId", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingUnacknowledgedPayload"/> and sets the default values.
         /// </summary>
         public BookingUnacknowledgedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.Models
     /// One channel message produced by the send. Airbnb carries one file per message and no text beside it, so text + 2 photos is 3 parts (files first, then the text). Booking.com carries every file on the one text message, so it is always 1 part.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class SendMessagePart : IAdditionalDataHolder, IParsable
+    public partial class SendMessagePart : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Indexes into the request&apos;s `attachments` that this message carried.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? AttachmentIndexes { get; set; }
+        public List<int?>? AttachmentIndexes
+        {
+            get { return BackingStore?.Get<List<int?>?>("attachmentIndexes"); }
+            set { BackingStore?.Set("attachmentIndexes", value); }
+        }
 #nullable restore
 #else
-        public List<int?> AttachmentIndexes { get; set; }
+        public List<int?> AttachmentIndexes
+        {
+            get { return BackingStore?.Get<List<int?>>("attachmentIndexes"); }
+            set { BackingStore?.Set("attachmentIndexes", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Why this part was not delivered.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The externalMessageId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalMessageId { get; set; }
+        public string? ExternalMessageId
+        {
+            get { return BackingStore?.Get<string?>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalMessageId { get; set; }
+        public string ExternalMessageId
+        {
+            get { return BackingStore?.Get<string>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #endif
         /// <summary>Whether this message carried the text.</summary>
-        public bool? HasText { get; set; }
+        public bool? HasText
+        {
+            get { return BackingStore?.Get<bool?>("hasText"); }
+            set { BackingStore?.Set("hasText", value); }
+        }
         /// <summary>The messageId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MessageId { get; set; }
+        public string? MessageId
+        {
+            get { return BackingStore?.Get<string?>("messageId"); }
+            set { BackingStore?.Set("messageId", value); }
+        }
 #nullable restore
 #else
-        public string MessageId { get; set; }
+        public string MessageId
+        {
+            get { return BackingStore?.Get<string>("messageId"); }
+            set { BackingStore?.Set("messageId", value); }
+        }
 #endif
         /// <summary>The sent property</summary>
-        public bool? Sent { get; set; }
+        public bool? Sent
+        {
+            get { return BackingStore?.Get<bool?>("sent"); }
+            set { BackingStore?.Set("sent", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.SendMessagePart"/> and sets the default values.
         /// </summary>
         public SendMessagePart()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

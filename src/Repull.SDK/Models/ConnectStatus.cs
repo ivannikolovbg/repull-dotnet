@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,111 +12,222 @@ namespace Repull.SDK.Models
     /// Connection status response for a single provider. When `connected` is false, all other fields except `provider` and `host` may be omitted, and `host` is null.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConnectStatus : IAdditionalDataHolder, IParsable
+    public partial class ConnectStatus : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>What the connection may do: `read_only`, `messaging` or `full_access` (see `ConnectionAccessType` for the meaning per provider). Airbnb: the tier of the host in `externalAccountId`; each host&apos;s own is on `accounts[].accessType`. Absent when `connected` is false and on `GET /v1/connect/vrbo-login` (per account there); `null` when unknown.</summary>
-        public global::Repull.SDK.Models.ConnectionAccessType? AccessType { get; set; }
+        public global::Repull.SDK.Models.ConnectionAccessType? AccessType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectionAccessType?>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
         /// <summary>One entry per connected account, for every provider: Airbnb, every host account connected (including ones since disconnected), each with its own `accessType`; Booking.com, every hotel (`externalAccountId` is the hotel id); Vrbo, every sign-in; Booking.com Extranet, every hotel login; a PMS, its one account. Pass `externalAccountId` as `accountId` to `DELETE /v1/connect/{provider}` to disconnect one. The top-level fields describe one record and stay for existing integrations; show `accounts[]` to list what is connected. Vrbo sign-ins also carry `accessType` and `import` (a `VrboImportStatus`), with a top-level `dataFreshness` on `GET /v1/connect/vrbo-login`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ConnectStatus_accounts>? Accounts { get; set; }
+        public List<global::Repull.SDK.Models.ConnectStatus_accounts>? Accounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConnectStatus_accounts>?>("accounts"); }
+            set { BackingStore?.Set("accounts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ConnectStatus_accounts> Accounts { get; set; }
+        public List<global::Repull.SDK.Models.ConnectStatus_accounts> Accounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConnectStatus_accounts>>("accounts"); }
+            set { BackingStore?.Set("accounts", value); }
+        }
 #endif
         /// <summary>Smoobu only: set to `{ required: true, reason: &quot;reauth_required&quot;, message }` when the connection still uses a legacy single API key, which Smoobu stops accepting on October 31, 2026. `null` once it is on an API key + secret.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConnectionAction? Action { get; set; }
+        public global::Repull.SDK.Models.ConnectionAction? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectionAction?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConnectionAction Action { get; set; }
+        public global::Repull.SDK.Models.ConnectionAction Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectionAction>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>PMS providers only. `reservations`: which reservation writes the API performs on this connection&apos;s listings — the connector&apos;s support combined with `writePolicy`. `pms`: everything else the API does through this PMS (review replies, request answers, listing content, guests, message channel/attachments, calendar). When `connected` is false, what the connector supports once connected.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConnectStatus_capabilities? Capabilities { get; set; }
+        public global::Repull.SDK.Models.ConnectStatus_capabilities? Capabilities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectStatus_capabilities?>("capabilities"); }
+            set { BackingStore?.Set("capabilities", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConnectStatus_capabilities Capabilities { get; set; }
+        public global::Repull.SDK.Models.ConnectStatus_capabilities Capabilities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectStatus_capabilities>("capabilities"); }
+            set { BackingStore?.Set("capabilities", value); }
+        }
 #endif
         /// <summary>The connected property</summary>
-        public bool? Connected { get; set; }
+        public bool? Connected
+        {
+            get { return BackingStore?.Get<bool?>("connected"); }
+            set { BackingStore?.Set("connected", value); }
+        }
         /// <summary>Same as `id`: our connection record.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>Vrbo only: the same freshness envelope the Airbnb read endpoints return, per account and in aggregate. Its reason is never_synced until a mapping is confirmed and importing while upcoming bookings come in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConnectStatus_dataFreshness? DataFreshness { get; set; }
+        public global::Repull.SDK.Models.ConnectStatus_dataFreshness? DataFreshness
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectStatus_dataFreshness?>("dataFreshness"); }
+            set { BackingStore?.Set("dataFreshness", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConnectStatus_dataFreshness DataFreshness { get; set; }
+        public global::Repull.SDK.Models.ConnectStatus_dataFreshness DataFreshness
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectStatus_dataFreshness>("dataFreshness"); }
+            set { BackingStore?.Set("dataFreshness", value); }
+        }
 #endif
         /// <summary>The platform&apos;s own account id: Airbnb host id; Booking.com hotel id (`booking`); the Booking.com account id behind the Extranet login (`booking_extranet`); Vrbo&apos;s account id (`vrbo`); the PMS&apos;s own account or company id. `null` when the platform id is not known yet (a Vrbo sign-in before its account id is captured, a PMS that does not expose one); never a Repull id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalAccountId { get; set; }
+        public string? ExternalAccountId
+        {
+            get { return BackingStore?.Get<string?>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalAccountId { get; set; }
+        public string ExternalAccountId
+        {
+            get { return BackingStore?.Get<string>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #endif
         /// <summary>Smoobu only: durable link to the hosted Smoobu form where the host pastes a new API key + secret. Submitting it updates this same connection (`id` unchanged). Present only when `action.required` is true.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FixUrl { get; set; }
+        public string? FixUrl
+        {
+            get { return BackingStore?.Get<string?>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #nullable restore
 #else
-        public string FixUrl { get; set; }
+        public string FixUrl
+        {
+            get { return BackingStore?.Get<string>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #endif
         /// <summary>Host metadata, populated for Airbnb when the host row exists. Null for other providers (per-provider enrichment is incremental).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConnectHost? Host { get; set; }
+        public global::Repull.SDK.Models.ConnectHost? Host
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectHost?>("host"); }
+            set { BackingStore?.Set("host", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConnectHost Host { get; set; }
+        public global::Repull.SDK.Models.ConnectHost Host
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectHost>("host"); }
+            set { BackingStore?.Set("host", value); }
+        }
 #endif
         /// <summary>Repull-side connection ID (the `X-Account-Id`). Stable across token refreshes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.Models.ConnectStatus_status? Status { get; set; }
+        public global::Repull.SDK.Models.ConnectStatus_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectStatus_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>PMS connections only: what the app may change in the PMS. Change it with `PATCH /v1/connect/{provider}/write-policy`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsWritePolicy? WritePolicy { get; set; }
+        public global::Repull.SDK.Models.PmsWritePolicy? WritePolicy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsWritePolicy?>("writePolicy"); }
+            set { BackingStore?.Set("writePolicy", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsWritePolicy WritePolicy { get; set; }
+        public global::Repull.SDK.Models.PmsWritePolicy WritePolicy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsWritePolicy>("writePolicy"); }
+            set { BackingStore?.Set("writePolicy", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectStatus"/> and sets the default values.
         /// </summary>
         public ConnectStatus()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

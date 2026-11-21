@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,46 +10,89 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MappingsPostResponse_results : IAdditionalDataHolder, IParsable
+    public partial class MappingsPostResponse_results : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The created property</summary>
-        public bool? Created { get; set; }
+        public bool? Created
+        {
+            get { return BackingStore?.Get<bool?>("created"); }
+            set { BackingStore?.Set("created", value); }
+        }
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>Vrbo, for a mapped unit: the listing&apos;s Repull iCal backup feed (`GET /v1/listings/{id}/ical`). With calendar sync on, Repull imports it into the Vrbo unit by itself (Vrbo → Calendar → Import calendar, named &quot;Repull&quot;) and removes other tools&apos; imported feeds; `listing.ical_feed_changed` reports it. Only if that fails does the host add it by hand.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? IcalFeedUrl { get; set; }
+        public string? IcalFeedUrl
+        {
+            get { return BackingStore?.Get<string?>("ical_feed_url"); }
+            set { BackingStore?.Set("ical_feed_url", value); }
+        }
 #nullable restore
 #else
-        public string IcalFeedUrl { get; set; }
+        public string IcalFeedUrl
+        {
+            get { return BackingStore?.Get<string>("ical_feed_url"); }
+            set { BackingStore?.Set("ical_feed_url", value); }
+        }
 #endif
         /// <summary>The listing_id property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
         /// <summary>The ok property</summary>
-        public bool? Ok { get; set; }
+        public bool? Ok
+        {
+            get { return BackingStore?.Get<bool?>("ok"); }
+            set { BackingStore?.Set("ok", value); }
+        }
         /// <summary>The unit_id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitId { get; set; }
+        public string? UnitId
+        {
+            get { return BackingStore?.Get<string?>("unit_id"); }
+            set { BackingStore?.Set("unit_id", value); }
+        }
 #nullable restore
 #else
-        public string UnitId { get; set; }
+        public string UnitId
+        {
+            get { return BackingStore?.Get<string>("unit_id"); }
+            set { BackingStore?.Set("unit_id", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connections.Item.Mappings.MappingsPostResponse_results"/> and sets the default values.
         /// </summary>
         public MappingsPostResponse_results()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

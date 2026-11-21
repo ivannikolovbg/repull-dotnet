@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,37 +12,88 @@ namespace Repull.SDK.Models
     /// Where a Vrbo account import stands. Nothing is imported until its unit mapping is confirmed; then upcoming bookings and the last 30 days of messages come first, and the whole account history after.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class VrboImportStatus : IAdditionalDataHolder, IParsable
+    public partial class VrboImportStatus : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>`messaging`: bookings and messages only, the calendar is never pushed.</summary>
-        public global::Repull.SDK.Models.VrboImportStatus_accessType? AccessType { get; set; }
+        public global::Repull.SDK.Models.VrboImportStatus_accessType? AccessType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboImportStatus_accessType?>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
         /// <summary>The accountId property</summary>
-        public int? AccountId { get; set; }
+        public int? AccountId
+        {
+            get { return BackingStore?.Get<int?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The conversationsImported property</summary>
-        public int? ConversationsImported { get; set; }
+        public int? ConversationsImported
+        {
+            get { return BackingStore?.Get<int?>("conversationsImported"); }
+            set { BackingStore?.Set("conversationsImported", value); }
+        }
         /// <summary>The conversationsSeen property</summary>
-        public int? ConversationsSeen { get; set; }
+        public int? ConversationsSeen
+        {
+            get { return BackingStore?.Get<int?>("conversationsSeen"); }
+            set { BackingStore?.Set("conversationsSeen", value); }
+        }
         /// <summary>The whole account history is imported.</summary>
-        public bool? HistoryComplete { get; set; }
+        public bool? HistoryComplete
+        {
+            get { return BackingStore?.Get<bool?>("historyComplete"); }
+            set { BackingStore?.Set("historyComplete", value); }
+        }
         /// <summary>The historyCompletedAt property</summary>
-        public DateTimeOffset? HistoryCompletedAt { get; set; }
+        public DateTimeOffset? HistoryCompletedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("historyCompletedAt"); }
+            set { BackingStore?.Set("historyCompletedAt", value); }
+        }
         /// <summary>Last completed sync (Vrbo is read every few minutes and on each Vrbo notification email).</summary>
-        public DateTimeOffset? LastSyncedAt { get; set; }
+        public DateTimeOffset? LastSyncedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastSyncedAt"); }
+            set { BackingStore?.Set("lastSyncedAt", value); }
+        }
         /// <summary>Upcoming bookings and the last 30 days are in.</summary>
-        public DateTimeOffset? PriorityImportedAt { get; set; }
+        public DateTimeOffset? PriorityImportedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("priorityImportedAt"); }
+            set { BackingStore?.Set("priorityImportedAt", value); }
+        }
         /// <summary>When the mapping was confirmed.</summary>
-        public DateTimeOffset? RequestedAt { get; set; }
+        public DateTimeOffset? RequestedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("requestedAt"); }
+            set { BackingStore?.Set("requestedAt", value); }
+        }
         /// <summary>Bookings imported so far.</summary>
-        public int? Reservations { get; set; }
+        public int? Reservations
+        {
+            get { return BackingStore?.Get<int?>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
         /// <summary>The state property</summary>
-        public global::Repull.SDK.Models.VrboImportStatus_state? State { get; set; }
+        public global::Repull.SDK.Models.VrboImportStatus_state? State
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboImportStatus_state?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.VrboImportStatus"/> and sets the default values.
         /// </summary>
         public VrboImportStatus()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

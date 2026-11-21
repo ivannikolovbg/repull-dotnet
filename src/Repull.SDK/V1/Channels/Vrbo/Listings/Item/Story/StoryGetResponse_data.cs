@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,86 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story
     /// The section as Vrbo has it now.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class StoryGetResponse_data : IAdditionalDataHolder, IParsable
+    public partial class StoryGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The aboutYou property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AboutYou { get; set; }
+        public string? AboutYou
+        {
+            get { return BackingStore?.Get<string?>("aboutYou"); }
+            set { BackingStore?.Set("aboutYou", value); }
+        }
 #nullable restore
 #else
-        public string AboutYou { get; set; }
+        public string AboutYou
+        {
+            get { return BackingStore?.Get<string>("aboutYou"); }
+            set { BackingStore?.Set("aboutYou", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The limits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryGetResponse_data_limits? Limits { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryGetResponse_data_limits? Limits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryGetResponse_data_limits?>("limits"); }
+            set { BackingStore?.Set("limits", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryGetResponse_data_limits Limits { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryGetResponse_data_limits Limits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryGetResponse_data_limits>("limits"); }
+            set { BackingStore?.Set("limits", value); }
+        }
 #endif
         /// <summary>The uniqueBenefits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UniqueBenefits { get; set; }
+        public string? UniqueBenefits
+        {
+            get { return BackingStore?.Get<string?>("uniqueBenefits"); }
+            set { BackingStore?.Set("uniqueBenefits", value); }
+        }
 #nullable restore
 #else
-        public string UniqueBenefits { get; set; }
+        public string UniqueBenefits
+        {
+            get { return BackingStore?.Get<string>("uniqueBenefits"); }
+            set { BackingStore?.Set("uniqueBenefits", value); }
+        }
 #endif
         /// <summary>The whyThisProperty property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WhyThisProperty { get; set; }
+        public string? WhyThisProperty
+        {
+            get { return BackingStore?.Get<string?>("whyThisProperty"); }
+            set { BackingStore?.Set("whyThisProperty", value); }
+        }
 #nullable restore
 #else
-        public string WhyThisProperty { get; set; }
+        public string WhyThisProperty
+        {
+            get { return BackingStore?.Get<string>("whyThisProperty"); }
+            set { BackingStore?.Set("whyThisProperty", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryGetResponse_data"/> and sets the default values.
         /// </summary>
         public StoryGetResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

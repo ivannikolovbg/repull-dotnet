@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,40 +12,81 @@ namespace Repull.SDK.V1.Connect
     /// Migrate only — your wording for the hosted pages. Anything you leave out uses Repull&apos;s localized migration copy.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConnectPostRequestBody_copy : IParsable
+    public partial class ConnectPostRequestBody_copy : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The completedBody property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompletedBody { get; set; }
+        public string? CompletedBody
+        {
+            get { return BackingStore?.Get<string?>("completedBody"); }
+            set { BackingStore?.Set("completedBody", value); }
+        }
 #nullable restore
 #else
-        public string CompletedBody { get; set; }
+        public string CompletedBody
+        {
+            get { return BackingStore?.Get<string>("completedBody"); }
+            set { BackingStore?.Set("completedBody", value); }
+        }
 #endif
         /// <summary>The completedTitle property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompletedTitle { get; set; }
+        public string? CompletedTitle
+        {
+            get { return BackingStore?.Get<string?>("completedTitle"); }
+            set { BackingStore?.Set("completedTitle", value); }
+        }
 #nullable restore
 #else
-        public string CompletedTitle { get; set; }
+        public string CompletedTitle
+        {
+            get { return BackingStore?.Get<string>("completedTitle"); }
+            set { BackingStore?.Set("completedTitle", value); }
+        }
 #endif
         /// <summary>The subtitle property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Subtitle { get; set; }
+        public string? Subtitle
+        {
+            get { return BackingStore?.Get<string?>("subtitle"); }
+            set { BackingStore?.Set("subtitle", value); }
+        }
 #nullable restore
 #else
-        public string Subtitle { get; set; }
+        public string Subtitle
+        {
+            get { return BackingStore?.Get<string>("subtitle"); }
+            set { BackingStore?.Set("subtitle", value); }
+        }
 #endif
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.ConnectPostRequestBody_copy"/> and sets the default values.
+        /// </summary>
+        public ConnectPostRequestBody_copy()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

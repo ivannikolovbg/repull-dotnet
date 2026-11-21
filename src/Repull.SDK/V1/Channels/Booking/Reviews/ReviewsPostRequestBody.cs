@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,40 +10,71 @@ namespace Repull.SDK.V1.Channels.Booking.Reviews
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReviewsPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class ReviewsPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com hotel/property id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
 #endif
         /// <summary>Public host reply text.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Response { get; set; }
+        public string? Response
+        {
+            get { return BackingStore?.Get<string?>("response"); }
+            set { BackingStore?.Set("response", value); }
+        }
 #nullable restore
 #else
-        public string Response { get; set; }
+        public string Response
+        {
+            get { return BackingStore?.Get<string>("response"); }
+            set { BackingStore?.Set("response", value); }
+        }
 #endif
         /// <summary>Booking.com review id (from `GET /v1/channels/booking/reviews`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReviewId { get; set; }
+        public string? ReviewId
+        {
+            get { return BackingStore?.Get<string?>("review_id"); }
+            set { BackingStore?.Set("review_id", value); }
+        }
 #nullable restore
 #else
-        public string ReviewId { get; set; }
+        public string ReviewId
+        {
+            get { return BackingStore?.Get<string>("review_id"); }
+            set { BackingStore?.Set("review_id", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.Reviews.ReviewsPostRequestBody"/> and sets the default values.
         /// </summary>
         public ReviewsPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,80 +10,167 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MarketTopComp : IAdditionalDataHolder, IParsable
+    public partial class MarketTopComp : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bedrooms property</summary>
-        public int? Bedrooms { get; set; }
+        public int? Bedrooms
+        {
+            get { return BackingStore?.Get<int?>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
         /// <summary>The currentNightlyRate property</summary>
-        public double? CurrentNightlyRate { get; set; }
+        public double? CurrentNightlyRate
+        {
+            get { return BackingStore?.Get<double?>("currentNightlyRate"); }
+            set { BackingStore?.Set("currentNightlyRate", value); }
+        }
         /// <summary>The distanceKm property</summary>
-        public double? DistanceKm { get; set; }
+        public double? DistanceKm
+        {
+            get { return BackingStore?.Get<double?>("distanceKm"); }
+            set { BackingStore?.Set("distanceKm", value); }
+        }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The lat property</summary>
-        public double? Lat { get; set; }
+        public double? Lat
+        {
+            get { return BackingStore?.Get<double?>("lat"); }
+            set { BackingStore?.Set("lat", value); }
+        }
         /// <summary>The lng property</summary>
-        public double? Lng { get; set; }
+        public double? Lng
+        {
+            get { return BackingStore?.Get<double?>("lng"); }
+            set { BackingStore?.Set("lng", value); }
+        }
         /// <summary>The maxGuests property</summary>
-        public int? MaxGuests { get; set; }
+        public int? MaxGuests
+        {
+            get { return BackingStore?.Get<int?>("maxGuests"); }
+            set { BackingStore?.Set("maxGuests", value); }
+        }
         /// <summary>The platformListingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PlatformListingId { get; set; }
+        public string? PlatformListingId
+        {
+            get { return BackingStore?.Get<string?>("platformListingId"); }
+            set { BackingStore?.Set("platformListingId", value); }
+        }
 #nullable restore
 #else
-        public string PlatformListingId { get; set; }
+        public string PlatformListingId
+        {
+            get { return BackingStore?.Get<string>("platformListingId"); }
+            set { BackingStore?.Set("platformListingId", value); }
+        }
 #endif
         /// <summary>The propertyType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyType { get; set; }
+        public string? PropertyType
+        {
+            get { return BackingStore?.Get<string?>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #nullable restore
 #else
-        public string PropertyType { get; set; }
+        public string PropertyType
+        {
+            get { return BackingStore?.Get<string>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #endif
         /// <summary>The rating property</summary>
-        public double? Rating { get; set; }
+        public double? Rating
+        {
+            get { return BackingStore?.Get<double?>("rating"); }
+            set { BackingStore?.Set("rating", value); }
+        }
         /// <summary>The reviewCount property</summary>
-        public int? ReviewCount { get; set; }
+        public int? ReviewCount
+        {
+            get { return BackingStore?.Get<int?>("reviewCount"); }
+            set { BackingStore?.Set("reviewCount", value); }
+        }
         /// <summary>The thumbnailUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThumbnailUrl { get; set; }
+        public string? ThumbnailUrl
+        {
+            get { return BackingStore?.Get<string?>("thumbnailUrl"); }
+            set { BackingStore?.Set("thumbnailUrl", value); }
+        }
 #nullable restore
 #else
-        public string ThumbnailUrl { get; set; }
+        public string ThumbnailUrl
+        {
+            get { return BackingStore?.Get<string>("thumbnailUrl"); }
+            set { BackingStore?.Set("thumbnailUrl", value); }
+        }
 #endif
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
         /// <summary>The url property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url
+        {
+            get { return BackingStore?.Get<string?>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return BackingStore?.Get<string>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketTopComp"/> and sets the default values.
         /// </summary>
         public MarketTopComp()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

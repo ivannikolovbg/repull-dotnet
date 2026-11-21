@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,52 +10,99 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AccountUnitsAddedPayload_units : IAdditionalDataHolder, IParsable
+    public partial class AccountUnitsAddedPayload_units : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com property ID.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The listing the unit is mapped to, when `mapped`.</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>Whether the unit is already mapped to a listing. New units are almost always unmapped: their bookings, messages and reviews import once you map them.</summary>
-        public bool? Mapped { get; set; }
+        public bool? Mapped
+        {
+            get { return BackingStore?.Get<bool?>("mapped"); }
+            set { BackingStore?.Set("mapped", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>Booking.com room ID.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
         /// <summary>The `unit_id` to pass to `POST /v1/connections/{id}/mappings`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitId { get; set; }
+        public string? UnitId
+        {
+            get { return BackingStore?.Get<string?>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #nullable restore
 #else
-        public string UnitId { get; set; }
+        public string UnitId
+        {
+            get { return BackingStore?.Get<string>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AccountUnitsAddedPayload_units"/> and sets the default values.
         /// </summary>
         public AccountUnitsAddedPayload_units()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

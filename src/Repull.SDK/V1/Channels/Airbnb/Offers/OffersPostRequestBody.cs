@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,48 +11,95 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class OffersPostRequestBody : IParsable
+    public partial class OffersPostRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Pre-approval only: require the guest to book through the pre-approval rather than Instant Book. (`blockInstantBooking` is accepted too.)</summary>
-        public bool? BlockInstantBooking { get; set; }
+        public bool? BlockInstantBooking
+        {
+            get { return BackingStore?.Get<bool?>("block_instant_booking"); }
+            set { BackingStore?.Set("block_instant_booking", value); }
+        }
         /// <summary>Offer only (required). `number_of_guests` is adults + children; if omitted it is computed from them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details? GuestDetails { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details? GuestDetails
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details?>("guest_details"); }
+            set { BackingStore?.Set("guest_details", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details GuestDetails { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details GuestDetails
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details>("guest_details"); }
+            set { BackingStore?.Set("guest_details", value); }
+        }
 #endif
         /// <summary>Offer only (required): the AIRBNB listing id, as a string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
 #endif
         /// <summary>Offer only (required).</summary>
-        public int? Nights { get; set; }
+        public int? Nights
+        {
+            get { return BackingStore?.Get<int?>("nights"); }
+            set { BackingStore?.Set("nights", value); }
+        }
         /// <summary>Offer only (required): first night.</summary>
-        public Date? StartDate { get; set; }
+        public Date? StartDate
+        {
+            get { return BackingStore?.Get<Date?>("start_date"); }
+            set { BackingStore?.Set("start_date", value); }
+        }
         /// <summary>Airbnb message-thread id the offer answers. (`threadId` is accepted too.)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThreadId { get; set; }
+        public string? ThreadId
+        {
+            get { return BackingStore?.Get<string?>("thread_id"); }
+            set { BackingStore?.Set("thread_id", value); }
+        }
 #nullable restore
 #else
-        public string ThreadId { get; set; }
+        public string ThreadId
+        {
+            get { return BackingStore?.Get<string>("thread_id"); }
+            set { BackingStore?.Set("thread_id", value); }
+        }
 #endif
         /// <summary>Offer only (required): total for the stay, in the listing’s Airbnb currency.</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("total_price"); }
+            set { BackingStore?.Set("total_price", value); }
+        }
         /// <summary>What to create.</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_type? Type { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody"/> and sets the default values.
         /// </summary>
         public OffersPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             BlockInstantBooking = false;
         }
         /// <summary>

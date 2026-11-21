@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,40 +10,79 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class Promotion_usage : IAdditionalDataHolder, IParsable
+    public partial class Promotion_usage : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bookings property</summary>
-        public int? Bookings { get; set; }
+        public int? Bookings
+        {
+            get { return BackingStore?.Get<int?>("bookings"); }
+            set { BackingStore?.Set("bookings", value); }
+        }
         /// <summary>The cancellations property</summary>
-        public int? Cancellations { get; set; }
+        public int? Cancellations
+        {
+            get { return BackingStore?.Get<int?>("cancellations"); }
+            set { BackingStore?.Set("cancellations", value); }
+        }
         /// <summary>The lastAppliedAmount property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Promotion_usage_lastAppliedAmount? LastAppliedAmount { get; set; }
+        public global::Repull.SDK.Models.Promotion_usage_lastAppliedAmount? LastAppliedAmount
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_usage_lastAppliedAmount?>("lastAppliedAmount"); }
+            set { BackingStore?.Set("lastAppliedAmount", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Promotion_usage_lastAppliedAmount LastAppliedAmount { get; set; }
+        public global::Repull.SDK.Models.Promotion_usage_lastAppliedAmount LastAppliedAmount
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_usage_lastAppliedAmount>("lastAppliedAmount"); }
+            set { BackingStore?.Set("lastAppliedAmount", value); }
+        }
 #endif
         /// <summary>Airbnb Custom promotion: when it was last applied to a booking.</summary>
-        public DateTimeOffset? LastAppliedAt { get; set; }
+        public DateTimeOffset? LastAppliedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastAppliedAt"); }
+            set { BackingStore?.Set("lastAppliedAt", value); }
+        }
         /// <summary>The revenue property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Promotion_usage_revenue? Revenue { get; set; }
+        public global::Repull.SDK.Models.Promotion_usage_revenue? Revenue
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_usage_revenue?>("revenue"); }
+            set { BackingStore?.Set("revenue", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Promotion_usage_revenue Revenue { get; set; }
+        public global::Repull.SDK.Models.Promotion_usage_revenue Revenue
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_usage_revenue>("revenue"); }
+            set { BackingStore?.Set("revenue", value); }
+        }
 #endif
         /// <summary>The roomNights property</summary>
-        public int? RoomNights { get; set; }
+        public int? RoomNights
+        {
+            get { return BackingStore?.Get<int?>("roomNights"); }
+            set { BackingStore?.Set("roomNights", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Promotion_usage"/> and sets the default values.
         /// </summary>
         public Promotion_usage()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

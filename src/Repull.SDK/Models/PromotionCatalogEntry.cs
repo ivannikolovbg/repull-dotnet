@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,74 +10,149 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PromotionCatalogEntry : IAdditionalDataHolder, IParsable
+    public partial class PromotionCatalogEntry : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The available property</summary>
-        public bool? Available { get; set; }
+        public bool? Available
+        {
+            get { return BackingStore?.Get<bool?>("available"); }
+            set { BackingStore?.Set("available", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The campaign property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Campaign { get; set; }
+        public string? Campaign
+        {
+            get { return BackingStore?.Get<string?>("campaign"); }
+            set { BackingStore?.Set("campaign", value); }
+        }
 #nullable restore
 #else
-        public string Campaign { get; set; }
+        public string Campaign
+        {
+            get { return BackingStore?.Get<string>("campaign"); }
+            set { BackingStore?.Set("campaign", value); }
+        }
 #endif
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.Models.PromotionCatalogEntry_channel? Channel { get; set; }
+        public global::Repull.SDK.Models.PromotionCatalogEntry_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionCatalogEntry_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>The channelType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ChannelType { get; set; }
+        public string? ChannelType
+        {
+            get { return BackingStore?.Get<string?>("channelType"); }
+            set { BackingStore?.Set("channelType", value); }
+        }
 #nullable restore
 #else
-        public string ChannelType { get; set; }
+        public string ChannelType
+        {
+            get { return BackingStore?.Get<string>("channelType"); }
+            set { BackingStore?.Set("channelType", value); }
+        }
 #endif
         /// <summary>One or two sentences to show hosts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>Every field, supported or not, so a UI can grey out what a type does not take.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PromotionCatalogEntry_fields? Fields { get; set; }
+        public global::Repull.SDK.Models.PromotionCatalogEntry_fields? Fields
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionCatalogEntry_fields?>("fields"); }
+            set { BackingStore?.Set("fields", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PromotionCatalogEntry_fields Fields { get; set; }
+        public global::Repull.SDK.Models.PromotionCatalogEntry_fields Fields
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionCatalogEntry_fields>("fields"); }
+            set { BackingStore?.Set("fields", value); }
+        }
 #endif
         /// <summary>Newly available — show a “New” badge.</summary>
-        public bool? IsNew { get; set; }
+        public bool? IsNew
+        {
+            get { return BackingStore?.Get<bool?>("isNew"); }
+            set { BackingStore?.Set("isNew", value); }
+        }
         /// <summary>The label property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Label { get; set; }
+        public string? Label
+        {
+            get { return BackingStore?.Get<string?>("label"); }
+            set { BackingStore?.Set("label", value); }
+        }
 #nullable restore
 #else
-        public string Label { get; set; }
+        public string Label
+        {
+            get { return BackingStore?.Get<string>("label"); }
+            set { BackingStore?.Set("label", value); }
+        }
 #endif
         /// <summary>Only one at a time (Airbnb types; Booking.com mobile and country rates per property).</summary>
-        public bool? Single { get; set; }
+        public bool? Single
+        {
+            get { return BackingStore?.Get<bool?>("single"); }
+            set { BackingStore?.Set("single", value); }
+        }
         /// <summary>The same idea on both channels shares a type: `mobile` is Airbnb’s mobile-only discount or Booking.com’s mobile rate; `new_listing` is Airbnb’s new listing promotion or Booking.com’s new property deal. `top_rated_guests` is Airbnb only; the deal, last-minute, early-booker, country and campaign types are Booking.com only; `custom` (Airbnb Custom promotion) is read-only.</summary>
-        public global::Repull.SDK.Models.PromotionType? Type { get; set; }
+        public global::Repull.SDK.Models.PromotionType? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionType?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>The unavailableReason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnavailableReason { get; set; }
+        public string? UnavailableReason
+        {
+            get { return BackingStore?.Get<string?>("unavailableReason"); }
+            set { BackingStore?.Set("unavailableReason", value); }
+        }
 #nullable restore
 #else
-        public string UnavailableReason { get; set; }
+        public string UnavailableReason
+        {
+            get { return BackingStore?.Get<string>("unavailableReason"); }
+            set { BackingStore?.Set("unavailableReason", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PromotionCatalogEntry"/> and sets the default values.
         /// </summary>
         public PromotionCatalogEntry()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,143 +12,294 @@ namespace Repull.SDK.Models
     /// An Airbnb reservation alteration request (date change, guest-count change, price change, or a move to another listing), mirrored locally in `reservation_alterations`. Fields prefixed `original*` describe the reservation as it stands today; `new*` fields describe the proposed change. Compare them to render a diff and decide whether to accept (`POST .../{id}/accept`) or decline (`POST .../{id}/decline`) — or, for one you proposed yourself, to withdraw it (`POST .../{id}/cancel`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbAlteration : IAdditionalDataHolder, IParsable
+    public partial class AirbnbAlteration : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Which connected Airbnb account this row belongs to — the Airbnb host id, as a string (they exceed 2^53). The same value `?account_id=` accepts and `GET /v1/connect/airbnb` returns as `accounts[].externalAccountId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>Display name of that connected Airbnb account.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountName { get; set; }
+        public string? AccountName
+        {
+            get { return BackingStore?.Get<string?>("accountName"); }
+            set { BackingStore?.Set("accountName", value); }
+        }
 #nullable restore
 #else
-        public string AccountName { get; set; }
+        public string AccountName
+        {
+            get { return BackingStore?.Get<string>("accountName"); }
+            set { BackingStore?.Set("accountName", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Airbnb alteration id. This is the `{id}` you pass to `GET/POST /v1/channels/airbnb/alterations/{id}` and the accept / decline sub-routes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AlterationId { get; set; }
+        public string? AlterationId
+        {
+            get { return BackingStore?.Get<string?>("alterationId"); }
+            set { BackingStore?.Set("alterationId", value); }
+        }
 #nullable restore
 #else
-        public string AlterationId { get; set; }
+        public string AlterationId
+        {
+            get { return BackingStore?.Get<string>("alterationId"); }
+            set { BackingStore?.Set("alterationId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>When the alteration was first mirrored locally.</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>Internal Repull mirror-row id (not the Airbnb alteration id — use `alterationId` for the `{id}` path param on the get / accept / decline routes).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Who proposed the alteration — e.g. `host` or `guest`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Initiator { get; set; }
+        public string? Initiator
+        {
+            get { return BackingStore?.Get<string?>("initiator"); }
+            set { BackingStore?.Set("initiator", value); }
+        }
 #nullable restore
 #else
-        public string Initiator { get; set; }
+        public string Initiator
+        {
+            get { return BackingStore?.Get<string>("initiator"); }
+            set { BackingStore?.Set("initiator", value); }
+        }
 #endif
         /// <summary>The same transfer target as Airbnb spells it (the Airbnb listing id). Present alongside `newListingId`; it is also the only one of the two that is set when the destination listing has not been imported into this workspace.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NewAirbnbListingId { get; set; }
+        public string? NewAirbnbListingId
+        {
+            get { return BackingStore?.Get<string?>("newAirbnbListingId"); }
+            set { BackingStore?.Set("newAirbnbListingId", value); }
+        }
 #nullable restore
 #else
-        public string NewAirbnbListingId { get; set; }
+        public string NewAirbnbListingId
+        {
+            get { return BackingStore?.Get<string>("newAirbnbListingId"); }
+            set { BackingStore?.Set("newAirbnbListingId", value); }
+        }
 #endif
         /// <summary>Proposed new check-in.</summary>
-        public DateTimeOffset? NewCheckIn { get; set; }
+        public DateTimeOffset? NewCheckIn
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("newCheckIn"); }
+            set { BackingStore?.Set("newCheckIn", value); }
+        }
         /// <summary>Proposed new check-out.</summary>
-        public DateTimeOffset? NewCheckOut { get; set; }
+        public DateTimeOffset? NewCheckOut
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("newCheckOut"); }
+            set { BackingStore?.Set("newCheckOut", value); }
+        }
         /// <summary>Proposed new guest count.</summary>
-        public int? NewGuestCount { get; set; }
+        public int? NewGuestCount
+        {
+            get { return BackingStore?.Get<int?>("newGuestCount"); }
+            set { BackingStore?.Set("newGuestCount", value); }
+        }
         /// <summary>Repull listing id the alteration moves the reservation to — a **listing transfer**. `null` when the alteration does not change the listing, which is the usual case. Compare it with the reservation&apos;s current `listingId` to render the move. Like every id on this API it is a string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NewListingId { get; set; }
+        public string? NewListingId
+        {
+            get { return BackingStore?.Get<string?>("newListingId"); }
+            set { BackingStore?.Set("newListingId", value); }
+        }
 #nullable restore
 #else
-        public string NewListingId { get; set; }
+        public string NewListingId
+        {
+            get { return BackingStore?.Get<string>("newListingId"); }
+            set { BackingStore?.Set("newListingId", value); }
+        }
 #endif
         /// <summary>Proposed new total price (decimal string).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NewTotalPrice { get; set; }
+        public string? NewTotalPrice
+        {
+            get { return BackingStore?.Get<string?>("newTotalPrice"); }
+            set { BackingStore?.Set("newTotalPrice", value); }
+        }
 #nullable restore
 #else
-        public string NewTotalPrice { get; set; }
+        public string NewTotalPrice
+        {
+            get { return BackingStore?.Get<string>("newTotalPrice"); }
+            set { BackingStore?.Set("newTotalPrice", value); }
+        }
 #endif
         /// <summary>Additional notes attached to the alteration.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Notes { get; set; }
+        public string? Notes
+        {
+            get { return BackingStore?.Get<string?>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #nullable restore
 #else
-        public string Notes { get; set; }
+        public string Notes
+        {
+            get { return BackingStore?.Get<string>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #endif
         /// <summary>Check-in on the reservation BEFORE the proposed change.</summary>
-        public DateTimeOffset? OriginalCheckIn { get; set; }
+        public DateTimeOffset? OriginalCheckIn
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("originalCheckIn"); }
+            set { BackingStore?.Set("originalCheckIn", value); }
+        }
         /// <summary>Check-out on the reservation BEFORE the proposed change.</summary>
-        public DateTimeOffset? OriginalCheckOut { get; set; }
+        public DateTimeOffset? OriginalCheckOut
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("originalCheckOut"); }
+            set { BackingStore?.Set("originalCheckOut", value); }
+        }
         /// <summary>Guest count BEFORE the proposed change.</summary>
-        public int? OriginalGuestCount { get; set; }
+        public int? OriginalGuestCount
+        {
+            get { return BackingStore?.Get<int?>("originalGuestCount"); }
+            set { BackingStore?.Set("originalGuestCount", value); }
+        }
         /// <summary>Total price (decimal string) BEFORE the proposed change.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? OriginalTotalPrice { get; set; }
+        public string? OriginalTotalPrice
+        {
+            get { return BackingStore?.Get<string?>("originalTotalPrice"); }
+            set { BackingStore?.Set("originalTotalPrice", value); }
+        }
 #nullable restore
 #else
-        public string OriginalTotalPrice { get; set; }
+        public string OriginalTotalPrice
+        {
+            get { return BackingStore?.Get<string>("originalTotalPrice"); }
+            set { BackingStore?.Set("originalTotalPrice", value); }
+        }
 #endif
         /// <summary>Always `airbnb` on this surface.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Platform { get; set; }
+        public string? Platform
+        {
+            get { return BackingStore?.Get<string?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #nullable restore
 #else
-        public string Platform { get; set; }
+        public string Platform
+        {
+            get { return BackingStore?.Get<string>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #endif
         /// <summary>Free-text reason supplied with the alteration request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>Repull reservation id the alteration belongs to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReservationId { get; set; }
+        public string? ReservationId
+        {
+            get { return BackingStore?.Get<string?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #nullable restore
 #else
-        public string ReservationId { get; set; }
+        public string ReservationId
+        {
+            get { return BackingStore?.Get<string>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #endif
         /// <summary>Alteration lifecycle status — e.g. `pending` (awaiting a decision), `accepted`, `declined`, `canceled`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>When the alteration mirror row was last updated.</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbAlteration"/> and sets the default values.
         /// </summary>
         public AirbnbAlteration()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

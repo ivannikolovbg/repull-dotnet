@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,41 +12,76 @@ namespace Repull.SDK.Models
     /// Payload for `conversation.message.status_changed`: a message you sent changed delivery status after the send call returned — a Vrbo reply accepted as `queued` (`202`) was delivered (`sent`) or gave up (`failed`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConversationMessageStatusChangedPayload : IAdditionalDataHolder, IParsable
+    public partial class ConversationMessageStatusChangedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The conversation (`GET /v1/conversations/{id}`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get; set; }
+        public string? ConversationId
+        {
+            get { return BackingStore?.Get<string?>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #nullable restore
 #else
-        public string ConversationId { get; set; }
+        public string ConversationId
+        {
+            get { return BackingStore?.Get<string>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #endif
         /// <summary>The message, as `id` on the send response and on `GET /v1/conversations/{id}/messages`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MessageId { get; set; }
+        public string? MessageId
+        {
+            get { return BackingStore?.Get<string?>("messageId"); }
+            set { BackingStore?.Set("messageId", value); }
+        }
 #nullable restore
 #else
-        public string MessageId { get; set; }
+        public string MessageId
+        {
+            get { return BackingStore?.Get<string>("messageId"); }
+            set { BackingStore?.Set("messageId", value); }
+        }
 #endif
         /// <summary>The new delivery status.</summary>
-        public global::Repull.SDK.Models.ConversationMessageStatusChangedPayload_status? Status { get; set; }
+        public global::Repull.SDK.Models.ConversationMessageStatusChangedPayload_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationMessageStatusChangedPayload_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>Why it `failed`, in plain words. `null` when `sent`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StatusReason { get; set; }
+        public string? StatusReason
+        {
+            get { return BackingStore?.Get<string?>("statusReason"); }
+            set { BackingStore?.Set("statusReason", value); }
+        }
 #nullable restore
 #else
-        public string StatusReason { get; set; }
+        public string StatusReason
+        {
+            get { return BackingStore?.Get<string>("statusReason"); }
+            set { BackingStore?.Set("statusReason", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConversationMessageStatusChangedPayload"/> and sets the default values.
         /// </summary>
         public ConversationMessageStatusChangedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

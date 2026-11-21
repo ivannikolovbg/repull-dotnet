@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,45 +12,104 @@ namespace Repull.SDK.Models
     /// Per-city KPIs combining the customer&apos;s own listings with Atlas comp aggregates.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MarketSummary : IAdditionalDataHolder, IParsable
+    public partial class MarketSummary : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>The marketAvgAdr property</summary>
-        public double? MarketAvgAdr { get; set; }
+        public double? MarketAvgAdr
+        {
+            get { return BackingStore?.Get<double?>("marketAvgAdr"); }
+            set { BackingStore?.Set("marketAvgAdr", value); }
+        }
         /// <summary>The marketAvgRating property</summary>
-        public double? MarketAvgRating { get; set; }
+        public double? MarketAvgRating
+        {
+            get { return BackingStore?.Get<double?>("marketAvgRating"); }
+            set { BackingStore?.Set("marketAvgRating", value); }
+        }
         /// <summary>The marketOccupancyPct property</summary>
-        public double? MarketOccupancyPct { get; set; }
+        public double? MarketOccupancyPct
+        {
+            get { return BackingStore?.Get<double?>("marketOccupancyPct"); }
+            set { BackingStore?.Set("marketOccupancyPct", value); }
+        }
         /// <summary>The marketSharePct property</summary>
-        public int? MarketSharePct { get; set; }
+        public int? MarketSharePct
+        {
+            get { return BackingStore?.Get<int?>("marketSharePct"); }
+            set { BackingStore?.Set("marketSharePct", value); }
+        }
         /// <summary>The myAvgAdr property</summary>
-        public double? MyAvgAdr { get; set; }
+        public double? MyAvgAdr
+        {
+            get { return BackingStore?.Get<double?>("myAvgAdr"); }
+            set { BackingStore?.Set("myAvgAdr", value); }
+        }
         /// <summary>The myAvgRating property</summary>
-        public double? MyAvgRating { get; set; }
+        public double? MyAvgRating
+        {
+            get { return BackingStore?.Get<double?>("myAvgRating"); }
+            set { BackingStore?.Set("myAvgRating", value); }
+        }
         /// <summary>The myListings property</summary>
-        public int? MyListings { get; set; }
+        public int? MyListings
+        {
+            get { return BackingStore?.Get<int?>("myListings"); }
+            set { BackingStore?.Set("myListings", value); }
+        }
         /// <summary>Customer&apos;s 30-day forward occupancy %.</summary>
-        public double? MyOccupancyPct { get; set; }
+        public double? MyOccupancyPct
+        {
+            get { return BackingStore?.Get<double?>("myOccupancyPct"); }
+            set { BackingStore?.Set("myOccupancyPct", value); }
+        }
         /// <summary>(myAvgAdr - marketAvgAdr) / marketAvgAdr * 100, rounded.</summary>
-        public int? PriceDiffPct { get; set; }
+        public int? PriceDiffPct
+        {
+            get { return BackingStore?.Get<int?>("priceDiffPct"); }
+            set { BackingStore?.Set("priceDiffPct", value); }
+        }
         /// <summary>Distinct property types Atlas has seen in this city.</summary>
-        public int? PropertyTypes { get; set; }
+        public int? PropertyTypes
+        {
+            get { return BackingStore?.Get<int?>("propertyTypes"); }
+            set { BackingStore?.Set("propertyTypes", value); }
+        }
         /// <summary>Atlas-tracked active comps in this city.</summary>
-        public int? TotalListings { get; set; }
+        public int? TotalListings
+        {
+            get { return BackingStore?.Get<int?>("totalListings"); }
+            set { BackingStore?.Set("totalListings", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketSummary"/> and sets the default values.
         /// </summary>
         public MarketSummary()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

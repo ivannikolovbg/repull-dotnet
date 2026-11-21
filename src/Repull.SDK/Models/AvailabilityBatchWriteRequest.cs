@@ -15,10 +15,18 @@ namespace Repull.SDK.Models
         /// <summary>The propertyIds property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? PropertyIds { get; set; }
+        public List<int?>? PropertyIds
+        {
+            get { return BackingStore?.Get<List<int?>?>("propertyIds"); }
+            set { BackingStore?.Set("propertyIds", value); }
+        }
 #nullable restore
 #else
-        public List<int?> PropertyIds { get; set; }
+        public List<int?> PropertyIds
+        {
+            get { return BackingStore?.Get<List<int?>>("propertyIds"); }
+            set { BackingStore?.Set("propertyIds", value); }
+        }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

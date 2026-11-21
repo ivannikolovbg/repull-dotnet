@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,41 +12,76 @@ namespace Repull.SDK.Models
     /// Returned by `POST /v1/connect/sessions/{sessionId}/select-provider`. The picker UI navigates the user to `nextUrl` to begin the per-provider handoff.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class SelectProviderResponse : IAdditionalDataHolder, IParsable
+    public partial class SelectProviderResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Where to send the user next — OAuth consent, credentials form, activation checklist, claim form, or (for a `request-only` PMS) the request form.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NextUrl { get; set; }
+        public string? NextUrl
+        {
+            get { return BackingStore?.Get<string?>("nextUrl"); }
+            set { BackingStore?.Set("nextUrl", value); }
+        }
 #nullable restore
 #else
-        public string NextUrl { get; set; }
+        public string NextUrl
+        {
+            get { return BackingStore?.Get<string>("nextUrl"); }
+            set { BackingStore?.Set("nextUrl", value); }
+        }
 #endif
         /// <summary>The pattern property</summary>
-        public global::Repull.SDK.Models.SelectProviderResponse_pattern? Pattern { get; set; }
+        public global::Repull.SDK.Models.SelectProviderResponse_pattern? Pattern
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.SelectProviderResponse_pattern?>("pattern"); }
+            set { BackingStore?.Set("pattern", value); }
+        }
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SessionId { get; set; }
+        public string? SessionId
+        {
+            get { return BackingStore?.Get<string?>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #nullable restore
 #else
-        public string SessionId { get; set; }
+        public string SessionId
+        {
+            get { return BackingStore?.Get<string>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.SelectProviderResponse"/> and sets the default values.
         /// </summary>
         public SelectProviderResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

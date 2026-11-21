@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,106 @@ namespace Repull.SDK.Models
     /// One Atlas DNA segment (e.g. `upscale-modern-2br`) with share + ADR aggregates across the scoped comp set or market.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingSegment : IAdditionalDataHolder, IParsable
+    public partial class ListingSegment : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The avgAdrInSegment property</summary>
-        public double? AvgAdrInSegment { get; set; }
+        public double? AvgAdrInSegment
+        {
+            get { return BackingStore?.Get<double?>("avgAdrInSegment"); }
+            set { BackingStore?.Set("avgAdrInSegment", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Decomposed bedroom count. `0` indicates studio.</summary>
-        public int? Bedrooms { get; set; }
+        public int? Bedrooms
+        {
+            get { return BackingStore?.Get<int?>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>Decomposed style token (e.g. `modern`, `mid-century`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DesignStyle { get; set; }
+        public string? DesignStyle
+        {
+            get { return BackingStore?.Get<string?>("designStyle"); }
+            set { BackingStore?.Set("designStyle", value); }
+        }
 #nullable restore
 #else
-        public string DesignStyle { get; set; }
+        public string DesignStyle
+        {
+            get { return BackingStore?.Get<string>("designStyle"); }
+            set { BackingStore?.Set("designStyle", value); }
+        }
 #endif
         /// <summary>True when the source listing&apos;s `ai_segment` matches this segment.</summary>
-        public bool? MyListingMatch { get; set; }
+        public bool? MyListingMatch
+        {
+            get { return BackingStore?.Get<bool?>("myListingMatch"); }
+            set { BackingStore?.Set("myListingMatch", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The qualityTier property</summary>
-        public global::Repull.SDK.Models.ListingSegment_qualityTier? QualityTier { get; set; }
+        public global::Repull.SDK.Models.ListingSegment_qualityTier? QualityTier
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSegment_qualityTier?>("qualityTier"); }
+            set { BackingStore?.Set("qualityTier", value); }
+        }
         /// <summary>The sampleSize property</summary>
-        public int? SampleSize { get; set; }
+        public int? SampleSize
+        {
+            get { return BackingStore?.Get<int?>("sampleSize"); }
+            set { BackingStore?.Set("sampleSize", value); }
+        }
         /// <summary>Percent of analyzed comps in the scope that fall in this segment.</summary>
-        public double? SharePct { get; set; }
+        public double? SharePct
+        {
+            get { return BackingStore?.Get<double?>("sharePct"); }
+            set { BackingStore?.Set("sharePct", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingSegment"/> and sets the default values.
         /// </summary>
         public ListingSegment()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,29 +12,56 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
     /// How much notice a booking needs.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingSettingsPutResponse_data_settings_advanceNotice : IAdditionalDataHolder, IParsable
+    public partial class BookingSettingsPutResponse_data_settings_advanceNotice : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Whether a guest may still REQUEST to book inside the notice window.</summary>
-        public bool? AllowRequestToBook { get; set; }
+        public bool? AllowRequestToBook
+        {
+            get { return BackingStore?.Get<bool?>("allowRequestToBook"); }
+            set { BackingStore?.Set("allowRequestToBook", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb&apos;s advance notice: 0-24, 48, 72 or 168. Airbnb counts it back from 11:59 PM on the check-in day, in the listing&apos;s time zone, so 0-23 is a same-day cutoff: `0` = same-day bookings until midnight, `1` = until 11 PM, `3` = until 9 PM. `24` and above = no same-day bookings.</summary>
-        public int? Hours { get; set; }
+        public int? Hours
+        {
+            get { return BackingStore?.Get<int?>("hours"); }
+            set { BackingStore?.Set("hours", value); }
+        }
         /// <summary>Derived: `hours &lt; 24`.</summary>
-        public bool? SameDayBookingsAllowed { get; set; }
+        public bool? SameDayBookingsAllowed
+        {
+            get { return BackingStore?.Get<bool?>("sameDayBookingsAllowed"); }
+            set { BackingStore?.Set("sameDayBookingsAllowed", value); }
+        }
         /// <summary>Derived: the last time a same-day booking is accepted, `HH:mm` in the listing&apos;s time (`00:00` = midnight). `null` when same-day bookings are off.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SameDayCutoff { get; set; }
+        public string? SameDayCutoff
+        {
+            get { return BackingStore?.Get<string?>("sameDayCutoff"); }
+            set { BackingStore?.Set("sameDayCutoff", value); }
+        }
 #nullable restore
 #else
-        public string SameDayCutoff { get; set; }
+        public string SameDayCutoff
+        {
+            get { return BackingStore?.Get<string>("sameDayCutoff"); }
+            set { BackingStore?.Set("sameDayCutoff", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutResponse_data_settings_advanceNotice"/> and sets the default values.
         /// </summary>
         public BookingSettingsPutResponse_data_settings_advanceNotice()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

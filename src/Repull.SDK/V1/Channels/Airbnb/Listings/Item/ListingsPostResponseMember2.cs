@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -12,47 +13,86 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
     /// `push` / `publish` — the per-section publish result.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingsPostResponseMember2 : IAdditionalDataHolder, IParsable
+    public partial class ListingsPostResponseMember2 : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The action property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Action { get; set; }
+        public string? Action
+        {
+            get { return BackingStore?.Get<string?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
 #nullable restore
 #else
-        public string Action { get; set; }
+        public string Action
+        {
+            get { return BackingStore?.Get<string>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>A publish is not one call to Airbnb: it is up to eight independent ones (details, description, amenities, rooms, policies, photos, pricing, checkout_tasks), each of which can fail on its own. A PARTIAL publish is normal — what succeeded stays applied; there is no rollback.**Content landing and the listing being live are two different answers.** `published` is about content; `live` is about whether the listing takes bookings. Read both.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbPublishResult? Result { get; set; }
+        public global::Repull.SDK.Models.AirbnbPublishResult? Result
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPublishResult?>("result"); }
+            set { BackingStore?.Set("result", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbPublishResult Result { get; set; }
+        public global::Repull.SDK.Models.AirbnbPublishResult Result
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPublishResult>("result"); }
+            set { BackingStore?.Set("result", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/> and sets the default values.
         /// </summary>
         public ListingsPostResponseMember2()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

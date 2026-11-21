@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,107 +12,218 @@ namespace Repull.SDK.Models
     /// An Airbnb-side connection record for a listing. The same property may appear under multiple connections if it has been linked from multiple Airbnb host accounts.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbConnection : IAdditionalDataHolder, IParsable
+    public partial class AirbnbConnection : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Present only when `?include=amenities` is passed. Accessibility-tagged subset of the local amenity cache (step-free access, wide doorways, grab rails, disabled parking, wheelchair, accessible-height fixtures, hoists, etc). Returns an empty array when amenities synced but none qualify as accessibility; returns `null` when the cache is empty for this connection (use `dataFreshness` to disambiguate &quot;never synced&quot; from &quot;fresh and genuinely empty&quot;).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities>? AccessibilityAmenities { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities>? AccessibilityAmenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities>?>("accessibility_amenities"); }
+            set { BackingStore?.Set("accessibility_amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities> AccessibilityAmenities { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities> AccessibilityAmenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbConnection_accessibility_amenities>>("accessibility_amenities"); }
+            set { BackingStore?.Set("accessibility_amenities", value); }
+        }
 #endif
         /// <summary>Which connected Airbnb account this row belongs to — the Airbnb host id, as a string (they exceed 2^53). The same value `?account_id=` accepts and `GET /v1/connect/airbnb` returns as `accounts[].externalAccountId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>Display name of that connected Airbnb account.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountName { get; set; }
+        public string? AccountName
+        {
+            get { return BackingStore?.Get<string?>("accountName"); }
+            set { BackingStore?.Set("accountName", value); }
+        }
 #nullable restore
 #else
-        public string AccountName { get; set; }
+        public string AccountName
+        {
+            get { return BackingStore?.Get<string>("accountName"); }
+            set { BackingStore?.Set("accountName", value); }
+        }
 #endif
         /// <summary>The active property</summary>
-        public bool? Active { get; set; }
+        public bool? Active
+        {
+            get { return BackingStore?.Get<bool?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Airbnb-side listing id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbId { get; set; }
+        public string? AirbnbId
+        {
+            get { return BackingStore?.Get<string?>("airbnbId"); }
+            set { BackingStore?.Set("airbnbId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbId { get; set; }
+        public string AirbnbId
+        {
+            get { return BackingStore?.Get<string>("airbnbId"); }
+            set { BackingStore?.Set("airbnbId", value); }
+        }
 #endif
         /// <summary>Present only when `?include=amenities` is passed. Sourced from the local `listings_airbnb_amenities` cache (populated by the Airbnb sync worker). Returns `null` when the cache is empty for this connection — see the top-level `dataFreshness` envelope to disambiguate &quot;never synced&quot; vs &quot;host disconnected&quot; vs &quot;fresh and genuinely empty&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbConnection_amenities>? Amenities { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbConnection_amenities>? Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbConnection_amenities>?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbConnection_amenities> Amenities { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbConnection_amenities> Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbConnection_amenities>>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>Alias of `accountId`, kept for compatibility — same Airbnb host id, same string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HostId { get; set; }
+        public string? HostId
+        {
+            get { return BackingStore?.Get<string?>("hostId"); }
+            set { BackingStore?.Set("hostId", value); }
+        }
 #nullable restore
 #else
-        public string HostId { get; set; }
+        public string HostId
+        {
+            get { return BackingStore?.Get<string>("hostId"); }
+            set { BackingStore?.Set("hostId", value); }
+        }
 #endif
         /// <summary>Alias of `accountName`, kept for compatibility.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HostName { get; set; }
+        public string? HostName
+        {
+            get { return BackingStore?.Get<string?>("hostName"); }
+            set { BackingStore?.Set("hostName", value); }
+        }
 #nullable restore
 #else
-        public string HostName { get; set; }
+        public string HostName
+        {
+            get { return BackingStore?.Get<string>("hostName"); }
+            set { BackingStore?.Set("hostName", value); }
+        }
 #endif
         /// <summary>Connection row id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Fields Airbnb will NOT let you change on this listing — `property_type_category`, `name`, `check_in_option`, `summary`, `space`, individual amenities, … Airbnb does not refuse a write to a locked field: it returns 200, reports the field as locked, and applies nothing. Check this before a content write; `[]` means nothing is known to be locked. Recorded at sync time, so a lock added on Airbnb since the last sync will show up on the write instead (as `blockedFields` in the response).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? LockedFields { get; set; }
+        public List<string>? LockedFields
+        {
+            get { return BackingStore?.Get<List<string>?>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #nullable restore
 #else
-        public List<string> LockedFields { get; set; }
+        public List<string> LockedFields
+        {
+            get { return BackingStore?.Get<List<string>>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #endif
         /// <summary>The Airbnb markup as a fraction: &quot;0.35&quot; = +35% on the listing&apos;s own price. Read or set it as a percentage with `/v1/listings/{id}/markups`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Markup { get; set; }
+        public string? Markup
+        {
+            get { return BackingStore?.Get<string?>("markup"); }
+            set { BackingStore?.Set("markup", value); }
+        }
 #nullable restore
 #else
-        public string Markup { get; set; }
+        public string Markup
+        {
+            get { return BackingStore?.Get<string>("markup"); }
+            set { BackingStore?.Set("markup", value); }
+        }
 #endif
         /// <summary>The primary property</summary>
-        public bool? Primary { get; set; }
+        public bool? Primary
+        {
+            get { return BackingStore?.Get<bool?>("primary"); }
+            set { BackingStore?.Set("primary", value); }
+        }
         /// <summary>Airbnb&apos;s own API sync decision for THIS listing, as Airbnb reports it. Airbnb authorises sync one listing at a time, so a connected account can still contain listings it will not accept writes for.- `sync_all` — Repull manages content, rates and availability.- `sync_rates_and_availability` — Repull manages rates and availability; listing content is managed by the host on Airbnb.- `none` — the listing is **not** connected to Repull on Airbnb&apos;s side. Every write to it is refused with `403 listing_not_api_connected`; reconnecting the Airbnb account does not change this, the host must switch the listing on in Airbnb.`null` when the listing has not synced yet. Not to be confused with `syncEnabled`, which is a Repull-side flag and says nothing about what Airbnb accepts.</summary>
-        public global::Repull.SDK.Models.AirbnbConnection_syncCategory? SyncCategory { get; set; }
+        public global::Repull.SDK.Models.AirbnbConnection_syncCategory? SyncCategory
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbConnection_syncCategory?>("syncCategory"); }
+            set { BackingStore?.Set("syncCategory", value); }
+        }
         /// <summary>The syncEnabled property</summary>
-        public bool? SyncEnabled { get; set; }
+        public bool? SyncEnabled
+        {
+            get { return BackingStore?.Get<bool?>("syncEnabled"); }
+            set { BackingStore?.Set("syncEnabled", value); }
+        }
         /// <summary>Whether Repull will send a write for this listing to Airbnb. `false` exactly when `syncCategory` is `none` — such a write is refused with `403 listing_not_api_connected` before anything reaches Airbnb. Check this before a portfolio-wide push instead of discovering it one 403 at a time.</summary>
-        public bool? Writable { get; set; }
+        public bool? Writable
+        {
+            get { return BackingStore?.Get<bool?>("writable"); }
+            set { BackingStore?.Set("writable", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbConnection"/> and sets the default values.
         /// </summary>
         public AirbnbConnection()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,30 +10,57 @@ namespace Repull.SDK.V1.Connections.Item.Mappings
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MappingsPostRequestBody_mappings : IAdditionalDataHolder, IParsable
+    public partial class MappingsPostRequestBody_mappings : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Vrbo: push this listing&apos;s prices and availability to Vrbo. Omit to follow the connection&apos;s access type (`messaging` = off, `full_access` = on). A new listing (`create`) always follows the access type. Other channels ignore it. `true` returns `409 calendar_managed_elsewhere` while Vrbo says another tool (such as a PMS) manages the account&apos;s calendar (`calendar.managedBy` on `GET /v1/connect/vrbo-login`); see https://repull.dev/docs/channels/vrbo/calendar-managed-elsewhere.</summary>
-        public bool? CalendarSync { get; set; }
+        public bool? CalendarSync
+        {
+            get { return BackingStore?.Get<bool?>("calendarSync"); }
+            set { BackingStore?.Set("calendarSync", value); }
+        }
         /// <summary>The create property</summary>
-        public bool? Create { get; set; }
+        public bool? Create
+        {
+            get { return BackingStore?.Get<bool?>("create"); }
+            set { BackingStore?.Set("create", value); }
+        }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>The unitId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitId { get; set; }
+        public string? UnitId
+        {
+            get { return BackingStore?.Get<string?>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #nullable restore
 #else
-        public string UnitId { get; set; }
+        public string UnitId
+        {
+            get { return BackingStore?.Get<string>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connections.Item.Mappings.MappingsPostRequestBody_mappings"/> and sets the default values.
         /// </summary>
         public MappingsPostRequestBody_mappings()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

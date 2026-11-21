@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -10,116 +11,227 @@ namespace Repull.SDK.V1.Usage.Summary
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class SummaryGetResponse : IAdditionalDataHolder, IParsable
+    public partial class SummaryGetResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Added to the body of every successful (2xx) JSON object response while the plan&apos;s last renewal payment failed (the subscription is past_due or unpaid). It never blocks a request: API access keeps working while Stripe retries the card. Tell the user: pay the invoice at `payUrl`, or update the card at `billingUrl`. It disappears once the invoice is paid.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BillingNotice? BillingNotice { get; set; }
+        public global::Repull.SDK.Models.BillingNotice? BillingNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BillingNotice?>("billingNotice"); }
+            set { BackingStore?.Set("billingNotice", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BillingNotice BillingNotice { get; set; }
+        public global::Repull.SDK.Models.BillingNotice BillingNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BillingNotice>("billingNotice"); }
+            set { BackingStore?.Set("billingNotice", value); }
+        }
 #endif
         /// <summary>The breakdown property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>? Breakdown { get; set; }
+        public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>? Breakdown
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>?>("breakdown"); }
+            set { BackingStore?.Set("breakdown", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown> Breakdown { get; set; }
+        public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown> Breakdown
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_breakdown>>("breakdown"); }
+            set { BackingStore?.Set("breakdown", value); }
+        }
 #endif
         /// <summary>Pay-as-you-go wallet. Requests beyond your plan&apos;s monthly quota keep being served while `active`, billed at `usdPer1000Requests`. Top up at https://repull.dev/dashboard/billing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits? Credits { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits? Credits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits?>("credits"); }
+            set { BackingStore?.Set("credits", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits Credits { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits Credits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits>("credits"); }
+            set { BackingStore?.Set("credits", value); }
+        }
 #endif
         /// <summary>The dailyResetsAt property</summary>
-        public DateTimeOffset? DailyResetsAt { get; set; }
+        public DateTimeOffset? DailyResetsAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("dailyResetsAt"); }
+            set { BackingStore?.Set("dailyResetsAt", value); }
+        }
         /// <summary>The limits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits? Limits { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits? Limits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits?>("limits"); }
+            set { BackingStore?.Set("limits", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits Limits { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits Limits
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_limits>("limits"); }
+            set { BackingStore?.Set("limits", value); }
+        }
 #endif
         /// <summary>Added to the body of EVERY JSON response (success or error, except bare arrays and 5xx) while the workspace is connected to more listings than its plan lets it use — so a developer reading any payload, or an AI assistant relaying it, sees it. Connect keeps every listing it finds, but on a capped plan only as many as the plan allows are active; the rest are held back inactive and keep syncing. The same responses also carry the `X-Repull-Listings-Held-Back` and `X-Repull-Active-Listing-Limit` headers. Using a held-back listing answers `403 listing_inactive` with `reason: &quot;plan_limit&quot;`. Tell the user: they can see the held-back listings with `GET /v1/listings?status=all`, choose which are active with `POST /v1/listings/status`, or upgrade.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PlanNotice? PlanNotice { get; set; }
+        public global::Repull.SDK.Models.PlanNotice? PlanNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PlanNotice?>("planNotice"); }
+            set { BackingStore?.Set("planNotice", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PlanNotice PlanNotice { get; set; }
+        public global::Repull.SDK.Models.PlanNotice PlanNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PlanNotice>("planNotice"); }
+            set { BackingStore?.Set("planNotice", value); }
+        }
 #endif
         /// <summary>The range property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Range { get; set; }
+        public string? Range
+        {
+            get { return BackingStore?.Get<string?>("range"); }
+            set { BackingStore?.Set("range", value); }
+        }
 #nullable restore
 #else
-        public string Range { get; set; }
+        public string Range
+        {
+            get { return BackingStore?.Get<string>("range"); }
+            set { BackingStore?.Set("range", value); }
+        }
 #endif
         /// <summary>The remaining property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining? Remaining { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining? Remaining
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining?>("remaining"); }
+            set { BackingStore?.Set("remaining", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining Remaining { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining Remaining
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_remaining>("remaining"); }
+            set { BackingStore?.Set("remaining", value); }
+        }
 #endif
         /// <summary>The resetsAt property</summary>
-        public DateTimeOffset? ResetsAt { get; set; }
+        public DateTimeOffset? ResetsAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("resetsAt"); }
+            set { BackingStore?.Set("resetsAt", value); }
+        }
         /// <summary>The statusDistribution property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution? StatusDistribution { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution? StatusDistribution
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution?>("statusDistribution"); }
+            set { BackingStore?.Set("statusDistribution", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution StatusDistribution { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution StatusDistribution
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_statusDistribution>("statusDistribution"); }
+            set { BackingStore?.Set("statusDistribution", value); }
+        }
 #endif
         /// <summary>The tier property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Tier { get; set; }
+        public string? Tier
+        {
+            get { return BackingStore?.Get<string?>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #nullable restore
 #else
-        public string Tier { get; set; }
+        public string Tier
+        {
+            get { return BackingStore?.Get<string>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #endif
         /// <summary>The timeline property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline>? Timeline { get; set; }
+        public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline>? Timeline
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline>?>("timeline"); }
+            set { BackingStore?.Set("timeline", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline> Timeline { get; set; }
+        public List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline> Timeline
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_timeline>>("timeline"); }
+            set { BackingStore?.Set("timeline", value); }
+        }
 #endif
         /// <summary>The totals property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_totals? Totals { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_totals? Totals
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_totals?>("totals"); }
+            set { BackingStore?.Set("totals", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_totals Totals { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_totals Totals
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_totals>("totals"); }
+            set { BackingStore?.Set("totals", value); }
+        }
 #endif
         /// <summary>The used property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_used? Used { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_used? Used
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_used?>("used"); }
+            set { BackingStore?.Set("used", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_used Used { get; set; }
+        public global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_used Used
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_used>("used"); }
+            set { BackingStore?.Set("used", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse"/> and sets the default values.
         /// </summary>
         public SummaryGetResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

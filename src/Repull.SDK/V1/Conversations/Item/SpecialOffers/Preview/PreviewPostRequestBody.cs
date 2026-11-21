@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,32 +13,73 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview
     /// Any of the offer fields; only what is sent is changed.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PreviewPostRequestBody : IParsable
+    public partial class PreviewPostRequestBody : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>The damageDeposit property</summary>
-        public double? DamageDeposit { get; set; }
+        public double? DamageDeposit
+        {
+            get { return BackingStore?.Get<double?>("damageDeposit"); }
+            set { BackingStore?.Set("damageDeposit", value); }
+        }
         /// <summary>The fees property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_fees>? Fees { get; set; }
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_fees>? Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_fees>?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_fees> Fees { get; set; }
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_fees> Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_fees>>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #endif
         /// <summary>The guests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_guests? Guests { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_guests? Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_guests?>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_guests Guests { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_guests Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody_guests>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #endif
         /// <summary>Rent for the stay, excluding fees and taxes.</summary>
-        public double? RentalAmount { get; set; }
+        public double? RentalAmount
+        {
+            get { return BackingStore?.Get<double?>("rentalAmount"); }
+            set { BackingStore?.Set("rentalAmount", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Preview.PreviewPostRequestBody"/> and sets the default values.
+        /// </summary>
+        public PreviewPostRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

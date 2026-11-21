@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// Payload for `listing.deleted`. The listing is no longer reachable on the channel — usually because the host unlinked it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingDeletedPayload : IAdditionalDataHolder, IParsable
+    public partial class ListingDeletedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The deletedAt property</summary>
-        public DateTimeOffset? DeletedAt { get; set; }
+        public DateTimeOffset? DeletedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("deletedAt"); }
+            set { BackingStore?.Set("deletedAt", value); }
+        }
         /// <summary>The listing, in the shape `GET /v1/listings/{id}` returns. Hydrated at delivery, so a receiver gets the listing rather than a reason to fetch one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingWebhookObject? Object { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingWebhookObject Object { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>The reason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingDeletedPayload"/> and sets the default values.
         /// </summary>
         public ListingDeletedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

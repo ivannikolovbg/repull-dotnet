@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,38 +10,73 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MarketDetailResponse_topComps : IAdditionalDataHolder, IParsable
+    public partial class MarketDetailResponse_topComps : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The items property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketTopComp>? Items { get; set; }
+        public List<global::Repull.SDK.Models.MarketTopComp>? Items
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketTopComp>?>("items"); }
+            set { BackingStore?.Set("items", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketTopComp> Items { get; set; }
+        public List<global::Repull.SDK.Models.MarketTopComp> Items
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketTopComp>>("items"); }
+            set { BackingStore?.Set("items", value); }
+        }
 #endif
         /// <summary>The mapItems property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketTopComp>? MapItems { get; set; }
+        public List<global::Repull.SDK.Models.MarketTopComp>? MapItems
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketTopComp>?>("mapItems"); }
+            set { BackingStore?.Set("mapItems", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketTopComp> MapItems { get; set; }
+        public List<global::Repull.SDK.Models.MarketTopComp> MapItems
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketTopComp>>("mapItems"); }
+            set { BackingStore?.Set("mapItems", value); }
+        }
 #endif
         /// <summary>The page property</summary>
-        public int? Page { get; set; }
+        public int? Page
+        {
+            get { return BackingStore?.Get<int?>("page"); }
+            set { BackingStore?.Set("page", value); }
+        }
         /// <summary>The pageSize property</summary>
-        public int? PageSize { get; set; }
+        public int? PageSize
+        {
+            get { return BackingStore?.Get<int?>("pageSize"); }
+            set { BackingStore?.Set("pageSize", value); }
+        }
         /// <summary>The total property</summary>
-        public int? Total { get; set; }
+        public int? Total
+        {
+            get { return BackingStore?.Get<int?>("total"); }
+            set { BackingStore?.Set("total", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketDetailResponse_topComps"/> and sets the default values.
         /// </summary>
         public MarketDetailResponse_topComps()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

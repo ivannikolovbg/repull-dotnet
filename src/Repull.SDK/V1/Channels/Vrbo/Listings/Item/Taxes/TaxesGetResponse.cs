@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,56 +10,103 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TaxesGetResponse : IAdditionalDataHolder, IParsable
+    public partial class TaxesGetResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The section as Vrbo has it now.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data? Data { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data? Data
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data Data { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data Data
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Vrbo&apos;s property id for the unit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #endif
         /// <summary>The section property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Section { get; set; }
+        public string? Section
+        {
+            get { return BackingStore?.Get<string?>("section"); }
+            set { BackingStore?.Set("section", value); }
+        }
 #nullable restore
 #else
-        public string Section { get; set; }
+        public string Section
+        {
+            get { return BackingStore?.Get<string>("section"); }
+            set { BackingStore?.Set("section", value); }
+        }
 #endif
         /// <summary>The vrboListingNumber property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? VrboListingNumber { get; set; }
+        public string? VrboListingNumber
+        {
+            get { return BackingStore?.Get<string?>("vrboListingNumber"); }
+            set { BackingStore?.Set("vrboListingNumber", value); }
+        }
 #nullable restore
 #else
-        public string VrboListingNumber { get; set; }
+        public string VrboListingNumber
+        {
+            get { return BackingStore?.Get<string>("vrboListingNumber"); }
+            set { BackingStore?.Set("vrboListingNumber", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse"/> and sets the default values.
         /// </summary>
         public TaxesGetResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

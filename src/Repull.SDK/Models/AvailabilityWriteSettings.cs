@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,29 +12,64 @@ namespace Repull.SDK.Models
     /// At least one field is required. An empty object is rejected rather than silently no-ops — the upstream treats every field as optional, so a typo would otherwise return 200 and change nothing.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AvailabilityWriteSettings : IAdditionalDataHolder, IParsable
+    public partial class AvailabilityWriteSettings : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Block or unblock the dates.</summary>
-        public bool? Available { get; set; }
+        public bool? Available
+        {
+            get { return BackingStore?.Get<bool?>("available"); }
+            set { BackingStore?.Set("available", value); }
+        }
         /// <summary>Rooms to sell on these dates, for a listing that sells several identical rooms (`unitCount` &gt; 1, e.g. a Booking.com room type). Up to the listing&apos;s `unitCount`. Refused with `409 managed_by_pms` on a hotel PMS room type (Cloudbeds, Mews) — its PMS owns the room count.</summary>
-        public int? AvailableUnits { get; set; }
+        public int? AvailableUnits
+        {
+            get { return BackingStore?.Get<int?>("availableUnits"); }
+            set { BackingStore?.Set("availableUnits", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>No check-in on these dates (`true`), or check-in allowed again (`false`). Sent to Airbnb, Booking.com and Vrbo. Leaving it out keeps the current value.</summary>
-        public bool? ClosedToArrival { get; set; }
+        public bool? ClosedToArrival
+        {
+            get { return BackingStore?.Get<bool?>("closedToArrival"); }
+            set { BackingStore?.Set("closedToArrival", value); }
+        }
         /// <summary>No check-out on these dates (`true`), or check-out allowed again (`false`). Sent to Airbnb, Booking.com and Vrbo. Leaving it out keeps the current value.</summary>
-        public bool? ClosedToDeparture { get; set; }
+        public bool? ClosedToDeparture
+        {
+            get { return BackingStore?.Get<bool?>("closedToDeparture"); }
+            set { BackingStore?.Set("closedToDeparture", value); }
+        }
         /// <summary>Maximum stay for an arrival on these dates. Sent to Airbnb and Booking.com. Vrbo has no per-date maximum stay, so it is not sent there.</summary>
-        public int? MaxNights { get; set; }
+        public int? MaxNights
+        {
+            get { return BackingStore?.Get<int?>("maxNights"); }
+            set { BackingStore?.Set("maxNights", value); }
+        }
         /// <summary>The minNights property</summary>
-        public int? MinNights { get; set; }
+        public int? MinNights
+        {
+            get { return BackingStore?.Get<int?>("minNights"); }
+            set { BackingStore?.Set("minNights", value); }
+        }
         /// <summary>Nightly base price.</summary>
-        public double? Price { get; set; }
+        public double? Price
+        {
+            get { return BackingStore?.Get<double?>("price"); }
+            set { BackingStore?.Set("price", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AvailabilityWriteSettings"/> and sets the default values.
         /// </summary>
         public AvailabilityWriteSettings()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

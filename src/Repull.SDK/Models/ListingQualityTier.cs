@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,24 +10,47 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingQualityTier : IAdditionalDataHolder, IParsable
+    public partial class ListingQualityTier : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The avgAdr property</summary>
-        public double? AvgAdr { get; set; }
+        public double? AvgAdr
+        {
+            get { return BackingStore?.Get<double?>("avgAdr"); }
+            set { BackingStore?.Set("avgAdr", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The sampleSize property</summary>
-        public int? SampleSize { get; set; }
+        public int? SampleSize
+        {
+            get { return BackingStore?.Get<int?>("sampleSize"); }
+            set { BackingStore?.Set("sampleSize", value); }
+        }
         /// <summary>The sharePct property</summary>
-        public double? SharePct { get; set; }
+        public double? SharePct
+        {
+            get { return BackingStore?.Get<double?>("sharePct"); }
+            set { BackingStore?.Set("sharePct", value); }
+        }
         /// <summary>The tier property</summary>
-        public global::Repull.SDK.Models.ListingQualityTier_tier? Tier { get; set; }
+        public global::Repull.SDK.Models.ListingQualityTier_tier? Tier
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingQualityTier_tier?>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingQualityTier"/> and sets the default values.
         /// </summary>
         public ListingQualityTier()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

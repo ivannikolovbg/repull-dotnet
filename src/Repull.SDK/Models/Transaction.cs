@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,99 +12,202 @@ namespace Repull.SDK.Models
     /// One row of the unified transactions &amp; payments ledger: a payout (`isPayout: true`) or a reservation charge / refund, on any channel. `platform` is normalized — `booking` is Booking.com however the account was connected (never `booking_extranet`). For a payout, `amount` is the net the host received, `grossAmount` the guest-paid gross, and `fees` the deductions (commission, payments service fee, processing fee).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Transaction : IAdditionalDataHolder, IParsable
+    public partial class Transaction : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Net amount; for a payout, what the host received.</summary>
-        public double? Amount { get; set; }
+        public double? Amount
+        {
+            get { return BackingStore?.Get<double?>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>Transaction / payout date (the channel&apos;s display form or ISO).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Date { get; set; }
+        public string? Date
+        {
+            get { return BackingStore?.Get<string?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
 #nullable restore
 #else
-        public string Date { get; set; }
+        public string Date
+        {
+            get { return BackingStore?.Get<string>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
 #endif
         /// <summary>The fees property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Transaction_fees? Fees { get; set; }
+        public global::Repull.SDK.Models.Transaction_fees? Fees
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Transaction_fees?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Transaction_fees Fees { get; set; }
+        public global::Repull.SDK.Models.Transaction_fees Fees
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Transaction_fees>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #endif
         /// <summary>Guest-paid gross (payouts).</summary>
-        public double? GrossAmount { get; set; }
+        public double? GrossAmount
+        {
+            get { return BackingStore?.Get<double?>("grossAmount"); }
+            set { BackingStore?.Set("grossAmount", value); }
+        }
         /// <summary>`true` when this is money that reached the host (a payout).</summary>
-        public bool? IsPayout { get; set; }
+        public bool? IsPayout
+        {
+            get { return BackingStore?.Get<bool?>("isPayout"); }
+            set { BackingStore?.Set("isPayout", value); }
+        }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>The payout property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Transaction_payout? Payout { get; set; }
+        public global::Repull.SDK.Models.Transaction_payout? Payout
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Transaction_payout?>("payout"); }
+            set { BackingStore?.Set("payout", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Transaction_payout Payout { get; set; }
+        public global::Repull.SDK.Models.Transaction_payout Payout
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Transaction_payout>("payout"); }
+            set { BackingStore?.Set("payout", value); }
+        }
 #endif
         /// <summary>Normalized channel: `airbnb`, `booking` (Booking.com, however connected — never `booking_extranet`), or `vrbo`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Platform { get; set; }
+        public string? Platform
+        {
+            get { return BackingStore?.Get<string?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #nullable restore
 #else
-        public string Platform { get; set; }
+        public string Platform
+        {
+            get { return BackingStore?.Get<string>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #endif
         /// <summary>The reservationId property</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>Normalized settlement status (`COMPLETED` / `UPCOMING`; the raw value passes through when it maps to neither).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>The syncedAt property</summary>
-        public DateTimeOffset? SyncedAt { get; set; }
+        public DateTimeOffset? SyncedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("syncedAt"); }
+            set { BackingStore?.Set("syncedAt", value); }
+        }
         /// <summary>Stable id of the transaction (the underlying payment id). Upsert on it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TransactionId { get; set; }
+        public string? TransactionId
+        {
+            get { return BackingStore?.Get<string?>("transactionId"); }
+            set { BackingStore?.Set("transactionId", value); }
+        }
 #nullable restore
 #else
-        public string TransactionId { get; set; }
+        public string TransactionId
+        {
+            get { return BackingStore?.Get<string>("transactionId"); }
+            set { BackingStore?.Set("transactionId", value); }
+        }
 #endif
         /// <summary>Transaction type: `Payout`, `Reservation`, `Refund`, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Transaction"/> and sets the default values.
         /// </summary>
         public Transaction()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

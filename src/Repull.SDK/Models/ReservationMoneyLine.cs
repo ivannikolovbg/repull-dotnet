@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,94 @@ namespace Repull.SDK.Models
     /// One line inside a fee / tax / discount collection. `amount` is always a `number` in the reservation `currency` — the underlying channel data stores some amounts as decimal strings and the API coerces them. Every other property is passed through only when the source channel supplied it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationMoneyLine : IAdditionalDataHolder, IParsable
+    public partial class ReservationMoneyLine : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Amount in the reservation `currency`.</summary>
-        public double? Amount { get; set; }
+        public double? Amount
+        {
+            get { return BackingStore?.Get<double?>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Longer channel-supplied description. Only present when it differs from `name`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>Label as the channel reported it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>Discount lines only: the listing promotion that produced the discount, named as in `GET /v1/listings/{id}/promotions` (Airbnb reports each applied promotion as its own line). `custom` is an Airbnb Custom promotion.</summary>
-        public global::Repull.SDK.Models.ReservationMoneyLine_promotionType? PromotionType { get; set; }
+        public global::Repull.SDK.Models.ReservationMoneyLine_promotionType? PromotionType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMoneyLine_promotionType?>("promotionType"); }
+            set { BackingStore?.Set("promotionType", value); }
+        }
         /// <summary>Units billed, when the channel reports a quantity (Booking.com add-ons).</summary>
-        public double? Quantity { get; set; }
+        public double? Quantity
+        {
+            get { return BackingStore?.Get<double?>("quantity"); }
+            set { BackingStore?.Set("quantity", value); }
+        }
         /// <summary>Channel-reported classifier. NOT an enum — new channels introduce new values. Observed on fees: `cleaning`, `extra_guest`, `service`, `guest_service`, `pet`, `fixed`, `add_on`, `host_service`, `platform`, `processing`. Observed on taxes: `airbnb_collected` (channel collected AND remitted it), `pass_through` (reaches the host to remit), `tax`, `custom`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
         /// <summary>VAT charged on top of this line, when the channel splits it out separately.</summary>
-        public double? Vat { get; set; }
+        public double? Vat
+        {
+            get { return BackingStore?.Get<double?>("vat"); }
+            set { BackingStore?.Set("vat", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationMoneyLine"/> and sets the default values.
         /// </summary>
         public ReservationMoneyLine()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

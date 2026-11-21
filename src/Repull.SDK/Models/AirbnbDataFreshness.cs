@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,43 +12,82 @@ namespace Repull.SDK.Models
     /// Top-level freshness indicator for any DB-backed Airbnb read. Tells consumers WHY a column may be `null` or stale without sprinkling per-row error envelopes through the response. The endpoint always returns 200 + DB data; this field is the single signal for &quot;should I prompt the user to reconnect / wait for sync?&quot;.A workspace can connect several Airbnb accounts, so the answer has two levels. `accounts[]` carries the verdict per account; the top-level fields aggregate it. Scope a request with `?account_id=` and `accounts[]` holds exactly that account, with the top-level fields mirroring it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbDataFreshness : IAdditionalDataHolder, IParsable
+    public partial class AirbnbDataFreshness : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Per-account freshness, sorted by `accountId`. Omitted on responses that have no connected account to attribute (e.g. a workspace that has never connected Airbnb).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbAccountFreshness>? Accounts { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbAccountFreshness>? Accounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbAccountFreshness>?>("accounts"); }
+            set { BackingStore?.Set("accounts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbAccountFreshness> Accounts { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbAccountFreshness> Accounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbAccountFreshness>>("accounts"); }
+            set { BackingStore?.Set("accounts", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Dashboard URL the consumer can open to resolve the staleness (the Airbnb connections screen). Present whenever `reason` is, including on `partial_account_staleness`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FixUrl { get; set; }
+        public string? FixUrl
+        {
+            get { return BackingStore?.Get<string?>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #nullable restore
 #else
-        public string FixUrl { get; set; }
+        public string FixUrl
+        {
+            get { return BackingStore?.Get<string>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #endif
         /// <summary>The most recent Airbnb import COMPLETED by any account in scope. `null` when none of them ever has. A run that failed or was rate-limited does not move it.</summary>
-        public DateTimeOffset? LastSyncedAt { get; set; }
+        public DateTimeOffset? LastSyncedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastSyncedAt"); }
+            set { BackingStore?.Set("lastSyncedAt", value); }
+        }
         /// <summary>Why the data is stale. One of `host_disconnected_since_&lt;iso&gt;`, `host_not_activated`, `sync_lag_&gt;_24h`, `never_synced`, `host_disconnected`, or `partial_account_staleness`. The last one appears WITH `stale: false`: the response is usable, but at least one connected account needs attention — deliberately surfaced so a consumer reading only the aggregate is never told everything is fine while an account is down.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>`true` only when EVERY connected Airbnb account is stale — nothing in this response can be trusted to be current. With one account (the common case) that is the same as it has always been. With several, one disconnected host no longer condemns the other&apos;s rows: `stale` stays `false` and `reason` becomes `partial_account_staleness`. Read `accounts[]` for which is which.</summary>
-        public bool? Stale { get; set; }
+        public bool? Stale
+        {
+            get { return BackingStore?.Get<bool?>("stale"); }
+            set { BackingStore?.Set("stale", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbDataFreshness"/> and sets the default values.
         /// </summary>
         public AirbnbDataFreshness()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

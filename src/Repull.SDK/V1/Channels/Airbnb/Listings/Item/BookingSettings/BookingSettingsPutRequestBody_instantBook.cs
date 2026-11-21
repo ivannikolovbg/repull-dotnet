@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,14 +12,35 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
     /// Send `enabled`, `guestCategory`, or `enabled` + `requiresGoodTrackRecord`. `requiresGoodTrackRecord` alone is refused — it selects WHICH guests may Instant Book, so it needs `enabled: true` (or an explicit category) with it. Contradictory combinations are refused.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingSettingsPutRequestBody_instantBook : IParsable
+    public partial class BookingSettingsPutRequestBody_instantBook : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The enabled property</summary>
-        public bool? Enabled { get; set; }
+        public bool? Enabled
+        {
+            get { return BackingStore?.Get<bool?>("enabled"); }
+            set { BackingStore?.Set("enabled", value); }
+        }
         /// <summary>The guestCategory property</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_instantBook_guestCategory? GuestCategory { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_instantBook_guestCategory? GuestCategory
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_instantBook_guestCategory?>("guestCategory"); }
+            set { BackingStore?.Set("guestCategory", value); }
+        }
         /// <summary>The requiresGoodTrackRecord property</summary>
-        public bool? RequiresGoodTrackRecord { get; set; }
+        public bool? RequiresGoodTrackRecord
+        {
+            get { return BackingStore?.Get<bool?>("requiresGoodTrackRecord"); }
+            set { BackingStore?.Set("requiresGoodTrackRecord", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_instantBook"/> and sets the default values.
+        /// </summary>
+        public BookingSettingsPutRequestBody_instantBook()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

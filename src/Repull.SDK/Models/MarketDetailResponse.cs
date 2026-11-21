@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,111 +12,214 @@ namespace Repull.SDK.Models
     /// Detailed view for a single city. Several sub-objects are passed through verbatim from upstream — keys mirror the underlying SQL aggregations.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MarketDetailResponse : IAdditionalDataHolder, IParsable
+    public partial class MarketDetailResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bedroomBreakdown property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketDetailResponse_bedroomBreakdown>? BedroomBreakdown { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_bedroomBreakdown>? BedroomBreakdown
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_bedroomBreakdown>?>("bedroomBreakdown"); }
+            set { BackingStore?.Set("bedroomBreakdown", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketDetailResponse_bedroomBreakdown> BedroomBreakdown { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_bedroomBreakdown> BedroomBreakdown
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_bedroomBreakdown>>("bedroomBreakdown"); }
+            set { BackingStore?.Set("bedroomBreakdown", value); }
+        }
 #endif
         /// <summary>The benchmarks property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketDetailResponse_benchmarks>? Benchmarks { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_benchmarks>? Benchmarks
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_benchmarks>?>("benchmarks"); }
+            set { BackingStore?.Set("benchmarks", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketDetailResponse_benchmarks> Benchmarks { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_benchmarks> Benchmarks
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_benchmarks>>("benchmarks"); }
+            set { BackingStore?.Set("benchmarks", value); }
+        }
 #endif
         /// <summary>The capacityGap property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MarketDetailResponse_capacityGap? CapacityGap { get; set; }
+        public global::Repull.SDK.Models.MarketDetailResponse_capacityGap? CapacityGap
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketDetailResponse_capacityGap?>("capacityGap"); }
+            set { BackingStore?.Set("capacityGap", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MarketDetailResponse_capacityGap CapacityGap { get; set; }
+        public global::Repull.SDK.Models.MarketDetailResponse_capacityGap CapacityGap
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketDetailResponse_capacityGap>("capacityGap"); }
+            set { BackingStore?.Set("capacityGap", value); }
+        }
 #endif
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketEvent>? Events { get; set; }
+        public List<global::Repull.SDK.Models.MarketEvent>? Events
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketEvent>?>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketEvent> Events { get; set; }
+        public List<global::Repull.SDK.Models.MarketEvent> Events
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketEvent>>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #endif
         /// <summary>The healthSummary property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MarketDetailResponse_healthSummary? HealthSummary { get; set; }
+        public global::Repull.SDK.Models.MarketDetailResponse_healthSummary? HealthSummary
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketDetailResponse_healthSummary?>("healthSummary"); }
+            set { BackingStore?.Set("healthSummary", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MarketDetailResponse_healthSummary HealthSummary { get; set; }
+        public global::Repull.SDK.Models.MarketDetailResponse_healthSummary HealthSummary
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketDetailResponse_healthSummary>("healthSummary"); }
+            set { BackingStore?.Set("healthSummary", value); }
+        }
 #endif
         /// <summary>The marketPosition property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MarketDetailResponse_marketPosition? MarketPosition { get; set; }
+        public global::Repull.SDK.Models.MarketDetailResponse_marketPosition? MarketPosition
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketDetailResponse_marketPosition?>("marketPosition"); }
+            set { BackingStore?.Set("marketPosition", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MarketDetailResponse_marketPosition MarketPosition { get; set; }
+        public global::Repull.SDK.Models.MarketDetailResponse_marketPosition MarketPosition
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketDetailResponse_marketPosition>("marketPosition"); }
+            set { BackingStore?.Set("marketPosition", value); }
+        }
 #endif
         /// <summary>The priceDistribution property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketDetailResponse_priceDistribution>? PriceDistribution { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_priceDistribution>? PriceDistribution
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_priceDistribution>?>("priceDistribution"); }
+            set { BackingStore?.Set("priceDistribution", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketDetailResponse_priceDistribution> PriceDistribution { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_priceDistribution> PriceDistribution
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_priceDistribution>>("priceDistribution"); }
+            set { BackingStore?.Set("priceDistribution", value); }
+        }
 #endif
         /// <summary>The propertyTypeMix property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketDetailResponse_propertyTypeMix>? PropertyTypeMix { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_propertyTypeMix>? PropertyTypeMix
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_propertyTypeMix>?>("propertyTypeMix"); }
+            set { BackingStore?.Set("propertyTypeMix", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketDetailResponse_propertyTypeMix> PropertyTypeMix { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_propertyTypeMix> PropertyTypeMix
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_propertyTypeMix>>("propertyTypeMix"); }
+            set { BackingStore?.Set("propertyTypeMix", value); }
+        }
 #endif
         /// <summary>The supplyTrend property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketDetailResponse_supplyTrend>? SupplyTrend { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_supplyTrend>? SupplyTrend
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_supplyTrend>?>("supplyTrend"); }
+            set { BackingStore?.Set("supplyTrend", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketDetailResponse_supplyTrend> SupplyTrend { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_supplyTrend> SupplyTrend
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_supplyTrend>>("supplyTrend"); }
+            set { BackingStore?.Set("supplyTrend", value); }
+        }
 #endif
         /// <summary>The topComps property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MarketDetailResponse_topComps? TopComps { get; set; }
+        public global::Repull.SDK.Models.MarketDetailResponse_topComps? TopComps
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketDetailResponse_topComps?>("topComps"); }
+            set { BackingStore?.Set("topComps", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MarketDetailResponse_topComps TopComps { get; set; }
+        public global::Repull.SDK.Models.MarketDetailResponse_topComps TopComps
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketDetailResponse_topComps>("topComps"); }
+            set { BackingStore?.Set("topComps", value); }
+        }
 #endif
         /// <summary>The wheelhouseTrends property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketDetailResponse_wheelhouseTrends>? WheelhouseTrends { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_wheelhouseTrends>? WheelhouseTrends
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_wheelhouseTrends>?>("wheelhouseTrends"); }
+            set { BackingStore?.Set("wheelhouseTrends", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketDetailResponse_wheelhouseTrends> WheelhouseTrends { get; set; }
+        public List<global::Repull.SDK.Models.MarketDetailResponse_wheelhouseTrends> WheelhouseTrends
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketDetailResponse_wheelhouseTrends>>("wheelhouseTrends"); }
+            set { BackingStore?.Set("wheelhouseTrends", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketDetailResponse"/> and sets the default values.
         /// </summary>
         public MarketDetailResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

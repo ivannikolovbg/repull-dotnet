@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,17 +13,31 @@ namespace Repull.SDK.Models
     /// Standardized error envelope. Returned by EVERY 4xx/5xx response on this API. Required fields (`code`, `message`, `fix`, `docs_url`, `request_id`) are designed for LLM-driven self-recovery — an AI agent should be able to fix the underlying problem and retry without escalating to a human. Lead with `fix` and `docs_url` in your tooling; demote `support` (rare) to a last resort.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Error : ApiException, IAdditionalDataHolder, IParsable
+    public partial class Error : ApiException, IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Error_error? ErrorProp { get; set; }
+        public global::Repull.SDK.Models.Error_error? ErrorProp
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Error_error ErrorProp { get; set; }
+        public global::Repull.SDK.Models.Error_error ErrorProp
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The primary error message.</summary>
         public override string Message { get => base.Message; }
@@ -31,6 +46,7 @@ namespace Repull.SDK.Models
         /// </summary>
         public Error()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

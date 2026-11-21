@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,79 +12,150 @@ namespace Repull.SDK.Models
     /// Overview of every market the customer operates in, plus auxiliary discovery slices. Wraps the canonical `{ data, pagination }` envelope around the per-city KPI list (`data`) so SDK consumers see the same shape they get from every other list endpoint. Auxiliary fields (`totals`, `myListings`, `browse`, `freeMarket`, `subscriptions`, `tier`) are returned as siblings because they are NOT paginated. The overview returns every market in one shot — `nextCursor` is always `null` and `hasMore` is always `false`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MarketsOverviewResponse : IAdditionalDataHolder, IParsable
+    public partial class MarketsOverviewResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Lightweight discovery summary. Use `/v1/markets/browse` for the full paginated catalog.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MarketsOverviewResponse_browse? Browse { get; set; }
+        public global::Repull.SDK.Models.MarketsOverviewResponse_browse? Browse
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketsOverviewResponse_browse?>("browse"); }
+            set { BackingStore?.Set("browse", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MarketsOverviewResponse_browse Browse { get; set; }
+        public global::Repull.SDK.Models.MarketsOverviewResponse_browse Browse
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketsOverviewResponse_browse>("browse"); }
+            set { BackingStore?.Set("browse", value); }
+        }
 #endif
         /// <summary>Per-city KPIs for every market the customer operates in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketSummary>? Data { get; set; }
+        public List<global::Repull.SDK.Models.MarketSummary>? Data
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketSummary>?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketSummary> Data { get; set; }
+        public List<global::Repull.SDK.Models.MarketSummary> Data
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketSummary>>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>City auto-assigned as the customer&apos;s free market (largest by listing count). Null for customers with no listings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FreeMarket { get; set; }
+        public string? FreeMarket
+        {
+            get { return BackingStore?.Get<string?>("freeMarket"); }
+            set { BackingStore?.Set("freeMarket", value); }
+        }
 #nullable restore
 #else
-        public string FreeMarket { get; set; }
+        public string FreeMarket
+        {
+            get { return BackingStore?.Get<string>("freeMarket"); }
+            set { BackingStore?.Set("freeMarket", value); }
+        }
 #endif
         /// <summary>The myListings property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketMyListing>? MyListings { get; set; }
+        public List<global::Repull.SDK.Models.MarketMyListing>? MyListings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketMyListing>?>("myListings"); }
+            set { BackingStore?.Set("myListings", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketMyListing> MyListings { get; set; }
+        public List<global::Repull.SDK.Models.MarketMyListing> MyListings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketMyListing>>("myListings"); }
+            set { BackingStore?.Set("myListings", value); }
+        }
 #endif
         /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Pagination? Pagination { get; set; }
+        public global::Repull.SDK.Models.Pagination? Pagination
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Pagination?>("pagination"); }
+            set { BackingStore?.Set("pagination", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Pagination Pagination { get; set; }
+        public global::Repull.SDK.Models.Pagination Pagination
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Pagination>("pagination"); }
+            set { BackingStore?.Set("pagination", value); }
+        }
 #endif
         /// <summary>Active per-market unlocks vs the tier quota.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions? Subscriptions { get; set; }
+        public global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions? Subscriptions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions?>("subscriptions"); }
+            set { BackingStore?.Set("subscriptions", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions Subscriptions { get; set; }
+        public global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions Subscriptions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketsOverviewResponse_subscriptions>("subscriptions"); }
+            set { BackingStore?.Set("subscriptions", value); }
+        }
 #endif
         /// <summary>Resolved Repull tier (free / starter / custom).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Tier { get; set; }
+        public string? Tier
+        {
+            get { return BackingStore?.Get<string?>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #nullable restore
 #else
-        public string Tier { get; set; }
+        public string Tier
+        {
+            get { return BackingStore?.Get<string>("tier"); }
+            set { BackingStore?.Set("tier", value); }
+        }
 #endif
         /// <summary>The totals property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MarketsOverviewResponse_totals? Totals { get; set; }
+        public global::Repull.SDK.Models.MarketsOverviewResponse_totals? Totals
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketsOverviewResponse_totals?>("totals"); }
+            set { BackingStore?.Set("totals", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MarketsOverviewResponse_totals Totals { get; set; }
+        public global::Repull.SDK.Models.MarketsOverviewResponse_totals Totals
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketsOverviewResponse_totals>("totals"); }
+            set { BackingStore?.Set("totals", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketsOverviewResponse"/> and sets the default values.
         /// </summary>
         public MarketsOverviewResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

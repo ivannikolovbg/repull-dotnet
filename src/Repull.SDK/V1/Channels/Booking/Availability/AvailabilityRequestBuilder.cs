@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using System.Collections.Generic;
@@ -199,32 +200,65 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/>, <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/>, <see cref="global::Repull.SDK.Models.BookingRestrictionWriteResponse"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class AvailabilityPutResponse : IComposedTypeWrapper, IParsable
+        public partial class AvailabilityPutResponse : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse? BookingDerivedPricingWriteResponse { get; set; }
+            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse? BookingDerivedPricingWriteResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse?>("BookingDerivedPricingWriteResponse"); }
+                set { BackingStore?.Set("BookingDerivedPricingWriteResponse", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse BookingDerivedPricingWriteResponse { get; set; }
+            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse BookingDerivedPricingWriteResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse>("BookingDerivedPricingWriteResponse"); }
+                set { BackingStore?.Set("BookingDerivedPricingWriteResponse", value); }
+            }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingPricingUpdateResponse? BookingPricingUpdateResponse { get; set; }
+            public global::Repull.SDK.Models.BookingPricingUpdateResponse? BookingPricingUpdateResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingUpdateResponse?>("BookingPricingUpdateResponse"); }
+                set { BackingStore?.Set("BookingPricingUpdateResponse", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingPricingUpdateResponse BookingPricingUpdateResponse { get; set; }
+            public global::Repull.SDK.Models.BookingPricingUpdateResponse BookingPricingUpdateResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingUpdateResponse>("BookingPricingUpdateResponse"); }
+                set { BackingStore?.Set("BookingPricingUpdateResponse", value); }
+            }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingRestrictionWriteResponse"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingRestrictionWriteResponse? BookingRestrictionWriteResponse { get; set; }
+            public global::Repull.SDK.Models.BookingRestrictionWriteResponse? BookingRestrictionWriteResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionWriteResponse?>("BookingRestrictionWriteResponse"); }
+                set { BackingStore?.Set("BookingRestrictionWriteResponse", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingRestrictionWriteResponse BookingRestrictionWriteResponse { get; set; }
+            public global::Repull.SDK.Models.BookingRestrictionWriteResponse BookingRestrictionWriteResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionWriteResponse>("BookingRestrictionWriteResponse"); }
+                set { BackingStore?.Set("BookingRestrictionWriteResponse", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityPutResponse"/> and sets the default values.
+            /// </summary>
+            public AvailabilityPutResponse()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>
@@ -346,32 +380,65 @@ namespace Repull.SDK.V1.Channels.Booking.Availability
         /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/>, <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/>, <see cref="global::Repull.SDK.Models.BookingRestrictionWriteResponse"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class AvailabilityResponse : IComposedTypeWrapper, IParsable
+        public partial class AvailabilityResponse : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse? BookingDerivedPricingWriteResponse { get; set; }
+            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse? BookingDerivedPricingWriteResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse?>("BookingDerivedPricingWriteResponse"); }
+                set { BackingStore?.Set("BookingDerivedPricingWriteResponse", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse BookingDerivedPricingWriteResponse { get; set; }
+            public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse BookingDerivedPricingWriteResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse>("BookingDerivedPricingWriteResponse"); }
+                set { BackingStore?.Set("BookingDerivedPricingWriteResponse", value); }
+            }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingPricingUpdateResponse? BookingPricingUpdateResponse { get; set; }
+            public global::Repull.SDK.Models.BookingPricingUpdateResponse? BookingPricingUpdateResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingUpdateResponse?>("BookingPricingUpdateResponse"); }
+                set { BackingStore?.Set("BookingPricingUpdateResponse", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingPricingUpdateResponse BookingPricingUpdateResponse { get; set; }
+            public global::Repull.SDK.Models.BookingPricingUpdateResponse BookingPricingUpdateResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingUpdateResponse>("BookingPricingUpdateResponse"); }
+                set { BackingStore?.Set("BookingPricingUpdateResponse", value); }
+            }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingRestrictionWriteResponse"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingRestrictionWriteResponse? BookingRestrictionWriteResponse { get; set; }
+            public global::Repull.SDK.Models.BookingRestrictionWriteResponse? BookingRestrictionWriteResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionWriteResponse?>("BookingRestrictionWriteResponse"); }
+                set { BackingStore?.Set("BookingRestrictionWriteResponse", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingRestrictionWriteResponse BookingRestrictionWriteResponse { get; set; }
+            public global::Repull.SDK.Models.BookingRestrictionWriteResponse BookingRestrictionWriteResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionWriteResponse>("BookingRestrictionWriteResponse"); }
+                set { BackingStore?.Set("BookingRestrictionWriteResponse", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.Availability.AvailabilityRequestBuilder.AvailabilityResponse"/> and sets the default values.
+            /// </summary>
+            public AvailabilityResponse()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

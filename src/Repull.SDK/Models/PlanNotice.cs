@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,59 +12,122 @@ namespace Repull.SDK.Models
     /// Added to the body of EVERY JSON response (success or error, except bare arrays and 5xx) while the workspace is connected to more listings than its plan lets it use — so a developer reading any payload, or an AI assistant relaying it, sees it. Connect keeps every listing it finds, but on a capped plan only as many as the plan allows are active; the rest are held back inactive and keep syncing. The same responses also carry the `X-Repull-Listings-Held-Back` and `X-Repull-Active-Listing-Limit` headers. Using a held-back listing answers `403 listing_inactive` with `reason: &quot;plan_limit&quot;`. Tell the user: they can see the held-back listings with `GET /v1/listings?status=all`, choose which are active with `POST /v1/listings/status`, or upgrade.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PlanNotice : IAdditionalDataHolder, IParsable
+    public partial class PlanNotice : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Active listings right now. Only when the code is &quot;listings_over_plan&quot;.</summary>
-        public int? ActiveListingCount { get; set; }
+        public int? ActiveListingCount
+        {
+            get { return BackingStore?.Get<int?>("activeListingCount"); }
+            set { BackingStore?.Set("activeListingCount", value); }
+        }
         /// <summary>The plan&apos;s cap on active listings.</summary>
-        public int? ActiveListingLimit { get; set; }
+        public int? ActiveListingLimit
+        {
+            get { return BackingStore?.Get<int?>("activeListingLimit"); }
+            set { BackingStore?.Set("activeListingLimit", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The billingUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BillingUrl { get; set; }
+        public string? BillingUrl
+        {
+            get { return BackingStore?.Get<string?>("billingUrl"); }
+            set { BackingStore?.Set("billingUrl", value); }
+        }
 #nullable restore
 #else
-        public string BillingUrl { get; set; }
+        public string BillingUrl
+        {
+            get { return BackingStore?.Get<string>("billingUrl"); }
+            set { BackingStore?.Set("billingUrl", value); }
+        }
 #endif
         /// <summary>Opens Starter checkout at `starterMonthlyPrice`. Present up to 100 listings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckoutUrl { get; set; }
+        public string? CheckoutUrl
+        {
+            get { return BackingStore?.Get<string?>("checkoutUrl"); }
+            set { BackingStore?.Set("checkoutUrl", value); }
+        }
 #nullable restore
 #else
-        public string CheckoutUrl { get; set; }
+        public string CheckoutUrl
+        {
+            get { return BackingStore?.Get<string>("checkoutUrl"); }
+            set { BackingStore?.Set("checkoutUrl", value); }
+        }
 #endif
         /// <summary>&quot;listings_held_back&quot;: some connected listings are held inactive by the plan. &quot;listings_over_plan&quot;: more listings are active than the plan includes (after a downgrade). Neither blocks any call.</summary>
-        public global::Repull.SDK.Models.PlanNotice_code? Code { get; set; }
+        public global::Repull.SDK.Models.PlanNotice_code? Code
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PlanNotice_code?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
         /// <summary>The fix property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Fix { get; set; }
+        public string? Fix
+        {
+            get { return BackingStore?.Get<string?>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #nullable restore
 #else
-        public string Fix { get; set; }
+        public string Fix
+        {
+            get { return BackingStore?.Get<string>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #endif
         /// <summary>Connected listings kept inactive because of the plan.</summary>
-        public int? ListingsHeldBack { get; set; }
+        public int? ListingsHeldBack
+        {
+            get { return BackingStore?.Get<int?>("listingsHeldBack"); }
+            set { BackingStore?.Set("listingsHeldBack", value); }
+        }
         /// <summary>The message property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>On a free plan: the listings Starter checkout bills today, the active ones across the plan&apos;s workspaces. Held-back listings are not included: upgrading does not switch them on.</summary>
-        public int? StarterListings { get; set; }
+        public int? StarterListings
+        {
+            get { return BackingStore?.Get<int?>("starterListings"); }
+            set { BackingStore?.Set("starterListings", value); }
+        }
         /// <summary>Starter&apos;s monthly price in USD for `starterListings` — exactly what checkout charges. Each listing switched on afterwards adds Starter&apos;s per-listing price ($5 a month from the 11th to the 100th). Present up to 100 connected listings; above that the message says how to ask for a plan.</summary>
-        public double? StarterMonthlyPrice { get; set; }
+        public double? StarterMonthlyPrice
+        {
+            get { return BackingStore?.Get<double?>("starterMonthlyPrice"); }
+            set { BackingStore?.Set("starterMonthlyPrice", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PlanNotice"/> and sets the default values.
         /// </summary>
         public PlanNotice()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

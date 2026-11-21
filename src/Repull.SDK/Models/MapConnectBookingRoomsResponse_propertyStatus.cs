@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,49 +12,92 @@ namespace Repull.SDK.Models
     /// Whether Booking.com has the property open for bookings. A property still being built on Booking.com is checked and opened as the last Connect step; one that is already open, or that its host closed, is left as it is. `null` when no room was mapped.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MapConnectBookingRoomsResponse_propertyStatus : IAdditionalDataHolder, IParsable
+    public partial class MapConnectBookingRoomsResponse_propertyStatus : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com&apos;s own reasons it will not open the property yet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Blockers { get; set; }
+        public List<string>? Blockers
+        {
+            get { return BackingStore?.Get<List<string>?>("blockers"); }
+            set { BackingStore?.Set("blockers", value); }
+        }
 #nullable restore
 #else
-        public List<string> Blockers { get; set; }
+        public List<string> Blockers
+        {
+            get { return BackingStore?.Get<List<string>>("blockers"); }
+            set { BackingStore?.Set("blockers", value); }
+        }
 #endif
         /// <summary>What is wrong and how to fix it, in plain words. Null when the property is open.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>`opened`: it was being built and is now open. `not_needed`: it was already past that stage. `blocked`: Booking.com will not open it yet — see `blockers`. `status_unknown`: its status could not be read. `failed`: Booking.com did not answer the open request. `listing_inactive`: a listing mapped to the property is inactive, so it was not opened — activate it when it is ready and Repull opens the property. `no_listing`: no listing is mapped to it.</summary>
-        public global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus_outcome? Outcome { get; set; }
+        public global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus_outcome? Outcome
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus_outcome?>("outcome"); }
+            set { BackingStore?.Set("outcome", value); }
+        }
         /// <summary>The propertyId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #endif
         /// <summary>Booking.com&apos;s status for the property before this step, e.g. `XML: Being built`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StatusBefore { get; set; }
+        public string? StatusBefore
+        {
+            get { return BackingStore?.Get<string?>("statusBefore"); }
+            set { BackingStore?.Set("statusBefore", value); }
+        }
 #nullable restore
 #else
-        public string StatusBefore { get; set; }
+        public string StatusBefore
+        {
+            get { return BackingStore?.Get<string>("statusBefore"); }
+            set { BackingStore?.Set("statusBefore", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus"/> and sets the default values.
         /// </summary>
         public MapConnectBookingRoomsResponse_propertyStatus()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

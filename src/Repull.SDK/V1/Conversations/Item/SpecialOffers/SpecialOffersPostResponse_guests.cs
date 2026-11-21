@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,25 +12,52 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers
     /// Guests on the offer. Airbnb counts adults + children as guests; infants and pets are extra.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class SpecialOffersPostResponse_guests : IAdditionalDataHolder, IParsable
+    public partial class SpecialOffersPostResponse_guests : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The adults property</summary>
-        public int? Adults { get; set; }
+        public int? Adults
+        {
+            get { return BackingStore?.Get<int?>("adults"); }
+            set { BackingStore?.Set("adults", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The children property</summary>
-        public int? Children { get; set; }
+        public int? Children
+        {
+            get { return BackingStore?.Get<int?>("children"); }
+            set { BackingStore?.Set("children", value); }
+        }
         /// <summary>The infants property</summary>
-        public int? Infants { get; set; }
+        public int? Infants
+        {
+            get { return BackingStore?.Get<int?>("infants"); }
+            set { BackingStore?.Set("infants", value); }
+        }
         /// <summary>The pets property</summary>
-        public int? Pets { get; set; }
+        public int? Pets
+        {
+            get { return BackingStore?.Get<int?>("pets"); }
+            set { BackingStore?.Set("pets", value); }
+        }
         /// <summary>The total property</summary>
-        public int? Total { get; set; }
+        public int? Total
+        {
+            get { return BackingStore?.Get<int?>("total"); }
+            set { BackingStore?.Set("total", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.SpecialOffersPostResponse_guests"/> and sets the default values.
         /// </summary>
         public SpecialOffersPostResponse_guests()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

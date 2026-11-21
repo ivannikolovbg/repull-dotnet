@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,42 +10,77 @@ namespace Repull.SDK.V1.Connect.Item
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class WithProviderDeleteResponse : IAdditionalDataHolder, IParsable
+    public partial class WithProviderDeleteResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The account that was disconnected. `null` only when the workspace had a stale connection record with no account to name, which was cleared.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Always `true` on success.</summary>
-        public bool? Disconnected { get; set; }
+        public bool? Disconnected
+        {
+            get { return BackingStore?.Get<bool?>("disconnected"); }
+            set { BackingStore?.Set("disconnected", value); }
+        }
         /// <summary>Ids of the listings this call deactivated. Listings still connected through another account or channel are not included and stay active.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ListingsDeactivated { get; set; }
+        public List<string>? ListingsDeactivated
+        {
+            get { return BackingStore?.Get<List<string>?>("listingsDeactivated"); }
+            set { BackingStore?.Set("listingsDeactivated", value); }
+        }
 #nullable restore
 #else
-        public List<string> ListingsDeactivated { get; set; }
+        public List<string> ListingsDeactivated
+        {
+            get { return BackingStore?.Get<List<string>>("listingsDeactivated"); }
+            set { BackingStore?.Set("listingsDeactivated", value); }
+        }
 #endif
         /// <summary>The provider the account belonged to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Item.WithProviderDeleteResponse"/> and sets the default values.
         /// </summary>
         public WithProviderDeleteResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

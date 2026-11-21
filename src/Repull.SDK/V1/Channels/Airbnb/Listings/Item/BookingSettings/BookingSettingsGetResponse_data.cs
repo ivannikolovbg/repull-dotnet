@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,74 +10,141 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BookingSettingsGetResponse_data : IAdditionalDataHolder, IParsable
+    public partial class BookingSettingsGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>How much notice a booking needs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_advanceNotice? AdvanceNotice { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_advanceNotice? AdvanceNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_advanceNotice?>("advanceNotice"); }
+            set { BackingStore?.Set("advanceNotice", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_advanceNotice AdvanceNotice { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_advanceNotice AdvanceNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_advanceNotice>("advanceNotice"); }
+            set { BackingStore?.Set("advanceNotice", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Derived from `instantBook`. `request_to_book` means every booking needs the host to approve it.</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingMode? BookingMode { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingMode? BookingMode
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingMode?>("bookingMode"); }
+            set { BackingStore?.Set("bookingMode", value); }
+        }
         /// <summary>How far ahead guests may book.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingWindow? BookingWindow { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingWindow? BookingWindow
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingWindow?>("bookingWindow"); }
+            set { BackingStore?.Set("bookingWindow", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingWindow BookingWindow { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingWindow BookingWindow
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_bookingWindow>("bookingWindow"); }
+            set { BackingStore?.Set("bookingWindow", value); }
+        }
 #endif
         /// <summary>The cancellation property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_cancellation? Cancellation { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_cancellation? Cancellation
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_cancellation?>("cancellation"); }
+            set { BackingStore?.Set("cancellation", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_cancellation Cancellation { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_cancellation Cancellation
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_cancellation>("cancellation"); }
+            set { BackingStore?.Set("cancellation", value); }
+        }
 #endif
         /// <summary>Check-in window as hours of the day, or `FLEXIBLE`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn? CheckIn { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn? CheckIn
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn CheckIn { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn CheckIn
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
 #endif
         /// <summary>The checkOut property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkOut? CheckOut { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkOut? CheckOut
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkOut?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkOut CheckOut { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkOut CheckOut
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkOut>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
 #endif
         /// <summary>Instant Book state. All three fields describe ONE Airbnb value, `instant_booking_allowed_category`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_instantBook? InstantBook { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_instantBook? InstantBook
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_instantBook?>("instantBook"); }
+            set { BackingStore?.Set("instantBook", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_instantBook InstantBook { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_instantBook InstantBook
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_instantBook>("instantBook"); }
+            set { BackingStore?.Set("instantBook", value); }
+        }
 #endif
         /// <summary>Airbnb&apos;s `turnover_days` — nights blocked between two stays.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_preparationTime? PreparationTime { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_preparationTime? PreparationTime
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_preparationTime?>("preparationTime"); }
+            set { BackingStore?.Set("preparationTime", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_preparationTime PreparationTime { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_preparationTime PreparationTime
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_preparationTime>("preparationTime"); }
+            set { BackingStore?.Set("preparationTime", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data"/> and sets the default values.
         /// </summary>
         public BookingSettingsGetResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

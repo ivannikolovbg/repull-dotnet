@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,58 +10,109 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ContentGetResponse_listing : IAdditionalDataHolder, IParsable
+    public partial class ContentGetResponse_listing : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The address property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? Address { get; set; }
+        public UntypedNode? Address
+        {
+            get { return BackingStore?.Get<UntypedNode?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode Address { get; set; }
+        public UntypedNode Address
+        {
+            get { return BackingStore?.Get<UntypedNode>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The enabled property</summary>
-        public bool? Enabled { get; set; }
+        public bool? Enabled
+        {
+            get { return BackingStore?.Get<bool?>("enabled"); }
+            set { BackingStore?.Set("enabled", value); }
+        }
         /// <summary>The listingNumber property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingNumber { get; set; }
+        public string? ListingNumber
+        {
+            get { return BackingStore?.Get<string?>("listingNumber"); }
+            set { BackingStore?.Set("listingNumber", value); }
+        }
 #nullable restore
 #else
-        public string ListingNumber { get; set; }
+        public string ListingNumber
+        {
+            get { return BackingStore?.Get<string>("listingNumber"); }
+            set { BackingStore?.Set("listingNumber", value); }
+        }
 #endif
         /// <summary>The triad property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Triad { get; set; }
+        public string? Triad
+        {
+            get { return BackingStore?.Get<string?>("triad"); }
+            set { BackingStore?.Set("triad", value); }
+        }
 #nullable restore
 #else
-        public string Triad { get; set; }
+        public string Triad
+        {
+            get { return BackingStore?.Get<string>("triad"); }
+            set { BackingStore?.Set("triad", value); }
+        }
 #endif
         /// <summary>The unitNumber property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitNumber { get; set; }
+        public string? UnitNumber
+        {
+            get { return BackingStore?.Get<string?>("unitNumber"); }
+            set { BackingStore?.Set("unitNumber", value); }
+        }
 #nullable restore
 #else
-        public string UnitNumber { get; set; }
+        public string UnitNumber
+        {
+            get { return BackingStore?.Get<string>("unitNumber"); }
+            set { BackingStore?.Set("unitNumber", value); }
+        }
 #endif
         /// <summary>The unitUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitUrl { get; set; }
+        public string? UnitUrl
+        {
+            get { return BackingStore?.Get<string?>("unitUrl"); }
+            set { BackingStore?.Set("unitUrl", value); }
+        }
 #nullable restore
 #else
-        public string UnitUrl { get; set; }
+        public string UnitUrl
+        {
+            get { return BackingStore?.Get<string>("unitUrl"); }
+            set { BackingStore?.Set("unitUrl", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_listing"/> and sets the default values.
         /// </summary>
         public ContentGetResponse_listing()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

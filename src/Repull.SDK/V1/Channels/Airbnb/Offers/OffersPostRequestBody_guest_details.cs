@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,25 +12,52 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
     /// Offer only (required). `number_of_guests` is adults + children; if omitted it is computed from them.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class OffersPostRequestBody_guest_details : IAdditionalDataHolder, IParsable
+    public partial class OffersPostRequestBody_guest_details : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The number_of_adults property</summary>
-        public int? NumberOfAdults { get; set; }
+        public int? NumberOfAdults
+        {
+            get { return BackingStore?.Get<int?>("number_of_adults"); }
+            set { BackingStore?.Set("number_of_adults", value); }
+        }
         /// <summary>The number_of_children property</summary>
-        public int? NumberOfChildren { get; set; }
+        public int? NumberOfChildren
+        {
+            get { return BackingStore?.Get<int?>("number_of_children"); }
+            set { BackingStore?.Set("number_of_children", value); }
+        }
         /// <summary>The number_of_guests property</summary>
-        public int? NumberOfGuests { get; set; }
+        public int? NumberOfGuests
+        {
+            get { return BackingStore?.Get<int?>("number_of_guests"); }
+            set { BackingStore?.Set("number_of_guests", value); }
+        }
         /// <summary>The number_of_infants property</summary>
-        public int? NumberOfInfants { get; set; }
+        public int? NumberOfInfants
+        {
+            get { return BackingStore?.Get<int?>("number_of_infants"); }
+            set { BackingStore?.Set("number_of_infants", value); }
+        }
         /// <summary>The number_of_pets property</summary>
-        public int? NumberOfPets { get; set; }
+        public int? NumberOfPets
+        {
+            get { return BackingStore?.Get<int?>("number_of_pets"); }
+            set { BackingStore?.Set("number_of_pets", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersPostRequestBody_guest_details"/> and sets the default values.
         /// </summary>
         public OffersPostRequestBody_guest_details()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,56 +10,103 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ContentGetResponse_sections_rooms : IAdditionalDataHolder, IParsable
+    public partial class ContentGetResponse_sections_rooms : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The addableTypes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? AddableTypes { get; set; }
+        public List<string>? AddableTypes
+        {
+            get { return BackingStore?.Get<List<string>?>("addableTypes"); }
+            set { BackingStore?.Set("addableTypes", value); }
+        }
 #nullable restore
 #else
-        public List<string> AddableTypes { get; set; }
+        public List<string> AddableTypes
+        {
+            get { return BackingStore?.Get<List<string>>("addableTypes"); }
+            set { BackingStore?.Set("addableTypes", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bathroomTypes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bathroomTypes>? BathroomTypes { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bathroomTypes>? BathroomTypes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bathroomTypes>?>("bathroomTypes"); }
+            set { BackingStore?.Set("bathroomTypes", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bathroomTypes> BathroomTypes { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bathroomTypes> BathroomTypes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bathroomTypes>>("bathroomTypes"); }
+            set { BackingStore?.Set("bathroomTypes", value); }
+        }
 #endif
         /// <summary>The bedTypes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bedTypes>? BedTypes { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bedTypes>? BedTypes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bedTypes>?>("bedTypes"); }
+            set { BackingStore?.Set("bedTypes", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bedTypes> BedTypes { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bedTypes> BedTypes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_bedTypes>>("bedTypes"); }
+            set { BackingStore?.Set("bedTypes", value); }
+        }
 #endif
         /// <summary>The spaces property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_spaces>? Spaces { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_spaces>? Spaces
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_spaces>?>("spaces"); }
+            set { BackingStore?.Set("spaces", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_spaces> Spaces { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_spaces> Spaces
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms_spaces>>("spaces"); }
+            set { BackingStore?.Set("spaces", value); }
+        }
 #endif
         /// <summary>The unitId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitId { get; set; }
+        public string? UnitId
+        {
+            get { return BackingStore?.Get<string?>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #nullable restore
 #else
-        public string UnitId { get; set; }
+        public string UnitId
+        {
+            get { return BackingStore?.Get<string>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_rooms"/> and sets the default values.
         /// </summary>
         public ContentGetResponse_sections_rooms()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

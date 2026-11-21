@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,25 +10,50 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbListingDetailsWriteRequest_quiet_hours : IParsable
+    public partial class AirbnbListingDetailsWriteRequest_quiet_hours : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The end_time property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? EndTime { get; set; }
+        public string? EndTime
+        {
+            get { return BackingStore?.Get<string?>("end_time"); }
+            set { BackingStore?.Set("end_time", value); }
+        }
 #nullable restore
 #else
-        public string EndTime { get; set; }
+        public string EndTime
+        {
+            get { return BackingStore?.Get<string>("end_time"); }
+            set { BackingStore?.Set("end_time", value); }
+        }
 #endif
         /// <summary>The start_time property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StartTime { get; set; }
+        public string? StartTime
+        {
+            get { return BackingStore?.Get<string?>("start_time"); }
+            set { BackingStore?.Set("start_time", value); }
+        }
 #nullable restore
 #else
-        public string StartTime { get; set; }
+        public string StartTime
+        {
+            get { return BackingStore?.Get<string>("start_time"); }
+            set { BackingStore?.Set("start_time", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours"/> and sets the default values.
+        /// </summary>
+        public AirbnbListingDetailsWriteRequest_quiet_hours()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

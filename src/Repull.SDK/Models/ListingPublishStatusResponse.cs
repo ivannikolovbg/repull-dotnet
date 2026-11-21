@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,48 +10,87 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingPublishStatusResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingPublishStatusResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Address readiness per channel, keyed by channel name (`airbnb` today). Airbnb requires `street` and `city` for every country and additionally `state` and `postalCode` for a **US** property — and a listing with no `countryCode` behaves as US. Check this BEFORE calling a publish endpoint: an incomplete address is refused at the create preflight and never reaches the channel.It sits here rather than inside `channels[]` because `channels` reports sync activity and is empty for a listing that has never been pushed — exactly the listing whose address blocker you need to see. Repair a gap with `PUT /v1/listings/{id}/content`, sending only the missing parts under `address`. An empty object means readiness was not reported; it never means ready.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness? AddressReadiness { get; set; }
+        public global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness? AddressReadiness
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness?>("addressReadiness"); }
+            set { BackingStore?.Set("addressReadiness", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness AddressReadiness { get; set; }
+        public global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness AddressReadiness
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPublishStatusResponse_addressReadiness>("addressReadiness"); }
+            set { BackingStore?.Set("addressReadiness", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Sync activity per channel — empty if the listing has never been pushed/pulled. Empty does NOT mean &quot;not connected&quot;; check `connections` for that.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingPublishStatusChannel>? Channels { get; set; }
+        public List<global::Repull.SDK.Models.ListingPublishStatusChannel>? Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingPublishStatusChannel>?>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingPublishStatusChannel> Channels { get; set; }
+        public List<global::Repull.SDK.Models.ListingPublishStatusChannel> Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingPublishStatusChannel>>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #endif
         /// <summary>Connection state per channel. Populated even when `channels` is empty so callers can distinguish &quot;owned, never pushed&quot; from &quot;owned, never connected&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingPublishStatusConnection>? Connections { get; set; }
+        public List<global::Repull.SDK.Models.ListingPublishStatusConnection>? Connections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingPublishStatusConnection>?>("connections"); }
+            set { BackingStore?.Set("connections", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingPublishStatusConnection> Connections { get; set; }
+        public List<global::Repull.SDK.Models.ListingPublishStatusConnection> Connections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingPublishStatusConnection>>("connections"); }
+            set { BackingStore?.Set("connections", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPublishStatusResponse"/> and sets the default values.
         /// </summary>
         public ListingPublishStatusResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

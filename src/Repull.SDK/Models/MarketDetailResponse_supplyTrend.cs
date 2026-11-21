@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,26 +10,45 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MarketDetailResponse_supplyTrend : IAdditionalDataHolder, IParsable
+    public partial class MarketDetailResponse_supplyTrend : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The month property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Month { get; set; }
+        public string? Month
+        {
+            get { return BackingStore?.Get<string?>("month"); }
+            set { BackingStore?.Set("month", value); }
+        }
 #nullable restore
 #else
-        public string Month { get; set; }
+        public string Month
+        {
+            get { return BackingStore?.Get<string>("month"); }
+            set { BackingStore?.Set("month", value); }
+        }
 #endif
         /// <summary>The new_listings property</summary>
-        public int? NewListings { get; set; }
+        public int? NewListings
+        {
+            get { return BackingStore?.Get<int?>("new_listings"); }
+            set { BackingStore?.Set("new_listings", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketDetailResponse_supplyTrend"/> and sets the default values.
         /// </summary>
         public MarketDetailResponse_supplyTrend()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

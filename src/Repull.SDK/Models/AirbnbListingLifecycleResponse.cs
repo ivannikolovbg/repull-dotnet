@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,39 +12,78 @@ namespace Repull.SDK.Models
     /// Result of `unlist` / `relist`. Reports the state of the LIVE Airbnb listing. The Repull record&apos;s own `active` flag is untouched by both and is deliberately not echoed here, so the two ideas cannot be read as one field.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbListingLifecycleResponse : IAdditionalDataHolder, IParsable
+    public partial class AirbnbListingLifecycleResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The action property</summary>
-        public global::Repull.SDK.Models.AirbnbListingLifecycleResponse_action? Action { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingLifecycleResponse_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingLifecycleResponse_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The airbnbConnectionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbConnectionId { get; set; }
+        public string? AirbnbConnectionId
+        {
+            get { return BackingStore?.Get<string?>("airbnbConnectionId"); }
+            set { BackingStore?.Set("airbnbConnectionId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbConnectionId { get; set; }
+        public string AirbnbConnectionId
+        {
+            get { return BackingStore?.Get<string>("airbnbConnectionId"); }
+            set { BackingStore?.Set("airbnbConnectionId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.Models.AirbnbListingLifecycleResponse_channel? Channel { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingLifecycleResponse_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingLifecycleResponse_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>Repull listing id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Whether the Airbnb listing is taking bookings after this call. `false` after `unlist`, `true` after `relist`.</summary>
-        public bool? Live { get; set; }
+        public bool? Live
+        {
+            get { return BackingStore?.Get<bool?>("live"); }
+            set { BackingStore?.Set("live", value); }
+        }
         /// <summary>True when the result was confirmed by reading the listing back from Airbnb, on `unlist` and `relist` alike: Airbnb accepting the call is not proof the listing came down or went live. `false` means the read-back could not run — an unknown, not a success. A read-back that shows the wrong state is returned as an error, not as `verified: false`.</summary>
-        public bool? Verified { get; set; }
+        public bool? Verified
+        {
+            get { return BackingStore?.Get<bool?>("verified"); }
+            set { BackingStore?.Set("verified", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/> and sets the default values.
         /// </summary>
         public AirbnbListingLifecycleResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

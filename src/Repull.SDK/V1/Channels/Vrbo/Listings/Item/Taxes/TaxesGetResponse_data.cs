@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,41 +12,76 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes
     /// The section as Vrbo has it now.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class TaxesGetResponse_data : IAdditionalDataHolder, IParsable
+    public partial class TaxesGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Vrbo&apos;s tax settings as Vrbo returns them — the shape a write takes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? Raw { get; set; }
+        public UntypedNode? Raw
+        {
+            get { return BackingStore?.Get<UntypedNode?>("raw"); }
+            set { BackingStore?.Set("raw", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode Raw { get; set; }
+        public UntypedNode Raw
+        {
+            get { return BackingStore?.Get<UntypedNode>("raw"); }
+            set { BackingStore?.Set("raw", value); }
+        }
 #endif
         /// <summary>The rules property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data_rules>? Rules { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data_rules>? Rules
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data_rules>?>("rules"); }
+            set { BackingStore?.Set("rules", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data_rules> Rules { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data_rules> Rules
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data_rules>>("rules"); }
+            set { BackingStore?.Set("rules", value); }
+        }
 #endif
         /// <summary>The taxSource property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TaxSource { get; set; }
+        public string? TaxSource
+        {
+            get { return BackingStore?.Get<string?>("taxSource"); }
+            set { BackingStore?.Set("taxSource", value); }
+        }
 #nullable restore
 #else
-        public string TaxSource { get; set; }
+        public string TaxSource
+        {
+            get { return BackingStore?.Get<string>("taxSource"); }
+            set { BackingStore?.Set("taxSource", value); }
+        }
 #endif
         /// <summary>The vrboCollects property</summary>
-        public bool? VrboCollects { get; set; }
+        public bool? VrboCollects
+        {
+            get { return BackingStore?.Get<bool?>("vrboCollects"); }
+            set { BackingStore?.Set("vrboCollects", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesGetResponse_data"/> and sets the default values.
         /// </summary>
         public TaxesGetResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

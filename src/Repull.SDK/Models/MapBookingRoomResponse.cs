@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,79 +12,158 @@ namespace Repull.SDK.Models
     /// Id fields are strings (API-wide convention — bigint ids are stringified to avoid 53-bit JS-number precision loss).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MapBookingRoomResponse : IAdditionalDataHolder, IParsable
+    public partial class MapBookingRoomResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>True when the room already pointed at this listing (or was already unmapped) and its channel link agreed. Nothing was written.</summary>
-        public bool? AlreadyMapped { get; set; }
+        public bool? AlreadyMapped
+        {
+            get { return BackingStore?.Get<bool?>("alreadyMapped"); }
+            set { BackingStore?.Set("alreadyMapped", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The Booking.com property the room belongs to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The listing the room now points at. Null after an unmap.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Id of the resulting channel-link row. Null after an unmap, and for a room Booking.com has given us no room id for.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PlatformLinkId { get; set; }
+        public string? PlatformLinkId
+        {
+            get { return BackingStore?.Get<string?>("platformLinkId"); }
+            set { BackingStore?.Set("platformLinkId", value); }
+        }
 #nullable restore
 #else
-        public string PlatformLinkId { get; set; }
+        public string PlatformLinkId
+        {
+            get { return BackingStore?.Get<string>("platformLinkId"); }
+            set { BackingStore?.Set("platformLinkId", value); }
+        }
 #endif
         /// <summary>The listing the room pointed at before this call; null when it was unmapped. Omitted on a no-op.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PreviousListingId { get; set; }
+        public string? PreviousListingId
+        {
+            get { return BackingStore?.Get<string?>("previousListingId"); }
+            set { BackingStore?.Set("previousListingId", value); }
+        }
 #nullable restore
 #else
-        public string PreviousListingId { get; set; }
+        public string PreviousListingId
+        {
+            get { return BackingStore?.Get<string>("previousListingId"); }
+            set { BackingStore?.Set("previousListingId", value); }
+        }
 #endif
         /// <summary>How many reservations Booking.com returned for the property. Equal to `reservationsImported` unless some could not be attached — so `0` here means Booking.com had none. Same `null` / absent rules as `reservationsImported`.</summary>
-        public int? ReservationsFound { get; set; }
+        public int? ReservationsFound
+        {
+            get { return BackingStore?.Get<int?>("reservationsFound"); }
+            set { BackingStore?.Set("reservationsFound", value); }
+        }
         /// <summary>Reservations Booking.com returned for the property and ran through the import after the room was mapped — the property&apos;s active bookings, which would otherwise never reach the listing. A reservation already present is left as it is, so this counts what was processed, not what was new, and re-sending never duplicates. Runs on every successful map, including a re-map to the same listing, so re-sending retries an import that did not run. `null` means the mapping succeeded but the import could not run; the room is still mapped. Absent after an unmap, when there is nothing to pull.</summary>
-        public int? ReservationsImported { get; set; }
+        public int? ReservationsImported
+        {
+            get { return BackingStore?.Get<int?>("reservationsImported"); }
+            set { BackingStore?.Set("reservationsImported", value); }
+        }
         /// <summary>Booking.com&apos;s room id, as recorded for this room.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomBookingId { get; set; }
+        public string? RoomBookingId
+        {
+            get { return BackingStore?.Get<string?>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #nullable restore
 #else
-        public string RoomBookingId { get; set; }
+        public string RoomBookingId
+        {
+            get { return BackingStore?.Get<string>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #endif
         /// <summary>Repull-side id of the room record — the `roomId` the Connect room-mapping flow takes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
         /// <summary>The roomName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomName { get; set; }
+        public string? RoomName
+        {
+            get { return BackingStore?.Get<string?>("roomName"); }
+            set { BackingStore?.Set("roomName", value); }
+        }
 #nullable restore
 #else
-        public string RoomName { get; set; }
+        public string RoomName
+        {
+            get { return BackingStore?.Get<string>("roomName"); }
+            set { BackingStore?.Set("roomName", value); }
+        }
 #endif
         /// <summary>The success property</summary>
-        public bool? Success { get; set; }
+        public bool? Success
+        {
+            get { return BackingStore?.Get<bool?>("success"); }
+            set { BackingStore?.Set("success", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MapBookingRoomResponse"/> and sets the default values.
         /// </summary>
         public MapBookingRoomResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

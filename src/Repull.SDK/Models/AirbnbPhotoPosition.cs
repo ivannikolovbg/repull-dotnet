@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,25 +12,44 @@ namespace Repull.SDK.Models
     /// One photo&apos;s position in the tour. `sortOrder` is a relative sort key, not an address — lower sorts earlier.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbPhotoPosition : IAdditionalDataHolder, IParsable
+    public partial class AirbnbPhotoPosition : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb-side photo id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PhotoId { get; set; }
+        public string? PhotoId
+        {
+            get { return BackingStore?.Get<string?>("photoId"); }
+            set { BackingStore?.Set("photoId", value); }
+        }
 #nullable restore
 #else
-        public string PhotoId { get; set; }
+        public string PhotoId
+        {
+            get { return BackingStore?.Get<string>("photoId"); }
+            set { BackingStore?.Set("photoId", value); }
+        }
 #endif
         /// <summary>Position in the tour, 1 first.</summary>
-        public int? SortOrder { get; set; }
+        public int? SortOrder
+        {
+            get { return BackingStore?.Get<int?>("sortOrder"); }
+            set { BackingStore?.Set("sortOrder", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPhotoPosition"/> and sets the default values.
         /// </summary>
         public AirbnbPhotoPosition()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

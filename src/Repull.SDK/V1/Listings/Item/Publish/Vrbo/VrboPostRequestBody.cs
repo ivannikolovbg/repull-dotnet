@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,41 +10,82 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class VrboPostRequestBody : IParsable
+    public partial class VrboPostRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The Vrbo account, as its handle (`&quot;vrbo:7001234&quot;`, Vrbo&apos;s own account id) or the bare id. Needed only when the workspace has several. The old sign-in ids (`&quot;vrbo:13&quot;`) still resolve until 2027-02-12.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Finish this unpublished Vrbo property (from a failed run&apos;s `job.propertyId`) instead of starting a new one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #endif
         /// <summary>Update only: push just these sections (default: all of them).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections?>? Sections { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections?>? Sections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections?>?>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections?> Sections { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections?> Sections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody_sections?>>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #endif
         /// <summary>Update only: the Vrbo listing to push to, when the listing is linked to several.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? VrboListingNumber { get; set; }
+        public string? VrboListingNumber
+        {
+            get { return BackingStore?.Get<string?>("vrboListingNumber"); }
+            set { BackingStore?.Set("vrboListingNumber", value); }
+        }
 #nullable restore
 #else
-        public string VrboListingNumber { get; set; }
+        public string VrboListingNumber
+        {
+            get { return BackingStore?.Get<string>("vrboListingNumber"); }
+            set { BackingStore?.Set("vrboListingNumber", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboPostRequestBody"/> and sets the default values.
+        /// </summary>
+        public VrboPostRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

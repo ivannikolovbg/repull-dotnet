@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,94 @@ namespace Repull.SDK.Models
     /// The read-back. Booking.com&apos;s answer to a rate write is an acknowledgement of the request with no per-date status, so the dates are read back to find out what is actually live.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingRateWriteVerification : IAdditionalDataHolder, IParsable
+    public partial class BookingRateWriteVerification : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Present when the read itself failed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The matched property</summary>
-        public int? Matched { get; set; }
+        public int? Matched
+        {
+            get { return BackingStore?.Get<int?>("matched"); }
+            set { BackingStore?.Set("matched", value); }
+        }
         /// <summary>The mismatched property</summary>
-        public int? Mismatched { get; set; }
+        public int? Mismatched
+        {
+            get { return BackingStore?.Get<int?>("mismatched"); }
+            set { BackingStore?.Set("mismatched", value); }
+        }
         /// <summary>Whether the read-back happened.</summary>
-        public bool? Ran { get; set; }
+        public bool? Ran
+        {
+            get { return BackingStore?.Get<bool?>("ran"); }
+            set { BackingStore?.Set("ran", value); }
+        }
         /// <summary>One row per night. When a write covers more than 62 rows, only the nights that did NOT match are listed and `rowsOmitted` counts the rest — `matched` and `mismatched` always cover every night.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingRateWriteVerificationRow>? Rows { get; set; }
+        public List<global::Repull.SDK.Models.BookingRateWriteVerificationRow>? Rows
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRateWriteVerificationRow>?>("rows"); }
+            set { BackingStore?.Set("rows", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingRateWriteVerificationRow> Rows { get; set; }
+        public List<global::Repull.SDK.Models.BookingRateWriteVerificationRow> Rows
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRateWriteVerificationRow>>("rows"); }
+            set { BackingStore?.Set("rows", value); }
+        }
 #endif
         /// <summary>Matching nights left out of `rows` on a long write. Absent when every row is listed.</summary>
-        public int? RowsOmitted { get; set; }
+        public int? RowsOmitted
+        {
+            get { return BackingStore?.Get<int?>("rowsOmitted"); }
+            set { BackingStore?.Set("rowsOmitted", value); }
+        }
         /// <summary>Why it did not: `not_requested` (you sent `verify: false`), `all_dates_beyond_booking_horizon`, `read_back_failed`, `nothing_to_verify`. Every night of a write is read back, however long the range (a year is read in 31-day chunks, in parallel).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SkippedReason { get; set; }
+        public string? SkippedReason
+        {
+            get { return BackingStore?.Get<string?>("skippedReason"); }
+            set { BackingStore?.Set("skippedReason", value); }
+        }
 #nullable restore
 #else
-        public string SkippedReason { get; set; }
+        public string SkippedReason
+        {
+            get { return BackingStore?.Get<string>("skippedReason"); }
+            set { BackingStore?.Set("skippedReason", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRateWriteVerification"/> and sets the default values.
         /// </summary>
         public BookingRateWriteVerification()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,27 +12,50 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location
     /// What Vrbo has stored for the section, read back after the write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class LocationPutResponse_data : IAdditionalDataHolder, IParsable
+    public partial class LocationPutResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The address (read-only: Vrbo changes it only through its support).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? Address { get; set; }
+        public UntypedNode? Address
+        {
+            get { return BackingStore?.Get<UntypedNode?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode Address { get; set; }
+        public UntypedNode Address
+        {
+            get { return BackingStore?.Get<UntypedNode>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #endif
         /// <summary>The addressEditable property</summary>
-        public bool? AddressEditable { get; set; }
+        public bool? AddressEditable
+        {
+            get { return BackingStore?.Get<bool?>("addressEditable"); }
+            set { BackingStore?.Set("addressEditable", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The showExactLocation property</summary>
-        public bool? ShowExactLocation { get; set; }
+        public bool? ShowExactLocation
+        {
+            get { return BackingStore?.Get<bool?>("showExactLocation"); }
+            set { BackingStore?.Set("showExactLocation", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Location.LocationPutResponse_data"/> and sets the default values.
         /// </summary>
         public LocationPutResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

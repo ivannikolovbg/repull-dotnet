@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,70 +10,145 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingPolicies : IAdditionalDataHolder, IParsable
+    public partial class ListingPolicies : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The allowsChildren property</summary>
-        public bool? AllowsChildren { get; set; }
+        public bool? AllowsChildren
+        {
+            get { return BackingStore?.Get<bool?>("allowsChildren"); }
+            set { BackingStore?.Set("allowsChildren", value); }
+        }
         /// <summary>The allowsEvents property</summary>
-        public bool? AllowsEvents { get; set; }
+        public bool? AllowsEvents
+        {
+            get { return BackingStore?.Get<bool?>("allowsEvents"); }
+            set { BackingStore?.Set("allowsEvents", value); }
+        }
         /// <summary>The allowsInfants property</summary>
-        public bool? AllowsInfants { get; set; }
+        public bool? AllowsInfants
+        {
+            get { return BackingStore?.Get<bool?>("allowsInfants"); }
+            set { BackingStore?.Set("allowsInfants", value); }
+        }
         /// <summary>The allowsPets property</summary>
-        public bool? AllowsPets { get; set; }
+        public bool? AllowsPets
+        {
+            get { return BackingStore?.Get<bool?>("allowsPets"); }
+            set { BackingStore?.Set("allowsPets", value); }
+        }
         /// <summary>The allowsSmoking property</summary>
-        public bool? AllowsSmoking { get; set; }
+        public bool? AllowsSmoking
+        {
+            get { return BackingStore?.Get<bool?>("allowsSmoking"); }
+            set { BackingStore?.Set("allowsSmoking", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cancellationPolicy property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CancellationPolicy { get; set; }
+        public string? CancellationPolicy
+        {
+            get { return BackingStore?.Get<string?>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
 #nullable restore
 #else
-        public string CancellationPolicy { get; set; }
+        public string CancellationPolicy
+        {
+            get { return BackingStore?.Get<string>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
 #endif
         /// <summary>The checkIn property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPolicies_checkIn? CheckIn { get; set; }
+        public global::Repull.SDK.Models.ListingPolicies_checkIn? CheckIn
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPolicies_checkIn?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPolicies_checkIn CheckIn { get; set; }
+        public global::Repull.SDK.Models.ListingPolicies_checkIn CheckIn
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPolicies_checkIn>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
 #endif
         /// <summary>The checkOut property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPolicies_checkOut? CheckOut { get; set; }
+        public global::Repull.SDK.Models.ListingPolicies_checkOut? CheckOut
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPolicies_checkOut?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPolicies_checkOut CheckOut { get; set; }
+        public global::Repull.SDK.Models.ListingPolicies_checkOut CheckOut
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPolicies_checkOut>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
 #endif
         /// <summary>The childrenMinAge property</summary>
-        public int? ChildrenMinAge { get; set; }
+        public int? ChildrenMinAge
+        {
+            get { return BackingStore?.Get<int?>("childrenMinAge"); }
+            set { BackingStore?.Set("childrenMinAge", value); }
+        }
         /// <summary>The houseRules property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HouseRules { get; set; }
+        public string? HouseRules
+        {
+            get { return BackingStore?.Get<string?>("houseRules"); }
+            set { BackingStore?.Set("houseRules", value); }
+        }
 #nullable restore
 #else
-        public string HouseRules { get; set; }
+        public string HouseRules
+        {
+            get { return BackingStore?.Get<string>("houseRules"); }
+            set { BackingStore?.Set("houseRules", value); }
+        }
 #endif
         /// <summary>The quietHours property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPolicies_quietHours? QuietHours { get; set; }
+        public global::Repull.SDK.Models.ListingPolicies_quietHours? QuietHours
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPolicies_quietHours?>("quietHours"); }
+            set { BackingStore?.Set("quietHours", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPolicies_quietHours QuietHours { get; set; }
+        public global::Repull.SDK.Models.ListingPolicies_quietHours QuietHours
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPolicies_quietHours>("quietHours"); }
+            set { BackingStore?.Set("quietHours", value); }
+        }
 #endif
         /// <summary>In the listing currency.</summary>
-        public double? SecurityDeposit { get; set; }
+        public double? SecurityDeposit
+        {
+            get { return BackingStore?.Get<double?>("securityDeposit"); }
+            set { BackingStore?.Set("securityDeposit", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPolicies"/> and sets the default values.
         /// </summary>
         public ListingPolicies()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

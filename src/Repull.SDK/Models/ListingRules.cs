@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,36 +10,75 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingRules : IAdditionalDataHolder, IParsable
+    public partial class ListingRules : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Hours of notice required before check-in.</summary>
-        public int? AdvanceNoticeHours { get; set; }
+        public int? AdvanceNoticeHours
+        {
+            get { return BackingStore?.Get<int?>("advanceNoticeHours"); }
+            set { BackingStore?.Set("advanceNoticeHours", value); }
+        }
         /// <summary>Whether guests may send a booking request inside the notice window.</summary>
-        public bool? AllowsBookingRequests { get; set; }
+        public bool? AllowsBookingRequests
+        {
+            get { return BackingStore?.Get<bool?>("allowsBookingRequests"); }
+            set { BackingStore?.Set("allowsBookingRequests", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>How far ahead a guest can book. `null` when unlimited or not set.</summary>
-        public int? BookingWindowDays { get; set; }
+        public int? BookingWindowDays
+        {
+            get { return BackingStore?.Get<int?>("bookingWindowDays"); }
+            set { BackingStore?.Set("bookingWindowDays", value); }
+        }
         /// <summary>The instantBook property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InstantBook { get; set; }
+        public string? InstantBook
+        {
+            get { return BackingStore?.Get<string?>("instantBook"); }
+            set { BackingStore?.Set("instantBook", value); }
+        }
 #nullable restore
 #else
-        public string InstantBook { get; set; }
+        public string InstantBook
+        {
+            get { return BackingStore?.Get<string>("instantBook"); }
+            set { BackingStore?.Set("instantBook", value); }
+        }
 #endif
         /// <summary>The maxNights property</summary>
-        public int? MaxNights { get; set; }
+        public int? MaxNights
+        {
+            get { return BackingStore?.Get<int?>("maxNights"); }
+            set { BackingStore?.Set("maxNights", value); }
+        }
         /// <summary>The minNights property</summary>
-        public int? MinNights { get; set; }
+        public int? MinNights
+        {
+            get { return BackingStore?.Get<int?>("minNights"); }
+            set { BackingStore?.Set("minNights", value); }
+        }
         /// <summary>Nights blocked between stays.</summary>
-        public int? PreparationDays { get; set; }
+        public int? PreparationDays
+        {
+            get { return BackingStore?.Get<int?>("preparationDays"); }
+            set { BackingStore?.Set("preparationDays", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingRules"/> and sets the default values.
         /// </summary>
         public ListingRules()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

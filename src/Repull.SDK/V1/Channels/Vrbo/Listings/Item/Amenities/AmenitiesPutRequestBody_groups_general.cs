@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,17 +10,34 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AmenitiesPutRequestBody_groups_general : IParsable
+    public partial class AmenitiesPutRequestBody_groups_general : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`{fieldId: value}`</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general_values? Values { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general_values? Values
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general_values?>("values"); }
+            set { BackingStore?.Set("values", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general_values Values { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general_values Values
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general_values>("values"); }
+            set { BackingStore?.Set("values", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general"/> and sets the default values.
+        /// </summary>
+        public AmenitiesPutRequestBody_groups_general()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

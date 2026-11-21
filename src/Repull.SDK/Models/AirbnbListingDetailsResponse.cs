@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,97 +12,196 @@ namespace Repull.SDK.Models
     /// The Airbnb-side detail row(s) for the listing, from the local mirror. One entry per Airbnb connection.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbListingDetailsResponse : IAdditionalDataHolder, IParsable
+    public partial class AirbnbListingDetailsResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bathrooms property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Bathrooms { get; set; }
+        public string? Bathrooms
+        {
+            get { return BackingStore?.Get<string?>("bathrooms"); }
+            set { BackingStore?.Set("bathrooms", value); }
+        }
 #nullable restore
 #else
-        public string Bathrooms { get; set; }
+        public string Bathrooms
+        {
+            get { return BackingStore?.Get<string>("bathrooms"); }
+            set { BackingStore?.Set("bathrooms", value); }
+        }
 #endif
         /// <summary>The bedrooms property</summary>
-        public int? Bedrooms { get; set; }
+        public int? Bedrooms
+        {
+            get { return BackingStore?.Get<int?>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
         /// <summary>The beds property</summary>
-        public int? Beds { get; set; }
+        public int? Beds
+        {
+            get { return BackingStore?.Get<int?>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
         /// <summary>`{ category, instruction }` — how the guest gets in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbListingDetailsResponse_checkInOption? CheckInOption { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingDetailsResponse_checkInOption? CheckInOption
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingDetailsResponse_checkInOption?>("checkInOption"); }
+            set { BackingStore?.Set("checkInOption", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbListingDetailsResponse_checkInOption CheckInOption { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingDetailsResponse_checkInOption CheckInOption
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingDetailsResponse_checkInOption>("checkInOption"); }
+            set { BackingStore?.Set("checkInOption", value); }
+        }
 #endif
         /// <summary>Whether the Airbnb listing is live. `false` means unlisted on Airbnb — unrelated to the Repull record being active.</summary>
-        public bool? HasAvailability { get; set; }
+        public bool? HasAvailability
+        {
+            get { return BackingStore?.Get<bool?>("hasAvailability"); }
+            set { BackingStore?.Set("hasAvailability", value); }
+        }
         /// <summary>The listingAirbnbId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingAirbnbId { get; set; }
+        public string? ListingAirbnbId
+        {
+            get { return BackingStore?.Get<string?>("listingAirbnbId"); }
+            set { BackingStore?.Set("listingAirbnbId", value); }
+        }
 #nullable restore
 #else
-        public string ListingAirbnbId { get; set; }
+        public string ListingAirbnbId
+        {
+            get { return BackingStore?.Get<string>("listingAirbnbId"); }
+            set { BackingStore?.Set("listingAirbnbId", value); }
+        }
 #endif
         /// <summary>The listingNickname property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingNickname { get; set; }
+        public string? ListingNickname
+        {
+            get { return BackingStore?.Get<string?>("listingNickname"); }
+            set { BackingStore?.Set("listingNickname", value); }
+        }
 #nullable restore
 #else
-        public string ListingNickname { get; set; }
+        public string ListingNickname
+        {
+            get { return BackingStore?.Get<string>("listingNickname"); }
+            set { BackingStore?.Set("listingNickname", value); }
+        }
 #endif
         /// <summary>Attributes Airbnb refuses to change on this listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? LockedFields { get; set; }
+        public List<string>? LockedFields
+        {
+            get { return BackingStore?.Get<List<string>?>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #nullable restore
 #else
-        public List<string> LockedFields { get; set; }
+        public List<string> LockedFields
+        {
+            get { return BackingStore?.Get<List<string>>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The personCapacity property</summary>
-        public int? PersonCapacity { get; set; }
+        public int? PersonCapacity
+        {
+            get { return BackingStore?.Get<int?>("personCapacity"); }
+            set { BackingStore?.Set("personCapacity", value); }
+        }
         /// <summary>The propertyTypeCategory property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyTypeCategory { get; set; }
+        public string? PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string?>("propertyTypeCategory"); }
+            set { BackingStore?.Set("propertyTypeCategory", value); }
+        }
 #nullable restore
 #else
-        public string PropertyTypeCategory { get; set; }
+        public string PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string>("propertyTypeCategory"); }
+            set { BackingStore?.Set("propertyTypeCategory", value); }
+        }
 #endif
         /// <summary>The propertyTypeGroup property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyTypeGroup { get; set; }
+        public string? PropertyTypeGroup
+        {
+            get { return BackingStore?.Get<string?>("propertyTypeGroup"); }
+            set { BackingStore?.Set("propertyTypeGroup", value); }
+        }
 #nullable restore
 #else
-        public string PropertyTypeGroup { get; set; }
+        public string PropertyTypeGroup
+        {
+            get { return BackingStore?.Get<string>("propertyTypeGroup"); }
+            set { BackingStore?.Set("propertyTypeGroup", value); }
+        }
 #endif
         /// <summary>The roomTypeCategory property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomTypeCategory { get; set; }
+        public string? RoomTypeCategory
+        {
+            get { return BackingStore?.Get<string?>("roomTypeCategory"); }
+            set { BackingStore?.Set("roomTypeCategory", value); }
+        }
 #nullable restore
 #else
-        public string RoomTypeCategory { get; set; }
+        public string RoomTypeCategory
+        {
+            get { return BackingStore?.Get<string>("roomTypeCategory"); }
+            set { BackingStore?.Set("roomTypeCategory", value); }
+        }
 #endif
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListingDetailsResponse"/> and sets the default values.
         /// </summary>
         public AirbnbListingDetailsResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

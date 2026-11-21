@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,29 +12,56 @@ namespace Repull.SDK.Models
     /// One stage of an account import (e.g. `reservations`). The stage is done when `done + failed` reaches `expected`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AccountImportStage : IAdditionalDataHolder, IParsable
+    public partial class AccountImportStage : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The done property</summary>
-        public int? Done { get; set; }
+        public int? Done
+        {
+            get { return BackingStore?.Get<int?>("done"); }
+            set { BackingStore?.Set("done", value); }
+        }
         /// <summary>Units of work in this stage (one per page, chunk, listing or thread, depending on the channel). `null` until the stage knows its size.</summary>
-        public int? Expected { get; set; }
+        public int? Expected
+        {
+            get { return BackingStore?.Get<int?>("expected"); }
+            set { BackingStore?.Set("expected", value); }
+        }
         /// <summary>The failed property</summary>
-        public int? Failed { get; set; }
+        public int? Failed
+        {
+            get { return BackingStore?.Get<int?>("failed"); }
+            set { BackingStore?.Set("failed", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AccountImportStage"/> and sets the default values.
         /// </summary>
         public AccountImportStage()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

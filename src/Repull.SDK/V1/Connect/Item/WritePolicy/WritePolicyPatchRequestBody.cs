@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,54 @@ namespace Repull.SDK.V1.Connect.Item.WritePolicy
     /// Only the switches you send change. Every value must be a boolean.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WritePolicyPatchRequestBody : IAdditionalDataHolder, IParsable
+    public partial class WritePolicyPatchRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The calendar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_calendar? Calendar { get; set; }
+        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_calendar? Calendar
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_calendar?>("calendar"); }
+            set { BackingStore?.Set("calendar", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_calendar Calendar { get; set; }
+        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_calendar Calendar
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_calendar>("calendar"); }
+            set { BackingStore?.Set("calendar", value); }
+        }
 #endif
         /// <summary>The reservations property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_reservations? Reservations { get; set; }
+        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_reservations? Reservations
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_reservations?>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_reservations Reservations { get; set; }
+        public global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_reservations Reservations
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody_reservations>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchRequestBody"/> and sets the default values.
         /// </summary>
         public WritePolicyPatchRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

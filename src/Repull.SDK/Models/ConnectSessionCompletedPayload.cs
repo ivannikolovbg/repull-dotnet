@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,53 +12,104 @@ namespace Repull.SDK.Models
     /// Payload for `connect.session.completed`. A user finished a Connect session, on any channel or PMS. Use `state` (your token from session creation) or `sessionId` to tie the connection to your own user; the account it names is keyed the same way as every other event&apos;s `account` block.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConnectSessionCompletedPayload : IAdditionalDataHolder, IParsable
+    public partial class ConnectSessionCompletedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The completedAt property</summary>
-        public DateTimeOffset? CompletedAt { get; set; }
+        public DateTimeOffset? CompletedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("completedAt"); }
+            set { BackingStore?.Set("completedAt", value); }
+        }
         /// <summary>Our connection record id: the `X-Account-Id` value, the same as `account.id`. `null` only when the account has no connection record (e.g. a Vrbo sign-in in a workspace with no Vrbo connection).</summary>
-        public int? ConnectionId { get; set; }
+        public int? ConnectionId
+        {
+            get { return BackingStore?.Get<int?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
         /// <summary>The platform&apos;s own account id: Airbnb host id; Booking.com hotel id (`booking`); the Booking.com account id behind the Extranet login (`booking_extranet`); Vrbo&apos;s account id (`vrbo`); the PMS&apos;s own account or company id. `null` when the platform id is not known yet (a Vrbo sign-in before its account id is captured, a PMS that does not expose one); never a Repull id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalAccountId { get; set; }
+        public string? ExternalAccountId
+        {
+            get { return BackingStore?.Get<string?>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalAccountId { get; set; }
+        public string ExternalAccountId
+        {
+            get { return BackingStore?.Get<string>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #endif
         /// <summary>Channel or PMS: airbnb, booking, booking_extranet, vrbo, hostaway, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The purpose property</summary>
-        public global::Repull.SDK.Models.ConnectSessionCompletedPayload_purpose? Purpose { get; set; }
+        public global::Repull.SDK.Models.ConnectSessionCompletedPayload_purpose? Purpose
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectSessionCompletedPayload_purpose?>("purpose"); }
+            set { BackingStore?.Set("purpose", value); }
+        }
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SessionId { get; set; }
+        public string? SessionId
+        {
+            get { return BackingStore?.Get<string?>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #nullable restore
 #else
-        public string SessionId { get; set; }
+        public string SessionId
+        {
+            get { return BackingStore?.Get<string>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #endif
         /// <summary>The `state` you passed when creating the session.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get; set; }
+        public string? State
+        {
+            get { return BackingStore?.Get<string?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #nullable restore
 #else
-        public string State { get; set; }
+        public string State
+        {
+            get { return BackingStore?.Get<string>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectSessionCompletedPayload"/> and sets the default values.
         /// </summary>
         public ConnectSessionCompletedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

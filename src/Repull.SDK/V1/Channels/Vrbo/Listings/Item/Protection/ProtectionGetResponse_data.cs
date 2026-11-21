@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,49 +12,92 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection
     /// The section as Vrbo has it now.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ProtectionGetResponse_data : IAdditionalDataHolder, IParsable
+    public partial class ProtectionGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The damageCoverageEnabled property</summary>
-        public bool? DamageCoverageEnabled { get; set; }
+        public bool? DamageCoverageEnabled
+        {
+            get { return BackingStore?.Get<bool?>("damageCoverageEnabled"); }
+            set { BackingStore?.Set("damageCoverageEnabled", value); }
+        }
         /// <summary>The damageDeposit property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? DamageDeposit { get; set; }
+        public UntypedNode? DamageDeposit
+        {
+            get { return BackingStore?.Get<UntypedNode?>("damageDeposit"); }
+            set { BackingStore?.Set("damageDeposit", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode DamageDeposit { get; set; }
+        public UntypedNode DamageDeposit
+        {
+            get { return BackingStore?.Get<UntypedNode>("damageDeposit"); }
+            set { BackingStore?.Set("damageDeposit", value); }
+        }
 #endif
         /// <summary>The damageProtection property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? DamageProtection { get; set; }
+        public UntypedNode? DamageProtection
+        {
+            get { return BackingStore?.Get<UntypedNode?>("damageProtection"); }
+            set { BackingStore?.Set("damageProtection", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode DamageProtection { get; set; }
+        public UntypedNode DamageProtection
+        {
+            get { return BackingStore?.Get<UntypedNode>("damageProtection"); }
+            set { BackingStore?.Set("damageProtection", value); }
+        }
 #endif
         /// <summary>The options property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionGetResponse_data_options>? Options { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionGetResponse_data_options>? Options
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionGetResponse_data_options>?>("options"); }
+            set { BackingStore?.Set("options", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionGetResponse_data_options> Options { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionGetResponse_data_options> Options
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionGetResponse_data_options>>("options"); }
+            set { BackingStore?.Set("options", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection.ProtectionGetResponse_data"/> and sets the default values.
         /// </summary>
         public ProtectionGetResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

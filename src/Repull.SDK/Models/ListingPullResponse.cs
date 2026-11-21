@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,57 +12,116 @@ namespace Repull.SDK.Models
     /// What the pull refreshed, and when. `pulledAt` is the same timestamp `GET /v1/listings/{id}/publish-status` reports as the channel&apos;s `lastPulledAt`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPullResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingPullResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.Models.ListingPullResponse_channel? Channel { get; set; }
+        public global::Repull.SDK.Models.ListingPullResponse_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPullResponse_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>The channel connection the values came from.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The listing id on the channel (the Airbnb listing id).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalId { get; set; }
+        public string? ExternalId
+        {
+            get { return BackingStore?.Get<string?>("externalId"); }
+            set { BackingStore?.Set("externalId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalId { get; set; }
+        public string ExternalId
+        {
+            get { return BackingStore?.Get<string>("externalId"); }
+            set { BackingStore?.Set("externalId", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Minimum seconds between pulls of one listing.</summary>
-        public int? MinIntervalSeconds { get; set; }
+        public int? MinIntervalSeconds
+        {
+            get { return BackingStore?.Get<int?>("minIntervalSeconds"); }
+            set { BackingStore?.Set("minIntervalSeconds", value); }
+        }
         /// <summary>Earliest time another pull of this listing is accepted. Calling before then returns `429`.</summary>
-        public DateTimeOffset? NextPullAvailableAt { get; set; }
+        public DateTimeOffset? NextPullAvailableAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("nextPullAvailableAt"); }
+            set { BackingStore?.Set("nextPullAvailableAt", value); }
+        }
         /// <summary>When this refresh completed.</summary>
-        public DateTimeOffset? PulledAt { get; set; }
+        public DateTimeOffset? PulledAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("pulledAt"); }
+            set { BackingStore?.Set("pulledAt", value); }
+        }
         /// <summary>True when Airbnb itself answered and our stored copy was rewritten from that answer. False means Airbnb could not be read this time (expired grant, read-only host, upstream error) and the projection ran off the copy we already held — nothing is wrong with your data, it simply is not newer than it was. Check `GET /v1/listings/{id}/publish-status` when this is false.</summary>
-        public bool? RefreshedFromChannel { get; set; }
+        public bool? RefreshedFromChannel
+        {
+            get { return BackingStore?.Get<bool?>("refreshedFromChannel"); }
+            set { BackingStore?.Set("refreshedFromChannel", value); }
+        }
         /// <summary>Slabs that changed, e.g. `[&quot;details&quot;,&quot;description&quot;,&quot;photos&quot;,&quot;rooms&quot;,&quot;amenities&quot;,&quot;policies&quot;,&quot;pricing&quot;]`. An empty array means Airbnb agreed with everything we already held.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Sections { get; set; }
+        public List<string>? Sections
+        {
+            get { return BackingStore?.Get<List<string>?>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #nullable restore
 #else
-        public List<string> Sections { get; set; }
+        public List<string> Sections
+        {
+            get { return BackingStore?.Get<List<string>>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPullResponse"/> and sets the default values.
         /// </summary>
         public ListingPullResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

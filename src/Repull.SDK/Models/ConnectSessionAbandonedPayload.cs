@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,87 +12,174 @@ namespace Repull.SDK.Models
     /// Payload for `connect.session.abandoned`. A user opened a Connect session and never finished it — the link ran out, or the account was connected but its rooms were never mapped. Use `state` or `sessionId` to find your user, `reason` and `nextStep` to decide what to send them (usually a new Connect link). Sent once per session, only for sessions opened in the last 7 days.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConnectSessionAbandonedPayload : IAdditionalDataHolder, IParsable
+    public partial class ConnectSessionAbandonedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com Extranet in `awaiting_room_mapping`: the connection record of the connected login (the `X-Account-Id`). Absent otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>Booking.com: the Hotel ID the user entered while waiting for the Extranet approval. Booking.com Extranet in `awaiting_room_mapping`: the Booking.com account id of the connected login.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalAccountId { get; set; }
+        public string? ExternalAccountId
+        {
+            get { return BackingStore?.Get<string?>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalAccountId { get; set; }
+        public string ExternalAccountId
+        {
+            get { return BackingStore?.Get<string>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #endif
         /// <summary>Booking.com Extranet in `awaiting_room_mapping`: a durable link that reopens Connect on the room-mapping step for this login. Send the host there to finish. `null` when there is nothing to resume.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FixUrl { get; set; }
+        public string? FixUrl
+        {
+            get { return BackingStore?.Get<string?>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #nullable restore
 #else
-        public string FixUrl { get; set; }
+        public string FixUrl
+        {
+            get { return BackingStore?.Get<string>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #endif
         /// <summary>The lastActivityAt property</summary>
-        public DateTimeOffset? LastActivityAt { get; set; }
+        public DateTimeOffset? LastActivityAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastActivityAt"); }
+            set { BackingStore?.Set("lastActivityAt", value); }
+        }
         /// <summary>The last error the user hit on the Connect page, e.g. `invalid_credentials`, `awaiting_designation`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastErrorCode { get; set; }
+        public string? LastErrorCode
+        {
+            get { return BackingStore?.Get<string?>("lastErrorCode"); }
+            set { BackingStore?.Set("lastErrorCode", value); }
+        }
 #nullable restore
 #else
-        public string LastErrorCode { get; set; }
+        public string LastErrorCode
+        {
+            get { return BackingStore?.Get<string>("lastErrorCode"); }
+            set { BackingStore?.Set("lastErrorCode", value); }
+        }
 #endif
         /// <summary>What to tell the user, in plain English.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NextStep { get; set; }
+        public string? NextStep
+        {
+            get { return BackingStore?.Get<string?>("nextStep"); }
+            set { BackingStore?.Set("nextStep", value); }
+        }
 #nullable restore
 #else
-        public string NextStep { get; set; }
+        public string NextStep
+        {
+            get { return BackingStore?.Get<string>("nextStep"); }
+            set { BackingStore?.Set("nextStep", value); }
+        }
 #endif
         /// <summary>Channel or PMS the user picked: airbnb, booking, booking_extranet, vrbo, hostaway, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>`not_finished`: opened and left. `credentials_rejected`: the provider refused the key or token the user entered. `provider_approval_pending`: Booking.com never confirmed the property in the Extranet. `mapping_not_finished`: connected, rooms not mapped. `failed`: another error, see `lastErrorCode`.</summary>
-        public global::Repull.SDK.Models.ConnectSessionAbandonedPayload_reason? Reason { get; set; }
+        public global::Repull.SDK.Models.ConnectSessionAbandonedPayload_reason? Reason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectSessionAbandonedPayload_reason?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SessionId { get; set; }
+        public string? SessionId
+        {
+            get { return BackingStore?.Get<string?>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #nullable restore
 #else
-        public string SessionId { get; set; }
+        public string SessionId
+        {
+            get { return BackingStore?.Get<string>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #endif
         /// <summary>The `state` you passed when creating the session.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get; set; }
+        public string? State
+        {
+            get { return BackingStore?.Get<string?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #nullable restore
 #else
-        public string State { get; set; }
+        public string State
+        {
+            get { return BackingStore?.Get<string>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #endif
         /// <summary>`expired`: the link ran out before the user finished. `awaiting_room_mapping`: the account is connected; its rooms were never matched to listings.</summary>
-        public global::Repull.SDK.Models.ConnectSessionAbandonedPayload_status? Status { get; set; }
+        public global::Repull.SDK.Models.ConnectSessionAbandonedPayload_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectSessionAbandonedPayload_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectSessionAbandonedPayload"/> and sets the default values.
         /// </summary>
         public ConnectSessionAbandonedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

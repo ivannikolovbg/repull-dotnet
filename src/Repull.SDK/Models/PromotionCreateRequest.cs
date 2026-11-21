@@ -15,10 +15,18 @@ namespace Repull.SDK.Models
         /// <summary>Booking.com: required when the listing has a room on more than one property (see `properties` in the catalog).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,34 +10,61 @@ namespace Repull.SDK.V1.Channels.Booking.Messaging
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MessagingPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class MessagingPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com conversation id to reply in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get; set; }
+        public string? ConversationId
+        {
+            get { return BackingStore?.Get<string?>("conversation_id"); }
+            set { BackingStore?.Set("conversation_id", value); }
+        }
 #nullable restore
 #else
-        public string ConversationId { get; set; }
+        public string ConversationId
+        {
+            get { return BackingStore?.Get<string>("conversation_id"); }
+            set { BackingStore?.Set("conversation_id", value); }
+        }
 #endif
         /// <summary>Message body to send to the guest.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>Booking.com property (hotel) id the conversation belongs to.</summary>
-        public int? PropertyId { get; set; }
+        public int? PropertyId
+        {
+            get { return BackingStore?.Get<int?>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.Messaging.MessagingPostRequestBody"/> and sets the default values.
         /// </summary>
         public MessagingPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

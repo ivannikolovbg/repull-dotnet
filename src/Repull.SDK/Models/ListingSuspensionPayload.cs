@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// Payload for `listing.suspended` and `listing.reactivated`. A suspended listing keeps accepting calendar and pricing writes and silently applies none of them, which is indistinguishable from an API fault unless you are told. It is also the one listing change a host cannot reverse alone.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingSuspensionPayload : IAdditionalDataHolder, IParsable
+    public partial class ListingSuspensionPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The listing, in the shape `GET /v1/listings/{id}` returns. Hydrated at delivery, so a receiver gets the listing rather than a reason to fetch one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingWebhookObject? Object { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingWebhookObject Object { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>The occurredAt property</summary>
-        public DateTimeOffset? OccurredAt { get; set; }
+        public DateTimeOffset? OccurredAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("occurredAt"); }
+            set { BackingStore?.Set("occurredAt", value); }
+        }
         /// <summary>The channel&apos;s stated reason, verbatim, when it gives one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingSuspensionPayload"/> and sets the default values.
         /// </summary>
         public ListingSuspensionPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

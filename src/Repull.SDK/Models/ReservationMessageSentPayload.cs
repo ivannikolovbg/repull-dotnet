@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,151 +12,310 @@ namespace Repull.SDK.Models
     /// Payload for `reservation.message.sent`: a host-side message was sent on a reservation thread. Same fields as `reservation.message.received`, plus `source`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationMessageSentPayload : IAdditionalDataHolder, IParsable
+    public partial class ReservationMessageSentPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The aiGenerated property</summary>
-        public bool? AiGenerated { get; set; }
+        public bool? AiGenerated
+        {
+            get { return BackingStore?.Get<bool?>("aiGenerated"); }
+            set { BackingStore?.Set("aiGenerated", value); }
+        }
         /// <summary>The attachments property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments { get; set; }
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConversationMessageAttachment>?>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ConversationMessageAttachment> Attachments { get; set; }
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment> Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConversationMessageAttachment>>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The body property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get; set; }
+        public string? Body
+        {
+            get { return BackingStore?.Get<string?>("body"); }
+            set { BackingStore?.Set("body", value); }
+        }
 #nullable restore
 #else
-        public string Body { get; set; }
+        public string Body
+        {
+            get { return BackingStore?.Get<string>("body"); }
+            set { BackingStore?.Set("body", value); }
+        }
 #endif
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The direction property</summary>
-        public global::Repull.SDK.Models.ReservationMessageSentPayload_direction? Direction { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageSentPayload_direction? Direction
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageSentPayload_direction?>("direction"); }
+            set { BackingStore?.Set("direction", value); }
+        }
         /// <summary>The channel&apos;s own message id. Dedupe on it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalMessageId { get; set; }
+        public string? ExternalMessageId
+        {
+            get { return BackingStore?.Get<string?>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalMessageId { get; set; }
+        public string ExternalMessageId
+        {
+            get { return BackingStore?.Get<string>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #endif
         /// <summary>The channel&apos;s own thread id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalThreadId { get; set; }
+        public string? ExternalThreadId
+        {
+            get { return BackingStore?.Get<string?>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalThreadId { get; set; }
+        public string ExternalThreadId
+        {
+            get { return BackingStore?.Get<string>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #endif
         /// <summary>The from property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationMessageSentPayload_from? From { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageSentPayload_from? From
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageSentPayload_from?>("from"); }
+            set { BackingStore?.Set("from", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationMessageSentPayload_from From { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageSentPayload_from From
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageSentPayload_from>("from"); }
+            set { BackingStore?.Set("from", value); }
+        }
 #endif
         /// <summary>Booking.com only: the hotel (property) id of the conversation&apos;s listing. Absent on other channels. A Booking.com Extranet login can cover several hotels, so use this to route the message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The isAutomated property</summary>
-        public bool? IsAutomated { get; set; }
+        public bool? IsAutomated
+        {
+            get { return BackingStore?.Get<bool?>("isAutomated"); }
+            set { BackingStore?.Set("isAutomated", value); }
+        }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>Repull message id, as `GET /v1/conversations/{id}/messages` returns it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MessageId { get; set; }
+        public string? MessageId
+        {
+            get { return BackingStore?.Get<string?>("messageId"); }
+            set { BackingStore?.Set("messageId", value); }
+        }
 #nullable restore
 #else
-        public string MessageId { get; set; }
+        public string MessageId
+        {
+            get { return BackingStore?.Get<string>("messageId"); }
+            set { BackingStore?.Set("messageId", value); }
+        }
 #endif
         /// <summary>The reservationId property</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>The revision property</summary>
-        public DateTimeOffset? Revision { get; set; }
+        public DateTimeOffset? Revision
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("revision"); }
+            set { BackingStore?.Set("revision", value); }
+        }
         /// <summary>The senderAvatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderAvatar { get; set; }
+        public string? SenderAvatar
+        {
+            get { return BackingStore?.Get<string?>("senderAvatar"); }
+            set { BackingStore?.Set("senderAvatar", value); }
+        }
 #nullable restore
 #else
-        public string SenderAvatar { get; set; }
+        public string SenderAvatar
+        {
+            get { return BackingStore?.Get<string>("senderAvatar"); }
+            set { BackingStore?.Set("senderAvatar", value); }
+        }
 #endif
         /// <summary>The senderName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderName { get; set; }
+        public string? SenderName
+        {
+            get { return BackingStore?.Get<string?>("senderName"); }
+            set { BackingStore?.Set("senderName", value); }
+        }
 #nullable restore
 #else
-        public string SenderName { get; set; }
+        public string SenderName
+        {
+            get { return BackingStore?.Get<string>("senderName"); }
+            set { BackingStore?.Set("senderName", value); }
+        }
 #endif
         /// <summary>Sender role as stored, the same as on `GET /v1/conversations/{id}/messages` (`user` for a message sent through Repull).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderType { get; set; }
+        public string? SenderType
+        {
+            get { return BackingStore?.Get<string?>("senderType"); }
+            set { BackingStore?.Set("senderType", value); }
+        }
 #nullable restore
 #else
-        public string SenderType { get; set; }
+        public string SenderType
+        {
+            get { return BackingStore?.Get<string>("senderType"); }
+            set { BackingStore?.Set("senderType", value); }
+        }
 #endif
         /// <summary>The sentAt property</summary>
-        public DateTimeOffset? SentAt { get; set; }
+        public DateTimeOffset? SentAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("sentAt"); }
+            set { BackingStore?.Set("sentAt", value); }
+        }
         /// <summary>`channel`: sent in the channel&apos;s own app (e.g. the Airbnb app). `repull`: sent through Repull — the API, the dashboard, an automation or AI.</summary>
-        public global::Repull.SDK.Models.ReservationMessageSentPayload_source? Source { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageSentPayload_source? Source
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageSentPayload_source?>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
         /// <summary>Delivery state: `sending`, `sent` or `failed`, as on `GET /v1/conversations/{id}/messages`. `null` for a message sent in the channel&apos;s app.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>The Repull conversation id (numeric, as a string), for `GET /v1/conversations/{id}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThreadId { get; set; }
+        public string? ThreadId
+        {
+            get { return BackingStore?.Get<string?>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #nullable restore
 #else
-        public string ThreadId { get; set; }
+        public string ThreadId
+        {
+            get { return BackingStore?.Get<string>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #endif
         /// <summary>The translatedBody property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TranslatedBody { get; set; }
+        public string? TranslatedBody
+        {
+            get { return BackingStore?.Get<string?>("translatedBody"); }
+            set { BackingStore?.Set("translatedBody", value); }
+        }
 #nullable restore
 #else
-        public string TranslatedBody { get; set; }
+        public string TranslatedBody
+        {
+            get { return BackingStore?.Get<string>("translatedBody"); }
+            set { BackingStore?.Set("translatedBody", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationMessageSentPayload"/> and sets the default values.
         /// </summary>
         public ReservationMessageSentPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,41 +10,82 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class FeesPutRequestBody : IParsable
+    public partial class FeesPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cleaning property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_cleaning? Cleaning { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_cleaning? Cleaning
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_cleaning?>("cleaning"); }
+            set { BackingStore?.Set("cleaning", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_cleaning Cleaning { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_cleaning Cleaning
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_cleaning>("cleaning"); }
+            set { BackingStore?.Set("cleaning", value); }
+        }
 #endif
         /// <summary>The custom property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom>? Custom { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom>? Custom
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom>?>("custom"); }
+            set { BackingStore?.Set("custom", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom> Custom { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom> Custom
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom>>("custom"); }
+            set { BackingStore?.Set("custom", value); }
+        }
 #endif
         /// <summary>The extraGuests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_extraGuests? ExtraGuests { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_extraGuests? ExtraGuests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_extraGuests?>("extraGuests"); }
+            set { BackingStore?.Set("extraGuests", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_extraGuests ExtraGuests { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_extraGuests ExtraGuests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_extraGuests>("extraGuests"); }
+            set { BackingStore?.Set("extraGuests", value); }
+        }
 #endif
         /// <summary>The pets property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_pets? Pets { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_pets? Pets
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_pets?>("pets"); }
+            set { BackingStore?.Set("pets", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_pets Pets { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_pets Pets
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_pets>("pets"); }
+            set { BackingStore?.Set("pets", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public FeesPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

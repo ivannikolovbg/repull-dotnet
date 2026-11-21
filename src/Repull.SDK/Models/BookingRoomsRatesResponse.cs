@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,57 +12,108 @@ namespace Repull.SDK.Models
     /// Returned by `GET /v1/channels/booking/properties/{id}/rooms`. Exposes the Booking.com room + rate-plan mapping ids for a listing so a caller can assemble a `PUT /v1/channels/booking/availability` restriction write (which requires `roomId` + `rateId` on every update). Read live from Booking&apos;s B.XML roomrates feed; `source` says so, and says when the answer came from the last import instead.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingRoomsRatesResponse : IAdditionalDataHolder, IParsable
+    public partial class BookingRoomsRatesResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com hotel/property id the rooms belong to — the one the mapping resolved to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>Repull listing id echoed back.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Why the live read was not used. Null when `source` is `booking`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MirrorReason { get; set; }
+        public string? MirrorReason
+        {
+            get { return BackingStore?.Get<string?>("mirrorReason"); }
+            set { BackingStore?.Set("mirrorReason", value); }
+        }
 #nullable restore
 #else
-        public string MirrorReason { get; set; }
+        public string MirrorReason
+        {
+            get { return BackingStore?.Get<string>("mirrorReason"); }
+            set { BackingStore?.Set("mirrorReason", value); }
+        }
 #endif
         /// <summary>Other Booking.com properties this listing is also published under. Empty in the normal case. Pass one as `?hotel_id=` to read its rooms instead.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? OtherHotelIds { get; set; }
+        public List<string>? OtherHotelIds
+        {
+            get { return BackingStore?.Get<List<string>?>("otherHotelIds"); }
+            set { BackingStore?.Set("otherHotelIds", value); }
+        }
 #nullable restore
 #else
-        public List<string> OtherHotelIds { get; set; }
+        public List<string> OtherHotelIds
+        {
+            get { return BackingStore?.Get<List<string>>("otherHotelIds"); }
+            set { BackingStore?.Set("otherHotelIds", value); }
+        }
 #endif
         /// <summary>Empty only when Booking.com reports no rooms for this property AND nothing was recorded at the last import. A failed read is never an empty list — it is an error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms>? Rooms { get; set; }
+        public List<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms>? Rooms
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms>?>("rooms"); }
+            set { BackingStore?.Set("rooms", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms> Rooms { get; set; }
+        public List<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms> Rooms
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms>>("rooms"); }
+            set { BackingStore?.Set("rooms", value); }
+        }
 #endif
         /// <summary>Where the rooms came from. `booking` — read live from Booking.com just now. `mirror` — Booking.com returned nothing usable, so these are the rooms and rate plans recorded at the last import; the ids are Booking.com&apos;s own and are safe to write against, but they can be stale and `maxPersons`, `policy`, `policyId`, `pricingType` and `isChildRate` come back `null` because only the live feed states them.</summary>
-        public global::Repull.SDK.Models.BookingRoomsRatesResponse_source? Source { get; set; }
+        public global::Repull.SDK.Models.BookingRoomsRatesResponse_source? Source
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRoomsRatesResponse_source?>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRoomsRatesResponse"/> and sets the default values.
         /// </summary>
         public BookingRoomsRatesResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

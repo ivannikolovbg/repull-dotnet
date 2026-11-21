@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,40 +10,79 @@ namespace Repull.SDK.V1.Conversations.Item.PreApproval
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PreApprovalPostResponse : IAdditionalDataHolder, IParsable
+    public partial class PreApprovalPostResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The blockInstantBooking property</summary>
-        public bool? BlockInstantBooking { get; set; }
+        public bool? BlockInstantBooking
+        {
+            get { return BackingStore?.Get<bool?>("blockInstantBooking"); }
+            set { BackingStore?.Set("blockInstantBooking", value); }
+        }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_channel? Channel { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>The conversationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get; set; }
+        public string? ConversationId
+        {
+            get { return BackingStore?.Get<string?>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #nullable restore
 #else
-        public string ConversationId { get; set; }
+        public string ConversationId
+        {
+            get { return BackingStore?.Get<string>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #endif
         /// <summary>When the guest can no longer book on the pre-approval, if the channel reported it.</summary>
-        public DateTimeOffset? ExpiresAt { get; set; }
+        public DateTimeOffset? ExpiresAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("expiresAt"); }
+            set { BackingStore?.Set("expiresAt", value); }
+        }
         /// <summary>The message sent to the guest with the pre-approval (VRBO).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_status? Status { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.PreApproval.PreApprovalPostResponse"/> and sets the default values.
         /// </summary>
         public PreApprovalPostResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

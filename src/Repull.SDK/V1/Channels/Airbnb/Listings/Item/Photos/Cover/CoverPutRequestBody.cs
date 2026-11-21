@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,17 +10,34 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CoverPutRequestBody : IParsable
+    public partial class CoverPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb photo id (`photoAirbnbId` from `GET /photos`) to lead the tour.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PhotoId { get; set; }
+        public string? PhotoId
+        {
+            get { return BackingStore?.Get<string?>("photo_id"); }
+            set { BackingStore?.Set("photo_id", value); }
+        }
 #nullable restore
 #else
-        public string PhotoId { get; set; }
+        public string PhotoId
+        {
+            get { return BackingStore?.Get<string>("photo_id"); }
+            set { BackingStore?.Set("photo_id", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Cover.CoverPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public CoverPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

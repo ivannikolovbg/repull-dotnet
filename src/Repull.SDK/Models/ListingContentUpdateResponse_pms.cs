@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,39 +12,70 @@ namespace Repull.SDK.Models
     /// Present when the listing is managed in a PMS: the PMS-owned fields were written there first, and this is its per-section outcome.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingContentUpdateResponse_pms : IAdditionalDataHolder, IParsable
+    public partial class ListingContentUpdateResponse_pms : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Sections the PMS applied.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Applied { get; set; }
+        public List<string>? Applied
+        {
+            get { return BackingStore?.Get<List<string>?>("applied"); }
+            set { BackingStore?.Set("applied", value); }
+        }
 #nullable restore
 #else
-        public List<string> Applied { get; set; }
+        public List<string> Applied
+        {
+            get { return BackingStore?.Get<List<string>>("applied"); }
+            set { BackingStore?.Set("applied", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Sections the PMS refused, with its reason.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingContentUpdateResponse_pms_errors>? Errors { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentUpdateResponse_pms_errors>? Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateResponse_pms_errors>?>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingContentUpdateResponse_pms_errors> Errors { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentUpdateResponse_pms_errors> Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateResponse_pms_errors>>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateResponse_pms"/> and sets the default values.
         /// </summary>
         public ListingContentUpdateResponse_pms()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

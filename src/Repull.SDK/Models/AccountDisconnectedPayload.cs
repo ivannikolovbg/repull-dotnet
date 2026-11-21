@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,53 +12,104 @@ namespace Repull.SDK.Models
     /// Payload for `account.disconnected`. A PMS or channel connection was revoked, expired, or rejected by the upstream provider. Sent for Airbnb, Booking.com Extranet logins, Vrbo logins and PMS connections (Hostaway, Guesty, Smoobu, Lodgify, Beds24, Hospitable, OwnerRez, iGMS, BookingSync, Track, Mews, Cloudbeds, Zeevou, RentalReady, CiiRUS, …). A PMS connection is reported when the PMS refuses its credentials (API key revoked or invalid, 401/403, token refresh refused); timeouts, rate limits and 5xx errors are retried and never reported. Sent once per disconnect, not on every failed sync. When the connection works again — credentials fixed in the PMS, or reconnected — Repull re-imports the changes made while it was down and sends their `reservation.*` events, so nothing missed has to be fetched by hand.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AccountDisconnectedPayload : IAdditionalDataHolder, IParsable
+    public partial class AccountDisconnectedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The disconnected account&apos;s `externalAccountId` — the platform&apos;s own account id: Airbnb host id; Booking.com hotel id (`booking`); the Booking.com account id behind the Extranet login (`booking_extranet`); Vrbo&apos;s account id (`vrbo`); the PMS&apos;s own account or company id. `null` when the platform id is not known yet (a Vrbo sign-in before its account id is captured, a PMS that does not expose one); never a Repull id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Our connection record id: the `X-Account-Id` value, the same as `account.id`. `null` only when the account has no connection record (e.g. a Vrbo sign-in in a workspace with no Vrbo connection). A string in this event.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The disconnectedAt property</summary>
-        public DateTimeOffset? DisconnectedAt { get; set; }
+        public DateTimeOffset? DisconnectedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("disconnectedAt"); }
+            set { BackingStore?.Set("disconnectedAt", value); }
+        }
         /// <summary>The listings this account holds in your workspace — the ones that stop syncing until it is reconnected. Identity only; inactive listings included. Matches `channels[].account` on `GET /v1/listings`. Empty when the account has no listings here.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings>? Listings { get; set; }
+        public List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings>? Listings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings>?>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings> Listings { get; set; }
+        public List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings> Listings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountDisconnectedPayload_listings>>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
 #endif
         /// <summary>Channel or PMS id: `airbnb`, `booking_extranet`, `vrbo`, or the PMS (`hostaway`, `guesty`, `smoobu`, …).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>Why the connection was lost. `refresh_token_rejected` — upstream OAuth refresh endpoint returned a hard rejection. `manual_disconnect` — host/admin disconnected via the dashboard. `auth_expired` — the saved credentials stopped working: an Extranet or Vrbo login was signed out, or a PMS rejected its API key or token (401/403). `revoked_upstream` — provider notified us the user revoked access.</summary>
-        public global::Repull.SDK.Models.AccountDisconnectedPayload_reason? Reason { get; set; }
+        public global::Repull.SDK.Models.AccountDisconnectedPayload_reason? Reason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountDisconnectedPayload_reason?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
         /// <summary>The workspaceId property</summary>
-        public Guid? WorkspaceId { get; set; }
+        public Guid? WorkspaceId
+        {
+            get { return BackingStore?.Get<Guid?>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AccountDisconnectedPayload"/> and sets the default values.
         /// </summary>
         public AccountDisconnectedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

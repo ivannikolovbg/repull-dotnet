@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,27 +12,50 @@ namespace Repull.SDK.Models
     /// Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class CursorPagination : IAdditionalDataHolder, IParsable
+    public partial class CursorPagination : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The hasMore property</summary>
-        public bool? HasMore { get; set; }
+        public bool? HasMore
+        {
+            get { return BackingStore?.Get<bool?>("hasMore"); }
+            set { BackingStore?.Set("hasMore", value); }
+        }
         /// <summary>Opaque base64 cursor — pass back as `?cursor=&lt;value&gt;`. `null` when there are no more pages.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NextCursor { get; set; }
+        public string? NextCursor
+        {
+            get { return BackingStore?.Get<string?>("nextCursor"); }
+            set { BackingStore?.Set("nextCursor", value); }
+        }
 #nullable restore
 #else
-        public string NextCursor { get; set; }
+        public string NextCursor
+        {
+            get { return BackingStore?.Get<string>("nextCursor"); }
+            set { BackingStore?.Set("nextCursor", value); }
+        }
 #endif
         /// <summary>Total rows matching the current filter (across all pages). Present when `?include_total=true` (the default on most endpoints). Omit `?include_total=false` to skip the COUNT(*) on very large workspaces.</summary>
-        public int? Total { get; set; }
+        public int? Total
+        {
+            get { return BackingStore?.Get<int?>("total"); }
+            set { BackingStore?.Set("total", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.CursorPagination"/> and sets the default values.
         /// </summary>
         public CursorPagination()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

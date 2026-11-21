@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,100 +10,203 @@ namespace Repull.SDK.V1.Migrations.Channex
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ChannexPostResponse_data : IAdditionalDataHolder, IParsable
+    public partial class ChannexPostResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channels property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels>? Channels { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels>? Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels>?>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels> Channels { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels> Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels>>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #endif
         /// <summary>False when the time budget ran out; run the same request again to continue.</summary>
-        public bool? Complete { get; set; }
+        public bool? Complete
+        {
+            get { return BackingStore?.Get<bool?>("complete"); }
+            set { BackingStore?.Set("complete", value); }
+        }
         /// <summary>The dryRun property</summary>
-        public bool? DryRun { get; set; }
+        public bool? DryRun
+        {
+            get { return BackingStore?.Get<bool?>("dryRun"); }
+            set { BackingStore?.Set("dryRun", value); }
+        }
         /// <summary>The environment property</summary>
-        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_environment? Environment { get; set; }
+        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_environment? Environment
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_environment?>("environment"); }
+            set { BackingStore?.Set("environment", value); }
+        }
         /// <summary>The finishedAt property</summary>
-        public DateTimeOffset? FinishedAt { get; set; }
+        public DateTimeOffset? FinishedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("finishedAt"); }
+            set { BackingStore?.Set("finishedAt", value); }
+        }
         /// <summary>The id property</summary>
-        public Guid? Id { get; set; }
+        public Guid? Id
+        {
+            get { return BackingStore?.Get<Guid?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>The nextSteps property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? NextSteps { get; set; }
+        public List<string>? NextSteps
+        {
+            get { return BackingStore?.Get<List<string>?>("nextSteps"); }
+            set { BackingStore?.Set("nextSteps", value); }
+        }
 #nullable restore
 #else
-        public List<string> NextSteps { get; set; }
+        public List<string> NextSteps
+        {
+            get { return BackingStore?.Get<List<string>>("nextSteps"); }
+            set { BackingStore?.Set("nextSteps", value); }
+        }
 #endif
         /// <summary>The properties property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_properties>? Properties { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_properties>? Properties
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_properties>?>("properties"); }
+            set { BackingStore?.Set("properties", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_properties> Properties { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_properties> Properties
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_properties>>("properties"); }
+            set { BackingStore?.Set("properties", value); }
+        }
 #endif
         /// <summary>The ratePlans property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_ratePlans>? RatePlans { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_ratePlans>? RatePlans
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_ratePlans>?>("ratePlans"); }
+            set { BackingStore?.Set("ratePlans", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_ratePlans> RatePlans { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_ratePlans> RatePlans
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_ratePlans>>("ratePlans"); }
+            set { BackingStore?.Set("ratePlans", value); }
+        }
 #endif
         /// <summary>The roomTypes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_roomTypes>? RoomTypes { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_roomTypes>? RoomTypes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_roomTypes>?>("roomTypes"); }
+            set { BackingStore?.Set("roomTypes", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_roomTypes> RoomTypes { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_roomTypes> RoomTypes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_roomTypes>>("roomTypes"); }
+            set { BackingStore?.Set("roomTypes", value); }
+        }
 #endif
         /// <summary>The signingKeys property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_signingKeys>? SigningKeys { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_signingKeys>? SigningKeys
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_signingKeys>?>("signingKeys"); }
+            set { BackingStore?.Set("signingKeys", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_signingKeys> SigningKeys { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_signingKeys> SigningKeys
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_signingKeys>>("signingKeys"); }
+            set { BackingStore?.Set("signingKeys", value); }
+        }
 #endif
         /// <summary>The startedAt property</summary>
-        public DateTimeOffset? StartedAt { get; set; }
+        public DateTimeOffset? StartedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("startedAt"); }
+            set { BackingStore?.Set("startedAt", value); }
+        }
         /// <summary>The summary property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_summary? Summary { get; set; }
+        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_summary? Summary
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_summary?>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_summary Summary { get; set; }
+        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_summary Summary
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_summary>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #endif
         /// <summary>The warnings property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Warnings { get; set; }
+        public List<string>? Warnings
+        {
+            get { return BackingStore?.Get<List<string>?>("warnings"); }
+            set { BackingStore?.Set("warnings", value); }
+        }
 #nullable restore
 #else
-        public List<string> Warnings { get; set; }
+        public List<string> Warnings
+        {
+            get { return BackingStore?.Get<List<string>>("warnings"); }
+            set { BackingStore?.Set("warnings", value); }
+        }
 #endif
         /// <summary>The webhooks property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_webhooks>? Webhooks { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_webhooks>? Webhooks
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_webhooks>?>("webhooks"); }
+            set { BackingStore?.Set("webhooks", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_webhooks> Webhooks { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_webhooks> Webhooks
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_webhooks>>("webhooks"); }
+            set { BackingStore?.Set("webhooks", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data"/> and sets the default values.
         /// </summary>
         public ChannexPostResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

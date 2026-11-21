@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,32 +11,63 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbTransaction_payout : IAdditionalDataHolder, IParsable
+    public partial class AirbnbTransaction_payout : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Position within the payout, from 1. `null` on the Payout row and on UPCOMING lines.</summary>
-        public int? LineIndex { get; set; }
+        public int? LineIndex
+        {
+            get { return BackingStore?.Get<int?>("lineIndex"); }
+            set { BackingStore?.Set("lineIndex", value); }
+        }
         /// <summary>On the Payout row only: the amount paid out. Its lines sum to it.</summary>
-        public double? PaidOutAmount { get; set; }
+        public double? PaidOutAmount
+        {
+            get { return BackingStore?.Get<double?>("paidOutAmount"); }
+            set { BackingStore?.Set("paidOutAmount", value); }
+        }
         /// <summary>The payoutDate property</summary>
-        public Date? PayoutDate { get; set; }
+        public Date? PayoutDate
+        {
+            get { return BackingStore?.Get<Date?>("payoutDate"); }
+            set { BackingStore?.Set("payoutDate", value); }
+        }
         /// <summary>The payout this line was settled in (its own id on a Payout row). `null` on an UPCOMING line.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PayoutId { get; set; }
+        public string? PayoutId
+        {
+            get { return BackingStore?.Get<string?>("payoutId"); }
+            set { BackingStore?.Set("payoutId", value); }
+        }
 #nullable restore
 #else
-        public string PayoutId { get; set; }
+        public string PayoutId
+        {
+            get { return BackingStore?.Get<string>("payoutId"); }
+            set { BackingStore?.Set("payoutId", value); }
+        }
 #endif
         /// <summary>`true` when Airbnb sent no payout id (a payout netting to $0.00) and Repull derived a stable one.</summary>
-        public bool? PayoutIdSynthetic { get; set; }
+        public bool? PayoutIdSynthetic
+        {
+            get { return BackingStore?.Get<bool?>("payoutIdSynthetic"); }
+            set { BackingStore?.Set("payoutIdSynthetic", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbTransaction_payout"/> and sets the default values.
         /// </summary>
         public AirbnbTransaction_payout()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

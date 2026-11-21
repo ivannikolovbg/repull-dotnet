@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,77 +13,152 @@ namespace Repull.SDK.Models
     /// Which rules a type supports depends on the channel — see the catalog.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PromotionRules : IAdditionalDataHolder, IParsable
+    public partial class PromotionRules : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>`public`, `subscribers` (members only, at least 10%), `app`, `all` (app and mobile web), or a country id from the catalog (e.g. `united_kingdom_pos`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Audience { get; set; }
+        public string? Audience
+        {
+            get { return BackingStore?.Get<string?>("audience"); }
+            set { BackingStore?.Set("audience", value); }
+        }
 #nullable restore
 #else
-        public string Audience { get; set; }
+        public string Audience
+        {
+            get { return BackingStore?.Get<string>("audience"); }
+            set { BackingStore?.Set("audience", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb — not yet available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<Date?>? BlackoutDates { get; set; }
+        public List<Date?>? BlackoutDates
+        {
+            get { return BackingStore?.Get<List<Date?>?>("blackoutDates"); }
+            set { BackingStore?.Set("blackoutDates", value); }
+        }
 #nullable restore
 #else
-        public List<Date?> BlackoutDates { get; set; }
+        public List<Date?> BlackoutDates
+        {
+            get { return BackingStore?.Get<List<Date?>>("blackoutDates"); }
+            set { BackingStore?.Set("blackoutDates", value); }
+        }
 #endif
         /// <summary>The blackoutDatesQuota property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PromotionRules_blackoutDatesQuota? BlackoutDatesQuota { get; set; }
+        public global::Repull.SDK.Models.PromotionRules_blackoutDatesQuota? BlackoutDatesQuota
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules_blackoutDatesQuota?>("blackoutDatesQuota"); }
+            set { BackingStore?.Set("blackoutDatesQuota", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PromotionRules_blackoutDatesQuota BlackoutDatesQuota { get; set; }
+        public global::Repull.SDK.Models.PromotionRules_blackoutDatesQuota BlackoutDatesQuota
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules_blackoutDatesQuota>("blackoutDatesQuota"); }
+            set { BackingStore?.Set("blackoutDatesQuota", value); }
+        }
 #endif
         /// <summary>The bookingWindow property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PromotionRules_bookingWindow? BookingWindow { get; set; }
+        public global::Repull.SDK.Models.PromotionRules_bookingWindow? BookingWindow
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules_bookingWindow?>("bookingWindow"); }
+            set { BackingStore?.Set("bookingWindow", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PromotionRules_bookingWindow BookingWindow { get; set; }
+        public global::Repull.SDK.Models.PromotionRules_bookingWindow BookingWindow
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules_bookingWindow>("bookingWindow"); }
+            set { BackingStore?.Set("bookingWindow", value); }
+        }
 #endif
         /// <summary>Booking.com campaigns: `black_friday`, `getaway`, `late_escape`, `early_year`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Campaign { get; set; }
+        public string? Campaign
+        {
+            get { return BackingStore?.Get<string?>("campaign"); }
+            set { BackingStore?.Set("campaign", value); }
+        }
 #nullable restore
 #else
-        public string Campaign { get; set; }
+        public string Campaign
+        {
+            get { return BackingStore?.Get<string>("campaign"); }
+            set { BackingStore?.Set("campaign", value); }
+        }
 #endif
         /// <summary>The earlyBookerDays property</summary>
-        public int? EarlyBookerDays { get; set; }
+        public int? EarlyBookerDays
+        {
+            get { return BackingStore?.Get<int?>("earlyBookerDays"); }
+            set { BackingStore?.Set("earlyBookerDays", value); }
+        }
         /// <summary>The lastMinute property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PromotionRules_lastMinute? LastMinute { get; set; }
+        public global::Repull.SDK.Models.PromotionRules_lastMinute? LastMinute
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules_lastMinute?>("lastMinute"); }
+            set { BackingStore?.Set("lastMinute", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PromotionRules_lastMinute LastMinute { get; set; }
+        public global::Repull.SDK.Models.PromotionRules_lastMinute LastMinute
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules_lastMinute>("lastMinute"); }
+            set { BackingStore?.Set("lastMinute", value); }
+        }
 #endif
         /// <summary>The minNights property</summary>
-        public int? MinNights { get; set; }
+        public int? MinNights
+        {
+            get { return BackingStore?.Get<int?>("minNights"); }
+            set { BackingStore?.Set("minNights", value); }
+        }
         /// <summary>The nonRefundable property</summary>
-        public bool? NonRefundable { get; set; }
+        public bool? NonRefundable
+        {
+            get { return BackingStore?.Get<bool?>("nonRefundable"); }
+            set { BackingStore?.Set("nonRefundable", value); }
+        }
         /// <summary>The stayWindow property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PromotionRules_stayWindow? StayWindow { get; set; }
+        public global::Repull.SDK.Models.PromotionRules_stayWindow? StayWindow
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules_stayWindow?>("stayWindow"); }
+            set { BackingStore?.Set("stayWindow", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PromotionRules_stayWindow StayWindow { get; set; }
+        public global::Repull.SDK.Models.PromotionRules_stayWindow StayWindow
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules_stayWindow>("stayWindow"); }
+            set { BackingStore?.Set("stayWindow", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PromotionRules"/> and sets the default values.
         /// </summary>
         public PromotionRules()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

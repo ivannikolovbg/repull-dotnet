@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// Structural observation about the segment landscape — not LLM-generated.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingSegmentRecommendation : IAdditionalDataHolder, IParsable
+    public partial class ListingSegmentRecommendation : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The evidence property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingSegmentRecommendation_evidence? Evidence { get; set; }
+        public global::Repull.SDK.Models.ListingSegmentRecommendation_evidence? Evidence
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSegmentRecommendation_evidence?>("evidence"); }
+            set { BackingStore?.Set("evidence", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingSegmentRecommendation_evidence Evidence { get; set; }
+        public global::Repull.SDK.Models.ListingSegmentRecommendation_evidence Evidence
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSegmentRecommendation_evidence>("evidence"); }
+            set { BackingStore?.Set("evidence", value); }
+        }
 #endif
         /// <summary>Stable identifier for the recommendation kind. SDKs can switch on this safely.</summary>
-        public global::Repull.SDK.Models.ListingSegmentRecommendation_kind? Kind { get; set; }
+        public global::Repull.SDK.Models.ListingSegmentRecommendation_kind? Kind
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSegmentRecommendation_kind?>("kind"); }
+            set { BackingStore?.Set("kind", value); }
+        }
         /// <summary>The message property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingSegmentRecommendation"/> and sets the default values.
         /// </summary>
         public ListingSegmentRecommendation()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

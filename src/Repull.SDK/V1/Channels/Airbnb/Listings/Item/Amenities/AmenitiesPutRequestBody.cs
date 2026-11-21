@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,24 +12,49 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities
     /// At least one amenity across `amenities` and `accessibility_amenities`. A body that changes nothing is refused rather than reported as a successful write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AmenitiesPutRequestBody : IParsable
+    public partial class AmenitiesPutRequestBody : IBackedModel, IParsable
     {
         /// <summary>The accessibility_amenities property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_accessibility_amenities>? AccessibilityAmenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_accessibility_amenities>? AccessibilityAmenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_accessibility_amenities>?>("accessibility_amenities"); }
+            set { BackingStore?.Set("accessibility_amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_accessibility_amenities> AccessibilityAmenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_accessibility_amenities> AccessibilityAmenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_accessibility_amenities>>("accessibility_amenities"); }
+            set { BackingStore?.Set("accessibility_amenities", value); }
+        }
 #endif
         /// <summary>The amenities property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_amenities>? Amenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_amenities>? Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_amenities>?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_amenities> Amenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_amenities> Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody_amenities>>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities.AmenitiesPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public AmenitiesPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

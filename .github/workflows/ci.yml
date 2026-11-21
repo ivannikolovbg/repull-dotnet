@@ -25,3 +25,6 @@ jobs:
 
       - name: Format check
         run: dotnet format --verify-no-changes --severity warn
+
+      - name: Test
+        run: dotnet test --no-build --configuration Release

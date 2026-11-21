@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,89 +12,180 @@ namespace Repull.SDK.Models
     /// Guest list-row shape returned by `GET /v1/guests`. Pre-resolved primary phone/email + display name + cumulative stay aggregates so list UIs can render without a per-row round-trip.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Guest : IAdditionalDataHolder, IParsable
+    public partial class Guest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Guest country (from profile metadata or address).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Country { get; set; }
+        public string? Country
+        {
+            get { return BackingStore?.Get<string?>("country"); }
+            set { BackingStore?.Set("country", value); }
+        }
 #nullable restore
 #else
-        public string Country { get; set; }
+        public string Country
+        {
+            get { return BackingStore?.Get<string>("country"); }
+            set { BackingStore?.Set("country", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>Short display name (first name).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DisplayName { get; set; }
+        public string? DisplayName
+        {
+            get { return BackingStore?.Get<string?>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #nullable restore
 #else
-        public string DisplayName { get; set; }
+        public string DisplayName
+        {
+            get { return BackingStore?.Get<string>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #endif
         /// <summary>Long display name (first + last). Falls back to displayName when last name is missing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DisplayNameLong { get; set; }
+        public string? DisplayNameLong
+        {
+            get { return BackingStore?.Get<string?>("displayNameLong"); }
+            set { BackingStore?.Set("displayNameLong", value); }
+        }
 #nullable restore
 #else
-        public string DisplayNameLong { get; set; }
+        public string DisplayNameLong
+        {
+            get { return BackingStore?.Get<string>("displayNameLong"); }
+            set { BackingStore?.Set("displayNameLong", value); }
+        }
 #endif
         /// <summary>Primary email contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Email { get; set; }
+        public string? Email
+        {
+            get { return BackingStore?.Get<string?>("email"); }
+            set { BackingStore?.Set("email", value); }
+        }
 #nullable restore
 #else
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return BackingStore?.Get<string>("email"); }
+            set { BackingStore?.Set("email", value); }
+        }
 #endif
         /// <summary>The firstStayedAt property</summary>
-        public DateTimeOffset? FirstStayedAt { get; set; }
+        public DateTimeOffset? FirstStayedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("firstStayedAt"); }
+            set { BackingStore?.Set("firstStayedAt", value); }
+        }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Guest&apos;s preferred language (ISO 639-1).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Language { get; set; }
+        public string? Language
+        {
+            get { return BackingStore?.Get<string?>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #nullable restore
 #else
-        public string Language { get; set; }
+        public string Language
+        {
+            get { return BackingStore?.Get<string>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #endif
         /// <summary>The lastStayedAt property</summary>
-        public DateTimeOffset? LastStayedAt { get; set; }
+        public DateTimeOffset? LastStayedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastStayedAt"); }
+            set { BackingStore?.Set("lastStayedAt", value); }
+        }
         /// <summary>Primary phone contact (or first non-primary if no primary set). May be an Airbnb relay number — check `phoneType`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Phone { get; set; }
+        public string? Phone
+        {
+            get { return BackingStore?.Get<string?>("phone"); }
+            set { BackingStore?.Set("phone", value); }
+        }
 #nullable restore
 #else
-        public string Phone { get; set; }
+        public string Phone
+        {
+            get { return BackingStore?.Get<string>("phone"); }
+            set { BackingStore?.Set("phone", value); }
+        }
 #endif
         /// <summary>`airbnb_relay` when `phone` is a temporary Airbnb relay number (SMS only, expires 48h after checkout, shared across hosts, never a guest identifier); `guest` otherwise; `null` when there is no phone.</summary>
-        public global::Repull.SDK.Models.GuestPhoneType? PhoneType { get; set; }
+        public global::Repull.SDK.Models.GuestPhoneType? PhoneType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.GuestPhoneType?>("phoneType"); }
+            set { BackingStore?.Set("phoneType", value); }
+        }
         /// <summary>Lifetime reservation count.</summary>
-        public int? TotalReservations { get; set; }
+        public int? TotalReservations
+        {
+            get { return BackingStore?.Get<int?>("totalReservations"); }
+            set { BackingStore?.Set("totalReservations", value); }
+        }
         /// <summary>Decimal-as-string to preserve precision across mixed-currency totals.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TotalRevenue { get; set; }
+        public string? TotalRevenue
+        {
+            get { return BackingStore?.Get<string?>("totalRevenue"); }
+            set { BackingStore?.Set("totalRevenue", value); }
+        }
 #nullable restore
 #else
-        public string TotalRevenue { get; set; }
+        public string TotalRevenue
+        {
+            get { return BackingStore?.Get<string>("totalRevenue"); }
+            set { BackingStore?.Set("totalRevenue", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Guest"/> and sets the default values.
         /// </summary>
         public Guest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

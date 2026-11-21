@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,57 +12,116 @@ namespace Repull.SDK.V1.Connect.Track.Credentials
     /// The Track domain and an API key + secret.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class CredentialsPostRequestBody_credentials : IAdditionalDataHolder, IParsable
+    public partial class CredentialsPostRequestBody_credentials : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Track API key.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiKey { get; set; }
+        public string? ApiKey
+        {
+            get { return BackingStore?.Get<string?>("apiKey"); }
+            set { BackingStore?.Set("apiKey", value); }
+        }
 #nullable restore
 #else
-        public string ApiKey { get; set; }
+        public string ApiKey
+        {
+            get { return BackingStore?.Get<string>("apiKey"); }
+            set { BackingStore?.Set("apiKey", value); }
+        }
 #endif
         /// <summary>Track API secret, shown next to the key in Track.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiSecret { get; set; }
+        public string? ApiSecret
+        {
+            get { return BackingStore?.Get<string?>("apiSecret"); }
+            set { BackingStore?.Set("apiSecret", value); }
+        }
 #nullable restore
 #else
-        public string ApiSecret { get; set; }
+        public string ApiSecret
+        {
+            get { return BackingStore?.Get<string>("apiSecret"); }
+            set { BackingStore?.Set("apiSecret", value); }
+        }
 #endif
         /// <summary>How requests to Track are signed. Leave the default unless Track support told you otherwise.</summary>
-        public global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials_authMode? AuthMode { get; set; }
+        public global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials_authMode? AuthMode
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials_authMode?>("authMode"); }
+            set { BackingStore?.Set("authMode", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Your Track domain: `acme.trackhs.com`, or just the subdomain `acme`. A full URL is accepted; only the host is kept.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Domain { get; set; }
+        public string? Domain
+        {
+            get { return BackingStore?.Get<string?>("domain"); }
+            set { BackingStore?.Set("domain", value); }
+        }
 #nullable restore
 #else
-        public string Domain { get; set; }
+        public string Domain
+        {
+            get { return BackingStore?.Get<string>("domain"); }
+            set { BackingStore?.Set("domain", value); }
+        }
 #endif
         /// <summary>HMAC realm. Defaults to `Acquia`, the realm Track&apos;s HMAC signing uses.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HmacRealm { get; set; }
+        public string? HmacRealm
+        {
+            get { return BackingStore?.Get<string?>("hmacRealm"); }
+            set { BackingStore?.Set("hmacRealm", value); }
+        }
 #nullable restore
 #else
-        public string HmacRealm { get; set; }
+        public string HmacRealm
+        {
+            get { return BackingStore?.Get<string>("hmacRealm"); }
+            set { BackingStore?.Set("hmacRealm", value); }
+        }
 #endif
         /// <summary>`server` — a Server Key (Company Setup → API Keys), full access, recommended. `channel` — a Channel Key (PMS Setup → Distribution Channels), booking only.</summary>
-        public global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials_keyType? KeyType { get; set; }
+        public global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials_keyType? KeyType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials_keyType?>("keyType"); }
+            set { BackingStore?.Set("keyType", value); }
+        }
         /// <summary>The Track move reason used when a reservation is moved to another unit. Without it, unit changes are refused.</summary>
-        public int? MoveReasonId { get; set; }
+        public int? MoveReasonId
+        {
+            get { return BackingStore?.Get<int?>("moveReasonId"); }
+            set { BackingStore?.Set("moveReasonId", value); }
+        }
         /// <summary>The Track payment type that payments recorded through this connection are posted to.</summary>
-        public int? PaymentTypeId { get; set; }
+        public int? PaymentTypeId
+        {
+            get { return BackingStore?.Get<int?>("paymentTypeId"); }
+            set { BackingStore?.Set("paymentTypeId", value); }
+        }
         /// <summary>Whether `apiSecret` is base64-encoded, as Track issues it. Set false to sign with the secret&apos;s raw text.</summary>
-        public bool? SecretIsBase64 { get; set; }
+        public bool? SecretIsBase64
+        {
+            get { return BackingStore?.Get<bool?>("secretIsBase64"); }
+            set { BackingStore?.Set("secretIsBase64", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials"/> and sets the default values.
         /// </summary>
         public CredentialsPostRequestBody_credentials()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
             AuthMode = global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials_authMode.Hmac;
             KeyType = global::Repull.SDK.V1.Connect.Track.Credentials.CredentialsPostRequestBody_credentials_keyType.Server;

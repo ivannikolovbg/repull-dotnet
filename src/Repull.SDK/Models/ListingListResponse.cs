@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,48 +10,87 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingListResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingListResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Added to the body of every successful (2xx) JSON object response while the plan&apos;s last renewal payment failed (the subscription is past_due or unpaid). It never blocks a request: API access keeps working while Stripe retries the card. Tell the user: pay the invoice at `payUrl`, or update the card at `billingUrl`. It disappears once the invoice is paid.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BillingNotice? BillingNotice { get; set; }
+        public global::Repull.SDK.Models.BillingNotice? BillingNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BillingNotice?>("billingNotice"); }
+            set { BackingStore?.Set("billingNotice", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BillingNotice BillingNotice { get; set; }
+        public global::Repull.SDK.Models.BillingNotice BillingNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BillingNotice>("billingNotice"); }
+            set { BackingStore?.Set("billingNotice", value); }
+        }
 #endif
         /// <summary>The data property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.Listing>? Data { get; set; }
+        public List<global::Repull.SDK.Models.Listing>? Data
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.Listing>?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.Listing> Data { get; set; }
+        public List<global::Repull.SDK.Models.Listing> Data
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.Listing>>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>Canonical cursor-based pagination envelope. Pass `nextCursor` back as `?cursor=` to fetch the next page; stop when `hasMore` is `false`. The cursor is opaque base64 — do not parse or construct it by hand.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.CursorPagination? Pagination { get; set; }
+        public global::Repull.SDK.Models.CursorPagination? Pagination
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.CursorPagination?>("pagination"); }
+            set { BackingStore?.Set("pagination", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.CursorPagination Pagination { get; set; }
+        public global::Repull.SDK.Models.CursorPagination Pagination
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.CursorPagination>("pagination"); }
+            set { BackingStore?.Set("pagination", value); }
+        }
 #endif
         /// <summary>Added to the body of EVERY JSON response (success or error, except bare arrays and 5xx) while the workspace is connected to more listings than its plan lets it use — so a developer reading any payload, or an AI assistant relaying it, sees it. Connect keeps every listing it finds, but on a capped plan only as many as the plan allows are active; the rest are held back inactive and keep syncing. The same responses also carry the `X-Repull-Listings-Held-Back` and `X-Repull-Active-Listing-Limit` headers. Using a held-back listing answers `403 listing_inactive` with `reason: &quot;plan_limit&quot;`. Tell the user: they can see the held-back listings with `GET /v1/listings?status=all`, choose which are active with `POST /v1/listings/status`, or upgrade.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PlanNotice? PlanNotice { get; set; }
+        public global::Repull.SDK.Models.PlanNotice? PlanNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PlanNotice?>("planNotice"); }
+            set { BackingStore?.Set("planNotice", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PlanNotice PlanNotice { get; set; }
+        public global::Repull.SDK.Models.PlanNotice PlanNotice
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PlanNotice>("planNotice"); }
+            set { BackingStore?.Set("planNotice", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingListResponse"/> and sets the default values.
         /// </summary>
         public ListingListResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,21 +10,46 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations.Item
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class WithCodePostRequestBody : IParsable
+    public partial class WithCodePostRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The action property</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody_action? Action { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Required for `decline` only: sent to the guest by Airbnb.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>Required for `decline` and `cancel`; not accepted for `accept`. `decline` takes `dates_not_available`, `not_comfortable`, `listing_not_ready`, `different_dates_needed`, `spam` or `other`. `cancel` takes `calendar_conflict`, `maintenance_issue`, `unable_to_host` or `other`.</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody_reason? Reason { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody_reason? Reason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody_reason?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Reservations.Item.WithCodePostRequestBody"/> and sets the default values.
+        /// </summary>
+        public WithCodePostRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

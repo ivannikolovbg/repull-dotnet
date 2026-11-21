@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -10,40 +11,71 @@ namespace Repull.SDK.V1.Connect.Item.WritePolicy
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class WritePolicyPatchResponse : IAdditionalDataHolder, IParsable
+    public partial class WritePolicyPatchResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>What this provider starts with.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsWritePolicy? Defaults { get; set; }
+        public global::Repull.SDK.Models.PmsWritePolicy? Defaults
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsWritePolicy?>("defaults"); }
+            set { BackingStore?.Set("defaults", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsWritePolicy Defaults { get; set; }
+        public global::Repull.SDK.Models.PmsWritePolicy Defaults
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsWritePolicy>("defaults"); }
+            set { BackingStore?.Set("defaults", value); }
+        }
 #endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>What the app may change in a connected PMS. Hotel PMSs (Cloudbeds, Mews) start with every `calendar` switch off, because the PMS owns its room inventory; every other PMS starts with everything on. Reading from the PMS is never affected.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsWritePolicy? WritePolicy { get; set; }
+        public global::Repull.SDK.Models.PmsWritePolicy? WritePolicy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsWritePolicy?>("writePolicy"); }
+            set { BackingStore?.Set("writePolicy", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsWritePolicy WritePolicy { get; set; }
+        public global::Repull.SDK.Models.PmsWritePolicy WritePolicy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsWritePolicy>("writePolicy"); }
+            set { BackingStore?.Set("writePolicy", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Item.WritePolicy.WritePolicyPatchResponse"/> and sets the default values.
         /// </summary>
         public WritePolicyPatchResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

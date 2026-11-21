@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.Models
     /// HOST-side view of the stay — what it looks like on the host ledger. Projected from the reservation&apos;s own stored price breakdown, so it is available on every channel (Airbnb, Booking.com, VRBO, direct, owner), not just Airbnb.**Nothing here is synthesised.** A property is present only when the source breakdown genuinely carries it; a component the channel never reported is OMITTED rather than returned as `0`. An empty array means the channel reported an empty collection.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationHostFinancials : IAdditionalDataHolder, IParsable
+    public partial class ReservationHostFinancials : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Accommodation subtotal before fees, taxes and discounts.</summary>
-        public double? Accommodation { get; set; }
+        public double? Accommodation
+        {
+            get { return BackingStore?.Get<double?>("accommodation"); }
+            set { BackingStore?.Set("accommodation", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Discounts applied to the stay (length-of-stay, non-refundable, promotional). Amounts are positive magnitudes of the reduction.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationMoneyLine>? Discounts { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine>? Discounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>?>("discounts"); }
+            set { BackingStore?.Set("discounts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationMoneyLine> Discounts { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine> Discounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>>("discounts"); }
+            set { BackingStore?.Set("discounts", value); }
+        }
 #endif
         /// <summary>The guest-side platform service fee as it appears on the host statement. Present only on channels that report it (Airbnb).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationMoneyLine>? GuestFees { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine>? GuestFees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>?>("guestFees"); }
+            set { BackingStore?.Set("guestFees", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationMoneyLine> GuestFees { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine> GuestFees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>>("guestFees"); }
+            set { BackingStore?.Set("guestFees", value); }
+        }
 #endif
         /// <summary>Fees the channel charged the HOST — host service fee / commission (with `vat` split out where the channel provides it), platform fee, payment processing fee.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationMoneyLine>? HostFees { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine>? HostFees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>?>("hostFees"); }
+            set { BackingStore?.Set("hostFees", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationMoneyLine> HostFees { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine> HostFees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>>("hostFees"); }
+            set { BackingStore?.Set("hostFees", value); }
+        }
 #endif
         /// <summary>Expected host payout for the stay, in `currency`.</summary>
-        public double? Revenue { get; set; }
+        public double? Revenue
+        {
+            get { return BackingStore?.Get<double?>("revenue"); }
+            set { BackingStore?.Set("revenue", value); }
+        }
         /// <summary>Taxes on the stay. Same collection as `financials.guest.taxes` — each line&apos;s `type` says who remits (`airbnb_collected` = the channel already collected and remitted it, `pass_through` = it reaches the host). The API deliberately does not split the list by remitter, so no classification of ours is baked into the payload.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationMoneyLine>? Taxes { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine>? Taxes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>?>("taxes"); }
+            set { BackingStore?.Set("taxes", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationMoneyLine> Taxes { get; set; }
+        public List<global::Repull.SDK.Models.ReservationMoneyLine> Taxes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationMoneyLine>>("taxes"); }
+            set { BackingStore?.Set("taxes", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationHostFinancials"/> and sets the default values.
         /// </summary>
         public ReservationHostFinancials()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

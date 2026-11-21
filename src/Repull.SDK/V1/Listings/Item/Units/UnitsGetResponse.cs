@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,34 +10,61 @@ namespace Repull.SDK.V1.Listings.Item.Units
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class UnitsGetResponse : IAdditionalDataHolder, IParsable
+    public partial class UnitsGetResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The data property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data>? Data { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data>? Data
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data>?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data> Data { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data> Data
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse_data>>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>Repull listing id (numeric string, like every `*Id` on the wire).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The total property</summary>
-        public int? Total { get; set; }
+        public int? Total
+        {
+            get { return BackingStore?.Get<int?>("total"); }
+            set { BackingStore?.Set("total", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Units.UnitsGetResponse"/> and sets the default values.
         /// </summary>
         public UnitsGetResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

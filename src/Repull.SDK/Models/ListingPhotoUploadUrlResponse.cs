@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,65 +12,124 @@ namespace Repull.SDK.Models
     /// A short-lived signed upload target. PUT the raw file bytes to `uploadUrl` — the bytes never pass through the Repull API.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPhotoUploadUrlResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingPhotoUploadUrlResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Seconds until `uploadUrl` expires. Mint a new one via a fresh POST if the upload did not happen in time.</summary>
-        public int? ExpiresIn { get; set; }
+        public int? ExpiresIn
+        {
+            get { return BackingStore?.Get<int?>("expiresIn"); }
+            set { BackingStore?.Set("expiresIn", value); }
+        }
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>What to do after uploading. Uploading does NOT attach the photo to the listing: send `publicUrl` in `photos` on `PUT /v1/listings/{id}/content` (with `photosMode: &quot;append&quot;` to keep existing photos).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NextStep { get; set; }
+        public string? NextStep
+        {
+            get { return BackingStore?.Get<string?>("nextStep"); }
+            set { BackingStore?.Set("nextStep", value); }
+        }
 #nullable restore
 #else
-        public string NextStep { get; set; }
+        public string NextStep
+        {
+            get { return BackingStore?.Get<string>("nextStep"); }
+            set { BackingStore?.Set("nextStep", value); }
+        }
 #endif
         /// <summary>Storage path the photo will live at once uploaded. Pass this to `DELETE /v1/listings/{id}/photos` to remove it later.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Path { get; set; }
+        public string? Path
+        {
+            get { return BackingStore?.Get<string?>("path"); }
+            set { BackingStore?.Set("path", value); }
+        }
 #nullable restore
 #else
-        public string Path { get; set; }
+        public string Path
+        {
+            get { return BackingStore?.Get<string>("path"); }
+            set { BackingStore?.Set("path", value); }
+        }
 #endif
         /// <summary>Durable public URL for the photo once the upload completes. Attach it to the listing via `PUT /v1/listings/{id}/content` (`photos` field).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PublicUrl { get; set; }
+        public string? PublicUrl
+        {
+            get { return BackingStore?.Get<string?>("publicUrl"); }
+            set { BackingStore?.Set("publicUrl", value); }
+        }
 #nullable restore
 #else
-        public string PublicUrl { get; set; }
+        public string PublicUrl
+        {
+            get { return BackingStore?.Get<string>("publicUrl"); }
+            set { BackingStore?.Set("publicUrl", value); }
+        }
 #endif
         /// <summary>Opaque upload token bound to this signed URL.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Token { get; set; }
+        public string? Token
+        {
+            get { return BackingStore?.Get<string?>("token"); }
+            set { BackingStore?.Set("token", value); }
+        }
 #nullable restore
 #else
-        public string Token { get; set; }
+        public string Token
+        {
+            get { return BackingStore?.Get<string>("token"); }
+            set { BackingStore?.Set("token", value); }
+        }
 #endif
         /// <summary>PUT the raw file bytes here directly from the client. Not a Repull API endpoint — a signed storage URL.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UploadUrl { get; set; }
+        public string? UploadUrl
+        {
+            get { return BackingStore?.Get<string?>("uploadUrl"); }
+            set { BackingStore?.Set("uploadUrl", value); }
+        }
 #nullable restore
 #else
-        public string UploadUrl { get; set; }
+        public string UploadUrl
+        {
+            get { return BackingStore?.Get<string>("uploadUrl"); }
+            set { BackingStore?.Set("uploadUrl", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPhotoUploadUrlResponse"/> and sets the default values.
         /// </summary>
         public ListingPhotoUploadUrlResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

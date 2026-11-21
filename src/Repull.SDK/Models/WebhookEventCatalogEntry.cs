@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,44 +10,83 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class WebhookEventCatalogEntry : IAdditionalDataHolder, IParsable
+    public partial class WebhookEventCatalogEntry : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The domain property</summary>
-        public global::Repull.SDK.Models.WebhookEventCatalogEntry_domain? Domain { get; set; }
+        public global::Repull.SDK.Models.WebhookEventCatalogEntry_domain? Domain
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventCatalogEntry_domain?>("domain"); }
+            set { BackingStore?.Set("domain", value); }
+        }
         /// <summary>Realistic example of the `data` payload an event of this `type` will deliver. Shape matches the matching variant in the `WebhookEvent` discriminated union.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.WebhookEventCatalogEntry_samplePayload? SamplePayload { get; set; }
+        public global::Repull.SDK.Models.WebhookEventCatalogEntry_samplePayload? SamplePayload
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventCatalogEntry_samplePayload?>("samplePayload"); }
+            set { BackingStore?.Set("samplePayload", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.WebhookEventCatalogEntry_samplePayload SamplePayload { get; set; }
+        public global::Repull.SDK.Models.WebhookEventCatalogEntry_samplePayload SamplePayload
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventCatalogEntry_samplePayload>("samplePayload"); }
+            set { BackingStore?.Set("samplePayload", value); }
+        }
 #endif
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
         /// <summary>Canonical event type identifier. Every webhook delivery declares one of these in its `type` field; SDKs key the discriminated `WebhookEvent` union on this value.</summary>
-        public global::Repull.SDK.Models.WebhookEventType? Type { get; set; }
+        public global::Repull.SDK.Models.WebhookEventType? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventType?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.WebhookEventCatalogEntry"/> and sets the default values.
         /// </summary>
         public WebhookEventCatalogEntry()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

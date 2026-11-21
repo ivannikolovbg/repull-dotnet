@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,70 +11,145 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MarketEvent : IAdditionalDataHolder, IParsable
+    public partial class MarketEvent : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The attendance property</summary>
-        public int? Attendance { get; set; }
+        public int? Attendance
+        {
+            get { return BackingStore?.Get<int?>("attendance"); }
+            set { BackingStore?.Set("attendance", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The category property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Category { get; set; }
+        public string? Category
+        {
+            get { return BackingStore?.Get<string?>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
 #nullable restore
 #else
-        public string Category { get; set; }
+        public string Category
+        {
+            get { return BackingStore?.Get<string>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
 #endif
         /// <summary>The demandImpact property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DemandImpact { get; set; }
+        public string? DemandImpact
+        {
+            get { return BackingStore?.Get<string?>("demandImpact"); }
+            set { BackingStore?.Set("demandImpact", value); }
+        }
 #nullable restore
 #else
-        public string DemandImpact { get; set; }
+        public string DemandImpact
+        {
+            get { return BackingStore?.Get<string>("demandImpact"); }
+            set { BackingStore?.Set("demandImpact", value); }
+        }
 #endif
         /// <summary>The endDate property</summary>
-        public Date? EndDate { get; set; }
+        public Date? EndDate
+        {
+            get { return BackingStore?.Get<Date?>("endDate"); }
+            set { BackingStore?.Set("endDate", value); }
+        }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The labels property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Labels { get; set; }
+        public List<string>? Labels
+        {
+            get { return BackingStore?.Get<List<string>?>("labels"); }
+            set { BackingStore?.Set("labels", value); }
+        }
 #nullable restore
 #else
-        public List<string> Labels { get; set; }
+        public List<string> Labels
+        {
+            get { return BackingStore?.Get<List<string>>("labels"); }
+            set { BackingStore?.Set("labels", value); }
+        }
 #endif
         /// <summary>The lat property</summary>
-        public double? Lat { get; set; }
+        public double? Lat
+        {
+            get { return BackingStore?.Get<double?>("lat"); }
+            set { BackingStore?.Set("lat", value); }
+        }
         /// <summary>The lng property</summary>
-        public double? Lng { get; set; }
+        public double? Lng
+        {
+            get { return BackingStore?.Get<double?>("lng"); }
+            set { BackingStore?.Set("lng", value); }
+        }
         /// <summary>The localRank property</summary>
-        public double? LocalRank { get; set; }
+        public double? LocalRank
+        {
+            get { return BackingStore?.Get<double?>("localRank"); }
+            set { BackingStore?.Set("localRank", value); }
+        }
         /// <summary>The rank property</summary>
-        public double? Rank { get; set; }
+        public double? Rank
+        {
+            get { return BackingStore?.Get<double?>("rank"); }
+            set { BackingStore?.Set("rank", value); }
+        }
         /// <summary>The startDate property</summary>
-        public Date? StartDate { get; set; }
+        public Date? StartDate
+        {
+            get { return BackingStore?.Get<Date?>("startDate"); }
+            set { BackingStore?.Set("startDate", value); }
+        }
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketEvent"/> and sets the default values.
         /// </summary>
         public MarketEvent()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

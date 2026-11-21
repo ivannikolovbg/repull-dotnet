@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,27 +12,58 @@ namespace Repull.SDK.Models
     /// What the import brought in. A channel reports the keys it imports.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AccountImportCounts : IAdditionalDataHolder, IParsable
+    public partial class AccountImportCounts : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The conversations property</summary>
-        public int? Conversations { get; set; }
+        public int? Conversations
+        {
+            get { return BackingStore?.Get<int?>("conversations"); }
+            set { BackingStore?.Set("conversations", value); }
+        }
         /// <summary>The listings property</summary>
-        public int? Listings { get; set; }
+        public int? Listings
+        {
+            get { return BackingStore?.Get<int?>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
         /// <summary>The messages property</summary>
-        public int? Messages { get; set; }
+        public int? Messages
+        {
+            get { return BackingStore?.Get<int?>("messages"); }
+            set { BackingStore?.Set("messages", value); }
+        }
         /// <summary>The payments property</summary>
-        public int? Payments { get; set; }
+        public int? Payments
+        {
+            get { return BackingStore?.Get<int?>("payments"); }
+            set { BackingStore?.Set("payments", value); }
+        }
         /// <summary>The reservations property</summary>
-        public int? Reservations { get; set; }
+        public int? Reservations
+        {
+            get { return BackingStore?.Get<int?>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
         /// <summary>The reviews property</summary>
-        public int? Reviews { get; set; }
+        public int? Reviews
+        {
+            get { return BackingStore?.Get<int?>("reviews"); }
+            set { BackingStore?.Set("reviews", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AccountImportCounts"/> and sets the default values.
         /// </summary>
         public AccountImportCounts()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

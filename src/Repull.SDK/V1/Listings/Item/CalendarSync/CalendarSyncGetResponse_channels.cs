@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,66 +10,133 @@ namespace Repull.SDK.V1.Listings.Item.CalendarSync
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CalendarSyncGetResponse_channels : IAdditionalDataHolder, IParsable
+    public partial class CalendarSyncGetResponse_channels : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>Explains `offReason` and how to turn calendar sync back on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DocsUrl { get; set; }
+        public string? DocsUrl
+        {
+            get { return BackingStore?.Get<string?>("docsUrl"); }
+            set { BackingStore?.Set("docsUrl", value); }
+        }
 #nullable restore
 #else
-        public string DocsUrl { get; set; }
+        public string DocsUrl
+        {
+            get { return BackingStore?.Get<string>("docsUrl"); }
+            set { BackingStore?.Set("docsUrl", value); }
+        }
 #endif
         /// <summary>When a push last wrote to this listing&apos;s calendar.</summary>
-        public DateTimeOffset? LastSyncAt { get; set; }
+        public DateTimeOffset? LastSyncAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastSyncAt"); }
+            set { BackingStore?.Set("lastSyncAt", value); }
+        }
         /// <summary>The nightsWithProblems property</summary>
-        public int? NightsWithProblems { get; set; }
+        public int? NightsWithProblems
+        {
+            get { return BackingStore?.Get<int?>("nightsWithProblems"); }
+            set { BackingStore?.Set("nightsWithProblems", value); }
+        }
         /// <summary>Vrbo only, when Repull turned calendar sync off: Vrbo says another tool (such as a PMS) manages the account&apos;s calendar. Absent when the host turned it off.</summary>
-        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_offReason? OffReason { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_offReason? OffReason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_offReason?>("offReason"); }
+            set { BackingStore?.Set("offReason", value); }
+        }
         /// <summary>The listing&apos;s id on the channel.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PlatformId { get; set; }
+        public string? PlatformId
+        {
+            get { return BackingStore?.Get<string?>("platformId"); }
+            set { BackingStore?.Set("platformId", value); }
+        }
 #nullable restore
 #else
-        public string PlatformId { get; set; }
+        public string PlatformId
+        {
+            get { return BackingStore?.Get<string>("platformId"); }
+            set { BackingStore?.Set("platformId", value); }
+        }
 #endif
         /// <summary>The problems property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems>? Problems { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems>? Problems
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems>?>("problems"); }
+            set { BackingStore?.Set("problems", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems> Problems { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems> Problems
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_problems>>("problems"); }
+            set { BackingStore?.Set("problems", value); }
+        }
 #endif
         /// <summary>VRBO only — the paced push queue.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue? Queue { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue? Queue
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue?>("queue"); }
+            set { BackingStore?.Set("queue", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue Queue { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue Queue
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue>("queue"); }
+            set { BackingStore?.Set("queue", value); }
+        }
 #endif
         /// <summary>`in_sync` — no future night has a problem; `problems` — see `problems`; `off` — calendar sync is off for this channel.</summary>
-        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_status? Status { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>Calendar pushes to this channel are on.</summary>
-        public bool? SyncEnabled { get; set; }
+        public bool? SyncEnabled
+        {
+            get { return BackingStore?.Get<bool?>("syncEnabled"); }
+            set { BackingStore?.Set("syncEnabled", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels"/> and sets the default values.
         /// </summary>
         public CalendarSyncGetResponse_channels()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

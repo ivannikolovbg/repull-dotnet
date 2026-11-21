@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities;
@@ -298,32 +299,65 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/>, <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1"/>, <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ListingsPostResponse : IComposedTypeWrapper, IParsable
+        public partial class ListingsPostResponse : IBackedModel, IComposedTypeWrapper, IParsable
         {
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse? AirbnbListingLifecycleResponse { get; set; }
+            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse? AirbnbListingLifecycleResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingLifecycleResponse?>("AirbnbListingLifecycleResponse"); }
+                set { BackingStore?.Set("AirbnbListingLifecycleResponse", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse AirbnbListingLifecycleResponse { get; set; }
+            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse AirbnbListingLifecycleResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingLifecycleResponse>("AirbnbListingLifecycleResponse"); }
+                set { BackingStore?.Set("AirbnbListingLifecycleResponse", value); }
+            }
 #endif
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1? ListingsPostResponseMember1 { get; set; }
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1? ListingsPostResponseMember1
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1?>("ListingsPostResponseMember1"); }
+                set { BackingStore?.Set("ListingsPostResponseMember1", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1 ListingsPostResponseMember1 { get; set; }
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1 ListingsPostResponseMember1
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1>("ListingsPostResponseMember1"); }
+                set { BackingStore?.Set("ListingsPostResponseMember1", value); }
+            }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2? ListingsPostResponseMember2 { get; set; }
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2? ListingsPostResponseMember2
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2?>("ListingsPostResponseMember2"); }
+                set { BackingStore?.Set("ListingsPostResponseMember2", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2 ListingsPostResponseMember2 { get; set; }
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2 ListingsPostResponseMember2
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2>("ListingsPostResponseMember2"); }
+                set { BackingStore?.Set("ListingsPostResponseMember2", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsPostResponse"/> and sets the default values.
+            /// </summary>
+            public ListingsPostResponse()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>
@@ -385,32 +419,65 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/>, <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1"/>, <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ListingsResponse : IComposedTypeWrapper, IParsable
+        public partial class ListingsResponse : IBackedModel, IComposedTypeWrapper, IParsable
         {
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AirbnbListingLifecycleResponse"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse? AirbnbListingLifecycleResponse { get; set; }
+            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse? AirbnbListingLifecycleResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingLifecycleResponse?>("AirbnbListingLifecycleResponse"); }
+                set { BackingStore?.Set("AirbnbListingLifecycleResponse", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse AirbnbListingLifecycleResponse { get; set; }
+            public global::Repull.SDK.Models.AirbnbListingLifecycleResponse AirbnbListingLifecycleResponse
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingLifecycleResponse>("AirbnbListingLifecycleResponse"); }
+                set { BackingStore?.Set("AirbnbListingLifecycleResponse", value); }
+            }
 #endif
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1? ListingsPostResponseMember1 { get; set; }
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1? ListingsPostResponseMember1
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1?>("ListingsPostResponseMember1"); }
+                set { BackingStore?.Set("ListingsPostResponseMember1", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1 ListingsPostResponseMember1 { get; set; }
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1 ListingsPostResponseMember1
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember1>("ListingsPostResponseMember1"); }
+                set { BackingStore?.Set("ListingsPostResponseMember1", value); }
+            }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2? ListingsPostResponseMember2 { get; set; }
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2? ListingsPostResponseMember2
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2?>("ListingsPostResponseMember2"); }
+                set { BackingStore?.Set("ListingsPostResponseMember2", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2 ListingsPostResponseMember2 { get; set; }
+            public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2 ListingsPostResponseMember2
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsPostResponseMember2>("ListingsPostResponseMember2"); }
+                set { BackingStore?.Set("ListingsPostResponseMember2", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder.ListingsResponse"/> and sets the default values.
+            /// </summary>
+            public ListingsResponse()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

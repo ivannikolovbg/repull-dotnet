@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,22 +10,41 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbSafetyDisclosure : IAdditionalDataHolder, IParsable
+    public partial class AirbnbSafetyDisclosure : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Read only: whether Airbnb holds an explicit answer for this type on this listing (as opposed to it simply not being declared).</summary>
-        public bool? Declared { get; set; }
+        public bool? Declared
+        {
+            get { return BackingStore?.Get<bool?>("declared"); }
+            set { BackingStore?.Set("declared", value); }
+        }
         /// <summary>What is being disclosed. `surveillance` = exterior security cameras or recording devices. `noise_monitor` = a decibel monitor is installed. `requires_stairs`, `potential_noise`, `animals` (farm or wild animals nearby), `has_pets` (the host&apos;s pets), `limited_parking`, `limited_amenities`, `shared_spaces`, `pool_or_jacuzzi_with_no_fence`, `heights_with_no_fence`, `climbing_or_play_structure`, `lake_or_river_or_water_body`, `weapons`.</summary>
-        public global::Repull.SDK.Models.AirbnbSafetyDisclosure_type? Type { get; set; }
+        public global::Repull.SDK.Models.AirbnbSafetyDisclosure_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbSafetyDisclosure_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>Whether it applies to this property.</summary>
-        public bool? Value { get; set; }
+        public bool? Value
+        {
+            get { return BackingStore?.Get<bool?>("value"); }
+            set { BackingStore?.Set("value", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbSafetyDisclosure"/> and sets the default values.
         /// </summary>
         public AirbnbSafetyDisclosure()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,94 @@ namespace Repull.SDK.Models
     /// A fee on top of the nightly rate, the cleaning fee included. One shape for every channel and PMS.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingFee : IAdditionalDataHolder, IParsable
+    public partial class ListingFee : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>In the listing currency when `amountType` is `flat`; a percent when `percent`.</summary>
-        public double? Amount { get; set; }
+        public double? Amount
+        {
+            get { return BackingStore?.Get<double?>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
         /// <summary>The amountType property</summary>
-        public global::Repull.SDK.Models.ListingFee_amountType? AmountType { get; set; }
+        public global::Repull.SDK.Models.ListingFee_amountType? AmountType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingFee_amountType?>("amountType"); }
+            set { BackingStore?.Set("amountType", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>How often an amount is charged: once per stay, per night, per guest, or per guest per night.</summary>
-        public global::Repull.SDK.Models.ChargePer? ChargedPer { get; set; }
+        public global::Repull.SDK.Models.ChargePer? ChargedPer
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChargePer?>("chargedPer"); }
+            set { BackingStore?.Set("chargedPer", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>Offered to the guest (an add-on) rather than always charged.</summary>
-        public bool? Optional { get; set; }
+        public bool? Optional
+        {
+            get { return BackingStore?.Get<bool?>("optional"); }
+            set { BackingStore?.Set("optional", value); }
+        }
         /// <summary>Where it was read from: `airbnb`, `guesty`, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Source { get; set; }
+        public string? Source
+        {
+            get { return BackingStore?.Get<string?>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
 #nullable restore
 #else
-        public string Source { get; set; }
+        public string Source
+        {
+            get { return BackingStore?.Get<string>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
 #endif
         /// <summary>`cleaning`, `pet`, `linen`, `resort`, `management`, `community`, or the source&apos;s own kind.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingFee"/> and sets the default values.
         /// </summary>
         public ListingFee()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

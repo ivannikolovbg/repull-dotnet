@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// What KIND of property this is. The publish path reads all three on every push, so setting them here is the update path for a listing that already exists — `POST /v1/listings` could only set the type at creation. Airbnb may lock these on an established listing; the publish response reports that in `lockedFields`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingContentUpdateRequest_details : IAdditionalDataHolder, IParsable
+    public partial class ListingContentUpdateRequest_details : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Free-form property type; mapped to Airbnb&apos;s property-type group at publish time.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyType { get; set; }
+        public string? PropertyType
+        {
+            get { return BackingStore?.Get<string?>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #nullable restore
 #else
-        public string PropertyType { get; set; }
+        public string PropertyType
+        {
+            get { return BackingStore?.Get<string>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #endif
         /// <summary>Airbnb&apos;s `property_type_category`, e.g. `apartment`, `condominium`, `townhouse`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyTypeCategory { get; set; }
+        public string? PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string?>("propertyTypeCategory"); }
+            set { BackingStore?.Set("propertyTypeCategory", value); }
+        }
 #nullable restore
 #else
-        public string PropertyTypeCategory { get; set; }
+        public string PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string>("propertyTypeCategory"); }
+            set { BackingStore?.Set("propertyTypeCategory", value); }
+        }
 #endif
         /// <summary>What the guest gets of the property.</summary>
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_details_roomTypeCategory? RoomTypeCategory { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_details_roomTypeCategory? RoomTypeCategory
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_details_roomTypeCategory?>("roomTypeCategory"); }
+            set { BackingStore?.Set("roomTypeCategory", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest_details"/> and sets the default values.
         /// </summary>
         public ListingContentUpdateRequest_details()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

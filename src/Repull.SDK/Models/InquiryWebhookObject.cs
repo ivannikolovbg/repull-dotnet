@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,101 +13,208 @@ namespace Repull.SDK.Models
     /// An inquiry — a guest asking about dates before booking — exactly as `GET /v1/inquiries` returns it. Delivered as `data.object` on `inquiry.*` events.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class InquiryWebhookObject : IAdditionalDataHolder, IParsable
+    public partial class InquiryWebhookObject : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>Pass to `POST /v1/conversations/{id}/pre-approval` or `/special-offers`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get; set; }
+        public string? ConversationId
+        {
+            get { return BackingStore?.Get<string?>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #nullable restore
 #else
-        public string ConversationId { get; set; }
+        public string ConversationId
+        {
+            get { return BackingStore?.Get<string>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The expectedPayout property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout? ExpectedPayout { get; set; }
+        public global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout? ExpectedPayout
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout?>("expectedPayout"); }
+            set { BackingStore?.Set("expectedPayout", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout ExpectedPayout { get; set; }
+        public global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout ExpectedPayout
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryWebhookObject_expectedPayout>("expectedPayout"); }
+            set { BackingStore?.Set("expectedPayout", value); }
+        }
 #endif
         /// <summary>Who asked. Airbnb shares only the first name before the guest books.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.InquiryWebhookObject_guest? Guest { get; set; }
+        public global::Repull.SDK.Models.InquiryWebhookObject_guest? Guest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryWebhookObject_guest?>("guest"); }
+            set { BackingStore?.Set("guest", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.InquiryWebhookObject_guest Guest { get; set; }
+        public global::Repull.SDK.Models.InquiryWebhookObject_guest Guest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryWebhookObject_guest>("guest"); }
+            set { BackingStore?.Set("guest", value); }
+        }
 #endif
         /// <summary>The guests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.InquiryWebhookObject_guests? Guests { get; set; }
+        public global::Repull.SDK.Models.InquiryWebhookObject_guests? Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryWebhookObject_guests?>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.InquiryWebhookObject_guests Guests { get; set; }
+        public global::Repull.SDK.Models.InquiryWebhookObject_guests Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryWebhookObject_guests>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #endif
         /// <summary>Repull inquiry id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>A PMS that relays this inquiry; when set, answer it in that PMS.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RelayedBy { get; set; }
+        public string? RelayedBy
+        {
+            get { return BackingStore?.Get<string?>("relayedBy"); }
+            set { BackingStore?.Set("relayedBy", value); }
+        }
 #nullable restore
 #else
-        public string RelayedBy { get; set; }
+        public string RelayedBy
+        {
+            get { return BackingStore?.Get<string>("relayedBy"); }
+            set { BackingStore?.Set("relayedBy", value); }
+        }
 #endif
         /// <summary>The reservation the inquiry became, once booked.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReservationId { get; set; }
+        public string? ReservationId
+        {
+            get { return BackingStore?.Get<string?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #nullable restore
 #else
-        public string ReservationId { get; set; }
+        public string ReservationId
+        {
+            get { return BackingStore?.Get<string>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #endif
         /// <summary>The respondBy property</summary>
-        public DateTimeOffset? RespondBy { get; set; }
+        public DateTimeOffset? RespondBy
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("respondBy"); }
+            set { BackingStore?.Set("respondBy", value); }
+        }
         /// <summary>The respondedAt property</summary>
-        public DateTimeOffset? RespondedAt { get; set; }
+        public DateTimeOffset? RespondedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("respondedAt"); }
+            set { BackingStore?.Set("respondedAt", value); }
+        }
         /// <summary>Same vocabulary as `GET /v1/inquiries`: `open` needs an answer; `booked` means the guest booked (`reservationId`).</summary>
-        public global::Repull.SDK.Models.InquiryWebhookObject_status? Status { get; set; }
+        public global::Repull.SDK.Models.InquiryWebhookObject_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryWebhookObject_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.InquiryWebhookObject"/> and sets the default values.
         /// </summary>
         public InquiryWebhookObject()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

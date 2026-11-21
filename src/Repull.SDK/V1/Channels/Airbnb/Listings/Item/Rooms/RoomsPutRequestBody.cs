@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,38 +12,83 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms
     /// At least one field. A body that changes nothing is refused rather than reported as a successful write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class RoomsPutRequestBody : IParsable
+    public partial class RoomsPutRequestBody : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The room&apos;s whole sleeping arrangement. Replaces what is there — send every bed, not just the changed one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_beds>? Beds { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_beds>? Beds
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_beds>?>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_beds> Beds { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_beds> Beds
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_beds>>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
 #endif
         /// <summary>The is_private property</summary>
-        public bool? IsPrivate { get; set; }
+        public bool? IsPrivate
+        {
+            get { return BackingStore?.Get<bool?>("is_private"); }
+            set { BackingStore?.Set("is_private", value); }
+        }
         /// <summary>The metadata property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_metadata? Metadata { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_metadata? Metadata
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_metadata?>("metadata"); }
+            set { BackingStore?.Set("metadata", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_metadata Metadata { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_metadata Metadata
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_metadata>("metadata"); }
+            set { BackingStore?.Set("metadata", value); }
+        }
 #endif
         /// <summary>Amenities attached to this room, not to the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_amenities>? RoomAmenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_amenities>? RoomAmenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_amenities>?>("room_amenities"); }
+            set { BackingStore?.Set("room_amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_amenities> RoomAmenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_amenities> RoomAmenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_amenities>>("room_amenities"); }
+            set { BackingStore?.Set("room_amenities", value); }
+        }
 #endif
         /// <summary>The room&apos;s position among the listing&apos;s rooms. Airbnb keys rooms of the same type by this number, so two bedrooms are 1 and 2.</summary>
-        public int? RoomNumber { get; set; }
+        public int? RoomNumber
+        {
+            get { return BackingStore?.Get<int?>("room_number"); }
+            set { BackingStore?.Set("room_number", value); }
+        }
         /// <summary>The room_type property</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_type? RoomType { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_type? RoomType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody_room_type?>("room_type"); }
+            set { BackingStore?.Set("room_type", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms.RoomsPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public RoomsPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

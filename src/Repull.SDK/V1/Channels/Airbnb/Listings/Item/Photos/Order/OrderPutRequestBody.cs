@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,17 +10,34 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Order
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class OrderPutRequestBody : IParsable
+    public partial class OrderPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb photo ids (`photoAirbnbId` from `GET /photos`) in display order, first photo first. No duplicates; every id must be on this listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? PhotoIds { get; set; }
+        public List<string>? PhotoIds
+        {
+            get { return BackingStore?.Get<List<string>?>("photo_ids"); }
+            set { BackingStore?.Set("photo_ids", value); }
+        }
 #nullable restore
 #else
-        public List<string> PhotoIds { get; set; }
+        public List<string> PhotoIds
+        {
+            get { return BackingStore?.Get<List<string>>("photo_ids"); }
+            set { BackingStore?.Set("photo_ids", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.Order.OrderPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public OrderPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

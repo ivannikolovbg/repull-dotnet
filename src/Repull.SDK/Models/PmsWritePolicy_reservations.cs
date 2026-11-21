@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,22 +10,41 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PmsWritePolicy_reservations : IAdditionalDataHolder, IParsable
+    public partial class PmsWritePolicy_reservations : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Create, change and cancel bookings through the reservations API.</summary>
-        public bool? Api { get; set; }
+        public bool? Api
+        {
+            get { return BackingStore?.Get<bool?>("api"); }
+            set { BackingStore?.Set("api", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Change and cancel bookings from the dashboard.</summary>
-        public bool? Dashboard { get; set; }
+        public bool? Dashboard
+        {
+            get { return BackingStore?.Get<bool?>("dashboard"); }
+            set { BackingStore?.Set("dashboard", value); }
+        }
         /// <summary>Create bookings from booking websites.</summary>
-        public bool? Website { get; set; }
+        public bool? Website
+        {
+            get { return BackingStore?.Get<bool?>("website"); }
+            set { BackingStore?.Set("website", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PmsWritePolicy_reservations"/> and sets the default values.
         /// </summary>
         public PmsWritePolicy_reservations()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

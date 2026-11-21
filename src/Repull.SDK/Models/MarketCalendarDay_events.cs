@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,36 +10,67 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MarketCalendarDay_events : IAdditionalDataHolder, IParsable
+    public partial class MarketCalendarDay_events : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The attendance property</summary>
-        public int? Attendance { get; set; }
+        public int? Attendance
+        {
+            get { return BackingStore?.Get<int?>("attendance"); }
+            set { BackingStore?.Set("attendance", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The category property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Category { get; set; }
+        public string? Category
+        {
+            get { return BackingStore?.Get<string?>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
 #nullable restore
 #else
-        public string Category { get; set; }
+        public string Category
+        {
+            get { return BackingStore?.Get<string>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
 #endif
         /// <summary>The rank property</summary>
-        public double? Rank { get; set; }
+        public double? Rank
+        {
+            get { return BackingStore?.Get<double?>("rank"); }
+            set { BackingStore?.Set("rank", value); }
+        }
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketCalendarDay_events"/> and sets the default values.
         /// </summary>
         public MarketCalendarDay_events()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

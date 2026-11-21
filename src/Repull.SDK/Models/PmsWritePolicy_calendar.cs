@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,22 +10,41 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PmsWritePolicy_calendar : IAdditionalDataHolder, IParsable
+    public partial class PmsWritePolicy_calendar : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Open and close nights. Off also means the PMS&apos;s bookings never block the calendar on other channels.</summary>
-        public bool? Availability { get; set; }
+        public bool? Availability
+        {
+            get { return BackingStore?.Get<bool?>("availability"); }
+            set { BackingStore?.Set("availability", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Nightly prices.</summary>
-        public bool? Rates { get; set; }
+        public bool? Rates
+        {
+            get { return BackingStore?.Get<bool?>("rates"); }
+            set { BackingStore?.Set("rates", value); }
+        }
         /// <summary>Minimum stay and other stay restrictions.</summary>
-        public bool? Restrictions { get; set; }
+        public bool? Restrictions
+        {
+            get { return BackingStore?.Get<bool?>("restrictions"); }
+            set { BackingStore?.Set("restrictions", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PmsWritePolicy_calendar"/> and sets the default values.
         /// </summary>
         public PmsWritePolicy_calendar()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

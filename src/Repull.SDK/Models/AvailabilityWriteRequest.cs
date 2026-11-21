@@ -16,10 +16,18 @@ namespace Repull.SDK.Models
         /// <summary>ISO dates. Capped at 731 — Airbnb refuses calendar writes spanning more.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<Date?>? Dates { get; set; }
+        public List<Date?>? Dates
+        {
+            get { return BackingStore?.Get<List<Date?>?>("dates"); }
+            set { BackingStore?.Set("dates", value); }
+        }
 #nullable restore
 #else
-        public List<Date?> Dates { get; set; }
+        public List<Date?> Dates
+        {
+            get { return BackingStore?.Get<List<Date?>>("dates"); }
+            set { BackingStore?.Set("dates", value); }
+        }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

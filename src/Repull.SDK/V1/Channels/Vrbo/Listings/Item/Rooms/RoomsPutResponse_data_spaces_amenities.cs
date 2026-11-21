@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,50 +10,93 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class RoomsPutResponse_data_spaces_amenities : IAdditionalDataHolder, IParsable
+    public partial class RoomsPutResponse_data_spaces_amenities : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The detail property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Detail { get; set; }
+        public string? Detail
+        {
+            get { return BackingStore?.Get<string?>("detail"); }
+            set { BackingStore?.Set("detail", value); }
+        }
 #nullable restore
 #else
-        public string Detail { get; set; }
+        public string Detail
+        {
+            get { return BackingStore?.Get<string>("detail"); }
+            set { BackingStore?.Set("detail", value); }
+        }
 #endif
         /// <summary>The detailId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DetailId { get; set; }
+        public string? DetailId
+        {
+            get { return BackingStore?.Get<string?>("detailId"); }
+            set { BackingStore?.Set("detailId", value); }
+        }
 #nullable restore
 #else
-        public string DetailId { get; set; }
+        public string DetailId
+        {
+            get { return BackingStore?.Get<string>("detailId"); }
+            set { BackingStore?.Set("detailId", value); }
+        }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The label property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Label { get; set; }
+        public string? Label
+        {
+            get { return BackingStore?.Get<string?>("label"); }
+            set { BackingStore?.Set("label", value); }
+        }
 #nullable restore
 #else
-        public string Label { get; set; }
+        public string Label
+        {
+            get { return BackingStore?.Get<string>("label"); }
+            set { BackingStore?.Set("label", value); }
+        }
 #endif
         /// <summary>The selected property</summary>
-        public bool? Selected { get; set; }
+        public bool? Selected
+        {
+            get { return BackingStore?.Get<bool?>("selected"); }
+            set { BackingStore?.Set("selected", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutResponse_data_spaces_amenities"/> and sets the default values.
         /// </summary>
         public RoomsPutResponse_data_spaces_amenities()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

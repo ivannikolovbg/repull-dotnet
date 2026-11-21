@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,23 +12,46 @@ namespace Repull.SDK.Models
     /// The parts the PMS itemized; absent parts were not itemized.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationQuoteResponse_breakdown : IAdditionalDataHolder, IParsable
+    public partial class ReservationQuoteResponse_breakdown : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The accommodation property</summary>
-        public double? Accommodation { get; set; }
+        public double? Accommodation
+        {
+            get { return BackingStore?.Get<double?>("accommodation"); }
+            set { BackingStore?.Set("accommodation", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cleaningFee property</summary>
-        public double? CleaningFee { get; set; }
+        public double? CleaningFee
+        {
+            get { return BackingStore?.Get<double?>("cleaningFee"); }
+            set { BackingStore?.Set("cleaningFee", value); }
+        }
         /// <summary>The fees property</summary>
-        public double? Fees { get; set; }
+        public double? Fees
+        {
+            get { return BackingStore?.Get<double?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
         /// <summary>The taxes property</summary>
-        public double? Taxes { get; set; }
+        public double? Taxes
+        {
+            get { return BackingStore?.Get<double?>("taxes"); }
+            set { BackingStore?.Set("taxes", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationQuoteResponse_breakdown"/> and sets the default values.
         /// </summary>
         public ReservationQuoteResponse_breakdown()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -10,48 +11,87 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class SafetyDisclosuresPutResponse : IAdditionalDataHolder, IParsable
+    public partial class SafetyDisclosuresPutResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The airbnbListingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbListingId { get; set; }
+        public string? AirbnbListingId
+        {
+            get { return BackingStore?.Get<string?>("airbnbListingId"); }
+            set { BackingStore?.Set("airbnbListingId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbListingId { get; set; }
+        public string AirbnbListingId
+        {
+            get { return BackingStore?.Get<string>("airbnbListingId"); }
+            set { BackingStore?.Set("airbnbListingId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The set as Airbnb reports it after the write.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? Disclosures { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? Disclosures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>?>("disclosures"); }
+            set { BackingStore?.Set("disclosures", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> Disclosures { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> Disclosures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>>("disclosures"); }
+            set { BackingStore?.Set("disclosures", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Airbnb&apos;s raw booking-settings response.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresPutResponse_result? Result { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresPutResponse_result? Result
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresPutResponse_result?>("result"); }
+            set { BackingStore?.Set("result", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresPutResponse_result Result { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresPutResponse_result Result
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresPutResponse_result>("result"); }
+            set { BackingStore?.Set("result", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures.SafetyDisclosuresPutResponse"/> and sets the default values.
         /// </summary>
         public SafetyDisclosuresPutResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

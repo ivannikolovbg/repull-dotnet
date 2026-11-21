@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,64 +11,127 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReservationQuoteResponse : IAdditionalDataHolder, IParsable
+    public partial class ReservationQuoteResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Whether the PMS would take the booking as asked.</summary>
-        public bool? Available { get; set; }
+        public bool? Available
+        {
+            get { return BackingStore?.Get<bool?>("available"); }
+            set { BackingStore?.Set("available", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The parts the PMS itemized; absent parts were not itemized.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationQuoteResponse_breakdown? Breakdown { get; set; }
+        public global::Repull.SDK.Models.ReservationQuoteResponse_breakdown? Breakdown
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationQuoteResponse_breakdown?>("breakdown"); }
+            set { BackingStore?.Set("breakdown", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationQuoteResponse_breakdown Breakdown { get; set; }
+        public global::Repull.SDK.Models.ReservationQuoteResponse_breakdown Breakdown
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationQuoteResponse_breakdown>("breakdown"); }
+            set { BackingStore?.Set("breakdown", value); }
+        }
 #endif
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The PMS that priced it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The PMS&apos;s reasons, verbatim, when `available` is false.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Restrictions { get; set; }
+        public List<string>? Restrictions
+        {
+            get { return BackingStore?.Get<List<string>?>("restrictions"); }
+            set { BackingStore?.Set("restrictions", value); }
+        }
 #nullable restore
 #else
-        public List<string> Restrictions { get; set; }
+        public List<string> Restrictions
+        {
+            get { return BackingStore?.Get<List<string>>("restrictions"); }
+            set { BackingStore?.Set("restrictions", value); }
+        }
 #endif
         /// <summary>Total for the stay, in `currency`. Null when the PMS gave no price (e.g. not available).</summary>
-        public double? Total { get; set; }
+        public double? Total
+        {
+            get { return BackingStore?.Get<double?>("total"); }
+            set { BackingStore?.Set("total", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationQuoteResponse"/> and sets the default values.
         /// </summary>
         public ReservationQuoteResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,79 +12,150 @@ namespace Repull.SDK.Models
     /// Result of a content write. **A 200 does not by itself mean the change was applied**: Airbnb locks host-managed fields on established listings and answers 200 while applying nothing for them. `blockedFields` is the list of fields YOU sent that Airbnb dropped; `blockedFields: []` is what a landed write looks like.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbContentWriteResponse : IAdditionalDataHolder, IParsable
+    public partial class AirbnbContentWriteResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The Airbnb-side listing id the write went to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbListingId { get; set; }
+        public string? AirbnbListingId
+        {
+            get { return BackingStore?.Get<string?>("airbnbListingId"); }
+            set { BackingStore?.Set("airbnbListingId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbListingId { get; set; }
+        public string AirbnbListingId
+        {
+            get { return BackingStore?.Get<string>("airbnbListingId"); }
+            set { BackingStore?.Set("airbnbListingId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Fields you sent that Airbnb refused to change. Not retryable — the content is managed on Airbnb.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? BlockedFields { get; set; }
+        public List<string>? BlockedFields
+        {
+            get { return BackingStore?.Get<List<string>?>("blockedFields"); }
+            set { BackingStore?.Set("blockedFields", value); }
+        }
 #nullable restore
 #else
-        public List<string> BlockedFields { get; set; }
+        public List<string> BlockedFields
+        {
+            get { return BackingStore?.Get<List<string>>("blockedFields"); }
+            set { BackingStore?.Set("blockedFields", value); }
+        }
 #endif
         /// <summary>Present only when `blockedFields` is non-empty: what to do about it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Fix { get; set; }
+        public string? Fix
+        {
+            get { return BackingStore?.Get<string?>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #nullable restore
 #else
-        public string Fix { get; set; }
+        public string Fix
+        {
+            get { return BackingStore?.Get<string>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Descriptions only — the locale written.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Locale { get; set; }
+        public string? Locale
+        {
+            get { return BackingStore?.Get<string?>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #nullable restore
 #else
-        public string Locale { get; set; }
+        public string Locale
+        {
+            get { return BackingStore?.Get<string>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #endif
         /// <summary>Present only when `blockedFields` is non-empty: what was not applied.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>Airbnb&apos;s raw response.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbContentWriteResponse_result? Result { get; set; }
+        public global::Repull.SDK.Models.AirbnbContentWriteResponse_result? Result
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbContentWriteResponse_result?>("result"); }
+            set { BackingStore?.Set("result", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbContentWriteResponse_result Result { get; set; }
+        public global::Repull.SDK.Models.AirbnbContentWriteResponse_result Result
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbContentWriteResponse_result>("result"); }
+            set { BackingStore?.Set("result", value); }
+        }
 #endif
         /// <summary>Fields that were applied.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Written { get; set; }
+        public List<string>? Written
+        {
+            get { return BackingStore?.Get<List<string>?>("written"); }
+            set { BackingStore?.Set("written", value); }
+        }
 #nullable restore
 #else
-        public List<string> Written { get; set; }
+        public List<string> Written
+        {
+            get { return BackingStore?.Get<List<string>>("written"); }
+            set { BackingStore?.Set("written", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbContentWriteResponse"/> and sets the default values.
         /// </summary>
         public AirbnbContentWriteResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

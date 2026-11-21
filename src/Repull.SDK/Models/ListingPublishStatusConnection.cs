@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,55 +12,110 @@ namespace Repull.SDK.Models
     /// Per-channel connection state. Distinct from `channels` (sync activity) — a listing can be connected here yet have empty `channels` if it has never been pushed.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPublishStatusConnection : IAdditionalDataHolder, IParsable
+    public partial class ListingPublishStatusConnection : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Channel name: airbnb, booking, vrbo, etc.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>Where the listing stands on the channel itself, when the channel reports it (VRBO): `online` — live and bookable; `offline` — hidden by the owner (`POST /v1/listings/{id}/online` brings it back); `not_live` — expired, new, still onboarding or deactivated by the channel (see `channelStatusDetail`). Null when not reported.</summary>
-        public global::Repull.SDK.Models.ListingPublishStatusConnection_channelStatus? ChannelStatus { get; set; }
+        public global::Repull.SDK.Models.ListingPublishStatusConnection_channelStatus? ChannelStatus
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPublishStatusConnection_channelStatus?>("channelStatus"); }
+            set { BackingStore?.Set("channelStatus", value); }
+        }
         /// <summary>The channel&apos;s own status word behind `channelStatus` (VRBO: `LIVE`, `InactiveByOwnerRequest`, `Expired`, `New`, …).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ChannelStatusDetail { get; set; }
+        public string? ChannelStatusDetail
+        {
+            get { return BackingStore?.Get<string?>("channelStatusDetail"); }
+            set { BackingStore?.Set("channelStatusDetail", value); }
+        }
 #nullable restore
 #else
-        public string ChannelStatusDetail { get; set; }
+        public string ChannelStatusDetail
+        {
+            get { return BackingStore?.Get<string>("channelStatusDetail"); }
+            set { BackingStore?.Set("channelStatusDetail", value); }
+        }
 #endif
         /// <summary>True when the link is active (not disconnected/suspended).</summary>
-        public bool? Connected { get; set; }
+        public bool? Connected
+        {
+            get { return BackingStore?.Get<bool?>("connected"); }
+            set { BackingStore?.Set("connected", value); }
+        }
         /// <summary>Fields the channel will not let this listing change. **Airbnb only** — present on the `airbnb` entry and absent on every other channel, because no other channel has the concept.Airbnb does not refuse a write to a locked field: the request returns 200, reports the field as locked, and applies nothing. So a write to one of these looks exactly like a write that worked. Read this before you let a user edit — it is here, rather than only on `GET /v1/channels/airbnb/listings/{id}`, because this is the endpoint a listing editor already calls.Empty for a listing with nothing locked, and for one that has not synced since we began recording them — the two are not distinguished, because a caller acts the same way on both. This is what Airbnb last told us, not a promise: a lock can appear between syncs, which is why a publish result also reports `lockedFields`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? LockedFields { get; set; }
+        public List<string>? LockedFields
+        {
+            get { return BackingStore?.Get<List<string>?>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #nullable restore
 #else
-        public List<string> LockedFields { get; set; }
+        public List<string> LockedFields
+        {
+            get { return BackingStore?.Get<List<string>>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #endif
         /// <summary>The listing&apos;s id on the channel — Airbnb listing id, Booking.com room/property id, VRBO listing number.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PlatformId { get; set; }
+        public string? PlatformId
+        {
+            get { return BackingStore?.Get<string?>("platformId"); }
+            set { BackingStore?.Set("platformId", value); }
+        }
 #nullable restore
 #else
-        public string PlatformId { get; set; }
+        public string PlatformId
+        {
+            get { return BackingStore?.Get<string>("platformId"); }
+            set { BackingStore?.Set("platformId", value); }
+        }
 #endif
         /// <summary>ISO timestamp the connection was first established.</summary>
-        public DateTimeOffset? Since { get; set; }
+        public DateTimeOffset? Since
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("since"); }
+            set { BackingStore?.Set("since", value); }
+        }
         /// <summary>True when sync writes are enabled for this channel.</summary>
-        public bool? SyncEnabled { get; set; }
+        public bool? SyncEnabled
+        {
+            get { return BackingStore?.Get<bool?>("syncEnabled"); }
+            set { BackingStore?.Set("syncEnabled", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPublishStatusConnection"/> and sets the default values.
         /// </summary>
         public ListingPublishStatusConnection()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

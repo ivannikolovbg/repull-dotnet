@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,25 +10,58 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class FeesPutRequestBody_custom : IParsable
+    public partial class FeesPutRequestBody_custom : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The amount property</summary>
-        public double? Amount { get; set; }
+        public double? Amount
+        {
+            get { return BackingStore?.Get<double?>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>One of the read&apos;s `customFeeCodes` (e.g. ADMINISTRATIVE, HOT_TUB, LINENS, PARKING, POOL).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ProductCode { get; set; }
+        public string? ProductCode
+        {
+            get { return BackingStore?.Get<string?>("productCode"); }
+            set { BackingStore?.Set("productCode", value); }
+        }
 #nullable restore
 #else
-        public string ProductCode { get; set; }
+        public string ProductCode
+        {
+            get { return BackingStore?.Get<string>("productCode"); }
+            set { BackingStore?.Set("productCode", value); }
+        }
 #endif
         /// <summary>The taxable property</summary>
-        public bool? Taxable { get; set; }
+        public bool? Taxable
+        {
+            get { return BackingStore?.Get<bool?>("taxable"); }
+            set { BackingStore?.Set("taxable", value); }
+        }
         /// <summary>The taxRate property</summary>
-        public double? TaxRate { get; set; }
+        public double? TaxRate
+        {
+            get { return BackingStore?.Get<double?>("taxRate"); }
+            set { BackingStore?.Set("taxRate", value); }
+        }
         /// <summary>The type property</summary>
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom_type? Type { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Fees.FeesPutRequestBody_custom"/> and sets the default values.
+        /// </summary>
+        public FeesPutRequestBody_custom()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

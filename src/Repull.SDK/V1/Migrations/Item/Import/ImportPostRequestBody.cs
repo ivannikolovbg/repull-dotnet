@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,19 +10,40 @@ namespace Repull.SDK.V1.Migrations.Item.Import
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ImportPostRequestBody : IParsable
+    public partial class ImportPostRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Defaults to listings and reservations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Migrations.Item.Import.ImportPostRequestBody_entities?>? Entities { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Item.Import.ImportPostRequestBody_entities?>? Entities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Item.Import.ImportPostRequestBody_entities?>?>("entities"); }
+            set { BackingStore?.Set("entities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Migrations.Item.Import.ImportPostRequestBody_entities?> Entities { get; set; }
+        public List<global::Repull.SDK.V1.Migrations.Item.Import.ImportPostRequestBody_entities?> Entities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Migrations.Item.Import.ImportPostRequestBody_entities?>>("entities"); }
+            set { BackingStore?.Set("entities", value); }
+        }
 #endif
         /// <summary>Only reservations changed after this.</summary>
-        public DateTimeOffset? Since { get; set; }
+        public DateTimeOffset? Since
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("since"); }
+            set { BackingStore?.Set("since", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Migrations.Item.Import.ImportPostRequestBody"/> and sets the default values.
+        /// </summary>
+        public ImportPostRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,45 +12,88 @@ namespace Repull.SDK.Models
     /// One Airbnb host record under the workspace, decorated with its most recent disconnect reason from `airbnb_host_events` (backfill events excluded).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbConnectionHost : IAdditionalDataHolder, IParsable
+    public partial class AirbnbConnectionHost : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Upstream Airbnb user id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbUserId { get; set; }
+        public string? AirbnbUserId
+        {
+            get { return BackingStore?.Get<string?>("airbnbUserId"); }
+            set { BackingStore?.Set("airbnbUserId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbUserId { get; set; }
+        public string AirbnbUserId
+        {
+            get { return BackingStore?.Get<string>("airbnbUserId"); }
+            set { BackingStore?.Set("airbnbUserId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>When the host was last marked inactive. Null on currently-connected hosts.</summary>
-        public DateTimeOffset? DeactivatedAt { get; set; }
+        public DateTimeOffset? DeactivatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("deactivatedAt"); }
+            set { BackingStore?.Set("deactivatedAt", value); }
+        }
         /// <summary>The isConnected property</summary>
-        public bool? IsConnected { get; set; }
+        public bool? IsConnected
+        {
+            get { return BackingStore?.Get<bool?>("isConnected"); }
+            set { BackingStore?.Set("isConnected", value); }
+        }
         /// <summary>Reason of the most recent non-backfill disconnect event. Common values: `token_refresh_rejected`, `auth_expired`, `user_revoked`. Null when the host has no recorded disconnects.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastDisconnectReason { get; set; }
+        public string? LastDisconnectReason
+        {
+            get { return BackingStore?.Get<string?>("lastDisconnectReason"); }
+            set { BackingStore?.Set("lastDisconnectReason", value); }
+        }
 #nullable restore
 #else
-        public string LastDisconnectReason { get; set; }
+        public string LastDisconnectReason
+        {
+            get { return BackingStore?.Get<string>("lastDisconnectReason"); }
+            set { BackingStore?.Set("lastDisconnectReason", value); }
+        }
 #endif
         /// <summary>When this account last COMPLETED an Airbnb import. `null` when it never has. A run that failed or was rate-limited does not move it, and neither does anything other than a sync.</summary>
-        public DateTimeOffset? LastSyncedAt { get; set; }
+        public DateTimeOffset? LastSyncedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastSyncedAt"); }
+            set { BackingStore?.Set("lastSyncedAt", value); }
+        }
         /// <summary>Display name (preferred form, falling back to legal first name). Null when both fields are empty.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbConnectionHost"/> and sets the default values.
         /// </summary>
         public AirbnbConnectionHost()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

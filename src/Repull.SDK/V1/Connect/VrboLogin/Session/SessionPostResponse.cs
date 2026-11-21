@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,54 +10,105 @@ namespace Repull.SDK.V1.Connect.VrboLogin.Session
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class SessionPostResponse : IAdditionalDataHolder, IParsable
+    public partial class SessionPostResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The accountId property</summary>
-        public int? AccountId { get; set; }
+        public int? AccountId
+        {
+            get { return BackingStore?.Get<int?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The awaitingMapping property</summary>
-        public bool? AwaitingMapping { get; set; }
+        public bool? AwaitingMapping
+        {
+            get { return BackingStore?.Get<bool?>("awaitingMapping"); }
+            set { BackingStore?.Set("awaitingMapping", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The destination property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Destination { get; set; }
+        public string? Destination
+        {
+            get { return BackingStore?.Get<string?>("destination"); }
+            set { BackingStore?.Set("destination", value); }
+        }
 #nullable restore
 #else
-        public string Destination { get; set; }
+        public string Destination
+        {
+            get { return BackingStore?.Get<string>("destination"); }
+            set { BackingStore?.Set("destination", value); }
+        }
 #endif
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The notificationEmail property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NotificationEmail { get; set; }
+        public string? NotificationEmail
+        {
+            get { return BackingStore?.Get<string?>("notificationEmail"); }
+            set { BackingStore?.Set("notificationEmail", value); }
+        }
 #nullable restore
 #else
-        public string NotificationEmail { get; set; }
+        public string NotificationEmail
+        {
+            get { return BackingStore?.Get<string>("notificationEmail"); }
+            set { BackingStore?.Set("notificationEmail", value); }
+        }
 #endif
         /// <summary>The reason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.V1.Connect.VrboLogin.Session.SessionPostResponse_status? Status { get; set; }
+        public global::Repull.SDK.V1.Connect.VrboLogin.Session.SessionPostResponse_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.VrboLogin.Session.SessionPostResponse_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.VrboLogin.Session.SessionPostResponse"/> and sets the default values.
         /// </summary>
         public SessionPostResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

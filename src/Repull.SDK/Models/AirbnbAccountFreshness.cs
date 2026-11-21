@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.Models
     /// Freshness of ONE connected Airbnb account. Freshness is a property of an account, not of a workspace: one host&apos;s token expiring says nothing about another host&apos;s data.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbAccountFreshness : IAdditionalDataHolder, IParsable
+    public partial class AirbnbAccountFreshness : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Airbnb host id, as a string (they exceed 2^53). The same value `?account_id=` accepts and `GET /v1/connect/airbnb` returns as `accounts[].externalAccountId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>Display name of the connected account.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountName { get; set; }
+        public string? AccountName
+        {
+            get { return BackingStore?.Get<string?>("accountName"); }
+            set { BackingStore?.Set("accountName", value); }
+        }
 #nullable restore
 #else
-        public string AccountName { get; set; }
+        public string AccountName
+        {
+            get { return BackingStore?.Get<string>("accountName"); }
+            set { BackingStore?.Set("accountName", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Where to reconnect this account. Omitted when it is fresh.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FixUrl { get; set; }
+        public string? FixUrl
+        {
+            get { return BackingStore?.Get<string?>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #nullable restore
 #else
-        public string FixUrl { get; set; }
+        public string FixUrl
+        {
+            get { return BackingStore?.Get<string>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #endif
         /// <summary>When this account last COMPLETED an Airbnb import. `null` when it never has. A run that failed or was rate-limited does not move it.</summary>
-        public DateTimeOffset? LastSyncedAt { get; set; }
+        public DateTimeOffset? LastSyncedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastSyncedAt"); }
+            set { BackingStore?.Set("lastSyncedAt", value); }
+        }
         /// <summary>Why THIS account is stale. Omitted when it is fresh.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>`true` when this account is disconnected, has never synced, or has not refreshed in 24h+.</summary>
-        public bool? Stale { get; set; }
+        public bool? Stale
+        {
+            get { return BackingStore?.Get<bool?>("stale"); }
+            set { BackingStore?.Set("stale", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbAccountFreshness"/> and sets the default values.
         /// </summary>
         public AirbnbAccountFreshness()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

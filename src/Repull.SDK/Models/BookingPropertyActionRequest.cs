@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,27 +12,50 @@ namespace Repull.SDK.Models
     /// Take this listing&apos;s Booking.com property off sale or put it back (`unlist` / `relist`), or open or close the property itself on Booking.com (`open` / `close`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingPropertyActionRequest : IAdditionalDataHolder, IParsable
+    public partial class BookingPropertyActionRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>`unlist` closes the room&apos;s availability across the whole forward window, so the property stops selling. `relist` re-syncs the real calendar: dates that are genuinely blocked (a reservation, an owner stay) stay blocked, and only the closure `unlist` wrote lifts. They are not mirror images, and that is deliberate.`open` runs Booking.com&apos;s readiness check and opens the property only if it passes — on a property that is not ready it changes nothing and answers `422 booking_rejected` with Booking.com&apos;s reasons in `blockers`. It opens a property Booking.com has in a build stage (`XML: Being built`, `XML: Ready to open`) or closed. `close` closes the property on Booking.com with `reason`.</summary>
-        public global::Repull.SDK.Models.BookingPropertyActionRequest_action? Action { get; set; }
+        public global::Repull.SDK.Models.BookingPropertyActionRequest_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPropertyActionRequest_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com property to act on, for a listing mapped to more than one. Without it the request is refused with `409 ambiguous_booking_mapping` and nothing is written. `?hotel_id=` means the same thing; the body wins if you send both.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>`close` only: the reason Booking.com records for closing the property. Default `PROPERTY_NOT_AVAILABLE`.</summary>
-        public global::Repull.SDK.Models.BookingPropertyActionRequest_reason? Reason { get; set; }
+        public global::Repull.SDK.Models.BookingPropertyActionRequest_reason? Reason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPropertyActionRequest_reason?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPropertyActionRequest"/> and sets the default values.
         /// </summary>
         public BookingPropertyActionRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,54 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
     /// Check-in window as hours of the day, or `FLEXIBLE`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingSettingsGetResponse_data_checkIn : IAdditionalDataHolder, IParsable
+    public partial class BookingSettingsGetResponse_data_checkIn : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The end property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_end? End { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_end? End
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_end?>("end"); }
+            set { BackingStore?.Set("end", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_end End { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_end End
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_end>("end"); }
+            set { BackingStore?.Set("end", value); }
+        }
 #endif
         /// <summary>The start property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_start? Start { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_start? Start
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_start?>("start"); }
+            set { BackingStore?.Set("start", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_start Start { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_start Start
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_start>("start"); }
+            set { BackingStore?.Set("start", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn"/> and sets the default values.
         /// </summary>
         public BookingSettingsGetResponse_data_checkIn()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
@@ -75,18 +99,39 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
         /// Composed type wrapper for classes <see cref="int"/>, <see cref="string"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class BookingSettingsGetResponse_data_checkIn_end : IComposedTypeWrapper, IParsable
+        public partial class BookingSettingsGetResponse_data_checkIn_end : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="int"/></summary>
-            public int? Integer { get; set; }
+            public int? Integer
+            {
+                get { return BackingStore?.Get<int?>("integer"); }
+                set { BackingStore?.Set("integer", value); }
+            }
             /// <summary>Composed type representation for type <see cref="string"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public string? String { get; set; }
+            public string? String
+            {
+                get { return BackingStore?.Get<string?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public string String { get; set; }
+            public string String
+            {
+                get { return BackingStore?.Get<string>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_end"/> and sets the default values.
+            /// </summary>
+            public BookingSettingsGetResponse_data_checkIn_end()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>
@@ -136,18 +181,39 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
         /// Composed type wrapper for classes <see cref="int"/>, <see cref="string"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class BookingSettingsGetResponse_data_checkIn_start : IComposedTypeWrapper, IParsable
+        public partial class BookingSettingsGetResponse_data_checkIn_start : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="int"/></summary>
-            public int? Integer { get; set; }
+            public int? Integer
+            {
+                get { return BackingStore?.Get<int?>("integer"); }
+                set { BackingStore?.Set("integer", value); }
+            }
             /// <summary>Composed type representation for type <see cref="string"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public string? String { get; set; }
+            public string? String
+            {
+                get { return BackingStore?.Get<string?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public string String { get; set; }
+            public string String
+            {
+                get { return BackingStore?.Get<string>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsGetResponse_data_checkIn.BookingSettingsGetResponse_data_checkIn_start"/> and sets the default values.
+            /// </summary>
+            public BookingSettingsGetResponse_data_checkIn_start()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

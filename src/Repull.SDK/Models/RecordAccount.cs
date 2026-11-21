@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,86 @@ namespace Repull.SDK.Models
     /// The connected account a record belongs to — keyed exactly like the webhook `account` block and `connect.session.completed`, so one `provider:externalAccountId` key routes reads and events to the same user. `null` when it cannot be resolved (never guessed). Until 2027-02-12 the `?account=` filter and connection handles also accept the old Extranet / Vrbo login ids (e.g. `booking_extranet:88`); they are never sent.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class RecordAccount : IAdditionalDataHolder, IParsable
+    public partial class RecordAccount : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Our connection record id: the `X-Account-Id` value, the same as `account.id`. `null` only when the account has no connection record (e.g. a Vrbo sign-in in a workspace with no Vrbo connection). A string, like every id in API responses.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The platform&apos;s own account id: Airbnb host id; Booking.com hotel id (`booking`); the Booking.com account id behind the Extranet login (`booking_extranet`); Vrbo&apos;s account id (`vrbo`); the PMS&apos;s own account or company id. `null` when the platform id is not known yet (a Vrbo sign-in before its account id is captured, a PMS that does not expose one); never a Repull id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalAccountId { get; set; }
+        public string? ExternalAccountId
+        {
+            get { return BackingStore?.Get<string?>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalAccountId { get; set; }
+        public string ExternalAccountId
+        {
+            get { return BackingStore?.Get<string>("externalAccountId"); }
+            set { BackingStore?.Set("externalAccountId", value); }
+        }
 #endif
         /// <summary>Booking.com only: the hotel (property) id the record belongs to. A `booking_extranet` account (a Booking.com account) can cover several hotels; this says which one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>airbnb, booking, booking_extranet, vrbo, or the PMS id (hostaway, cloudbeds, …).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.RecordAccount"/> and sets the default values.
         /// </summary>
         public RecordAccount()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

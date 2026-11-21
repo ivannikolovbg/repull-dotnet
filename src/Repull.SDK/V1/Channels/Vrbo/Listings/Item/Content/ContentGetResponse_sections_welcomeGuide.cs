@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,80 +10,151 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ContentGetResponse_sections_welcomeGuide : IAdditionalDataHolder, IParsable
+    public partial class ContentGetResponse_sections_welcomeGuide : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The access property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_access? Access { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_access? Access
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_access?>("access"); }
+            set { BackingStore?.Set("access", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_access Access { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_access Access
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_access>("access"); }
+            set { BackingStore?.Set("access", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Keyed by Vrbo amenity id (e.g. HOT_TUB_HOSPITALITY).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_amenities? Amenities { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_amenities? Amenities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_amenities?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_amenities Amenities { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_amenities Amenities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_amenities>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkIn property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkIn? CheckIn { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkIn? CheckIn
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkIn?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkIn CheckIn { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkIn CheckIn
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkIn>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
 #endif
         /// <summary>The checkOut property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkOut? CheckOut { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkOut? CheckOut
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkOut?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkOut CheckOut { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkOut CheckOut
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_checkOut>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
 #endif
         /// <summary>The contacts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_contacts>? Contacts { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_contacts>? Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_contacts>?>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_contacts> Contacts { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_contacts> Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_contacts>>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #endif
         /// <summary>The drivingDirections property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_drivingDirections? DrivingDirections { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_drivingDirections? DrivingDirections
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_drivingDirections?>("drivingDirections"); }
+            set { BackingStore?.Set("drivingDirections", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_drivingDirections DrivingDirections { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_drivingDirections DrivingDirections
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_drivingDirections>("drivingDirections"); }
+            set { BackingStore?.Set("drivingDirections", value); }
+        }
 #endif
         /// <summary>The parkingDirections property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_parkingDirections? ParkingDirections { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_parkingDirections? ParkingDirections
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_parkingDirections?>("parkingDirections"); }
+            set { BackingStore?.Set("parkingDirections", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_parkingDirections ParkingDirections { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_parkingDirections ParkingDirections
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_parkingDirections>("parkingDirections"); }
+            set { BackingStore?.Set("parkingDirections", value); }
+        }
 #endif
         /// <summary>The wifi property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_wifi? Wifi { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_wifi? Wifi
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_wifi?>("wifi"); }
+            set { BackingStore?.Set("wifi", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_wifi Wifi { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_wifi Wifi
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide_wifi>("wifi"); }
+            set { BackingStore?.Set("wifi", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_welcomeGuide"/> and sets the default values.
         /// </summary>
         public ContentGetResponse_sections_welcomeGuide()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

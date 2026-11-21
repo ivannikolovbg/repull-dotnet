@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,83 +12,178 @@ namespace Repull.SDK.Models
     /// A registered webhook endpoint. The `secret` field is only present in the response of `POST /v1/webhooks` and `POST /v1/webhooks/{id}/rotate-secret` (Stripe pattern — capture it then; it is masked everywhere else).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WebhookSubscription : IAdditionalDataHolder, IParsable
+    public partial class WebhookSubscription : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The apiVersion property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiVersion { get; set; }
+        public string? ApiVersion
+        {
+            get { return BackingStore?.Get<string?>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #nullable restore
 #else
-        public string ApiVersion { get; set; }
+        public string ApiVersion
+        {
+            get { return BackingStore?.Get<string>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The consecutiveFailures property</summary>
-        public int? ConsecutiveFailures { get; set; }
+        public int? ConsecutiveFailures
+        {
+            get { return BackingStore?.Get<int?>("consecutiveFailures"); }
+            set { BackingStore?.Set("consecutiveFailures", value); }
+        }
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The disabledAt property</summary>
-        public DateTimeOffset? DisabledAt { get; set; }
+        public DateTimeOffset? DisabledAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("disabledAt"); }
+            set { BackingStore?.Set("disabledAt", value); }
+        }
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.WebhookEventType?>? Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?>? Events
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.WebhookEventType?>?>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.WebhookEventType?> Events { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventType?> Events
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.WebhookEventType?>>("events"); }
+            set { BackingStore?.Set("events", value); }
+        }
 #endif
         /// <summary>The id property</summary>
-        public Guid? Id { get; set; }
+        public Guid? Id
+        {
+            get { return BackingStore?.Get<Guid?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>The lastDeliveredAt property</summary>
-        public DateTimeOffset? LastDeliveredAt { get; set; }
+        public DateTimeOffset? LastDeliveredAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastDeliveredAt"); }
+            set { BackingStore?.Set("lastDeliveredAt", value); }
+        }
         /// <summary>The lastDeliveryStatus property</summary>
-        public int? LastDeliveryStatus { get; set; }
+        public int? LastDeliveryStatus
+        {
+            get { return BackingStore?.Get<int?>("lastDeliveryStatus"); }
+            set { BackingStore?.Set("lastDeliveryStatus", value); }
+        }
         /// <summary>The lastFailureAt property</summary>
-        public DateTimeOffset? LastFailureAt { get; set; }
+        public DateTimeOffset? LastFailureAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastFailureAt"); }
+            set { BackingStore?.Set("lastFailureAt", value); }
+        }
         /// <summary>The lastSuccessAt property</summary>
-        public DateTimeOffset? LastSuccessAt { get; set; }
+        public DateTimeOffset? LastSuccessAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastSuccessAt"); }
+            set { BackingStore?.Set("lastSuccessAt", value); }
+        }
         /// <summary>Plaintext signing secret. Only returned by create + rotate. Capture and store securely.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Secret { get; set; }
+        public string? Secret
+        {
+            get { return BackingStore?.Get<string?>("secret"); }
+            set { BackingStore?.Set("secret", value); }
+        }
 #nullable restore
 #else
-        public string Secret { get; set; }
+        public string Secret
+        {
+            get { return BackingStore?.Get<string>("secret"); }
+            set { BackingStore?.Set("secret", value); }
+        }
 #endif
         /// <summary>The secretMasked property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SecretMasked { get; set; }
+        public string? SecretMasked
+        {
+            get { return BackingStore?.Get<string?>("secretMasked"); }
+            set { BackingStore?.Set("secretMasked", value); }
+        }
 #nullable restore
 #else
-        public string SecretMasked { get; set; }
+        public string SecretMasked
+        {
+            get { return BackingStore?.Get<string>("secretMasked"); }
+            set { BackingStore?.Set("secretMasked", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.Models.WebhookSubscription_status? Status { get; set; }
+        public global::Repull.SDK.Models.WebhookSubscription_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookSubscription_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>The url property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url
+        {
+            get { return BackingStore?.Get<string?>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return BackingStore?.Get<string>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.WebhookSubscription"/> and sets the default values.
         /// </summary>
         public WebhookSubscription()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

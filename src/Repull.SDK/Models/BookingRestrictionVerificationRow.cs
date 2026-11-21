@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,53 +13,104 @@ namespace Repull.SDK.Models
     /// One restriction on one night, read back off Booking.com after the write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingRestrictionVerificationRow : IAdditionalDataHolder, IParsable
+    public partial class BookingRestrictionVerificationRow : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>What Booking.com holds for that night now; `null` when they reported nothing for the field either way.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_bookingValue? BookingValue { get; set; }
+        public global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_bookingValue? BookingValue
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_bookingValue?>("bookingValue"); }
+            set { BackingStore?.Set("bookingValue", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_bookingValue BookingValue { get; set; }
+        public global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_bookingValue BookingValue
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_bookingValue>("bookingValue"); }
+            set { BackingStore?.Set("bookingValue", value); }
+        }
 #endif
         /// <summary>The date property</summary>
-        public Date? Date { get; set; }
+        public Date? Date
+        {
+            get { return BackingStore?.Get<Date?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
         /// <summary>The value that was sent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_expected? Expected { get; set; }
+        public global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_expected? Expected
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_expected?>("expected"); }
+            set { BackingStore?.Set("expected", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_expected Expected { get; set; }
+        public global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_expected Expected
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_expected>("expected"); }
+            set { BackingStore?.Set("expected", value); }
+        }
 #endif
         /// <summary>The field property</summary>
-        public global::Repull.SDK.Models.BookingRestrictionVerificationRow_field? Field { get; set; }
+        public global::Repull.SDK.Models.BookingRestrictionVerificationRow_field? Field
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRestrictionVerificationRow_field?>("field"); }
+            set { BackingStore?.Set("field", value); }
+        }
         /// <summary>The match property</summary>
-        public bool? Match { get; set; }
+        public bool? Match
+        {
+            get { return BackingStore?.Get<bool?>("match"); }
+            set { BackingStore?.Set("match", value); }
+        }
         /// <summary>The rateId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RateId { get; set; }
+        public string? RateId
+        {
+            get { return BackingStore?.Get<string?>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #nullable restore
 #else
-        public string RateId { get; set; }
+        public string RateId
+        {
+            get { return BackingStore?.Get<string>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #endif
         /// <summary>The roomId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRestrictionVerificationRow"/> and sets the default values.
         /// </summary>
         public BookingRestrictionVerificationRow()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
@@ -108,12 +160,29 @@ namespace Repull.SDK.Models
         /// Composed type wrapper for classes <see cref="bool"/>, <see cref="int"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class BookingRestrictionVerificationRow_bookingValue : IComposedTypeWrapper, IParsable
+        public partial class BookingRestrictionVerificationRow_bookingValue : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="bool"/></summary>
-            public bool? Boolean { get; set; }
+            public bool? Boolean
+            {
+                get { return BackingStore?.Get<bool?>("boolean"); }
+                set { BackingStore?.Set("boolean", value); }
+            }
             /// <summary>Composed type representation for type <see cref="int"/></summary>
-            public int? Integer { get; set; }
+            public int? Integer
+            {
+                get { return BackingStore?.Get<int?>("integer"); }
+                set { BackingStore?.Set("integer", value); }
+            }
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_bookingValue"/> and sets the default values.
+            /// </summary>
+            public BookingRestrictionVerificationRow_bookingValue()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>
@@ -163,12 +232,29 @@ namespace Repull.SDK.Models
         /// Composed type wrapper for classes <see cref="bool"/>, <see cref="int"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class BookingRestrictionVerificationRow_expected : IComposedTypeWrapper, IParsable
+        public partial class BookingRestrictionVerificationRow_expected : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="bool"/></summary>
-            public bool? Boolean { get; set; }
+            public bool? Boolean
+            {
+                get { return BackingStore?.Get<bool?>("boolean"); }
+                set { BackingStore?.Set("boolean", value); }
+            }
             /// <summary>Composed type representation for type <see cref="int"/></summary>
-            public int? Integer { get; set; }
+            public int? Integer
+            {
+                get { return BackingStore?.Get<int?>("integer"); }
+                set { BackingStore?.Set("integer", value); }
+            }
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRestrictionVerificationRow.BookingRestrictionVerificationRow_expected"/> and sets the default values.
+            /// </summary>
+            public BookingRestrictionVerificationRow_expected()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

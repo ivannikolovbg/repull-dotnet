@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,57 +12,116 @@ namespace Repull.SDK.Models
     /// One import run into a migration workspace.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MigrationImportPayload : IAdditionalDataHolder, IParsable
+    public partial class MigrationImportPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The connectionId property</summary>
-        public int? ConnectionId { get; set; }
+        public int? ConnectionId
+        {
+            get { return BackingStore?.Get<int?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
         /// <summary>The entities property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Entities { get; set; }
+        public List<string>? Entities
+        {
+            get { return BackingStore?.Get<List<string>?>("entities"); }
+            set { BackingStore?.Set("entities", value); }
+        }
 #nullable restore
 #else
-        public List<string> Entities { get; set; }
+        public List<string> Entities
+        {
+            get { return BackingStore?.Get<List<string>>("entities"); }
+            set { BackingStore?.Set("entities", value); }
+        }
 #endif
         /// <summary>Present on `migration.failed`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The finishedAt property</summary>
-        public DateTimeOffset? FinishedAt { get; set; }
+        public DateTimeOffset? FinishedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("finishedAt"); }
+            set { BackingStore?.Set("finishedAt", value); }
+        }
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The results property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MigrationImportPayload_results>? Results { get; set; }
+        public List<global::Repull.SDK.Models.MigrationImportPayload_results>? Results
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MigrationImportPayload_results>?>("results"); }
+            set { BackingStore?.Set("results", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MigrationImportPayload_results> Results { get; set; }
+        public List<global::Repull.SDK.Models.MigrationImportPayload_results> Results
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MigrationImportPayload_results>>("results"); }
+            set { BackingStore?.Set("results", value); }
+        }
 #endif
         /// <summary>The startedAt property</summary>
-        public DateTimeOffset? StartedAt { get; set; }
+        public DateTimeOffset? StartedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("startedAt"); }
+            set { BackingStore?.Set("startedAt", value); }
+        }
         /// <summary>The status property</summary>
-        public global::Repull.SDK.Models.MigrationImportPayload_status? Status { get; set; }
+        public global::Repull.SDK.Models.MigrationImportPayload_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationImportPayload_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The workspaceId property</summary>
-        public int? WorkspaceId { get; set; }
+        public int? WorkspaceId
+        {
+            get { return BackingStore?.Get<int?>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MigrationImportPayload"/> and sets the default values.
         /// </summary>
         public MigrationImportPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

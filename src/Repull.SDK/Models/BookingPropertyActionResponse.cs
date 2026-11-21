@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,58 +10,117 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BookingPropertyActionResponse : IAdditionalDataHolder, IParsable
+    public partial class BookingPropertyActionResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The action property</summary>
-        public global::Repull.SDK.Models.BookingPropertyActionResponse_action? Action { get; set; }
+        public global::Repull.SDK.Models.BookingPropertyActionResponse_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPropertyActionResponse_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`open` / `close` only: Booking.com&apos;s status for the property before the call, e.g. `XML: Ready to open`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BookingStatus { get; set; }
+        public string? BookingStatus
+        {
+            get { return BackingStore?.Get<string?>("bookingStatus"); }
+            set { BackingStore?.Set("bookingStatus", value); }
+        }
 #nullable restore
 #else
-        public string BookingStatus { get; set; }
+        public string BookingStatus
+        {
+            get { return BackingStore?.Get<string>("bookingStatus"); }
+            set { BackingStore?.Set("bookingStatus", value); }
+        }
 #endif
         /// <summary>`open` / `close` only: false when the property was already in that state, so nothing was sent.</summary>
-        public bool? Changed { get; set; }
+        public bool? Changed
+        {
+            get { return BackingStore?.Get<bool?>("changed"); }
+            set { BackingStore?.Set("changed", value); }
+        }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.Models.BookingPropertyActionResponse_channel? Channel { get; set; }
+        public global::Repull.SDK.Models.BookingPropertyActionResponse_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPropertyActionResponse_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>The Booking.com property that was acted on. Always read it back — a listing can be mapped to several, and this states which one changed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>`open` / `close` only: the property&apos;s state on Booking.com after the call.</summary>
-        public global::Repull.SDK.Models.BookingPropertyActionResponse_propertyStatus? PropertyStatus { get; set; }
+        public global::Repull.SDK.Models.BookingPropertyActionResponse_propertyStatus? PropertyStatus
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPropertyActionResponse_propertyStatus?>("propertyStatus"); }
+            set { BackingStore?.Set("propertyStatus", value); }
+        }
         /// <summary>Booking.com&apos;s own room id the availability write addressed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomBookingId { get; set; }
+        public string? RoomBookingId
+        {
+            get { return BackingStore?.Get<string?>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #nullable restore
 #else
-        public string RoomBookingId { get; set; }
+        public string RoomBookingId
+        {
+            get { return BackingStore?.Get<string>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #endif
         /// <summary>`unlist` / `relist` only. Whether the property is now on sale. **This is the state of the property on Booking.com, not of the listing in Repull** — `active` (what Repull bills and serves) is untouched by both actions and is deliberately not echoed here so the two can never be read as one field.</summary>
-        public bool? Selling { get; set; }
+        public bool? Selling
+        {
+            get { return BackingStore?.Get<bool?>("selling"); }
+            set { BackingStore?.Set("selling", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPropertyActionResponse"/> and sets the default values.
         /// </summary>
         public BookingPropertyActionResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

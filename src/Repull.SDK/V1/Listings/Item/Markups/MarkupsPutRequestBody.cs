@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,36 +10,67 @@ namespace Repull.SDK.V1.Listings.Item.Markups
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MarkupsPutRequestBody : IAdditionalDataHolder, IParsable
+    public partial class MarkupsPutRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Vrbo account (`vrbo:7001234`, Vrbo&apos;s own account id) — required when the listing is linked on more than one. The old sign-in ids (`vrbo:13`) still resolve until 2027-02-12.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.V1.Listings.Item.Markups.MarkupsPutRequestBody_channel? Channel { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Markups.MarkupsPutRequestBody_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Markups.MarkupsPutRequestBody_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>Booking.com property — required when the listing is on more than one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>15 = +15%. `null` removes the markup.</summary>
-        public double? MarkupPercent { get; set; }
+        public double? MarkupPercent
+        {
+            get { return BackingStore?.Get<double?>("markupPercent"); }
+            set { BackingStore?.Set("markupPercent", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Markups.MarkupsPutRequestBody"/> and sets the default values.
         /// </summary>
         public MarkupsPutRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,45 +12,96 @@ namespace Repull.SDK.Models
     /// Which reservation writes the API performs for this listing (or, on `GET /v1/connect/{provider}`, for any listing of that connection). Derived from the PMS connector, the connection, and its write policy — a flag is true only when all three allow it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationCapabilities : IAdditionalDataHolder, IParsable
+    public partial class ReservationCapabilities : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`POST /v1/reservations/{id}/cancel`.</summary>
-        public bool? Cancel { get; set; }
+        public bool? Cancel
+        {
+            get { return BackingStore?.Get<bool?>("cancel"); }
+            set { BackingStore?.Set("cancel", value); }
+        }
         /// <summary>`POST /v1/reservations`.</summary>
-        public bool? Create { get; set; }
+        public bool? Create
+        {
+            get { return BackingStore?.Get<bool?>("create"); }
+            set { BackingStore?.Set("create", value); }
+        }
         /// <summary>`totalPrice` on create is honoured; otherwise the PMS (or the rate engine) prices the stay.</summary>
-        public bool? CustomPrice { get; set; }
+        public bool? CustomPrice
+        {
+            get { return BackingStore?.Get<bool?>("customPrice"); }
+            set { BackingStore?.Set("customPrice", value); }
+        }
         /// <summary>`pms` — booked in the connected PMS; `repull` — a direct booking made in Repull.</summary>
-        public global::Repull.SDK.Models.ReservationCapabilities_managedBy? ManagedBy { get; set; }
+        public global::Repull.SDK.Models.ReservationCapabilities_managedBy? ManagedBy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCapabilities_managedBy?>("managedBy"); }
+            set { BackingStore?.Set("managedBy", value); }
+        }
         /// <summary>`PATCH /v1/reservations/{id}`.</summary>
-        public bool? Modify { get; set; }
+        public bool? Modify
+        {
+            get { return BackingStore?.Get<bool?>("modify"); }
+            set { BackingStore?.Set("modify", value); }
+        }
         /// <summary>What the flags do not say: limits, required access, and why something is off.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Notes { get; set; }
+        public string? Notes
+        {
+            get { return BackingStore?.Get<string?>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #nullable restore
 #else
-        public string Notes { get; set; }
+        public string Notes
+        {
+            get { return BackingStore?.Get<string>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>`POST /v1/reservations/quote`.</summary>
-        public bool? Quote { get; set; }
+        public bool? Quote
+        {
+            get { return BackingStore?.Get<bool?>("quote"); }
+            set { BackingStore?.Set("quote", value); }
+        }
         /// <summary>`sandbox` — run end to end on the vendor sandbox (Mews, Cloudbeds); `vendor_docs` — verified against the vendor&apos;s API documentation only. Null for direct bookings.</summary>
-        public global::Repull.SDK.Models.ReservationCapabilities_verifiedAgainst? VerifiedAgainst { get; set; }
+        public global::Repull.SDK.Models.ReservationCapabilities_verifiedAgainst? VerifiedAgainst
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCapabilities_verifiedAgainst?>("verifiedAgainst"); }
+            set { BackingStore?.Set("verifiedAgainst", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCapabilities"/> and sets the default values.
         /// </summary>
         public ReservationCapabilities()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

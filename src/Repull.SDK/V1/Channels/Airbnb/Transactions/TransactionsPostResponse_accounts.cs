@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,38 +10,73 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TransactionsPostResponse_accounts : IAdditionalDataHolder, IParsable
+    public partial class TransactionsPostResponse_accounts : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Airbnb host id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The count property</summary>
-        public int? Count { get; set; }
+        public int? Count
+        {
+            get { return BackingStore?.Get<int?>("count"); }
+            set { BackingStore?.Set("count", value); }
+        }
         /// <summary>Present only when this account was not refreshed. `code` is `connection_reauth_required`, `airbnb_rejected`, `airbnb_rate_limited`, `airbnb_error`, or `time_budget` (the request ran out of time before reaching it: refresh it alone with `?account_id=`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts_error? Error { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts_error? Error
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts_error?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts_error Error { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts_error Error
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts_error>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>Payouts in the refreshed window.</summary>
-        public int? Payouts { get; set; }
+        public int? Payouts
+        {
+            get { return BackingStore?.Get<int?>("payouts"); }
+            set { BackingStore?.Set("payouts", value); }
+        }
         /// <summary>UPCOMING lines Airbnb no longer lists (paid out or cancelled) and were removed.</summary>
-        public int? UpcomingRemoved { get; set; }
+        public int? UpcomingRemoved
+        {
+            get { return BackingStore?.Get<int?>("upcomingRemoved"); }
+            set { BackingStore?.Set("upcomingRemoved", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts"/> and sets the default values.
         /// </summary>
         public TransactionsPostResponse_accounts()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

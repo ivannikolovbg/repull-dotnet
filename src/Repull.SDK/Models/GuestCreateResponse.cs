@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,72 +10,143 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class GuestCreateResponse : IAdditionalDataHolder, IParsable
+    public partial class GuestCreateResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>One entry per stored contact. Email and phone are separate records.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.GuestCreateResponse_contacts>? Contacts { get; set; }
+        public List<global::Repull.SDK.Models.GuestCreateResponse_contacts>? Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestCreateResponse_contacts>?>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.GuestCreateResponse_contacts> Contacts { get; set; }
+        public List<global::Repull.SDK.Models.GuestCreateResponse_contacts> Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestCreateResponse_contacts>>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #endif
         /// <summary>`true` when a new guest was written, `false` when an existing guest matched on email/phone plus name. Read this rather than assuming a 2xx means a new record.</summary>
-        public bool? Created { get; set; }
+        public bool? Created
+        {
+            get { return BackingStore?.Get<bool?>("created"); }
+            set { BackingStore?.Set("created", value); }
+        }
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The firstName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FirstName { get; set; }
+        public string? FirstName
+        {
+            get { return BackingStore?.Get<string?>("firstName"); }
+            set { BackingStore?.Set("firstName", value); }
+        }
 #nullable restore
 #else
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get { return BackingStore?.Get<string>("firstName"); }
+            set { BackingStore?.Set("firstName", value); }
+        }
 #endif
         /// <summary>Pass to `GET /v1/guests/{id}` for the full profile.</summary>
-        public int? Id { get; set; }
+        public int? Id
+        {
+            get { return BackingStore?.Get<int?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>The isBusinessTraveler property</summary>
-        public bool? IsBusinessTraveler { get; set; }
+        public bool? IsBusinessTraveler
+        {
+            get { return BackingStore?.Get<bool?>("isBusinessTraveler"); }
+            set { BackingStore?.Set("isBusinessTraveler", value); }
+        }
         /// <summary>The language property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Language { get; set; }
+        public string? Language
+        {
+            get { return BackingStore?.Get<string?>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #nullable restore
 #else
-        public string Language { get; set; }
+        public string Language
+        {
+            get { return BackingStore?.Get<string>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #endif
         /// <summary>The lastName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastName { get; set; }
+        public string? LastName
+        {
+            get { return BackingStore?.Get<string?>("lastName"); }
+            set { BackingStore?.Set("lastName", value); }
+        }
 #nullable restore
 #else
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get { return BackingStore?.Get<string>("lastName"); }
+            set { BackingStore?.Set("lastName", value); }
+        }
 #endif
         /// <summary>Set when `provider` was sent: the PMS the guest was also created in, and its id there.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.GuestCreateResponse_pms? Pms { get; set; }
+        public global::Repull.SDK.Models.GuestCreateResponse_pms? Pms
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.GuestCreateResponse_pms?>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.GuestCreateResponse_pms Pms { get; set; }
+        public global::Repull.SDK.Models.GuestCreateResponse_pms Pms
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.GuestCreateResponse_pms>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestCreateResponse"/> and sets the default values.
         /// </summary>
         public GuestCreateResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,54 @@ namespace Repull.SDK.Models
     /// Payload for `reservation.updated`. Dates, status, or any tracked field changed on an existing reservation. `data.object` is the post-change snapshot; `data.previousAttributes` lists ONLY the fields that actually moved, with their prior values. Fields not in `previousAttributes` did not change.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationUpdatedPayload : IAdditionalDataHolder, IParsable
+    public partial class ReservationUpdatedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Lightweight reservation snapshot delivered as `data.object` on every reservation webhook event. Stable across `reservation.created`, `reservation.updated`, and `reservation.cancelled`. Fetch the full reservation via `GET /v1/reservations/{id}` if you need pricing, guest contact info, or audit history — those are deliberately omitted to keep deliveries small.**Stay terms are the one exception to that rule.** `cancellationPolicy`, `checkInTime` and `checkOutTime` ride on every delivery, because the decisions they drive — is a refund owed, when can housekeeping turn the unit over — are made at the moment the webhook lands, not on a follow-up fetch. They are operational parameters of the booking, not contact or payment data. Guest email, payment method and payment reference stay off the snapshot; see `GET /v1/reservations/{id}`.All three are `null` when the source channel did not supply them. They are never defaulted: a fabricated policy is worse than a missing one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationWebhookObject? Object { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationWebhookObject?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationWebhookObject Object { get; set; }
+        public global::Repull.SDK.Models.ReservationWebhookObject Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationWebhookObject>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>Sparse map: every key here is a field on the reservation snapshot whose value changed in this event, mapped to its prior value. Mirrors the keys of `ReservationWebhookObject` (e.g. `checkinDate`, `checkoutDate`, `status`). Receivers can diff `object[k]` vs `previousAttributes[k]` to know what moved.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes? PreviousAttributes { get; set; }
+        public global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes? PreviousAttributes
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes?>("previousAttributes"); }
+            set { BackingStore?.Set("previousAttributes", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes PreviousAttributes { get; set; }
+        public global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes PreviousAttributes
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes>("previousAttributes"); }
+            set { BackingStore?.Set("previousAttributes", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationUpdatedPayload"/> and sets the default values.
         /// </summary>
         public ReservationUpdatedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

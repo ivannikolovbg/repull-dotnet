@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,52 +10,99 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AvailabilityWriteResult_synced_channels : IAdditionalDataHolder, IParsable
+    public partial class AvailabilityWriteResult_synced_channels : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>True when the channel&apos;s authorization has expired: reconnect, don&apos;t retry.</summary>
-        public bool? AuthError { get; set; }
+        public bool? AuthError
+        {
+            get { return BackingStore?.Get<bool?>("authError"); }
+            set { BackingStore?.Set("authError", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`airbnb`, `booking`, `vrbo`, or another connected channel.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The channel&apos;s own id for the listing or room.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ChannelListingId { get; set; }
+        public string? ChannelListingId
+        {
+            get { return BackingStore?.Get<string?>("channelListingId"); }
+            set { BackingStore?.Set("channelListingId", value); }
+        }
 #nullable restore
 #else
-        public string ChannelListingId { get; set; }
+        public string ChannelListingId
+        {
+            get { return BackingStore?.Get<string>("channelListingId"); }
+            set { BackingStore?.Set("channelListingId", value); }
+        }
 #endif
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>`accepted`: the channel took the write in this request. `queued` (Vrbo): sent within minutes and read back; `GET /v1/listings/{id}/calendar-sync` shows the outcome. `failed`: the channel refused it; see `error`.</summary>
-        public global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels_status? Status { get; set; }
+        public global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels"/> and sets the default values.
         /// </summary>
         public AvailabilityWriteResult_synced_channels()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

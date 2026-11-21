@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.Models
     /// A file as delivered.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class SentAttachment : IAdditionalDataHolder, IParsable
+    public partial class SentAttachment : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Type read from the file&apos;s bytes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ContentType { get; set; }
+        public string? ContentType
+        {
+            get { return BackingStore?.Get<string?>("contentType"); }
+            set { BackingStore?.Set("contentType", value); }
+        }
 #nullable restore
 #else
-        public string ContentType { get; set; }
+        public string ContentType
+        {
+            get { return BackingStore?.Get<string>("contentType"); }
+            set { BackingStore?.Set("contentType", value); }
+        }
 #endif
         /// <summary>The filename property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Filename { get; set; }
+        public string? Filename
+        {
+            get { return BackingStore?.Get<string?>("filename"); }
+            set { BackingStore?.Set("filename", value); }
+        }
 #nullable restore
 #else
-        public string Filename { get; set; }
+        public string Filename
+        {
+            get { return BackingStore?.Get<string>("filename"); }
+            set { BackingStore?.Set("filename", value); }
+        }
 #endif
         /// <summary>The sizeBytes property</summary>
-        public int? SizeBytes { get; set; }
+        public int? SizeBytes
+        {
+            get { return BackingStore?.Get<int?>("sizeBytes"); }
+            set { BackingStore?.Set("sizeBytes", value); }
+        }
         /// <summary>The URL you sent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SourceUrl { get; set; }
+        public string? SourceUrl
+        {
+            get { return BackingStore?.Get<string?>("sourceUrl"); }
+            set { BackingStore?.Set("sourceUrl", value); }
+        }
 #nullable restore
 #else
-        public string SourceUrl { get; set; }
+        public string SourceUrl
+        {
+            get { return BackingStore?.Get<string>("sourceUrl"); }
+            set { BackingStore?.Set("sourceUrl", value); }
+        }
 #endif
         /// <summary>The type property</summary>
-        public global::Repull.SDK.Models.SentAttachment_type? Type { get; set; }
+        public global::Repull.SDK.Models.SentAttachment_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.SentAttachment_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>Durable stored copy — the same `url` the message&apos;s `attachments` will show when read back.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url
+        {
+            get { return BackingStore?.Get<string?>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return BackingStore?.Get<string>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.SentAttachment"/> and sets the default values.
         /// </summary>
         public SentAttachment()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

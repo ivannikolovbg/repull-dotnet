@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,20 +12,45 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings
     /// Send `hours` (or `sameDayCutoff`), `allowRequestToBook`, or both. The half you omit keeps the value Airbnb currently holds. `hours` and `sameDayCutoff` are the same setting: send one.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingSettingsPutRequestBody_advanceNotice : IParsable
+    public partial class BookingSettingsPutRequestBody_advanceNotice : IBackedModel, IParsable
     {
         /// <summary>The allowRequestToBook property</summary>
-        public bool? AllowRequestToBook { get; set; }
+        public bool? AllowRequestToBook
+        {
+            get { return BackingStore?.Get<bool?>("allowRequestToBook"); }
+            set { BackingStore?.Set("allowRequestToBook", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Counted back from 11:59 PM on the check-in day (listing time): `0` = same-day bookings until midnight, `1` = until 11 PM, `24` = no same-day bookings.</summary>
-        public int? Hours { get; set; }
+        public int? Hours
+        {
+            get { return BackingStore?.Get<int?>("hours"); }
+            set { BackingStore?.Set("hours", value); }
+        }
         /// <summary>The last time a same-day booking is accepted, whole hours in the listing&apos;s time (`23:00` = 11 PM, `00:00` = midnight). Converted to `hours` (`23:00` = 1).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SameDayCutoff { get; set; }
+        public string? SameDayCutoff
+        {
+            get { return BackingStore?.Get<string?>("sameDayCutoff"); }
+            set { BackingStore?.Set("sameDayCutoff", value); }
+        }
 #nullable restore
 #else
-        public string SameDayCutoff { get; set; }
+        public string SameDayCutoff
+        {
+            get { return BackingStore?.Get<string>("sameDayCutoff"); }
+            set { BackingStore?.Set("sameDayCutoff", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_advanceNotice"/> and sets the default values.
+        /// </summary>
+        public BookingSettingsPutRequestBody_advanceNotice()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

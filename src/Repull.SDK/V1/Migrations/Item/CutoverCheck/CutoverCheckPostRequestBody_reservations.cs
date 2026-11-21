@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,21 +11,46 @@ namespace Repull.SDK.V1.Migrations.Item.CutoverCheck
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CutoverCheckPostRequestBody_reservations : IParsable
+    public partial class CutoverCheckPostRequestBody_reservations : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Migrations.Item.CutoverCheck.CutoverCheckPostRequestBody_reservations"/> and sets the default values.
+        /// </summary>
+        public CutoverCheckPostRequestBody_reservations()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

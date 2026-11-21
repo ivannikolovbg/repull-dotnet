@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,54 @@ namespace Repull.SDK.Models
     /// Write one locale&apos;s copy. Airbnb keeps a separate description per locale, which is why the locale is explicit: writing Italian copy into the English row is how a translation gets lost. Only the fields you send are written.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbDescriptionWriteRequest : IAdditionalDataHolder, IParsable
+    public partial class AirbnbDescriptionWriteRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>At least one field required. `description` itself is NOT accepted: Airbnb composes the public description from these sections and ignores a directly-supplied one, so accepting it would be taking a value and discarding it. An unknown field is refused by name rather than dropped.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbDescriptionWriteRequest_description? Description { get; set; }
+        public global::Repull.SDK.Models.AirbnbDescriptionWriteRequest_description? Description
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbDescriptionWriteRequest_description?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbDescriptionWriteRequest_description Description { get; set; }
+        public global::Repull.SDK.Models.AirbnbDescriptionWriteRequest_description Description
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbDescriptionWriteRequest_description>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>Language tag — `en`, `it`, `pt-BR`. `GET /v1/channels/airbnb/listings/{id}/settings?type=locales` lists the locales already synced for this listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Locale { get; set; }
+        public string? Locale
+        {
+            get { return BackingStore?.Get<string?>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #nullable restore
 #else
-        public string Locale { get; set; }
+        public string Locale
+        {
+            get { return BackingStore?.Get<string>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbDescriptionWriteRequest"/> and sets the default values.
         /// </summary>
         public AirbnbDescriptionWriteRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

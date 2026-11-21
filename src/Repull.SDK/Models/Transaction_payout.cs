@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,58 +10,109 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class Transaction_payout : IAdditionalDataHolder, IParsable
+    public partial class Transaction_payout : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Masked destination bank account the payout was sent to (Booking.com payouts, from the statement PDF). Null on channels/rows without one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BankDestination { get; set; }
+        public string? BankDestination
+        {
+            get { return BackingStore?.Get<string?>("bankDestination"); }
+            set { BackingStore?.Set("bankDestination", value); }
+        }
 #nullable restore
 #else
-        public string BankDestination { get; set; }
+        public string BankDestination
+        {
+            get { return BackingStore?.Get<string>("bankDestination"); }
+            set { BackingStore?.Set("bankDestination", value); }
+        }
 #endif
         /// <summary>On a payout row: the net paid out to the host.</summary>
-        public double? PaidOutAmount { get; set; }
+        public double? PaidOutAmount
+        {
+            get { return BackingStore?.Get<double?>("paidOutAmount"); }
+            set { BackingStore?.Set("paidOutAmount", value); }
+        }
         /// <summary>The payoutDate property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PayoutDate { get; set; }
+        public string? PayoutDate
+        {
+            get { return BackingStore?.Get<string?>("payoutDate"); }
+            set { BackingStore?.Set("payoutDate", value); }
+        }
 #nullable restore
 #else
-        public string PayoutDate { get; set; }
+        public string PayoutDate
+        {
+            get { return BackingStore?.Get<string>("payoutDate"); }
+            set { BackingStore?.Set("payoutDate", value); }
+        }
 #endif
         /// <summary>Reference of the payout this row belongs to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PayoutId { get; set; }
+        public string? PayoutId
+        {
+            get { return BackingStore?.Get<string?>("payoutId"); }
+            set { BackingStore?.Set("payoutId", value); }
+        }
 #nullable restore
 #else
-        public string PayoutId { get; set; }
+        public string PayoutId
+        {
+            get { return BackingStore?.Get<string>("payoutId"); }
+            set { BackingStore?.Set("payoutId", value); }
+        }
 #endif
         /// <summary>The channel&apos;s own numeric statement id (Booking.com, e.g. &quot;010747030095&quot;). Null when none.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StatementId { get; set; }
+        public string? StatementId
+        {
+            get { return BackingStore?.Get<string?>("statementId"); }
+            set { BackingStore?.Set("statementId", value); }
+        }
 #nullable restore
 #else
-        public string StatementId { get; set; }
+        public string StatementId
+        {
+            get { return BackingStore?.Get<string>("statementId"); }
+            set { BackingStore?.Set("statementId", value); }
+        }
 #endif
         /// <summary>Repull-hosted download link for the original payout statement PDF (the authoritative settlement record). Add `?format=csv` for the CSV. Served by `GET /v1/transactions/{id}/statement` — no channel session needed. Null when none is stored.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StatementUrl { get; set; }
+        public string? StatementUrl
+        {
+            get { return BackingStore?.Get<string?>("statementUrl"); }
+            set { BackingStore?.Set("statementUrl", value); }
+        }
 #nullable restore
 #else
-        public string StatementUrl { get; set; }
+        public string StatementUrl
+        {
+            get { return BackingStore?.Get<string>("statementUrl"); }
+            set { BackingStore?.Set("statementUrl", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Transaction_payout"/> and sets the default values.
         /// </summary>
         public Transaction_payout()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

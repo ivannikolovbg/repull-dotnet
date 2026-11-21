@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,49 +10,98 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbPermitsWriteRequest_permits : IParsable
+    public partial class AirbnbPermitsWriteRequest_permits : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Keyed by each question&apos;s `answer_key`. Each value carries exactly one `&lt;type&gt;_value` field named after the question&apos;s `type` (lower-case): `text_value`, `attestation_value` (boolean), `radio_value`, `dropdown_value`, `email_value`, `future_date_value` (YYYY-MM-DD) and `file_upload_value` (object with the base64 file) are the ones Airbnb returns in production; other question types follow the same pattern. Airbnb validates the value against its question. Example: `{&quot;email&quot;: {&quot;email_value&quot;: &quot;host@example.com&quot;}, &quot;expiration_date&quot;: {&quot;future_date_value&quot;: &quot;2029-02-04&quot;}, &quot;attestation&quot;: {&quot;attestation_value&quot;: true}}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers? Answers { get; set; }
+        public global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers? Answers
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers?>("answers"); }
+            set { BackingStore?.Set("answers", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers Answers { get; set; }
+        public global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers Answers
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits_answers>("answers"); }
+            set { BackingStore?.Set("answers", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The `slug` of the flow you are answering, e.g. `existing_registration` or `exemption_claim`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FlowSlug { get; set; }
+        public string? FlowSlug
+        {
+            get { return BackingStore?.Get<string?>("flow_slug"); }
+            set { BackingStore?.Set("flow_slug", value); }
+        }
 #nullable restore
 #else
-        public string FlowSlug { get; set; }
+        public string FlowSlug
+        {
+            get { return BackingStore?.Get<string>("flow_slug"); }
+            set { BackingStore?.Set("flow_slug", value); }
+        }
 #endif
         /// <summary>Echo the GET&apos;s `regulation_context` (e.g. `initial`) when present.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RegulationContext { get; set; }
+        public string? RegulationContext
+        {
+            get { return BackingStore?.Get<string?>("regulation_context"); }
+            set { BackingStore?.Set("regulation_context", value); }
+        }
 #nullable restore
 #else
-        public string RegulationContext { get; set; }
+        public string RegulationContext
+        {
+            get { return BackingStore?.Get<string>("regulation_context"); }
+            set { BackingStore?.Set("regulation_context", value); }
+        }
 #endif
         /// <summary>As returned by the GET.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RegulationType { get; set; }
+        public string? RegulationType
+        {
+            get { return BackingStore?.Get<string?>("regulation_type"); }
+            set { BackingStore?.Set("regulation_type", value); }
+        }
 #nullable restore
 #else
-        public string RegulationType { get; set; }
+        public string RegulationType
+        {
+            get { return BackingStore?.Get<string>("regulation_type"); }
+            set { BackingStore?.Set("regulation_type", value); }
+        }
 #endif
         /// <summary>As returned by the GET, e.g. `maui_county_hawaii`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RegulatoryBody { get; set; }
+        public string? RegulatoryBody
+        {
+            get { return BackingStore?.Get<string?>("regulatory_body"); }
+            set { BackingStore?.Set("regulatory_body", value); }
+        }
 #nullable restore
 #else
-        public string RegulatoryBody { get; set; }
+        public string RegulatoryBody
+        {
+            get { return BackingStore?.Get<string>("regulatory_body"); }
+            set { BackingStore?.Set("regulatory_body", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits"/> and sets the default values.
+        /// </summary>
+        public AirbnbPermitsWriteRequest_permits()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

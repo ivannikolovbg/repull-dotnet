@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,54 @@ namespace Repull.SDK.V1.Connect
     /// Opens a new sub-workspace for this customer of yours and lands the connection there; the response returns its `workspaceId`, which you then send as `X-Workspace-Id`. Works with both purposes: a plain `connect` keeps the normal onboarding pages. Required for `migrate` unless you send `X-Workspace-Id` to reconnect an existing one. Don&apos;t send it together with `X-Workspace-Id`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConnectPostRequestBody_workspace : IAdditionalDataHolder, IParsable
+    public partial class ConnectPostRequestBody_workspace : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Your own id for this property manager. Returned on every migration read.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalRef { get; set; }
+        public string? ExternalRef
+        {
+            get { return BackingStore?.Get<string?>("externalRef"); }
+            set { BackingStore?.Set("externalRef", value); }
+        }
 #nullable restore
 #else
-        public string ExternalRef { get; set; }
+        public string ExternalRef
+        {
+            get { return BackingStore?.Get<string>("externalRef"); }
+            set { BackingStore?.Set("externalRef", value); }
+        }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.ConnectPostRequestBody_workspace"/> and sets the default values.
         /// </summary>
         public ConnectPostRequestBody_workspace()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,36 +10,67 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ContentGetResponse_sections_houseRules_events : IAdditionalDataHolder, IParsable
+    public partial class ContentGetResponse_sections_houseRules_events : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The allowed property</summary>
-        public bool? Allowed { get; set; }
+        public bool? Allowed
+        {
+            get { return BackingStore?.Get<bool?>("allowed"); }
+            set { BackingStore?.Set("allowed", value); }
+        }
         /// <summary>The allowedEventsNote property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AllowedEventsNote { get; set; }
+        public string? AllowedEventsNote
+        {
+            get { return BackingStore?.Get<string?>("allowedEventsNote"); }
+            set { BackingStore?.Set("allowedEventsNote", value); }
+        }
 #nullable restore
 #else
-        public string AllowedEventsNote { get; set; }
+        public string AllowedEventsNote
+        {
+            get { return BackingStore?.Get<string>("allowedEventsNote"); }
+            set { BackingStore?.Set("allowedEventsNote", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The maxAttendees property</summary>
-        public int? MaxAttendees { get; set; }
+        public int? MaxAttendees
+        {
+            get { return BackingStore?.Get<int?>("maxAttendees"); }
+            set { BackingStore?.Set("maxAttendees", value); }
+        }
         /// <summary>The note property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Note { get; set; }
+        public string? Note
+        {
+            get { return BackingStore?.Get<string?>("note"); }
+            set { BackingStore?.Set("note", value); }
+        }
 #nullable restore
 #else
-        public string Note { get; set; }
+        public string Note
+        {
+            get { return BackingStore?.Get<string>("note"); }
+            set { BackingStore?.Set("note", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_houseRules_events"/> and sets the default values.
         /// </summary>
         public ContentGetResponse_sections_houseRules_events()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

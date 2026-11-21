@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,54 @@ namespace Repull.SDK.Models
     /// Canonical catalog of every event the API can deliver, grouped by domain. Each entry includes a realistic `samplePayload` matching the discriminated `WebhookEvent` union — so SDKs can render docs and dashboards from this single source of truth.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WebhookEventCatalog : IAdditionalDataHolder, IParsable
+    public partial class WebhookEventCatalog : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The domains property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.WebhookEventCatalog_domains>? Domains { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventCatalog_domains>? Domains
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.WebhookEventCatalog_domains>?>("domains"); }
+            set { BackingStore?.Set("domains", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.WebhookEventCatalog_domains> Domains { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventCatalog_domains> Domains
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.WebhookEventCatalog_domains>>("domains"); }
+            set { BackingStore?.Set("domains", value); }
+        }
 #endif
         /// <summary>All events in a flat list (same entries as `domains[].events`, ungrouped).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.WebhookEventCatalogEntry>? Flat { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventCatalogEntry>? Flat
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.WebhookEventCatalogEntry>?>("flat"); }
+            set { BackingStore?.Set("flat", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.WebhookEventCatalogEntry> Flat { get; set; }
+        public List<global::Repull.SDK.Models.WebhookEventCatalogEntry> Flat
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.WebhookEventCatalogEntry>>("flat"); }
+            set { BackingStore?.Set("flat", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.WebhookEventCatalog"/> and sets the default values.
         /// </summary>
         public WebhookEventCatalog()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,39 +12,70 @@ namespace Repull.SDK.Models
     /// Request body for `POST /v1/schema/custom`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class CustomSchemaCreate : IAdditionalDataHolder, IParsable
+    public partial class CustomSchemaCreate : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Optional human-readable note shown in the dashboard.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>Field-mapping table. Keys are the output field names emitted in the response payload; values are simple expressions referenced against the source `native` payload (dot paths, basic arithmetic, string concatenation). Min 1 entry, max 50 entries. Each key must be &lt;= 100 chars; each expression must be &lt;= 500 chars and pass the safety check (no `eval`, no `function`, no `process`, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.CustomSchemaMappings? Mappings { get; set; }
+        public global::Repull.SDK.Models.CustomSchemaMappings? Mappings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.CustomSchemaMappings?>("mappings"); }
+            set { BackingStore?.Set("mappings", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.CustomSchemaMappings Mappings { get; set; }
+        public global::Repull.SDK.Models.CustomSchemaMappings Mappings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.CustomSchemaMappings>("mappings"); }
+            set { BackingStore?.Set("mappings", value); }
+        }
 #endif
         /// <summary>3-100 lowercase chars + hyphens. Must be unique within the workspace and cannot collide with reserved names (`calry`, `calry-v1`, `native`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.CustomSchemaCreate"/> and sets the default values.
         /// </summary>
         public CustomSchemaCreate()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

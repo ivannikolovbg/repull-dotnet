@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,81 +12,164 @@ namespace Repull.SDK.Models
     /// A Booking.com property this workspace holds, with the Repull listings mapped under it. A property is a building; its rooms are what guests book, and each room maps to one Repull listing — so one property commonly carries many listings.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingProperty : IAdditionalDataHolder, IParsable
+    public partial class BookingProperty : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The active property</summary>
-        public bool? Active { get; set; }
+        public bool? Active
+        {
+            get { return BackingStore?.Get<bool?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bookingUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BookingUrl { get; set; }
+        public string? BookingUrl
+        {
+            get { return BackingStore?.Get<string?>("bookingUrl"); }
+            set { BackingStore?.Set("bookingUrl", value); }
+        }
 #nullable restore
 #else
-        public string BookingUrl { get; set; }
+        public string BookingUrl
+        {
+            get { return BackingStore?.Get<string>("bookingUrl"); }
+            set { BackingStore?.Set("bookingUrl", value); }
+        }
 #endif
         /// <summary>Repull-side id for this Booking.com connection.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>Booking.com hotel/property id. This is what `/v1/channels/booking/availability` takes as `property_id`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The Repull listings mapped under this property. Empty when `mappingStatus` is `unmapped`. Inactive listings are left out.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingProperty_listings>? Listings { get; set; }
+        public List<global::Repull.SDK.Models.BookingProperty_listings>? Listings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingProperty_listings>?>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingProperty_listings> Listings { get; set; }
+        public List<global::Repull.SDK.Models.BookingProperty_listings> Listings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingProperty_listings>>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
 #endif
         /// <summary>`mapped` — at least one room points at a listing. `unmapped` — the property is claimed but its rooms are not mapped yet, so `listings` is empty; finish `POST /v1/connect/booking/map-rooms`. An unmapped property is listed rather than hidden, so a half-finished connection is visible instead of looking like no connection at all.</summary>
-        public global::Repull.SDK.Models.BookingProperty_mappingStatus? MappingStatus { get; set; }
+        public global::Repull.SDK.Models.BookingProperty_mappingStatus? MappingStatus
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingProperty_mappingStatus?>("mappingStatus"); }
+            set { BackingStore?.Set("mappingStatus", value); }
+        }
         /// <summary>The Booking.com markup on this property, as a fraction: &quot;0.18&quot; = +18%, shared by every listing on the property. Read or set it as a percentage with `/v1/listings/{id}/markups`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Markup { get; set; }
+        public string? Markup
+        {
+            get { return BackingStore?.Get<string?>("markup"); }
+            set { BackingStore?.Set("markup", value); }
+        }
 #nullable restore
 #else
-        public string Markup { get; set; }
+        public string Markup
+        {
+            get { return BackingStore?.Get<string>("markup"); }
+            set { BackingStore?.Set("markup", value); }
+        }
 #endif
         /// <summary>The suspendedAt property</summary>
-        public DateTimeOffset? SuspendedAt { get; set; }
+        public DateTimeOffset? SuspendedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("suspendedAt"); }
+            set { BackingStore?.Set("suspendedAt", value); }
+        }
         /// <summary>The suspensionReason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SuspensionReason { get; set; }
+        public string? SuspensionReason
+        {
+            get { return BackingStore?.Get<string?>("suspensionReason"); }
+            set { BackingStore?.Set("suspensionReason", value); }
+        }
 #nullable restore
 #else
-        public string SuspensionReason { get; set; }
+        public string SuspensionReason
+        {
+            get { return BackingStore?.Get<string>("suspensionReason"); }
+            set { BackingStore?.Set("suspensionReason", value); }
+        }
 #endif
         /// <summary>The syncCategory property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SyncCategory { get; set; }
+        public string? SyncCategory
+        {
+            get { return BackingStore?.Get<string?>("syncCategory"); }
+            set { BackingStore?.Set("syncCategory", value); }
+        }
 #nullable restore
 #else
-        public string SyncCategory { get; set; }
+        public string SyncCategory
+        {
+            get { return BackingStore?.Get<string>("syncCategory"); }
+            set { BackingStore?.Set("syncCategory", value); }
+        }
 #endif
         /// <summary>The syncEnabled property</summary>
-        public bool? SyncEnabled { get; set; }
+        public bool? SyncEnabled
+        {
+            get { return BackingStore?.Get<bool?>("syncEnabled"); }
+            set { BackingStore?.Set("syncEnabled", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingProperty"/> and sets the default values.
         /// </summary>
         public BookingProperty()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,80 +12,161 @@ namespace Repull.SDK.Models
     /// At least one field required. `description` itself is NOT accepted: Airbnb composes the public description from these sections and ignores a directly-supplied one, so accepting it would be taking a value and discarding it. An unknown field is refused by name rather than dropped.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbDescriptionWriteRequest_description : IParsable
+    public partial class AirbnbDescriptionWriteRequest_description : IBackedModel, IParsable
     {
         /// <summary>The access property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Access { get; set; }
+        public string? Access
+        {
+            get { return BackingStore?.Get<string?>("access"); }
+            set { BackingStore?.Set("access", value); }
+        }
 #nullable restore
 #else
-        public string Access { get; set; }
+        public string Access
+        {
+            get { return BackingStore?.Get<string>("access"); }
+            set { BackingStore?.Set("access", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The house_rules property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HouseRules { get; set; }
+        public string? HouseRules
+        {
+            get { return BackingStore?.Get<string?>("house_rules"); }
+            set { BackingStore?.Set("house_rules", value); }
+        }
 #nullable restore
 #else
-        public string HouseRules { get; set; }
+        public string HouseRules
+        {
+            get { return BackingStore?.Get<string>("house_rules"); }
+            set { BackingStore?.Set("house_rules", value); }
+        }
 #endif
         /// <summary>The interaction property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Interaction { get; set; }
+        public string? Interaction
+        {
+            get { return BackingStore?.Get<string?>("interaction"); }
+            set { BackingStore?.Set("interaction", value); }
+        }
 #nullable restore
 #else
-        public string Interaction { get; set; }
+        public string Interaction
+        {
+            get { return BackingStore?.Get<string>("interaction"); }
+            set { BackingStore?.Set("interaction", value); }
+        }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The neighborhood_overview property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NeighborhoodOverview { get; set; }
+        public string? NeighborhoodOverview
+        {
+            get { return BackingStore?.Get<string?>("neighborhood_overview"); }
+            set { BackingStore?.Set("neighborhood_overview", value); }
+        }
 #nullable restore
 #else
-        public string NeighborhoodOverview { get; set; }
+        public string NeighborhoodOverview
+        {
+            get { return BackingStore?.Get<string>("neighborhood_overview"); }
+            set { BackingStore?.Set("neighborhood_overview", value); }
+        }
 #endif
         /// <summary>The notes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Notes { get; set; }
+        public string? Notes
+        {
+            get { return BackingStore?.Get<string?>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #nullable restore
 #else
-        public string Notes { get; set; }
+        public string Notes
+        {
+            get { return BackingStore?.Get<string>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #endif
         /// <summary>The space property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Space { get; set; }
+        public string? Space
+        {
+            get { return BackingStore?.Get<string?>("space"); }
+            set { BackingStore?.Set("space", value); }
+        }
 #nullable restore
 #else
-        public string Space { get; set; }
+        public string Space
+        {
+            get { return BackingStore?.Get<string>("space"); }
+            set { BackingStore?.Set("space", value); }
+        }
 #endif
         /// <summary>Airbnb hard-caps this at 500 characters and refuses the whole write if it is longer.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Summary { get; set; }
+        public string? Summary
+        {
+            get { return BackingStore?.Get<string?>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #nullable restore
 #else
-        public string Summary { get; set; }
+        public string Summary
+        {
+            get { return BackingStore?.Get<string>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #endif
         /// <summary>The transit property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Transit { get; set; }
+        public string? Transit
+        {
+            get { return BackingStore?.Get<string?>("transit"); }
+            set { BackingStore?.Set("transit", value); }
+        }
 #nullable restore
 #else
-        public string Transit { get; set; }
+        public string Transit
+        {
+            get { return BackingStore?.Get<string>("transit"); }
+            set { BackingStore?.Set("transit", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbDescriptionWriteRequest_description"/> and sets the default values.
+        /// </summary>
+        public AirbnbDescriptionWriteRequest_description()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

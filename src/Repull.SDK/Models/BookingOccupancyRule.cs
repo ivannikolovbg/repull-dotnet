@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,16 +12,41 @@ namespace Repull.SDK.Models
     /// One occupancy rule: the price for a party of `persons`, relative to the leading-occupancy price. Send exactly one of `additional` or `percentage`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingOccupancyRule : IParsable
+    public partial class BookingOccupancyRule : IBackedModel, IParsable
     {
         /// <summary>Signed amount added to the leading-occupancy price, in the rate plan&apos;s currency. `-12.01` = 12.01 less.</summary>
-        public double? Additional { get; set; }
+        public double? Additional
+        {
+            get { return BackingStore?.Get<double?>("additional"); }
+            set { BackingStore?.Set("additional", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Signed percent change from the leading-occupancy price. `-10` = 10% less, `5` = 5% more. (Booking.com&apos;s own feeds show the result as a multiplier, `90.0`; Repull reads it back as `-10`.)</summary>
-        public double? Percentage { get; set; }
+        public double? Percentage
+        {
+            get { return BackingStore?.Get<double?>("percentage"); }
+            set { BackingStore?.Set("percentage", value); }
+        }
         /// <summary>The party size this rule prices. Must differ from `leadingOccupancy` and be no more than the room holds.</summary>
-        public int? Persons { get; set; }
+        public int? Persons
+        {
+            get { return BackingStore?.Get<int?>("persons"); }
+            set { BackingStore?.Set("persons", value); }
+        }
         /// <summary>Ask Booking.com to round the derived price. Default `false`.</summary>
-        public bool? Round { get; set; }
+        public bool? Round
+        {
+            get { return BackingStore?.Get<bool?>("round"); }
+            set { BackingStore?.Set("round", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingOccupancyRule"/> and sets the default values.
+        /// </summary>
+        public BookingOccupancyRule()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,127 +12,246 @@ namespace Repull.SDK.Models
     /// Rich multilingual content slab for a listing — guest-facing copy sourced from `listings_descriptions` (the `en` row when surfaced via `?include=content`). Also returned as the AI-generated payload from `POST /v1/listings/{id}/generate-content` (where `title` and `amenities` are populated). All fields are individually nullable.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingContent : IAdditionalDataHolder, IParsable
+    public partial class ListingContent : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Structured supplementary rules (JSON; shape evolves with the listings_descriptions schema).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? AdditionalRules { get; set; }
+        public UntypedNode? AdditionalRules
+        {
+            get { return BackingStore?.Get<UntypedNode?>("additionalRules"); }
+            set { BackingStore?.Set("additionalRules", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode AdditionalRules { get; set; }
+        public UntypedNode AdditionalRules
+        {
+            get { return BackingStore?.Get<UntypedNode>("additionalRules"); }
+            set { BackingStore?.Set("additionalRules", value); }
+        }
 #endif
         /// <summary>Free-text amenity strings. Populated only by `generate-content`; the `?include=amenities` expansion returns the structured `ListingAmenity[]` instead.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Amenities { get; set; }
+        public List<string>? Amenities
+        {
+            get { return BackingStore?.Get<List<string>?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public List<string> Amenities { get; set; }
+        public List<string> Amenities
+        {
+            get { return BackingStore?.Get<List<string>>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>Free-text directions for getting to + around the property (e.g. &quot;Take Highway 95 north for 12 miles&quot;).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GettingAround { get; set; }
+        public string? GettingAround
+        {
+            get { return BackingStore?.Get<string?>("gettingAround"); }
+            set { BackingStore?.Set("gettingAround", value); }
+        }
 #nullable restore
 #else
-        public string GettingAround { get; set; }
+        public string GettingAround
+        {
+            get { return BackingStore?.Get<string>("gettingAround"); }
+            set { BackingStore?.Set("gettingAround", value); }
+        }
 #endif
         /// <summary>The guestAccess property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestAccess { get; set; }
+        public string? GuestAccess
+        {
+            get { return BackingStore?.Get<string?>("guestAccess"); }
+            set { BackingStore?.Set("guestAccess", value); }
+        }
 #nullable restore
 #else
-        public string GuestAccess { get; set; }
+        public string GuestAccess
+        {
+            get { return BackingStore?.Get<string>("guestAccess"); }
+            set { BackingStore?.Set("guestAccess", value); }
+        }
 #endif
         /// <summary>The houseRules property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HouseRules { get; set; }
+        public string? HouseRules
+        {
+            get { return BackingStore?.Get<string?>("houseRules"); }
+            set { BackingStore?.Set("houseRules", value); }
+        }
 #nullable restore
 #else
-        public string HouseRules { get; set; }
+        public string HouseRules
+        {
+            get { return BackingStore?.Get<string>("houseRules"); }
+            set { BackingStore?.Set("houseRules", value); }
+        }
 #endif
         /// <summary>Host’s description of how they engage with guests (e.g. &quot;Self check-in, available via message&quot;).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InteractionWithGuests { get; set; }
+        public string? InteractionWithGuests
+        {
+            get { return BackingStore?.Get<string?>("interactionWithGuests"); }
+            set { BackingStore?.Set("interactionWithGuests", value); }
+        }
 #nullable restore
 #else
-        public string InteractionWithGuests { get; set; }
+        public string InteractionWithGuests
+        {
+            get { return BackingStore?.Get<string>("interactionWithGuests"); }
+            set { BackingStore?.Set("interactionWithGuests", value); }
+        }
 #endif
         /// <summary>The listing&apos;s stored public title, and the one a channel pull writes — after `POST /v1/listings/{id}/pull/airbnb` this is the title as it stands on Airbnb.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The neighborhoodOverview property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NeighborhoodOverview { get; set; }
+        public string? NeighborhoodOverview
+        {
+            get { return BackingStore?.Get<string?>("neighborhoodOverview"); }
+            set { BackingStore?.Set("neighborhoodOverview", value); }
+        }
 #nullable restore
 #else
-        public string NeighborhoodOverview { get; set; }
+        public string NeighborhoodOverview
+        {
+            get { return BackingStore?.Get<string>("neighborhoodOverview"); }
+            set { BackingStore?.Set("neighborhoodOverview", value); }
+        }
 #endif
         /// <summary>The notes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Notes { get; set; }
+        public string? Notes
+        {
+            get { return BackingStore?.Get<string?>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #nullable restore
 #else
-        public string Notes { get; set; }
+        public string Notes
+        {
+            get { return BackingStore?.Get<string>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #endif
         /// <summary>The space property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Space { get; set; }
+        public string? Space
+        {
+            get { return BackingStore?.Get<string?>("space"); }
+            set { BackingStore?.Set("space", value); }
+        }
 #nullable restore
 #else
-        public string Space { get; set; }
+        public string Space
+        {
+            get { return BackingStore?.Get<string>("space"); }
+            set { BackingStore?.Set("space", value); }
+        }
 #endif
         /// <summary>The summary property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Summary { get; set; }
+        public string? Summary
+        {
+            get { return BackingStore?.Get<string?>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #nullable restore
 #else
-        public string Summary { get; set; }
+        public string Summary
+        {
+            get { return BackingStore?.Get<string>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #endif
         /// <summary>Public listing title as proposed by `POST /v1/listings/{id}/generate-content`. The STORED title is `name` — read that one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
         /// <summary>The transit property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Transit { get; set; }
+        public string? Transit
+        {
+            get { return BackingStore?.Get<string?>("transit"); }
+            set { BackingStore?.Set("transit", value); }
+        }
 #nullable restore
 #else
-        public string Transit { get; set; }
+        public string Transit
+        {
+            get { return BackingStore?.Get<string>("transit"); }
+            set { BackingStore?.Set("transit", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContent"/> and sets the default values.
         /// </summary>
         public ListingContent()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

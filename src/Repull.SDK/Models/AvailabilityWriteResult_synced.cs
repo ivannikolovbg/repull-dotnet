@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,31 +12,62 @@ namespace Repull.SDK.Models
     /// Per-channel push outcome. A partial failure is surfaced, not swallowed: &quot;saved locally but the channel rejected it&quot; is precisely the state a caller must know about.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AvailabilityWriteResult_synced : IAdditionalDataHolder, IParsable
+    public partial class AvailabilityWriteResult_synced : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The attempted property</summary>
-        public int? Attempted { get; set; }
+        public int? Attempted
+        {
+            get { return BackingStore?.Get<int?>("attempted"); }
+            set { BackingStore?.Set("attempted", value); }
+        }
         /// <summary>Channels whose token has expired — these need reconnecting, not retrying.</summary>
-        public int? AuthErrors { get; set; }
+        public int? AuthErrors
+        {
+            get { return BackingStore?.Get<int?>("authErrors"); }
+            set { BackingStore?.Set("authErrors", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>One entry per listing per connected channel: which channel took the write and which refused it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels>? Channels { get; set; }
+        public List<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels>? Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels>?>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels> Channels { get; set; }
+        public List<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels> Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AvailabilityWriteResult_synced_channels>>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #endif
         /// <summary>The failed property</summary>
-        public int? Failed { get; set; }
+        public int? Failed
+        {
+            get { return BackingStore?.Get<int?>("failed"); }
+            set { BackingStore?.Set("failed", value); }
+        }
         /// <summary>The succeeded property</summary>
-        public int? Succeeded { get; set; }
+        public int? Succeeded
+        {
+            get { return BackingStore?.Get<int?>("succeeded"); }
+            set { BackingStore?.Set("succeeded", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AvailabilityWriteResult_synced"/> and sets the default values.
         /// </summary>
         public AvailabilityWriteResult_synced()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

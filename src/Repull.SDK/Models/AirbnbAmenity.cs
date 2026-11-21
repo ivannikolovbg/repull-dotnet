@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// A single Airbnb amenity from the local cache.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbAmenity : IAdditionalDataHolder, IParsable
+    public partial class AirbnbAmenity : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb amenity id (e.g. `wifi`, `bathroom_step_free_access`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Optional host-supplied instruction for the amenity.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Instruction { get; set; }
+        public string? Instruction
+        {
+            get { return BackingStore?.Get<string?>("instruction"); }
+            set { BackingStore?.Set("instruction", value); }
+        }
 #nullable restore
 #else
-        public string Instruction { get; set; }
+        public string Instruction
+        {
+            get { return BackingStore?.Get<string>("instruction"); }
+            set { BackingStore?.Set("instruction", value); }
+        }
 #endif
         /// <summary>Whether the amenity is present on the listing.</summary>
-        public bool? IsPresent { get; set; }
+        public bool? IsPresent
+        {
+            get { return BackingStore?.Get<bool?>("is_present"); }
+            set { BackingStore?.Set("is_present", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbAmenity"/> and sets the default values.
         /// </summary>
         public AirbnbAmenity()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

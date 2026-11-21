@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,42 +10,77 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BookingDerivedPricingWriteResponse_rates : IAdditionalDataHolder, IParsable
+    public partial class BookingDerivedPricingWriteResponse_rates : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The leadingOccupancy property</summary>
-        public int? LeadingOccupancy { get; set; }
+        public int? LeadingOccupancy
+        {
+            get { return BackingStore?.Get<int?>("leadingOccupancy"); }
+            set { BackingStore?.Set("leadingOccupancy", value); }
+        }
         /// <summary>The occupancies property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingOccupancyRule>? Occupancies { get; set; }
+        public List<global::Repull.SDK.Models.BookingOccupancyRule>? Occupancies
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingOccupancyRule>?>("occupancies"); }
+            set { BackingStore?.Set("occupancies", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingOccupancyRule> Occupancies { get; set; }
+        public List<global::Repull.SDK.Models.BookingOccupancyRule> Occupancies
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingOccupancyRule>>("occupancies"); }
+            set { BackingStore?.Set("occupancies", value); }
+        }
 #endif
         /// <summary>The rateId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RateId { get; set; }
+        public string? RateId
+        {
+            get { return BackingStore?.Get<string?>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #nullable restore
 #else
-        public string RateId { get; set; }
+        public string RateId
+        {
+            get { return BackingStore?.Get<string>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #endif
         /// <summary>The roomId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_rates"/> and sets the default values.
         /// </summary>
         public BookingDerivedPricingWriteResponse_rates()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

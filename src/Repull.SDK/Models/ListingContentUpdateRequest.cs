@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,129 +12,252 @@ namespace Repull.SDK.Models
     /// Canonical PMS-owned listing content. Every field is optional — this is a partial update, only the fields you send are written; absent fields are left untouched. This is a LOCAL write only: it does NOT push to Airbnb/Booking.com. Distribution is a separate explicit publish step. `photos` are ingested by URL and attached to the listing in order (full-replace by default, or append via `photosMode`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingContentUpdateRequest : IAdditionalDataHolder, IParsable
+    public partial class ListingContentUpdateRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Partial address. Only provided sub-fields are written; the ones you omit keep their current value, and an explicit `null` clears one.This is also the repair path for a listing that cannot be published: Airbnb requires `street` and `city` for every country and additionally `state` and `postalCode` for a **US** property — and a listing with no `countryCode` behaves as US. Send just the missing part, e.g. `{ &quot;address&quot;: { &quot;state&quot;: &quot;FL&quot; } }`. `GET /v1/listings/{id}/publish-status` names what is missing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_address? Address { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_address? Address
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_address?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_address Address { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_address Address
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_address>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #endif
         /// <summary>FULL replacement of the amenity set. Accepts canonical keys as a string[] or structured rows. Omit to leave amenities untouched; send `[]` to clear them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities? Amenities { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities? Amenities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities Amenities { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities Amenities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>What the guest is asked to do before leaving. FULL replacement: omit to leave untouched; send `[]` to clear. An unknown `taskType` refuses the whole request with `422 invalid_params`.Published to Airbnb, which is the only channel with checkout tasks. Airbnb accepts them only from partner apps it has certified for the feature; until then the publish result reports Airbnb&apos;s own refusal for this section and every other section still lands.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks>? CheckoutTasks { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks>? CheckoutTasks
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks>?>("checkoutTasks"); }
+            set { BackingStore?.Set("checkoutTasks", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks> CheckoutTasks { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks> CheckoutTasks
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateRequest_checkoutTasks>>("checkoutTasks"); }
+            set { BackingStore?.Set("checkoutTasks", value); }
+        }
 #endif
         /// <summary>Long-form listing description.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>What KIND of property this is. The publish path reads all three on every push, so setting them here is the update path for a listing that already exists — `POST /v1/listings` could only set the type at creation. Airbnb may lock these on an established listing; the publish response reports that in `lockedFields`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_details? Details { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_details? Details
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_details?>("details"); }
+            set { BackingStore?.Set("details", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_details Details { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_details Details
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_details>("details"); }
+            set { BackingStore?.Set("details", value); }
+        }
 #endif
         /// <summary>Which language the `title` / `description` / `summary` / `policies.houseRules` in THIS request are written in. Defaults to `en`. Canonical content is stored per locale — one row per (listing, locale) — so sending Italian copy with `locale: &quot;it&quot;` creates or updates the Italian row instead of overwriting the English one. Distribution of a non-primary locale to Airbnb is a separate call: `PUT /v1/channels/airbnb/listings/{id}/descriptions`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Locale { get; set; }
+        public string? Locale
+        {
+            get { return BackingStore?.Get<string?>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #nullable restore
 #else
-        public string Locale { get; set; }
+        public string Locale
+        {
+            get { return BackingStore?.Get<string>("locale"); }
+            set { BackingStore?.Set("locale", value); }
+        }
 #endif
         /// <summary>Alias for `title`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The occupancy property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy? Occupancy { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy? Occupancy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy?>("occupancy"); }
+            set { BackingStore?.Set("occupancy", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy Occupancy { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy Occupancy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_occupancy>("occupancy"); }
+            set { BackingStore?.Set("occupancy", value); }
+        }
 #endif
         /// <summary>Photo set — full replacement by default (pass `photosMode: &quot;append&quot;` to add after existing photos, or `[]` to clear; omit to leave untouched). Each entry is a hosted image URL (string) or a structured ref. URL-ingest only: the URL is persisted and attached to the listing in order — the OTA push downloads it at publish time. Binary/multipart upload is a follow-up. A non-empty array with no valid http(s) URL is reported in `deferred` (existing photos left untouched).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Photos { get; set; }
+        public List<string>? Photos
+        {
+            get { return BackingStore?.Get<List<string>?>("photos"); }
+            set { BackingStore?.Set("photos", value); }
+        }
 #nullable restore
 #else
-        public List<string> Photos { get; set; }
+        public List<string> Photos
+        {
+            get { return BackingStore?.Get<List<string>>("photos"); }
+            set { BackingStore?.Set("photos", value); }
+        }
 #endif
         /// <summary>How `photos` is applied: `replace` (full replacement of the photo set) or `append` (add after the existing photos). Ignored when `photos` is absent.</summary>
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_photosMode? PhotosMode { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_photosMode? PhotosMode
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_photosMode?>("photosMode"); }
+            set { BackingStore?.Set("photosMode", value); }
+        }
         /// <summary>The policies property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_policies? Policies { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_policies? Policies
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_policies?>("policies"); }
+            set { BackingStore?.Set("policies", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_policies Policies { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_policies Policies
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_policies>("policies"); }
+            set { BackingStore?.Set("policies", value); }
+        }
 #endif
         /// <summary>The listing&apos;s standing rates. Partial like every other section: only the fields you send are written, and `null` clears one.Changing `defaultDailyPrice` or `weekendPrice` also moves the nights on the calendar that still carry the old rate and were written by us — a night you or a channel priced yourself is never touched, and neither is a blocked or reserved one. So a price change reaches the calendar without overwriting anyone&apos;s work.This is still a local write. Publish to send the new rates to a channel.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_pricing? Pricing { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_pricing? Pricing
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_pricing?>("pricing"); }
+            set { BackingStore?.Set("pricing", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_pricing Pricing { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_pricing Pricing
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_pricing>("pricing"); }
+            set { BackingStore?.Set("pricing", value); }
+        }
 #endif
         /// <summary>The listing&apos;s rooms and the beds in each — what Airbnb shows as the sleeping arrangements and needs before a listing can go live. FULL replacement: the rooms you send become the whole set. Omit to leave rooms untouched; send `[]` to clear them.Every entry is checked before anything is written, so a bad entry refuses the whole request with `422 invalid_params` naming it (e.g. `rooms[1].beds[0].quantity`) — a listing is never left with half its rooms.Values use Airbnb&apos;s vocabulary, which Booking.com room mapping also reads. This is a local write; publish to send it to a channel.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms>? Rooms { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms>? Rooms
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms>?>("rooms"); }
+            set { BackingStore?.Set("rooms", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms> Rooms { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms> Rooms
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateRequest_rooms>>("rooms"); }
+            set { BackingStore?.Set("rooms", value); }
+        }
 #endif
         /// <summary>Short summary / tagline.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Summary { get; set; }
+        public string? Summary
+        {
+            get { return BackingStore?.Get<string?>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #nullable restore
 #else
-        public string Summary { get; set; }
+        public string Summary
+        {
+            get { return BackingStore?.Get<string>("summary"); }
+            set { BackingStore?.Set("summary", value); }
+        }
 #endif
         /// <summary>Guest-facing title. Written to the listing name and the description row for `locale`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest"/> and sets the default values.
         /// </summary>
         public ListingContentUpdateRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
             PhotosMode = global::Repull.SDK.Models.ListingContentUpdateRequest_photosMode.Replace;
         }
@@ -200,24 +324,49 @@ namespace Repull.SDK.Models
         /// Composed type wrapper for classes List&lt;global::Repull.SDK.Models.ListingContentUpdateRequest_amenitiesMember1&gt;, List&lt;string&gt;
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class ListingContentUpdateRequest_amenities : IComposedTypeWrapper, IParsable
+        public partial class ListingContentUpdateRequest_amenities : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type List&lt;global::Repull.SDK.Models.ListingContentUpdateRequest_amenitiesMember1&gt;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public List<global::Repull.SDK.Models.ListingContentUpdateRequest_amenitiesMember1>? ListingContentUpdateRequestAmenitiesMember1 { get; set; }
+            public List<global::Repull.SDK.Models.ListingContentUpdateRequest_amenitiesMember1>? ListingContentUpdateRequestAmenitiesMember1
+            {
+                get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateRequest_amenitiesMember1>?>("ListingContentUpdateRequest_amenitiesMember1"); }
+                set { BackingStore?.Set("ListingContentUpdateRequest_amenitiesMember1", value); }
+            }
 #nullable restore
 #else
-            public List<global::Repull.SDK.Models.ListingContentUpdateRequest_amenitiesMember1> ListingContentUpdateRequestAmenitiesMember1 { get; set; }
+            public List<global::Repull.SDK.Models.ListingContentUpdateRequest_amenitiesMember1> ListingContentUpdateRequestAmenitiesMember1
+            {
+                get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentUpdateRequest_amenitiesMember1>>("ListingContentUpdateRequest_amenitiesMember1"); }
+                set { BackingStore?.Set("ListingContentUpdateRequest_amenitiesMember1", value); }
+            }
 #endif
             /// <summary>Composed type representation for type List&lt;string&gt;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public List<string>? String { get; set; }
+            public List<string>? String
+            {
+                get { return BackingStore?.Get<List<string>?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public List<string> String { get; set; }
+            public List<string> String
+            {
+                get { return BackingStore?.Get<List<string>>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest.ListingContentUpdateRequest_amenities"/> and sets the default values.
+            /// </summary>
+            public ListingContentUpdateRequest_amenities()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

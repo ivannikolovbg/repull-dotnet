@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.Models
     /// Returned by `PUT /v1/channels/booking/availability` with `type: &quot;derived-pricing&quot;`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingDerivedPricingWriteResponse : IAdditionalDataHolder, IParsable
+    public partial class BookingDerivedPricingWriteResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>`verified` — read back, each rate plan holds exactly the rules sent. `mismatch` — read back and they differ (`verification.rows`). `unverified` — `verify: false`, or the read failed. A refusal is `422 booking_rejected`, not a 200.</summary>
-        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_applied? Applied { get; set; }
+        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_applied? Applied
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_applied?>("applied"); }
+            set { BackingStore?.Set("applied", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com&apos;s answer, verbatim.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_booking? Booking { get; set; }
+        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_booking? Booking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_booking?>("booking"); }
+            set { BackingStore?.Set("booking", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_booking Booking { get; set; }
+        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_booking Booking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_booking>("booking"); }
+            set { BackingStore?.Set("booking", value); }
+        }
 #endif
         /// <summary>The propertyId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #endif
         /// <summary>Per rate plan, the rules it holds now (as read back; as sent when unverified).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_rates>? Rates { get; set; }
+        public List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_rates>? Rates
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_rates>?>("rates"); }
+            set { BackingStore?.Set("rates", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_rates> Rates { get; set; }
+        public List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_rates> Rates
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_rates>>("rates"); }
+            set { BackingStore?.Set("rates", value); }
+        }
 #endif
         /// <summary>The requested property</summary>
-        public int? Requested { get; set; }
+        public int? Requested
+        {
+            get { return BackingStore?.Get<int?>("requested"); }
+            set { BackingStore?.Set("requested", value); }
+        }
         /// <summary>The verification property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification? Verification { get; set; }
+        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification? Verification
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification?>("verification"); }
+            set { BackingStore?.Set("verification", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification Verification { get; set; }
+        public global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification Verification
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification>("verification"); }
+            set { BackingStore?.Set("verification", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse"/> and sets the default values.
         /// </summary>
         public BookingDerivedPricingWriteResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

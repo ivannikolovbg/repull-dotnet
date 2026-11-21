@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,110 @@ namespace Repull.SDK.Models
     /// Same shape as `ListingPricingStrategy` minus the read-only fields. Send only fields you want to change.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPricingStrategyInput : IAdditionalDataHolder, IParsable
+    public partial class ListingPricingStrategyInput : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The compAdjustPct property</summary>
-        public double? CompAdjustPct { get; set; }
+        public double? CompAdjustPct
+        {
+            get { return BackingStore?.Get<double?>("compAdjustPct"); }
+            set { BackingStore?.Set("compAdjustPct", value); }
+        }
         /// <summary>The compPositionTarget property</summary>
-        public global::Repull.SDK.Models.ListingPricingStrategyInput_compPositionTarget? CompPositionTarget { get; set; }
+        public global::Repull.SDK.Models.ListingPricingStrategyInput_compPositionTarget? CompPositionTarget
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingStrategyInput_compPositionTarget?>("compPositionTarget"); }
+            set { BackingStore?.Set("compPositionTarget", value); }
+        }
         /// <summary>The dayOfWeekMultipliers property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPricingStrategyInput_dayOfWeekMultipliers? DayOfWeekMultipliers { get; set; }
+        public global::Repull.SDK.Models.ListingPricingStrategyInput_dayOfWeekMultipliers? DayOfWeekMultipliers
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingStrategyInput_dayOfWeekMultipliers?>("dayOfWeekMultipliers"); }
+            set { BackingStore?.Set("dayOfWeekMultipliers", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPricingStrategyInput_dayOfWeekMultipliers DayOfWeekMultipliers { get; set; }
+        public global::Repull.SDK.Models.ListingPricingStrategyInput_dayOfWeekMultipliers DayOfWeekMultipliers
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingStrategyInput_dayOfWeekMultipliers>("dayOfWeekMultipliers"); }
+            set { BackingStore?.Set("dayOfWeekMultipliers", value); }
+        }
 #endif
         /// <summary>The eventBoostEnabled property</summary>
-        public bool? EventBoostEnabled { get; set; }
+        public bool? EventBoostEnabled
+        {
+            get { return BackingStore?.Get<bool?>("eventBoostEnabled"); }
+            set { BackingStore?.Set("eventBoostEnabled", value); }
+        }
         /// <summary>The eventBoostMaxPct property</summary>
-        public double? EventBoostMaxPct { get; set; }
+        public double? EventBoostMaxPct
+        {
+            get { return BackingStore?.Get<double?>("eventBoostMaxPct"); }
+            set { BackingStore?.Set("eventBoostMaxPct", value); }
+        }
         /// <summary>The maxDailyChangePct property</summary>
-        public double? MaxDailyChangePct { get; set; }
+        public double? MaxDailyChangePct
+        {
+            get { return BackingStore?.Get<double?>("maxDailyChangePct"); }
+            set { BackingStore?.Set("maxDailyChangePct", value); }
+        }
         /// <summary>The maxPrice property</summary>
-        public double? MaxPrice { get; set; }
+        public double? MaxPrice
+        {
+            get { return BackingStore?.Get<double?>("maxPrice"); }
+            set { BackingStore?.Set("maxPrice", value); }
+        }
         /// <summary>The minPrice property</summary>
-        public double? MinPrice { get; set; }
+        public double? MinPrice
+        {
+            get { return BackingStore?.Get<double?>("minPrice"); }
+            set { BackingStore?.Set("minPrice", value); }
+        }
         /// <summary>The mode property</summary>
-        public global::Repull.SDK.Models.ListingPricingStrategyInput_mode? Mode { get; set; }
+        public global::Repull.SDK.Models.ListingPricingStrategyInput_mode? Mode
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingStrategyInput_mode?>("mode"); }
+            set { BackingStore?.Set("mode", value); }
+        }
         /// <summary>The ownerMinMonthlyPayout property</summary>
-        public double? OwnerMinMonthlyPayout { get; set; }
+        public double? OwnerMinMonthlyPayout
+        {
+            get { return BackingStore?.Get<double?>("ownerMinMonthlyPayout"); }
+            set { BackingStore?.Set("ownerMinMonthlyPayout", value); }
+        }
         /// <summary>The targetMonthlyRevenue property</summary>
-        public double? TargetMonthlyRevenue { get; set; }
+        public double? TargetMonthlyRevenue
+        {
+            get { return BackingStore?.Get<double?>("targetMonthlyRevenue"); }
+            set { BackingStore?.Set("targetMonthlyRevenue", value); }
+        }
         /// <summary>The targetOccupancyPct property</summary>
-        public double? TargetOccupancyPct { get; set; }
+        public double? TargetOccupancyPct
+        {
+            get { return BackingStore?.Get<double?>("targetOccupancyPct"); }
+            set { BackingStore?.Set("targetOccupancyPct", value); }
+        }
         /// <summary>The weekendMarkupPct property</summary>
-        public double? WeekendMarkupPct { get; set; }
+        public double? WeekendMarkupPct
+        {
+            get { return BackingStore?.Get<double?>("weekendMarkupPct"); }
+            set { BackingStore?.Set("weekendMarkupPct", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPricingStrategyInput"/> and sets the default values.
         /// </summary>
         public ListingPricingStrategyInput()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

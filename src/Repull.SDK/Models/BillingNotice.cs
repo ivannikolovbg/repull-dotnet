@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,63 +12,126 @@ namespace Repull.SDK.Models
     /// Added to the body of every successful (2xx) JSON object response while the plan&apos;s last renewal payment failed (the subscription is past_due or unpaid). It never blocks a request: API access keeps working while Stripe retries the card. Tell the user: pay the invoice at `payUrl`, or update the card at `billingUrl`. It disappears once the invoice is paid.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BillingNotice : IAdditionalDataHolder, IParsable
+    public partial class BillingNotice : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The amount owed, in major units of `currency`.</summary>
-        public double? Amount { get; set; }
+        public double? Amount
+        {
+            get { return BackingStore?.Get<double?>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The billingUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BillingUrl { get; set; }
+        public string? BillingUrl
+        {
+            get { return BackingStore?.Get<string?>("billingUrl"); }
+            set { BackingStore?.Set("billingUrl", value); }
+        }
 #nullable restore
 #else
-        public string BillingUrl { get; set; }
+        public string BillingUrl
+        {
+            get { return BackingStore?.Get<string>("billingUrl"); }
+            set { BackingStore?.Set("billingUrl", value); }
+        }
 #endif
         /// <summary>&quot;payment_failed&quot;: the last renewal payment failed and is still owed.</summary>
-        public global::Repull.SDK.Models.BillingNotice_code? Code { get; set; }
+        public global::Repull.SDK.Models.BillingNotice_code? Code
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BillingNotice_code?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
         /// <summary>Lower-case ISO 4217 code.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>When the payment failed.</summary>
-        public DateTimeOffset? FailedAt { get; set; }
+        public DateTimeOffset? FailedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("failedAt"); }
+            set { BackingStore?.Set("failedAt", value); }
+        }
         /// <summary>The fix property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Fix { get; set; }
+        public string? Fix
+        {
+            get { return BackingStore?.Get<string?>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #nullable restore
 #else
-        public string Fix { get; set; }
+        public string Fix
+        {
+            get { return BackingStore?.Get<string>("fix"); }
+            set { BackingStore?.Set("fix", value); }
+        }
 #endif
         /// <summary>The message property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>When Stripe retries the card automatically; null when no retry is left.</summary>
-        public DateTimeOffset? NextRetryAt { get; set; }
+        public DateTimeOffset? NextRetryAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("nextRetryAt"); }
+            set { BackingStore?.Set("nextRetryAt", value); }
+        }
         /// <summary>Stripe&apos;s hosted invoice: pay it there with any card.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PayUrl { get; set; }
+        public string? PayUrl
+        {
+            get { return BackingStore?.Get<string?>("payUrl"); }
+            set { BackingStore?.Set("payUrl", value); }
+        }
 #nullable restore
 #else
-        public string PayUrl { get; set; }
+        public string PayUrl
+        {
+            get { return BackingStore?.Get<string>("payUrl"); }
+            set { BackingStore?.Set("payUrl", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BillingNotice"/> and sets the default values.
         /// </summary>
         public BillingNotice()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

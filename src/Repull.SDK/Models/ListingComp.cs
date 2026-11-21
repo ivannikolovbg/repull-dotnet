@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,83 +12,170 @@ namespace Repull.SDK.Models
     /// A single competitor listing in a comp set, sorted closest-first. Includes per-day rate/availability for the requested calendar window.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingComp : IAdditionalDataHolder, IParsable
+    public partial class ListingComp : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bedrooms property</summary>
-        public int? Bedrooms { get; set; }
+        public int? Bedrooms
+        {
+            get { return BackingStore?.Get<int?>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
         /// <summary>The compId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompId { get; set; }
+        public string? CompId
+        {
+            get { return BackingStore?.Get<string?>("compId"); }
+            set { BackingStore?.Set("compId", value); }
+        }
 #nullable restore
 #else
-        public string CompId { get; set; }
+        public string CompId
+        {
+            get { return BackingStore?.Get<string>("compId"); }
+            set { BackingStore?.Set("compId", value); }
+        }
 #endif
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>Latest snapshot ADR — fallback to render when the calendar window is empty.</summary>
-        public double? CurrentNightlyRate { get; set; }
+        public double? CurrentNightlyRate
+        {
+            get { return BackingStore?.Get<double?>("currentNightlyRate"); }
+            set { BackingStore?.Set("currentNightlyRate", value); }
+        }
         /// <summary>Haversine distance from the source listing in km, rounded to 3 decimals.</summary>
-        public double? DistanceKm { get; set; }
+        public double? DistanceKm
+        {
+            get { return BackingStore?.Get<double?>("distanceKm"); }
+            set { BackingStore?.Set("distanceKm", value); }
+        }
         /// <summary>Link to the listing on its source platform when one is available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalUrl { get; set; }
+        public string? ExternalUrl
+        {
+            get { return BackingStore?.Get<string?>("externalUrl"); }
+            set { BackingStore?.Set("externalUrl", value); }
+        }
 #nullable restore
 #else
-        public string ExternalUrl { get; set; }
+        public string ExternalUrl
+        {
+            get { return BackingStore?.Get<string>("externalUrl"); }
+            set { BackingStore?.Set("externalUrl", value); }
+        }
 #endif
         /// <summary>The lat property</summary>
-        public double? Lat { get; set; }
+        public double? Lat
+        {
+            get { return BackingStore?.Get<double?>("lat"); }
+            set { BackingStore?.Set("lat", value); }
+        }
         /// <summary>The listingName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingName { get; set; }
+        public string? ListingName
+        {
+            get { return BackingStore?.Get<string?>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #nullable restore
 #else
-        public string ListingName { get; set; }
+        public string ListingName
+        {
+            get { return BackingStore?.Get<string>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #endif
         /// <summary>The lng property</summary>
-        public double? Lng { get; set; }
+        public double? Lng
+        {
+            get { return BackingStore?.Get<double?>("lng"); }
+            set { BackingStore?.Set("lng", value); }
+        }
         /// <summary>The maxGuests property</summary>
-        public int? MaxGuests { get; set; }
+        public int? MaxGuests
+        {
+            get { return BackingStore?.Get<int?>("maxGuests"); }
+            set { BackingStore?.Set("maxGuests", value); }
+        }
         /// <summary>Per-day rate + availability for the requested window. May be empty if Atlas hasn&apos;t snapshotted the comp recently.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingCompNightly>? Nightly { get; set; }
+        public List<global::Repull.SDK.Models.ListingCompNightly>? Nightly
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingCompNightly>?>("nightly"); }
+            set { BackingStore?.Set("nightly", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingCompNightly> Nightly { get; set; }
+        public List<global::Repull.SDK.Models.ListingCompNightly> Nightly
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingCompNightly>>("nightly"); }
+            set { BackingStore?.Set("nightly", value); }
+        }
 #endif
         /// <summary>The platform property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Platform { get; set; }
+        public string? Platform
+        {
+            get { return BackingStore?.Get<string?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #nullable restore
 #else
-        public string Platform { get; set; }
+        public string Platform
+        {
+            get { return BackingStore?.Get<string>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #endif
         /// <summary>The ratings property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingComp_ratings? Ratings { get; set; }
+        public global::Repull.SDK.Models.ListingComp_ratings? Ratings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingComp_ratings?>("ratings"); }
+            set { BackingStore?.Set("ratings", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingComp_ratings Ratings { get; set; }
+        public global::Repull.SDK.Models.ListingComp_ratings Ratings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingComp_ratings>("ratings"); }
+            set { BackingStore?.Set("ratings", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingComp"/> and sets the default values.
         /// </summary>
         public ListingComp()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

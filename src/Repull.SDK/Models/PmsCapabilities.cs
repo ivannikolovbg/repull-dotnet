@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,97 +12,188 @@ namespace Repull.SDK.Models
     /// What the API does through a connected PMS beyond reservation writes, read from the same connector table the router uses — a `false` flag is a `422 pms_write_unsupported` naming the PMS.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PmsCapabilities : IAdditionalDataHolder, IParsable
+    public partial class PmsCapabilities : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The calendar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_calendar? Calendar { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_calendar? Calendar
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_calendar?>("calendar"); }
+            set { BackingStore?.Set("calendar", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_calendar Calendar { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_calendar Calendar
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_calendar>("calendar"); }
+            set { BackingStore?.Set("calendar", value); }
+        }
 #endif
         /// <summary>`false`: what the connector supports once connected (on a listing: a dead link — every write answers `409 no_connection`).</summary>
-        public bool? Connected { get; set; }
+        public bool? Connected
+        {
+            get { return BackingStore?.Get<bool?>("connected"); }
+            set { BackingStore?.Set("connected", value); }
+        }
         /// <summary>The conversations property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_conversations? Conversations { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_conversations? Conversations
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_conversations?>("conversations"); }
+            set { BackingStore?.Set("conversations", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_conversations Conversations { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_conversations Conversations
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_conversations>("conversations"); }
+            set { BackingStore?.Set("conversations", value); }
+        }
 #endif
         /// <summary>The guests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_guests? Guests { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_guests? Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_guests?>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_guests Guests { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_guests Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_guests>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #endif
         /// <summary>Sections `PUT /v1/listings/{id}/content` writes to the PMS.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_listings? Listings { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_listings? Listings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_listings?>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_listings Listings { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_listings Listings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_listings>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
 #endif
         /// <summary>The connector&apos;s own notes per family (limits, required access).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_notes? Notes { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_notes? Notes
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_notes?>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_notes Notes { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_notes Notes
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_notes>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #endif
         /// <summary>The payments property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_payments? Payments { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_payments? Payments
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_payments?>("payments"); }
+            set { BackingStore?.Set("payments", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_payments Payments { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_payments Payments
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_payments>("payments"); }
+            set { BackingStore?.Set("payments", value); }
+        }
 #endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The reservations property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_reservations? Reservations { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_reservations? Reservations
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_reservations?>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_reservations Reservations { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_reservations Reservations
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_reservations>("reservations"); }
+            set { BackingStore?.Set("reservations", value); }
+        }
 #endif
         /// <summary>The reviews property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_reviews? Reviews { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_reviews? Reviews
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_reviews?>("reviews"); }
+            set { BackingStore?.Set("reviews", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_reviews Reviews { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_reviews Reviews
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_reviews>("reviews"); }
+            set { BackingStore?.Set("reviews", value); }
+        }
 #endif
         /// <summary>The tasks property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsCapabilities_tasks? Tasks { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_tasks? Tasks
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_tasks?>("tasks"); }
+            set { BackingStore?.Set("tasks", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsCapabilities_tasks Tasks { get; set; }
+        public global::Repull.SDK.Models.PmsCapabilities_tasks Tasks
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsCapabilities_tasks>("tasks"); }
+            set { BackingStore?.Set("tasks", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PmsCapabilities"/> and sets the default values.
         /// </summary>
         public PmsCapabilities()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

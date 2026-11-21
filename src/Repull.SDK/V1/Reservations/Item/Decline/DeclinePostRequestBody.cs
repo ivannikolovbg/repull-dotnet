@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,19 +10,40 @@ namespace Repull.SDK.V1.Reservations.Item.Decline
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class DeclinePostRequestBody : IParsable
+    public partial class DeclinePostRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Sent to the guest by Airbnb with the decline.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>Airbnb’s decline reason, verbatim. `dates_not_available` — the dates are taken; `not_comfortable` — you are not comfortable with the booking; `listing_not_ready` — the listing cannot be booked right now; `different_dates_needed` — you want different dates; `spam` — the request is spam; `other` — anything else (explain in `message`).</summary>
-        public global::Repull.SDK.V1.Reservations.Item.Decline.DeclinePostRequestBody_reason? Reason { get; set; }
+        public global::Repull.SDK.V1.Reservations.Item.Decline.DeclinePostRequestBody_reason? Reason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reservations.Item.Decline.DeclinePostRequestBody_reason?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Reservations.Item.Decline.DeclinePostRequestBody"/> and sets the default values.
+        /// </summary>
+        public DeclinePostRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

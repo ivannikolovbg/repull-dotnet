@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,83 +12,170 @@ namespace Repull.SDK.Models
     /// Full request + response capture for one delivery attempt. `payload` is the exact `WebhookEvent` envelope that was (or would have been) POSTed to the subscription URL.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WebhookDeliveryDetail : IAdditionalDataHolder, IParsable
+    public partial class WebhookDeliveryDetail : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The attempt property</summary>
-        public int? Attempt { get; set; }
+        public int? Attempt
+        {
+            get { return BackingStore?.Get<int?>("attempt"); }
+            set { BackingStore?.Set("attempt", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The errorMessage property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ErrorMessage { get; set; }
+        public string? ErrorMessage
+        {
+            get { return BackingStore?.Get<string?>("errorMessage"); }
+            set { BackingStore?.Set("errorMessage", value); }
+        }
 #nullable restore
 #else
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage
+        {
+            get { return BackingStore?.Get<string>("errorMessage"); }
+            set { BackingStore?.Set("errorMessage", value); }
+        }
 #endif
         /// <summary>The eventId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? EventId { get; set; }
+        public string? EventId
+        {
+            get { return BackingStore?.Get<string?>("eventId"); }
+            set { BackingStore?.Set("eventId", value); }
+        }
 #nullable restore
 #else
-        public string EventId { get; set; }
+        public string EventId
+        {
+            get { return BackingStore?.Get<string>("eventId"); }
+            set { BackingStore?.Set("eventId", value); }
+        }
 #endif
         /// <summary>Canonical event type identifier. Every webhook delivery declares one of these in its `type` field; SDKs key the discriminated `WebhookEvent` union on this value.</summary>
-        public global::Repull.SDK.Models.WebhookEventType? EventType { get; set; }
+        public global::Repull.SDK.Models.WebhookEventType? EventType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventType?>("eventType"); }
+            set { BackingStore?.Set("eventType", value); }
+        }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The full event envelope POSTed to your webhook URL. Discriminated on `type` — narrow `event.data` by switching on `event.type`. Use the matching `*Event` variant directly if your SDK lacks discriminator support. Events about an inactive listing (reservations, messages, alterations, reviews, payments, calendar and listing events) are not delivered. The data keeps syncing while the listing is inactive, but its events are never sent — including after you reactivate it; webhooks resume for events that happen from reactivation on. Account-level events are always delivered.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.WebhookEvent? Payload { get; set; }
+        public global::Repull.SDK.Models.WebhookEvent? Payload
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEvent?>("payload"); }
+            set { BackingStore?.Set("payload", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.WebhookEvent Payload { get; set; }
+        public global::Repull.SDK.Models.WebhookEvent Payload
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEvent>("payload"); }
+            set { BackingStore?.Set("payload", value); }
+        }
 #endif
         /// <summary>The requestHeaders property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders? RequestHeaders { get; set; }
+        public global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders? RequestHeaders
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders?>("requestHeaders"); }
+            set { BackingStore?.Set("requestHeaders", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders RequestHeaders { get; set; }
+        public global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders RequestHeaders
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookDeliveryDetail_requestHeaders>("requestHeaders"); }
+            set { BackingStore?.Set("requestHeaders", value); }
+        }
 #endif
         /// <summary>The responseBody property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ResponseBody { get; set; }
+        public string? ResponseBody
+        {
+            get { return BackingStore?.Get<string?>("responseBody"); }
+            set { BackingStore?.Set("responseBody", value); }
+        }
 #nullable restore
 #else
-        public string ResponseBody { get; set; }
+        public string ResponseBody
+        {
+            get { return BackingStore?.Get<string>("responseBody"); }
+            set { BackingStore?.Set("responseBody", value); }
+        }
 #endif
         /// <summary>The responseHeaders property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders? ResponseHeaders { get; set; }
+        public global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders? ResponseHeaders
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders?>("responseHeaders"); }
+            set { BackingStore?.Set("responseHeaders", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders ResponseHeaders { get; set; }
+        public global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders ResponseHeaders
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookDeliveryDetail_responseHeaders>("responseHeaders"); }
+            set { BackingStore?.Set("responseHeaders", value); }
+        }
 #endif
         /// <summary>The responseTimeMs property</summary>
-        public int? ResponseTimeMs { get; set; }
+        public int? ResponseTimeMs
+        {
+            get { return BackingStore?.Get<int?>("responseTimeMs"); }
+            set { BackingStore?.Set("responseTimeMs", value); }
+        }
         /// <summary>The statusCode property</summary>
-        public int? StatusCode { get; set; }
+        public int? StatusCode
+        {
+            get { return BackingStore?.Get<int?>("statusCode"); }
+            set { BackingStore?.Set("statusCode", value); }
+        }
         /// <summary>The success property</summary>
-        public bool? Success { get; set; }
+        public bool? Success
+        {
+            get { return BackingStore?.Get<bool?>("success"); }
+            set { BackingStore?.Set("success", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.WebhookDeliveryDetail"/> and sets the default values.
         /// </summary>
         public WebhookDeliveryDetail()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

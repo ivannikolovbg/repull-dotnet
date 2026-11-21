@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,120 +10,239 @@ namespace Repull.SDK.V1.Channels.Booking.Content
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ContentPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class ContentPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The contacts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contacts>? Contacts { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contacts>? Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contacts>?>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contacts> Contacts { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contacts> Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contacts>>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #endif
         /// <summary>The contentData property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contentData>? ContentData { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contentData>? ContentData
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contentData>?>("contentData"); }
+            set { BackingStore?.Set("contentData", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contentData> ContentData { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contentData> ContentData
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_contentData>>("contentData"); }
+            set { BackingStore?.Set("contentData", value); }
+        }
 #endif
         /// <summary>The facilities property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_facilities>? Facilities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_facilities>? Facilities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_facilities>?>("facilities"); }
+            set { BackingStore?.Set("facilities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_facilities> Facilities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_facilities> Facilities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_facilities>>("facilities"); }
+            set { BackingStore?.Set("facilities", value); }
+        }
 #endif
         /// <summary>`description`: language code, e.g. `en` or `es`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Language { get; set; }
+        public string? Language
+        {
+            get { return BackingStore?.Get<string?>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #nullable restore
 #else
-        public string Language { get; set; }
+        public string Language
+        {
+            get { return BackingStore?.Get<string>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #endif
         /// <summary>`checkin_methods`: [{ checkin_method }].</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_methods>? Methods { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_methods>? Methods
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_methods>?>("methods"); }
+            set { BackingStore?.Set("methods", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_methods> Methods { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_methods> Methods
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_methods>>("methods"); }
+            set { BackingStore?.Set("methods", value); }
+        }
 #endif
         /// <summary>The photo_ids property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? PhotoIds { get; set; }
+        public List<string>? PhotoIds
+        {
+            get { return BackingStore?.Get<List<string>?>("photo_ids"); }
+            set { BackingStore?.Set("photo_ids", value); }
+        }
 #nullable restore
 #else
-        public List<string> PhotoIds { get; set; }
+        public List<string> PhotoIds
+        {
+            get { return BackingStore?.Get<List<string>>("photo_ids"); }
+            set { BackingStore?.Set("photo_ids", value); }
+        }
 #endif
         /// <summary>The photos property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_photos>? Photos { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_photos>? Photos
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_photos>?>("photos"); }
+            set { BackingStore?.Set("photos", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_photos> Photos { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_photos> Photos
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_photos>>("photos"); }
+            set { BackingStore?.Set("photos", value); }
+        }
 #endif
         /// <summary>The policyCode property</summary>
-        public int? PolicyCode { get; set; }
+        public int? PolicyCode
+        {
+            get { return BackingStore?.Get<int?>("policyCode"); }
+            set { BackingStore?.Set("policyCode", value); }
+        }
         /// <summary>The policyId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PolicyId { get; set; }
+        public string? PolicyId
+        {
+            get { return BackingStore?.Get<string?>("policyId"); }
+            set { BackingStore?.Set("policyId", value); }
+        }
 #nullable restore
 #else
-        public string PolicyId { get; set; }
+        public string PolicyId
+        {
+            get { return BackingStore?.Get<string>("policyId"); }
+            set { BackingStore?.Set("policyId", value); }
+        }
 #endif
         /// <summary>The prepaymentRequired property</summary>
-        public bool? PrepaymentRequired { get; set; }
+        public bool? PrepaymentRequired
+        {
+            get { return BackingStore?.Get<bool?>("prepaymentRequired"); }
+            set { BackingStore?.Set("prepaymentRequired", value); }
+        }
         /// <summary>Booking.com property id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
 #endif
         /// <summary>A Booking.com room id, for `facilities`, `photos` (gallery) and `licences`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("room_id"); }
+            set { BackingStore?.Set("room_id", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("room_id"); }
+            set { BackingStore?.Set("room_id", value); }
+        }
 #endif
         /// <summary>The settings property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_settings? Settings { get; set; }
+        public global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_settings? Settings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_settings?>("settings"); }
+            set { BackingStore?.Set("settings", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_settings Settings { get; set; }
+        public global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_settings Settings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_settings>("settings"); }
+            set { BackingStore?.Set("settings", value); }
+        }
 #endif
         /// <summary>`description`: the property description, up to 65,535 characters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Text { get; set; }
+        public string? Text
+        {
+            get { return BackingStore?.Get<string?>("text"); }
+            set { BackingStore?.Set("text", value); }
+        }
 #nullable restore
 #else
-        public string Text { get; set; }
+        public string Text
+        {
+            get { return BackingStore?.Get<string>("text"); }
+            set { BackingStore?.Set("text", value); }
+        }
 #endif
         /// <summary>The type property</summary>
-        public global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_type? Type { get; set; }
+        public global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>The variantId property</summary>
-        public int? VariantId { get; set; }
+        public int? VariantId
+        {
+            get { return BackingStore?.Get<int?>("variantId"); }
+            set { BackingStore?.Set("variantId", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Booking.Content.ContentPostRequestBody"/> and sets the default values.
         /// </summary>
         public ContentPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

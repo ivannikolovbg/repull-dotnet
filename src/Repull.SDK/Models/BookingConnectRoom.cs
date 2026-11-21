@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.Models
     /// A Booking.com room imported from the claimed hotel. The customer maps each room to one of their Repull listings via `mapConnectBookingRooms`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingConnectRoom : IAdditionalDataHolder, IParsable
+    public partial class BookingConnectRoom : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Currently mapped Repull listing ID, or null if not yet mapped.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CurrentListingId { get; set; }
+        public string? CurrentListingId
+        {
+            get { return BackingStore?.Get<string?>("currentListingId"); }
+            set { BackingStore?.Set("currentListingId", value); }
+        }
 #nullable restore
 #else
-        public string CurrentListingId { get; set; }
+        public string CurrentListingId
+        {
+            get { return BackingStore?.Get<string>("currentListingId"); }
+            set { BackingStore?.Set("currentListingId", value); }
+        }
 #endif
         /// <summary>The maxGuests property</summary>
-        public int? MaxGuests { get; set; }
+        public int? MaxGuests
+        {
+            get { return BackingStore?.Get<int?>("maxGuests"); }
+            set { BackingStore?.Set("maxGuests", value); }
+        }
         /// <summary>Number of inventory units of this room type at the hotel.</summary>
-        public int? NumberOfRooms { get; set; }
+        public int? NumberOfRooms
+        {
+            get { return BackingStore?.Get<int?>("numberOfRooms"); }
+            set { BackingStore?.Set("numberOfRooms", value); }
+        }
         /// <summary>Booking.com-side room ID (used internally for `listing_platform_links`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomBookingId { get; set; }
+        public string? RoomBookingId
+        {
+            get { return BackingStore?.Get<string?>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #nullable restore
 #else
-        public string RoomBookingId { get; set; }
+        public string RoomBookingId
+        {
+            get { return BackingStore?.Get<string>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #endif
         /// <summary>Repull-side `listings_booking_rooms.id`. Pass this back in the mapping submission.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
         /// <summary>The roomName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomName { get; set; }
+        public string? RoomName
+        {
+            get { return BackingStore?.Get<string?>("roomName"); }
+            set { BackingStore?.Set("roomName", value); }
+        }
 #nullable restore
 #else
-        public string RoomName { get; set; }
+        public string RoomName
+        {
+            get { return BackingStore?.Get<string>("roomName"); }
+            set { BackingStore?.Set("roomName", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingConnectRoom"/> and sets the default values.
         /// </summary>
         public BookingConnectRoom()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,69 +12,136 @@ namespace Repull.SDK.Models
     /// Returned by `GET /v1/listings/{id}/segments`. Honest about DNA coverage — when no comps in the scope have been DNA-scored, returns `totalCompsAnalyzed: 0` plus a `low_dna_coverage` recommendation rather than fabricated data.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingSegmentsResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingSegmentsResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The level property</summary>
-        public global::Repull.SDK.Models.ListingSegmentsResponse_level? Level { get; set; }
+        public global::Repull.SDK.Models.ListingSegmentsResponse_level? Level
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSegmentsResponse_level?>("level"); }
+            set { BackingStore?.Set("level", value); }
+        }
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The myQualityTier property</summary>
-        public global::Repull.SDK.Models.ListingSegmentsResponse_myQualityTier? MyQualityTier { get; set; }
+        public global::Repull.SDK.Models.ListingSegmentsResponse_myQualityTier? MyQualityTier
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSegmentsResponse_myQualityTier?>("myQualityTier"); }
+            set { BackingStore?.Set("myQualityTier", value); }
+        }
         /// <summary>The source listing&apos;s own `ai_segment` (or null if not yet scored).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MySegment { get; set; }
+        public string? MySegment
+        {
+            get { return BackingStore?.Get<string?>("mySegment"); }
+            set { BackingStore?.Set("mySegment", value); }
+        }
 #nullable restore
 #else
-        public string MySegment { get; set; }
+        public string MySegment
+        {
+            get { return BackingStore?.Get<string>("mySegment"); }
+            set { BackingStore?.Set("mySegment", value); }
+        }
 #endif
         /// <summary>The qualityTiers property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingQualityTier>? QualityTiers { get; set; }
+        public List<global::Repull.SDK.Models.ListingQualityTier>? QualityTiers
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingQualityTier>?>("qualityTiers"); }
+            set { BackingStore?.Set("qualityTiers", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingQualityTier> QualityTiers { get; set; }
+        public List<global::Repull.SDK.Models.ListingQualityTier> QualityTiers
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingQualityTier>>("qualityTiers"); }
+            set { BackingStore?.Set("qualityTiers", value); }
+        }
 #endif
         /// <summary>The recommendations property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingSegmentRecommendation>? Recommendations { get; set; }
+        public List<global::Repull.SDK.Models.ListingSegmentRecommendation>? Recommendations
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingSegmentRecommendation>?>("recommendations"); }
+            set { BackingStore?.Set("recommendations", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingSegmentRecommendation> Recommendations { get; set; }
+        public List<global::Repull.SDK.Models.ListingSegmentRecommendation> Recommendations
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingSegmentRecommendation>>("recommendations"); }
+            set { BackingStore?.Set("recommendations", value); }
+        }
 #endif
         /// <summary>When `level=comp_set` carries `radiusKm`; when `level=market` carries `city`. May be empty when neither could be resolved.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingSegmentsResponse_scope? Scope { get; set; }
+        public global::Repull.SDK.Models.ListingSegmentsResponse_scope? Scope
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSegmentsResponse_scope?>("scope"); }
+            set { BackingStore?.Set("scope", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingSegmentsResponse_scope Scope { get; set; }
+        public global::Repull.SDK.Models.ListingSegmentsResponse_scope Scope
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSegmentsResponse_scope>("scope"); }
+            set { BackingStore?.Set("scope", value); }
+        }
 #endif
         /// <summary>The segments property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingSegment>? Segments { get; set; }
+        public List<global::Repull.SDK.Models.ListingSegment>? Segments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingSegment>?>("segments"); }
+            set { BackingStore?.Set("segments", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingSegment> Segments { get; set; }
+        public List<global::Repull.SDK.Models.ListingSegment> Segments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingSegment>>("segments"); }
+            set { BackingStore?.Set("segments", value); }
+        }
 #endif
         /// <summary>Number of comps in scope that have a DNA score. `0` is a coverage signal, not an error.</summary>
-        public int? TotalCompsAnalyzed { get; set; }
+        public int? TotalCompsAnalyzed
+        {
+            get { return BackingStore?.Get<int?>("totalCompsAnalyzed"); }
+            set { BackingStore?.Set("totalCompsAnalyzed", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingSegmentsResponse"/> and sets the default values.
         /// </summary>
         public ListingSegmentsResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

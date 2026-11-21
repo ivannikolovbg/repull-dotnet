@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.Models;
 using System.Collections.Generic;
@@ -11,64 +12,127 @@ namespace Repull.SDK.V1.Reservations.Item.Cancel
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CancelPostResponse : IAdditionalDataHolder, IParsable
+    public partial class CancelPostResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Present and true when the reservation was already cancelled.</summary>
-        public bool? AlreadyCancelled { get; set; }
+        public bool? AlreadyCancelled
+        {
+            get { return BackingStore?.Get<bool?>("alreadyCancelled"); }
+            set { BackingStore?.Set("alreadyCancelled", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Present when the write was made in a PMS: what the PMS applied. `partial: true` means the booking exists in the PMS but the steps in `failedSections` (e.g. notes, a tentative state) did not apply — do not create it again.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationPmsOutcome? Pms { get; set; }
+        public global::Repull.SDK.Models.ReservationPmsOutcome? Pms
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationPmsOutcome?>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationPmsOutcome Pms { get; set; }
+        public global::Repull.SDK.Models.ReservationPmsOutcome Pms
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationPmsOutcome>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_status? Status { get; set; }
+        public global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The updatedAt property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UpdatedAt { get; set; }
+        public string? UpdatedAt
+        {
+            get { return BackingStore?.Get<string?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
 #nullable restore
 #else
-        public string UpdatedAt { get; set; }
+        public string UpdatedAt
+        {
+            get { return BackingStore?.Get<string>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Reservations.Item.Cancel.CancelPostResponse"/> and sets the default values.
         /// </summary>
         public CancelPostResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

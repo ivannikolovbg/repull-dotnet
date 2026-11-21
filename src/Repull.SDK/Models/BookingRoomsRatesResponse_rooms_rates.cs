@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,68 +10,131 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BookingRoomsRatesResponse_rooms_rates : IAdditionalDataHolder, IParsable
+    public partial class BookingRoomsRatesResponse_rooms_rates : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Whether this rate plan is a derived child rate.</summary>
-        public bool? IsChildRate { get; set; }
+        public bool? IsChildRate
+        {
+            get { return BackingStore?.Get<bool?>("isChildRate"); }
+            set { BackingStore?.Set("isChildRate", value); }
+        }
         /// <summary>The party size this rate plan prices. A rate amount must be written at this number: above it Booking.com declines the price in silence, below it answers 400. Null when `source` is `mirror`.</summary>
-        public int? MaxPersons { get; set; }
+        public int? MaxPersons
+        {
+            get { return BackingStore?.Get<int?>("maxPersons"); }
+            set { BackingStore?.Set("maxPersons", value); }
+        }
         /// <summary>The occupancy rules this rate plan holds on Booking.com — what `PUT /v1/channels/booking/availability` with `type: &quot;derived-pricing&quot;` writes, in the same terms (`percentage: -10` is 10% less). Empty when the rate plan has none; `null` when `source` is `mirror`. The price for a party of `persons` is the nightly price plus `additional` (or changed by `percentage`), on every night.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingOccupancyRule>? OccupancyPricing { get; set; }
+        public List<global::Repull.SDK.Models.BookingOccupancyRule>? OccupancyPricing
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingOccupancyRule>?>("occupancyPricing"); }
+            set { BackingStore?.Set("occupancyPricing", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingOccupancyRule> OccupancyPricing { get; set; }
+        public List<global::Repull.SDK.Models.BookingOccupancyRule> OccupancyPricing
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingOccupancyRule>>("occupancyPricing"); }
+            set { BackingStore?.Set("occupancyPricing", value); }
+        }
 #endif
         /// <summary>Cancellation policy name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Policy { get; set; }
+        public string? Policy
+        {
+            get { return BackingStore?.Get<string?>("policy"); }
+            set { BackingStore?.Set("policy", value); }
+        }
 #nullable restore
 #else
-        public string Policy { get; set; }
+        public string Policy
+        {
+            get { return BackingStore?.Get<string>("policy"); }
+            set { BackingStore?.Set("policy", value); }
+        }
 #endif
         /// <summary>The policyId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PolicyId { get; set; }
+        public string? PolicyId
+        {
+            get { return BackingStore?.Get<string?>("policyId"); }
+            set { BackingStore?.Set("policyId", value); }
+        }
 #nullable restore
 #else
-        public string PolicyId { get; set; }
+        public string PolicyId
+        {
+            get { return BackingStore?.Get<string>("policyId"); }
+            set { BackingStore?.Set("policyId", value); }
+        }
 #endif
         /// <summary>Pricing model: `Standard`, `RLO`, `OBP`, or `LOS`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PricingType { get; set; }
+        public string? PricingType
+        {
+            get { return BackingStore?.Get<string?>("pricingType"); }
+            set { BackingStore?.Set("pricingType", value); }
+        }
 #nullable restore
 #else
-        public string PricingType { get; set; }
+        public string PricingType
+        {
+            get { return BackingStore?.Get<string>("pricingType"); }
+            set { BackingStore?.Set("pricingType", value); }
+        }
 #endif
         /// <summary>Booking.com rate-plan id — use as `rateId` in an ARI update.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RateId { get; set; }
+        public string? RateId
+        {
+            get { return BackingStore?.Get<string?>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #nullable restore
 #else
-        public string RateId { get; set; }
+        public string RateId
+        {
+            get { return BackingStore?.Get<string>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #endif
         /// <summary>The rateName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RateName { get; set; }
+        public string? RateName
+        {
+            get { return BackingStore?.Get<string?>("rateName"); }
+            set { BackingStore?.Set("rateName", value); }
+        }
 #nullable restore
 #else
-        public string RateName { get; set; }
+        public string RateName
+        {
+            get { return BackingStore?.Get<string>("rateName"); }
+            set { BackingStore?.Set("rateName", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRoomsRatesResponse_rooms_rates"/> and sets the default values.
         /// </summary>
         public BookingRoomsRatesResponse_rooms_rates()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

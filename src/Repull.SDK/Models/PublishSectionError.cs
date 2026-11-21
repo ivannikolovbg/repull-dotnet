@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,35 +12,66 @@ namespace Repull.SDK.Models
     /// One section of a publish that did not reach Airbnb.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PublishSectionError : IAdditionalDataHolder, IParsable
+    public partial class PublishSectionError : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`locked` — Airbnb refuses to change these fields on this listing; retrying cannot succeed and `lockedFields` names them. `no_content` — there was nothing canonical to send; write the content, then publish again. `rejected` — Airbnb refused the section as sent; fix the content and publish again.</summary>
-        public global::Repull.SDK.Models.PublishSectionError_code? Code { get; set; }
+        public global::Repull.SDK.Models.PublishSectionError_code? Code
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PublishSectionError_code?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
         /// <summary>For `code: locked` — the fields Airbnb dropped.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? LockedFields { get; set; }
+        public List<string>? LockedFields
+        {
+            get { return BackingStore?.Get<List<string>?>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #nullable restore
 #else
-        public List<string> LockedFields { get; set; }
+        public List<string> LockedFields
+        {
+            get { return BackingStore?.Get<List<string>>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #endif
         /// <summary>Airbnb&apos;s own reason, verbatim, or ours when we refused to send an empty section.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>Which part of the listing this failure is about.</summary>
-        public global::Repull.SDK.Models.PublishSectionError_section? Section { get; set; }
+        public global::Repull.SDK.Models.PublishSectionError_section? Section
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PublishSectionError_section?>("section"); }
+            set { BackingStore?.Set("section", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PublishSectionError"/> and sets the default values.
         /// </summary>
         public PublishSectionError()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

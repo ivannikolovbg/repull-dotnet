@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,57 +12,108 @@ namespace Repull.SDK.Models
     /// Normalized money block. `totalPrice` is a `number` (NOT a decimal-as-string) — the legacy top-level `totalPrice` string field is kept on the parent for back-compat but is deprecated. `totalPrice` is the GUEST-side stay total (what the guest paid), NOT the host payout.The full host/guest breakdown — accommodation subtotal, discounts, cleaning and other guest fees, channel service fees split host/guest, tax lines, and the expected host payout — is served inline under `host` and `guest` for EVERY channel. (Earlier versions of this spec sent you to `GET /v1/channels/airbnb/transactions` for the host payout; that endpoint is Airbnb-only and is no longer the place to look for a reservation&apos;s financials. It remains useful for settlement-level detail — actual payout dates and settlement status — which the reservation record does not carry.)Not yet served here: individual guest **payment records** (charges, refunds, schedules) and post-booking **adjustments** — neither is stored on the reservation breakdown.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationFinancials : IAdditionalDataHolder, IParsable
+    public partial class ReservationFinancials : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Channel cancellation policy code, verbatim from the reservation. Airbnb codes look like `strict_14_with_grace_period`, `moderate`, `flexible`, `tiered_pricing_non_refundable`; Booking.com reports a numeric policy id. Omitted when the channel did not supply one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CancellationPolicy { get; set; }
+        public string? CancellationPolicy
+        {
+            get { return BackingStore?.Get<string?>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
 #nullable restore
 #else
-        public string CancellationPolicy { get; set; }
+        public string CancellationPolicy
+        {
+            get { return BackingStore?.Get<string>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
 #endif
         /// <summary>ISO 4217 currency code.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>GUEST-side view of the stay — what the guest was actually charged. Same non-fabrication rule as `ReservationHostFinancials`: absent components are omitted, never zero-filled.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationGuestFinancials? Guest { get; set; }
+        public global::Repull.SDK.Models.ReservationGuestFinancials? Guest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationGuestFinancials?>("guest"); }
+            set { BackingStore?.Set("guest", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationGuestFinancials Guest { get; set; }
+        public global::Repull.SDK.Models.ReservationGuestFinancials Guest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationGuestFinancials>("guest"); }
+            set { BackingStore?.Set("guest", value); }
+        }
 #endif
         /// <summary>HOST-side view of the stay — what it looks like on the host ledger. Projected from the reservation&apos;s own stored price breakdown, so it is available on every channel (Airbnb, Booking.com, VRBO, direct, owner), not just Airbnb.**Nothing here is synthesised.** A property is present only when the source breakdown genuinely carries it; a component the channel never reported is OMITTED rather than returned as `0`. An empty array means the channel reported an empty collection.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationHostFinancials? Host { get; set; }
+        public global::Repull.SDK.Models.ReservationHostFinancials? Host
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationHostFinancials?>("host"); }
+            set { BackingStore?.Set("host", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationHostFinancials Host { get; set; }
+        public global::Repull.SDK.Models.ReservationHostFinancials Host
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationHostFinancials>("host"); }
+            set { BackingStore?.Set("host", value); }
+        }
 #endif
         /// <summary>Payment lifecycle status (e.g. `pending`, `paid`, `refunded`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PaymentStatus { get; set; }
+        public string? PaymentStatus
+        {
+            get { return BackingStore?.Get<string?>("paymentStatus"); }
+            set { BackingStore?.Set("paymentStatus", value); }
+        }
 #nullable restore
 #else
-        public string PaymentStatus { get; set; }
+        public string PaymentStatus
+        {
+            get { return BackingStore?.Get<string>("paymentStatus"); }
+            set { BackingStore?.Set("paymentStatus", value); }
+        }
 #endif
         /// <summary>GUEST-side stay total in `currency` — what the guest paid, not the host payout. Number, not string. For the host payout see `financials.host.revenue`.</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationFinancials"/> and sets the default values.
         /// </summary>
         public ReservationFinancials()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

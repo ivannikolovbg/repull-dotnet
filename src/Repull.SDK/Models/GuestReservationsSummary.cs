@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,23 +12,46 @@ namespace Repull.SDK.Models
     /// Aggregate counts of reservations attached to the guest. `future` is derived from `total - past - cancelled`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class GuestReservationsSummary : IAdditionalDataHolder, IParsable
+    public partial class GuestReservationsSummary : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cancelled property</summary>
-        public int? Cancelled { get; set; }
+        public int? Cancelled
+        {
+            get { return BackingStore?.Get<int?>("cancelled"); }
+            set { BackingStore?.Set("cancelled", value); }
+        }
         /// <summary>The future property</summary>
-        public int? Future { get; set; }
+        public int? Future
+        {
+            get { return BackingStore?.Get<int?>("future"); }
+            set { BackingStore?.Set("future", value); }
+        }
         /// <summary>The past property</summary>
-        public int? Past { get; set; }
+        public int? Past
+        {
+            get { return BackingStore?.Get<int?>("past"); }
+            set { BackingStore?.Set("past", value); }
+        }
         /// <summary>The total property</summary>
-        public int? Total { get; set; }
+        public int? Total
+        {
+            get { return BackingStore?.Get<int?>("total"); }
+            set { BackingStore?.Set("total", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestReservationsSummary"/> and sets the default values.
         /// </summary>
         public GuestReservationsSummary()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

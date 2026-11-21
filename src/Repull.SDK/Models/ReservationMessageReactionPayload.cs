@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,69 +12,136 @@ namespace Repull.SDK.Models
     /// Payload for `reservation.message.reaction`: someone on the conversation added or removed a reaction. Airbnb reports reactions; other channels do not fire this event.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationMessageReactionPayload : IAdditionalDataHolder, IParsable
+    public partial class ReservationMessageReactionPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The action property</summary>
-        public global::Repull.SDK.Models.ReservationMessageReactionPayload_action? Action { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReactionPayload_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReactionPayload_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The externalMessageId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalMessageId { get; set; }
+        public string? ExternalMessageId
+        {
+            get { return BackingStore?.Get<string?>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalMessageId { get; set; }
+        public string ExternalMessageId
+        {
+            get { return BackingStore?.Get<string>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #endif
         /// <summary>The externalThreadId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalThreadId { get; set; }
+        public string? ExternalThreadId
+        {
+            get { return BackingStore?.Get<string?>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalThreadId { get; set; }
+        public string ExternalThreadId
+        {
+            get { return BackingStore?.Get<string>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>The message reacted to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MessageId { get; set; }
+        public string? MessageId
+        {
+            get { return BackingStore?.Get<string?>("messageId"); }
+            set { BackingStore?.Set("messageId", value); }
+        }
 #nullable restore
 #else
-        public string MessageId { get; set; }
+        public string MessageId
+        {
+            get { return BackingStore?.Get<string>("messageId"); }
+            set { BackingStore?.Set("messageId", value); }
+        }
 #endif
         /// <summary>The reaction property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationMessageReactionPayload_reaction? Reaction { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReactionPayload_reaction? Reaction
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReactionPayload_reaction?>("reaction"); }
+            set { BackingStore?.Set("reaction", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationMessageReactionPayload_reaction Reaction { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReactionPayload_reaction Reaction
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReactionPayload_reaction>("reaction"); }
+            set { BackingStore?.Set("reaction", value); }
+        }
 #endif
         /// <summary>The reservationId property</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>The threadId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThreadId { get; set; }
+        public string? ThreadId
+        {
+            get { return BackingStore?.Get<string?>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #nullable restore
 #else
-        public string ThreadId { get; set; }
+        public string ThreadId
+        {
+            get { return BackingStore?.Get<string>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationMessageReactionPayload"/> and sets the default values.
         /// </summary>
         public ReservationMessageReactionPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

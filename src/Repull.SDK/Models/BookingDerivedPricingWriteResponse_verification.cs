@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,46 +10,89 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BookingDerivedPricingWriteResponse_verification : IAdditionalDataHolder, IParsable
+    public partial class BookingDerivedPricingWriteResponse_verification : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The matched property</summary>
-        public int? Matched { get; set; }
+        public int? Matched
+        {
+            get { return BackingStore?.Get<int?>("matched"); }
+            set { BackingStore?.Set("matched", value); }
+        }
         /// <summary>The mismatched property</summary>
-        public int? Mismatched { get; set; }
+        public int? Mismatched
+        {
+            get { return BackingStore?.Get<int?>("mismatched"); }
+            set { BackingStore?.Set("mismatched", value); }
+        }
         /// <summary>The ran property</summary>
-        public bool? Ran { get; set; }
+        public bool? Ran
+        {
+            get { return BackingStore?.Get<bool?>("ran"); }
+            set { BackingStore?.Set("ran", value); }
+        }
         /// <summary>The rows property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification_rows>? Rows { get; set; }
+        public List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification_rows>? Rows
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification_rows>?>("rows"); }
+            set { BackingStore?.Set("rows", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification_rows> Rows { get; set; }
+        public List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification_rows> Rows
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification_rows>>("rows"); }
+            set { BackingStore?.Set("rows", value); }
+        }
 #endif
         /// <summary>The skippedReason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SkippedReason { get; set; }
+        public string? SkippedReason
+        {
+            get { return BackingStore?.Get<string?>("skippedReason"); }
+            set { BackingStore?.Set("skippedReason", value); }
+        }
 #nullable restore
 #else
-        public string SkippedReason { get; set; }
+        public string SkippedReason
+        {
+            get { return BackingStore?.Get<string>("skippedReason"); }
+            set { BackingStore?.Set("skippedReason", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingDerivedPricingWriteResponse_verification"/> and sets the default values.
         /// </summary>
         public BookingDerivedPricingWriteResponse_verification()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

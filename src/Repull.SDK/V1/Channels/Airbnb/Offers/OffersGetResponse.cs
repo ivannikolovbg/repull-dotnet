@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,61 +13,128 @@ namespace Repull.SDK.V1.Channels.Airbnb.Offers
     /// Airbnb’s special-offer object as Airbnb returns it (keys camelCased). Fields vary by `offerType`; a pre-approval carries only the thread, status and expiry.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class OffersGetResponse : IAdditionalDataHolder, IParsable
+    public partial class OffersGetResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The expiresAt property</summary>
-        public DateTimeOffset? ExpiresAt { get; set; }
+        public DateTimeOffset? ExpiresAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("expiresAt"); }
+            set { BackingStore?.Set("expiresAt", value); }
+        }
         /// <summary>The guestDetails property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_guestDetails? GuestDetails { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_guestDetails? GuestDetails
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_guestDetails?>("guestDetails"); }
+            set { BackingStore?.Set("guestDetails", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_guestDetails GuestDetails { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_guestDetails GuestDetails
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_guestDetails>("guestDetails"); }
+            set { BackingStore?.Set("guestDetails", value); }
+        }
 #endif
         /// <summary>Airbnb special-offer id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Airbnb listing id (special offers only).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The nights property</summary>
-        public int? Nights { get; set; }
+        public int? Nights
+        {
+            get { return BackingStore?.Get<int?>("nights"); }
+            set { BackingStore?.Set("nights", value); }
+        }
         /// <summary>The offerType property</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_offerType? OfferType { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_offerType? OfferType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_offerType?>("offerType"); }
+            set { BackingStore?.Set("offerType", value); }
+        }
         /// <summary>The startDate property</summary>
-        public Date? StartDate { get; set; }
+        public Date? StartDate
+        {
+            get { return BackingStore?.Get<Date?>("startDate"); }
+            set { BackingStore?.Set("startDate", value); }
+        }
         /// <summary>The status property</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_status? Status { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>Airbnb thread id the offer was sent on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThreadId { get; set; }
+        public string? ThreadId
+        {
+            get { return BackingStore?.Get<string?>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #nullable restore
 #else
-        public string ThreadId { get; set; }
+        public string ThreadId
+        {
+            get { return BackingStore?.Get<string>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #endif
         /// <summary>The totalPrice property</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Offers.OffersGetResponse"/> and sets the default values.
         /// </summary>
         public OffersGetResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,57 +12,108 @@ namespace Repull.SDK.Models
     /// Why Booking.com refused one half of a write, in their words. Present on the half that was refused.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingUpstreamFailure : IAdditionalDataHolder, IParsable
+    public partial class BookingUpstreamFailure : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The upstream body, trimmed and capped, for when the parsed reason is not enough.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get; set; }
+        public string? Body
+        {
+            get { return BackingStore?.Get<string?>("body"); }
+            set { BackingStore?.Set("body", value); }
+        }
 #nullable restore
 #else
-        public string Body { get; set; }
+        public string Body
+        {
+            get { return BackingStore?.Get<string>("body"); }
+            set { BackingStore?.Set("body", value); }
+        }
 #endif
         /// <summary>Booking.com&apos;s own error code, when their envelope named one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BookingCode { get; set; }
+        public string? BookingCode
+        {
+            get { return BackingStore?.Get<string?>("booking_code"); }
+            set { BackingStore?.Set("booking_code", value); }
+        }
 #nullable restore
 #else
-        public string BookingCode { get; set; }
+        public string BookingCode
+        {
+            get { return BackingStore?.Get<string>("booking_code"); }
+            set { BackingStore?.Set("booking_code", value); }
+        }
 #endif
         /// <summary>Booking.com&apos;s request id. Quote it to their connectivity support to have them trace the call.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BookingRuid { get; set; }
+        public string? BookingRuid
+        {
+            get { return BackingStore?.Get<string?>("booking_ruid"); }
+            set { BackingStore?.Set("booking_ruid", value); }
+        }
 #nullable restore
 #else
-        public string BookingRuid { get; set; }
+        public string BookingRuid
+        {
+            get { return BackingStore?.Get<string>("booking_ruid"); }
+            set { BackingStore?.Set("booking_ruid", value); }
+        }
 #endif
         /// <summary>How the failure was classified internally (e.g. `BAD_REQUEST`, `RATE_LIMITED`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Code { get; set; }
+        public string? Code
+        {
+            get { return BackingStore?.Get<string?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #nullable restore
 #else
-        public string Code { get; set; }
+        public string Code
+        {
+            get { return BackingStore?.Get<string>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #endif
         /// <summary>Booking.com&apos;s own reason, taken from the body they answered with — never a paraphrase of their status code.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>The HTTP status Booking.com answered with.</summary>
-        public int? UpstreamStatus { get; set; }
+        public int? UpstreamStatus
+        {
+            get { return BackingStore?.Get<int?>("upstream_status"); }
+            set { BackingStore?.Set("upstream_status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingUpstreamFailure"/> and sets the default values.
         /// </summary>
         public BookingUpstreamFailure()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

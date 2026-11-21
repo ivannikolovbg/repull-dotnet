@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,37 +12,80 @@ namespace Repull.SDK.Models
     /// Lightweight review snapshot delivered as `data.object` on `review.*` events. Fetch the full review (category ratings, public text, private feedback, response body) via `GET /v1/reviews/{id}`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReviewWebhookObject : IAdditionalDataHolder, IParsable
+    public partial class ReviewWebhookObject : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Source channel the review came from.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>Workspace (customer) id.</summary>
-        public int? CustomerId { get; set; }
+        public int? CustomerId
+        {
+            get { return BackingStore?.Get<int?>("customerId"); }
+            set { BackingStore?.Set("customerId", value); }
+        }
         /// <summary>Repull-internal review id. Pass to `GET /v1/reviews/{id}`.</summary>
-        public int? Id { get; set; }
+        public int? Id
+        {
+            get { return BackingStore?.Get<int?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>Repull listing id the review is about.</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>Overall star rating, if present.</summary>
-        public int? Rating { get; set; }
+        public int? Rating
+        {
+            get { return BackingStore?.Get<int?>("rating"); }
+            set { BackingStore?.Set("rating", value); }
+        }
         /// <summary>Repull reservation id the review is attached to, if known.</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>Who wrote the review — `guest` (about the host/property) or `host` (about the guest).</summary>
-        public global::Repull.SDK.Models.ReviewWebhookObject_reviewerRole? ReviewerRole { get; set; }
+        public global::Repull.SDK.Models.ReviewWebhookObject_reviewerRole? ReviewerRole
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReviewWebhookObject_reviewerRole?>("reviewerRole"); }
+            set { BackingStore?.Set("reviewerRole", value); }
+        }
         /// <summary>When the review was submitted on the source channel.</summary>
-        public DateTimeOffset? SubmittedAt { get; set; }
+        public DateTimeOffset? SubmittedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("submittedAt"); }
+            set { BackingStore?.Set("submittedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReviewWebhookObject"/> and sets the default values.
         /// </summary>
         public ReviewWebhookObject()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

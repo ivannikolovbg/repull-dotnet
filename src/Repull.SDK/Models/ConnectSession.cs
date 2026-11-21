@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,53 +12,104 @@ namespace Repull.SDK.Models
     /// A multi-channel Connect picker session. The `url` is the hosted picker page on connect.repull.dev — redirect the host to it, they pick a channel, and the picker takes them through the per-provider flow before redirecting back to the original `redirectUrl`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConnectSession : IAdditionalDataHolder, IParsable
+    public partial class ConnectSession : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The expiresAt property</summary>
-        public DateTimeOffset? ExpiresAt { get; set; }
+        public DateTimeOffset? ExpiresAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("expiresAt"); }
+            set { BackingStore?.Set("expiresAt", value); }
+        }
         /// <summary>Present (`true`) when the session also lists PMSes Repull doesn&apos;t connect yet.</summary>
-        public bool? IncludeRequestOnly { get; set; }
+        public bool? IncludeRequestOnly
+        {
+            get { return BackingStore?.Get<bool?>("includeRequestOnly"); }
+            set { BackingStore?.Set("includeRequestOnly", value); }
+        }
         /// <summary>Present only on a Repull Migrate session.</summary>
-        public global::Repull.SDK.Models.ConnectSession_purpose? Purpose { get; set; }
+        public global::Repull.SDK.Models.ConnectSession_purpose? Purpose
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectSession_purpose?>("purpose"); }
+            set { BackingStore?.Set("purpose", value); }
+        }
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SessionId { get; set; }
+        public string? SessionId
+        {
+            get { return BackingStore?.Get<string?>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #nullable restore
 #else
-        public string SessionId { get; set; }
+        public string SessionId
+        {
+            get { return BackingStore?.Get<string>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #endif
         /// <summary>Echoed back from the request body for SDK consumers that pass an opaque correlation token.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get; set; }
+        public string? State
+        {
+            get { return BackingStore?.Get<string?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #nullable restore
 #else
-        public string State { get; set; }
+        public string State
+        {
+            get { return BackingStore?.Get<string>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
 #endif
         /// <summary>The url property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url
+        {
+            get { return BackingStore?.Get<string?>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return BackingStore?.Get<string>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #endif
         /// <summary>Present when the session lands on a sub-workspace (`workspace` or `X-Workspace-Id` on the request): the workspace the connection lands in. Read and write it with `X-Workspace-Id`; on a migrate session, track the import with `GET /v1/migrations/{workspaceId}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WorkspaceId { get; set; }
+        public string? WorkspaceId
+        {
+            get { return BackingStore?.Get<string?>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
 #nullable restore
 #else
-        public string WorkspaceId { get; set; }
+        public string WorkspaceId
+        {
+            get { return BackingStore?.Get<string>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectSession"/> and sets the default values.
         /// </summary>
         public ConnectSession()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

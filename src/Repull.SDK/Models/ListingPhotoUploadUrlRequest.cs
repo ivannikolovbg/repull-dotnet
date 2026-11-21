@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,34 +10,61 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingPhotoUploadUrlRequest : IAdditionalDataHolder, IParsable
+    public partial class ListingPhotoUploadUrlRequest : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Original file name, e.g. &quot;living-room.jpg&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FileName { get; set; }
+        public string? FileName
+        {
+            get { return BackingStore?.Get<string?>("fileName"); }
+            set { BackingStore?.Set("fileName", value); }
+        }
 #nullable restore
 #else
-        public string FileName { get; set; }
+        public string FileName
+        {
+            get { return BackingStore?.Get<string>("fileName"); }
+            set { BackingStore?.Set("fileName", value); }
+        }
 #endif
         /// <summary>File size in bytes. Required: the signed upload is issued for this size.</summary>
-        public int? FileSize { get; set; }
+        public int? FileSize
+        {
+            get { return BackingStore?.Get<int?>("fileSize"); }
+            set { BackingStore?.Set("fileSize", value); }
+        }
         /// <summary>Image MIME type. Must start with &quot;image/&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FileType { get; set; }
+        public string? FileType
+        {
+            get { return BackingStore?.Get<string?>("fileType"); }
+            set { BackingStore?.Set("fileType", value); }
+        }
 #nullable restore
 #else
-        public string FileType { get; set; }
+        public string FileType
+        {
+            get { return BackingStore?.Get<string>("fileType"); }
+            set { BackingStore?.Set("fileType", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPhotoUploadUrlRequest"/> and sets the default values.
         /// </summary>
         public ListingPhotoUploadUrlRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

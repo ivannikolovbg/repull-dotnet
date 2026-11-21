@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,32 +10,55 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MigrationCutoverCheck_mismatched : IAdditionalDataHolder, IParsable
+    public partial class MigrationCutoverCheck_mismatched : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The destination property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MigrationReservationRef? Destination { get; set; }
+        public global::Repull.SDK.Models.MigrationReservationRef? Destination
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationReservationRef?>("destination"); }
+            set { BackingStore?.Set("destination", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MigrationReservationRef Destination { get; set; }
+        public global::Repull.SDK.Models.MigrationReservationRef Destination
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationReservationRef>("destination"); }
+            set { BackingStore?.Set("destination", value); }
+        }
 #endif
         /// <summary>The source property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MigrationReservationRef? Source { get; set; }
+        public global::Repull.SDK.Models.MigrationReservationRef? Source
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationReservationRef?>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MigrationReservationRef Source { get; set; }
+        public global::Repull.SDK.Models.MigrationReservationRef Source
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationReservationRef>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MigrationCutoverCheck_mismatched"/> and sets the default values.
         /// </summary>
         public MigrationCutoverCheck_mismatched()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,74 +10,149 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MapConnectBookingRoomsResponse : IAdditionalDataHolder, IParsable
+    public partial class MapConnectBookingRoomsResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Plain-language explanation of `needsCalendar`, present only when it is non-empty.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CalendarNote { get; set; }
+        public string? CalendarNote
+        {
+            get { return BackingStore?.Get<string?>("calendarNote"); }
+            set { BackingStore?.Set("calendarNote", value); }
+        }
 #nullable restore
 #else
-        public string CalendarNote { get; set; }
+        public string CalendarNote
+        {
+            get { return BackingStore?.Get<string>("calendarNote"); }
+            set { BackingStore?.Set("calendarNote", value); }
+        }
 #endif
         /// <summary>The connectionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>Rooms now linked to a listing.</summary>
-        public int? Mapped { get; set; }
+        public int? Mapped
+        {
+            get { return BackingStore?.Get<int?>("mapped"); }
+            set { BackingStore?.Set("mapped", value); }
+        }
         /// <summary>Ids of the listings this call created from Booking.com rooms (`create: true`). They start without a calendar: Booking.com shows those rooms closed and nothing is sent to Booking.com for them until they have one. Give a listing a calendar by setting its prices and availability with `PUT /v1/availability/{propertyId}`, or by mapping the same home from Airbnb so its calendar is used. Rooms mapped to an existing listing are not listed: that listing&apos;s calendar is pushed as before.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? NeedsCalendar { get; set; }
+        public List<string>? NeedsCalendar
+        {
+            get { return BackingStore?.Get<List<string>?>("needsCalendar"); }
+            set { BackingStore?.Set("needsCalendar", value); }
+        }
 #nullable restore
 #else
-        public List<string> NeedsCalendar { get; set; }
+        public List<string> NeedsCalendar
+        {
+            get { return BackingStore?.Get<List<string>>("needsCalendar"); }
+            set { BackingStore?.Set("needsCalendar", value); }
+        }
 #endif
         /// <summary>`propertyStatus.message`, present only when the property is not open.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyNote { get; set; }
+        public string? PropertyNote
+        {
+            get { return BackingStore?.Get<string?>("propertyNote"); }
+            set { BackingStore?.Set("propertyNote", value); }
+        }
 #nullable restore
 #else
-        public string PropertyNote { get; set; }
+        public string PropertyNote
+        {
+            get { return BackingStore?.Get<string>("propertyNote"); }
+            set { BackingStore?.Set("propertyNote", value); }
+        }
 #endif
         /// <summary>Whether Booking.com has the property open for bookings. A property still being built on Booking.com is checked and opened as the last Connect step; one that is already open, or that its host closed, is left as it is. `null` when no room was mapped.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus? PropertyStatus { get; set; }
+        public global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus? PropertyStatus
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus?>("propertyStatus"); }
+            set { BackingStore?.Set("propertyStatus", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus PropertyStatus { get; set; }
+        public global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus PropertyStatus
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MapConnectBookingRoomsResponse_propertyStatus>("propertyStatus"); }
+            set { BackingStore?.Set("propertyStatus", value); }
+        }
 #endif
         /// <summary>How many reservations Booking.com returned for the property. Equal to `reservationsImported` unless some could not be attached to a listing — so `0` here means Booking.com had none. `null` when the sync could not run.</summary>
-        public int? ReservationsFound { get; set; }
+        public int? ReservationsFound
+        {
+            get { return BackingStore?.Get<int?>("reservationsFound"); }
+            set { BackingStore?.Set("reservationsFound", value); }
+        }
         /// <summary>Reservations pulled from Booking.com once the rooms were mapped. Mapping triggers the same full property sync the dashboard&apos;s Sync button runs, because a reservation can only be resolved to a listing through a mapped room. `0` without a sync when no room was mapped. `null` means the sync could not be run — the connection and mapping are still good, and the property can be synced from the dashboard.</summary>
-        public int? ReservationsImported { get; set; }
+        public int? ReservationsImported
+        {
+            get { return BackingStore?.Get<int?>("reservationsImported"); }
+            set { BackingStore?.Set("reservationsImported", value); }
+        }
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SessionId { get; set; }
+        public string? SessionId
+        {
+            get { return BackingStore?.Get<string?>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #nullable restore
 #else
-        public string SessionId { get; set; }
+        public string SessionId
+        {
+            get { return BackingStore?.Get<string>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #endif
         /// <summary>The success property</summary>
-        public bool? Success { get; set; }
+        public bool? Success
+        {
+            get { return BackingStore?.Get<bool?>("success"); }
+            set { BackingStore?.Set("success", value); }
+        }
         /// <summary>Rooms submitted with `listingId: null` (&quot;don&apos;t map&quot;), which are left without a listing.</summary>
-        public int? Unmapped { get; set; }
+        public int? Unmapped
+        {
+            get { return BackingStore?.Get<int?>("unmapped"); }
+            set { BackingStore?.Set("unmapped", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MapConnectBookingRoomsResponse"/> and sets the default values.
         /// </summary>
         public MapConnectBookingRoomsResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

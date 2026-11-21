@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,99 +12,194 @@ namespace Repull.SDK.Models
     /// What a Booking.com rate write actually did. Returned by `PUT /v1/channels/booking/listings/{id}/pricing` and by `PUT /v1/channels/booking/availability` with `type: &quot;rates&quot;`.Prices and restrictions are two writes on two of Booking.com&apos;s wires, and Booking.com can take one and refuse the other. The response says so: `price` and `restrictions` each carry their own state, their own read-back and — when refused — Booking.com&apos;s own reason. The top-level `applied` summarises them, and is `partial` when they disagree. A half that landed is never reported as a failure.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingPricingUpdateResponse : IAdditionalDataHolder, IParsable
+    public partial class BookingPricingUpdateResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>What is known about the nights now. `verified` — read back, every night carries what was sent. `mismatch` — read back, some do not (`verification.rows` / `restrictions.verification.rows` name them). `rejected` — Booking.com refused everything that was sent. `partial` — one half landed and the other did not; read `price.applied` and `restrictions.applied` to see which, and `restrictions.rejection.message` for Booking.com&apos;s reason. `unverified` — Booking.com acknowledged the request and no read-back ran: an unknown, not a success. A bare acknowledgement is never reported as &quot;all applied&quot;.</summary>
-        public global::Repull.SDK.Models.BookingPricingUpdateResponse_applied? Applied { get; set; }
+        public global::Repull.SDK.Models.BookingPricingUpdateResponse_applied? Applied
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingUpdateResponse_applied?>("applied"); }
+            set { BackingStore?.Set("applied", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com&apos;s own answers, verbatim: `rates` (the rate-amount notification) and `restrictions` (the availability notification, when the updates carried any restriction).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingPricingUpdateResponse_booking? Booking { get; set; }
+        public global::Repull.SDK.Models.BookingPricingUpdateResponse_booking? Booking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingUpdateResponse_booking?>("booking"); }
+            set { BackingStore?.Set("booking", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingPricingUpdateResponse_booking Booking { get; set; }
+        public global::Repull.SDK.Models.BookingPricingUpdateResponse_booking Booking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingUpdateResponse_booking>("booking"); }
+            set { BackingStore?.Set("booking", value); }
+        }
 #endif
         /// <summary>Failures Booking.com named, across both wires. Empty means Booking.com named none — not that the nights changed; that is what `applied` is for.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>? Errors { get; set; }
+        public List<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>? Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>?>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors> Errors { get; set; }
+        public List<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors> Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingPricingUpdateResponse_errors>>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #endif
         /// <summary>The hotelId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The occupancy property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingRateWriteOccupancy>? Occupancy { get; set; }
+        public List<global::Repull.SDK.Models.BookingRateWriteOccupancy>? Occupancy
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRateWriteOccupancy>?>("occupancy"); }
+            set { BackingStore?.Set("occupancy", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingRateWriteOccupancy> Occupancy { get; set; }
+        public List<global::Repull.SDK.Models.BookingRateWriteOccupancy> Occupancy
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingRateWriteOccupancy>>("occupancy"); }
+            set { BackingStore?.Set("occupancy", value); }
+        }
 #endif
         /// <summary>The prices: what was sent, what Booking.com said, and what is live now.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingRateWritePriceHalf? Price { get; set; }
+        public global::Repull.SDK.Models.BookingRateWritePriceHalf? Price
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRateWritePriceHalf?>("price"); }
+            set { BackingStore?.Set("price", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingRateWritePriceHalf Price { get; set; }
+        public global::Repull.SDK.Models.BookingRateWritePriceHalf Price
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRateWritePriceHalf>("price"); }
+            set { BackingStore?.Set("price", value); }
+        }
 #endif
         /// <summary>Echoed back by `PUT /v1/channels/booking/availability`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #endif
         /// <summary>Present when Booking.com&apos;s rate-plan read did not complete, so an occupancy fell back to the room definition.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RatePlanReadError { get; set; }
+        public string? RatePlanReadError
+        {
+            get { return BackingStore?.Get<string?>("ratePlanReadError"); }
+            set { BackingStore?.Set("ratePlanReadError", value); }
+        }
 #nullable restore
 #else
-        public string RatePlanReadError { get; set; }
+        public string RatePlanReadError
+        {
+            get { return BackingStore?.Get<string>("ratePlanReadError"); }
+            set { BackingStore?.Set("ratePlanReadError", value); }
+        }
 #endif
         /// <summary>How many updates were sent.</summary>
-        public int? Requested { get; set; }
+        public int? Requested
+        {
+            get { return BackingStore?.Get<int?>("requested"); }
+            set { BackingStore?.Set("requested", value); }
+        }
         /// <summary>The restrictions: the same report as the price half, for the other write.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingRateWriteRestrictionHalf? Restrictions { get; set; }
+        public global::Repull.SDK.Models.BookingRateWriteRestrictionHalf? Restrictions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf?>("restrictions"); }
+            set { BackingStore?.Set("restrictions", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingRateWriteRestrictionHalf Restrictions { get; set; }
+        public global::Repull.SDK.Models.BookingRateWriteRestrictionHalf Restrictions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRateWriteRestrictionHalf>("restrictions"); }
+            set { BackingStore?.Set("restrictions", value); }
+        }
 #endif
         /// <summary>The read-back. Booking.com&apos;s answer to a rate write is an acknowledgement of the request with no per-date status, so the dates are read back to find out what is actually live.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingRateWriteVerification? Verification { get; set; }
+        public global::Repull.SDK.Models.BookingRateWriteVerification? Verification
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRateWriteVerification?>("verification"); }
+            set { BackingStore?.Set("verification", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingRateWriteVerification Verification { get; set; }
+        public global::Repull.SDK.Models.BookingRateWriteVerification Verification
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingRateWriteVerification>("verification"); }
+            set { BackingStore?.Set("verification", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingUpdateResponse"/> and sets the default values.
         /// </summary>
         public BookingPricingUpdateResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

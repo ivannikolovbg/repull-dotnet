@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,49 +12,92 @@ namespace Repull.SDK.Models
     /// What happened to one Booking.com property when its listing was activated. Repull opens a Booking.com property automatically only while every listing mapped to it is active. Keep a listing that is not ready inactive and its property is never opened; activate it and Repull opens the property, provided Booking.com&apos;s own readiness check passes.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingPropertyOpenResult : IAdditionalDataHolder, IParsable
+    public partial class BookingPropertyOpenResult : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com&apos;s own reasons it will not open the property, e.g. &quot;Room 1554900501 does not have kitchen or kitchenette&quot;. Empty unless `outcome` is `refused`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Blockers { get; set; }
+        public List<string>? Blockers
+        {
+            get { return BackingStore?.Get<List<string>?>("blockers"); }
+            set { BackingStore?.Set("blockers", value); }
+        }
 #nullable restore
 #else
-        public List<string> Blockers { get; set; }
+        public List<string> Blockers
+        {
+            get { return BackingStore?.Get<List<string>>("blockers"); }
+            set { BackingStore?.Set("blockers", value); }
+        }
 #endif
         /// <summary>Booking.com&apos;s status for the property before anything was sent, e.g. `XML: Ready to open`, when it was read.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BookingStatus { get; set; }
+        public string? BookingStatus
+        {
+            get { return BackingStore?.Get<string?>("bookingStatus"); }
+            set { BackingStore?.Set("bookingStatus", value); }
+        }
 #nullable restore
 #else
-        public string BookingStatus { get; set; }
+        public string BookingStatus
+        {
+            get { return BackingStore?.Get<string>("bookingStatus"); }
+            set { BackingStore?.Set("bookingStatus", value); }
+        }
 #endif
         /// <summary>The Booking.com property (hotel id).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The listings in this request that are mapped to the property.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ListingIds { get; set; }
+        public List<string>? ListingIds
+        {
+            get { return BackingStore?.Get<List<string>?>("listingIds"); }
+            set { BackingStore?.Set("listingIds", value); }
+        }
 #nullable restore
 #else
-        public List<string> ListingIds { get; set; }
+        public List<string> ListingIds
+        {
+            get { return BackingStore?.Get<List<string>>("listingIds"); }
+            set { BackingStore?.Set("listingIds", value); }
+        }
 #endif
         /// <summary>`opened`: Booking.com&apos;s check passed and the property is now open. `refused`: Booking.com&apos;s check did not pass — `blockers` has its own reasons — and nothing changed. `not_needed`: Booking.com already has the property past its build stage (open, or closed by you), so it was left alone; use the `open` action on `POST /v1/channels/booking/properties/{id}` to reopen a closed property. `listing_inactive`: another listing on the same property is still inactive. `no_listing`: no listing is mapped to the property. `failed`: Booking.com did not answer; nothing changed — send the request again.</summary>
-        public global::Repull.SDK.Models.BookingPropertyOpenResult_outcome? Outcome { get; set; }
+        public global::Repull.SDK.Models.BookingPropertyOpenResult_outcome? Outcome
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPropertyOpenResult_outcome?>("outcome"); }
+            set { BackingStore?.Set("outcome", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPropertyOpenResult"/> and sets the default values.
         /// </summary>
         public BookingPropertyOpenResult()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,45 +12,88 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Pricing
     /// The section as Vrbo has it now.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PricingGetResponse_data : IAdditionalDataHolder, IParsable
+    public partial class PricingGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The defaultMinStay property</summary>
-        public int? DefaultMinStay { get; set; }
+        public int? DefaultMinStay
+        {
+            get { return BackingStore?.Get<int?>("defaultMinStay"); }
+            set { BackingStore?.Set("defaultMinStay", value); }
+        }
         /// <summary>The monthlyDiscountPercent property</summary>
-        public double? MonthlyDiscountPercent { get; set; }
+        public double? MonthlyDiscountPercent
+        {
+            get { return BackingStore?.Get<double?>("monthlyDiscountPercent"); }
+            set { BackingStore?.Set("monthlyDiscountPercent", value); }
+        }
         /// <summary>Base rate per weekday (sunday … saturday).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Pricing.PricingGetResponse_data_nightlyRate? NightlyRate { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Pricing.PricingGetResponse_data_nightlyRate? NightlyRate
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Pricing.PricingGetResponse_data_nightlyRate?>("nightlyRate"); }
+            set { BackingStore?.Set("nightlyRate", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Pricing.PricingGetResponse_data_nightlyRate NightlyRate { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Pricing.PricingGetResponse_data_nightlyRate NightlyRate
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Pricing.PricingGetResponse_data_nightlyRate>("nightlyRate"); }
+            set { BackingStore?.Set("nightlyRate", value); }
+        }
 #endif
         /// <summary>The rateLimits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? RateLimits { get; set; }
+        public UntypedNode? RateLimits
+        {
+            get { return BackingStore?.Get<UntypedNode?>("rateLimits"); }
+            set { BackingStore?.Set("rateLimits", value); }
+        }
 #nullable restore
 #else
-        public UntypedNode RateLimits { get; set; }
+        public UntypedNode RateLimits
+        {
+            get { return BackingStore?.Get<UntypedNode>("rateLimits"); }
+            set { BackingStore?.Set("rateLimits", value); }
+        }
 #endif
         /// <summary>The weeklyDiscountPercent property</summary>
-        public double? WeeklyDiscountPercent { get; set; }
+        public double? WeeklyDiscountPercent
+        {
+            get { return BackingStore?.Get<double?>("weeklyDiscountPercent"); }
+            set { BackingStore?.Set("weeklyDiscountPercent", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Pricing.PricingGetResponse_data"/> and sets the default values.
         /// </summary>
         public PricingGetResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

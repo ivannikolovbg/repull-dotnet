@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,40 +10,79 @@ namespace Repull.SDK.V1.Reservations.Item.Accept
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AcceptPostResponse : IAdditionalDataHolder, IParsable
+    public partial class AcceptPostResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The action property</summary>
-        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_action? Action { get; set; }
+        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_channel? Channel { get; set; }
+        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The declineReason property</summary>
-        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_declineReason? DeclineReason { get; set; }
+        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_declineReason? DeclineReason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_declineReason?>("declineReason"); }
+            set { BackingStore?.Set("declineReason", value); }
+        }
         /// <summary>The reservationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReservationId { get; set; }
+        public string? ReservationId
+        {
+            get { return BackingStore?.Get<string?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #nullable restore
 #else
-        public string ReservationId { get; set; }
+        public string ReservationId
+        {
+            get { return BackingStore?.Get<string>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #endif
         /// <summary>What Airbnb was asked to do and did not refuse. The reservation itself moves when Airbnb’s own notification lands, usually within seconds — that is when `reservation.request.updated` fires (`requestStatus` `accepted` or `declined`), plus `reservation.created` for an accepted request.</summary>
-        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_status? Status { get; set; }
+        public global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Reservations.Item.Accept.AcceptPostResponse"/> and sets the default values.
         /// </summary>
         public AcceptPostResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,35 +12,66 @@ namespace Repull.SDK.Models
     /// Body for `POST /v1/channels/airbnb/listings/{id}`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbListingActionRequest : IAdditionalDataHolder, IParsable
+    public partial class AirbnbListingActionRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>`delete` deactivates the REPULL RECORD — billing and API visibility — and never calls Airbnb. `push`/`publish` push content to Airbnb. `unlist` takes the LIVE AIRBNB LISTING down so it stops taking bookings; `relist` puts it back up. Deactivating and unlisting are different operations with different blast radii and are deliberately different action names.</summary>
-        public global::Repull.SDK.Models.AirbnbListingActionRequest_action? Action { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingActionRequest_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingActionRequest_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>For `push`/`publish`: the Airbnb connection to update (from `GET /v1/channels/airbnb/listings/{id}`). Pass this OR `hostId`. REQUIRED for `unlist`/`relist`: a listing can be connected to more than one Airbnb listing and the wrong one cannot be un-taken-down through this API.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbConnectionId { get; set; }
+        public string? AirbnbConnectionId
+        {
+            get { return BackingStore?.Get<string?>("airbnbConnectionId"); }
+            set { BackingStore?.Set("airbnbConnectionId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbConnectionId { get; set; }
+        public string AirbnbConnectionId
+        {
+            get { return BackingStore?.Get<string>("airbnbConnectionId"); }
+            set { BackingStore?.Set("airbnbConnectionId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>For `push`/`publish`: re-push every field, ignoring dirty-field tracking.</summary>
-        public bool? Force { get; set; }
+        public bool? Force
+        {
+            get { return BackingStore?.Get<bool?>("force"); }
+            set { BackingStore?.Set("force", value); }
+        }
         /// <summary>For `push`/`publish`: create + publish a new Airbnb listing under this host. Pass this OR `airbnbConnectionId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HostId { get; set; }
+        public string? HostId
+        {
+            get { return BackingStore?.Get<string?>("hostId"); }
+            set { BackingStore?.Set("hostId", value); }
+        }
 #nullable restore
 #else
-        public string HostId { get; set; }
+        public string HostId
+        {
+            get { return BackingStore?.Get<string>("hostId"); }
+            set { BackingStore?.Set("hostId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListingActionRequest"/> and sets the default values.
         /// </summary>
         public AirbnbListingActionRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
             Force = false;
         }

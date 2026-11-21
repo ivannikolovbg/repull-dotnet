@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,108 +10,219 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingContentUpdateRequest_policies : IAdditionalDataHolder, IParsable
+    public partial class ListingContentUpdateRequest_policies : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The allowsChildren property</summary>
-        public bool? AllowsChildren { get; set; }
+        public bool? AllowsChildren
+        {
+            get { return BackingStore?.Get<bool?>("allowsChildren"); }
+            set { BackingStore?.Set("allowsChildren", value); }
+        }
         /// <summary>The allowsEvents property</summary>
-        public bool? AllowsEvents { get; set; }
+        public bool? AllowsEvents
+        {
+            get { return BackingStore?.Get<bool?>("allowsEvents"); }
+            set { BackingStore?.Set("allowsEvents", value); }
+        }
         /// <summary>The allowsInfants property</summary>
-        public bool? AllowsInfants { get; set; }
+        public bool? AllowsInfants
+        {
+            get { return BackingStore?.Get<bool?>("allowsInfants"); }
+            set { BackingStore?.Set("allowsInfants", value); }
+        }
         /// <summary>The allowsPets property</summary>
-        public bool? AllowsPets { get; set; }
+        public bool? AllowsPets
+        {
+            get { return BackingStore?.Get<bool?>("allowsPets"); }
+            set { BackingStore?.Set("allowsPets", value); }
+        }
         /// <summary>The allowsSmoking property</summary>
-        public bool? AllowsSmoking { get; set; }
+        public bool? AllowsSmoking
+        {
+            get { return BackingStore?.Get<bool?>("allowsSmoking"); }
+            set { BackingStore?.Set("allowsSmoking", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Alias for `cancellationPolicy`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Cancellation { get; set; }
+        public string? Cancellation
+        {
+            get { return BackingStore?.Get<string?>("cancellation"); }
+            set { BackingStore?.Set("cancellation", value); }
+        }
 #nullable restore
 #else
-        public string Cancellation { get; set; }
+        public string Cancellation
+        {
+            get { return BackingStore?.Get<string>("cancellation"); }
+            set { BackingStore?.Set("cancellation", value); }
+        }
 #endif
         /// <summary>Cancellation policy slug/label.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CancellationPolicy { get; set; }
+        public string? CancellationPolicy
+        {
+            get { return BackingStore?.Get<string?>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
 #nullable restore
 #else
-        public string CancellationPolicy { get; set; }
+        public string CancellationPolicy
+        {
+            get { return BackingStore?.Get<string>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
 #endif
         /// <summary>Instruction shown with the check-in method.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInInstruction { get; set; }
+        public string? CheckInInstruction
+        {
+            get { return BackingStore?.Get<string?>("checkInInstruction"); }
+            set { BackingStore?.Set("checkInInstruction", value); }
+        }
 #nullable restore
 #else
-        public string CheckInInstruction { get; set; }
+        public string CheckInInstruction
+        {
+            get { return BackingStore?.Get<string>("checkInInstruction"); }
+            set { BackingStore?.Set("checkInInstruction", value); }
+        }
 #endif
         /// <summary>How the guest lets themselves in. Canonical storage only — distributing it to Airbnb is `PUT /v1/channels/airbnb/listings/{id}/details` with `check_in_option`.</summary>
-        public global::Repull.SDK.Models.ListingContentUpdateRequest_policies_checkInMethod? CheckInMethod { get; set; }
+        public global::Repull.SDK.Models.ListingContentUpdateRequest_policies_checkInMethod? CheckInMethod
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContentUpdateRequest_policies_checkInMethod?>("checkInMethod"); }
+            set { BackingStore?.Set("checkInMethod", value); }
+        }
         /// <summary>The checkInTimeEnd property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTimeEnd { get; set; }
+        public string? CheckInTimeEnd
+        {
+            get { return BackingStore?.Get<string?>("checkInTimeEnd"); }
+            set { BackingStore?.Set("checkInTimeEnd", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTimeEnd { get; set; }
+        public string CheckInTimeEnd
+        {
+            get { return BackingStore?.Get<string>("checkInTimeEnd"); }
+            set { BackingStore?.Set("checkInTimeEnd", value); }
+        }
 #endif
         /// <summary>e.g. &quot;15&quot; (3pm).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTimeStart { get; set; }
+        public string? CheckInTimeStart
+        {
+            get { return BackingStore?.Get<string?>("checkInTimeStart"); }
+            set { BackingStore?.Set("checkInTimeStart", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTimeStart { get; set; }
+        public string CheckInTimeStart
+        {
+            get { return BackingStore?.Get<string>("checkInTimeStart"); }
+            set { BackingStore?.Set("checkInTimeStart", value); }
+        }
 #endif
         /// <summary>e.g. &quot;11&quot; (11am).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckOutTime { get; set; }
+        public string? CheckOutTime
+        {
+            get { return BackingStore?.Get<string?>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckOutTime { get; set; }
+        public string CheckOutTime
+        {
+            get { return BackingStore?.Get<string>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #endif
         /// <summary>Guest-safety disclosures — exterior cameras, noise monitors, stairs, pets, an unfenced pool. FULL replacement of the canonical set: omit to leave untouched, send `[]` to clear. Canonical storage only — distributing them to Airbnb is `PUT /v1/channels/airbnb/listings/{id}/safety-disclosures`, which merges rather than replaces.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? GuestSafetyDisclosures { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? GuestSafetyDisclosures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>?>("guestSafetyDisclosures"); }
+            set { BackingStore?.Set("guestSafetyDisclosures", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> GuestSafetyDisclosures { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> GuestSafetyDisclosures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>>("guestSafetyDisclosures"); }
+            set { BackingStore?.Set("guestSafetyDisclosures", value); }
+        }
 #endif
         /// <summary>Free-text house rules.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HouseRules { get; set; }
+        public string? HouseRules
+        {
+            get { return BackingStore?.Get<string?>("houseRules"); }
+            set { BackingStore?.Set("houseRules", value); }
+        }
 #nullable restore
 #else
-        public string HouseRules { get; set; }
+        public string HouseRules
+        {
+            get { return BackingStore?.Get<string>("houseRules"); }
+            set { BackingStore?.Set("houseRules", value); }
+        }
 #endif
         /// <summary>The quietHoursEnd property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? QuietHoursEnd { get; set; }
+        public string? QuietHoursEnd
+        {
+            get { return BackingStore?.Get<string?>("quietHoursEnd"); }
+            set { BackingStore?.Set("quietHoursEnd", value); }
+        }
 #nullable restore
 #else
-        public string QuietHoursEnd { get; set; }
+        public string QuietHoursEnd
+        {
+            get { return BackingStore?.Get<string>("quietHoursEnd"); }
+            set { BackingStore?.Set("quietHoursEnd", value); }
+        }
 #endif
         /// <summary>Quiet-hours window start, e.g. &quot;22:00&quot;. Distributed to Airbnb by the publish path.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? QuietHoursStart { get; set; }
+        public string? QuietHoursStart
+        {
+            get { return BackingStore?.Get<string?>("quietHoursStart"); }
+            set { BackingStore?.Set("quietHoursStart", value); }
+        }
 #nullable restore
 #else
-        public string QuietHoursStart { get; set; }
+        public string QuietHoursStart
+        {
+            get { return BackingStore?.Get<string>("quietHoursStart"); }
+            set { BackingStore?.Set("quietHoursStart", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest_policies"/> and sets the default values.
         /// </summary>
         public ListingContentUpdateRequest_policies()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

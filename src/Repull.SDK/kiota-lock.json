@@ -1,5 +1,5 @@
 {
-  "descriptionHash": "C9CF4832BEC16CCCFA551F398AAA6367B1351FF088CEE049A07A43C345BB77A68AB37AB40E70921BBDD8535BEC88D51D962CDE561E3C015194901EB9D10A8FA1",
+  "descriptionHash": "31CFB5D167D29BABEED881AE7941A147DB8D3DA55E6533A5BB08096AC7D8A166187B8CE75384D7102A398A35F622892157F96AE94D6427F9400882630E8BF3DA",
   "descriptionLocation": "../../openapi/v1.json",
   "lockFileVersion": "1.0.0",
   "kiotaVersion": "1.35.0",
@@ -7,7 +7,7 @@
   "typeAccessModifier": "Public",
   "clientNamespaceName": "Repull.SDK",
   "language": "CSharp",
-  "usesBackingStore": false,
+  "usesBackingStore": true,
   "excludeBackwardCompatible": false,
   "includeAdditionalData": true,
   "disableSSLValidation": false,

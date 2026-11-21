@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,43 +12,82 @@ namespace Repull.SDK.Models
     /// Your review of a guest. Airbnb requires `publicReview`, `isRevieweeRecommended`, and a rating for each of cleanliness, communication and respect_house_rules — through `rating`, `categoryRatings`, or both. Submitting publishes it and is final.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbHostReviewSubmit : IAdditionalDataHolder, IParsable
+    public partial class AirbnbHostReviewSubmit : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Per-category scores. Categories not listed take `rating`; without `rating`, all three must be listed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbHostReviewSubmit_categoryRatings>? CategoryRatings { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbHostReviewSubmit_categoryRatings>? CategoryRatings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbHostReviewSubmit_categoryRatings>?>("categoryRatings"); }
+            set { BackingStore?.Set("categoryRatings", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbHostReviewSubmit_categoryRatings> CategoryRatings { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbHostReviewSubmit_categoryRatings> CategoryRatings
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbHostReviewSubmit_categoryRatings>>("categoryRatings"); }
+            set { BackingStore?.Set("categoryRatings", value); }
+        }
 #endif
         /// <summary>Required. Whether you would host this guest again.</summary>
-        public bool? IsRevieweeRecommended { get; set; }
+        public bool? IsRevieweeRecommended
+        {
+            get { return BackingStore?.Get<bool?>("isRevieweeRecommended"); }
+            set { BackingStore?.Set("isRevieweeRecommended", value); }
+        }
         /// <summary>Optional. A note to the guest that is not published.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PrivateFeedback { get; set; }
+        public string? PrivateFeedback
+        {
+            get { return BackingStore?.Get<string?>("privateFeedback"); }
+            set { BackingStore?.Set("privateFeedback", value); }
+        }
 #nullable restore
 #else
-        public string PrivateFeedback { get; set; }
+        public string PrivateFeedback
+        {
+            get { return BackingStore?.Get<string>("privateFeedback"); }
+            set { BackingStore?.Set("privateFeedback", value); }
+        }
 #endif
         /// <summary>Shown publicly on the guest&apos;s profile. `comment` is accepted as an alias.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PublicReview { get; set; }
+        public string? PublicReview
+        {
+            get { return BackingStore?.Get<string?>("publicReview"); }
+            set { BackingStore?.Set("publicReview", value); }
+        }
 #nullable restore
 #else
-        public string PublicReview { get; set; }
+        public string PublicReview
+        {
+            get { return BackingStore?.Get<string>("publicReview"); }
+            set { BackingStore?.Set("publicReview", value); }
+        }
 #endif
         /// <summary>Used for every category not rated in `categoryRatings`.</summary>
-        public int? Rating { get; set; }
+        public int? Rating
+        {
+            get { return BackingStore?.Get<int?>("rating"); }
+            set { BackingStore?.Set("rating", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbHostReviewSubmit"/> and sets the default values.
         /// </summary>
         public AirbnbHostReviewSubmit()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

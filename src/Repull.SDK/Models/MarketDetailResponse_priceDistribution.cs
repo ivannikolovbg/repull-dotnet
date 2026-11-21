@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,32 +10,63 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MarketDetailResponse_priceDistribution : IAdditionalDataHolder, IParsable
+    public partial class MarketDetailResponse_priceDistribution : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The avg_rate property</summary>
-        public int? AvgRate { get; set; }
+        public int? AvgRate
+        {
+            get { return BackingStore?.Get<int?>("avg_rate"); }
+            set { BackingStore?.Set("avg_rate", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The count property</summary>
-        public int? Count { get; set; }
+        public int? Count
+        {
+            get { return BackingStore?.Get<int?>("count"); }
+            set { BackingStore?.Set("count", value); }
+        }
         /// <summary>The label property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Label { get; set; }
+        public string? Label
+        {
+            get { return BackingStore?.Get<string?>("label"); }
+            set { BackingStore?.Set("label", value); }
+        }
 #nullable restore
 #else
-        public string Label { get; set; }
+        public string Label
+        {
+            get { return BackingStore?.Get<string>("label"); }
+            set { BackingStore?.Set("label", value); }
+        }
 #endif
         /// <summary>The max_rate property</summary>
-        public int? MaxRate { get; set; }
+        public int? MaxRate
+        {
+            get { return BackingStore?.Get<int?>("max_rate"); }
+            set { BackingStore?.Set("max_rate", value); }
+        }
         /// <summary>The min_rate property</summary>
-        public int? MinRate { get; set; }
+        public int? MinRate
+        {
+            get { return BackingStore?.Get<int?>("min_rate"); }
+            set { BackingStore?.Set("min_rate", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketDetailResponse_priceDistribution"/> and sets the default values.
         /// </summary>
         public MarketDetailResponse_priceDistribution()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

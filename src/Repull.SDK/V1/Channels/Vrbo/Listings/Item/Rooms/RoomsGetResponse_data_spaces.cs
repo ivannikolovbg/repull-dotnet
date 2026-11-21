@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,74 +10,141 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class RoomsGetResponse_data_spaces : IAdditionalDataHolder, IParsable
+    public partial class RoomsGetResponse_data_spaces : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The amenities property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_amenities>? Amenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_amenities>? Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_amenities>?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_amenities> Amenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_amenities> Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_amenities>>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The beds property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_beds>? Beds { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_beds>? Beds
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_beds>?>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_beds> Beds { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_beds> Beds
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces_beds>>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
 #endif
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The isLegacyCommonArea property</summary>
-        public bool? IsLegacyCommonArea { get; set; }
+        public bool? IsLegacyCommonArea
+        {
+            get { return BackingStore?.Get<bool?>("isLegacyCommonArea"); }
+            set { BackingStore?.Set("isLegacyCommonArea", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The spaceId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SpaceId { get; set; }
+        public string? SpaceId
+        {
+            get { return BackingStore?.Get<string?>("spaceId"); }
+            set { BackingStore?.Set("spaceId", value); }
+        }
 #nullable restore
 #else
-        public string SpaceId { get; set; }
+        public string SpaceId
+        {
+            get { return BackingStore?.Get<string>("spaceId"); }
+            set { BackingStore?.Set("spaceId", value); }
+        }
 #endif
         /// <summary>The subType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SubType { get; set; }
+        public string? SubType
+        {
+            get { return BackingStore?.Get<string?>("subType"); }
+            set { BackingStore?.Set("subType", value); }
+        }
 #nullable restore
 #else
-        public string SubType { get; set; }
+        public string SubType
+        {
+            get { return BackingStore?.Get<string>("subType"); }
+            set { BackingStore?.Set("subType", value); }
+        }
 #endif
         /// <summary>The type property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsGetResponse_data_spaces"/> and sets the default values.
         /// </summary>
         public RoomsGetResponse_data_spaces()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

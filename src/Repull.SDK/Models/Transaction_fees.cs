@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,22 +10,41 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class Transaction_fees : IAdditionalDataHolder, IParsable
+    public partial class Transaction_fees : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Channel commission deducted.</summary>
-        public double? Commission { get; set; }
+        public double? Commission
+        {
+            get { return BackingStore?.Get<double?>("commission"); }
+            set { BackingStore?.Set("commission", value); }
+        }
         /// <summary>The processingFee property</summary>
-        public double? ProcessingFee { get; set; }
+        public double? ProcessingFee
+        {
+            get { return BackingStore?.Get<double?>("processingFee"); }
+            set { BackingStore?.Set("processingFee", value); }
+        }
         /// <summary>Payments service fee deducted.</summary>
-        public double? ServiceFee { get; set; }
+        public double? ServiceFee
+        {
+            get { return BackingStore?.Get<double?>("serviceFee"); }
+            set { BackingStore?.Set("serviceFee", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Transaction_fees"/> and sets the default values.
         /// </summary>
         public Transaction_fees()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

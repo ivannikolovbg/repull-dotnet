@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,33 +10,66 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.WelcomeGuide
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class WelcomeGuidePutRequestBody_wifi : IParsable
+    public partial class WelcomeGuidePutRequestBody_wifi : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The instructions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Instructions { get; set; }
+        public string? Instructions
+        {
+            get { return BackingStore?.Get<string?>("instructions"); }
+            set { BackingStore?.Set("instructions", value); }
+        }
 #nullable restore
 #else
-        public string Instructions { get; set; }
+        public string Instructions
+        {
+            get { return BackingStore?.Get<string>("instructions"); }
+            set { BackingStore?.Set("instructions", value); }
+        }
 #endif
         /// <summary>The networkName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NetworkName { get; set; }
+        public string? NetworkName
+        {
+            get { return BackingStore?.Get<string?>("networkName"); }
+            set { BackingStore?.Set("networkName", value); }
+        }
 #nullable restore
 #else
-        public string NetworkName { get; set; }
+        public string NetworkName
+        {
+            get { return BackingStore?.Get<string>("networkName"); }
+            set { BackingStore?.Set("networkName", value); }
+        }
 #endif
         /// <summary>The password property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Password { get; set; }
+        public string? Password
+        {
+            get { return BackingStore?.Get<string?>("password"); }
+            set { BackingStore?.Set("password", value); }
+        }
 #nullable restore
 #else
-        public string Password { get; set; }
+        public string Password
+        {
+            get { return BackingStore?.Get<string>("password"); }
+            set { BackingStore?.Set("password", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.WelcomeGuide.WelcomeGuidePutRequestBody_wifi"/> and sets the default values.
+        /// </summary>
+        public WelcomeGuidePutRequestBody_wifi()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,33 +10,66 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TaxesPutRequestBody : IParsable
+    public partial class TaxesPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The partnerTaxSettings property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_partnerTaxSettings? PartnerTaxSettings { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_partnerTaxSettings? PartnerTaxSettings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_partnerTaxSettings?>("partnerTaxSettings"); }
+            set { BackingStore?.Set("partnerTaxSettings", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_partnerTaxSettings PartnerTaxSettings { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_partnerTaxSettings PartnerTaxSettings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_partnerTaxSettings>("partnerTaxSettings"); }
+            set { BackingStore?.Set("partnerTaxSettings", value); }
+        }
 #endif
         /// <summary>The stayTax property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_stayTax? StayTax { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_stayTax? StayTax
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_stayTax?>("stayTax"); }
+            set { BackingStore?.Set("stayTax", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_stayTax StayTax { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_stayTax StayTax
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_stayTax>("stayTax"); }
+            set { BackingStore?.Set("stayTax", value); }
+        }
 #endif
         /// <summary>The tax property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_tax? Tax { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_tax? Tax
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_tax?>("tax"); }
+            set { BackingStore?.Set("tax", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_tax Tax { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_tax Tax
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody_tax>("tax"); }
+            set { BackingStore?.Set("tax", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes.TaxesPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public TaxesPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

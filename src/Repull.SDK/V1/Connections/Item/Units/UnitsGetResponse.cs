@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -10,76 +11,147 @@ namespace Repull.SDK.V1.Connections.Item.Units
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class UnitsGetResponse : IAdditionalDataHolder, IParsable
+    public partial class UnitsGetResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Whether another tool manages a Vrbo account&apos;s calendar. Vrbo reports it per account; Repull asks when the account connects and once a day. While `managedBy` is set, Vrbo refuses price and availability changes from anyone else, so calendar sync is off for every unit of the account and turning it on returns `409 calendar_managed_elsewhere`. Bookings and messages keep working.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.VrboCalendarAccess? Calendar { get; set; }
+        public global::Repull.SDK.Models.VrboCalendarAccess? Calendar
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboCalendarAccess?>("calendar"); }
+            set { BackingStore?.Set("calendar", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.VrboCalendarAccess Calendar { get; set; }
+        public global::Repull.SDK.Models.VrboCalendarAccess Calendar
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.VrboCalendarAccess>("calendar"); }
+            set { BackingStore?.Set("calendar", value); }
+        }
 #endif
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The connection_id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connection_id"); }
+            set { BackingStore?.Set("connection_id", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connection_id"); }
+            set { BackingStore?.Set("connection_id", value); }
+        }
 #endif
         /// <summary>The listing_options property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options>? ListingOptions { get; set; }
+        public List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options>? ListingOptions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options>?>("listing_options"); }
+            set { BackingStore?.Set("listing_options", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options> ListingOptions { get; set; }
+        public List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options> ListingOptions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_listing_options>>("listing_options"); }
+            set { BackingStore?.Set("listing_options", value); }
+        }
 #endif
         /// <summary>How many listings the workspace has to map to.</summary>
-        public int? ListingOptionsTotal { get; set; }
+        public int? ListingOptionsTotal
+        {
+            get { return BackingStore?.Get<int?>("listing_options_total"); }
+            set { BackingStore?.Set("listing_options_total", value); }
+        }
         /// <summary>The missing_capabilities property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? MissingCapabilities { get; set; }
+        public List<string>? MissingCapabilities
+        {
+            get { return BackingStore?.Get<List<string>?>("missing_capabilities"); }
+            set { BackingStore?.Set("missing_capabilities", value); }
+        }
 #nullable restore
 #else
-        public List<string> MissingCapabilities { get; set; }
+        public List<string> MissingCapabilities
+        {
+            get { return BackingStore?.Get<List<string>>("missing_capabilities"); }
+            set { BackingStore?.Set("missing_capabilities", value); }
+        }
 #endif
         /// <summary>Vrbo only. Ask the host to add this address on Vrbo as a secondary email, with message and reservation notifications on. It is how new bookings, inquiries and guest messages reach Repull within a minute; without it they arrive at the next scheduled check. Hosted Connect asks for it on its mapping screen, so show it in your own flow when you map with `mapping: &quot;api&quot;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NotificationEmail { get; set; }
+        public string? NotificationEmail
+        {
+            get { return BackingStore?.Get<string?>("notification_email"); }
+            set { BackingStore?.Set("notification_email", value); }
+        }
 #nullable restore
 #else
-        public string NotificationEmail { get; set; }
+        public string NotificationEmail
+        {
+            get { return BackingStore?.Get<string>("notification_email"); }
+            set { BackingStore?.Set("notification_email", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_status? Status { get; set; }
+        public global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The units property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units>? Units { get; set; }
+        public List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units>? Units
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units>?>("units"); }
+            set { BackingStore?.Set("units", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units> Units { get; set; }
+        public List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units> Units
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse_units>>("units"); }
+            set { BackingStore?.Set("units", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connections.Item.Units.UnitsGetResponse"/> and sets the default values.
         /// </summary>
         public UnitsGetResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

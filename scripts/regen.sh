@@ -47,6 +47,8 @@ HAND_FILES=(
   "src/Repull.SDK/RepullClient.Partial.cs"
   "src/Repull.SDK/RepullClientExtensions.cs"
   "src/Repull.SDK/RepullClientFactory.cs"
+  "src/Repull.SDK/RepullBackingStore.cs"
+  "src/Repull.SDK/RepullJsonParseNodeFactory.cs"
   "src/Repull.SDK/Models/Reservation.Partial.cs"
 )
 
@@ -72,14 +74,44 @@ for f in "${HAND_FILES[@]}"; do
   fi
 done
 
+# Kiota generates from a prepared copy of the spec (see scripts/prepare-spec.py):
+# object|primitive oneOfs become anyOf so Kiota can read and write the object branch.
+GEN_SPEC="$BACKUP_DIR/openapi.kiota.json"
+python3 "$ROOT/scripts/prepare-spec.py" "$SPEC" "$GEN_SPEC"
+
+# --backing-store: models record which properties were set, so an explicit null
+# (e.g. Vrbo fees `"pets": null`, remove the pet fee) is sent instead of dropped.
 echo "Regenerating Kiota client into src/Repull.SDK/..."
 kiota generate \
-  --openapi "$SPEC" \
+  --openapi "$GEN_SPEC" \
   --language csharp \
   --class-name RepullClient \
   --namespace-name Repull.SDK \
   --output "$ROOT/src/Repull.SDK" \
+  --backing-store \
   --clean-output
+
+# Every generated model gets RepullBackingStore (src/Repull.SDK/RepullBackingStore.cs),
+# not Kiota's process-wide default: Kiota's store only sends changed values, which
+# would drop every field of a model read from JSON. Scoped to this SDK's models, so
+# other Kiota clients in the same process are unaffected.
+echo "Pointing generated models at RepullBackingStore..."
+grep -rl --include='*.cs' 'BackingStoreFactorySingleton.Instance.CreateBackingStore()' "$ROOT/src/Repull.SDK" \
+  | xargs -r sed -i 's/BackingStoreFactorySingleton\.Instance\.CreateBackingStore()/global::Repull.SDK.RepullBackingStore.Create()/g'
+if grep -rq --include='*.cs' 'BackingStoreFactorySingleton.Instance.CreateBackingStore()' "$ROOT/src/Repull.SDK"; then
+  echo "error: a generated model still uses BackingStoreFactorySingleton" >&2
+  exit 1
+fi
+# Kiota's JSON reader skips null properties, so `{"pets": null}` read from JSON would
+# lose its null before the write. RepullJsonParseNodeFactory (hand-maintained) keeps them.
+echo "Registering RepullJsonParseNodeFactory in RepullClient..."
+sed -i 's/ApiClientBuilder\.RegisterDefaultDeserializer<JsonParseNodeFactory>();/global::Repull.SDK.RepullJsonParseNodeFactory.Register();/' "$ROOT/src/Repull.SDK/RepullClient.cs"
+grep -q 'RepullJsonParseNodeFactory.Register();' "$ROOT/src/Repull.SDK/RepullClient.cs" || {
+  echo "error: could not register RepullJsonParseNodeFactory in RepullClient.cs" >&2
+  exit 1
+}
+# The lock file records the spec Kiota read; point it back at the committed snapshot.
+sed -i 's#"descriptionLocation": ".*"#"descriptionLocation": "../../openapi/v1.json"#' "$ROOT/src/Repull.SDK/kiota-lock.json"
 
 echo "Restoring hand-maintained files..."
 for f in "${HAND_FILES[@]}"; do

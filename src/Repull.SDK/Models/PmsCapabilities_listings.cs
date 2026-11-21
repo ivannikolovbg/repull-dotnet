@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,37 +12,88 @@ namespace Repull.SDK.Models
     /// Sections `PUT /v1/listings/{id}/content` writes to the PMS.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PmsCapabilities_listings : IAdditionalDataHolder, IParsable
+    public partial class PmsCapabilities_listings : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The address property</summary>
-        public bool? Address { get; set; }
+        public bool? Address
+        {
+            get { return BackingStore?.Get<bool?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
         /// <summary>The amenities property</summary>
-        public bool? Amenities { get; set; }
+        public bool? Amenities
+        {
+            get { return BackingStore?.Get<bool?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The capacity property</summary>
-        public bool? Capacity { get; set; }
+        public bool? Capacity
+        {
+            get { return BackingStore?.Get<bool?>("capacity"); }
+            set { BackingStore?.Set("capacity", value); }
+        }
         /// <summary>The descriptions property</summary>
-        public bool? Descriptions { get; set; }
+        public bool? Descriptions
+        {
+            get { return BackingStore?.Get<bool?>("descriptions"); }
+            set { BackingStore?.Set("descriptions", value); }
+        }
         /// <summary>The houseRules property</summary>
-        public bool? HouseRules { get; set; }
+        public bool? HouseRules
+        {
+            get { return BackingStore?.Get<bool?>("houseRules"); }
+            set { BackingStore?.Set("houseRules", value); }
+        }
         /// <summary>The photoCaptions property</summary>
-        public bool? PhotoCaptions { get; set; }
+        public bool? PhotoCaptions
+        {
+            get { return BackingStore?.Get<bool?>("photoCaptions"); }
+            set { BackingStore?.Set("photoCaptions", value); }
+        }
         /// <summary>The photosAdd property</summary>
-        public bool? PhotosAdd { get; set; }
+        public bool? PhotosAdd
+        {
+            get { return BackingStore?.Get<bool?>("photosAdd"); }
+            set { BackingStore?.Set("photosAdd", value); }
+        }
         /// <summary>The photosDelete property</summary>
-        public bool? PhotosDelete { get; set; }
+        public bool? PhotosDelete
+        {
+            get { return BackingStore?.Get<bool?>("photosDelete"); }
+            set { BackingStore?.Set("photosDelete", value); }
+        }
         /// <summary>The photosReorder property</summary>
-        public bool? PhotosReorder { get; set; }
+        public bool? PhotosReorder
+        {
+            get { return BackingStore?.Get<bool?>("photosReorder"); }
+            set { BackingStore?.Set("photosReorder", value); }
+        }
         /// <summary>The times property</summary>
-        public bool? Times { get; set; }
+        public bool? Times
+        {
+            get { return BackingStore?.Get<bool?>("times"); }
+            set { BackingStore?.Set("times", value); }
+        }
         /// <summary>The title property</summary>
-        public bool? Title { get; set; }
+        public bool? Title
+        {
+            get { return BackingStore?.Get<bool?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PmsCapabilities_listings"/> and sets the default values.
         /// </summary>
         public PmsCapabilities_listings()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

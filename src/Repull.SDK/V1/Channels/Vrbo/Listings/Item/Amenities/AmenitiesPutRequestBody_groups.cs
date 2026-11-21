@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,160 +12,321 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities
     /// Keyed by group: essentials, internet, climateControl, general, office, kitchenAndDining, parking, poolAndSpa, sustainability, entertainment, outdoor, onsiteService, accessibility, homeSafety, safetyDevices, enhancedCleaning, locationAndView, localAttractionsAndActivities, checkoutInstructions.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AmenitiesPutRequestBody_groups : IParsable
+    public partial class AmenitiesPutRequestBody_groups : IBackedModel, IParsable
     {
         /// <summary>The accessibility property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_accessibility? Accessibility { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_accessibility? Accessibility
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_accessibility?>("accessibility"); }
+            set { BackingStore?.Set("accessibility", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_accessibility Accessibility { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_accessibility Accessibility
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_accessibility>("accessibility"); }
+            set { BackingStore?.Set("accessibility", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkoutInstructions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_checkoutInstructions? CheckoutInstructions { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_checkoutInstructions? CheckoutInstructions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_checkoutInstructions?>("checkoutInstructions"); }
+            set { BackingStore?.Set("checkoutInstructions", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_checkoutInstructions CheckoutInstructions { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_checkoutInstructions CheckoutInstructions
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_checkoutInstructions>("checkoutInstructions"); }
+            set { BackingStore?.Set("checkoutInstructions", value); }
+        }
 #endif
         /// <summary>The climateControl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_climateControl? ClimateControl { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_climateControl? ClimateControl
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_climateControl?>("climateControl"); }
+            set { BackingStore?.Set("climateControl", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_climateControl ClimateControl { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_climateControl ClimateControl
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_climateControl>("climateControl"); }
+            set { BackingStore?.Set("climateControl", value); }
+        }
 #endif
         /// <summary>The enhancedCleaning property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_enhancedCleaning? EnhancedCleaning { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_enhancedCleaning? EnhancedCleaning
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_enhancedCleaning?>("enhancedCleaning"); }
+            set { BackingStore?.Set("enhancedCleaning", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_enhancedCleaning EnhancedCleaning { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_enhancedCleaning EnhancedCleaning
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_enhancedCleaning>("enhancedCleaning"); }
+            set { BackingStore?.Set("enhancedCleaning", value); }
+        }
 #endif
         /// <summary>The entertainment property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_entertainment? Entertainment { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_entertainment? Entertainment
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_entertainment?>("entertainment"); }
+            set { BackingStore?.Set("entertainment", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_entertainment Entertainment { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_entertainment Entertainment
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_entertainment>("entertainment"); }
+            set { BackingStore?.Set("entertainment", value); }
+        }
 #endif
         /// <summary>The essentials property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_essentials? Essentials { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_essentials? Essentials
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_essentials?>("essentials"); }
+            set { BackingStore?.Set("essentials", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_essentials Essentials { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_essentials Essentials
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_essentials>("essentials"); }
+            set { BackingStore?.Set("essentials", value); }
+        }
 #endif
         /// <summary>The general property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general? General { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general? General
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general?>("general"); }
+            set { BackingStore?.Set("general", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general General { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general General
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_general>("general"); }
+            set { BackingStore?.Set("general", value); }
+        }
 #endif
         /// <summary>The homeSafety property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_homeSafety? HomeSafety { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_homeSafety? HomeSafety
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_homeSafety?>("homeSafety"); }
+            set { BackingStore?.Set("homeSafety", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_homeSafety HomeSafety { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_homeSafety HomeSafety
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_homeSafety>("homeSafety"); }
+            set { BackingStore?.Set("homeSafety", value); }
+        }
 #endif
         /// <summary>The internet property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_internet? Internet { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_internet? Internet
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_internet?>("internet"); }
+            set { BackingStore?.Set("internet", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_internet Internet { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_internet Internet
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_internet>("internet"); }
+            set { BackingStore?.Set("internet", value); }
+        }
 #endif
         /// <summary>The kitchenAndDining property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_kitchenAndDining? KitchenAndDining { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_kitchenAndDining? KitchenAndDining
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_kitchenAndDining?>("kitchenAndDining"); }
+            set { BackingStore?.Set("kitchenAndDining", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_kitchenAndDining KitchenAndDining { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_kitchenAndDining KitchenAndDining
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_kitchenAndDining>("kitchenAndDining"); }
+            set { BackingStore?.Set("kitchenAndDining", value); }
+        }
 #endif
         /// <summary>The localAttractionsAndActivities property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_localAttractionsAndActivities? LocalAttractionsAndActivities { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_localAttractionsAndActivities? LocalAttractionsAndActivities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_localAttractionsAndActivities?>("localAttractionsAndActivities"); }
+            set { BackingStore?.Set("localAttractionsAndActivities", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_localAttractionsAndActivities LocalAttractionsAndActivities { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_localAttractionsAndActivities LocalAttractionsAndActivities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_localAttractionsAndActivities>("localAttractionsAndActivities"); }
+            set { BackingStore?.Set("localAttractionsAndActivities", value); }
+        }
 #endif
         /// <summary>The locationAndView property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_locationAndView? LocationAndView { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_locationAndView? LocationAndView
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_locationAndView?>("locationAndView"); }
+            set { BackingStore?.Set("locationAndView", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_locationAndView LocationAndView { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_locationAndView LocationAndView
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_locationAndView>("locationAndView"); }
+            set { BackingStore?.Set("locationAndView", value); }
+        }
 #endif
         /// <summary>The office property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_office? Office { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_office? Office
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_office?>("office"); }
+            set { BackingStore?.Set("office", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_office Office { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_office Office
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_office>("office"); }
+            set { BackingStore?.Set("office", value); }
+        }
 #endif
         /// <summary>The onsiteService property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_onsiteService? OnsiteService { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_onsiteService? OnsiteService
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_onsiteService?>("onsiteService"); }
+            set { BackingStore?.Set("onsiteService", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_onsiteService OnsiteService { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_onsiteService OnsiteService
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_onsiteService>("onsiteService"); }
+            set { BackingStore?.Set("onsiteService", value); }
+        }
 #endif
         /// <summary>The outdoor property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_outdoor? Outdoor { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_outdoor? Outdoor
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_outdoor?>("outdoor"); }
+            set { BackingStore?.Set("outdoor", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_outdoor Outdoor { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_outdoor Outdoor
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_outdoor>("outdoor"); }
+            set { BackingStore?.Set("outdoor", value); }
+        }
 #endif
         /// <summary>The parking property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_parking? Parking { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_parking? Parking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_parking?>("parking"); }
+            set { BackingStore?.Set("parking", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_parking Parking { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_parking Parking
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_parking>("parking"); }
+            set { BackingStore?.Set("parking", value); }
+        }
 #endif
         /// <summary>The poolAndSpa property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_poolAndSpa? PoolAndSpa { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_poolAndSpa? PoolAndSpa
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_poolAndSpa?>("poolAndSpa"); }
+            set { BackingStore?.Set("poolAndSpa", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_poolAndSpa PoolAndSpa { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_poolAndSpa PoolAndSpa
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_poolAndSpa>("poolAndSpa"); }
+            set { BackingStore?.Set("poolAndSpa", value); }
+        }
 #endif
         /// <summary>The safetyDevices property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_safetyDevices? SafetyDevices { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_safetyDevices? SafetyDevices
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_safetyDevices?>("safetyDevices"); }
+            set { BackingStore?.Set("safetyDevices", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_safetyDevices SafetyDevices { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_safetyDevices SafetyDevices
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_safetyDevices>("safetyDevices"); }
+            set { BackingStore?.Set("safetyDevices", value); }
+        }
 #endif
         /// <summary>The sustainability property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_sustainability? Sustainability { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_sustainability? Sustainability
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_sustainability?>("sustainability"); }
+            set { BackingStore?.Set("sustainability", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_sustainability Sustainability { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_sustainability Sustainability
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups_sustainability>("sustainability"); }
+            set { BackingStore?.Set("sustainability", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Amenities.AmenitiesPutRequestBody_groups"/> and sets the default values.
+        /// </summary>
+        public AmenitiesPutRequestBody_groups()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

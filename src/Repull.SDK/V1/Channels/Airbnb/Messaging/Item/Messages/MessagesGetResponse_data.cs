@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -10,102 +11,201 @@ namespace Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MessagesGetResponse_data : IAdditionalDataHolder, IParsable
+    public partial class MessagesGetResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The attachments property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments { get; set; }
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConversationMessageAttachment>?>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ConversationMessageAttachment> Attachments { get; set; }
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment> Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConversationMessageAttachment>>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>When Airbnb recorded the message.</summary>
-        public DateTimeOffset? ExternalCreatedAt { get; set; }
+        public DateTimeOffset? ExternalCreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("externalCreatedAt"); }
+            set { BackingStore?.Set("externalCreatedAt", value); }
+        }
         /// <summary>Airbnb&apos;s message id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalMessageId { get; set; }
+        public string? ExternalMessageId
+        {
+            get { return BackingStore?.Get<string?>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalMessageId { get; set; }
+        public string ExternalMessageId
+        {
+            get { return BackingStore?.Get<string>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #endif
         /// <summary>Repull message id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Message text. Empty for a file-only message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>The reservationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReservationId { get; set; }
+        public string? ReservationId
+        {
+            get { return BackingStore?.Get<string?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #nullable restore
 #else
-        public string ReservationId { get; set; }
+        public string ReservationId
+        {
+            get { return BackingStore?.Get<string>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
 #endif
         /// <summary>`guest`, `host`, `user`, `system`, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderType { get; set; }
+        public string? SenderType
+        {
+            get { return BackingStore?.Get<string?>("senderType"); }
+            set { BackingStore?.Set("senderType", value); }
+        }
 #nullable restore
 #else
-        public string SenderType { get; set; }
+        public string SenderType
+        {
+            get { return BackingStore?.Get<string>("senderType"); }
+            set { BackingStore?.Set("senderType", value); }
+        }
 #endif
         /// <summary>The Airbnb thread id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThreadId { get; set; }
+        public string? ThreadId
+        {
+            get { return BackingStore?.Get<string?>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #nullable restore
 #else
-        public string ThreadId { get; set; }
+        public string ThreadId
+        {
+            get { return BackingStore?.Get<string>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #endif
         /// <summary>The translatedMessage property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TranslatedMessage { get; set; }
+        public string? TranslatedMessage
+        {
+            get { return BackingStore?.Get<string?>("translatedMessage"); }
+            set { BackingStore?.Set("translatedMessage", value); }
+        }
 #nullable restore
 #else
-        public string TranslatedMessage { get; set; }
+        public string TranslatedMessage
+        {
+            get { return BackingStore?.Get<string>("translatedMessage"); }
+            set { BackingStore?.Set("translatedMessage", value); }
+        }
 #endif
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>Airbnb user id of the sender.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UserId { get; set; }
+        public string? UserId
+        {
+            get { return BackingStore?.Get<string?>("userId"); }
+            set { BackingStore?.Set("userId", value); }
+        }
 #nullable restore
 #else
-        public string UserId { get; set; }
+        public string UserId
+        {
+            get { return BackingStore?.Get<string>("userId"); }
+            set { BackingStore?.Set("userId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Messaging.Item.Messages.MessagesGetResponse_data"/> and sets the default values.
         /// </summary>
         public MessagesGetResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

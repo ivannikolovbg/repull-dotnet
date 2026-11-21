@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,25 +10,50 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class RegistrationPutRequestBody_settings : IParsable
+    public partial class RegistrationPutRequestBody_settings : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>A `fields[].name` from the read (they differ per jurisdiction).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration.RegistrationPutRequestBody_settings.RegistrationPutRequestBody_settings_value? Value { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration.RegistrationPutRequestBody_settings.RegistrationPutRequestBody_settings_value? Value
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration.RegistrationPutRequestBody_settings.RegistrationPutRequestBody_settings_value?>("value"); }
+            set { BackingStore?.Set("value", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration.RegistrationPutRequestBody_settings.RegistrationPutRequestBody_settings_value Value { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration.RegistrationPutRequestBody_settings.RegistrationPutRequestBody_settings_value Value
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration.RegistrationPutRequestBody_settings.RegistrationPutRequestBody_settings_value>("value"); }
+            set { BackingStore?.Set("value", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration.RegistrationPutRequestBody_settings"/> and sets the default values.
+        /// </summary>
+        public RegistrationPutRequestBody_settings()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -64,20 +90,45 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration
         /// Composed type wrapper for classes <see cref="bool"/>, <see cref="double"/>, <see cref="string"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class RegistrationPutRequestBody_settings_value : IComposedTypeWrapper, IParsable
+        public partial class RegistrationPutRequestBody_settings_value : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="bool"/></summary>
-            public bool? Boolean { get; set; }
+            public bool? Boolean
+            {
+                get { return BackingStore?.Get<bool?>("boolean"); }
+                set { BackingStore?.Set("boolean", value); }
+            }
             /// <summary>Composed type representation for type <see cref="double"/></summary>
-            public double? Double { get; set; }
+            public double? Double
+            {
+                get { return BackingStore?.Get<double?>("double"); }
+                set { BackingStore?.Set("double", value); }
+            }
             /// <summary>Composed type representation for type <see cref="string"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public string? String { get; set; }
+            public string? String
+            {
+                get { return BackingStore?.Get<string?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public string String { get; set; }
+            public string String
+            {
+                get { return BackingStore?.Get<string>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Registration.RegistrationPutRequestBody_settings.RegistrationPutRequestBody_settings_value"/> and sets the default values.
+            /// </summary>
+            public RegistrationPutRequestBody_settings_value()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

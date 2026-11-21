@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,43 +12,82 @@ namespace Repull.SDK.Models
     /// Per-platform connection for a listing — one row per channel the listing is published to.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingChannel : IAdditionalDataHolder, IParsable
+    public partial class ListingChannel : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The connected account this listing belongs to on this channel — for Airbnb the host account (`externalAccountId` is the Airbnb host id). The same account `account.disconnected` names, so a disconnect can be matched to its listings. Null when it cannot be resolved.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.RecordAccount? Account { get; set; }
+        public global::Repull.SDK.Models.RecordAccount? Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RecordAccount?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.RecordAccount Account { get; set; }
+        public global::Repull.SDK.Models.RecordAccount Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RecordAccount>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>The active property</summary>
-        public bool? Active { get; set; }
+        public bool? Active
+        {
+            get { return BackingStore?.Get<bool?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>ID in the platform (Airbnb listing id, Booking room id, etc.)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalId { get; set; }
+        public string? ExternalId
+        {
+            get { return BackingStore?.Get<string?>("externalId"); }
+            set { BackingStore?.Set("externalId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalId { get; set; }
+        public string ExternalId
+        {
+            get { return BackingStore?.Get<string>("externalId"); }
+            set { BackingStore?.Set("externalId", value); }
+        }
 #endif
         /// <summary>The platform property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Platform { get; set; }
+        public string? Platform
+        {
+            get { return BackingStore?.Get<string?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #nullable restore
 #else
-        public string Platform { get; set; }
+        public string Platform
+        {
+            get { return BackingStore?.Get<string>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #endif
         /// <summary>The syncEnabled property</summary>
-        public bool? SyncEnabled { get; set; }
+        public bool? SyncEnabled
+        {
+            get { return BackingStore?.Get<bool?>("syncEnabled"); }
+            set { BackingStore?.Set("syncEnabled", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingChannel"/> and sets the default values.
         /// </summary>
         public ListingChannel()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

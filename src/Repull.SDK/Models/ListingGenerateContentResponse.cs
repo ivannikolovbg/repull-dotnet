@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,34 +10,61 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingGenerateContentResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingGenerateContentResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Rich multilingual content slab for a listing — guest-facing copy sourced from `listings_descriptions` (the `en` row when surfaced via `?include=content`). Also returned as the AI-generated payload from `POST /v1/listings/{id}/generate-content` (where `title` and `amenities` are populated). All fields are individually nullable.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingContent? Content { get; set; }
+        public global::Repull.SDK.Models.ListingContent? Content
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContent?>("content"); }
+            set { BackingStore?.Set("content", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingContent Content { get; set; }
+        public global::Repull.SDK.Models.ListingContent Content
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContent>("content"); }
+            set { BackingStore?.Set("content", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The persisted property</summary>
-        public bool? Persisted { get; set; }
+        public bool? Persisted
+        {
+            get { return BackingStore?.Get<bool?>("persisted"); }
+            set { BackingStore?.Set("persisted", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingGenerateContentResponse"/> and sets the default values.
         /// </summary>
         public ListingGenerateContentResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

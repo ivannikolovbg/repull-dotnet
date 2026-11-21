@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,119 +12,246 @@ namespace Repull.SDK.Models
     /// A single message inside a conversation thread. Returned by `GET /v1/conversations/{id}/messages`. `direction` is normalized to `inbound` (from the guest) / `outbound` (from the host or an automation).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Message : IAdditionalDataHolder, IParsable
+    public partial class Message : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>`true` when the body was written by AI (autopilot, draft).</summary>
-        public bool? AiGenerated { get; set; }
+        public bool? AiGenerated
+        {
+            get { return BackingStore?.Get<bool?>("aiGenerated"); }
+            set { BackingStore?.Set("aiGenerated", value); }
+        }
         /// <summary>Files on this message, inbound or outbound. Empty array when there are none. A file-only message has an empty `body`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments { get; set; }
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment>? Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConversationMessageAttachment>?>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ConversationMessageAttachment> Attachments { get; set; }
+        public List<global::Repull.SDK.Models.ConversationMessageAttachment> Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConversationMessageAttachment>>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Message body in the original language.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get; set; }
+        public string? Body
+        {
+            get { return BackingStore?.Get<string?>("body"); }
+            set { BackingStore?.Set("body", value); }
+        }
 #nullable restore
 #else
-        public string Body { get; set; }
+        public string Body
+        {
+            get { return BackingStore?.Get<string>("body"); }
+            set { BackingStore?.Set("body", value); }
+        }
 #endif
         /// <summary>Delivery channel — `airbnb`, `booking`, `sms`, `email`, etc.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>When the message reached the channel. `null` while it is `sending` or when it `failed`.</summary>
-        public DateTimeOffset? DeliveredAt { get; set; }
+        public DateTimeOffset? DeliveredAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("deliveredAt"); }
+            set { BackingStore?.Set("deliveredAt", value); }
+        }
         /// <summary>The direction property</summary>
-        public global::Repull.SDK.Models.Message_direction? Direction { get; set; }
+        public global::Repull.SDK.Models.Message_direction? Direction
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Message_direction?>("direction"); }
+            set { BackingStore?.Set("direction", value); }
+        }
         /// <summary>ID assigned by the source channel (Airbnb message id, Booking message id, etc.). Stable across syncs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalMessageId { get; set; }
+        public string? ExternalMessageId
+        {
+            get { return BackingStore?.Get<string?>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalMessageId { get; set; }
+        public string ExternalMessageId
+        {
+            get { return BackingStore?.Get<string>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #endif
         /// <summary>Inbound messages only: when the host or a co-host first read it on the channel, from the channel&apos;s read receipts (Airbnb reports them). `null` for your own messages, on other channels, and until your side has opened the conversation since it arrived.</summary>
-        public DateTimeOffset? HostReadAt { get; set; }
+        public DateTimeOffset? HostReadAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("hostReadAt"); }
+            set { BackingStore?.Set("hostReadAt", value); }
+        }
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>`true` when the message was sent by an automation (template, schedule, etc.).</summary>
-        public bool? IsAutomated { get; set; }
+        public bool? IsAutomated
+        {
+            get { return BackingStore?.Get<bool?>("isAutomated"); }
+            set { BackingStore?.Set("isAutomated", value); }
+        }
         /// <summary>Reactions on this message, oldest first. Airbnb reports them; empty on other channels. Added and removed reactions are sent as `reservation.message.reaction`. To react, `PATCH /v1/channels/airbnb/messaging/{threadId}/messages/{messageId}` with `action: &quot;react&quot;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MessageReaction>? Reactions { get; set; }
+        public List<global::Repull.SDK.Models.MessageReaction>? Reactions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MessageReaction>?>("reactions"); }
+            set { BackingStore?.Set("reactions", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MessageReaction> Reactions { get; set; }
+        public List<global::Repull.SDK.Models.MessageReaction> Reactions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MessageReaction>>("reactions"); }
+            set { BackingStore?.Set("reactions", value); }
+        }
 #endif
         /// <summary>Who read it depends on `direction`. **Outbound** (your message): when the guest first read it, from the channel&apos;s read receipts — Airbnb reports them; on other channels it stays `null`. Changes are sent as `reservation.message.read`. **Inbound** (the guest&apos;s message): when your team answered it or marked it handled.</summary>
-        public DateTimeOffset? ReadAt { get; set; }
+        public DateTimeOffset? ReadAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("readAt"); }
+            set { BackingStore?.Set("readAt", value); }
+        }
         /// <summary>The senderAvatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderAvatar { get; set; }
+        public string? SenderAvatar
+        {
+            get { return BackingStore?.Get<string?>("senderAvatar"); }
+            set { BackingStore?.Set("senderAvatar", value); }
+        }
 #nullable restore
 #else
-        public string SenderAvatar { get; set; }
+        public string SenderAvatar
+        {
+            get { return BackingStore?.Get<string>("senderAvatar"); }
+            set { BackingStore?.Set("senderAvatar", value); }
+        }
 #endif
         /// <summary>The senderName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderName { get; set; }
+        public string? SenderName
+        {
+            get { return BackingStore?.Get<string?>("senderName"); }
+            set { BackingStore?.Set("senderName", value); }
+        }
 #nullable restore
 #else
-        public string SenderName { get; set; }
+        public string SenderName
+        {
+            get { return BackingStore?.Get<string>("senderName"); }
+            set { BackingStore?.Set("senderName", value); }
+        }
 #endif
         /// <summary>Free-form sender role from the channel (e.g. `guest`, `host`, `system`, `airbnb`). Use `direction` for binary inbound/outbound logic.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SenderType { get; set; }
+        public string? SenderType
+        {
+            get { return BackingStore?.Get<string?>("senderType"); }
+            set { BackingStore?.Set("senderType", value); }
+        }
 #nullable restore
 #else
-        public string SenderType { get; set; }
+        public string SenderType
+        {
+            get { return BackingStore?.Get<string>("senderType"); }
+            set { BackingStore?.Set("senderType", value); }
+        }
 #endif
         /// <summary>The sentAt property</summary>
-        public DateTimeOffset? SentAt { get; set; }
+        public DateTimeOffset? SentAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("sentAt"); }
+            set { BackingStore?.Set("sentAt", value); }
+        }
         /// <summary>Delivery state. Inbound messages are `received`. An outbound message is `sending` while it is handed to the channel, `queued` when the channel was busy and Repull is still delivering it in the background (Vrbo), `sent` once the channel accepted it, or `failed`. Only `sent` (or `received`) means the guest can see it. A change from `queued` is sent as `conversation.message.status_changed`.</summary>
-        public global::Repull.SDK.Models.Message_status? Status { get; set; }
+        public global::Repull.SDK.Models.Message_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Message_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>Why a message is still `sending` or `queued`, or why it `failed`, in plain words. `null` otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StatusReason { get; set; }
+        public string? StatusReason
+        {
+            get { return BackingStore?.Get<string?>("statusReason"); }
+            set { BackingStore?.Set("statusReason", value); }
+        }
 #nullable restore
 #else
-        public string StatusReason { get; set; }
+        public string StatusReason
+        {
+            get { return BackingStore?.Get<string>("statusReason"); }
+            set { BackingStore?.Set("statusReason", value); }
+        }
 #endif
         /// <summary>English translation when the original language is non-English and a translation has been computed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TranslatedBody { get; set; }
+        public string? TranslatedBody
+        {
+            get { return BackingStore?.Get<string?>("translatedBody"); }
+            set { BackingStore?.Set("translatedBody", value); }
+        }
 #nullable restore
 #else
-        public string TranslatedBody { get; set; }
+        public string TranslatedBody
+        {
+            get { return BackingStore?.Get<string>("translatedBody"); }
+            set { BackingStore?.Set("translatedBody", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Message"/> and sets the default values.
         /// </summary>
         public Message()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

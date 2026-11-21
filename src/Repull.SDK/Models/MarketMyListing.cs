@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,61 +12,128 @@ namespace Repull.SDK.Models
     /// Lightweight customer listing entry for map rendering.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MarketMyListing : IAdditionalDataHolder, IParsable
+    public partial class MarketMyListing : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The availableNights property</summary>
-        public int? AvailableNights { get; set; }
+        public int? AvailableNights
+        {
+            get { return BackingStore?.Get<int?>("availableNights"); }
+            set { BackingStore?.Set("availableNights", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The blocked property</summary>
-        public bool? Blocked { get; set; }
+        public bool? Blocked
+        {
+            get { return BackingStore?.Get<bool?>("blocked"); }
+            set { BackingStore?.Set("blocked", value); }
+        }
         /// <summary>The bookedNights property</summary>
-        public int? BookedNights { get; set; }
+        public int? BookedNights
+        {
+            get { return BackingStore?.Get<int?>("bookedNights"); }
+            set { BackingStore?.Set("bookedNights", value); }
+        }
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The lat property</summary>
-        public double? Lat { get; set; }
+        public double? Lat
+        {
+            get { return BackingStore?.Get<double?>("lat"); }
+            set { BackingStore?.Set("lat", value); }
+        }
         /// <summary>The lng property</summary>
-        public double? Lng { get; set; }
+        public double? Lng
+        {
+            get { return BackingStore?.Get<double?>("lng"); }
+            set { BackingStore?.Set("lng", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The thumbnail property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Thumbnail { get; set; }
+        public string? Thumbnail
+        {
+            get { return BackingStore?.Get<string?>("thumbnail"); }
+            set { BackingStore?.Set("thumbnail", value); }
+        }
 #nullable restore
 #else
-        public string Thumbnail { get; set; }
+        public string Thumbnail
+        {
+            get { return BackingStore?.Get<string>("thumbnail"); }
+            set { BackingStore?.Set("thumbnail", value); }
+        }
 #endif
         /// <summary>Pre-computed ADR rounded to integer.</summary>
-        public int? TodayPrice { get; set; }
+        public int? TodayPrice
+        {
+            get { return BackingStore?.Get<int?>("todayPrice"); }
+            set { BackingStore?.Set("todayPrice", value); }
+        }
         /// <summary>The type property</summary>
-        public global::Repull.SDK.Models.MarketMyListing_type? Type { get; set; }
+        public global::Repull.SDK.Models.MarketMyListing_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MarketMyListing_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketMyListing"/> and sets the default values.
         /// </summary>
         public MarketMyListing()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

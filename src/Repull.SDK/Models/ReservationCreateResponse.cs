@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,94 +11,185 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReservationCreateResponse : IAdditionalDataHolder, IParsable
+    public partial class ReservationCreateResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The guestId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestId { get; set; }
+        public string? GuestId
+        {
+            get { return BackingStore?.Get<string?>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
 #nullable restore
 #else
-        public string GuestId { get; set; }
+        public string GuestId
+        {
+            get { return BackingStore?.Get<string>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
 #endif
         /// <summary>Pass to `GET /v1/reservations/{id}` for the full record. A string, like every id in API responses.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The platform property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Platform { get; set; }
+        public string? Platform
+        {
+            get { return BackingStore?.Get<string?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #nullable restore
 #else
-        public string Platform { get; set; }
+        public string Platform
+        {
+            get { return BackingStore?.Get<string>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #endif
         /// <summary>Present when the write was made in a PMS: what the PMS applied. `partial: true` means the booking exists in the PMS but the steps in `failedSections` (e.g. notes, a tentative state) did not apply — do not create it again.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationPmsOutcome? Pms { get; set; }
+        public global::Repull.SDK.Models.ReservationPmsOutcome? Pms
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationPmsOutcome?>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationPmsOutcome Pms { get; set; }
+        public global::Repull.SDK.Models.ReservationPmsOutcome Pms
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationPmsOutcome>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #endif
         /// <summary>Same vocabulary as `GET /v1/reservations/{id}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>The total the booking was recorded at. On a PMS listing: the PMS&apos;s total (your `totalPrice` where the PMS honours one, else the PMS&apos;s own price). On any other listing: the price the rate engine derived (`0` when the listing has no rates for the range).</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
         /// <summary>PMS listings: the unit the PMS assigned (hotel-model PMSs), or null. Absent for direct bookings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationCreateResponse_unit? Unit { get; set; }
+        public global::Repull.SDK.Models.ReservationCreateResponse_unit? Unit
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCreateResponse_unit?>("unit"); }
+            set { BackingStore?.Set("unit", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationCreateResponse_unit Unit { get; set; }
+        public global::Repull.SDK.Models.ReservationCreateResponse_unit Unit
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCreateResponse_unit>("unit"); }
+            set { BackingStore?.Set("unit", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationCreateResponse"/> and sets the default values.
         /// </summary>
         public ReservationCreateResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

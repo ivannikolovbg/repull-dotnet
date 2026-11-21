@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,34 +11,69 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class RatesPutResponse_data_days : IAdditionalDataHolder, IParsable
+    public partial class RatesPutResponse_data_days : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The date property</summary>
-        public Date? Date { get; set; }
+        public Date? Date
+        {
+            get { return BackingStore?.Get<Date?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
         /// <summary>The minStay property</summary>
-        public int? MinStay { get; set; }
+        public int? MinStay
+        {
+            get { return BackingStore?.Get<int?>("minStay"); }
+            set { BackingStore?.Set("minStay", value); }
+        }
         /// <summary>The monthlyDiscountPercent property</summary>
-        public double? MonthlyDiscountPercent { get; set; }
+        public double? MonthlyDiscountPercent
+        {
+            get { return BackingStore?.Get<double?>("monthlyDiscountPercent"); }
+            set { BackingStore?.Set("monthlyDiscountPercent", value); }
+        }
         /// <summary>The nightlyRate property</summary>
-        public double? NightlyRate { get; set; }
+        public double? NightlyRate
+        {
+            get { return BackingStore?.Get<double?>("nightlyRate"); }
+            set { BackingStore?.Set("nightlyRate", value); }
+        }
         /// <summary>The weekday property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Weekday { get; set; }
+        public string? Weekday
+        {
+            get { return BackingStore?.Get<string?>("weekday"); }
+            set { BackingStore?.Set("weekday", value); }
+        }
 #nullable restore
 #else
-        public string Weekday { get; set; }
+        public string Weekday
+        {
+            get { return BackingStore?.Get<string>("weekday"); }
+            set { BackingStore?.Set("weekday", value); }
+        }
 #endif
         /// <summary>The weeklyDiscountPercent property</summary>
-        public double? WeeklyDiscountPercent { get; set; }
+        public double? WeeklyDiscountPercent
+        {
+            get { return BackingStore?.Get<double?>("weeklyDiscountPercent"); }
+            set { BackingStore?.Set("weeklyDiscountPercent", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates.RatesPutResponse_data_days"/> and sets the default values.
         /// </summary>
         public RatesPutResponse_data_days()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

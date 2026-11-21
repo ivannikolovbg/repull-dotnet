@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,38 +10,73 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbAccess_accounts : IAdditionalDataHolder, IParsable
+    public partial class AirbnbAccess_accounts : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>What `account` on a send takes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Account { get; set; }
+        public string? Account
+        {
+            get { return BackingStore?.Get<string?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public string Account { get; set; }
+        public string Account
+        {
+            get { return BackingStore?.Get<string>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The disconnectedAt property</summary>
-        public DateTimeOffset? DisconnectedAt { get; set; }
+        public DateTimeOffset? DisconnectedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("disconnectedAt"); }
+            set { BackingStore?.Set("disconnectedAt", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The role property</summary>
-        public global::Repull.SDK.Models.AirbnbAccess_accounts_role? Role { get; set; }
+        public global::Repull.SDK.Models.AirbnbAccess_accounts_role? Role
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAccess_accounts_role?>("role"); }
+            set { BackingStore?.Set("role", value); }
+        }
         /// <summary>`connected` can act now; `disconnected` was connected to this workspace; `never_connected` is on the listing but was never connected here.</summary>
-        public global::Repull.SDK.Models.AirbnbAccess_accounts_state? State { get; set; }
+        public global::Repull.SDK.Models.AirbnbAccess_accounts_state? State
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAccess_accounts_state?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbAccess_accounts"/> and sets the default values.
         /// </summary>
         public AirbnbAccess_accounts()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

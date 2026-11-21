@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,81 +12,156 @@ namespace Repull.SDK.Models
     /// Successful verify response. The session is transitioned to `awaiting_room_mapping` and a `pms_connections` row is upserted.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingVerifyHotelResponse : IAdditionalDataHolder, IParsable
+    public partial class BookingVerifyHotelResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>Repull-side `pms_connections.id` for the linked Booking account.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConnectionId { get; set; }
+        public string? ConnectionId
+        {
+            get { return BackingStore?.Get<string?>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #nullable restore
 #else
-        public string ConnectionId { get; set; }
+        public string ConnectionId
+        {
+            get { return BackingStore?.Get<string>("connectionId"); }
+            set { BackingStore?.Set("connectionId", value); }
+        }
 #endif
         /// <summary>The country property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Country { get; set; }
+        public string? Country
+        {
+            get { return BackingStore?.Get<string?>("country"); }
+            set { BackingStore?.Set("country", value); }
+        }
 #nullable restore
 #else
-        public string Country { get; set; }
+        public string Country
+        {
+            get { return BackingStore?.Get<string>("country"); }
+            set { BackingStore?.Set("country", value); }
+        }
 #endif
         /// <summary>The hotelId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>The hotelName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelName { get; set; }
+        public string? HotelName
+        {
+            get { return BackingStore?.Get<string?>("hotelName"); }
+            set { BackingStore?.Set("hotelName", value); }
+        }
 #nullable restore
 #else
-        public string HotelName { get; set; }
+        public string HotelName
+        {
+            get { return BackingStore?.Get<string>("hotelName"); }
+            set { BackingStore?.Set("hotelName", value); }
+        }
 #endif
         /// <summary>Booking.com hotel/property type code (e.g. `apartment`, `hotel`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelType { get; set; }
+        public string? HotelType
+        {
+            get { return BackingStore?.Get<string?>("hotelType"); }
+            set { BackingStore?.Set("hotelType", value); }
+        }
 #nullable restore
 #else
-        public string HotelType { get; set; }
+        public string HotelType
+        {
+            get { return BackingStore?.Get<string>("hotelType"); }
+            set { BackingStore?.Set("hotelType", value); }
+        }
 #endif
         /// <summary>Capabilities Booking.com explicitly refused for this property (HTTP 401/403), usually empty. `content` means the connection is live and syncs reservations, rates and messages normally, but the Content API was never granted, so the property name, rooms and photos cannot be read from Booking.com and are substituted. A capability whose probe failed for any other reason is omitted rather than listed here.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities?>? MissingCapabilities { get; set; }
+        public List<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities?>? MissingCapabilities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities?>?>("missingCapabilities"); }
+            set { BackingStore?.Set("missingCapabilities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities?> MissingCapabilities { get; set; }
+        public List<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities?> MissingCapabilities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingVerifyHotelResponse_missingCapabilities?>>("missingCapabilities"); }
+            set { BackingStore?.Set("missingCapabilities", value); }
+        }
 #endif
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SessionId { get; set; }
+        public string? SessionId
+        {
+            get { return BackingStore?.Get<string?>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #nullable restore
 #else
-        public string SessionId { get; set; }
+        public string SessionId
+        {
+            get { return BackingStore?.Get<string>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #endif
         /// <summary>The valid property</summary>
-        public bool? Valid { get; set; }
+        public bool? Valid
+        {
+            get { return BackingStore?.Get<bool?>("valid"); }
+            set { BackingStore?.Set("valid", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingVerifyHotelResponse"/> and sets the default values.
         /// </summary>
         public BookingVerifyHotelResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

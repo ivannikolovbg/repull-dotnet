@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,15 +12,22 @@ namespace Repull.SDK.Models
     /// Sparse map: every key here is a field on the reservation snapshot whose value changed in this event, mapped to its prior value. Mirrors the keys of `ReservationWebhookObject` (e.g. `checkinDate`, `checkoutDate`, `status`). Receivers can diff `object[k]` vs `previousAttributes[k]` to know what moved.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationUpdatedPayload_previousAttributes : IAdditionalDataHolder, IParsable
+    public partial class ReservationUpdatedPayload_previousAttributes : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationUpdatedPayload_previousAttributes"/> and sets the default values.
         /// </summary>
         public ReservationUpdatedPayload_previousAttributes()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,27 +12,50 @@ namespace Repull.SDK.Models
     /// Pay-as-you-go credits, the alternative to a plan change: past your plan&apos;s monthly quota, requests are served while the wallet has a balance. Present with `upgrade`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Error_error_credits : IAdditionalDataHolder, IParsable
+    public partial class Error_error_credits : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Your wallet balance; null when you have no wallet.</summary>
-        public double? BalanceUsd { get; set; }
+        public double? BalanceUsd
+        {
+            get { return BackingStore?.Get<double?>("balance_usd"); }
+            set { BackingStore?.Set("balance_usd", value); }
+        }
         /// <summary>The top_up_url property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TopUpUrl { get; set; }
+        public string? TopUpUrl
+        {
+            get { return BackingStore?.Get<string?>("top_up_url"); }
+            set { BackingStore?.Set("top_up_url", value); }
+        }
 #nullable restore
 #else
-        public string TopUpUrl { get; set; }
+        public string TopUpUrl
+        {
+            get { return BackingStore?.Get<string>("top_up_url"); }
+            set { BackingStore?.Set("top_up_url", value); }
+        }
 #endif
         /// <summary>The usd_per_1000_requests property</summary>
-        public double? UsdPer1000Requests { get; set; }
+        public double? UsdPer1000Requests
+        {
+            get { return BackingStore?.Get<double?>("usd_per_1000_requests"); }
+            set { BackingStore?.Set("usd_per_1000_requests", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Error_error_credits"/> and sets the default values.
         /// </summary>
         public Error_error_credits()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,20 +10,35 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbTransaction_fees : IAdditionalDataHolder, IParsable
+    public partial class AirbnbTransaction_fees : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Cleaning fee included in this line&apos;s gross.</summary>
-        public double? CleaningFee { get; set; }
+        public double? CleaningFee
+        {
+            get { return BackingStore?.Get<double?>("cleaningFee"); }
+            set { BackingStore?.Set("cleaningFee", value); }
+        }
         /// <summary>Airbnb&apos;s host service fee on this line, as a deduction (negative). Already taken out of `amount`.</summary>
-        public double? HostServiceFee { get; set; }
+        public double? HostServiceFee
+        {
+            get { return BackingStore?.Get<double?>("hostServiceFee"); }
+            set { BackingStore?.Set("hostServiceFee", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbTransaction_fees"/> and sets the default values.
         /// </summary>
         public AirbnbTransaction_fees()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

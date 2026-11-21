@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,23 +12,38 @@ namespace Repull.SDK.Models
     /// Optional. Omit the body entirely to pull through the listing&apos;s primary Airbnb connection.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPullAirbnbRequest : IAdditionalDataHolder, IParsable
+    public partial class ListingPullAirbnbRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Pull through this specific Airbnb connection instead of the listing&apos;s primary one. Use when a listing carries several connections (merged properties, host migrations) — the ids come from `GET /v1/listings/{id}/publish-status`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbConnectionId { get; set; }
+        public string? AirbnbConnectionId
+        {
+            get { return BackingStore?.Get<string?>("airbnbConnectionId"); }
+            set { BackingStore?.Set("airbnbConnectionId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbConnectionId { get; set; }
+        public string AirbnbConnectionId
+        {
+            get { return BackingStore?.Get<string>("airbnbConnectionId"); }
+            set { BackingStore?.Set("airbnbConnectionId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPullAirbnbRequest"/> and sets the default values.
         /// </summary>
         public ListingPullAirbnbRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

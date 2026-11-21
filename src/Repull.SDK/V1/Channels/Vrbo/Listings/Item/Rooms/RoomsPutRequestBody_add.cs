@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,57 +10,114 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class RoomsPutRequestBody_add : IParsable
+    public partial class RoomsPutRequestBody_add : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>`{amenityId: true|false}` or `[{id, selected, detail?}]` — only the ones given change.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_amenities>? Amenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_amenities>? Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_amenities>?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_amenities> Amenities { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_amenities> Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_amenities>>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The beds property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_beds>? Beds { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_beds>? Beds
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_beds>?>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_beds> Beds { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_beds> Beds
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add_beds>>("beds"); }
+            set { BackingStore?.Set("beds", value); }
+        }
 #endif
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>Bathrooms: one of the read&apos;s `bathroomTypes` (FULL_BATH, HALF_BATH, …).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SubType { get; set; }
+        public string? SubType
+        {
+            get { return BackingStore?.Get<string?>("subType"); }
+            set { BackingStore?.Set("subType", value); }
+        }
 #nullable restore
 #else
-        public string SubType { get; set; }
+        public string SubType
+        {
+            get { return BackingStore?.Get<string>("subType"); }
+            set { BackingStore?.Set("subType", value); }
+        }
 #endif
         /// <summary>One of the read&apos;s `addableTypes` (BEDROOM, BATHROOM, LIVING_ROOM, OFFICE, …).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms.RoomsPutRequestBody_add"/> and sets the default values.
+        /// </summary>
+        public RoomsPutRequestBody_add()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

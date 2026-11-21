@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,42 +13,103 @@ namespace Repull.SDK.Models
     /// One calendar operation, applied to every date it names. Supply either `dates` OR a `start_date` + `end_date` pair (not both). Unknown fields are refused with `422 invalid_params` rather than dropped, so a misspelling such as `price` (the field is `daily_price`) can never look like a successful write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbCalendarOperation : IParsable
+    public partial class AirbnbCalendarOperation : IBackedModel, IParsable
     {
         /// <summary>Stop-sell is expressed here: `unavailable` blocks the date(s); `available` re-opens; `default` reverts to rule-based availability.</summary>
-        public global::Repull.SDK.Models.AirbnbCalendarOperation_availability? Availability { get; set; }
+        public global::Repull.SDK.Models.AirbnbCalendarOperation_availability? Availability
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbCalendarOperation_availability?>("availability"); }
+            set { BackingStore?.Set("availability", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Why a blocked date is blocked. Airbnb requires it whenever `availability` is `unavailable`; when you leave it out, Repull sends **`BLOCKED_BY_HOST`**. Use `OUTSIDE_RESERVATION` for a date held by a booking made on another channel.</summary>
-        public global::Repull.SDK.Models.AirbnbCalendarOperation_busy_subtype? BusySubtype { get; set; }
+        public global::Repull.SDK.Models.AirbnbCalendarOperation_busy_subtype? BusySubtype
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbCalendarOperation_busy_subtype?>("busy_subtype"); }
+            set { BackingStore?.Set("busy_subtype", value); }
+        }
         /// <summary>Closed-to-arrival — no check-ins on the affected date(s).</summary>
-        public bool? ClosedToArrival { get; set; }
+        public bool? ClosedToArrival
+        {
+            get { return BackingStore?.Get<bool?>("closed_to_arrival"); }
+            set { BackingStore?.Set("closed_to_arrival", value); }
+        }
         /// <summary>Closed-to-departure — no check-outs on the affected date(s).</summary>
-        public bool? ClosedToDeparture { get; set; }
+        public bool? ClosedToDeparture
+        {
+            get { return BackingStore?.Get<bool?>("closed_to_departure"); }
+            set { BackingStore?.Set("closed_to_departure", value); }
+        }
         /// <summary>Nightly price override, in the listing currency.</summary>
-        public double? DailyPrice { get; set; }
+        public double? DailyPrice
+        {
+            get { return BackingStore?.Get<double?>("daily_price"); }
+            set { BackingStore?.Set("daily_price", value); }
+        }
         /// <summary>Dates as `YYYY-MM-DD`, or inclusive ranges as `YYYY-MM-DD:YYYY-MM-DD` — an alternative to `start_date`/`end_date`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Dates { get; set; }
+        public List<string>? Dates
+        {
+            get { return BackingStore?.Get<List<string>?>("dates"); }
+            set { BackingStore?.Set("dates", value); }
+        }
 #nullable restore
 #else
-        public List<string> Dates { get; set; }
+        public List<string> Dates
+        {
+            get { return BackingStore?.Get<List<string>>("dates"); }
+            set { BackingStore?.Set("dates", value); }
+        }
 #endif
         /// <summary>Inclusive range end, YYYY-MM-DD, on or after `start_date`.</summary>
-        public Date? EndDate { get; set; }
+        public Date? EndDate
+        {
+            get { return BackingStore?.Get<Date?>("end_date"); }
+            set { BackingStore?.Set("end_date", value); }
+        }
         /// <summary>Maximum length of stay for the date(s), 1–1125 and no lower than `min_nights`. Send `-1` to drop the date&apos;s own maximum so it follows the listing default again (`default_max_nights`).</summary>
-        public int? MaxNights { get; set; }
+        public int? MaxNights
+        {
+            get { return BackingStore?.Get<int?>("max_nights"); }
+            set { BackingStore?.Set("max_nights", value); }
+        }
         /// <summary>Minimum length of stay for the date(s), 1–1125. Send `-1` to drop the date&apos;s own minimum so it follows the listing default again (`default_min_nights`). `0` and `null` do not clear it.</summary>
-        public int? MinNights { get; set; }
+        public int? MinNights
+        {
+            get { return BackingStore?.Get<int?>("min_nights"); }
+            set { BackingStore?.Set("min_nights", value); }
+        }
         /// <summary>The notes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Notes { get; set; }
+        public string? Notes
+        {
+            get { return BackingStore?.Get<string?>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #nullable restore
 #else
-        public string Notes { get; set; }
+        public string Notes
+        {
+            get { return BackingStore?.Get<string>("notes"); }
+            set { BackingStore?.Set("notes", value); }
+        }
 #endif
         /// <summary>Inclusive range start, YYYY-MM-DD. Send together with `end_date`.</summary>
-        public Date? StartDate { get; set; }
+        public Date? StartDate
+        {
+            get { return BackingStore?.Get<Date?>("start_date"); }
+            set { BackingStore?.Set("start_date", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbCalendarOperation"/> and sets the default values.
+        /// </summary>
+        public AirbnbCalendarOperation()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,376 +12,753 @@ namespace Repull.SDK.Models
     /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.AccountCalendarAccessChangedEvent"/>, <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/>, <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportFailedEvent"/>, <see cref="global::Repull.SDK.Models.AccountImportStartedEvent"/>, <see cref="global::Repull.SDK.Models.AccountNotificationsMissingEvent"/>, <see cref="global::Repull.SDK.Models.AccountUnitsAddedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/>, <see cref="global::Repull.SDK.Models.BookingUnacknowledgedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelDegradedEvent"/>, <see cref="global::Repull.SDK.Models.ChannelSyncFailedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionAbandonedEvent"/>, <see cref="global::Repull.SDK.Models.ConnectSessionCompletedEvent"/>, <see cref="global::Repull.SDK.Models.ConversationMessageStatusChangedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/>, <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/>, <see cref="global::Repull.SDK.Models.ListingIcalFeedChangedEvent"/>, <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/>, <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/>, <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/>, <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/>, <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/>, <see cref="global::Repull.SDK.Models.PayoutCompletedEvent"/>, <see cref="global::Repull.SDK.Models.RepullPingEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/>, <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReactionEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReadEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageSentEvent"/>, <see cref="global::Repull.SDK.Models.ReservationMessageUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationThreadAssignedEvent"/>, <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/>, <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/>, <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WebhookEvent : IComposedTypeWrapper, IParsable
+    public partial class WebhookEvent : IBackedModel, IComposedTypeWrapper, IParsable
     {
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountCalendarAccessChangedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountCalendarAccessChangedEvent? AccountCalendarAccessChangedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountCalendarAccessChangedEvent? AccountCalendarAccessChangedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountCalendarAccessChangedEvent?>("AccountCalendarAccessChangedEvent"); }
+            set { BackingStore?.Set("AccountCalendarAccessChangedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountCalendarAccessChangedEvent AccountCalendarAccessChangedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountCalendarAccessChangedEvent AccountCalendarAccessChangedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountCalendarAccessChangedEvent>("AccountCalendarAccessChangedEvent"); }
+            set { BackingStore?.Set("AccountCalendarAccessChangedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountCreatedEvent? AccountCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountCreatedEvent? AccountCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountCreatedEvent?>("AccountCreatedEvent"); }
+            set { BackingStore?.Set("AccountCreatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountCreatedEvent AccountCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountCreatedEvent AccountCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountCreatedEvent>("AccountCreatedEvent"); }
+            set { BackingStore?.Set("AccountCreatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountDisconnectedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountDisconnectedEvent? AccountDisconnectedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountDisconnectedEvent? AccountDisconnectedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountDisconnectedEvent?>("AccountDisconnectedEvent"); }
+            set { BackingStore?.Set("AccountDisconnectedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountDisconnectedEvent AccountDisconnectedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountDisconnectedEvent AccountDisconnectedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountDisconnectedEvent>("AccountDisconnectedEvent"); }
+            set { BackingStore?.Set("AccountDisconnectedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountImportCompletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountImportCompletedEvent? AccountImportCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountImportCompletedEvent? AccountImportCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportCompletedEvent?>("AccountImportCompletedEvent"); }
+            set { BackingStore?.Set("AccountImportCompletedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountImportCompletedEvent AccountImportCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountImportCompletedEvent AccountImportCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportCompletedEvent>("AccountImportCompletedEvent"); }
+            set { BackingStore?.Set("AccountImportCompletedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountImportFailedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountImportFailedEvent? AccountImportFailedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountImportFailedEvent? AccountImportFailedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportFailedEvent?>("AccountImportFailedEvent"); }
+            set { BackingStore?.Set("AccountImportFailedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountImportFailedEvent AccountImportFailedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountImportFailedEvent AccountImportFailedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportFailedEvent>("AccountImportFailedEvent"); }
+            set { BackingStore?.Set("AccountImportFailedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountImportStartedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountImportStartedEvent? AccountImportStartedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountImportStartedEvent? AccountImportStartedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportStartedEvent?>("AccountImportStartedEvent"); }
+            set { BackingStore?.Set("AccountImportStartedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountImportStartedEvent AccountImportStartedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountImportStartedEvent AccountImportStartedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportStartedEvent>("AccountImportStartedEvent"); }
+            set { BackingStore?.Set("AccountImportStartedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountNotificationsMissingEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountNotificationsMissingEvent? AccountNotificationsMissingEvent { get; set; }
+        public global::Repull.SDK.Models.AccountNotificationsMissingEvent? AccountNotificationsMissingEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountNotificationsMissingEvent?>("AccountNotificationsMissingEvent"); }
+            set { BackingStore?.Set("AccountNotificationsMissingEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountNotificationsMissingEvent AccountNotificationsMissingEvent { get; set; }
+        public global::Repull.SDK.Models.AccountNotificationsMissingEvent AccountNotificationsMissingEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountNotificationsMissingEvent>("AccountNotificationsMissingEvent"); }
+            set { BackingStore?.Set("AccountNotificationsMissingEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AccountUnitsAddedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountUnitsAddedEvent? AccountUnitsAddedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountUnitsAddedEvent? AccountUnitsAddedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountUnitsAddedEvent?>("AccountUnitsAddedEvent"); }
+            set { BackingStore?.Set("AccountUnitsAddedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountUnitsAddedEvent AccountUnitsAddedEvent { get; set; }
+        public global::Repull.SDK.Models.AccountUnitsAddedEvent AccountUnitsAddedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountUnitsAddedEvent>("AccountUnitsAddedEvent"); }
+            set { BackingStore?.Set("AccountUnitsAddedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AiOperationCompletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AiOperationCompletedEvent? AiOperationCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.AiOperationCompletedEvent? AiOperationCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AiOperationCompletedEvent?>("AiOperationCompletedEvent"); }
+            set { BackingStore?.Set("AiOperationCompletedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AiOperationCompletedEvent AiOperationCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.AiOperationCompletedEvent AiOperationCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AiOperationCompletedEvent>("AiOperationCompletedEvent"); }
+            set { BackingStore?.Set("AiOperationCompletedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.AiOperationFailedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AiOperationFailedEvent? AiOperationFailedEvent { get; set; }
+        public global::Repull.SDK.Models.AiOperationFailedEvent? AiOperationFailedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AiOperationFailedEvent?>("AiOperationFailedEvent"); }
+            set { BackingStore?.Set("AiOperationFailedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AiOperationFailedEvent AiOperationFailedEvent { get; set; }
+        public global::Repull.SDK.Models.AiOperationFailedEvent AiOperationFailedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AiOperationFailedEvent>("AiOperationFailedEvent"); }
+            set { BackingStore?.Set("AiOperationFailedEvent", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingUnacknowledgedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingUnacknowledgedEvent? BookingUnacknowledgedEvent { get; set; }
+        public global::Repull.SDK.Models.BookingUnacknowledgedEvent? BookingUnacknowledgedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingUnacknowledgedEvent?>("BookingUnacknowledgedEvent"); }
+            set { BackingStore?.Set("BookingUnacknowledgedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingUnacknowledgedEvent BookingUnacknowledgedEvent { get; set; }
+        public global::Repull.SDK.Models.BookingUnacknowledgedEvent BookingUnacknowledgedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingUnacknowledgedEvent>("BookingUnacknowledgedEvent"); }
+            set { BackingStore?.Set("BookingUnacknowledgedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ChannelDegradedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ChannelDegradedEvent? ChannelDegradedEvent { get; set; }
+        public global::Repull.SDK.Models.ChannelDegradedEvent? ChannelDegradedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelDegradedEvent?>("ChannelDegradedEvent"); }
+            set { BackingStore?.Set("ChannelDegradedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ChannelDegradedEvent ChannelDegradedEvent { get; set; }
+        public global::Repull.SDK.Models.ChannelDegradedEvent ChannelDegradedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelDegradedEvent>("ChannelDegradedEvent"); }
+            set { BackingStore?.Set("ChannelDegradedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ChannelSyncFailedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ChannelSyncFailedEvent? ChannelSyncFailedEvent { get; set; }
+        public global::Repull.SDK.Models.ChannelSyncFailedEvent? ChannelSyncFailedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelSyncFailedEvent?>("ChannelSyncFailedEvent"); }
+            set { BackingStore?.Set("ChannelSyncFailedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ChannelSyncFailedEvent ChannelSyncFailedEvent { get; set; }
+        public global::Repull.SDK.Models.ChannelSyncFailedEvent ChannelSyncFailedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ChannelSyncFailedEvent>("ChannelSyncFailedEvent"); }
+            set { BackingStore?.Set("ChannelSyncFailedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ConnectSessionAbandonedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConnectSessionAbandonedEvent? ConnectSessionAbandonedEvent { get; set; }
+        public global::Repull.SDK.Models.ConnectSessionAbandonedEvent? ConnectSessionAbandonedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectSessionAbandonedEvent?>("ConnectSessionAbandonedEvent"); }
+            set { BackingStore?.Set("ConnectSessionAbandonedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConnectSessionAbandonedEvent ConnectSessionAbandonedEvent { get; set; }
+        public global::Repull.SDK.Models.ConnectSessionAbandonedEvent ConnectSessionAbandonedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectSessionAbandonedEvent>("ConnectSessionAbandonedEvent"); }
+            set { BackingStore?.Set("ConnectSessionAbandonedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ConnectSessionCompletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConnectSessionCompletedEvent? ConnectSessionCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.ConnectSessionCompletedEvent? ConnectSessionCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectSessionCompletedEvent?>("ConnectSessionCompletedEvent"); }
+            set { BackingStore?.Set("ConnectSessionCompletedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConnectSessionCompletedEvent ConnectSessionCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.ConnectSessionCompletedEvent ConnectSessionCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectSessionCompletedEvent>("ConnectSessionCompletedEvent"); }
+            set { BackingStore?.Set("ConnectSessionCompletedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ConversationMessageStatusChangedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConversationMessageStatusChangedEvent? ConversationMessageStatusChangedEvent { get; set; }
+        public global::Repull.SDK.Models.ConversationMessageStatusChangedEvent? ConversationMessageStatusChangedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationMessageStatusChangedEvent?>("ConversationMessageStatusChangedEvent"); }
+            set { BackingStore?.Set("ConversationMessageStatusChangedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConversationMessageStatusChangedEvent ConversationMessageStatusChangedEvent { get; set; }
+        public global::Repull.SDK.Models.ConversationMessageStatusChangedEvent ConversationMessageStatusChangedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConversationMessageStatusChangedEvent>("ConversationMessageStatusChangedEvent"); }
+            set { BackingStore?.Set("ConversationMessageStatusChangedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.InquiryCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.InquiryCreatedEvent? InquiryCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.InquiryCreatedEvent? InquiryCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryCreatedEvent?>("InquiryCreatedEvent"); }
+            set { BackingStore?.Set("InquiryCreatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.InquiryCreatedEvent InquiryCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.InquiryCreatedEvent InquiryCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryCreatedEvent>("InquiryCreatedEvent"); }
+            set { BackingStore?.Set("InquiryCreatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.InquiryUpdatedEvent? InquiryUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.InquiryUpdatedEvent? InquiryUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryUpdatedEvent?>("InquiryUpdatedEvent"); }
+            set { BackingStore?.Set("InquiryUpdatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.InquiryUpdatedEvent InquiryUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.InquiryUpdatedEvent InquiryUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryUpdatedEvent>("InquiryUpdatedEvent"); }
+            set { BackingStore?.Set("InquiryUpdatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingCreatedEvent? ListingCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingCreatedEvent? ListingCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingCreatedEvent?>("ListingCreatedEvent"); }
+            set { BackingStore?.Set("ListingCreatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingCreatedEvent ListingCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingCreatedEvent ListingCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingCreatedEvent>("ListingCreatedEvent"); }
+            set { BackingStore?.Set("ListingCreatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingDeletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingDeletedEvent? ListingDeletedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingDeletedEvent? ListingDeletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingDeletedEvent?>("ListingDeletedEvent"); }
+            set { BackingStore?.Set("ListingDeletedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingDeletedEvent ListingDeletedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingDeletedEvent ListingDeletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingDeletedEvent>("ListingDeletedEvent"); }
+            set { BackingStore?.Set("ListingDeletedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingIcalFeedChangedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingIcalFeedChangedEvent? ListingIcalFeedChangedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingIcalFeedChangedEvent? ListingIcalFeedChangedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingIcalFeedChangedEvent?>("ListingIcalFeedChangedEvent"); }
+            set { BackingStore?.Set("ListingIcalFeedChangedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingIcalFeedChangedEvent ListingIcalFeedChangedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingIcalFeedChangedEvent ListingIcalFeedChangedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingIcalFeedChangedEvent>("ListingIcalFeedChangedEvent"); }
+            set { BackingStore?.Set("ListingIcalFeedChangedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingReactivatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingReactivatedEvent? ListingReactivatedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingReactivatedEvent? ListingReactivatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingReactivatedEvent?>("ListingReactivatedEvent"); }
+            set { BackingStore?.Set("ListingReactivatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingReactivatedEvent ListingReactivatedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingReactivatedEvent ListingReactivatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingReactivatedEvent>("ListingReactivatedEvent"); }
+            set { BackingStore?.Set("ListingReactivatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingSuspendedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingSuspendedEvent? ListingSuspendedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingSuspendedEvent? ListingSuspendedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSuspendedEvent?>("ListingSuspendedEvent"); }
+            set { BackingStore?.Set("ListingSuspendedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingSuspendedEvent ListingSuspendedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingSuspendedEvent ListingSuspendedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingSuspendedEvent>("ListingSuspendedEvent"); }
+            set { BackingStore?.Set("ListingSuspendedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingUpdatedEvent? ListingUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingUpdatedEvent? ListingUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingUpdatedEvent?>("ListingUpdatedEvent"); }
+            set { BackingStore?.Set("ListingUpdatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingUpdatedEvent ListingUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.ListingUpdatedEvent ListingUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingUpdatedEvent>("ListingUpdatedEvent"); }
+            set { BackingStore?.Set("ListingUpdatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.MigrationCompletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MigrationCompletedEvent? MigrationCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.MigrationCompletedEvent? MigrationCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationCompletedEvent?>("MigrationCompletedEvent"); }
+            set { BackingStore?.Set("MigrationCompletedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MigrationCompletedEvent MigrationCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.MigrationCompletedEvent MigrationCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationCompletedEvent>("MigrationCompletedEvent"); }
+            set { BackingStore?.Set("MigrationCompletedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.MigrationFailedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.MigrationFailedEvent? MigrationFailedEvent { get; set; }
+        public global::Repull.SDK.Models.MigrationFailedEvent? MigrationFailedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationFailedEvent?>("MigrationFailedEvent"); }
+            set { BackingStore?.Set("MigrationFailedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.MigrationFailedEvent MigrationFailedEvent { get; set; }
+        public global::Repull.SDK.Models.MigrationFailedEvent MigrationFailedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationFailedEvent>("MigrationFailedEvent"); }
+            set { BackingStore?.Set("MigrationFailedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.PaymentCompletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PaymentCompletedEvent? PaymentCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.PaymentCompletedEvent? PaymentCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PaymentCompletedEvent?>("PaymentCompletedEvent"); }
+            set { BackingStore?.Set("PaymentCompletedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PaymentCompletedEvent PaymentCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.PaymentCompletedEvent PaymentCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PaymentCompletedEvent>("PaymentCompletedEvent"); }
+            set { BackingStore?.Set("PaymentCompletedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.PaymentRefundedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PaymentRefundedEvent? PaymentRefundedEvent { get; set; }
+        public global::Repull.SDK.Models.PaymentRefundedEvent? PaymentRefundedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PaymentRefundedEvent?>("PaymentRefundedEvent"); }
+            set { BackingStore?.Set("PaymentRefundedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PaymentRefundedEvent PaymentRefundedEvent { get; set; }
+        public global::Repull.SDK.Models.PaymentRefundedEvent PaymentRefundedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PaymentRefundedEvent>("PaymentRefundedEvent"); }
+            set { BackingStore?.Set("PaymentRefundedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.PayoutCompletedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PayoutCompletedEvent? PayoutCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.PayoutCompletedEvent? PayoutCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PayoutCompletedEvent?>("PayoutCompletedEvent"); }
+            set { BackingStore?.Set("PayoutCompletedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PayoutCompletedEvent PayoutCompletedEvent { get; set; }
+        public global::Repull.SDK.Models.PayoutCompletedEvent PayoutCompletedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PayoutCompletedEvent>("PayoutCompletedEvent"); }
+            set { BackingStore?.Set("PayoutCompletedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.RepullPingEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.RepullPingEvent? RepullPingEvent { get; set; }
+        public global::Repull.SDK.Models.RepullPingEvent? RepullPingEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RepullPingEvent?>("RepullPingEvent"); }
+            set { BackingStore?.Set("RepullPingEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.RepullPingEvent RepullPingEvent { get; set; }
+        public global::Repull.SDK.Models.RepullPingEvent RepullPingEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RepullPingEvent>("RepullPingEvent"); }
+            set { BackingStore?.Set("RepullPingEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationAlterationCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationAlterationCreatedEvent? ReservationAlterationCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationAlterationCreatedEvent? ReservationAlterationCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationAlterationCreatedEvent?>("ReservationAlterationCreatedEvent"); }
+            set { BackingStore?.Set("ReservationAlterationCreatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationAlterationCreatedEvent ReservationAlterationCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationAlterationCreatedEvent ReservationAlterationCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationAlterationCreatedEvent>("ReservationAlterationCreatedEvent"); }
+            set { BackingStore?.Set("ReservationAlterationCreatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationAlterationRespondedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationAlterationRespondedEvent? ReservationAlterationRespondedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationAlterationRespondedEvent? ReservationAlterationRespondedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationAlterationRespondedEvent?>("ReservationAlterationRespondedEvent"); }
+            set { BackingStore?.Set("ReservationAlterationRespondedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationAlterationRespondedEvent ReservationAlterationRespondedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationAlterationRespondedEvent ReservationAlterationRespondedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationAlterationRespondedEvent>("ReservationAlterationRespondedEvent"); }
+            set { BackingStore?.Set("ReservationAlterationRespondedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationCancelledEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationCancelledEvent? ReservationCancelledEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationCancelledEvent? ReservationCancelledEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCancelledEvent?>("ReservationCancelledEvent"); }
+            set { BackingStore?.Set("ReservationCancelledEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationCancelledEvent ReservationCancelledEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationCancelledEvent ReservationCancelledEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCancelledEvent>("ReservationCancelledEvent"); }
+            set { BackingStore?.Set("ReservationCancelledEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationCreatedEvent? ReservationCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationCreatedEvent? ReservationCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCreatedEvent?>("ReservationCreatedEvent"); }
+            set { BackingStore?.Set("ReservationCreatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationCreatedEvent ReservationCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationCreatedEvent ReservationCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationCreatedEvent>("ReservationCreatedEvent"); }
+            set { BackingStore?.Set("ReservationCreatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationMessageReactionEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationMessageReactionEvent? ReservationMessageReactionEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReactionEvent? ReservationMessageReactionEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReactionEvent?>("ReservationMessageReactionEvent"); }
+            set { BackingStore?.Set("ReservationMessageReactionEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationMessageReactionEvent ReservationMessageReactionEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReactionEvent ReservationMessageReactionEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReactionEvent>("ReservationMessageReactionEvent"); }
+            set { BackingStore?.Set("ReservationMessageReactionEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationMessageReadEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationMessageReadEvent? ReservationMessageReadEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReadEvent? ReservationMessageReadEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReadEvent?>("ReservationMessageReadEvent"); }
+            set { BackingStore?.Set("ReservationMessageReadEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationMessageReadEvent ReservationMessageReadEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReadEvent ReservationMessageReadEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReadEvent>("ReservationMessageReadEvent"); }
+            set { BackingStore?.Set("ReservationMessageReadEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationMessageReceivedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationMessageReceivedEvent? ReservationMessageReceivedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReceivedEvent? ReservationMessageReceivedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReceivedEvent?>("ReservationMessageReceivedEvent"); }
+            set { BackingStore?.Set("ReservationMessageReceivedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationMessageReceivedEvent ReservationMessageReceivedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageReceivedEvent ReservationMessageReceivedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageReceivedEvent>("ReservationMessageReceivedEvent"); }
+            set { BackingStore?.Set("ReservationMessageReceivedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationMessageSentEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationMessageSentEvent? ReservationMessageSentEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageSentEvent? ReservationMessageSentEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageSentEvent?>("ReservationMessageSentEvent"); }
+            set { BackingStore?.Set("ReservationMessageSentEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationMessageSentEvent ReservationMessageSentEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageSentEvent ReservationMessageSentEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageSentEvent>("ReservationMessageSentEvent"); }
+            set { BackingStore?.Set("ReservationMessageSentEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationMessageUpdatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationMessageUpdatedEvent? ReservationMessageUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageUpdatedEvent? ReservationMessageUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageUpdatedEvent?>("ReservationMessageUpdatedEvent"); }
+            set { BackingStore?.Set("ReservationMessageUpdatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationMessageUpdatedEvent ReservationMessageUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationMessageUpdatedEvent ReservationMessageUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationMessageUpdatedEvent>("ReservationMessageUpdatedEvent"); }
+            set { BackingStore?.Set("ReservationMessageUpdatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationRequestCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationRequestCreatedEvent? ReservationRequestCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationRequestCreatedEvent? ReservationRequestCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationRequestCreatedEvent?>("ReservationRequestCreatedEvent"); }
+            set { BackingStore?.Set("ReservationRequestCreatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationRequestCreatedEvent ReservationRequestCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationRequestCreatedEvent ReservationRequestCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationRequestCreatedEvent>("ReservationRequestCreatedEvent"); }
+            set { BackingStore?.Set("ReservationRequestCreatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationRequestUpdatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationRequestUpdatedEvent? ReservationRequestUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationRequestUpdatedEvent? ReservationRequestUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationRequestUpdatedEvent?>("ReservationRequestUpdatedEvent"); }
+            set { BackingStore?.Set("ReservationRequestUpdatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationRequestUpdatedEvent ReservationRequestUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationRequestUpdatedEvent ReservationRequestUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationRequestUpdatedEvent>("ReservationRequestUpdatedEvent"); }
+            set { BackingStore?.Set("ReservationRequestUpdatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationThreadAssignedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationThreadAssignedEvent? ReservationThreadAssignedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationThreadAssignedEvent? ReservationThreadAssignedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationThreadAssignedEvent?>("ReservationThreadAssignedEvent"); }
+            set { BackingStore?.Set("ReservationThreadAssignedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationThreadAssignedEvent ReservationThreadAssignedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationThreadAssignedEvent ReservationThreadAssignedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationThreadAssignedEvent>("ReservationThreadAssignedEvent"); }
+            set { BackingStore?.Set("ReservationThreadAssignedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReservationUpdatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationUpdatedEvent? ReservationUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationUpdatedEvent? ReservationUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationUpdatedEvent?>("ReservationUpdatedEvent"); }
+            set { BackingStore?.Set("ReservationUpdatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationUpdatedEvent ReservationUpdatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReservationUpdatedEvent ReservationUpdatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationUpdatedEvent>("ReservationUpdatedEvent"); }
+            set { BackingStore?.Set("ReservationUpdatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReviewCreatedEvent? ReviewCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReviewCreatedEvent? ReviewCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReviewCreatedEvent?>("ReviewCreatedEvent"); }
+            set { BackingStore?.Set("ReviewCreatedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReviewCreatedEvent ReviewCreatedEvent { get; set; }
+        public global::Repull.SDK.Models.ReviewCreatedEvent ReviewCreatedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReviewCreatedEvent>("ReviewCreatedEvent"); }
+            set { BackingStore?.Set("ReviewCreatedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.ReviewRespondedEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReviewRespondedEvent? ReviewRespondedEvent { get; set; }
+        public global::Repull.SDK.Models.ReviewRespondedEvent? ReviewRespondedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReviewRespondedEvent?>("ReviewRespondedEvent"); }
+            set { BackingStore?.Set("ReviewRespondedEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReviewRespondedEvent ReviewRespondedEvent { get; set; }
+        public global::Repull.SDK.Models.ReviewRespondedEvent ReviewRespondedEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReviewRespondedEvent>("ReviewRespondedEvent"); }
+            set { BackingStore?.Set("ReviewRespondedEvent", value); }
+        }
 #endif
         /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.UsageQuotaWarningEvent"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.UsageQuotaWarningEvent? UsageQuotaWarningEvent { get; set; }
+        public global::Repull.SDK.Models.UsageQuotaWarningEvent? UsageQuotaWarningEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.UsageQuotaWarningEvent?>("UsageQuotaWarningEvent"); }
+            set { BackingStore?.Set("UsageQuotaWarningEvent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.UsageQuotaWarningEvent UsageQuotaWarningEvent { get; set; }
+        public global::Repull.SDK.Models.UsageQuotaWarningEvent UsageQuotaWarningEvent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.UsageQuotaWarningEvent>("UsageQuotaWarningEvent"); }
+            set { BackingStore?.Set("UsageQuotaWarningEvent", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.WebhookEvent"/> and sets the default values.
+        /// </summary>
+        public WebhookEvent()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

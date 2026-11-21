@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,39 +12,70 @@ namespace Repull.SDK.Models
     /// Linked guest metadata for a conversation thread. Resolved through the thread&apos;s `reservation_id` → `reservations.guest_id`. Up to 50 contacts are returned.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConversationGuest : IAdditionalDataHolder, IParsable
+    public partial class ConversationGuest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The contacts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ConversationGuestContact>? Contacts { get; set; }
+        public List<global::Repull.SDK.Models.ConversationGuestContact>? Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConversationGuestContact>?>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ConversationGuestContact> Contacts { get; set; }
+        public List<global::Repull.SDK.Models.ConversationGuestContact> Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ConversationGuestContact>>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #endif
         /// <summary>The displayName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DisplayName { get; set; }
+        public string? DisplayName
+        {
+            get { return BackingStore?.Get<string?>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #nullable restore
 #else
-        public string DisplayName { get; set; }
+        public string DisplayName
+        {
+            get { return BackingStore?.Get<string>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConversationGuest"/> and sets the default values.
         /// </summary>
         public ConversationGuest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

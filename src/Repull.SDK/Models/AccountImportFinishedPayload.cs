@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,52 +10,107 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AccountImportFinishedPayload : IAdditionalDataHolder, IParsable
+    public partial class AccountImportFinishedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The completedAt property</summary>
-        public DateTimeOffset? CompletedAt { get; set; }
+        public DateTimeOffset? CompletedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("completedAt"); }
+            set { BackingStore?.Set("completedAt", value); }
+        }
         /// <summary>What the import brought in. A channel reports the keys it imports.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AccountImportCounts? Counts { get; set; }
+        public global::Repull.SDK.Models.AccountImportCounts? Counts
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportCounts?>("counts"); }
+            set { BackingStore?.Set("counts", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AccountImportCounts Counts { get; set; }
+        public global::Repull.SDK.Models.AccountImportCounts Counts
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportCounts>("counts"); }
+            set { BackingStore?.Set("counts", value); }
+        }
 #endif
         /// <summary>The importId property</summary>
-        public Guid? ImportId { get; set; }
+        public Guid? ImportId
+        {
+            get { return BackingStore?.Get<Guid?>("importId"); }
+            set { BackingStore?.Set("importId", value); }
+        }
         /// <summary>The outcome property</summary>
-        public global::Repull.SDK.Models.AccountImportFinishedPayload_outcome? Outcome { get; set; }
+        public global::Repull.SDK.Models.AccountImportFinishedPayload_outcome? Outcome
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportFinishedPayload_outcome?>("outcome"); }
+            set { BackingStore?.Set("outcome", value); }
+        }
         /// <summary>`account.import.failed` only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>The stages property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AccountImportStage>? Stages { get; set; }
+        public List<global::Repull.SDK.Models.AccountImportStage>? Stages
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountImportStage>?>("stages"); }
+            set { BackingStore?.Set("stages", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AccountImportStage> Stages { get; set; }
+        public List<global::Repull.SDK.Models.AccountImportStage> Stages
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AccountImportStage>>("stages"); }
+            set { BackingStore?.Set("stages", value); }
+        }
 #endif
         /// <summary>The startedAt property</summary>
-        public DateTimeOffset? StartedAt { get; set; }
+        public DateTimeOffset? StartedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("startedAt"); }
+            set { BackingStore?.Set("startedAt", value); }
+        }
         /// <summary>The status property</summary>
-        public global::Repull.SDK.Models.AccountImportFinishedPayload_status? Status { get; set; }
+        public global::Repull.SDK.Models.AccountImportFinishedPayload_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportFinishedPayload_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The trigger property</summary>
-        public global::Repull.SDK.Models.AccountImportFinishedPayload_trigger? Trigger { get; set; }
+        public global::Repull.SDK.Models.AccountImportFinishedPayload_trigger? Trigger
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImportFinishedPayload_trigger?>("trigger"); }
+            set { BackingStore?.Set("trigger", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AccountImportFinishedPayload"/> and sets the default values.
         /// </summary>
         public AccountImportFinishedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

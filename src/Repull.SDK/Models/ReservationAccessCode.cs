@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,55 +12,110 @@ namespace Repull.SDK.Models
     /// One door code for a stay, as the PMS reported it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ReservationAccessCode : IAdditionalDataHolder, IParsable
+    public partial class ReservationAccessCode : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The code to enter on the lock.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Code { get; set; }
+        public string? Code
+        {
+            get { return BackingStore?.Get<string?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #nullable restore
 #else
-        public string Code { get; set; }
+        public string Code
+        {
+            get { return BackingStore?.Get<string>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #endif
         /// <summary>The locks the code opens.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationAccessCode_locks>? Locks { get; set; }
+        public List<global::Repull.SDK.Models.ReservationAccessCode_locks>? Locks
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationAccessCode_locks>?>("locks"); }
+            set { BackingStore?.Set("locks", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationAccessCode_locks> Locks { get; set; }
+        public List<global::Repull.SDK.Models.ReservationAccessCode_locks> Locks
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationAccessCode_locks>>("locks"); }
+            set { BackingStore?.Set("locks", value); }
+        }
 #endif
         /// <summary>The PMS the code was read from.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Source { get; set; }
+        public string? Source
+        {
+            get { return BackingStore?.Get<string?>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
 #nullable restore
 #else
-        public string Source { get; set; }
+        public string Source
+        {
+            get { return BackingStore?.Get<string>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
 #endif
         /// <summary>The PMS&apos;s status for the code, lower-cased.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>`guest`: the code to give the guest. `backup`: give it only if the guest code fails; Guesty may change a backup code read before check-in day.</summary>
-        public global::Repull.SDK.Models.ReservationAccessCode_type? Type { get; set; }
+        public global::Repull.SDK.Models.ReservationAccessCode_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationAccessCode_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>When the codes were last read from the PMS.</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>When the code starts working. `null` when the PMS gives no window.</summary>
-        public DateTimeOffset? ValidFrom { get; set; }
+        public DateTimeOffset? ValidFrom
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("validFrom"); }
+            set { BackingStore?.Set("validFrom", value); }
+        }
         /// <summary>When the code stops working. `null` when the PMS gives no window.</summary>
-        public DateTimeOffset? ValidUntil { get; set; }
+        public DateTimeOffset? ValidUntil
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("validUntil"); }
+            set { BackingStore?.Set("validUntil", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationAccessCode"/> and sets the default values.
         /// </summary>
         public ReservationAccessCode()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

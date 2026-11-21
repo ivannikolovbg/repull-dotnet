@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,113 +12,236 @@ namespace Repull.SDK.Models
     /// One promotion on one listing. Airbnb sets the discount for its promotions (`discount.setBy: channel`); Booking.com promotions belong to the property and list the rooms they cover in `appliesTo`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Promotion : IAdditionalDataHolder, IParsable
+    public partial class Promotion : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Booking.com only. An empty `rooms` list means every room on the property.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Promotion_appliesTo? AppliesTo { get; set; }
+        public global::Repull.SDK.Models.Promotion_appliesTo? AppliesTo
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_appliesTo?>("appliesTo"); }
+            set { BackingStore?.Set("appliesTo", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Promotion_appliesTo AppliesTo { get; set; }
+        public global::Repull.SDK.Models.Promotion_appliesTo AppliesTo
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_appliesTo>("appliesTo"); }
+            set { BackingStore?.Set("appliesTo", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel property</summary>
-        public global::Repull.SDK.Models.Promotion_channel? Channel { get; set; }
+        public global::Repull.SDK.Models.Promotion_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>Airbnb listing id, or the Booking.com property (hotel id) the promotion belongs to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ChannelPropertyId { get; set; }
+        public string? ChannelPropertyId
+        {
+            get { return BackingStore?.Get<string?>("channelPropertyId"); }
+            set { BackingStore?.Set("channelPropertyId", value); }
+        }
 #nullable restore
 #else
-        public string ChannelPropertyId { get; set; }
+        public string ChannelPropertyId
+        {
+            get { return BackingStore?.Get<string>("channelPropertyId"); }
+            set { BackingStore?.Set("channelPropertyId", value); }
+        }
 #endif
         /// <summary>The channel’s own name, e.g. `HIGH_RATED_GUEST_DISCOUNT`, `basic`, `campaign_getaway`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ChannelType { get; set; }
+        public string? ChannelType
+        {
+            get { return BackingStore?.Get<string?>("channelType"); }
+            set { BackingStore?.Set("channelType", value); }
+        }
 #nullable restore
 #else
-        public string ChannelType { get; set; }
+        public string ChannelType
+        {
+            get { return BackingStore?.Get<string>("channelType"); }
+            set { BackingStore?.Set("channelType", value); }
+        }
 #endif
         /// <summary>The discount property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Promotion_discount? Discount { get; set; }
+        public global::Repull.SDK.Models.Promotion_discount? Discount
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_discount?>("discount"); }
+            set { BackingStore?.Set("discount", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Promotion_discount Discount { get; set; }
+        public global::Repull.SDK.Models.Promotion_discount Discount
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_discount>("discount"); }
+            set { BackingStore?.Set("discount", value); }
+        }
 #endif
         /// <summary>The editable property</summary>
-        public bool? Editable { get; set; }
+        public bool? Editable
+        {
+            get { return BackingStore?.Get<bool?>("editable"); }
+            set { BackingStore?.Set("editable", value); }
+        }
         /// <summary>The expiresAt property</summary>
-        public DateTimeOffset? ExpiresAt { get; set; }
+        public DateTimeOffset? ExpiresAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("expiresAt"); }
+            set { BackingStore?.Set("expiresAt", value); }
+        }
         /// <summary>The channel’s promotion id. Booking.com may issue a new one when a promotion is changed; the Repull `id` stays the same.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalId { get; set; }
+        public string? ExternalId
+        {
+            get { return BackingStore?.Get<string?>("externalId"); }
+            set { BackingStore?.Set("externalId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalId { get; set; }
+        public string ExternalId
+        {
+            get { return BackingStore?.Get<string>("externalId"); }
+            set { BackingStore?.Set("externalId", value); }
+        }
 #endif
         /// <summary>Repull id of this promotion on this listing (use it in `/promotions/{promotionId}`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>`channel`: created in the channel’s own tools and read-only here (Airbnb Custom promotions).</summary>
-        public global::Repull.SDK.Models.Promotion_managedBy? ManagedBy { get; set; }
+        public global::Repull.SDK.Models.Promotion_managedBy? ManagedBy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_managedBy?>("managedBy"); }
+            set { BackingStore?.Set("managedBy", value); }
+        }
         /// <summary>Set when it comes from the listing’s weekly or monthly discount in its pricing settings — change those instead.</summary>
-        public global::Repull.SDK.Models.Promotion_managedKey? ManagedKey { get; set; }
+        public global::Repull.SDK.Models.Promotion_managedKey? ManagedKey
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_managedKey?>("managedKey"); }
+            set { BackingStore?.Set("managedKey", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The removable property</summary>
-        public bool? Removable { get; set; }
+        public bool? Removable
+        {
+            get { return BackingStore?.Get<bool?>("removable"); }
+            set { BackingStore?.Set("removable", value); }
+        }
         /// <summary>Which rules a type supports depends on the channel — see the catalog.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PromotionRules? Rules { get; set; }
+        public global::Repull.SDK.Models.PromotionRules? Rules
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules?>("rules"); }
+            set { BackingStore?.Set("rules", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PromotionRules Rules { get; set; }
+        public global::Repull.SDK.Models.PromotionRules Rules
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionRules>("rules"); }
+            set { BackingStore?.Set("rules", value); }
+        }
 #endif
         /// <summary>`eligible`: the listing qualifies but is not enrolled (Airbnb new listing promotion). `inactive`: switched off; Booking.com keeps deactivated promotions.</summary>
-        public global::Repull.SDK.Models.Promotion_status? Status { get; set; }
+        public global::Repull.SDK.Models.Promotion_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The syncedAt property</summary>
-        public DateTimeOffset? SyncedAt { get; set; }
+        public DateTimeOffset? SyncedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("syncedAt"); }
+            set { BackingStore?.Set("syncedAt", value); }
+        }
         /// <summary>The same idea on both channels shares a type: `mobile` is Airbnb’s mobile-only discount or Booking.com’s mobile rate; `new_listing` is Airbnb’s new listing promotion or Booking.com’s new property deal. `top_rated_guests` is Airbnb only; the deal, last-minute, early-booker, country and campaign types are Booking.com only; `custom` (Airbnb Custom promotion) is read-only.</summary>
-        public global::Repull.SDK.Models.PromotionType? Type { get; set; }
+        public global::Repull.SDK.Models.PromotionType? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PromotionType?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>The usage property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Promotion_usage? Usage { get; set; }
+        public global::Repull.SDK.Models.Promotion_usage? Usage
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_usage?>("usage"); }
+            set { BackingStore?.Set("usage", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Promotion_usage Usage { get; set; }
+        public global::Repull.SDK.Models.Promotion_usage Usage
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Promotion_usage>("usage"); }
+            set { BackingStore?.Set("usage", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Promotion"/> and sets the default values.
         /// </summary>
         public Promotion()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

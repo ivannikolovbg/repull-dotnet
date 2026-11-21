@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,35 +12,66 @@ namespace Repull.SDK.Models
     /// Body for `POST /v1/channels/booking/listings/map`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MapBookingRoomRequest : IAdditionalDataHolder, IParsable
+    public partial class MapBookingRoomRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Optional. When present, must be the Booking.com property the room belongs to — guards against mapping a room of the wrong property when looping over several.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>Canonical Repull listing id to link the room to. Must belong to your workspace and be active. `null` unmaps the room and removes its channel link. The field is required — omitting it is a 422, not an unmap.</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>Booking.com&apos;s own room id. Discover it via `GET /v1/channels/booking/properties/{id}/rooms` (`rooms[].roomId`). A number is also accepted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomBookingId { get; set; }
+        public string? RoomBookingId
+        {
+            get { return BackingStore?.Get<string?>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #nullable restore
 #else
-        public string RoomBookingId { get; set; }
+        public string RoomBookingId
+        {
+            get { return BackingStore?.Get<string>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #endif
         /// <summary>Whether the resulting channel link has sync enabled.</summary>
-        public bool? SyncEnabled { get; set; }
+        public bool? SyncEnabled
+        {
+            get { return BackingStore?.Get<bool?>("syncEnabled"); }
+            set { BackingStore?.Set("syncEnabled", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MapBookingRoomRequest"/> and sets the default values.
         /// </summary>
         public MapBookingRoomRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
             SyncEnabled = true;
         }

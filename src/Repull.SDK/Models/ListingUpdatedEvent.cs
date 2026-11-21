@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,46 +10,89 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingUpdatedEvent : IAdditionalDataHolder, IParsable
+    public partial class ListingUpdatedEvent : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Which connected account produced this event. Null when it cannot be resolved — present-but-null rather than omitted, so a receiver can tell &quot;unresolvable&quot; from &quot;an old event&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.WebhookEventAccount? Account { get; set; }
+        public global::Repull.SDK.Models.WebhookEventAccount? Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventAccount?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.WebhookEventAccount Account { get; set; }
+        public global::Repull.SDK.Models.WebhookEventAccount Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventAccount>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The apiVersion property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiVersion { get; set; }
+        public string? ApiVersion
+        {
+            get { return BackingStore?.Get<string?>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #nullable restore
 #else
-        public string ApiVersion { get; set; }
+        public string ApiVersion
+        {
+            get { return BackingStore?.Get<string>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Payload for `listing.updated`. Something about the listing changed on the channel — content, pricing, booking settings, house rules, availability, sync settings or promotions.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingUpdatedPayload? Data { get; set; }
+        public global::Repull.SDK.Models.ListingUpdatedPayload? Data
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingUpdatedPayload?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingUpdatedPayload Data { get; set; }
+        public global::Repull.SDK.Models.ListingUpdatedPayload Data
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingUpdatedPayload>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>The event name. This field is `event`, not `type`.</summary>
-        public global::Repull.SDK.Models.ListingUpdatedEvent_event? Event { get; set; }
+        public global::Repull.SDK.Models.ListingUpdatedEvent_event? Event
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingUpdatedEvent_event?>("event"); }
+            set { BackingStore?.Set("event", value); }
+        }
         /// <summary>Stable across every delivery and replay of this logical event — dedupe on it.</summary>
-        public Guid? EventId { get; set; }
+        public Guid? EventId
+        {
+            get { return BackingStore?.Get<Guid?>("eventId"); }
+            set { BackingStore?.Set("eventId", value); }
+        }
         /// <summary>When this delivery was built.</summary>
-        public DateTimeOffset? Timestamp { get; set; }
+        public DateTimeOffset? Timestamp
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("timestamp"); }
+            set { BackingStore?.Set("timestamp", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingUpdatedEvent"/> and sets the default values.
         /// </summary>
         public ListingUpdatedEvent()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

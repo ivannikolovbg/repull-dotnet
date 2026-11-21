@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,48 +10,87 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingPolicies_checkIn : IAdditionalDataHolder, IParsable
+    public partial class ListingPolicies_checkIn : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The from property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? From { get; set; }
+        public string? From
+        {
+            get { return BackingStore?.Get<string?>("from"); }
+            set { BackingStore?.Set("from", value); }
+        }
 #nullable restore
 #else
-        public string From { get; set; }
+        public string From
+        {
+            get { return BackingStore?.Get<string>("from"); }
+            set { BackingStore?.Set("from", value); }
+        }
 #endif
         /// <summary>The instructions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Instructions { get; set; }
+        public string? Instructions
+        {
+            get { return BackingStore?.Get<string?>("instructions"); }
+            set { BackingStore?.Set("instructions", value); }
+        }
 #nullable restore
 #else
-        public string Instructions { get; set; }
+        public string Instructions
+        {
+            get { return BackingStore?.Get<string>("instructions"); }
+            set { BackingStore?.Set("instructions", value); }
+        }
 #endif
         /// <summary>`lockbox`, `smartlock`, `keypad`, `doorman`, `host_greets`, `building_staff`, `other`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Method { get; set; }
+        public string? Method
+        {
+            get { return BackingStore?.Get<string?>("method"); }
+            set { BackingStore?.Set("method", value); }
+        }
 #nullable restore
 #else
-        public string Method { get; set; }
+        public string Method
+        {
+            get { return BackingStore?.Get<string>("method"); }
+            set { BackingStore?.Set("method", value); }
+        }
 #endif
         /// <summary>The until property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Until { get; set; }
+        public string? Until
+        {
+            get { return BackingStore?.Get<string?>("until"); }
+            set { BackingStore?.Set("until", value); }
+        }
 #nullable restore
 #else
-        public string Until { get; set; }
+        public string Until
+        {
+            get { return BackingStore?.Get<string>("until"); }
+            set { BackingStore?.Set("until", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPolicies_checkIn"/> and sets the default values.
         /// </summary>
         public ListingPolicies_checkIn()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

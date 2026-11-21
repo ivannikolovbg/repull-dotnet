@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,113 +12,228 @@ namespace Repull.SDK.Models
     /// An Airbnb Resolution Center case (AirCover / damage, extra-guest, refund or change request). Read-only — Airbnb exposes no create/evidence/status API. The money a resolution moved rides in the transactions ledger as `Resolution Payout` / `Resolution Adjustment` rows sharing the same reference; join on `resolutionId`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Resolution : IAdditionalDataHolder, IParsable
+    public partial class Resolution : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Airbnb&apos;s case-status label.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CaseStatus { get; set; }
+        public string? CaseStatus
+        {
+            get { return BackingStore?.Get<string?>("caseStatus"); }
+            set { BackingStore?.Set("caseStatus", value); }
+        }
 #nullable restore
 #else
-        public string CaseStatus { get; set; }
+        public string CaseStatus
+        {
+            get { return BackingStore?.Get<string>("caseStatus"); }
+            set { BackingStore?.Set("caseStatus", value); }
+        }
 #endif
         /// <summary>Airbnb confirmation code of the reservation the case is on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>True when Airbnb Customer Support (not the host/guest) opened the case.</summary>
-        public bool? CustomerSupportInitiated { get; set; }
+        public bool? CustomerSupportInitiated
+        {
+            get { return BackingStore?.Get<bool?>("customerSupportInitiated"); }
+            set { BackingStore?.Set("customerSupportInitiated", value); }
+        }
         /// <summary>Who opened the case (id + name).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Resolution_initiator? Initiator { get; set; }
+        public global::Repull.SDK.Models.Resolution_initiator? Initiator
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Resolution_initiator?>("initiator"); }
+            set { BackingStore?.Set("initiator", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Resolution_initiator Initiator { get; set; }
+        public global::Repull.SDK.Models.Resolution_initiator Initiator
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Resolution_initiator>("initiator"); }
+            set { BackingStore?.Set("initiator", value); }
+        }
 #endif
         /// <summary>The listingName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingName { get; set; }
+        public string? ListingName
+        {
+            get { return BackingStore?.Get<string?>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #nullable restore
 #else
-        public string ListingName { get; set; }
+        public string ListingName
+        {
+            get { return BackingStore?.Get<string>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #endif
         /// <summary>The productType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ProductType { get; set; }
+        public string? ProductType
+        {
+            get { return BackingStore?.Get<string?>("productType"); }
+            set { BackingStore?.Set("productType", value); }
+        }
 #nullable restore
 #else
-        public string ProductType { get; set; }
+        public string ProductType
+        {
+            get { return BackingStore?.Get<string>("productType"); }
+            set { BackingStore?.Set("productType", value); }
+        }
 #endif
         /// <summary>Why the resolution was opened.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>Repull&apos;s internal reservation id, when the reservation is in this workspace.</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>Airbnb&apos;s resolution id — the `{id}` path value and the join key to a transaction&apos;s `reference`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ResolutionId { get; set; }
+        public string? ResolutionId
+        {
+            get { return BackingStore?.Get<string?>("resolutionId"); }
+            set { BackingStore?.Set("resolutionId", value); }
+        }
 #nullable restore
 #else
-        public string ResolutionId { get; set; }
+        public string ResolutionId
+        {
+            get { return BackingStore?.Get<string>("resolutionId"); }
+            set { BackingStore?.Set("resolutionId", value); }
+        }
 #endif
         /// <summary>Who responds (id + name).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Resolution_responder? Responder { get; set; }
+        public global::Repull.SDK.Models.Resolution_responder? Responder
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Resolution_responder?>("responder"); }
+            set { BackingStore?.Set("responder", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Resolution_responder Responder { get; set; }
+        public global::Repull.SDK.Models.Resolution_responder Responder
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Resolution_responder>("responder"); }
+            set { BackingStore?.Set("responder", value); }
+        }
 #endif
         /// <summary>OPEN or CLOSED, as Airbnb reports it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>Human-readable status detail.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StatusText { get; set; }
+        public string? StatusText
+        {
+            get { return BackingStore?.Get<string?>("statusText"); }
+            set { BackingStore?.Set("statusText", value); }
+        }
 #nullable restore
 #else
-        public string StatusText { get; set; }
+        public string StatusText
+        {
+            get { return BackingStore?.Get<string>("statusText"); }
+            set { BackingStore?.Set("statusText", value); }
+        }
 #endif
         /// <summary>Airbnb&apos;s hint on whose turn it is to act next — track progress with it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SuggestedActionText { get; set; }
+        public string? SuggestedActionText
+        {
+            get { return BackingStore?.Get<string?>("suggestedActionText"); }
+            set { BackingStore?.Set("suggestedActionText", value); }
+        }
 #nullable restore
 #else
-        public string SuggestedActionText { get; set; }
+        public string SuggestedActionText
+        {
+            get { return BackingStore?.Get<string>("suggestedActionText"); }
+            set { BackingStore?.Set("suggestedActionText", value); }
+        }
 #endif
         /// <summary>When Repull last refreshed this case from Airbnb.</summary>
-        public DateTimeOffset? SyncedAt { get; set; }
+        public DateTimeOffset? SyncedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("syncedAt"); }
+            set { BackingStore?.Set("syncedAt", value); }
+        }
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Resolution"/> and sets the default values.
         /// </summary>
         public Resolution()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

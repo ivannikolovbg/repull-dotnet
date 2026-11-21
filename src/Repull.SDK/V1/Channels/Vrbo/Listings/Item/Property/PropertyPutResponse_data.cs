@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property
     /// What Vrbo has stored for the section, read back after the write.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PropertyPutResponse_data : IAdditionalDataHolder, IParsable
+    public partial class PropertyPutResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The interiorSize property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_interiorSize? InteriorSize { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_interiorSize? InteriorSize
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_interiorSize?>("interiorSize"); }
+            set { BackingStore?.Set("interiorSize", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_interiorSize InteriorSize { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_interiorSize InteriorSize
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_interiorSize>("interiorSize"); }
+            set { BackingStore?.Set("interiorSize", value); }
+        }
 #endif
         /// <summary>The longTermRentersWelcome property</summary>
-        public bool? LongTermRentersWelcome { get; set; }
+        public bool? LongTermRentersWelcome
+        {
+            get { return BackingStore?.Get<bool?>("longTermRentersWelcome"); }
+            set { BackingStore?.Set("longTermRentersWelcome", value); }
+        }
         /// <summary>The propertyName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyName { get; set; }
+        public string? PropertyName
+        {
+            get { return BackingStore?.Get<string?>("propertyName"); }
+            set { BackingStore?.Set("propertyName", value); }
+        }
 #nullable restore
 #else
-        public string PropertyName { get; set; }
+        public string PropertyName
+        {
+            get { return BackingStore?.Get<string>("propertyName"); }
+            set { BackingStore?.Set("propertyName", value); }
+        }
 #endif
         /// <summary>The propertyType property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyType { get; set; }
+        public string? PropertyType
+        {
+            get { return BackingStore?.Get<string?>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #nullable restore
 #else
-        public string PropertyType { get; set; }
+        public string PropertyType
+        {
+            get { return BackingStore?.Get<string>("propertyType"); }
+            set { BackingStore?.Set("propertyType", value); }
+        }
 #endif
         /// <summary>The propertyTypeOptions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_propertyTypeOptions>? PropertyTypeOptions { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_propertyTypeOptions>? PropertyTypeOptions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_propertyTypeOptions>?>("propertyTypeOptions"); }
+            set { BackingStore?.Set("propertyTypeOptions", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_propertyTypeOptions> PropertyTypeOptions { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_propertyTypeOptions> PropertyTypeOptions
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data_propertyTypeOptions>>("propertyTypeOptions"); }
+            set { BackingStore?.Set("propertyTypeOptions", value); }
+        }
 #endif
         /// <summary>The seniorsOnly property</summary>
-        public bool? SeniorsOnly { get; set; }
+        public bool? SeniorsOnly
+        {
+            get { return BackingStore?.Get<bool?>("seniorsOnly"); }
+            set { BackingStore?.Set("seniorsOnly", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Property.PropertyPutResponse_data"/> and sets the default values.
         /// </summary>
         public PropertyPutResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

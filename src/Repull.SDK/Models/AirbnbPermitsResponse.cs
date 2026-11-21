@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,32 +10,55 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbPermitsResponse : IAdditionalDataHolder, IParsable
+    public partial class AirbnbPermitsResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Permits as last mirrored by the sync worker: body, type, status, number. The RESULT of a permit, not the questions.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbPermitsResponse_cached>? Cached { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPermitsResponse_cached>? Cached
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPermitsResponse_cached>?>("cached"); }
+            set { BackingStore?.Set("cached", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbPermitsResponse_cached> Cached { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPermitsResponse_cached> Cached
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPermitsResponse_cached>>("cached"); }
+            set { BackingStore?.Set("cached", value); }
+        }
 #endif
         /// <summary>The live permit flows from Airbnb — present only with `?source=live`, `null` otherwise. Each flow names its `regulatory_body`, `regulation_type`, `status`, its `flows[]` with the `answer_key` / `type` / `choices` of every question you have to answer, plus the answers already on file.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbPermitsResponse_permits>? Permits { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPermitsResponse_permits>? Permits
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPermitsResponse_permits>?>("permits"); }
+            set { BackingStore?.Set("permits", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbPermitsResponse_permits> Permits { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPermitsResponse_permits> Permits
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPermitsResponse_permits>>("permits"); }
+            set { BackingStore?.Set("permits", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPermitsResponse"/> and sets the default values.
         /// </summary>
         public AirbnbPermitsResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

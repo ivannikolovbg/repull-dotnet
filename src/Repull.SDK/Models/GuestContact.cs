@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,39 +12,78 @@ namespace Repull.SDK.Models
     /// One contact channel attached to a guest profile (phone, email, etc.).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class GuestContact : IAdditionalDataHolder, IParsable
+    public partial class GuestContact : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The isPrimary property</summary>
-        public bool? IsPrimary { get; set; }
+        public bool? IsPrimary
+        {
+            get { return BackingStore?.Get<bool?>("isPrimary"); }
+            set { BackingStore?.Set("isPrimary", value); }
+        }
         /// <summary>The lastUsed property</summary>
-        public DateTimeOffset? LastUsed { get; set; }
+        public DateTimeOffset? LastUsed
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastUsed"); }
+            set { BackingStore?.Set("lastUsed", value); }
+        }
         /// <summary>Phone contacts only: `airbnb_relay` when this is a temporary Airbnb relay number (SMS only, expires 48h after checkout, shared across hosts, never a guest identifier); `guest` otherwise.</summary>
-        public global::Repull.SDK.Models.GuestPhoneType? PhoneType { get; set; }
+        public global::Repull.SDK.Models.GuestPhoneType? PhoneType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.GuestPhoneType?>("phoneType"); }
+            set { BackingStore?.Set("phoneType", value); }
+        }
         /// <summary>Contact channel type (`phone`, `email`, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
         /// <summary>The value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Value { get; set; }
+        public string? Value
+        {
+            get { return BackingStore?.Get<string?>("value"); }
+            set { BackingStore?.Set("value", value); }
+        }
 #nullable restore
 #else
-        public string Value { get; set; }
+        public string Value
+        {
+            get { return BackingStore?.Get<string>("value"); }
+            set { BackingStore?.Set("value", value); }
+        }
 #endif
         /// <summary>The verified property</summary>
-        public bool? Verified { get; set; }
+        public bool? Verified
+        {
+            get { return BackingStore?.Get<bool?>("verified"); }
+            set { BackingStore?.Set("verified", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestContact"/> and sets the default values.
         /// </summary>
         public GuestContact()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

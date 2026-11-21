@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -10,34 +11,61 @@ namespace Repull.SDK.V1.Webhooks.Test
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TestPostRequestBody : IAdditionalDataHolder, IParsable
+    public partial class TestPostRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Canonical event type identifier. Every webhook delivery declares one of these in its `type` field; SDKs key the discriminated `WebhookEvent` union on this value.</summary>
-        public global::Repull.SDK.Models.WebhookEventType? EventType { get; set; }
+        public global::Repull.SDK.Models.WebhookEventType? EventType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventType?>("event_type"); }
+            set { BackingStore?.Set("event_type", value); }
+        }
         /// <summary>The signing_secret property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SigningSecret { get; set; }
+        public string? SigningSecret
+        {
+            get { return BackingStore?.Get<string?>("signing_secret"); }
+            set { BackingStore?.Set("signing_secret", value); }
+        }
 #nullable restore
 #else
-        public string SigningSecret { get; set; }
+        public string SigningSecret
+        {
+            get { return BackingStore?.Get<string>("signing_secret"); }
+            set { BackingStore?.Set("signing_secret", value); }
+        }
 #endif
         /// <summary>The url property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url
+        {
+            get { return BackingStore?.Get<string?>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return BackingStore?.Get<string>("url"); }
+            set { BackingStore?.Set("url", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Webhooks.Test.TestPostRequestBody"/> and sets the default values.
         /// </summary>
         public TestPostRequestBody()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

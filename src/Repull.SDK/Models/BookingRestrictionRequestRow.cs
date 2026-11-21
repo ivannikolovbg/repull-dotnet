@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,45 +13,88 @@ namespace Repull.SDK.Models
     /// One update&apos;s restriction request: which nights, and which restrictions were asked for them.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingRestrictionRequestRow : IAdditionalDataHolder, IParsable
+    public partial class BookingRestrictionRequestRow : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Last night, inclusive.</summary>
-        public Date? End { get; set; }
+        public Date? End
+        {
+            get { return BackingStore?.Get<Date?>("end"); }
+            set { BackingStore?.Set("end", value); }
+        }
         /// <summary>The restrictions stated for these nights.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Fields { get; set; }
+        public List<string>? Fields
+        {
+            get { return BackingStore?.Get<List<string>?>("fields"); }
+            set { BackingStore?.Set("fields", value); }
+        }
 #nullable restore
 #else
-        public List<string> Fields { get; set; }
+        public List<string> Fields
+        {
+            get { return BackingStore?.Get<List<string>>("fields"); }
+            set { BackingStore?.Set("fields", value); }
+        }
 #endif
         /// <summary>Position of the update in the request `updates[]`.</summary>
-        public int? Index { get; set; }
+        public int? Index
+        {
+            get { return BackingStore?.Get<int?>("index"); }
+            set { BackingStore?.Set("index", value); }
+        }
         /// <summary>The rateId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RateId { get; set; }
+        public string? RateId
+        {
+            get { return BackingStore?.Get<string?>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #nullable restore
 #else
-        public string RateId { get; set; }
+        public string RateId
+        {
+            get { return BackingStore?.Get<string>("rateId"); }
+            set { BackingStore?.Set("rateId", value); }
+        }
 #endif
         /// <summary>The roomId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
         /// <summary>First night, inclusive.</summary>
-        public Date? Start { get; set; }
+        public Date? Start
+        {
+            get { return BackingStore?.Get<Date?>("start"); }
+            set { BackingStore?.Set("start", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingRestrictionRequestRow"/> and sets the default values.
         /// </summary>
         public BookingRestrictionRequestRow()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

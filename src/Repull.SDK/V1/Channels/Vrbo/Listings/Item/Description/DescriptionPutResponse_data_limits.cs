@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,32 +10,55 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class DescriptionPutResponse_data_limits : IAdditionalDataHolder, IParsable
+    public partial class DescriptionPutResponse_data_limits : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_description? Description { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_description? Description
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_description?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_description Description { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_description Description
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_description>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The headline property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_headline? Headline { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_headline? Headline
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_headline?>("headline"); }
+            set { BackingStore?.Set("headline", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_headline Headline { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_headline Headline
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits_headline>("headline"); }
+            set { BackingStore?.Set("headline", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Description.DescriptionPutResponse_data_limits"/> and sets the default values.
         /// </summary>
         public DescriptionPutResponse_data_limits()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

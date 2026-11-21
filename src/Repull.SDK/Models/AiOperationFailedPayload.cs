@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,41 +12,76 @@ namespace Repull.SDK.Models
     /// Payload for `ai.operation.failed`. An async AI run terminated with an error and will not be retried.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AiOperationFailedPayload : IAdditionalDataHolder, IParsable
+    public partial class AiOperationFailedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AiOperationFailedPayload_error? Error { get; set; }
+        public global::Repull.SDK.Models.AiOperationFailedPayload_error? Error
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AiOperationFailedPayload_error?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AiOperationFailedPayload_error Error { get; set; }
+        public global::Repull.SDK.Models.AiOperationFailedPayload_error Error
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AiOperationFailedPayload_error>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The failedAt property</summary>
-        public DateTimeOffset? FailedAt { get; set; }
+        public DateTimeOffset? FailedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("failedAt"); }
+            set { BackingStore?.Set("failedAt", value); }
+        }
         /// <summary>The operationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? OperationId { get; set; }
+        public string? OperationId
+        {
+            get { return BackingStore?.Get<string?>("operationId"); }
+            set { BackingStore?.Set("operationId", value); }
+        }
 #nullable restore
 #else
-        public string OperationId { get; set; }
+        public string OperationId
+        {
+            get { return BackingStore?.Get<string>("operationId"); }
+            set { BackingStore?.Set("operationId", value); }
+        }
 #endif
         /// <summary>The type property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AiOperationFailedPayload"/> and sets the default values.
         /// </summary>
         public AiOperationFailedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

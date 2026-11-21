@@ -28,6 +28,9 @@ jobs:
       - name: Format check
         run: dotnet format --verify-no-changes --severity warn
 
+      - name: Test
+        run: dotnet test --no-build --configuration Release
+
       - name: Pack
         run: dotnet pack src/Repull.SDK/Repull.SDK.csproj --no-build --configuration Release --output ./artifacts
 

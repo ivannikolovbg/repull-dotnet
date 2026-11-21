@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,32 +10,55 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AirbnbSafetyDisclosuresResponse : IAdditionalDataHolder, IParsable
+    public partial class AirbnbSafetyDisclosuresResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Just the types that are true of this property.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Declared { get; set; }
+        public List<string>? Declared
+        {
+            get { return BackingStore?.Get<List<string>?>("declared"); }
+            set { BackingStore?.Set("declared", value); }
+        }
 #nullable restore
 #else
-        public List<string> Declared { get; set; }
+        public List<string> Declared
+        {
+            get { return BackingStore?.Get<List<string>>("declared"); }
+            set { BackingStore?.Set("declared", value); }
+        }
 #endif
         /// <summary>Every supported disclosure type, including the ones this listing has not declared (`value: false`), so &quot;does this property have cameras?&quot; has an answer rather than a missing key. Types Airbnb returns that are not in the documented set are passed through, never dropped.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? Disclosures { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>? Disclosures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>?>("disclosures"); }
+            set { BackingStore?.Set("disclosures", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> Disclosures { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbSafetyDisclosure> Disclosures
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbSafetyDisclosure>>("disclosures"); }
+            set { BackingStore?.Set("disclosures", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbSafetyDisclosuresResponse"/> and sets the default values.
         /// </summary>
         public AirbnbSafetyDisclosuresResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

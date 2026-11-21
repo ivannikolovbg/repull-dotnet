@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,55 +12,102 @@ namespace Repull.SDK.Models
     /// Public-facing metadata about the host whose account is linked. Lets clients render an account-level card (avatar + name) instead of just an opaque ID. Email is intentionally NOT exposed for Airbnb — the partner API doesn&apos;t return host email.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConnectHost : IAdditionalDataHolder, IParsable
+    public partial class ConnectHost : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Per-provider activation/onboarding status.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ActivationStatus { get; set; }
+        public string? ActivationStatus
+        {
+            get { return BackingStore?.Get<string?>("activationStatus"); }
+            set { BackingStore?.Set("activationStatus", value); }
+        }
 #nullable restore
 #else
-        public string ActivationStatus { get; set; }
+        public string ActivationStatus
+        {
+            get { return BackingStore?.Get<string>("activationStatus"); }
+            set { BackingStore?.Set("activationStatus", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Profile picture URL (small).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AvatarUrl { get; set; }
+        public string? AvatarUrl
+        {
+            get { return BackingStore?.Get<string?>("avatarUrl"); }
+            set { BackingStore?.Set("avatarUrl", value); }
+        }
 #nullable restore
 #else
-        public string AvatarUrl { get; set; }
+        public string AvatarUrl
+        {
+            get { return BackingStore?.Get<string>("avatarUrl"); }
+            set { BackingStore?.Set("avatarUrl", value); }
+        }
 #endif
         /// <summary>Profile picture URL (large).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AvatarUrlLarge { get; set; }
+        public string? AvatarUrlLarge
+        {
+            get { return BackingStore?.Get<string?>("avatarUrlLarge"); }
+            set { BackingStore?.Set("avatarUrlLarge", value); }
+        }
 #nullable restore
 #else
-        public string AvatarUrlLarge { get; set; }
+        public string AvatarUrlLarge
+        {
+            get { return BackingStore?.Get<string>("avatarUrlLarge"); }
+            set { BackingStore?.Set("avatarUrlLarge", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Short display name (Airbnb first name).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DisplayName { get; set; }
+        public string? DisplayName
+        {
+            get { return BackingStore?.Get<string?>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #nullable restore
 #else
-        public string DisplayName { get; set; }
+        public string DisplayName
+        {
+            get { return BackingStore?.Get<string>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #endif
         /// <summary>Preferred long-form name. Falls back to displayName when the host hasn&apos;t set a preferred form.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DisplayNameLong { get; set; }
+        public string? DisplayNameLong
+        {
+            get { return BackingStore?.Get<string?>("displayNameLong"); }
+            set { BackingStore?.Set("displayNameLong", value); }
+        }
 #nullable restore
 #else
-        public string DisplayNameLong { get; set; }
+        public string DisplayNameLong
+        {
+            get { return BackingStore?.Get<string>("displayNameLong"); }
+            set { BackingStore?.Set("displayNameLong", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectHost"/> and sets the default values.
         /// </summary>
         public ConnectHost()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,29 +12,64 @@ namespace Repull.SDK.V1.Health.Channels.Item
     /// VRBO only — the connector&apos;s own signals.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WithChannelGetResponse_vrbo : IAdditionalDataHolder, IParsable
+    public partial class WithChannelGetResponse_vrbo : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>The accounts_connected property</summary>
-        public int? AccountsConnected { get; set; }
+        public int? AccountsConnected
+        {
+            get { return BackingStore?.Get<int?>("accounts_connected"); }
+            set { BackingStore?.Set("accounts_connected", value); }
+        }
         /// <summary>Accounts VRBO signed out; `status` is `down` while any is.</summary>
-        public int? AccountsSignedOut { get; set; }
+        public int? AccountsSignedOut
+        {
+            get { return BackingStore?.Get<int?>("accounts_signed_out"); }
+            set { BackingStore?.Set("accounts_signed_out", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The calendar_oldest_wait_minutes property</summary>
-        public int? CalendarOldestWaitMinutes { get; set; }
+        public int? CalendarOldestWaitMinutes
+        {
+            get { return BackingStore?.Get<int?>("calendar_oldest_wait_minutes"); }
+            set { BackingStore?.Set("calendar_oldest_wait_minutes", value); }
+        }
         /// <summary>Listings with a calendar push waiting.</summary>
-        public int? CalendarQueueBacklog { get; set; }
+        public int? CalendarQueueBacklog
+        {
+            get { return BackingStore?.Get<int?>("calendar_queue_backlog"); }
+            set { BackingStore?.Set("calendar_queue_backlog", value); }
+        }
         /// <summary>Failed pushes in the window caused by Repull&apos;s own VRBO connector (a timeout, a browser session in use), not by VRBO. They are retried and never set `status`.</summary>
-        public int? ConnectorErrors { get; set; }
+        public int? ConnectorErrors
+        {
+            get { return BackingStore?.Get<int?>("connector_errors"); }
+            set { BackingStore?.Set("connector_errors", value); }
+        }
         /// <summary>Accounts whose last full inbox sync is older than 30 minutes (it runs every 5).</summary>
-        public int? InboxSyncLate { get; set; }
+        public int? InboxSyncLate
+        {
+            get { return BackingStore?.Get<int?>("inbox_sync_late"); }
+            set { BackingStore?.Set("inbox_sync_late", value); }
+        }
         /// <summary>Hours the push failure rate is judged over.</summary>
-        public int? WindowHours { get; set; }
+        public int? WindowHours
+        {
+            get { return BackingStore?.Get<int?>("window_hours"); }
+            set { BackingStore?.Set("window_hours", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Health.Channels.Item.WithChannelGetResponse_vrbo"/> and sets the default values.
         /// </summary>
         public WithChannelGetResponse_vrbo()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

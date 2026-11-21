@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,77 +12,152 @@ namespace Repull.SDK.Models
     /// A channel the multi-channel Connect picker can show. Returned by `GET /v1/connect/providers` and consumed by SDKs that render their own picker UI.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConnectProvider : IAdditionalDataHolder, IParsable
+    public partial class ConnectProvider : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Optional friendly aliases the picker&apos;s search box can match.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Aliases { get; set; }
+        public List<string>? Aliases
+        {
+            get { return BackingStore?.Get<List<string>?>("aliases"); }
+            set { BackingStore?.Set("aliases", value); }
+        }
 #nullable restore
 #else
-        public List<string> Aliases { get; set; }
+        public List<string> Aliases
+        {
+            get { return BackingStore?.Get<List<string>>("aliases"); }
+            set { BackingStore?.Set("aliases", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Channel category — OTAs are listing marketplaces; PMSes are property management systems.</summary>
-        public global::Repull.SDK.Models.ConnectProvider_category? Category { get; set; }
+        public global::Repull.SDK.Models.ConnectProvider_category? Category
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectProvider_category?>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
         /// <summary>How the host is connected. `oauth`: provider-side consent screen. `credentials`: hosted form collects API keys. `activation`: push-only handshake. `claim`: connectivity-provider designation in the channel&apos;s Extranet (Booking.com). `extranet`: the host signs in with their Booking.com Extranet user.</summary>
-        public global::Repull.SDK.Models.ConnectProvider_connectPattern? ConnectPattern { get; set; }
+        public global::Repull.SDK.Models.ConnectProvider_connectPattern? ConnectPattern
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectProvider_connectPattern?>("connectPattern"); }
+            set { BackingStore?.Set("connectPattern", value); }
+        }
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get { return BackingStore?.Get<string?>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return BackingStore?.Get<string>("description"); }
+            set { BackingStore?.Set("description", value); }
+        }
 #endif
         /// <summary>The displayName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DisplayName { get; set; }
+        public string? DisplayName
+        {
+            get { return BackingStore?.Get<string?>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #nullable restore
 #else
-        public string DisplayName { get; set; }
+        public string DisplayName
+        {
+            get { return BackingStore?.Get<string>("displayName"); }
+            set { BackingStore?.Set("displayName", value); }
+        }
 #endif
         /// <summary>The docsUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DocsUrl { get; set; }
+        public string? DocsUrl
+        {
+            get { return BackingStore?.Get<string?>("docsUrl"); }
+            set { BackingStore?.Set("docsUrl", value); }
+        }
 #nullable restore
 #else
-        public string DocsUrl { get; set; }
+        public string DocsUrl
+        {
+            get { return BackingStore?.Get<string>("docsUrl"); }
+            set { BackingStore?.Set("docsUrl", value); }
+        }
 #endif
         /// <summary>Stable identifier passed back to /select-provider and used in /v1/connect/{provider} routes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Logo URL — Clearbit stand-in until self-hosted SVGs land.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LogoUrl { get; set; }
+        public string? LogoUrl
+        {
+            get { return BackingStore?.Get<string?>("logoUrl"); }
+            set { BackingStore?.Set("logoUrl", value); }
+        }
 #nullable restore
 #else
-        public string LogoUrl { get; set; }
+        public string LogoUrl
+        {
+            get { return BackingStore?.Get<string>("logoUrl"); }
+            set { BackingStore?.Set("logoUrl", value); }
+        }
 #endif
         /// <summary>PMS providers: what Repull Migrate can carry across, per entity — `{ read: { listings: { level, notes }, … }, write: { … } }` with `level` `full` | `partial` | `none`. `null` for channels (OTAs).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ConnectProvider_migrationCapabilities? MigrationCapabilities { get; set; }
+        public global::Repull.SDK.Models.ConnectProvider_migrationCapabilities? MigrationCapabilities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectProvider_migrationCapabilities?>("migrationCapabilities"); }
+            set { BackingStore?.Set("migrationCapabilities", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ConnectProvider_migrationCapabilities MigrationCapabilities { get; set; }
+        public global::Repull.SDK.Models.ConnectProvider_migrationCapabilities MigrationCapabilities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectProvider_migrationCapabilities>("migrationCapabilities"); }
+            set { BackingStore?.Set("migrationCapabilities", value); }
+        }
 #endif
         /// <summary>Pickers should hide / disable `coming-soon` cards. `beta` cards are clickable but show a Beta pill. `request-only` is a PMS Repull doesn&apos;t connect yet, listed only with `includeRequestOnly`: picking it collects the host&apos;s access details for the Repull team, and the session ends as `requested` instead of connecting.</summary>
-        public global::Repull.SDK.Models.ConnectProvider_status? Status { get; set; }
+        public global::Repull.SDK.Models.ConnectProvider_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectProvider_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ConnectProvider"/> and sets the default values.
         /// </summary>
         public ConnectProvider()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

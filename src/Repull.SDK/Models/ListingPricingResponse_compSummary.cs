@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,23 +12,46 @@ namespace Repull.SDK.Models
     /// 5km comp aggregate (Atlas comp_listings).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPricingResponse_compSummary : IAdditionalDataHolder, IParsable
+    public partial class ListingPricingResponse_compSummary : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The avgPrice property</summary>
-        public double? AvgPrice { get; set; }
+        public double? AvgPrice
+        {
+            get { return BackingStore?.Get<double?>("avgPrice"); }
+            set { BackingStore?.Set("avgPrice", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The count property</summary>
-        public int? Count { get; set; }
+        public int? Count
+        {
+            get { return BackingStore?.Get<int?>("count"); }
+            set { BackingStore?.Set("count", value); }
+        }
         /// <summary>The maxPrice property</summary>
-        public double? MaxPrice { get; set; }
+        public double? MaxPrice
+        {
+            get { return BackingStore?.Get<double?>("maxPrice"); }
+            set { BackingStore?.Set("maxPrice", value); }
+        }
         /// <summary>The minPrice property</summary>
-        public double? MinPrice { get; set; }
+        public double? MinPrice
+        {
+            get { return BackingStore?.Get<double?>("minPrice"); }
+            set { BackingStore?.Set("minPrice", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPricingResponse_compSummary"/> and sets the default values.
         /// </summary>
         public ListingPricingResponse_compSummary()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

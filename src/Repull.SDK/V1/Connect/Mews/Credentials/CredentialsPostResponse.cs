@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -10,68 +11,131 @@ namespace Repull.SDK.V1.Connect.Mews.Credentials
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CredentialsPostResponse : IAdditionalDataHolder, IParsable
+    public partial class CredentialsPostResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The accountInfo property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_accountInfo? AccountInfo { get; set; }
+        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_accountInfo? AccountInfo
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_accountInfo?>("accountInfo"); }
+            set { BackingStore?.Set("accountInfo", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_accountInfo AccountInfo { get; set; }
+        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_accountInfo AccountInfo
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_accountInfo>("accountInfo"); }
+            set { BackingStore?.Set("accountInfo", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The connected property</summary>
-        public bool? Connected { get; set; }
+        public bool? Connected
+        {
+            get { return BackingStore?.Get<bool?>("connected"); }
+            set { BackingStore?.Set("connected", value); }
+        }
         /// <summary>False when an existing connection was updated.</summary>
-        public bool? Created { get; set; }
+        public bool? Created
+        {
+            get { return BackingStore?.Get<bool?>("created"); }
+            set { BackingStore?.Set("created", value); }
+        }
         /// <summary>Id of the stored connection.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PmsConnectionId { get; set; }
+        public string? PmsConnectionId
+        {
+            get { return BackingStore?.Get<string?>("pmsConnectionId"); }
+            set { BackingStore?.Set("pmsConnectionId", value); }
+        }
 #nullable restore
 #else
-        public string PmsConnectionId { get; set; }
+        public string PmsConnectionId
+        {
+            get { return BackingStore?.Get<string>("pmsConnectionId"); }
+            set { BackingStore?.Set("pmsConnectionId", value); }
+        }
 #endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Provider { get; set; }
+        public string? Provider
+        {
+            get { return BackingStore?.Get<string?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #nullable restore
 #else
-        public string Provider { get; set; }
+        public string Provider
+        {
+            get { return BackingStore?.Get<string>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
 #endif
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SessionId { get; set; }
+        public string? SessionId
+        {
+            get { return BackingStore?.Get<string?>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #nullable restore
 #else
-        public string SessionId { get; set; }
+        public string SessionId
+        {
+            get { return BackingStore?.Get<string>("sessionId"); }
+            set { BackingStore?.Set("sessionId", value); }
+        }
 #endif
         /// <summary>The webhooks property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_webhooks? Webhooks { get; set; }
+        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_webhooks? Webhooks
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_webhooks?>("webhooks"); }
+            set { BackingStore?.Set("webhooks", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_webhooks Webhooks { get; set; }
+        public global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_webhooks Webhooks
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse_webhooks>("webhooks"); }
+            set { BackingStore?.Set("webhooks", value); }
+        }
 #endif
         /// <summary>What the app may change in a connected PMS. Hotel PMSs (Cloudbeds, Mews) start with every `calendar` switch off, because the PMS owns its room inventory; every other PMS starts with everything on. Reading from the PMS is never affected.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.PmsWritePolicy? WritePolicy { get; set; }
+        public global::Repull.SDK.Models.PmsWritePolicy? WritePolicy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsWritePolicy?>("writePolicy"); }
+            set { BackingStore?.Set("writePolicy", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.PmsWritePolicy WritePolicy { get; set; }
+        public global::Repull.SDK.Models.PmsWritePolicy WritePolicy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PmsWritePolicy>("writePolicy"); }
+            set { BackingStore?.Set("writePolicy", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Mews.Credentials.CredentialsPostResponse"/> and sets the default values.
         /// </summary>
         public CredentialsPostResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,48 +12,99 @@ namespace Repull.SDK.Models
     /// Length-of-stay and arrival restrictions for the nights in this update. Omit a field to leave that restriction untouched — nothing you do not state is changed.These are written on Booking.com&apos;s availability notification, which is the wire that carries a restriction when no inventory changes hands. Sending them alongside a price is supported: the prices and the restrictions are two writes, and the response reports each one separately (`price` and `restrictions`), so a half that lands is never reported as a failure and a half that is refused is never reported as applied.Three restrictions are refused with `422 restriction_not_supported` naming the field: Booking.com&apos;s notification has no element for them, and dropping a restriction you stated would be worse than refusing it. Set those on the rate plan in the Booking.com Extranet.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingPricingRateUpdateRestrictions : IAdditionalDataHolder, IParsable
+    public partial class BookingPricingRateUpdateRestrictions : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Closed-to-arrival — guests may not check in on these nights. `false` clears the flag; omit the field to leave it as it is.</summary>
-        public bool? ClosedToArrival { get; set; }
+        public bool? ClosedToArrival
+        {
+            get { return BackingStore?.Get<bool?>("closedToArrival"); }
+            set { BackingStore?.Set("closedToArrival", value); }
+        }
         /// <summary>Closed-to-departure — guests may not check out on these nights. `false` clears the flag; omit the field to leave it as it is.</summary>
-        public bool? ClosedToDeparture { get; set; }
+        public bool? ClosedToDeparture
+        {
+            get { return BackingStore?.Get<bool?>("closedToDeparture"); }
+            set { BackingStore?.Set("closedToDeparture", value); }
+        }
         /// <summary>Refused. Booking.com&apos;s restriction notification has no element for an exact arrival-based stay length, so it cannot be written through the API; sending it returns `422 restriction_not_supported` naming `updates[N].restrictions.exactStayArrival`. Set it on the rate plan in the Booking.com Extranet.</summary>
         [Obsolete("")]
-        public int? ExactStayArrival { get; set; }
+        public int? ExactStayArrival
+        {
+            get { return BackingStore?.Get<int?>("exactStayArrival"); }
+            set { BackingStore?.Set("exactStayArrival", value); }
+        }
         /// <summary>Refused, for the same reason as `exactStayArrival` — returns `422 restriction_not_supported`. Set the maximum advance-reservation window on the rate plan in the Booking.com Extranet.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MaxAdvanceRes { get; set; }
+        public string? MaxAdvanceRes
+        {
+            get { return BackingStore?.Get<string?>("maxAdvanceRes"); }
+            set { BackingStore?.Set("maxAdvanceRes", value); }
+        }
 #nullable restore
 #else
-        public string MaxAdvanceRes { get; set; }
+        public string MaxAdvanceRes
+        {
+            get { return BackingStore?.Get<string>("maxAdvanceRes"); }
+            set { BackingStore?.Set("maxAdvanceRes", value); }
+        }
 #endif
         /// <summary>Stay-through maximum length of stay — no stay covering these nights may be longer. `1`–`90`; `0` removes the maximum. Above `90` returns `422 restriction_out_of_range`: Booking.com acknowledges a larger value and then stores no maximum, so send `0` for &quot;no limit&quot;.</summary>
-        public int? MaxStay { get; set; }
+        public int? MaxStay
+        {
+            get { return BackingStore?.Get<int?>("maxStay"); }
+            set { BackingStore?.Set("maxStay", value); }
+        }
         /// <summary>Arrival-based maximum length of stay — the longest stay that may START on these nights. `1`–`90`; `0` removes the maximum. Above `90` (for example `365`) returns `422 restriction_out_of_range`: Booking.com acknowledges it and then stores no maximum (`0`), so send `0` for &quot;no limit&quot;.</summary>
-        public int? MaxStayArrival { get; set; }
+        public int? MaxStayArrival
+        {
+            get { return BackingStore?.Get<int?>("maxStayArrival"); }
+            set { BackingStore?.Set("maxStayArrival", value); }
+        }
         /// <summary>Refused, for the same reason as `exactStayArrival` — returns `422 restriction_not_supported`. Set the minimum advance-reservation window on the rate plan in the Booking.com Extranet.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MinAdvanceRes { get; set; }
+        public string? MinAdvanceRes
+        {
+            get { return BackingStore?.Get<string?>("minAdvanceRes"); }
+            set { BackingStore?.Set("minAdvanceRes", value); }
+        }
 #nullable restore
 #else
-        public string MinAdvanceRes { get; set; }
+        public string MinAdvanceRes
+        {
+            get { return BackingStore?.Get<string>("minAdvanceRes"); }
+            set { BackingStore?.Set("minAdvanceRes", value); }
+        }
 #endif
         /// <summary>Stay-through minimum length of stay — every stay that covers these nights must be at least this long. `1`–`91`; `0` removes the minimum. Booking.com stores a 1-night minimum as no minimum at all, so `minStay: 1` reads back as `0` and is reported as applied. Above `91` returns `422 restriction_out_of_range` (Booking.com would store 91).</summary>
-        public int? MinStay { get; set; }
+        public int? MinStay
+        {
+            get { return BackingStore?.Get<int?>("minStay"); }
+            set { BackingStore?.Set("minStay", value); }
+        }
         /// <summary>Arrival-based minimum length of stay — applies to stays that START on these nights, rather than any stay covering them. `1`–`91`; `0` removes it. Above `91` returns `422 restriction_out_of_range`.</summary>
-        public int? MinStayArrival { get; set; }
+        public int? MinStayArrival
+        {
+            get { return BackingStore?.Get<int?>("minStayArrival"); }
+            set { BackingStore?.Set("minStayArrival", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPricingRateUpdateRestrictions"/> and sets the default values.
         /// </summary>
         public BookingPricingRateUpdateRestrictions()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

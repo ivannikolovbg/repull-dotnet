@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,35 +12,66 @@ namespace Repull.SDK.Models
     /// Workspace-level Airbnb connection state. The dedicated answer to &quot;is my Airbnb still connected?&quot; — emit one summary instead of inferring from per-listing 401s.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbConnectionSummary : IAdditionalDataHolder, IParsable
+    public partial class AirbnbConnectionSummary : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Self-serve recovery URL. Set whenever `status` is anything other than `connected`. Points at the dashboard surface where the host re-authorizes (or initiates the first OAuth flow for `never_connected` workspaces).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FixUrl { get; set; }
+        public string? FixUrl
+        {
+            get { return BackingStore?.Get<string?>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #nullable restore
 #else
-        public string FixUrl { get; set; }
+        public string FixUrl
+        {
+            get { return BackingStore?.Get<string>("fixUrl"); }
+            set { BackingStore?.Set("fixUrl", value); }
+        }
 #endif
         /// <summary>The hostCount property</summary>
-        public int? HostCount { get; set; }
+        public int? HostCount
+        {
+            get { return BackingStore?.Get<int?>("hostCount"); }
+            set { BackingStore?.Set("hostCount", value); }
+        }
         /// <summary>The hosts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbConnectionHost>? Hosts { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbConnectionHost>? Hosts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbConnectionHost>?>("hosts"); }
+            set { BackingStore?.Set("hosts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbConnectionHost> Hosts { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbConnectionHost> Hosts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbConnectionHost>>("hosts"); }
+            set { BackingStore?.Set("hosts", value); }
+        }
 #endif
         /// <summary>`connected` — every host is currently connected. `reconnect_required` — at least one host is connected, at least one is not. `disconnected` — every host has been disconnected. `never_connected` — the workspace has never linked an Airbnb account.</summary>
-        public global::Repull.SDK.Models.AirbnbConnectionSummary_status? Status { get; set; }
+        public global::Repull.SDK.Models.AirbnbConnectionSummary_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbConnectionSummary_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbConnectionSummary"/> and sets the default values.
         /// </summary>
         public AirbnbConnectionSummary()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

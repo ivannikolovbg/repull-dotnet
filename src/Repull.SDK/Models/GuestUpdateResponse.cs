@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,60 +10,115 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class GuestUpdateResponse : IAdditionalDataHolder, IParsable
+    public partial class GuestUpdateResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The contacts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.GuestUpdateResponse_contacts>? Contacts { get; set; }
+        public List<global::Repull.SDK.Models.GuestUpdateResponse_contacts>? Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestUpdateResponse_contacts>?>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.GuestUpdateResponse_contacts> Contacts { get; set; }
+        public List<global::Repull.SDK.Models.GuestUpdateResponse_contacts> Contacts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestUpdateResponse_contacts>>("contacts"); }
+            set { BackingStore?.Set("contacts", value); }
+        }
 #endif
         /// <summary>The firstName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FirstName { get; set; }
+        public string? FirstName
+        {
+            get { return BackingStore?.Get<string?>("firstName"); }
+            set { BackingStore?.Set("firstName", value); }
+        }
 #nullable restore
 #else
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get { return BackingStore?.Get<string>("firstName"); }
+            set { BackingStore?.Set("firstName", value); }
+        }
 #endif
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+        public int? Id
+        {
+            get { return BackingStore?.Get<int?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>The language property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Language { get; set; }
+        public string? Language
+        {
+            get { return BackingStore?.Get<string?>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #nullable restore
 #else
-        public string Language { get; set; }
+        public string Language
+        {
+            get { return BackingStore?.Get<string>("language"); }
+            set { BackingStore?.Set("language", value); }
+        }
 #endif
         /// <summary>The lastName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastName { get; set; }
+        public string? LastName
+        {
+            get { return BackingStore?.Get<string?>("lastName"); }
+            set { BackingStore?.Set("lastName", value); }
+        }
 #nullable restore
 #else
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get { return BackingStore?.Get<string>("lastName"); }
+            set { BackingStore?.Set("lastName", value); }
+        }
 #endif
         /// <summary>Each PMS the change was written to first (the guest&apos;s linked PMSs), with the sections it applied.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.GuestUpdateResponse_pms>? Pms { get; set; }
+        public List<global::Repull.SDK.Models.GuestUpdateResponse_pms>? Pms
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestUpdateResponse_pms>?>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.GuestUpdateResponse_pms> Pms { get; set; }
+        public List<global::Repull.SDK.Models.GuestUpdateResponse_pms> Pms
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.GuestUpdateResponse_pms>>("pms"); }
+            set { BackingStore?.Set("pms", value); }
+        }
 #endif
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.GuestUpdateResponse"/> and sets the default values.
         /// </summary>
         public GuestUpdateResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

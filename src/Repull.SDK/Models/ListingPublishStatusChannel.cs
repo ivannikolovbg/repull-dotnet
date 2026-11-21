@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,47 +12,94 @@ namespace Repull.SDK.Models
     /// Sync activity for one channel. `pushStatus` says whether the last push landed; `pushError` says why it did not.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPublishStatusChannel : IAdditionalDataHolder, IParsable
+    public partial class ListingPublishStatusChannel : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The dirtyFields property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? DirtyFields { get; set; }
+        public List<string>? DirtyFields
+        {
+            get { return BackingStore?.Get<List<string>?>("dirtyFields"); }
+            set { BackingStore?.Set("dirtyFields", value); }
+        }
 #nullable restore
 #else
-        public List<string> DirtyFields { get; set; }
+        public List<string> DirtyFields
+        {
+            get { return BackingStore?.Get<List<string>>("dirtyFields"); }
+            set { BackingStore?.Set("dirtyFields", value); }
+        }
 #endif
         /// <summary>The lastPulledAt property</summary>
-        public DateTimeOffset? LastPulledAt { get; set; }
+        public DateTimeOffset? LastPulledAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastPulledAt"); }
+            set { BackingStore?.Set("lastPulledAt", value); }
+        }
         /// <summary>The lastPushedAt property</summary>
-        public DateTimeOffset? LastPushedAt { get; set; }
+        public DateTimeOffset? LastPushedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("lastPushedAt"); }
+            set { BackingStore?.Set("lastPushedAt", value); }
+        }
         /// <summary>The platform property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Platform { get; set; }
+        public string? Platform
+        {
+            get { return BackingStore?.Get<string?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #nullable restore
 #else
-        public string Platform { get; set; }
+        public string Platform
+        {
+            get { return BackingStore?.Get<string>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #endif
         /// <summary>The platformHasChanges property</summary>
-        public bool? PlatformHasChanges { get; set; }
+        public bool? PlatformHasChanges
+        {
+            get { return BackingStore?.Get<bool?>("platformHasChanges"); }
+            set { BackingStore?.Set("platformHasChanges", value); }
+        }
         /// <summary>Why the last push failed — the channel&apos;s own reason, verbatim, sanitised for display.This is the field to render when `pushStatus` is `error`. It carries what Airbnb or Booking.com actually objected to, which is almost always something the operator can fix in the listing content: `&quot;Airbnb error (400): We can&apos;t save your info yet. Links and contact info can&apos;t be shared.&quot;`, `&quot;Check-in start time must be before end time&quot;`, `&quot;property_type_group must be one of [apartments, houses, …]&quot;`, `&quot;Rate limited by provider&quot;`.**Free text, not an enum.** It is written by the channel and changes without notice: show it to a human, log it, put it next to the retry button — but never parse it or branch on its contents. When a push fails for several reasons at once the reasons are joined with `; `.`null` when the last push succeeded, and when no push has run yet — the two are told apart by `pushStatus` and `lastPushedAt`, not by this field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PushError { get; set; }
+        public string? PushError
+        {
+            get { return BackingStore?.Get<string?>("pushError"); }
+            set { BackingStore?.Set("pushError", value); }
+        }
 #nullable restore
 #else
-        public string PushError { get; set; }
+        public string PushError
+        {
+            get { return BackingStore?.Get<string>("pushError"); }
+            set { BackingStore?.Set("pushError", value); }
+        }
 #endif
         /// <summary>The pushStatus property</summary>
-        public global::Repull.SDK.Models.ListingPublishStatusChannel_pushStatus? PushStatus { get; set; }
+        public global::Repull.SDK.Models.ListingPublishStatusChannel_pushStatus? PushStatus
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPublishStatusChannel_pushStatus?>("pushStatus"); }
+            set { BackingStore?.Set("pushStatus", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPublishStatusChannel"/> and sets the default values.
         /// </summary>
         public ListingPublishStatusChannel()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

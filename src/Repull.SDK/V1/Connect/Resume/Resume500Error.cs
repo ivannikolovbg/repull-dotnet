@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,13 +11,23 @@ namespace Repull.SDK.V1.Connect.Resume
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class Resume500Error : ApiException, IAdditionalDataHolder, IParsable
+    public partial class Resume500Error : ApiException, IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The error property</summary>
-        public global::Repull.SDK.V1.Connect.Resume.Resume500Error_error? Error { get; set; }
+        public global::Repull.SDK.V1.Connect.Resume.Resume500Error_error? Error
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Resume.Resume500Error_error?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
         /// <summary>The primary error message.</summary>
         public override string Message { get => base.Message; }
         /// <summary>
@@ -24,6 +35,7 @@ namespace Repull.SDK.V1.Connect.Resume
         /// </summary>
         public Resume500Error()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

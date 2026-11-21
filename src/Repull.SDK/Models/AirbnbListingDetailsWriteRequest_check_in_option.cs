@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,18 +12,39 @@ namespace Repull.SDK.Models
     /// How the guest lets themselves in — Airbnb&apos;s `check_in_option`. `instruction` is the arrival instructions the guest sees.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbListingDetailsWriteRequest_check_in_option : IParsable
+    public partial class AirbnbListingDetailsWriteRequest_check_in_option : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The category property</summary>
-        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option_category? Category { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option_category? Category
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option_category?>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
         /// <summary>The instruction property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Instruction { get; set; }
+        public string? Instruction
+        {
+            get { return BackingStore?.Get<string?>("instruction"); }
+            set { BackingStore?.Set("instruction", value); }
+        }
 #nullable restore
 #else
-        public string Instruction { get; set; }
+        public string Instruction
+        {
+            get { return BackingStore?.Get<string>("instruction"); }
+            set { BackingStore?.Set("instruction", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option"/> and sets the default values.
+        /// </summary>
+        public AirbnbListingDetailsWriteRequest_check_in_option()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

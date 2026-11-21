@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,27 +12,50 @@ namespace Repull.SDK.Models
     /// Response for `POST /v1/listings/pricing/bulk`. Per-item failures are returned granularly so the SDK consumer can retry just the bad entries.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BulkPricingResponse : IAdditionalDataHolder, IParsable
+    public partial class BulkPricingResponse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The failed property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BulkPricingFailure>? Failed { get; set; }
+        public List<global::Repull.SDK.Models.BulkPricingFailure>? Failed
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BulkPricingFailure>?>("failed"); }
+            set { BackingStore?.Set("failed", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BulkPricingFailure> Failed { get; set; }
+        public List<global::Repull.SDK.Models.BulkPricingFailure> Failed
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BulkPricingFailure>>("failed"); }
+            set { BackingStore?.Set("failed", value); }
+        }
 #endif
         /// <summary>Total dates attempted across every item.</summary>
-        public int? Processed { get; set; }
+        public int? Processed
+        {
+            get { return BackingStore?.Get<int?>("processed"); }
+            set { BackingStore?.Set("processed", value); }
+        }
         /// <summary>Total dates that were successfully applied (or declined).</summary>
-        public int? Succeeded { get; set; }
+        public int? Succeeded
+        {
+            get { return BackingStore?.Get<int?>("succeeded"); }
+            set { BackingStore?.Set("succeeded", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BulkPricingResponse"/> and sets the default values.
         /// </summary>
         public BulkPricingResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

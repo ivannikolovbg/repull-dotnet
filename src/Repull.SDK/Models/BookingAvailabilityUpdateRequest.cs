@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,35 +12,66 @@ namespace Repull.SDK.Models
     /// Body for `PUT /v1/channels/booking/availability`. `type` selects which of Booking.com&apos;s writes to perform. Date ranges are inclusive at both ends everywhere in this body.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingAvailabilityUpdateRequest : IAdditionalDataHolder, IParsable
+    public partial class BookingAvailabilityUpdateRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Booking.com hotel/property id (numeric; accepted as int or numeric string).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id? PropertyId { get; set; }
+        public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id? PropertyId
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id?>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id PropertyId { get; set; }
+        public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id PropertyId
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id>("property_id"); }
+            set { BackingStore?.Set("property_id", value); }
+        }
 #endif
         /// <summary>`rates` → nightly prices (+ any restrictions sent with them), written at an explicit `occupancy`; `availability` → inventory, stop-sell and restrictions; `derived-pricing` → occupancy-derived pricing rules. A rates update may not carry `roomsToSell`: inventory is an `availability` write.</summary>
-        public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest_type? Type { get; set; }
+        public global::Repull.SDK.Models.BookingAvailabilityUpdateRequest_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>For `type: &quot;rates&quot;` each item is a `BookingPricingRateUpdate`; for `type: &quot;availability&quot;` a `BookingAvailabilityUpdate`; for `type: &quot;derived-pricing&quot;` a `BookingDerivedPricingUpdate`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates>? Updates { get; set; }
+        public List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates>? Updates
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates>?>("updates"); }
+            set { BackingStore?.Set("updates", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates> Updates { get; set; }
+        public List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates> Updates
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates>>("updates"); }
+            set { BackingStore?.Set("updates", value); }
+        }
 #endif
         /// <summary>Default `true`, for every `type`: after the write Repull reads the result back off Booking.com so `applied` says `verified` or `mismatch` — prices and restrictions per night (`rates`, `availability`), the rule set per rate plan (`derived-pricing`). Send `false` to skip the read; `applied` is then `unverified` (`acknowledged` for a restriction-only `availability` write).</summary>
-        public bool? Verify { get; set; }
+        public bool? Verify
+        {
+            get { return BackingStore?.Get<bool?>("verify"); }
+            set { BackingStore?.Set("verify", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdateRequest"/> and sets the default values.
         /// </summary>
         public BookingAvailabilityUpdateRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
@@ -83,18 +115,39 @@ namespace Repull.SDK.Models
         /// Composed type wrapper for classes <see cref="int"/>, <see cref="string"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class BookingAvailabilityUpdateRequest_property_id : IComposedTypeWrapper, IParsable
+        public partial class BookingAvailabilityUpdateRequest_property_id : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="int"/></summary>
-            public int? Integer { get; set; }
+            public int? Integer
+            {
+                get { return BackingStore?.Get<int?>("integer"); }
+                set { BackingStore?.Set("integer", value); }
+            }
             /// <summary>Composed type representation for type <see cref="string"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public string? String { get; set; }
+            public string? String
+            {
+                get { return BackingStore?.Get<string?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public string String { get; set; }
+            public string String
+            {
+                get { return BackingStore?.Get<string>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_property_id"/> and sets the default values.
+            /// </summary>
+            public BookingAvailabilityUpdateRequest_property_id()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>
@@ -144,32 +197,65 @@ namespace Repull.SDK.Models
         /// Composed type wrapper for classes <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdate"/>, <see cref="global::Repull.SDK.Models.BookingDerivedPricingUpdate"/>, <see cref="global::Repull.SDK.Models.BookingPricingRateUpdate"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class BookingAvailabilityUpdateRequest_updates : IComposedTypeWrapper, IParsable
+        public partial class BookingAvailabilityUpdateRequest_updates : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdate"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingAvailabilityUpdate? BookingAvailabilityUpdate { get; set; }
+            public global::Repull.SDK.Models.BookingAvailabilityUpdate? BookingAvailabilityUpdate
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingAvailabilityUpdate?>("BookingAvailabilityUpdate"); }
+                set { BackingStore?.Set("BookingAvailabilityUpdate", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingAvailabilityUpdate BookingAvailabilityUpdate { get; set; }
+            public global::Repull.SDK.Models.BookingAvailabilityUpdate BookingAvailabilityUpdate
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingAvailabilityUpdate>("BookingAvailabilityUpdate"); }
+                set { BackingStore?.Set("BookingAvailabilityUpdate", value); }
+            }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingDerivedPricingUpdate"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingDerivedPricingUpdate? BookingDerivedPricingUpdate { get; set; }
+            public global::Repull.SDK.Models.BookingDerivedPricingUpdate? BookingDerivedPricingUpdate
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingUpdate?>("BookingDerivedPricingUpdate"); }
+                set { BackingStore?.Set("BookingDerivedPricingUpdate", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingDerivedPricingUpdate BookingDerivedPricingUpdate { get; set; }
+            public global::Repull.SDK.Models.BookingDerivedPricingUpdate BookingDerivedPricingUpdate
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingDerivedPricingUpdate>("BookingDerivedPricingUpdate"); }
+                set { BackingStore?.Set("BookingDerivedPricingUpdate", value); }
+            }
 #endif
             /// <summary>Composed type representation for type <see cref="global::Repull.SDK.Models.BookingPricingRateUpdate"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public global::Repull.SDK.Models.BookingPricingRateUpdate? BookingPricingRateUpdate { get; set; }
+            public global::Repull.SDK.Models.BookingPricingRateUpdate? BookingPricingRateUpdate
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingRateUpdate?>("BookingPricingRateUpdate"); }
+                set { BackingStore?.Set("BookingPricingRateUpdate", value); }
+            }
 #nullable restore
 #else
-            public global::Repull.SDK.Models.BookingPricingRateUpdate BookingPricingRateUpdate { get; set; }
+            public global::Repull.SDK.Models.BookingPricingRateUpdate BookingPricingRateUpdate
+            {
+                get { return BackingStore?.Get<global::Repull.SDK.Models.BookingPricingRateUpdate>("BookingPricingRateUpdate"); }
+                set { BackingStore?.Set("BookingPricingRateUpdate", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingAvailabilityUpdateRequest.BookingAvailabilityUpdateRequest_updates"/> and sets the default values.
+            /// </summary>
+            public BookingAvailabilityUpdateRequest_updates()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

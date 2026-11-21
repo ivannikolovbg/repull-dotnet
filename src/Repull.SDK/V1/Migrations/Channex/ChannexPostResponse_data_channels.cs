@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,56 +10,111 @@ namespace Repull.SDK.V1.Migrations.Channex
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ChannexPostResponse_data_channels : IAdditionalDataHolder, IParsable
+    public partial class ChannexPostResponse_data_channels : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Channex adapter code (BookingCom, AirBNB, VRBO…).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>The Channex id, which keeps resolving on `/channex/api/v1`.</summary>
-        public Guid? ChannexId { get; set; }
+        public Guid? ChannexId
+        {
+            get { return BackingStore?.Get<Guid?>("channexId"); }
+            set { BackingStore?.Set("channexId", value); }
+        }
         /// <summary>How it was matched, or what to do.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Detail { get; set; }
+        public string? Detail
+        {
+            get { return BackingStore?.Get<string?>("detail"); }
+            set { BackingStore?.Set("detail", value); }
+        }
 #nullable restore
 #else
-        public string Detail { get; set; }
+        public string Detail
+        {
+            get { return BackingStore?.Get<string>("detail"); }
+            set { BackingStore?.Set("detail", value); }
+        }
 #endif
         /// <summary>The instructions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Instructions { get; set; }
+        public string? Instructions
+        {
+            get { return BackingStore?.Get<string?>("instructions"); }
+            set { BackingStore?.Set("instructions", value); }
+        }
 #nullable restore
 #else
-        public string Instructions { get; set; }
+        public string Instructions
+        {
+            get { return BackingStore?.Get<string>("instructions"); }
+            set { BackingStore?.Set("instructions", value); }
+        }
 #endif
         /// <summary>The providerSwitch property</summary>
-        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels_providerSwitch? ProviderSwitch { get; set; }
+        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels_providerSwitch? ProviderSwitch
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels_providerSwitch?>("providerSwitch"); }
+            set { BackingStore?.Set("providerSwitch", value); }
+        }
         /// <summary>The repullListingId property</summary>
-        public int? RepullListingId { get; set; }
+        public int? RepullListingId
+        {
+            get { return BackingStore?.Get<int?>("repullListingId"); }
+            set { BackingStore?.Set("repullListingId", value); }
+        }
         /// <summary>The status property</summary>
-        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels_status? Status { get; set; }
+        public global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The title property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title
+        {
+            get { return BackingStore?.Get<string?>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return BackingStore?.Get<string>("title"); }
+            set { BackingStore?.Set("title", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Migrations.Channex.ChannexPostResponse_data_channels"/> and sets the default values.
         /// </summary>
         public ChannexPostResponse_data_channels()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

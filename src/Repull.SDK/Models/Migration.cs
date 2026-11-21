@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,61 +12,120 @@ namespace Repull.SDK.Models
     /// One migration: a property manager moved through Repull Migrate, living in its own workspace.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Migration : IAdditionalDataHolder, IParsable
+    public partial class Migration : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The connections property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.Migration_connections>? Connections { get; set; }
+        public List<global::Repull.SDK.Models.Migration_connections>? Connections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.Migration_connections>?>("connections"); }
+            set { BackingStore?.Set("connections", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.Migration_connections> Connections { get; set; }
+        public List<global::Repull.SDK.Models.Migration_connections> Connections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.Migration_connections>>("connections"); }
+            set { BackingStore?.Set("connections", value); }
+        }
 #endif
         /// <summary>The counts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Migration_counts? Counts { get; set; }
+        public global::Repull.SDK.Models.Migration_counts? Counts
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Migration_counts?>("counts"); }
+            set { BackingStore?.Set("counts", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Migration_counts Counts { get; set; }
+        public global::Repull.SDK.Models.Migration_counts Counts
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Migration_counts>("counts"); }
+            set { BackingStore?.Set("counts", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The cutoverAt property</summary>
-        public DateTimeOffset? CutoverAt { get; set; }
+        public DateTimeOffset? CutoverAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("cutoverAt"); }
+            set { BackingStore?.Set("cutoverAt", value); }
+        }
         /// <summary>Your own id for this property manager, as sent when the migration was created.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalRef { get; set; }
+        public string? ExternalRef
+        {
+            get { return BackingStore?.Get<string?>("externalRef"); }
+            set { BackingStore?.Set("externalRef", value); }
+        }
 #nullable restore
 #else
-        public string ExternalRef { get; set; }
+        public string ExternalRef
+        {
+            get { return BackingStore?.Get<string>("externalRef"); }
+            set { BackingStore?.Set("externalRef", value); }
+        }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>`awaiting_connection` — not connected yet. `importing` — the first import is running. `imported` — data is in and kept fresh until cutover. `failed` — the last import failed (see `connections[].import.error`). `cut_over` — the source was disconnected. `deactivated` — the migration was deleted.</summary>
-        public global::Repull.SDK.Models.Migration_state? State { get; set; }
+        public global::Repull.SDK.Models.Migration_state? State
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Migration_state?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
         /// <summary>Pass as `X-Workspace-Id` to read this property manager&apos;s listings, reservations and conversations through the regular endpoints.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WorkspaceId { get; set; }
+        public string? WorkspaceId
+        {
+            get { return BackingStore?.Get<string?>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
 #nullable restore
 #else
-        public string WorkspaceId { get; set; }
+        public string WorkspaceId
+        {
+            get { return BackingStore?.Get<string>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Migration"/> and sets the default values.
         /// </summary>
         public Migration()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

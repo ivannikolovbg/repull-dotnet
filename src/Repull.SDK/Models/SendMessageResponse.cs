@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,94 +10,185 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class SendMessageResponse : IAdditionalDataHolder, IParsable
+    public partial class SendMessageResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The files delivered, in request order. Empty array for a text-only send.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.SentAttachment>? Attachments { get; set; }
+        public List<global::Repull.SDK.Models.SentAttachment>? Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.SentAttachment>?>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.SentAttachment> Attachments { get; set; }
+        public List<global::Repull.SDK.Models.SentAttachment> Attachments
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.SentAttachment>>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel the message actually went out on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Channel { get; set; }
+        public string? Channel
+        {
+            get { return BackingStore?.Get<string?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #nullable restore
 #else
-        public string Channel { get; set; }
+        public string Channel
+        {
+            get { return BackingStore?.Get<string>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
 #endif
         /// <summary>TRUE when the channel altered the text before delivery — today that means Airbnb stripped a link, an email address or a phone number and the remainder was re-sent. When true, the guest did NOT receive `submittedContent`; they received `deliveredContent`.</summary>
-        public bool? ContentRewritten { get; set; }
+        public bool? ContentRewritten
+        {
+            get { return BackingStore?.Get<bool?>("contentRewritten"); }
+            set { BackingStore?.Set("contentRewritten", value); }
+        }
         /// <summary>The conversationId property</summary>
-        public int? ConversationId { get; set; }
+        public int? ConversationId
+        {
+            get { return BackingStore?.Get<int?>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
         /// <summary>The text the guest actually received. Differs from `submittedContent` exactly when `contentRewritten` is true.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DeliveredContent { get; set; }
+        public string? DeliveredContent
+        {
+            get { return BackingStore?.Get<string?>("deliveredContent"); }
+            set { BackingStore?.Set("deliveredContent", value); }
+        }
 #nullable restore
 #else
-        public string DeliveredContent { get; set; }
+        public string DeliveredContent
+        {
+            get { return BackingStore?.Get<string>("deliveredContent"); }
+            set { BackingStore?.Set("deliveredContent", value); }
+        }
 #endif
         /// <summary>The direction property</summary>
-        public global::Repull.SDK.Models.SendMessageResponse_direction? Direction { get; set; }
+        public global::Repull.SDK.Models.SendMessageResponse_direction? Direction
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.SendMessageResponse_direction?>("direction"); }
+            set { BackingStore?.Set("direction", value); }
+        }
         /// <summary>The channel&apos;s own message id, when it returns one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalMessageId { get; set; }
+        public string? ExternalMessageId
+        {
+            get { return BackingStore?.Get<string?>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalMessageId { get; set; }
+        public string ExternalMessageId
+        {
+            get { return BackingStore?.Get<string>("externalMessageId"); }
+            set { BackingStore?.Set("externalMessageId", value); }
+        }
 #endif
         /// <summary>Repull message id for the row that was recorded.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>Present only when `attachments` were sent: one entry per channel message, in delivery order. `id` is the text message (or the last file message when there is no text).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.SendMessagePart>? Parts { get; set; }
+        public List<global::Repull.SDK.Models.SendMessagePart>? Parts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.SendMessagePart>?>("parts"); }
+            set { BackingStore?.Set("parts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.SendMessagePart> Parts { get; set; }
+        public List<global::Repull.SDK.Models.SendMessagePart> Parts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.SendMessagePart>>("parts"); }
+            set { BackingStore?.Set("parts", value); }
+        }
 #endif
         /// <summary>`sent`: delivered. `queued` (with HTTP `202`): recorded, and still being delivered in the background because the channel was busy (Vrbo) — do not resend; the outcome arrives as the message&apos;s `status` on `GET /v1/conversations/{id}/messages` and as `conversation.message.status_changed`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>The channel&apos;s verbatim note, when it gave one — including the refusal that triggered a rewrite.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StatusReason { get; set; }
+        public string? StatusReason
+        {
+            get { return BackingStore?.Get<string?>("statusReason"); }
+            set { BackingStore?.Set("statusReason", value); }
+        }
 #nullable restore
 #else
-        public string StatusReason { get; set; }
+        public string StatusReason
+        {
+            get { return BackingStore?.Get<string>("statusReason"); }
+            set { BackingStore?.Set("statusReason", value); }
+        }
 #endif
         /// <summary>The text you sent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SubmittedContent { get; set; }
+        public string? SubmittedContent
+        {
+            get { return BackingStore?.Get<string?>("submittedContent"); }
+            set { BackingStore?.Set("submittedContent", value); }
+        }
 #nullable restore
 #else
-        public string SubmittedContent { get; set; }
+        public string SubmittedContent
+        {
+            get { return BackingStore?.Get<string>("submittedContent"); }
+            set { BackingStore?.Set("submittedContent", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.SendMessageResponse"/> and sets the default values.
         /// </summary>
         public SendMessageResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

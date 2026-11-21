@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,48 +10,95 @@ namespace Repull.SDK.V1.Workspaces.Item.Reactivate
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReactivatePostResponse_data : IAdditionalDataHolder, IParsable
+    public partial class ReactivatePostResponse_data : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Accounts are never reconnected by this call.</summary>
-        public bool? AccountsReconnectRequired { get; set; }
+        public bool? AccountsReconnectRequired
+        {
+            get { return BackingStore?.Get<bool?>("accountsReconnectRequired"); }
+            set { BackingStore?.Set("accountsReconnectRequired", value); }
+        }
         /// <summary>The active property</summary>
-        public bool? Active { get; set; }
+        public bool? Active
+        {
+            get { return BackingStore?.Get<bool?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>True when the workspace was already active — nothing was changed.</summary>
-        public bool? AlreadyActive { get; set; }
+        public bool? AlreadyActive
+        {
+            get { return BackingStore?.Get<bool?>("alreadyActive"); }
+            set { BackingStore?.Set("alreadyActive", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Listings switched back on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ListingsReactivated { get; set; }
+        public List<string>? ListingsReactivated
+        {
+            get { return BackingStore?.Get<List<string>?>("listingsReactivated"); }
+            set { BackingStore?.Set("listingsReactivated", value); }
+        }
 #nullable restore
 #else
-        public List<string> ListingsReactivated { get; set; }
+        public List<string> ListingsReactivated
+        {
+            get { return BackingStore?.Get<List<string>>("listingsReactivated"); }
+            set { BackingStore?.Set("listingsReactivated", value); }
+        }
 #endif
         /// <summary>What to do next: reconnect the accounts through Connect.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NextStep { get; set; }
+        public string? NextStep
+        {
+            get { return BackingStore?.Get<string?>("nextStep"); }
+            set { BackingStore?.Set("nextStep", value); }
+        }
 #nullable restore
 #else
-        public string NextStep { get; set; }
+        public string NextStep
+        {
+            get { return BackingStore?.Get<string>("nextStep"); }
+            set { BackingStore?.Set("nextStep", value); }
+        }
 #endif
         /// <summary>Null when the workspace was already active.</summary>
-        public DateTimeOffset? ReactivatedAt { get; set; }
+        public DateTimeOffset? ReactivatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("reactivatedAt"); }
+            set { BackingStore?.Set("reactivatedAt", value); }
+        }
         /// <summary>The workspaceId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WorkspaceId { get; set; }
+        public string? WorkspaceId
+        {
+            get { return BackingStore?.Get<string?>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
 #nullable restore
 #else
-        public string WorkspaceId { get; set; }
+        public string WorkspaceId
+        {
+            get { return BackingStore?.Get<string>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Workspaces.Item.Reactivate.ReactivatePostResponse_data"/> and sets the default values.
         /// </summary>
         public ReactivatePostResponse_data()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

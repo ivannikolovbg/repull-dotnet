@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,41 +13,76 @@ namespace Repull.SDK.Models
     /// Per-item failure entry. Per-item failures DO NOT fail the whole batch — partial-success is the norm at this scale.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BulkPricingFailure : IAdditionalDataHolder, IParsable
+    public partial class BulkPricingFailure : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The dates property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<Date?>? Dates { get; set; }
+        public List<Date?>? Dates
+        {
+            get { return BackingStore?.Get<List<Date?>?>("dates"); }
+            set { BackingStore?.Set("dates", value); }
+        }
 #nullable restore
 #else
-        public List<Date?> Dates { get; set; }
+        public List<Date?> Dates
+        {
+            get { return BackingStore?.Get<List<Date?>>("dates"); }
+            set { BackingStore?.Set("dates", value); }
+        }
 #endif
         /// <summary>The error property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The errorCode property</summary>
-        public global::Repull.SDK.Models.BulkPricingFailure_errorCode? ErrorCode { get; set; }
+        public global::Repull.SDK.Models.BulkPricingFailure_errorCode? ErrorCode
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BulkPricingFailure_errorCode?>("errorCode"); }
+            set { BackingStore?.Set("errorCode", value); }
+        }
         /// <summary>The listingId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BulkPricingFailure"/> and sets the default values.
         /// </summary>
         public BulkPricingFailure()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,27 +10,64 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.BookingSettings
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BookingSettingsPutRequestBody : IParsable
+    public partial class BookingSettingsPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>One of the read&apos;s `accessTypeOptions[].value`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccessType { get; set; }
+        public string? AccessType
+        {
+            get { return BackingStore?.Get<string?>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
 #nullable restore
 #else
-        public string AccessType { get; set; }
+        public string AccessType
+        {
+            get { return BackingStore?.Get<string>("accessType"); }
+            set { BackingStore?.Set("accessType", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bookingType property</summary>
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_bookingType? BookingType { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_bookingType? BookingType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.BookingSettings.BookingSettingsPutRequestBody_bookingType?>("bookingType"); }
+            set { BackingStore?.Set("bookingType", value); }
+        }
         /// <summary>The maxLengthOfStay property</summary>
-        public int? MaxLengthOfStay { get; set; }
+        public int? MaxLengthOfStay
+        {
+            get { return BackingStore?.Get<int?>("maxLengthOfStay"); }
+            set { BackingStore?.Set("maxLengthOfStay", value); }
+        }
         /// <summary>The maxMonthsBeforeBooking property</summary>
-        public int? MaxMonthsBeforeBooking { get; set; }
+        public int? MaxMonthsBeforeBooking
+        {
+            get { return BackingStore?.Get<int?>("maxMonthsBeforeBooking"); }
+            set { BackingStore?.Set("maxMonthsBeforeBooking", value); }
+        }
         /// <summary>One of the read&apos;s `minDaysBeforeBookingOptions`.</summary>
-        public int? MinDaysBeforeBooking { get; set; }
+        public int? MinDaysBeforeBooking
+        {
+            get { return BackingStore?.Get<int?>("minDaysBeforeBooking"); }
+            set { BackingStore?.Set("minDaysBeforeBooking", value); }
+        }
         /// <summary>The minNights property</summary>
-        public int? MinNights { get; set; }
+        public int? MinNights
+        {
+            get { return BackingStore?.Get<int?>("minNights"); }
+            set { BackingStore?.Set("minNights", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.BookingSettings.BookingSettingsPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public BookingSettingsPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

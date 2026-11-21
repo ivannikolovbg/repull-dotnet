@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,116 +11,243 @@ namespace Repull.SDK.V1.Conversations.Item.SpecialOffers.Item
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class WithOfferGetResponse : IAdditionalDataHolder, IParsable
+    public partial class WithOfferGetResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Airbnb listing id the offer is for (a string — it exceeds 2^53).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AirbnbListingId { get; set; }
+        public string? AirbnbListingId
+        {
+            get { return BackingStore?.Get<string?>("airbnbListingId"); }
+            set { BackingStore?.Set("airbnbListingId", value); }
+        }
 #nullable restore
 #else
-        public string AirbnbListingId { get; set; }
+        public string AirbnbListingId
+        {
+            get { return BackingStore?.Get<string>("airbnbListingId"); }
+            set { BackingStore?.Set("airbnbListingId", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel the offer is on.</summary>
-        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_channel? Channel { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_channel? Channel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_channel?>("channel"); }
+            set { BackingStore?.Set("channel", value); }
+        }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>Repull conversation id the offer was sent on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get; set; }
+        public string? ConversationId
+        {
+            get { return BackingStore?.Get<string?>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #nullable restore
 #else
-        public string ConversationId { get; set; }
+        public string ConversationId
+        {
+            get { return BackingStore?.Get<string>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>Currency of the amounts, when the channel states it (VRBO).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>VRBO: refundable damage deposit; null for none.</summary>
-        public double? DamageDeposit { get; set; }
+        public double? DamageDeposit
+        {
+            get { return BackingStore?.Get<double?>("damageDeposit"); }
+            set { BackingStore?.Set("damageDeposit", value); }
+        }
         /// <summary>VRBO: its automatic stay discount on the rent, when the offer carries one.</summary>
-        public double? Discount { get; set; }
+        public double? Discount
+        {
+            get { return BackingStore?.Get<double?>("discount"); }
+            set { BackingStore?.Set("discount", value); }
+        }
         /// <summary>When the guest can no longer book the offer (Airbnb gives them 24 hours).</summary>
-        public DateTimeOffset? ExpiresAt { get; set; }
+        public DateTimeOffset? ExpiresAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("expiresAt"); }
+            set { BackingStore?.Set("expiresAt", value); }
+        }
         /// <summary>VRBO: the offer’s fees by type. Empty on Airbnb.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees>? Fees { get; set; }
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees>? Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees>?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees> Fees { get; set; }
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees> Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_fees>>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #endif
         /// <summary>Guests on the offer. Airbnb counts adults + children as guests; infants and pets are extra.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests? Guests { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests? Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests?>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests Guests { get; set; }
+        public global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests Guests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_guests>("guests"); }
+            set { BackingStore?.Set("guests", value); }
+        }
 #endif
         /// <summary>The offer id — use it to read or withdraw the offer. Airbnb’s special-offer id; on VRBO, where a conversation has one live offer, `current`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>VRBO: its offer summary line by line, in VRBO’s words (nights, fees, taxes, total traveler payment, payout).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines>? Lines { get; set; }
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines>? Lines
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines>?>("lines"); }
+            set { BackingStore?.Set("lines", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines> Lines { get; set; }
+        public List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines> Lines
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse_lines>>("lines"); }
+            set { BackingStore?.Set("lines", value); }
+        }
 #endif
         /// <summary>Repull listing id, when known.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The message sent to the guest with the offer (VRBO).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>The nights property</summary>
-        public int? Nights { get; set; }
+        public int? Nights
+        {
+            get { return BackingStore?.Get<int?>("nights"); }
+            set { BackingStore?.Set("nights", value); }
+        }
         /// <summary>VRBO: rent for the stay, excluding fees and taxes. Null on Airbnb (priced by one total).</summary>
-        public double? RentalAmount { get; set; }
+        public double? RentalAmount
+        {
+            get { return BackingStore?.Get<double?>("rentalAmount"); }
+            set { BackingStore?.Set("rentalAmount", value); }
+        }
         /// <summary>Airbnb: its status for the offer — `active` (the guest can book it), `accepted`, `declined`, `expired` or `voided` (withdrawn). VRBO: `sent` (just sent), `current` (the live offer) or `preview` (recalculated, not sent).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>What the guest pays for the stay. Airbnb: the total you set. VRBO: VRBO’s own total, including its taxes and service fee.</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Conversations.Item.SpecialOffers.Item.WithOfferGetResponse"/> and sets the default values.
         /// </summary>
         public WithOfferGetResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

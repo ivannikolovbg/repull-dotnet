@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,22 +10,41 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CancellationGetResponse_data_tiers : IAdditionalDataHolder, IParsable
+    public partial class CancellationGetResponse_data_tiers : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The daysBefore property</summary>
-        public int? DaysBefore { get; set; }
+        public int? DaysBefore
+        {
+            get { return BackingStore?.Get<int?>("daysBefore"); }
+            set { BackingStore?.Set("daysBefore", value); }
+        }
         /// <summary>The penaltyPercent property</summary>
-        public double? PenaltyPercent { get; set; }
+        public double? PenaltyPercent
+        {
+            get { return BackingStore?.Get<double?>("penaltyPercent"); }
+            set { BackingStore?.Set("penaltyPercent", value); }
+        }
         /// <summary>The refundPercent property</summary>
-        public double? RefundPercent { get; set; }
+        public double? RefundPercent
+        {
+            get { return BackingStore?.Get<double?>("refundPercent"); }
+            set { BackingStore?.Set("refundPercent", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Cancellation.CancellationGetResponse_data_tiers"/> and sets the default values.
         /// </summary>
         public CancellationGetResponse_data_tiers()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

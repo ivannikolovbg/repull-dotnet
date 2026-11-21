@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,41 +13,84 @@ namespace Repull.SDK.Models
     /// One date in the recommendation-vs-applied audit trail.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingPricingHistoryEntry : IAdditionalDataHolder, IParsable
+    public partial class ListingPricingHistoryEntry : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The appliedAt property</summary>
-        public DateTimeOffset? AppliedAt { get; set; }
+        public DateTimeOffset? AppliedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("appliedAt"); }
+            set { BackingStore?.Set("appliedAt", value); }
+        }
         /// <summary>Who applied it (e.g. `auto`, `api`, `user`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AppliedBy { get; set; }
+        public string? AppliedBy
+        {
+            get { return BackingStore?.Get<string?>("appliedBy"); }
+            set { BackingStore?.Set("appliedBy", value); }
+        }
 #nullable restore
 #else
-        public string AppliedBy { get; set; }
+        public string AppliedBy
+        {
+            get { return BackingStore?.Get<string>("appliedBy"); }
+            set { BackingStore?.Set("appliedBy", value); }
+        }
 #endif
         /// <summary>Price actually written to the calendar. `null` when status is `pending` or `declined`. For now, when `status=applied` this equals `recommendedRate` because the apply path writes the recommendation verbatim.</summary>
-        public double? AppliedRate { get; set; }
+        public double? AppliedRate
+        {
+            get { return BackingStore?.Get<double?>("appliedRate"); }
+            set { BackingStore?.Set("appliedRate", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The date property</summary>
-        public Date? Date { get; set; }
+        public Date? Date
+        {
+            get { return BackingStore?.Get<Date?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
         /// <summary>Raw model factors (comp distance, event boost, weekend, demand, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors? RecommendationFactors { get; set; }
+        public global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors? RecommendationFactors
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors?>("recommendationFactors"); }
+            set { BackingStore?.Set("recommendationFactors", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors RecommendationFactors { get; set; }
+        public global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors RecommendationFactors
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingHistoryEntry_recommendationFactors>("recommendationFactors"); }
+            set { BackingStore?.Set("recommendationFactors", value); }
+        }
 #endif
         /// <summary>The Atlas model&apos;s recommended price for the date.</summary>
-        public double? RecommendedRate { get; set; }
+        public double? RecommendedRate
+        {
+            get { return BackingStore?.Get<double?>("recommendedRate"); }
+            set { BackingStore?.Set("recommendedRate", value); }
+        }
         /// <summary>`overridden` is reserved for a future signal — it never appears today.</summary>
-        public global::Repull.SDK.Models.ListingPricingHistoryEntry_status? Status { get; set; }
+        public global::Repull.SDK.Models.ListingPricingHistoryEntry_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingHistoryEntry_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingPricingHistoryEntry"/> and sets the default values.
         /// </summary>
         public ListingPricingHistoryEntry()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

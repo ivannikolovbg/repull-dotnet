@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,33 +10,66 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.WelcomeGuide
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class WelcomeGuidePutRequestBody_access : IParsable
+    public partial class WelcomeGuidePutRequestBody_access : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The code property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Code { get; set; }
+        public string? Code
+        {
+            get { return BackingStore?.Get<string?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #nullable restore
 #else
-        public string Code { get; set; }
+        public string Code
+        {
+            get { return BackingStore?.Get<string>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #endif
         /// <summary>The instructions property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Instructions { get; set; }
+        public string? Instructions
+        {
+            get { return BackingStore?.Get<string?>("instructions"); }
+            set { BackingStore?.Set("instructions", value); }
+        }
 #nullable restore
 #else
-        public string Instructions { get; set; }
+        public string Instructions
+        {
+            get { return BackingStore?.Get<string>("instructions"); }
+            set { BackingStore?.Set("instructions", value); }
+        }
 #endif
         /// <summary>The type property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.WelcomeGuide.WelcomeGuidePutRequestBody_access"/> and sets the default values.
+        /// </summary>
+        public WelcomeGuidePutRequestBody_access()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

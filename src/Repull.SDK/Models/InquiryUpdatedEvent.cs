@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,46 +10,89 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class InquiryUpdatedEvent : IAdditionalDataHolder, IParsable
+    public partial class InquiryUpdatedEvent : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Which connected account produced this event. Null when it cannot be resolved — present-but-null rather than omitted, so a receiver can tell &quot;unresolvable&quot; from &quot;an old event&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.WebhookEventAccount? Account { get; set; }
+        public global::Repull.SDK.Models.WebhookEventAccount? Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventAccount?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.WebhookEventAccount Account { get; set; }
+        public global::Repull.SDK.Models.WebhookEventAccount Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventAccount>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The apiVersion property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiVersion { get; set; }
+        public string? ApiVersion
+        {
+            get { return BackingStore?.Get<string?>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #nullable restore
 #else
-        public string ApiVersion { get; set; }
+        public string ApiVersion
+        {
+            get { return BackingStore?.Get<string>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Payload for `inquiry.updated`. The inquiry&apos;s status, dates, guest count or the reservation it became changed. `previousAttributes` holds only what moved, with prior values. Fires whether the host acted through the API, a connected app or the Airbnb app. An inquiry whose dates simply pass is `expired` in `GET /v1/inquiries` but fires no event unless the channel reports it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.InquiryUpdatedPayload? Data { get; set; }
+        public global::Repull.SDK.Models.InquiryUpdatedPayload? Data
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryUpdatedPayload?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.InquiryUpdatedPayload Data { get; set; }
+        public global::Repull.SDK.Models.InquiryUpdatedPayload Data
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryUpdatedPayload>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>The event name. This field is `event`, not `type`.</summary>
-        public global::Repull.SDK.Models.InquiryUpdatedEvent_event? Event { get; set; }
+        public global::Repull.SDK.Models.InquiryUpdatedEvent_event? Event
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.InquiryUpdatedEvent_event?>("event"); }
+            set { BackingStore?.Set("event", value); }
+        }
         /// <summary>Stable across every delivery and replay of this logical event — dedupe on it.</summary>
-        public Guid? EventId { get; set; }
+        public Guid? EventId
+        {
+            get { return BackingStore?.Get<Guid?>("eventId"); }
+            set { BackingStore?.Set("eventId", value); }
+        }
         /// <summary>When this delivery was built.</summary>
-        public DateTimeOffset? Timestamp { get; set; }
+        public DateTimeOffset? Timestamp
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("timestamp"); }
+            set { BackingStore?.Set("timestamp", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.InquiryUpdatedEvent"/> and sets the default values.
         /// </summary>
         public InquiryUpdatedEvent()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

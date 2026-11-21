@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,67 +12,130 @@ namespace Repull.SDK.Models
     /// Body for `PUT /v1/channels/airbnb/listings/{id}/pricing`. The `type` discriminator selects the pricing sub-resource. `type: &quot;calendar&quot;` shares the same per-date restriction shape as the availability endpoint (min/max nights, closed-to-arrival/departure, stop-sell via `availability: &quot;unavailable&quot;`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbPricingWriteRequest : IAdditionalDataHolder, IParsable
+    public partial class AirbnbPricingWriteRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Required for `type: &quot;currency&quot;` — ISO 4217 code in capitals, e.g. `USD`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>With `type: &quot;fees&quot;` — the fee changes to apply. **Merged by `fee_type`**: fees you do not mention are kept, the ones you send are set, and `amount: null` removes that fee. (Airbnb itself replaces the whole fee list on every write, so Repull reads the listing&apos;s current fees, applies your changes and writes the full set.) The response is the listing&apos;s fees as Airbnb holds them afterwards.**Units — the same as `GET …/pricing` returns:** a `flat` fee is the amount in the listing currency × 1,000,000 (`160000000` = 160.00); a `percent` fee is a whole percent of the rent (`10` = 10%).Example — add a 10% management fee and keep everything else: `{&quot;type&quot;:&quot;fees&quot;,&quot;fees&quot;:[{&quot;fee_type&quot;:&quot;PASS_THROUGH_MANAGEMENT_FEE&quot;,&quot;amount&quot;:10,&quot;amount_type&quot;:&quot;percent&quot;}]}`. Remove the pet fee: `{&quot;type&quot;:&quot;fees&quot;,&quot;fees&quot;:[{&quot;fee_type&quot;:&quot;PASS_THROUGH_PET_FEE&quot;,&quot;amount&quot;:null}]}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees>? Fees { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees>? Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees>?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees> Fees { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees> Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_fees>>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #endif
         /// <summary>Required when `type: &quot;model&quot;` — the pricing-availability model to switch the listing to.</summary>
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType? ModelType { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType? ModelType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_modelType?>("modelType"); }
+            set { BackingStore?.Set("modelType", value); }
+        }
         /// <summary>Required when `type: &quot;calendar&quot;`. Batch of per-date price + restriction operations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbCalendarOperation>? Operations { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbCalendarOperation>? Operations
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbCalendarOperation>?>("operations"); }
+            set { BackingStore?.Set("operations", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbCalendarOperation> Operations { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbCalendarOperation> Operations
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbCalendarOperation>>("operations"); }
+            set { BackingStore?.Set("operations", value); }
+        }
 #endif
         /// <summary>Required for `type: &quot;los&quot;` — length-of-stay records.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records>? Records { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records>? Records
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records>?>("records"); }
+            set { BackingStore?.Set("records", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records> Records { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records> Records
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPricingWriteRequest_records>>("records"); }
+            set { BackingStore?.Set("records", value); }
+        }
 #endif
         /// <summary>Required for `type: &quot;rule&quot;` — a single pricing rule appended to the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule? Rule { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule? Rule
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule?>("rule"); }
+            set { BackingStore?.Set("rule", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule Rule { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule Rule
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_rule>("rule"); }
+            set { BackingStore?.Set("rule", value); }
+        }
 #endif
         /// <summary>Required for `type: &quot;standard&quot; | &quot;rate-plan&quot;` — the pricing-settings object to PUT. With `type: &quot;fees&quot;` it is the raw alternative to `fees`: `{&quot;standard_fees&quot;: [...]}` **replaces every fee** on the listing (Airbnb does not merge), so send the complete list. Prefer `fees`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_settings? Settings { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_settings? Settings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_settings?>("settings"); }
+            set { BackingStore?.Set("settings", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_settings Settings { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_settings Settings
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_settings>("settings"); }
+            set { BackingStore?.Set("settings", value); }
+        }
 #endif
         /// <summary>The type property</summary>
-        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_type? Type { get; set; }
+        public global::Repull.SDK.Models.AirbnbPricingWriteRequest_type? Type
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbPricingWriteRequest_type?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPricingWriteRequest"/> and sets the default values.
         /// </summary>
         public AirbnbPricingWriteRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

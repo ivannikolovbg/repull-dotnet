@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,29 +12,56 @@ namespace Repull.SDK.V1.Listings.Item.CalendarSync
     /// VRBO only — the paced push queue.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class CalendarSyncGetResponse_channels_queue : IAdditionalDataHolder, IParsable
+    public partial class CalendarSyncGetResponse_channels_queue : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The lastPush property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush? LastPush { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush? LastPush
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush?>("lastPush"); }
+            set { BackingStore?.Set("lastPush", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush LastPush { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush LastPush
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush>("lastPush"); }
+            set { BackingStore?.Set("lastPush", value); }
+        }
 #endif
         /// <summary>The queuedAt property</summary>
-        public DateTimeOffset? QueuedAt { get; set; }
+        public DateTimeOffset? QueuedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("queuedAt"); }
+            set { BackingStore?.Set("queuedAt", value); }
+        }
         /// <summary>Nights waiting to be pushed.</summary>
-        public int? QueuedNights { get; set; }
+        public int? QueuedNights
+        {
+            get { return BackingStore?.Get<int?>("queuedNights"); }
+            set { BackingStore?.Set("queuedNights", value); }
+        }
         /// <summary>The state property</summary>
-        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_state? State { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_state? State
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_state?>("state"); }
+            set { BackingStore?.Set("state", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue"/> and sets the default values.
         /// </summary>
         public CalendarSyncGetResponse_channels_queue()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

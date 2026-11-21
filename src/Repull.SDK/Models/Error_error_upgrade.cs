@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,49 +12,100 @@ namespace Repull.SDK.Models
     /// The cheapest plan that covers your usage. Present on the monthly quota refusal (`rate_limit_exceeded`, `scope: &quot;monthly&quot;`), `credits_exhausted` and `daily_limit_exceeded`. `monthly_price_usd` is exactly what `checkout_url` charges for `listings`. `plan: &quot;custom&quot;` means no self-serve plan covers the usage (already on Starter, more than Starter&apos;s quotas, or more than 100 listings): email `contact_email`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Error_error_upgrade : IAdditionalDataHolder, IParsable
+    public partial class Error_error_upgrade : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Opens checkout for exactly `monthly_price_usd`. Null for `custom`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckoutUrl { get; set; }
+        public string? CheckoutUrl
+        {
+            get { return BackingStore?.Get<string?>("checkout_url"); }
+            set { BackingStore?.Set("checkout_url", value); }
+        }
 #nullable restore
 #else
-        public string CheckoutUrl { get; set; }
+        public string CheckoutUrl
+        {
+            get { return BackingStore?.Get<string>("checkout_url"); }
+            set { BackingStore?.Set("checkout_url", value); }
+        }
 #endif
         /// <summary>Where to ask for a plan when `plan` is `custom`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ContactEmail { get; set; }
+        public string? ContactEmail
+        {
+            get { return BackingStore?.Get<string?>("contact_email"); }
+            set { BackingStore?.Set("contact_email", value); }
+        }
 #nullable restore
 #else
-        public string ContactEmail { get; set; }
+        public string ContactEmail
+        {
+            get { return BackingStore?.Get<string>("contact_email"); }
+            set { BackingStore?.Set("contact_email", value); }
+        }
 #endif
         /// <summary>The plan&apos;s daily request cap. Null for `custom`.</summary>
-        public int? DailyRequests { get; set; }
+        public int? DailyRequests
+        {
+            get { return BackingStore?.Get<int?>("daily_requests"); }
+            set { BackingStore?.Set("daily_requests", value); }
+        }
         /// <summary>Listings the price covers: your active ones, across your workspaces (what checkout bills). Held-back listings are not included; upgrading does not switch them on.</summary>
-        public int? Listings { get; set; }
+        public int? Listings
+        {
+            get { return BackingStore?.Get<int?>("listings"); }
+            set { BackingStore?.Set("listings", value); }
+        }
         /// <summary>Monthly price in USD for `listings`: Starter&apos;s base plus its per-listing price. Null for `custom`.</summary>
-        public double? MonthlyPriceUsd { get; set; }
+        public double? MonthlyPriceUsd
+        {
+            get { return BackingStore?.Get<double?>("monthly_price_usd"); }
+            set { BackingStore?.Set("monthly_price_usd", value); }
+        }
         /// <summary>Requests a month the plan includes. Null for `custom`.</summary>
-        public int? MonthlyRequests { get; set; }
+        public int? MonthlyRequests
+        {
+            get { return BackingStore?.Get<int?>("monthly_requests"); }
+            set { BackingStore?.Set("monthly_requests", value); }
+        }
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The plan property</summary>
-        public global::Repull.SDK.Models.Error_error_upgrade_plan? Plan { get; set; }
+        public global::Repull.SDK.Models.Error_error_upgrade_plan? Plan
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Error_error_upgrade_plan?>("plan"); }
+            set { BackingStore?.Set("plan", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Error_error_upgrade"/> and sets the default values.
         /// </summary>
         public Error_error_upgrade()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

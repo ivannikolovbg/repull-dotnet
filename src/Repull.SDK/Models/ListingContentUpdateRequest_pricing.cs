@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,39 +12,86 @@ namespace Repull.SDK.Models
     /// The listing&apos;s standing rates. Partial like every other section: only the fields you send are written, and `null` clears one.Changing `defaultDailyPrice` or `weekendPrice` also moves the nights on the calendar that still carry the old rate and were written by us — a night you or a channel priced yourself is never touched, and neither is a blocked or reserved one. So a price change reaches the calendar without overwriting anyone&apos;s work.This is still a local write. Publish to send the new rates to a channel.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingContentUpdateRequest_pricing : IAdditionalDataHolder, IParsable
+    public partial class ListingContentUpdateRequest_pricing : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cleaningFee property</summary>
-        public double? CleaningFee { get; set; }
+        public double? CleaningFee
+        {
+            get { return BackingStore?.Get<double?>("cleaningFee"); }
+            set { BackingStore?.Set("cleaningFee", value); }
+        }
         /// <summary>ISO 4217, e.g. `USD`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>Nightly rate for every night that is not a weekend night.</summary>
-        public double? DefaultDailyPrice { get; set; }
+        public double? DefaultDailyPrice
+        {
+            get { return BackingStore?.Get<double?>("defaultDailyPrice"); }
+            set { BackingStore?.Set("defaultDailyPrice", value); }
+        }
         /// <summary>Guests covered by the nightly rate before `pricePerExtraGuest` applies.</summary>
-        public int? GuestsIncluded { get; set; }
+        public int? GuestsIncluded
+        {
+            get { return BackingStore?.Get<int?>("guestsIncluded"); }
+            set { BackingStore?.Set("guestsIncluded", value); }
+        }
         /// <summary>A percentage, not a fraction: `20` is 20% off a stay of 28 nights or more. Values between 0 and 1 are refused, as for `weeklyDiscount`.</summary>
-        public double? MonthlyDiscount { get; set; }
+        public double? MonthlyDiscount
+        {
+            get { return BackingStore?.Get<double?>("monthlyDiscount"); }
+            set { BackingStore?.Set("monthlyDiscount", value); }
+        }
         /// <summary>The pricePerExtraGuest property</summary>
-        public double? PricePerExtraGuest { get; set; }
+        public double? PricePerExtraGuest
+        {
+            get { return BackingStore?.Get<double?>("pricePerExtraGuest"); }
+            set { BackingStore?.Set("pricePerExtraGuest", value); }
+        }
         /// <summary>The securityDeposit property</summary>
-        public double? SecurityDeposit { get; set; }
+        public double? SecurityDeposit
+        {
+            get { return BackingStore?.Get<double?>("securityDeposit"); }
+            set { BackingStore?.Set("securityDeposit", value); }
+        }
         /// <summary>Nightly rate for Saturday and Sunday nights (UTC).</summary>
-        public double? WeekendPrice { get; set; }
+        public double? WeekendPrice
+        {
+            get { return BackingStore?.Get<double?>("weekendPrice"); }
+            set { BackingStore?.Set("weekendPrice", value); }
+        }
         /// <summary>A percentage, not a fraction: `10` is 10% off a stay of a week or more. A value between 0 and 1 is refused (it would publish as a fraction of one percent) — send `10`, not `0.1`. `0` clears it.</summary>
-        public double? WeeklyDiscount { get; set; }
+        public double? WeeklyDiscount
+        {
+            get { return BackingStore?.Get<double?>("weeklyDiscount"); }
+            set { BackingStore?.Set("weeklyDiscount", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingContentUpdateRequest_pricing"/> and sets the default values.
         /// </summary>
         public ListingContentUpdateRequest_pricing()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

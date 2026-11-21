@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,78 +10,153 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BookingProperty_listings : IAdditionalDataHolder, IParsable
+    public partial class BookingProperty_listings : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>On inactive listings only: why it is inactive.</summary>
-        public global::Repull.SDK.Models.BookingProperty_listings_inactiveReason? InactiveReason { get; set; }
+        public global::Repull.SDK.Models.BookingProperty_listings_inactiveReason? InactiveReason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingProperty_listings_inactiveReason?>("inactiveReason"); }
+            set { BackingStore?.Set("inactiveReason", value); }
+        }
         /// <summary>Repull listing id — what `/v1/channels/booking/properties/{id}` and `/v1/channels/booking/listings/{id}/pricing` take.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Which record carries the mapping: the room mapping written by Connect, or the legacy property-level link.</summary>
-        public global::Repull.SDK.Models.BookingProperty_listings_mappedVia? MappedVia { get; set; }
+        public global::Repull.SDK.Models.BookingProperty_listings_mappedVia? MappedVia
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingProperty_listings_mappedVia?>("mappedVia"); }
+            set { BackingStore?.Set("mappedVia", value); }
+        }
         /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The title guests see on the channel; show this to end users.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PublicName { get; set; }
+        public string? PublicName
+        {
+            get { return BackingStore?.Get<string?>("publicName"); }
+            set { BackingStore?.Set("publicName", value); }
+        }
 #nullable restore
 #else
-        public string PublicName { get; set; }
+        public string PublicName
+        {
+            get { return BackingStore?.Get<string>("publicName"); }
+            set { BackingStore?.Set("publicName", value); }
+        }
 #endif
         /// <summary>Booking.com&apos;s own room id — the `roomId` an ARI write takes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomBookingId { get; set; }
+        public string? RoomBookingId
+        {
+            get { return BackingStore?.Get<string?>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #nullable restore
 #else
-        public string RoomBookingId { get; set; }
+        public string RoomBookingId
+        {
+            get { return BackingStore?.Get<string>("roomBookingId"); }
+            set { BackingStore?.Set("roomBookingId", value); }
+        }
 #endif
         /// <summary>Repull-side room row id, as used by `POST /v1/connect/booking/map-rooms`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("roomId"); }
+            set { BackingStore?.Set("roomId", value); }
+        }
 #endif
         /// <summary>The roomName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomName { get; set; }
+        public string? RoomName
+        {
+            get { return BackingStore?.Get<string?>("roomName"); }
+            set { BackingStore?.Set("roomName", value); }
+        }
 #nullable restore
 #else
-        public string RoomName { get; set; }
+        public string RoomName
+        {
+            get { return BackingStore?.Get<string>("roomName"); }
+            set { BackingStore?.Set("roomName", value); }
+        }
 #endif
         /// <summary>Inactive listings appear only with `?status=inactive|all`, with identity fields only.</summary>
-        public global::Repull.SDK.Models.BookingProperty_listings_status? Status { get; set; }
+        public global::Repull.SDK.Models.BookingProperty_listings_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingProperty_listings_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingProperty_listings"/> and sets the default values.
         /// </summary>
         public BookingProperty_listings()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,68 +12,141 @@ namespace Repull.SDK.Models
     /// Update what kind of property this is, when the quiet hours are, how the guest gets in, the house manual, directions or Wi-Fi details. At least one field required. These are among the attributes Airbnb locks on established listings — see `blockedFields` on the response.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbListingDetailsWriteRequest : IParsable
+    public partial class AirbnbListingDetailsWriteRequest : IBackedModel, IParsable
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>How the guest lets themselves in — Airbnb&apos;s `check_in_option`. `instruction` is the arrival instructions the guest sees.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option? CheckInOption { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option? CheckInOption
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option?>("check_in_option"); }
+            set { BackingStore?.Set("check_in_option", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option CheckInOption { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option CheckInOption
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_check_in_option>("check_in_option"); }
+            set { BackingStore?.Set("check_in_option", value); }
+        }
 #endif
         /// <summary>Directions to the property, shown to booked guests.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Directions { get; set; }
+        public string? Directions
+        {
+            get { return BackingStore?.Get<string?>("directions"); }
+            set { BackingStore?.Set("directions", value); }
+        }
 #nullable restore
 #else
-        public string Directions { get; set; }
+        public string Directions
+        {
+            get { return BackingStore?.Get<string>("directions"); }
+            set { BackingStore?.Set("directions", value); }
+        }
 #endif
         /// <summary>The house manual guests see after booking.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HouseManual { get; set; }
+        public string? HouseManual
+        {
+            get { return BackingStore?.Get<string?>("house_manual"); }
+            set { BackingStore?.Set("house_manual", value); }
+        }
 #nullable restore
 #else
-        public string HouseManual { get; set; }
+        public string HouseManual
+        {
+            get { return BackingStore?.Get<string>("house_manual"); }
+            set { BackingStore?.Set("house_manual", value); }
+        }
 #endif
         /// <summary>The specific type inside the group, e.g. `apartment`, `condominium`, `townhouse`, `guesthouse`. Airbnb validates it against the group, so send both when you are changing the kind of property.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyTypeCategory { get; set; }
+        public string? PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string?>("property_type_category"); }
+            set { BackingStore?.Set("property_type_category", value); }
+        }
 #nullable restore
 #else
-        public string PropertyTypeCategory { get; set; }
+        public string PropertyTypeCategory
+        {
+            get { return BackingStore?.Get<string>("property_type_category"); }
+            set { BackingStore?.Set("property_type_category", value); }
+        }
 #endif
         /// <summary>The coarse building family.</summary>
-        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_property_type_group? PropertyTypeGroup { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_property_type_group? PropertyTypeGroup
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_property_type_group?>("property_type_group"); }
+            set { BackingStore?.Set("property_type_group", value); }
+        }
         /// <summary>Whole hours on a 24h clock, as strings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours>? QuietHours { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours>? QuietHours
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours>?>("quiet_hours"); }
+            set { BackingStore?.Set("quiet_hours", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours> QuietHours { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours> QuietHours
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_quiet_hours>>("quiet_hours"); }
+            set { BackingStore?.Set("quiet_hours", value); }
+        }
 #endif
         /// <summary>What the guest gets of the property.</summary>
-        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_room_type_category? RoomTypeCategory { get; set; }
+        public global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_room_type_category? RoomTypeCategory
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest_room_type_category?>("room_type_category"); }
+            set { BackingStore?.Set("room_type_category", value); }
+        }
         /// <summary>Wi-Fi network name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WifiNetwork { get; set; }
+        public string? WifiNetwork
+        {
+            get { return BackingStore?.Get<string?>("wifi_network"); }
+            set { BackingStore?.Set("wifi_network", value); }
+        }
 #nullable restore
 #else
-        public string WifiNetwork { get; set; }
+        public string WifiNetwork
+        {
+            get { return BackingStore?.Get<string>("wifi_network"); }
+            set { BackingStore?.Set("wifi_network", value); }
+        }
 #endif
         /// <summary>Wi-Fi password.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? WifiPassword { get; set; }
+        public string? WifiPassword
+        {
+            get { return BackingStore?.Get<string?>("wifi_password"); }
+            set { BackingStore?.Set("wifi_password", value); }
+        }
 #nullable restore
 #else
-        public string WifiPassword { get; set; }
+        public string WifiPassword
+        {
+            get { return BackingStore?.Get<string>("wifi_password"); }
+            set { BackingStore?.Set("wifi_password", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListingDetailsWriteRequest"/> and sets the default values.
+        /// </summary>
+        public AirbnbListingDetailsWriteRequest()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

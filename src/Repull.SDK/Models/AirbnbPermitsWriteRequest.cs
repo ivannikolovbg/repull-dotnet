@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,23 +12,38 @@ namespace Repull.SDK.Models
     /// Answer the regulatory permit questions Airbnb asks for this listing, in Airbnb&apos;s Listing Permits shape. Read them first with `?source=live` on the GET: each permit lists its `flows[]`, and each flow its `questions[]` with an `answer_key` and a `type`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbPermitsWriteRequest : IAdditionalDataHolder, IParsable
+    public partial class AirbnbPermitsWriteRequest : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The permits property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits>? Permits { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits>? Permits
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits>?>("permits"); }
+            set { BackingStore?.Set("permits", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits> Permits { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits> Permits
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbPermitsWriteRequest_permits>>("permits"); }
+            set { BackingStore?.Set("permits", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPermitsWriteRequest"/> and sets the default values.
         /// </summary>
         public AirbnbPermitsWriteRequest()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

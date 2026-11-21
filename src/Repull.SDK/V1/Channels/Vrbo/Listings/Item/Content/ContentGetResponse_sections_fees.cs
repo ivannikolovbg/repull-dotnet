@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,80 +10,151 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ContentGetResponse_sections_fees : IAdditionalDataHolder, IParsable
+    public partial class ContentGetResponse_sections_fees : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cleaning property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_cleaning? Cleaning { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_cleaning? Cleaning
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_cleaning?>("cleaning"); }
+            set { BackingStore?.Set("cleaning", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_cleaning Cleaning { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_cleaning Cleaning
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_cleaning>("cleaning"); }
+            set { BackingStore?.Set("cleaning", value); }
+        }
 #endif
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The custom property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_custom>? Custom { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_custom>? Custom
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_custom>?>("custom"); }
+            set { BackingStore?.Set("custom", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_custom> Custom { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_custom> Custom
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_custom>>("custom"); }
+            set { BackingStore?.Set("custom", value); }
+        }
 #endif
         /// <summary>The customFeeCodes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? CustomFeeCodes { get; set; }
+        public List<string>? CustomFeeCodes
+        {
+            get { return BackingStore?.Get<List<string>?>("customFeeCodes"); }
+            set { BackingStore?.Set("customFeeCodes", value); }
+        }
 #nullable restore
 #else
-        public List<string> CustomFeeCodes { get; set; }
+        public List<string> CustomFeeCodes
+        {
+            get { return BackingStore?.Get<List<string>>("customFeeCodes"); }
+            set { BackingStore?.Set("customFeeCodes", value); }
+        }
 #endif
         /// <summary>The extraGuestFeeTypes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ExtraGuestFeeTypes { get; set; }
+        public List<string>? ExtraGuestFeeTypes
+        {
+            get { return BackingStore?.Get<List<string>?>("extraGuestFeeTypes"); }
+            set { BackingStore?.Set("extraGuestFeeTypes", value); }
+        }
 #nullable restore
 #else
-        public List<string> ExtraGuestFeeTypes { get; set; }
+        public List<string> ExtraGuestFeeTypes
+        {
+            get { return BackingStore?.Get<List<string>>("extraGuestFeeTypes"); }
+            set { BackingStore?.Set("extraGuestFeeTypes", value); }
+        }
 #endif
         /// <summary>The extraGuests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_extraGuests? ExtraGuests { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_extraGuests? ExtraGuests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_extraGuests?>("extraGuests"); }
+            set { BackingStore?.Set("extraGuests", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_extraGuests ExtraGuests { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_extraGuests ExtraGuests
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_extraGuests>("extraGuests"); }
+            set { BackingStore?.Set("extraGuests", value); }
+        }
 #endif
         /// <summary>The feeTypes property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? FeeTypes { get; set; }
+        public List<string>? FeeTypes
+        {
+            get { return BackingStore?.Get<List<string>?>("feeTypes"); }
+            set { BackingStore?.Set("feeTypes", value); }
+        }
 #nullable restore
 #else
-        public List<string> FeeTypes { get; set; }
+        public List<string> FeeTypes
+        {
+            get { return BackingStore?.Get<List<string>>("feeTypes"); }
+            set { BackingStore?.Set("feeTypes", value); }
+        }
 #endif
         /// <summary>The pets property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_pets? Pets { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_pets? Pets
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_pets?>("pets"); }
+            set { BackingStore?.Set("pets", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_pets Pets { get; set; }
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_pets Pets
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees_pets>("pets"); }
+            set { BackingStore?.Set("pets", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Content.ContentGetResponse_sections_fees"/> and sets the default values.
         /// </summary>
         public ContentGetResponse_sections_fees()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

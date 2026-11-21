@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,62 +10,127 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PhotosPostRequestBody_photos : IParsable
+    public partial class PhotosPostRequestBody_photos : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Amenity id, when `category` is `listing_amenity` or `room_amenity`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Amenity { get; set; }
+        public string? Amenity
+        {
+            get { return BackingStore?.Get<string?>("amenity"); }
+            set { BackingStore?.Set("amenity", value); }
+        }
 #nullable restore
 #else
-        public string Amenity { get; set; }
+        public string Amenity
+        {
+            get { return BackingStore?.Get<string>("amenity"); }
+            set { BackingStore?.Set("amenity", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The caption property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Caption { get; set; }
+        public string? Caption
+        {
+            get { return BackingStore?.Get<string?>("caption"); }
+            set { BackingStore?.Set("caption", value); }
+        }
 #nullable restore
 #else
-        public string Caption { get; set; }
+        public string Caption
+        {
+            get { return BackingStore?.Get<string>("caption"); }
+            set { BackingStore?.Set("caption", value); }
+        }
 #endif
         /// <summary>The category property</summary>
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_category? Category { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_category? Category
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_category?>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
         /// <summary>Base64 image data. A `data:image/jpeg;base64,` prefix is accepted and stripped. Maximum 25 MB decoded.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Image { get; set; }
+        public string? Image
+        {
+            get { return BackingStore?.Get<string?>("image"); }
+            set { BackingStore?.Set("image", value); }
+        }
 #nullable restore
 #else
-        public string Image { get; set; }
+        public string Image
+        {
+            get { return BackingStore?.Get<string>("image"); }
+            set { BackingStore?.Set("image", value); }
+        }
 #endif
         /// <summary>Accepted and ignored — the listing comes from the path.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos.PhotosPostRequestBody_photos_listing_id? ListingId { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos.PhotosPostRequestBody_photos_listing_id? ListingId
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos.PhotosPostRequestBody_photos_listing_id?>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos.PhotosPostRequestBody_photos_listing_id ListingId { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos.PhotosPostRequestBody_photos_listing_id ListingId
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos.PhotosPostRequestBody_photos_listing_id>("listing_id"); }
+            set { BackingStore?.Set("listing_id", value); }
+        }
 #endif
         /// <summary>At most 10 pairs; keys 40 characters or fewer.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_metadata? Metadata { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_metadata? Metadata
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_metadata?>("metadata"); }
+            set { BackingStore?.Set("metadata", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_metadata Metadata { get; set; }
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_metadata Metadata
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos_metadata>("metadata"); }
+            set { BackingStore?.Set("metadata", value); }
+        }
 #endif
         /// <summary>Airbnb room id to file this photo under (`roomId` from `GET /rooms`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoomId { get; set; }
+        public string? RoomId
+        {
+            get { return BackingStore?.Get<string?>("room_id"); }
+            set { BackingStore?.Set("room_id", value); }
+        }
 #nullable restore
 #else
-        public string RoomId { get; set; }
+        public string RoomId
+        {
+            get { return BackingStore?.Get<string>("room_id"); }
+            set { BackingStore?.Set("room_id", value); }
+        }
 #endif
         /// <summary>The sort_order property</summary>
-        public int? SortOrder { get; set; }
+        public int? SortOrder
+        {
+            get { return BackingStore?.Get<int?>("sort_order"); }
+            set { BackingStore?.Set("sort_order", value); }
+        }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos"/> and sets the default values.
+        /// </summary>
+        public PhotosPostRequestBody_photos()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -113,18 +179,39 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos
         /// Composed type wrapper for classes <see cref="int"/>, <see cref="string"/>
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class PhotosPostRequestBody_photos_listing_id : IComposedTypeWrapper, IParsable
+        public partial class PhotosPostRequestBody_photos_listing_id : IBackedModel, IComposedTypeWrapper, IParsable
         {
+            /// <summary>Stores model information.</summary>
+            public IBackingStore BackingStore { get; private set; }
             /// <summary>Composed type representation for type <see cref="int"/></summary>
-            public int? Integer { get; set; }
+            public int? Integer
+            {
+                get { return BackingStore?.Get<int?>("integer"); }
+                set { BackingStore?.Set("integer", value); }
+            }
             /// <summary>Composed type representation for type <see cref="string"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-            public string? String { get; set; }
+            public string? String
+            {
+                get { return BackingStore?.Get<string?>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #nullable restore
 #else
-            public string String { get; set; }
+            public string String
+            {
+                get { return BackingStore?.Get<string>("string"); }
+                set { BackingStore?.Set("string", value); }
+            }
 #endif
+            /// <summary>
+            /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos.PhotosPostRequestBody_photos.PhotosPostRequestBody_photos_listing_id"/> and sets the default values.
+            /// </summary>
+            public PhotosPostRequestBody_photos_listing_id()
+            {
+                BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+            }
             /// <summary>
             /// Creates a new instance of the appropriate class based on discriminator value
             /// </summary>

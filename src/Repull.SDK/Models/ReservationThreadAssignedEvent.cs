@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,46 +10,89 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReservationThreadAssignedEvent : IAdditionalDataHolder, IParsable
+    public partial class ReservationThreadAssignedEvent : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Which connected account produced this event. Null when it cannot be resolved — present-but-null rather than omitted, so a receiver can tell &quot;unresolvable&quot; from &quot;an old event&quot;.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.WebhookEventAccount? Account { get; set; }
+        public global::Repull.SDK.Models.WebhookEventAccount? Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventAccount?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.WebhookEventAccount Account { get; set; }
+        public global::Repull.SDK.Models.WebhookEventAccount Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.WebhookEventAccount>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The apiVersion property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ApiVersion { get; set; }
+        public string? ApiVersion
+        {
+            get { return BackingStore?.Get<string?>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #nullable restore
 #else
-        public string ApiVersion { get; set; }
+        public string ApiVersion
+        {
+            get { return BackingStore?.Get<string>("apiVersion"); }
+            set { BackingStore?.Set("apiVersion", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Payload for `reservation.thread.assigned`. A message thread was attached to a booking. Threads are often born orphaned — a guest messages about a booking whose import has not landed — and adopted when the reservation arrives.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationThreadAssignedPayload? Data { get; set; }
+        public global::Repull.SDK.Models.ReservationThreadAssignedPayload? Data
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationThreadAssignedPayload?>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationThreadAssignedPayload Data { get; set; }
+        public global::Repull.SDK.Models.ReservationThreadAssignedPayload Data
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationThreadAssignedPayload>("data"); }
+            set { BackingStore?.Set("data", value); }
+        }
 #endif
         /// <summary>The event name. This field is `event`, not `type`.</summary>
-        public global::Repull.SDK.Models.ReservationThreadAssignedEvent_event? Event { get; set; }
+        public global::Repull.SDK.Models.ReservationThreadAssignedEvent_event? Event
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationThreadAssignedEvent_event?>("event"); }
+            set { BackingStore?.Set("event", value); }
+        }
         /// <summary>The eventId property</summary>
-        public Guid? EventId { get; set; }
+        public Guid? EventId
+        {
+            get { return BackingStore?.Get<Guid?>("eventId"); }
+            set { BackingStore?.Set("eventId", value); }
+        }
         /// <summary>The timestamp property</summary>
-        public DateTimeOffset? Timestamp { get; set; }
+        public DateTimeOffset? Timestamp
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("timestamp"); }
+            set { BackingStore?.Set("timestamp", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationThreadAssignedEvent"/> and sets the default values.
         /// </summary>
         public ReservationThreadAssignedEvent()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

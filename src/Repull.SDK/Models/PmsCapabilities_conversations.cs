@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,22 +10,41 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class PmsCapabilities_conversations : IAdditionalDataHolder, IParsable
+    public partial class PmsCapabilities_conversations : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>`attachments` on `POST /v1/conversations/{id}/messages`.</summary>
-        public bool? Attachments { get; set; }
+        public bool? Attachments
+        {
+            get { return BackingStore?.Get<bool?>("attachments"); }
+            set { BackingStore?.Set("attachments", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`channel` on `POST /v1/conversations/{id}/messages`.</summary>
-        public bool? ChannelSelect { get; set; }
+        public bool? ChannelSelect
+        {
+            get { return BackingStore?.Get<bool?>("channelSelect"); }
+            set { BackingStore?.Set("channelSelect", value); }
+        }
         /// <summary>The send property</summary>
-        public bool? Send { get; set; }
+        public bool? Send
+        {
+            get { return BackingStore?.Get<bool?>("send"); }
+            set { BackingStore?.Set("send", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PmsCapabilities_conversations"/> and sets the default values.
         /// </summary>
         public PmsCapabilities_conversations()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

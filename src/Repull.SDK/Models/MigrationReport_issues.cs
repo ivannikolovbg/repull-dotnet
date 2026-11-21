@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,52 +10,99 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class MigrationReport_issues : IAdditionalDataHolder, IParsable
+    public partial class MigrationReport_issues : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The code property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Code { get; set; }
+        public string? Code
+        {
+            get { return BackingStore?.Get<string?>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #nullable restore
 #else
-        public string Code { get; set; }
+        public string Code
+        {
+            get { return BackingStore?.Get<string>("code"); }
+            set { BackingStore?.Set("code", value); }
+        }
 #endif
         /// <summary>The count property</summary>
-        public int? Count { get; set; }
+        public int? Count
+        {
+            get { return BackingStore?.Get<int?>("count"); }
+            set { BackingStore?.Set("count", value); }
+        }
         /// <summary>The entity property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Entity { get; set; }
+        public string? Entity
+        {
+            get { return BackingStore?.Get<string?>("entity"); }
+            set { BackingStore?.Set("entity", value); }
+        }
 #nullable restore
 #else
-        public string Entity { get; set; }
+        public string Entity
+        {
+            get { return BackingStore?.Get<string>("entity"); }
+            set { BackingStore?.Set("entity", value); }
+        }
 #endif
         /// <summary>The message property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Message { get; set; }
+        public string? Message
+        {
+            get { return BackingStore?.Get<string?>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #nullable restore
 #else
-        public string Message { get; set; }
+        public string Message
+        {
+            get { return BackingStore?.Get<string>("message"); }
+            set { BackingStore?.Set("message", value); }
+        }
 #endif
         /// <summary>Up to 10 affected listing / reservation ids.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? SampleIds { get; set; }
+        public List<int?>? SampleIds
+        {
+            get { return BackingStore?.Get<List<int?>?>("sampleIds"); }
+            set { BackingStore?.Set("sampleIds", value); }
+        }
 #nullable restore
 #else
-        public List<int?> SampleIds { get; set; }
+        public List<int?> SampleIds
+        {
+            get { return BackingStore?.Get<List<int?>>("sampleIds"); }
+            set { BackingStore?.Set("sampleIds", value); }
+        }
 #endif
         /// <summary>The severity property</summary>
-        public global::Repull.SDK.Models.MigrationReport_issues_severity? Severity { get; set; }
+        public global::Repull.SDK.Models.MigrationReport_issues_severity? Severity
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.MigrationReport_issues_severity?>("severity"); }
+            set { BackingStore?.Set("severity", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MigrationReport_issues"/> and sets the default values.
         /// </summary>
         public MigrationReport_issues()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

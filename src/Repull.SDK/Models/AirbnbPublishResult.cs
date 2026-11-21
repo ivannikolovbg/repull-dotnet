@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,59 +12,114 @@ namespace Repull.SDK.Models
     /// A publish is not one call to Airbnb: it is up to eight independent ones (details, description, amenities, rooms, policies, photos, pricing, checkout_tasks), each of which can fail on its own. A PARTIAL publish is normal — what succeeded stays applied; there is no rollback.**Content landing and the listing being live are two different answers.** `published` is about content; `live` is about whether the listing takes bookings. Read both.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbPublishResult : IAdditionalDataHolder, IParsable
+    public partial class AirbnbPublishResult : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Per-section failures. Empty when `published` is true.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.PublishSectionError>? Errors { get; set; }
+        public List<global::Repull.SDK.Models.PublishSectionError>? Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.PublishSectionError>?>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.PublishSectionError> Errors { get; set; }
+        public List<global::Repull.SDK.Models.PublishSectionError> Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.PublishSectionError>>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #endif
         /// <summary>Whether the listing is active and bookable on Airbnb — that is, whether activation was actually performed and succeeded.`published: true` with `live: false` is a real and common outcome: every content section landed, but the listing was never activated, because activation is skipped when instant-booking cannot be confirmed to be off. `warnings` says why.**Absent is not `false`.** The field is omitted entirely when activation was never part of the operation — publishing to an already-mapped Airbnb listing updates content and activates nothing, so there is nothing to report. Only treat the listing as not-live when `live` is present and false.</summary>
-        public bool? Live { get; set; }
+        public bool? Live
+        {
+            get { return BackingStore?.Get<bool?>("live"); }
+            set { BackingStore?.Set("live", value); }
+        }
         /// <summary>Fields Airbnb will not let this listing change — collected from the failures above and from the `locked_attributes` Airbnb recorded for the listing. Sending them again returns success and changes nothing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? LockedFields { get; set; }
+        public List<string>? LockedFields
+        {
+            get { return BackingStore?.Get<List<string>?>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #nullable restore
 #else
-        public List<string> LockedFields { get; set; }
+        public List<string> LockedFields
+        {
+            get { return BackingStore?.Get<List<string>>("lockedFields"); }
+            set { BackingStore?.Set("lockedFields", value); }
+        }
 #endif
         /// <summary>True only when EVERY attempted section reached Airbnb.</summary>
-        public bool? Published { get; set; }
+        public bool? Published
+        {
+            get { return BackingStore?.Get<bool?>("published"); }
+            set { BackingStore?.Set("published", value); }
+        }
         /// <summary>Set when the publish never started at all (no connection, address missing, subscription gate).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>Sections that landed on Airbnb.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Sections { get; set; }
+        public List<string>? Sections
+        {
+            get { return BackingStore?.Get<List<string>?>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #nullable restore
 #else
-        public List<string> Sections { get; set; }
+        public List<string> Sections
+        {
+            get { return BackingStore?.Get<List<string>>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #endif
         /// <summary>Steps that failed WITHOUT failing the publish — optional work the push carried on past, each in the push&apos;s own words. These used to be swallowed silently, so the only sign of one was a listing that was somehow not quite right afterwards. A publish can be `published: true` and still carry warnings; read them before concluding nothing needs doing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Warnings { get; set; }
+        public List<string>? Warnings
+        {
+            get { return BackingStore?.Get<List<string>?>("warnings"); }
+            set { BackingStore?.Set("warnings", value); }
+        }
 #nullable restore
 #else
-        public List<string> Warnings { get; set; }
+        public List<string> Warnings
+        {
+            get { return BackingStore?.Get<List<string>>("warnings"); }
+            set { BackingStore?.Set("warnings", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbPublishResult"/> and sets the default values.
         /// </summary>
         public AirbnbPublishResult()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

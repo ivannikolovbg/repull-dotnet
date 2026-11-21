@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,42 +10,77 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListingStatusBatchResponse : IAdditionalDataHolder, IParsable
+    public partial class ListingStatusBatchResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The state every listing in the request is now in.</summary>
-        public bool? Active { get; set; }
+        public bool? Active
+        {
+            get { return BackingStore?.Get<bool?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Only when `active` is true: one entry per Booking.com property the listings in the request are mapped to, saying whether it was opened. Every listing in the request counts, including those in `unchanged`, so sending `active: true` again retries an open Booking.com refused. Empty when none of the listings has a Booking.com property.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingPropertyOpenResult>? BookingProperties { get; set; }
+        public List<global::Repull.SDK.Models.BookingPropertyOpenResult>? BookingProperties
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingPropertyOpenResult>?>("bookingProperties"); }
+            set { BackingStore?.Set("bookingProperties", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingPropertyOpenResult> BookingProperties { get; set; }
+        public List<global::Repull.SDK.Models.BookingPropertyOpenResult> BookingProperties
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingPropertyOpenResult>>("bookingProperties"); }
+            set { BackingStore?.Set("bookingProperties", value); }
+        }
 #endif
         /// <summary>Listing ids that were already in the requested state, in request order.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Unchanged { get; set; }
+        public List<string>? Unchanged
+        {
+            get { return BackingStore?.Get<List<string>?>("unchanged"); }
+            set { BackingStore?.Set("unchanged", value); }
+        }
 #nullable restore
 #else
-        public List<string> Unchanged { get; set; }
+        public List<string> Unchanged
+        {
+            get { return BackingStore?.Get<List<string>>("unchanged"); }
+            set { BackingStore?.Set("unchanged", value); }
+        }
 #endif
         /// <summary>Listing ids whose state this call changed, in request order.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Updated { get; set; }
+        public List<string>? Updated
+        {
+            get { return BackingStore?.Get<List<string>?>("updated"); }
+            set { BackingStore?.Set("updated", value); }
+        }
 #nullable restore
 #else
-        public List<string> Updated { get; set; }
+        public List<string> Updated
+        {
+            get { return BackingStore?.Get<List<string>>("updated"); }
+            set { BackingStore?.Set("updated", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingStatusBatchResponse"/> and sets the default values.
         /// </summary>
         public ListingStatusBatchResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

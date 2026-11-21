@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,97 +12,196 @@ namespace Repull.SDK.Models
     /// A money movement: a guest charge, a host payout, a refund, a tourist-tax pass-through, a resolution payout, or an adjustment that claws money back.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PaymentWebhookObject : IAdditionalDataHolder, IParsable
+    public partial class PaymentWebhookObject : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Gross amount. Negative on adjustments and clawbacks — the sign is preserved so the direction never has to be inferred.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Amount { get; set; }
+        public string? Amount
+        {
+            get { return BackingStore?.Get<string?>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
 #nullable restore
 #else
-        public string Amount { get; set; }
+        public string Amount
+        {
+            get { return BackingStore?.Get<string>("amount"); }
+            set { BackingStore?.Set("amount", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The channel&apos;s confirmation code, when resolved.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The customerId property</summary>
-        public int? CustomerId { get; set; }
+        public int? CustomerId
+        {
+            get { return BackingStore?.Get<int?>("customerId"); }
+            set { BackingStore?.Set("customerId", value); }
+        }
         /// <summary>The id property</summary>
-        public int? Id { get; set; }
+        public int? Id
+        {
+            get { return BackingStore?.Get<int?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>Emitted only where the source carries it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? NetAmount { get; set; }
+        public string? NetAmount
+        {
+            get { return BackingStore?.Get<string?>("netAmount"); }
+            set { BackingStore?.Set("netAmount", value); }
+        }
 #nullable restore
 #else
-        public string NetAmount { get; set; }
+        public string NetAmount
+        {
+            get { return BackingStore?.Get<string>("netAmount"); }
+            set { BackingStore?.Set("netAmount", value); }
+        }
 #endif
         /// <summary>The platform property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Platform { get; set; }
+        public string? Platform
+        {
+            get { return BackingStore?.Get<string?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #nullable restore
 #else
-        public string Platform { get; set; }
+        public string Platform
+        {
+            get { return BackingStore?.Get<string>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
 #endif
         /// <summary>The platform&apos;s own id. Airbnb payout ids look like `G-FRSLYC3ZKAJDQ`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PlatformPaymentId { get; set; }
+        public string? PlatformPaymentId
+        {
+            get { return BackingStore?.Get<string?>("platformPaymentId"); }
+            set { BackingStore?.Set("platformPaymentId", value); }
+        }
 #nullable restore
 #else
-        public string PlatformPaymentId { get; set; }
+        public string PlatformPaymentId
+        {
+            get { return BackingStore?.Get<string>("platformPaymentId"); }
+            set { BackingStore?.Set("platformPaymentId", value); }
+        }
 #endif
         /// <summary>Emitted only where the source carries it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ProcessingFee { get; set; }
+        public string? ProcessingFee
+        {
+            get { return BackingStore?.Get<string?>("processingFee"); }
+            set { BackingStore?.Set("processingFee", value); }
+        }
 #nullable restore
 #else
-        public string ProcessingFee { get; set; }
+        public string ProcessingFee
+        {
+            get { return BackingStore?.Get<string>("processingFee"); }
+            set { BackingStore?.Set("processingFee", value); }
+        }
 #endif
         /// <summary>Present when the movement belongs to one reservation. Absent on batched payouts, which genuinely arrive without a reservation reference.</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>The source system&apos;s own type string, unmapped, for reconciling against the dashboard.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SourceType { get; set; }
+        public string? SourceType
+        {
+            get { return BackingStore?.Get<string?>("sourceType"); }
+            set { BackingStore?.Set("sourceType", value); }
+        }
 #nullable restore
 #else
-        public string SourceType { get; set; }
+        public string SourceType
+        {
+            get { return BackingStore?.Get<string>("sourceType"); }
+            set { BackingStore?.Set("sourceType", value); }
+        }
 #endif
         /// <summary>The status property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status
+        {
+            get { return BackingStore?.Get<string?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status
+        {
+            get { return BackingStore?.Get<string>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
 #endif
         /// <summary>Repull&apos;s normalised vocabulary for what this movement is.</summary>
-        public global::Repull.SDK.Models.PaymentWebhookObject_transactionType? TransactionType { get; set; }
+        public global::Repull.SDK.Models.PaymentWebhookObject_transactionType? TransactionType
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.PaymentWebhookObject_transactionType?>("transactionType"); }
+            set { BackingStore?.Set("transactionType", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PaymentWebhookObject"/> and sets the default values.
         /// </summary>
         public PaymentWebhookObject()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

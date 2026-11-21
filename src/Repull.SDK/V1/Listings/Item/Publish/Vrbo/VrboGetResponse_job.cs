@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,116 +10,235 @@ namespace Repull.SDK.V1.Listings.Item.Publish.Vrbo
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class VrboGetResponse_job : IAdditionalDataHolder, IParsable
+    public partial class VrboGetResponse_job : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The Vrbo account the listing is created in, as its handle `vrbo:{Vrbo account id}`. `null` until Vrbo&apos;s account id is captured for the sign-in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AccountId { get; set; }
+        public string? AccountId
+        {
+            get { return BackingStore?.Get<string?>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #nullable restore
 #else
-        public string AccountId { get; set; }
+        public string AccountId
+        {
+            get { return BackingStore?.Get<string>("accountId"); }
+            set { BackingStore?.Set("accountId", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>POST only: where the Vrbo listing departs from the listing&apos;s content because of a Vrbo rule.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Adjustments { get; set; }
+        public List<string>? Adjustments
+        {
+            get { return BackingStore?.Get<List<string>?>("adjustments"); }
+            set { BackingStore?.Set("adjustments", value); }
+        }
 #nullable restore
 #else
-        public List<string> Adjustments { get; set; }
+        public List<string> Adjustments
+        {
+            get { return BackingStore?.Get<List<string>>("adjustments"); }
+            set { BackingStore?.Set("adjustments", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Vrbo&apos;s reason when `status` is `failed`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>Update only.</summary>
-        public DateTimeOffset? FinishedAt { get; set; }
+        public DateTimeOffset? FinishedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("finishedAt"); }
+            set { BackingStore?.Set("finishedAt", value); }
+        }
         /// <summary>Pass to `GET /v1/listings/{id}/publish/vrbo?jobId=`. A creation is `vrbo_&lt;n&gt;_&lt;n&gt;`, a push onto an existing Vrbo listing `vrbo_push_&lt;n&gt;_&lt;n&gt;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? JobId { get; set; }
+        public string? JobId
+        {
+            get { return BackingStore?.Get<string?>("jobId"); }
+            set { BackingStore?.Set("jobId", value); }
+        }
 #nullable restore
 #else
-        public string JobId { get; set; }
+        public string JobId
+        {
+            get { return BackingStore?.Get<string>("jobId"); }
+            set { BackingStore?.Set("jobId", value); }
+        }
 #endif
         /// <summary>The new Vrbo unit is linked to the listing with calendar sync on, and the whole calendar has been queued to Vrbo.</summary>
-        public bool? Linked { get; set; }
+        public bool? Linked
+        {
+            get { return BackingStore?.Get<bool?>("linked"); }
+            set { BackingStore?.Set("linked", value); }
+        }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>`create`: the listing is being created on Vrbo. `update`: it was already on Vrbo and its content is being pushed onto that listing.</summary>
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_mode? Mode { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_mode? Mode
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_mode?>("mode"); }
+            set { BackingStore?.Set("mode", value); }
+        }
         /// <summary>The Vrbo property being built. Send it back as `propertyId` to finish a run that failed part-way.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PropertyId { get; set; }
+        public string? PropertyId
+        {
+            get { return BackingStore?.Get<string?>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #nullable restore
 #else
-        public string PropertyId { get; set; }
+        public string PropertyId
+        {
+            get { return BackingStore?.Get<string>("propertyId"); }
+            set { BackingStore?.Set("propertyId", value); }
+        }
 #endif
         /// <summary>Photos Vrbo&apos;s review refused (position in the listing&apos;s order, and Vrbo&apos;s reason).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos>? RejectedPhotos { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos>? RejectedPhotos
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos>?>("rejectedPhotos"); }
+            set { BackingStore?.Set("rejectedPhotos", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos> RejectedPhotos { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos> RejectedPhotos
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_rejectedPhotos>>("rejectedPhotos"); }
+            set { BackingStore?.Set("rejectedPhotos", value); }
+        }
 #endif
         /// <summary>POST only: set when an unfinished Vrbo property of this listing is completed instead of starting a new one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ResumedPropertyId { get; set; }
+        public string? ResumedPropertyId
+        {
+            get { return BackingStore?.Get<string?>("resumedPropertyId"); }
+            set { BackingStore?.Set("resumedPropertyId", value); }
+        }
 #nullable restore
 #else
-        public string ResumedPropertyId { get; set; }
+        public string ResumedPropertyId
+        {
+            get { return BackingStore?.Get<string>("resumedPropertyId"); }
+            set { BackingStore?.Set("resumedPropertyId", value); }
+        }
 #endif
         /// <summary>Update only: each section pushed, in order, with what was sent, Vrbo&apos;s refusals and what Vrbo has stored after the write.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections>? Sections { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections>? Sections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections>?>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections> Sections { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections> Sections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_sections>>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #endif
         /// <summary>Update only: sections the push leaves as they are on Vrbo, and why (rooms, photos, registration, or no value in the listing content).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped>? Skipped { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped>? Skipped
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped>?>("skipped"); }
+            set { BackingStore?.Set("skipped", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped> Skipped { get; set; }
+        public List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped> Skipped
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_skipped>>("skipped"); }
+            set { BackingStore?.Set("skipped", value); }
+        }
 #endif
         /// <summary>Update only.</summary>
-        public DateTimeOffset? StartedAt { get; set; }
+        public DateTimeOffset? StartedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("startedAt"); }
+            set { BackingStore?.Set("startedAt", value); }
+        }
         /// <summary>The status property</summary>
-        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_status? Status { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>Steps Vrbo has finished, in order: create, amenities, property type, rooms, photos, headline + description, house rules, rate, booking options, publish, fees, cancellation policy, …</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Steps { get; set; }
+        public List<string>? Steps
+        {
+            get { return BackingStore?.Get<List<string>?>("steps"); }
+            set { BackingStore?.Set("steps", value); }
+        }
 #nullable restore
 #else
-        public List<string> Steps { get; set; }
+        public List<string> Steps
+        {
+            get { return BackingStore?.Get<List<string>>("steps"); }
+            set { BackingStore?.Set("steps", value); }
+        }
 #endif
         /// <summary>The new Vrbo listing number, once Vrbo has published it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? VrboListingNumber { get; set; }
+        public string? VrboListingNumber
+        {
+            get { return BackingStore?.Get<string?>("vrboListingNumber"); }
+            set { BackingStore?.Set("vrboListingNumber", value); }
+        }
 #nullable restore
 #else
-        public string VrboListingNumber { get; set; }
+        public string VrboListingNumber
+        {
+            get { return BackingStore?.Get<string>("vrboListingNumber"); }
+            set { BackingStore?.Set("vrboListingNumber", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboGetResponse_job"/> and sets the default values.
         /// </summary>
         public VrboGetResponse_job()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,41 +12,76 @@ namespace Repull.SDK.Models
     /// A single amenity row from the unified `listings_amenities` table. Surfaced on `GET /v1/listings/{id}` and `GET /v1/properties/{id}` only when the caller passes `?include=amenities`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingAmenity : IAdditionalDataHolder, IParsable
+    public partial class ListingAmenity : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>Canonical amenity key (e.g. `wifi`, `pool`, `parking`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AmenityKey { get; set; }
+        public string? AmenityKey
+        {
+            get { return BackingStore?.Get<string?>("amenityKey"); }
+            set { BackingStore?.Set("amenityKey", value); }
+        }
 #nullable restore
 #else
-        public string AmenityKey { get; set; }
+        public string AmenityKey
+        {
+            get { return BackingStore?.Get<string>("amenityKey"); }
+            set { BackingStore?.Set("amenityKey", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Optional grouping (e.g. `essentials`, `safety`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Category { get; set; }
+        public string? Category
+        {
+            get { return BackingStore?.Get<string?>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
 #nullable restore
 #else
-        public string Category { get; set; }
+        public string Category
+        {
+            get { return BackingStore?.Get<string>("category"); }
+            set { BackingStore?.Set("category", value); }
+        }
 #endif
         /// <summary>Optional free-form instruction for the guest (e.g. WiFi password, parking notes).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Instruction { get; set; }
+        public string? Instruction
+        {
+            get { return BackingStore?.Get<string?>("instruction"); }
+            set { BackingStore?.Set("instruction", value); }
+        }
 #nullable restore
 #else
-        public string Instruction { get; set; }
+        public string Instruction
+        {
+            get { return BackingStore?.Get<string>("instruction"); }
+            set { BackingStore?.Set("instruction", value); }
+        }
 #endif
         /// <summary>`true` when the listing has this amenity, `false` when it has been explicitly opted out.</summary>
-        public bool? IsPresent { get; set; }
+        public bool? IsPresent
+        {
+            get { return BackingStore?.Get<bool?>("isPresent"); }
+            set { BackingStore?.Set("isPresent", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingAmenity"/> and sets the default values.
         /// </summary>
         public ListingAmenity()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

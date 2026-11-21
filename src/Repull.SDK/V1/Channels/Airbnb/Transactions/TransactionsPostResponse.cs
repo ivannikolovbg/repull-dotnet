@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,28 +10,51 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TransactionsPostResponse : IAdditionalDataHolder, IParsable
+    public partial class TransactionsPostResponse : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The accounts property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts>? Accounts { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts>? Accounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts>?>("accounts"); }
+            set { BackingStore?.Set("accounts", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts> Accounts { get; set; }
+        public List<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts> Accounts
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse_accounts>>("accounts"); }
+            set { BackingStore?.Set("accounts", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Ledger lines written, Payout rows included.</summary>
-        public int? Count { get; set; }
+        public int? Count
+        {
+            get { return BackingStore?.Get<int?>("count"); }
+            set { BackingStore?.Set("count", value); }
+        }
         /// <summary>The synced property</summary>
-        public bool? Synced { get; set; }
+        public bool? Synced
+        {
+            get { return BackingStore?.Get<bool?>("synced"); }
+            set { BackingStore?.Set("synced", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostResponse"/> and sets the default values.
         /// </summary>
         public TransactionsPostResponse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

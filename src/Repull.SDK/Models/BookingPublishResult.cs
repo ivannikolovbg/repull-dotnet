@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,49 +12,92 @@ namespace Repull.SDK.Models
     /// A publish is not one call to Booking.com: it is several independent Content API calls (details, description, amenities, rooms, photos, pricing), each of which can fail on its own. A PARTIAL publish is normal — what succeeded stays applied; there is no rollback. Fix the failing sections and publish again; re-publishing an unchanged section is harmless.A property whose Content API credentials do not cover a section answers 403 for that section alone — the rest still land, and the failure is reported here rather than swallowed.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingPublishResult : IAdditionalDataHolder, IParsable
+    public partial class BookingPublishResult : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Per-section failures. Empty when `published` is true.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingPublishSectionError>? Errors { get; set; }
+        public List<global::Repull.SDK.Models.BookingPublishSectionError>? Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingPublishSectionError>?>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingPublishSectionError> Errors { get; set; }
+        public List<global::Repull.SDK.Models.BookingPublishSectionError> Errors
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingPublishSectionError>>("errors"); }
+            set { BackingStore?.Set("errors", value); }
+        }
 #endif
         /// <summary>The Booking.com property this publish wrote into — resolved from the listing&apos;s mapping, or the one you named. Always read it back: a listing can be mapped to several properties, and this states which one actually received the content. Null when the listing is mapped to no property, in which case nothing was pushed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HotelId { get; set; }
+        public string? HotelId
+        {
+            get { return BackingStore?.Get<string?>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #nullable restore
 #else
-        public string HotelId { get; set; }
+        public string HotelId
+        {
+            get { return BackingStore?.Get<string>("hotelId"); }
+            set { BackingStore?.Set("hotelId", value); }
+        }
 #endif
         /// <summary>True only when EVERY attempted section reached Booking.com.</summary>
-        public bool? Published { get; set; }
+        public bool? Published
+        {
+            get { return BackingStore?.Get<bool?>("published"); }
+            set { BackingStore?.Set("published", value); }
+        }
         /// <summary>Set when the publish never started at all — most often because the listing is not mapped to any Booking.com property yet. Finish the Connect flow (`POST /v1/connect/booking/map-rooms`) and publish again.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>Sections that landed on Booking.com.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Sections { get; set; }
+        public List<string>? Sections
+        {
+            get { return BackingStore?.Get<List<string>?>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #nullable restore
 #else
-        public List<string> Sections { get; set; }
+        public List<string> Sections
+        {
+            get { return BackingStore?.Get<List<string>>("sections"); }
+            set { BackingStore?.Set("sections", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingPublishResult"/> and sets the default values.
         /// </summary>
         public BookingPublishResult()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

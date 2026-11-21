@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,38 +10,73 @@ namespace Repull.SDK.V1.Listings.Item.Ical
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class IcalGetResponse_vrbo : IAdditionalDataHolder, IParsable
+    public partial class IcalGetResponse_vrbo : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Calendar sync is on for the unit.</summary>
-        public bool? CalendarSync { get; set; }
+        public bool? CalendarSync
+        {
+            get { return BackingStore?.Get<bool?>("calendarSync"); }
+            set { BackingStore?.Set("calendarSync", value); }
+        }
         /// <summary>When Repull last read the unit&apos;s imported calendars.</summary>
-        public DateTimeOffset? CheckedAt { get; set; }
+        public DateTimeOffset? CheckedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("checkedAt"); }
+            set { BackingStore?.Set("checkedAt", value); }
+        }
         /// <summary>Names of other calendars the unit still imports, as Vrbo shows them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? OtherFeeds { get; set; }
+        public List<string>? OtherFeeds
+        {
+            get { return BackingStore?.Get<List<string>?>("otherFeeds"); }
+            set { BackingStore?.Set("otherFeeds", value); }
+        }
 #nullable restore
 #else
-        public List<string> OtherFeeds { get; set; }
+        public List<string> OtherFeeds
+        {
+            get { return BackingStore?.Get<List<string>>("otherFeeds"); }
+            set { BackingStore?.Set("otherFeeds", value); }
+        }
 #endif
         /// <summary>`imported`: Vrbo imports the feed. `pending`: calendar sync is on and Repull has not checked the unit yet — it adds the feed itself. `failed`: Vrbo did not take it; ask the host to add `url` in Vrbo → Calendar → Import calendar, named &quot;Repull&quot;. `not_imported`: checked, not there, and not added (for example, the feed is turned off). `off`: calendar sync is off, so Repull leaves the unit&apos;s imported calendars alone.</summary>
-        public global::Repull.SDK.V1.Listings.Item.Ical.IcalGetResponse_vrbo_status? Status { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.Ical.IcalGetResponse_vrbo_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.Ical.IcalGetResponse_vrbo_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>The Vrbo listing number (`unitId` on `GET /v1/connections/{id}/units`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitId { get; set; }
+        public string? UnitId
+        {
+            get { return BackingStore?.Get<string?>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #nullable restore
 #else
-        public string UnitId { get; set; }
+        public string UnitId
+        {
+            get { return BackingStore?.Get<string>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Ical.IcalGetResponse_vrbo"/> and sets the default values.
         /// </summary>
         public IcalGetResponse_vrbo()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

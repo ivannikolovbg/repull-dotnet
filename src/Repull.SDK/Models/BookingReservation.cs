@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,95 +12,190 @@ namespace Repull.SDK.Models
     /// A Booking.com reservation as returned by `GET /v1/channels/booking/reservations`.**This is the RAW Booking.com OTA payload**, passed through from the connector unmodified — it is NOT renormalised to the unified Repull reservation shape (`GET /v1/reservations`). Field names, casing, and nesting follow Booking&apos;s OTA format (nested `room[]`, `customer`, snake_case keys). Additional Booking-side fields not enumerated here may be present, and any field may be absent depending on the reservation `type` (`new` / `modified` / `details`). For a channel-agnostic, stable reservation contract, use `GET /v1/reservations` instead.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class BookingReservation : IAdditionalDataHolder, IParsable
+    public partial class BookingReservation : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The cancellation_deadline property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CancellationDeadline { get; set; }
+        public string? CancellationDeadline
+        {
+            get { return BackingStore?.Get<string?>("cancellation_deadline"); }
+            set { BackingStore?.Set("cancellation_deadline", value); }
+        }
 #nullable restore
 #else
-        public string CancellationDeadline { get; set; }
+        public string CancellationDeadline
+        {
+            get { return BackingStore?.Get<string>("cancellation_deadline"); }
+            set { BackingStore?.Set("cancellation_deadline", value); }
+        }
 #endif
         /// <summary>The commission_amount property</summary>
-        public double? CommissionAmount { get; set; }
+        public double? CommissionAmount
+        {
+            get { return BackingStore?.Get<double?>("commission_amount"); }
+            set { BackingStore?.Set("commission_amount", value); }
+        }
         /// <summary>The company_name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompanyName { get; set; }
+        public string? CompanyName
+        {
+            get { return BackingStore?.Get<string?>("company_name"); }
+            set { BackingStore?.Set("company_name", value); }
+        }
 #nullable restore
 #else
-        public string CompanyName { get; set; }
+        public string CompanyName
+        {
+            get { return BackingStore?.Get<string>("company_name"); }
+            set { BackingStore?.Set("company_name", value); }
+        }
 #endif
         /// <summary>The currency_code property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CurrencyCode { get; set; }
+        public string? CurrencyCode
+        {
+            get { return BackingStore?.Get<string?>("currency_code"); }
+            set { BackingStore?.Set("currency_code", value); }
+        }
 #nullable restore
 #else
-        public string CurrencyCode { get; set; }
+        public string CurrencyCode
+        {
+            get { return BackingStore?.Get<string>("currency_code"); }
+            set { BackingStore?.Set("currency_code", value); }
+        }
 #endif
         /// <summary>Guest / customer block (name, contact, address) in Booking&apos;s OTA shape.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.BookingReservation_customer? Customer { get; set; }
+        public global::Repull.SDK.Models.BookingReservation_customer? Customer
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingReservation_customer?>("customer"); }
+            set { BackingStore?.Set("customer", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.BookingReservation_customer Customer { get; set; }
+        public global::Repull.SDK.Models.BookingReservation_customer Customer
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingReservation_customer>("customer"); }
+            set { BackingStore?.Set("customer", value); }
+        }
 #endif
         /// <summary>Booking date (YYYY-MM-DD).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Date { get; set; }
+        public string? Date
+        {
+            get { return BackingStore?.Get<string?>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
 #nullable restore
 #else
-        public string Date { get; set; }
+        public string Date
+        {
+            get { return BackingStore?.Get<string>("date"); }
+            set { BackingStore?.Set("date", value); }
+        }
 #endif
         /// <summary>Booking.com reservation id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The payment_status property</summary>
-        public global::Repull.SDK.Models.BookingReservation_payment_status? PaymentStatus { get; set; }
+        public global::Repull.SDK.Models.BookingReservation_payment_status? PaymentStatus
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingReservation_payment_status?>("payment_status"); }
+            set { BackingStore?.Set("payment_status", value); }
+        }
         /// <summary>Reserved rooms.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.BookingReservationRoom>? Room { get; set; }
+        public List<global::Repull.SDK.Models.BookingReservationRoom>? Room
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingReservationRoom>?>("room"); }
+            set { BackingStore?.Set("room", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.BookingReservationRoom> Room { get; set; }
+        public List<global::Repull.SDK.Models.BookingReservationRoom> Room
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.BookingReservationRoom>>("room"); }
+            set { BackingStore?.Set("room", value); }
+        }
 #endif
         /// <summary>The special_requests property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? SpecialRequests { get; set; }
+        public List<string>? SpecialRequests
+        {
+            get { return BackingStore?.Get<List<string>?>("special_requests"); }
+            set { BackingStore?.Set("special_requests", value); }
+        }
 #nullable restore
 #else
-        public List<string> SpecialRequests { get; set; }
+        public List<string> SpecialRequests
+        {
+            get { return BackingStore?.Get<List<string>>("special_requests"); }
+            set { BackingStore?.Set("special_requests", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.Models.BookingReservation_status? Status { get; set; }
+        public global::Repull.SDK.Models.BookingReservation_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.BookingReservation_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>Booking time.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Time { get; set; }
+        public string? Time
+        {
+            get { return BackingStore?.Get<string?>("time"); }
+            set { BackingStore?.Set("time", value); }
+        }
 #nullable restore
 #else
-        public string Time { get; set; }
+        public string Time
+        {
+            get { return BackingStore?.Get<string>("time"); }
+            set { BackingStore?.Set("time", value); }
+        }
 #endif
         /// <summary>The total_price property</summary>
-        public double? TotalPrice { get; set; }
+        public double? TotalPrice
+        {
+            get { return BackingStore?.Get<double?>("total_price"); }
+            set { BackingStore?.Set("total_price", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.BookingReservation"/> and sets the default values.
         /// </summary>
         public BookingReservation()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

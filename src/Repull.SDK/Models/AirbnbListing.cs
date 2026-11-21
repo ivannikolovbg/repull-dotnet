@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,63 +12,118 @@ namespace Repull.SDK.Models
     /// A listing paired with its Airbnb connections. The list endpoint groups every Airbnb connection of the same `listingId` under a single `connections[]` array.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AirbnbListing : IAdditionalDataHolder, IParsable
+    public partial class AirbnbListing : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The city property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? City { get; set; }
+        public string? City
+        {
+            get { return BackingStore?.Get<string?>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #nullable restore
 #else
-        public string City { get; set; }
+        public string City
+        {
+            get { return BackingStore?.Get<string>("city"); }
+            set { BackingStore?.Set("city", value); }
+        }
 #endif
         /// <summary>The connections property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.AirbnbConnection>? Connections { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbConnection>? Connections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbConnection>?>("connections"); }
+            set { BackingStore?.Set("connections", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.AirbnbConnection> Connections { get; set; }
+        public List<global::Repull.SDK.Models.AirbnbConnection> Connections
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.AirbnbConnection>>("connections"); }
+            set { BackingStore?.Set("connections", value); }
+        }
 #endif
         /// <summary>Repull listing id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The title guests see on the channel (e.g. the Airbnb listing title). `name` is the host&apos;s internal nickname for the listing; show `publicName` in anything a guest or end user reads. Present on inactive rows too.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PublicName { get; set; }
+        public string? PublicName
+        {
+            get { return BackingStore?.Get<string?>("publicName"); }
+            set { BackingStore?.Set("publicName", value); }
+        }
 #nullable restore
 #else
-        public string PublicName { get; set; }
+        public string PublicName
+        {
+            get { return BackingStore?.Get<string>("publicName"); }
+            set { BackingStore?.Set("publicName", value); }
+        }
 #endif
         /// <summary>Cover photo URL for the listing. **Only present when the caller passes `?include=thumbnail`.** `null` when the listing has no cover photo stored — the listing is still returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThumbnailUrl { get; set; }
+        public string? ThumbnailUrl
+        {
+            get { return BackingStore?.Get<string?>("thumbnailUrl"); }
+            set { BackingStore?.Set("thumbnailUrl", value); }
+        }
 #nullable restore
 #else
-        public string ThumbnailUrl { get; set; }
+        public string ThumbnailUrl
+        {
+            get { return BackingStore?.Get<string>("thumbnailUrl"); }
+            set { BackingStore?.Set("thumbnailUrl", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbListing"/> and sets the default values.
         /// </summary>
         public AirbnbListing()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

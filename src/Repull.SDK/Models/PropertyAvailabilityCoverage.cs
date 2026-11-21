@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,27 +13,50 @@ namespace Repull.SDK.Models
     /// How much of the requested window we actually hold calendar data for. Read this before treating an absent date as bookable — absence means &quot;no data&quot;, not &quot;available&quot;.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class PropertyAvailabilityCoverage : IAdditionalDataHolder, IParsable
+    public partial class PropertyAvailabilityCoverage : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Number of those dates present in `days`.</summary>
-        public int? CoveredDays { get; set; }
+        public int? CoveredDays
+        {
+            get { return BackingStore?.Get<int?>("coveredDays"); }
+            set { BackingStore?.Set("coveredDays", value); }
+        }
         /// <summary>Requested dates with no calendar row, ascending. Availability for these dates is UNKNOWN — do not treat them as bookable.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<Date?>? MissingDates { get; set; }
+        public List<Date?>? MissingDates
+        {
+            get { return BackingStore?.Get<List<Date?>?>("missingDates"); }
+            set { BackingStore?.Set("missingDates", value); }
+        }
 #nullable restore
 #else
-        public List<Date?> MissingDates { get; set; }
+        public List<Date?> MissingDates
+        {
+            get { return BackingStore?.Get<List<Date?>>("missingDates"); }
+            set { BackingStore?.Set("missingDates", value); }
+        }
 #endif
         /// <summary>Number of dates in the requested `[from, to]` window, after the 366-day cap.</summary>
-        public int? RequestedDays { get; set; }
+        public int? RequestedDays
+        {
+            get { return BackingStore?.Get<int?>("requestedDays"); }
+            set { BackingStore?.Set("requestedDays", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.PropertyAvailabilityCoverage"/> and sets the default values.
         /// </summary>
         public PropertyAvailabilityCoverage()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

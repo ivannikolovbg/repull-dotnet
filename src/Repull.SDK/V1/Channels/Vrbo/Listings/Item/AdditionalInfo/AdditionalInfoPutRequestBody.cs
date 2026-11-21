@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,33 +10,66 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item.AdditionalInfo
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class AdditionalInfoPutRequestBody : IParsable
+    public partial class AdditionalInfoPutRequestBody : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The bathrooms property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Bathrooms { get; set; }
+        public string? Bathrooms
+        {
+            get { return BackingStore?.Get<string?>("bathrooms"); }
+            set { BackingStore?.Set("bathrooms", value); }
+        }
 #nullable restore
 #else
-        public string Bathrooms { get; set; }
+        public string Bathrooms
+        {
+            get { return BackingStore?.Get<string>("bathrooms"); }
+            set { BackingStore?.Set("bathrooms", value); }
+        }
 #endif
         /// <summary>The bedrooms property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Bedrooms { get; set; }
+        public string? Bedrooms
+        {
+            get { return BackingStore?.Get<string?>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
 #nullable restore
 #else
-        public string Bedrooms { get; set; }
+        public string Bedrooms
+        {
+            get { return BackingStore?.Get<string>("bedrooms"); }
+            set { BackingStore?.Set("bedrooms", value); }
+        }
 #endif
         /// <summary>The property property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Property { get; set; }
+        public string? Property
+        {
+            get { return BackingStore?.Get<string?>("property"); }
+            set { BackingStore?.Set("property", value); }
+        }
 #nullable restore
 #else
-        public string Property { get; set; }
+        public string Property
+        {
+            get { return BackingStore?.Get<string>("property"); }
+            set { BackingStore?.Set("property", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.AdditionalInfo.AdditionalInfoPutRequestBody"/> and sets the default values.
+        /// </summary>
+        public AdditionalInfoPutRequestBody()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

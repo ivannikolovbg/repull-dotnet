@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -10,29 +11,70 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReservationQuoteRequest : IParsable
+    public partial class ReservationQuoteRequest : IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The adults property</summary>
-        public int? Adults { get; set; }
+        public int? Adults
+        {
+            get { return BackingStore?.Get<int?>("adults"); }
+            set { BackingStore?.Set("adults", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>Must be after `checkIn`.</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>The children property</summary>
-        public int? Children { get; set; }
+        public int? Children
+        {
+            get { return BackingStore?.Get<int?>("children"); }
+            set { BackingStore?.Set("children", value); }
+        }
         /// <summary>Total guests, when you do not split adults and children.</summary>
-        public int? GuestCount { get; set; }
+        public int? GuestCount
+        {
+            get { return BackingStore?.Get<int?>("guestCount"); }
+            set { BackingStore?.Set("guestCount", value); }
+        }
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>Quote one unit (`GET /v1/listings/{id}` → `units[].id`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnitId { get; set; }
+        public string? UnitId
+        {
+            get { return BackingStore?.Get<string?>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #nullable restore
 #else
-        public string UnitId { get; set; }
+        public string UnitId
+        {
+            get { return BackingStore?.Get<string>("unitId"); }
+            set { BackingStore?.Set("unitId", value); }
+        }
 #endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationQuoteRequest"/> and sets the default values.
+        /// </summary>
+        public ReservationQuoteRequest()
+        {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

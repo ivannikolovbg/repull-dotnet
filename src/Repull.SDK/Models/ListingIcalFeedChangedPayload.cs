@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,65 +12,132 @@ namespace Repull.SDK.Models
     /// Payload for `listing.ical_feed_changed`: Repull changed a Vrbo unit&apos;s imported calendars, or could not. Repull imports the listing&apos;s Repull iCal backup feed into every calendar-synced Vrbo unit, and removes other tools&apos; imported feeds while Repull is the unit&apos;s master calendar.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ListingIcalFeedChangedPayload : IAdditionalDataHolder, IParsable
+    public partial class ListingIcalFeedChangedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>`repull_feed_added`: the Repull feed is now imported (`reason: &quot;repull_feed_missing&quot;` when it had been removed on Vrbo and was put back). `repull_feed_add_failed`: Vrbo did not take it — ask the host to add `repullFeedUrl` in Vrbo → Calendar → Import calendar, named &quot;Repull&quot;; nothing else is changed on the unit until it is there. `other_feed_removed`: another tool&apos;s imported calendar (`feed`) was removed. `other_feed_remove_failed`: removing it failed — ask the host to remove it in Vrbo → Calendar → Import calendar. Repull also emails the workspace owner when an action failed.</summary>
-        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_action? Action { get; set; }
+        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_action? Action
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingIcalFeedChangedPayload_action?>("action"); }
+            set { BackingStore?.Set("action", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The docsUrl property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DocsUrl { get; set; }
+        public string? DocsUrl
+        {
+            get { return BackingStore?.Get<string?>("docsUrl"); }
+            set { BackingStore?.Set("docsUrl", value); }
+        }
 #nullable restore
 #else
-        public string DocsUrl { get; set; }
+        public string DocsUrl
+        {
+            get { return BackingStore?.Get<string>("docsUrl"); }
+            set { BackingStore?.Set("docsUrl", value); }
+        }
 #endif
         /// <summary>Vrbo&apos;s answer, on a failed action.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Error { get; set; }
+        public string? Error
+        {
+            get { return BackingStore?.Get<string?>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #nullable restore
 #else
-        public string Error { get; set; }
+        public string Error
+        {
+            get { return BackingStore?.Get<string>("error"); }
+            set { BackingStore?.Set("error", value); }
+        }
 #endif
         /// <summary>The imported calendar acted on, as Vrbo shows it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_feed? Feed { get; set; }
+        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_feed? Feed
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingIcalFeedChangedPayload_feed?>("feed"); }
+            set { BackingStore?.Set("feed", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_feed Feed { get; set; }
+        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_feed Feed
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingIcalFeedChangedPayload_feed>("feed"); }
+            set { BackingStore?.Set("feed", value); }
+        }
 #endif
         /// <summary>The listing, in the shape `GET /v1/listings/{id}` returns. Hydrated at delivery, so a receiver gets the listing rather than a reason to fetch one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingWebhookObject? Object { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject? Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject?>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingWebhookObject Object { get; set; }
+        public global::Repull.SDK.Models.ListingWebhookObject Object
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingWebhookObject>("object"); }
+            set { BackingStore?.Set("object", value); }
+        }
 #endif
         /// <summary>The occurredAt property</summary>
-        public DateTimeOffset? OccurredAt { get; set; }
+        public DateTimeOffset? OccurredAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("occurredAt"); }
+            set { BackingStore?.Set("occurredAt", value); }
+        }
         /// <summary>The provider property</summary>
-        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_provider? Provider { get; set; }
+        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_provider? Provider
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingIcalFeedChangedPayload_provider?>("provider"); }
+            set { BackingStore?.Set("provider", value); }
+        }
         /// <summary>Why Repull acted.</summary>
-        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_reason? Reason { get; set; }
+        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_reason? Reason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingIcalFeedChangedPayload_reason?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
         /// <summary>The listing&apos;s Repull iCal backup feed (`GET /v1/listings/{id}/ical`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RepullFeedUrl { get; set; }
+        public string? RepullFeedUrl
+        {
+            get { return BackingStore?.Get<string?>("repullFeedUrl"); }
+            set { BackingStore?.Set("repullFeedUrl", value); }
+        }
 #nullable restore
 #else
-        public string RepullFeedUrl { get; set; }
+        public string RepullFeedUrl
+        {
+            get { return BackingStore?.Get<string>("repullFeedUrl"); }
+            set { BackingStore?.Set("repullFeedUrl", value); }
+        }
 #endif
         /// <summary>`calendar_sync_enabled`: calendar sync was just switched on for the unit. `drift_check`: the daily Vrbo calendar check.</summary>
-        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_trigger? Trigger { get; set; }
+        public global::Repull.SDK.Models.ListingIcalFeedChangedPayload_trigger? Trigger
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingIcalFeedChangedPayload_trigger?>("trigger"); }
+            set { BackingStore?.Set("trigger", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ListingIcalFeedChangedPayload"/> and sets the default values.
         /// </summary>
         public ListingIcalFeedChangedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

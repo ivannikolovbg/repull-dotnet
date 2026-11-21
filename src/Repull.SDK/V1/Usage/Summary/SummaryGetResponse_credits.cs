@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,25 +12,52 @@ namespace Repull.SDK.V1.Usage.Summary
     /// Pay-as-you-go wallet. Requests beyond your plan&apos;s monthly quota keep being served while `active`, billed at `usdPer1000Requests`. Top up at https://repull.dev/dashboard/billing.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class SummaryGetResponse_credits : IAdditionalDataHolder, IParsable
+    public partial class SummaryGetResponse_credits : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Positive balance and not paused — usage beyond the monthly quota is being served.</summary>
-        public bool? Active { get; set; }
+        public bool? Active
+        {
+            get { return BackingStore?.Get<bool?>("active"); }
+            set { BackingStore?.Set("active", value); }
+        }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The balanceUsd property</summary>
-        public double? BalanceUsd { get; set; }
+        public double? BalanceUsd
+        {
+            get { return BackingStore?.Get<double?>("balanceUsd"); }
+            set { BackingStore?.Set("balanceUsd", value); }
+        }
         /// <summary>The paused property</summary>
-        public bool? Paused { get; set; }
+        public bool? Paused
+        {
+            get { return BackingStore?.Get<bool?>("paused"); }
+            set { BackingStore?.Set("paused", value); }
+        }
         /// <summary>Requests beyond your quota the current balance pays for.</summary>
-        public int? RequestsCovered { get; set; }
+        public int? RequestsCovered
+        {
+            get { return BackingStore?.Get<int?>("requestsCovered"); }
+            set { BackingStore?.Set("requestsCovered", value); }
+        }
         /// <summary>The usdPer1000Requests property</summary>
-        public double? UsdPer1000Requests { get; set; }
+        public double? UsdPer1000Requests
+        {
+            get { return BackingStore?.Get<double?>("usdPer1000Requests"); }
+            set { BackingStore?.Set("usdPer1000Requests", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Usage.Summary.SummaryGetResponse_credits"/> and sets the default values.
         /// </summary>
         public SummaryGetResponse_credits()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

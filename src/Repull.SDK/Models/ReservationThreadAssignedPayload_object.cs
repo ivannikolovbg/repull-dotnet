@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,40 +10,79 @@ namespace Repull.SDK.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ReservationThreadAssignedPayload_object : IAdditionalDataHolder, IParsable
+    public partial class ReservationThreadAssignedPayload_object : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The customerId property</summary>
-        public int? CustomerId { get; set; }
+        public int? CustomerId
+        {
+            get { return BackingStore?.Get<int?>("customerId"); }
+            set { BackingStore?.Set("customerId", value); }
+        }
         /// <summary>The channel&apos;s own conversation id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalThreadId { get; set; }
+        public string? ExternalThreadId
+        {
+            get { return BackingStore?.Get<string?>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalThreadId { get; set; }
+        public string ExternalThreadId
+        {
+            get { return BackingStore?.Get<string>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #endif
         /// <summary>The listingId property</summary>
-        public int? ListingId { get; set; }
+        public int? ListingId
+        {
+            get { return BackingStore?.Get<int?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
         /// <summary>What the thread pointed at before. Null on the common orphan-adoption case; set when a thread moved between bookings.</summary>
-        public int? PreviousReservationId { get; set; }
+        public int? PreviousReservationId
+        {
+            get { return BackingStore?.Get<int?>("previousReservationId"); }
+            set { BackingStore?.Set("previousReservationId", value); }
+        }
         /// <summary>The reservationId property</summary>
-        public int? ReservationId { get; set; }
+        public int? ReservationId
+        {
+            get { return BackingStore?.Get<int?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
         /// <summary>Repull conversation id.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThreadId { get; set; }
+        public string? ThreadId
+        {
+            get { return BackingStore?.Get<string?>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #nullable restore
 #else
-        public string ThreadId { get; set; }
+        public string ThreadId
+        {
+            get { return BackingStore?.Get<string>("threadId"); }
+            set { BackingStore?.Set("threadId", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReservationThreadAssignedPayload_object"/> and sets the default values.
         /// </summary>
         public ReservationThreadAssignedPayload_object()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

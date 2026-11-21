@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,209 +12,420 @@ namespace Repull.SDK.Models
     /// A vacation rental listing in your Repull workspace.An **inactive** listing appears only in `GET /v1/listings`, and only when `?status=` asks for it. Such a row carries identity fields only — `id`, `name`, `status`, `inactiveReason`, `address.city`, `channels` — so the street, `content`, `details`, `createdAt` and `updatedAt` are absent until the listing is activated. `inactiveReason` is `plan_limit` (held back by the plan; activating needs a free slot or an upgrade), `unlisted_on_airbnb`, or `deactivated` (switched off by you). `GET /v1/listings/{id}` and every other listing endpoint answer `403 listing_inactive` for it. The one field you can add back is `thumbnailUrl`, by passing `?include=thumbnail` — enough to render an activate/deactivate picker with pictures from a single request.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Listing : IAdditionalDataHolder, IParsable
+    public partial class Listing : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
         /// <summary>The listing&apos;s postal address, unit included. Each part is read from the listing first, then from the connected channels (Airbnb, Vrbo, Booking.com). On an inactive row only `city` is present.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Listing_address? Address { get; set; }
+        public global::Repull.SDK.Models.Listing_address? Address
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_address?>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Listing_address Address { get; set; }
+        public global::Repull.SDK.Models.Listing_address Address
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_address>("address"); }
+            set { BackingStore?.Set("address", value); }
+        }
 #endif
         /// <summary>Airbnb listings: every account on the listing (owner and co-hosts), whether each is connected, and which one acts by default. `defaultAccount: null` means no connected account can reach the listing — connect one of `accounts`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AirbnbAccess? AirbnbAccess { get; set; }
+        public global::Repull.SDK.Models.AirbnbAccess? AirbnbAccess
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAccess?>("airbnbAccess"); }
+            set { BackingStore?.Set("airbnbAccess", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AirbnbAccess AirbnbAccess { get; set; }
+        public global::Repull.SDK.Models.AirbnbAccess AirbnbAccess
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbAccess>("airbnbAccess"); }
+            set { BackingStore?.Set("airbnbAccess", value); }
+        }
 #endif
         /// <summary>Amenity rows for the listing. **Only present when the caller passes `?include=amenities`.** Empty array (`[]`) when the listing has no amenity rows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingAmenity>? Amenities { get; set; }
+        public List<global::Repull.SDK.Models.ListingAmenity>? Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingAmenity>?>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingAmenity> Amenities { get; set; }
+        public List<global::Repull.SDK.Models.ListingAmenity> Amenities
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingAmenity>>("amenities"); }
+            set { BackingStore?.Set("amenities", value); }
+        }
 #endif
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>`GET /v1/listings/{id}` only. What the API can do with this listing. `pms` is present when a connected PMS manages it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Listing_capabilities? Capabilities { get; set; }
+        public global::Repull.SDK.Models.Listing_capabilities? Capabilities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_capabilities?>("capabilities"); }
+            set { BackingStore?.Set("capabilities", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Listing_capabilities Capabilities { get; set; }
+        public global::Repull.SDK.Models.Listing_capabilities Capabilities
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_capabilities>("capabilities"); }
+            set { BackingStore?.Set("capabilities", value); }
+        }
 #endif
         /// <summary>Channels (Airbnb, Booking, VRBO, etc.) the listing is connected to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingChannel>? Channels { get; set; }
+        public List<global::Repull.SDK.Models.ListingChannel>? Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingChannel>?>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingChannel> Channels { get; set; }
+        public List<global::Repull.SDK.Models.ListingChannel> Channels
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingChannel>>("channels"); }
+            set { BackingStore?.Set("channels", value); }
+        }
 #endif
         /// <summary>**Only present when the caller passes `?include=content`.** Sourced from `listings_descriptions` for the `en` locale. `null` when the listing has no description row stored (vs the field being absent — that signals the caller did not opt into the expansion).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingContent? Content { get; set; }
+        public global::Repull.SDK.Models.ListingContent? Content
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContent?>("content"); }
+            set { BackingStore?.Set("content", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingContent Content { get; set; }
+        public global::Repull.SDK.Models.ListingContent Content
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingContent>("content"); }
+            set { BackingStore?.Set("content", value); }
+        }
 #endif
         /// <summary>The createdAt property</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>**Only present when the caller passes `?include=details`.** Sourced from `listings_details`. `null` when the listing has no details row stored (vs the field being absent — that signals the caller did not opt into the expansion).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingDetails? Details { get; set; }
+        public global::Repull.SDK.Models.ListingDetails? Details
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingDetails?>("details"); }
+            set { BackingStore?.Set("details", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingDetails Details { get; set; }
+        public global::Repull.SDK.Models.ListingDetails Details
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingDetails>("details"); }
+            set { BackingStore?.Set("details", value); }
+        }
 #endif
         /// <summary>**Only present with `?include=fees`.** Every fee, the cleaning fee included, whatever channel or PMS it came from. `[]` when none.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingFee>? Fees { get; set; }
+        public List<global::Repull.SDK.Models.ListingFee>? Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingFee>?>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingFee> Fees { get; set; }
+        public List<global::Repull.SDK.Models.ListingFee> Fees
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingFee>>("fees"); }
+            set { BackingStore?.Set("fees", value); }
+        }
 #endif
         /// <summary>The hotel the listing belongs to: a hotel PMS hotel (Cloudbeds, Mews) or a Booking.com property with several room types or rooms. `null` for a standalone home. `GET /v1/hotels/{id}` lists its room types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Listing_hotel? Hotel { get; set; }
+        public global::Repull.SDK.Models.Listing_hotel? Hotel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_hotel?>("hotel"); }
+            set { BackingStore?.Set("hotel", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Listing_hotel Hotel { get; set; }
+        public global::Repull.SDK.Models.Listing_hotel Hotel
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_hotel>("hotel"); }
+            set { BackingStore?.Set("hotel", value); }
+        }
 #endif
         /// <summary>Repull listing id</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>`room_type` when the listing sells several units (a hotel room type or a Guesty multi-unit listing: `unitCount` &gt; 1) or is a hotel PMS room type; `home` otherwise. See the Hotels &amp; multi-unit guide.</summary>
-        public global::Repull.SDK.Models.Listing_kind? Kind { get; set; }
+        public global::Repull.SDK.Models.Listing_kind? Kind
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_kind?>("kind"); }
+            set { BackingStore?.Set("kind", value); }
+        }
         /// <summary>`GET /v1/listings/{id}` only. Map pin latitude in decimal degrees, as a string; the same value as `GET /v1/properties/{id}`. Null when the listing has no coordinates.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Latitude { get; set; }
+        public string? Latitude
+        {
+            get { return BackingStore?.Get<string?>("latitude"); }
+            set { BackingStore?.Set("latitude", value); }
+        }
 #nullable restore
 #else
-        public string Latitude { get; set; }
+        public string Latitude
+        {
+            get { return BackingStore?.Get<string>("latitude"); }
+            set { BackingStore?.Set("latitude", value); }
+        }
 #endif
         /// <summary>`GET /v1/listings/{id}` only. Map pin longitude in decimal degrees, as a string; the same value as `GET /v1/properties/{id}`. Null when the listing has no coordinates.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Longitude { get; set; }
+        public string? Longitude
+        {
+            get { return BackingStore?.Get<string?>("longitude"); }
+            set { BackingStore?.Set("longitude", value); }
+        }
 #nullable restore
 #else
-        public string Longitude { get; set; }
+        public string Longitude
+        {
+            get { return BackingStore?.Get<string>("longitude"); }
+            set { BackingStore?.Set("longitude", value); }
+        }
 #endif
         /// <summary>The host&apos;s internal nickname for the listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name
+        {
+            get { return BackingStore?.Get<string?>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return BackingStore?.Get<string>("name"); }
+            set { BackingStore?.Set("name", value); }
+        }
 #endif
         /// <summary>The multi-unit listing this listing is one unit of (a Guesty multi-unit listing&apos;s unit, which has its own calendar and stays). The parent lists it in `units[]` with this listing&apos;s id as `units[].listingId`. `null` otherwise.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Listing_parent? Parent { get; set; }
+        public global::Repull.SDK.Models.Listing_parent? Parent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_parent?>("parent"); }
+            set { BackingStore?.Set("parent", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Listing_parent Parent { get; set; }
+        public global::Repull.SDK.Models.Listing_parent Parent
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_parent>("parent"); }
+            set { BackingStore?.Set("parent", value); }
+        }
 #endif
         /// <summary>**Only present with `?include=photos`.** The listing photos in display order.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingContentPhoto>? Photos { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentPhoto>? Photos
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentPhoto>?>("photos"); }
+            set { BackingStore?.Set("photos", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingContentPhoto> Photos { get; set; }
+        public List<global::Repull.SDK.Models.ListingContentPhoto> Photos
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingContentPhoto>>("photos"); }
+            set { BackingStore?.Set("photos", value); }
+        }
 #endif
         /// <summary>**Only present with `?include=policies`.** Cancellation, house rules, check-in and check-out, pets/smoking/events/children, quiet hours, deposit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPolicies? Policies { get; set; }
+        public global::Repull.SDK.Models.ListingPolicies? Policies
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPolicies?>("policies"); }
+            set { BackingStore?.Set("policies", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPolicies Policies { get; set; }
+        public global::Repull.SDK.Models.ListingPolicies Policies
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPolicies>("policies"); }
+            set { BackingStore?.Set("policies", value); }
+        }
 #endif
         /// <summary>**Only present with `?include=pricing`.** Standing prices: base and weekend rate, cleaning and extra-guest fees, deposit, weekly/monthly discounts. `null` when none are stored.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingPricingSettings? Pricing { get; set; }
+        public global::Repull.SDK.Models.ListingPricingSettings? Pricing
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingSettings?>("pricing"); }
+            set { BackingStore?.Set("pricing", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingPricingSettings Pricing { get; set; }
+        public global::Repull.SDK.Models.ListingPricingSettings Pricing
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingPricingSettings>("pricing"); }
+            set { BackingStore?.Set("pricing", value); }
+        }
 #endif
         /// <summary>The title guests see on the channel (e.g. the Airbnb listing title). `name` is the host&apos;s internal nickname for the listing; show `publicName` in anything a guest or end user reads. Present on inactive rows too.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PublicName { get; set; }
+        public string? PublicName
+        {
+            get { return BackingStore?.Get<string?>("publicName"); }
+            set { BackingStore?.Set("publicName", value); }
+        }
 #nullable restore
 #else
-        public string PublicName { get; set; }
+        public string PublicName
+        {
+            get { return BackingStore?.Get<string>("publicName"); }
+            set { BackingStore?.Set("publicName", value); }
+        }
 #endif
         /// <summary>**Only present with `?include=rooms`.** Each room and its beds. `[]` when none are stored.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingRoom>? Rooms { get; set; }
+        public List<global::Repull.SDK.Models.ListingRoom>? Rooms
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingRoom>?>("rooms"); }
+            set { BackingStore?.Set("rooms", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingRoom> Rooms { get; set; }
+        public List<global::Repull.SDK.Models.ListingRoom> Rooms
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingRoom>>("rooms"); }
+            set { BackingStore?.Set("rooms", value); }
+        }
 #endif
         /// <summary>**Only present with `?include=rules`.** Stay rules: min/max nights, booking window, advance notice, preparation time, and whether booking requests are allowed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ListingRules? Rules { get; set; }
+        public global::Repull.SDK.Models.ListingRules? Rules
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingRules?>("rules"); }
+            set { BackingStore?.Set("rules", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ListingRules Rules { get; set; }
+        public global::Repull.SDK.Models.ListingRules Rules
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ListingRules>("rules"); }
+            set { BackingStore?.Set("rules", value); }
+        }
 #endif
         /// <summary>The status property</summary>
-        public global::Repull.SDK.Models.Listing_status? Status { get; set; }
+        public global::Repull.SDK.Models.Listing_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Listing_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>**Only present with `?include=taxes`.** Taxes charged to the guest. `[]` when none.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ListingTax>? Taxes { get; set; }
+        public List<global::Repull.SDK.Models.ListingTax>? Taxes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingTax>?>("taxes"); }
+            set { BackingStore?.Set("taxes", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ListingTax> Taxes { get; set; }
+        public List<global::Repull.SDK.Models.ListingTax> Taxes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ListingTax>>("taxes"); }
+            set { BackingStore?.Set("taxes", value); }
+        }
 #endif
         /// <summary>Cover photo URL. Always present on an active listing. On an **inactive** one it is present only when the caller passes `?include=thumbnail`; `null` means the listing has no cover photo stored, absent means the expansion was not requested.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ThumbnailUrl { get; set; }
+        public string? ThumbnailUrl
+        {
+            get { return BackingStore?.Get<string?>("thumbnailUrl"); }
+            set { BackingStore?.Set("thumbnailUrl", value); }
+        }
 #nullable restore
 #else
-        public string ThumbnailUrl { get; set; }
+        public string ThumbnailUrl
+        {
+            get { return BackingStore?.Get<string>("thumbnailUrl"); }
+            set { BackingStore?.Set("thumbnailUrl", value); }
+        }
 #endif
         /// <summary>How many units (rooms) this listing sells: the hotel PMS rooms of the room type, the units of a Guesty multi-unit listing, the room count on Booking.com, or 1 for a home. Units left per night are `availableUnits` on `GET /v1/availability/{propertyId}`, and which unit is free is `units` there.</summary>
-        public int? UnitCount { get; set; }
+        public int? UnitCount
+        {
+            get { return BackingStore?.Get<int?>("unitCount"); }
+            set { BackingStore?.Set("unitCount", value); }
+        }
         /// <summary>`GET /v1/listings/{id}` only. The units under the listing: a Mews or Cloudbeds room type&apos;s rooms, or a Guesty multi-unit listing&apos;s units; empty for a single home. Same items as `GET /v1/listings/{id}/units`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.Listing_units>? Units { get; set; }
+        public List<global::Repull.SDK.Models.Listing_units>? Units
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.Listing_units>?>("units"); }
+            set { BackingStore?.Set("units", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.Listing_units> Units { get; set; }
+        public List<global::Repull.SDK.Models.Listing_units> Units
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.Listing_units>>("units"); }
+            set { BackingStore?.Set("units", value); }
+        }
 #endif
         /// <summary>The updatedAt property</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Listing"/> and sets the default values.
         /// </summary>
         public Listing()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -9,42 +10,93 @@ namespace Repull.SDK.V1.Listings.Item.CalendarSync
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class CalendarSyncGetResponse_channels_queue_lastPush : IAdditionalDataHolder, IParsable
+    public partial class CalendarSyncGetResponse_channels_queue_lastPush : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The blocksCreated property</summary>
-        public int? BlocksCreated { get; set; }
+        public int? BlocksCreated
+        {
+            get { return BackingStore?.Get<int?>("blocksCreated"); }
+            set { BackingStore?.Set("blocksCreated", value); }
+        }
         /// <summary>The blocksRemoved property</summary>
-        public int? BlocksRemoved { get; set; }
+        public int? BlocksRemoved
+        {
+            get { return BackingStore?.Get<int?>("blocksRemoved"); }
+            set { BackingStore?.Set("blocksRemoved", value); }
+        }
         /// <summary>VRBO calls made — only what differed was sent.</summary>
-        public int? Calls { get; set; }
+        public int? Calls
+        {
+            get { return BackingStore?.Get<int?>("calls"); }
+            set { BackingStore?.Set("calls", value); }
+        }
         /// <summary>The finishedAt property</summary>
-        public DateTimeOffset? FinishedAt { get; set; }
+        public DateTimeOffset? FinishedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("finishedAt"); }
+            set { BackingStore?.Set("finishedAt", value); }
+        }
         /// <summary>The minStaysChanged property</summary>
-        public int? MinStaysChanged { get; set; }
+        public int? MinStaysChanged
+        {
+            get { return BackingStore?.Get<int?>("minStaysChanged"); }
+            set { BackingStore?.Set("minStaysChanged", value); }
+        }
         /// <summary>Nights the push covered.</summary>
-        public int? Nights { get; set; }
+        public int? Nights
+        {
+            get { return BackingStore?.Get<int?>("nights"); }
+            set { BackingStore?.Set("nights", value); }
+        }
         /// <summary>Nights VRBO still showed differently after the push (they are retried).</summary>
-        public int? NightsDiffering { get; set; }
+        public int? NightsDiffering
+        {
+            get { return BackingStore?.Get<int?>("nightsDiffering"); }
+            set { BackingStore?.Set("nightsDiffering", value); }
+        }
         /// <summary>The pricesChanged property</summary>
-        public int? PricesChanged { get; set; }
+        public int? PricesChanged
+        {
+            get { return BackingStore?.Get<int?>("pricesChanged"); }
+            set { BackingStore?.Set("pricesChanged", value); }
+        }
         /// <summary>The reason property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Reason { get; set; }
+        public string? Reason
+        {
+            get { return BackingStore?.Get<string?>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #nullable restore
 #else
-        public string Reason { get; set; }
+        public string Reason
+        {
+            get { return BackingStore?.Get<string>("reason"); }
+            set { BackingStore?.Set("reason", value); }
+        }
 #endif
         /// <summary>`skipped` — not sent because the unit is not live on VRBO (`reason`).</summary>
-        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush_result? Result { get; set; }
+        public global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush_result? Result
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush_result?>("result"); }
+            set { BackingStore?.Set("result", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.CalendarSync.CalendarSyncGetResponse_channels_queue_lastPush"/> and sets the default values.
         /// </summary>
         public CalendarSyncGetResponse_channels_queue_lastPush()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

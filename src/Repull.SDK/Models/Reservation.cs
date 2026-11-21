@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
@@ -12,226 +13,461 @@ namespace Repull.SDK.Models
     /// A booking/reservation from a connected PMS. Identical shape between list-row (`GET /v1/reservations`) and detail (`GET /v1/reservations/{id}`) — SDK consumers can use the same type for both.The canonical (post-2026-05) shape uses nested `primaryGuest`, `occupancy`, `financials` blocks. The legacy flat fields (`guestId`, `totalPrice`, `currency`, `guestDetails`) remain populated for back-compat and are marked `deprecated` here. New consumers should read from the nested blocks; existing consumers continue to work unchanged.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Reservation : IAdditionalDataHolder, IParsable
+    public partial class Reservation : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Door codes for the stay from the PMS&apos;s lock manager (today: Guesty Locks Manager), refreshed about every 30 minutes for stays checking in within 14 days that have not checked out. `null` when the reservation&apos;s codes are not read from a PMS. `[]` when they are and there is none yet, and for a cancelled stay.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.ReservationAccessCode>? AccessCodes { get; set; }
+        public List<global::Repull.SDK.Models.ReservationAccessCode>? AccessCodes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationAccessCode>?>("accessCodes"); }
+            set { BackingStore?.Set("accessCodes", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.ReservationAccessCode> AccessCodes { get; set; }
+        public List<global::Repull.SDK.Models.ReservationAccessCode> AccessCodes
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.ReservationAccessCode>>("accessCodes"); }
+            set { BackingStore?.Set("accessCodes", value); }
+        }
 #endif
         /// <summary>The connected account this reservation belongs to. List endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.RecordAccount? Account { get; set; }
+        public global::Repull.SDK.Models.RecordAccount? Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RecordAccount?>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.RecordAccount Account { get; set; }
+        public global::Repull.SDK.Models.RecordAccount Account
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.RecordAccount>("account"); }
+            set { BackingStore?.Set("account", value); }
+        }
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>When the booking was made on the source channel (when reported by the channel).</summary>
-        public DateTimeOffset? BookedAt { get; set; }
+        public DateTimeOffset? BookedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("bookedAt"); }
+            set { BackingStore?.Set("bookedAt", value); }
+        }
         /// <summary>The checkIn property</summary>
-        public Date? CheckIn { get; set; }
+        public Date? CheckIn
+        {
+            get { return BackingStore?.Get<Date?>("checkIn"); }
+            set { BackingStore?.Set("checkIn", value); }
+        }
         /// <summary>Local check-in time for this stay, `HH:MM` on a 24-hour clock in the **property&apos;s own timezone** — not UTC. Usually inherited from the listing policy, overridden per reservation where an early check-in was agreed. `null` when unknown. This is the same field `PATCH /v1/reservations/{id}` writes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckInTime { get; set; }
+        public string? CheckInTime
+        {
+            get { return BackingStore?.Get<string?>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckInTime { get; set; }
+        public string CheckInTime
+        {
+            get { return BackingStore?.Get<string>("checkInTime"); }
+            set { BackingStore?.Set("checkInTime", value); }
+        }
 #endif
         /// <summary>The checkOut property</summary>
-        public Date? CheckOut { get; set; }
+        public Date? CheckOut
+        {
+            get { return BackingStore?.Get<Date?>("checkOut"); }
+            set { BackingStore?.Set("checkOut", value); }
+        }
         /// <summary>Local check-out time for this stay, `HH:MM` on a 24-hour clock in the property&apos;s own timezone. Pair with `checkOut` to schedule the turnover clean. `null` when unknown. This is the same field `PATCH /v1/reservations/{id}` writes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CheckOutTime { get; set; }
+        public string? CheckOutTime
+        {
+            get { return BackingStore?.Get<string?>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #nullable restore
 #else
-        public string CheckOutTime { get; set; }
+        public string CheckOutTime
+        {
+            get { return BackingStore?.Get<string>("checkOutTime"); }
+            set { BackingStore?.Set("checkOutTime", value); }
+        }
 #endif
         /// <summary>Channel-side confirmation code (Airbnb HMxxx, Booking.com numeric, etc.).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfirmationCode { get; set; }
+        public string? ConfirmationCode
+        {
+            get { return BackingStore?.Get<string?>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #nullable restore
 #else
-        public string ConfirmationCode { get; set; }
+        public string ConfirmationCode
+        {
+            get { return BackingStore?.Get<string>("confirmationCode"); }
+            set { BackingStore?.Set("confirmationCode", value); }
+        }
 #endif
         /// <summary>The conversation with this guest — pass it to `GET /v1/conversations/{id}` and `/v1/conversations/{id}/messages`. It is the same conversation from inquiry through pre-approval to the confirmed booking, and the same id the message webhooks carry, so a booking links straight to the messages that led to it. `null` when the channel has no conversation for this booking.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get; set; }
+        public string? ConversationId
+        {
+            get { return BackingStore?.Get<string?>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #nullable restore
 #else
-        public string ConversationId { get; set; }
+        public string ConversationId
+        {
+            get { return BackingStore?.Get<string>("conversationId"); }
+            set { BackingStore?.Set("conversationId", value); }
+        }
 #endif
         /// <summary>When the reservation row was created in Repull (not the booking-on-channel timestamp).</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>DEPRECATED — use `financials.currency`. ISO 4217 currency code.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency
+        {
+            get { return BackingStore?.Get<string?>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency
+        {
+            get { return BackingStore?.Get<string>("currency"); }
+            set { BackingStore?.Set("currency", value); }
+        }
 #endif
         /// <summary>The channel&apos;s own id for that conversation (Airbnb thread id, Booking.com conversation id, …). `null` when there is none.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalThreadId { get; set; }
+        public string? ExternalThreadId
+        {
+            get { return BackingStore?.Get<string?>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #nullable restore
 #else
-        public string ExternalThreadId { get; set; }
+        public string ExternalThreadId
+        {
+            get { return BackingStore?.Get<string>("externalThreadId"); }
+            set { BackingStore?.Set("externalThreadId", value); }
+        }
 #endif
         /// <summary>Normalized money block. Always populated for paid reservations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationFinancials? Financials { get; set; }
+        public global::Repull.SDK.Models.ReservationFinancials? Financials
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationFinancials?>("financials"); }
+            set { BackingStore?.Set("financials", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationFinancials Financials { get; set; }
+        public global::Repull.SDK.Models.ReservationFinancials Financials
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationFinancials>("financials"); }
+            set { BackingStore?.Set("financials", value); }
+        }
 #endif
         /// <summary>DEPRECATED — use `occupancy` for normalized counts and `primaryGuest` for guest identity. Raw guest details from the source channel; shape varies by platform.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Reservation_guestDetails? GuestDetails { get; set; }
+        public global::Repull.SDK.Models.Reservation_guestDetails? GuestDetails
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_guestDetails?>("guestDetails"); }
+            set { BackingStore?.Set("guestDetails", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Reservation_guestDetails GuestDetails { get; set; }
+        public global::Repull.SDK.Models.Reservation_guestDetails GuestDetails
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_guestDetails>("guestDetails"); }
+            set { BackingStore?.Set("guestDetails", value); }
+        }
 #endif
         /// <summary>DEPRECATED — use `primaryGuest.id`. Internal Repull guest ID. Kept populated for back-compat.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestId { get; set; }
+        public string? GuestId
+        {
+            get { return BackingStore?.Get<string?>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
 #nullable restore
 #else
-        public string GuestId { get; set; }
+        public string GuestId
+        {
+            get { return BackingStore?.Get<string>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
 #endif
         /// <summary>Pre-resolved display name (`firstName lastName`) from the joined guest row. Undefined when no first name is available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestName { get; set; }
+        public string? GuestName
+        {
+            get { return BackingStore?.Get<string?>("guestName"); }
+            set { BackingStore?.Set("guestName", value); }
+        }
 #nullable restore
 #else
-        public string GuestName { get; set; }
+        public string GuestName
+        {
+            get { return BackingStore?.Get<string>("guestName"); }
+            set { BackingStore?.Set("guestName", value); }
+        }
 #endif
         /// <summary>What the guest wrote with the booking, as the channel sent it. Booking.com puts the estimated arrival time and special requests here. Free text, never parsed. `null` when the guest left none.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? GuestNotes { get; set; }
+        public string? GuestNotes
+        {
+            get { return BackingStore?.Get<string?>("guestNotes"); }
+            set { BackingStore?.Set("guestNotes", value); }
+        }
 #nullable restore
 #else
-        public string GuestNotes { get; set; }
+        public string GuestNotes
+        {
+            get { return BackingStore?.Get<string>("guestNotes"); }
+            set { BackingStore?.Set("guestNotes", value); }
+        }
 #endif
         /// <summary>Internal Repull reservation ID</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
 #endif
         /// <summary>The inquiry this booking came from (`GET /v1/inquiries`), when the guest asked before booking. When an inquiry turns into a booking, `inquiry.updated` fires with `status: &quot;booked&quot;` and this reservation&apos;s id. `null` for bookings with no inquiry.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InquiryId { get; set; }
+        public string? InquiryId
+        {
+            get { return BackingStore?.Get<string?>("inquiryId"); }
+            set { BackingStore?.Set("inquiryId", value); }
+        }
 #nullable restore
 #else
-        public string InquiryId { get; set; }
+        public string InquiryId
+        {
+            get { return BackingStore?.Get<string>("inquiryId"); }
+            set { BackingStore?.Set("inquiryId", value); }
+        }
 #endif
         /// <summary>Internal Repull listing ID this reservation is on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingId { get; set; }
+        public string? ListingId
+        {
+            get { return BackingStore?.Get<string?>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #nullable restore
 #else
-        public string ListingId { get; set; }
+        public string ListingId
+        {
+            get { return BackingStore?.Get<string>("listingId"); }
+            set { BackingStore?.Set("listingId", value); }
+        }
 #endif
         /// <summary>Name of the listing this reservation is on, so a report or message can name it without a second lookup.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListingName { get; set; }
+        public string? ListingName
+        {
+            get { return BackingStore?.Get<string?>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #nullable restore
 #else
-        public string ListingName { get; set; }
+        public string ListingName
+        {
+            get { return BackingStore?.Get<string>("listingName"); }
+            set { BackingStore?.Set("listingName", value); }
+        }
 #endif
         /// <summary>Normalized guest counts. May be undefined when the source channel did not provide counts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationOccupancy? Occupancy { get; set; }
+        public global::Repull.SDK.Models.ReservationOccupancy? Occupancy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationOccupancy?>("occupancy"); }
+            set { BackingStore?.Set("occupancy", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationOccupancy Occupancy { get; set; }
+        public global::Repull.SDK.Models.ReservationOccupancy Occupancy
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationOccupancy>("occupancy"); }
+            set { BackingStore?.Set("occupancy", value); }
+        }
 #endif
         /// <summary>Why a `pending` reservation is pending — who has to act next. `host_approval`: a booking request the host must accept or decline (see `respondBy`). `guest_payment`: Airbnb is waiting for the guest to pay. `guest_verification`: Airbnb is holding the booking while the guest completes identity verification. The last two need no action from the host, and Airbnb does not publish a deadline for them. Present only while `status` is `pending`; when it changes you receive `reservation.updated` with the previous raw status in `previousAttributes.status`, even if `status` stays `pending`.</summary>
-        public global::Repull.SDK.Models.Reservation_pendingReason? PendingReason { get; set; }
+        public global::Repull.SDK.Models.Reservation_pendingReason? PendingReason
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_pendingReason?>("pendingReason"); }
+            set { BackingStore?.Set("pendingReason", value); }
+        }
         /// <summary>DEPRECATED alias for `source`. Same value, kept for back-compat.</summary>
         [Obsolete("")]
-        public global::Repull.SDK.Models.Reservation_platform? Platform { get; set; }
+        public global::Repull.SDK.Models.Reservation_platform? Platform
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_platform?>("platform"); }
+            set { BackingStore?.Set("platform", value); }
+        }
         /// <summary>The PMS&apos;s own id for this reservation (for example Guesty&apos;s reservation `_id`), so you can look it up in the PMS. `null` when the reservation did not come from a PMS.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? PmsReservationId { get; set; }
+        public string? PmsReservationId
+        {
+            get { return BackingStore?.Get<string?>("pmsReservationId"); }
+            set { BackingStore?.Set("pmsReservationId", value); }
+        }
 #nullable restore
 #else
-        public string PmsReservationId { get; set; }
+        public string PmsReservationId
+        {
+            get { return BackingStore?.Get<string>("pmsReservationId"); }
+            set { BackingStore?.Set("pmsReservationId", value); }
+        }
 #endif
         /// <summary>Inline guest summary. May be undefined for owner-blocks / pre-arrival rows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.ReservationPrimaryGuest? PrimaryGuest { get; set; }
+        public global::Repull.SDK.Models.ReservationPrimaryGuest? PrimaryGuest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationPrimaryGuest?>("primaryGuest"); }
+            set { BackingStore?.Set("primaryGuest", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.ReservationPrimaryGuest PrimaryGuest { get; set; }
+        public global::Repull.SDK.Models.ReservationPrimaryGuest PrimaryGuest
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.ReservationPrimaryGuest>("primaryGuest"); }
+            set { BackingStore?.Set("primaryGuest", value); }
+        }
 #endif
         /// <summary>On a `pending` Airbnb booking request (`pendingReason: host_approval`) that can still be answered: when it lapses (24 hours after the guest asked). Accept or decline before then with `POST /v1/reservations/{id}/accept` / `/decline`. Absent on every other reservation, including bookings Airbnb is holding for the guest&apos;s payment or verification — those have no deadline we can report.</summary>
-        public DateTimeOffset? RespondBy { get; set; }
+        public DateTimeOffset? RespondBy
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("respondBy"); }
+            set { BackingStore?.Set("respondBy", value); }
+        }
         /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
-        public global::Repull.SDK.Models.Reservation_source? Source { get; set; }
+        public global::Repull.SDK.Models.Reservation_source? Source
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_source?>("source"); }
+            set { BackingStore?.Set("source", value); }
+        }
         /// <summary>Lifecycle status. The API normalises a multi-decade internal taxonomy down to these four buckets, so the value you receive is always one of the enum constants. `completed` is derived from `checkOut &lt; today`. A `pending` booking request the channel already let lapse — Airbnb expires an unanswered request 24 hours after the guest asks, and no request can be answered once its check-in has passed — is reported as `cancelled` with `statusDetail: &quot;request_expired&quot;`, even when the channel never told us. Every `cancelled` reservation says how it ended in `statusDetail` when the channel tells us.</summary>
-        public global::Repull.SDK.Models.Reservation_status? Status { get; set; }
+        public global::Repull.SDK.Models.Reservation_status? Status
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_status?>("status"); }
+            set { BackingStore?.Set("status", value); }
+        }
         /// <summary>On a `cancelled` reservation: how it ended. `request_expired` — a booking request nobody answered in time (Airbnb&apos;s 24-hour window passed, or the check-in did), whether the channel reported it or we derived it. `declined` — the host declined the request. `request_voided` — the request was withdrawn or voided before anyone answered it. `verification_failed` — the guest failed Airbnb&apos;s identity verification. `hold_voided` — Airbnb voided a booking it was holding for the guest&apos;s payment or verification. `cancelled_by_guest` / `cancelled_by_host` / `cancelled_by_platform` — a booking cancelled by that party (`platform` is the channel itself, e.g. Airbnb support). Matches what the webhooks report for the same change. Absent on every other status, and on a cancellation whose channel gives no reason.</summary>
-        public global::Repull.SDK.Models.Reservation_statusDetail? StatusDetail { get; set; }
+        public global::Repull.SDK.Models.Reservation_statusDetail? StatusDetail
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_statusDetail?>("statusDetail"); }
+            set { BackingStore?.Set("statusDetail", value); }
+        }
         /// <summary>Airbnb reservations only, when Airbnb sends it: the door code Airbnb suggests — the last 4 digits of the booker&apos;s verified phone number, or random digits when there is none. Use it instead of deriving a code from the guest&apos;s phone, which Airbnb no longer shares. Omitted on every other reservation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SuggestedDoorCode { get; set; }
+        public string? SuggestedDoorCode
+        {
+            get { return BackingStore?.Get<string?>("suggestedDoorCode"); }
+            set { BackingStore?.Set("suggestedDoorCode", value); }
+        }
 #nullable restore
 #else
-        public string SuggestedDoorCode { get; set; }
+        public string SuggestedDoorCode
+        {
+            get { return BackingStore?.Get<string>("suggestedDoorCode"); }
+            set { BackingStore?.Set("suggestedDoorCode", value); }
+        }
 #endif
         /// <summary>DEPRECATED — use `financials.totalPrice` (a number). Decimal-as-string (precision 10, scale 2) kept for back-compat.</summary>
         [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TotalPrice { get; set; }
+        public string? TotalPrice
+        {
+            get { return BackingStore?.Get<string?>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
 #nullable restore
 #else
-        public string TotalPrice { get; set; }
+        public string TotalPrice
+        {
+            get { return BackingStore?.Get<string>("totalPrice"); }
+            set { BackingStore?.Set("totalPrice", value); }
+        }
 #endif
         /// <summary>The unit the stay is on: the room assigned by a hotel-model PMS (Mews, Cloudbeds) where the listing is a room type, or the unit of a Guesty multi-unit listing (the stay&apos;s `listingId` is then that unit&apos;s own listing). Matches the listing&apos;s `units[].id` and the per-night `units` on availability. `null` when no unit is assigned yet, and for every listing that is a single home.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.Reservation_unit? Unit { get; set; }
+        public global::Repull.SDK.Models.Reservation_unit? Unit
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_unit?>("unit"); }
+            set { BackingStore?.Set("unit", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.Reservation_unit Unit { get; set; }
+        public global::Repull.SDK.Models.Reservation_unit Unit
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_unit>("unit"); }
+            set { BackingStore?.Set("unit", value); }
+        }
 #endif
         /// <summary>Last time this reservation was modified (dates, status, price, or guest details). Advances on every amendment or cancellation — poll or compare this value to reconcile changes instead of fingerprinting individual fields.</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Reservation"/> and sets the default values.
         /// </summary>
         public Reservation()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,51 +12,98 @@ namespace Repull.SDK.Models
     /// Payload for `ai.operation.completed`. An async AI run (review response, message draft, pricing suggestion) finished.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AiOperationCompletedPayload : IAdditionalDataHolder, IParsable
+    public partial class AiOperationCompletedPayload : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The completedAt property</summary>
-        public DateTimeOffset? CompletedAt { get; set; }
+        public DateTimeOffset? CompletedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("completedAt"); }
+            set { BackingStore?.Set("completedAt", value); }
+        }
         /// <summary>The inputSummary property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InputSummary { get; set; }
+        public string? InputSummary
+        {
+            get { return BackingStore?.Get<string?>("inputSummary"); }
+            set { BackingStore?.Set("inputSummary", value); }
+        }
 #nullable restore
 #else
-        public string InputSummary { get; set; }
+        public string InputSummary
+        {
+            get { return BackingStore?.Get<string>("inputSummary"); }
+            set { BackingStore?.Set("inputSummary", value); }
+        }
 #endif
         /// <summary>The operationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? OperationId { get; set; }
+        public string? OperationId
+        {
+            get { return BackingStore?.Get<string?>("operationId"); }
+            set { BackingStore?.Set("operationId", value); }
+        }
 #nullable restore
 #else
-        public string OperationId { get; set; }
+        public string OperationId
+        {
+            get { return BackingStore?.Get<string>("operationId"); }
+            set { BackingStore?.Set("operationId", value); }
+        }
 #endif
         /// <summary>Operation-specific output object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Repull.SDK.Models.AiOperationCompletedPayload_output? Output { get; set; }
+        public global::Repull.SDK.Models.AiOperationCompletedPayload_output? Output
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AiOperationCompletedPayload_output?>("output"); }
+            set { BackingStore?.Set("output", value); }
+        }
 #nullable restore
 #else
-        public global::Repull.SDK.Models.AiOperationCompletedPayload_output Output { get; set; }
+        public global::Repull.SDK.Models.AiOperationCompletedPayload_output Output
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AiOperationCompletedPayload_output>("output"); }
+            set { BackingStore?.Set("output", value); }
+        }
 #endif
         /// <summary>The tokensUsed property</summary>
-        public int? TokensUsed { get; set; }
+        public int? TokensUsed
+        {
+            get { return BackingStore?.Get<int?>("tokensUsed"); }
+            set { BackingStore?.Set("tokensUsed", value); }
+        }
         /// <summary>AI operation kind — e.g. respond-to-guest, price-suggestion, review-response.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type
+        {
+            get { return BackingStore?.Get<string?>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type
+        {
+            get { return BackingStore?.Get<string>("type"); }
+            set { BackingStore?.Set("type", value); }
+        }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AiOperationCompletedPayload"/> and sets the default values.
         /// </summary>
         public AiOperationCompletedPayload()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

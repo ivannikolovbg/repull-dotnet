@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,27 +12,50 @@ namespace Repull.SDK.Models
     /// The operation responsible for the largest share of the window so far. Absent when it could not be determined.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class UsageQuotaWarningPayload_topOperation : IAdditionalDataHolder, IParsable
+    public partial class UsageQuotaWarningPayload_topOperation : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>The operationId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? OperationId { get; set; }
+        public string? OperationId
+        {
+            get { return BackingStore?.Get<string?>("operationId"); }
+            set { BackingStore?.Set("operationId", value); }
+        }
 #nullable restore
 #else
-        public string OperationId { get; set; }
+        public string OperationId
+        {
+            get { return BackingStore?.Get<string>("operationId"); }
+            set { BackingStore?.Set("operationId", value); }
+        }
 #endif
         /// <summary>The requestCount property</summary>
-        public int? RequestCount { get; set; }
+        public int? RequestCount
+        {
+            get { return BackingStore?.Get<int?>("requestCount"); }
+            set { BackingStore?.Set("requestCount", value); }
+        }
         /// <summary>Share of the window&apos;s requests, 0-100.</summary>
-        public double? SharePercent { get; set; }
+        public double? SharePercent
+        {
+            get { return BackingStore?.Get<double?>("sharePercent"); }
+            set { BackingStore?.Set("sharePercent", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.UsageQuotaWarningPayload_topOperation"/> and sets the default values.
         /// </summary>
         public UsageQuotaWarningPayload_topOperation()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>

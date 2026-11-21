@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions.Store;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,33 +12,60 @@ namespace Repull.SDK.Models
     /// Lightweight discovery summary. Use `/v1/markets/browse` for the full paginated catalog.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class MarketsOverviewResponse_browse : IAdditionalDataHolder, IParsable
+    public partial class MarketsOverviewResponse_browse : IAdditionalDataHolder, IBackedModel, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
-        public IDictionary<string, object> AdditionalData { get; set; }
+        public IDictionary<string, object> AdditionalData
+        {
+            get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
+            set { BackingStore.Set("AdditionalData", value); }
+        }
+        /// <summary>Stores model information.</summary>
+        public IBackingStore BackingStore { get; private set; }
         /// <summary>Top 50 countries by tracked-city count.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketBrowseCategory>? Categories { get; set; }
+        public List<global::Repull.SDK.Models.MarketBrowseCategory>? Categories
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketBrowseCategory>?>("categories"); }
+            set { BackingStore?.Set("categories", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketBrowseCategory> Categories { get; set; }
+        public List<global::Repull.SDK.Models.MarketBrowseCategory> Categories
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketBrowseCategory>>("categories"); }
+            set { BackingStore?.Set("categories", value); }
+        }
 #endif
         /// <summary>Top ~50 markets by listing volume the customer doesn&apos;t already operate in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Repull.SDK.Models.MarketBrowseFeatured>? Featured { get; set; }
+        public List<global::Repull.SDK.Models.MarketBrowseFeatured>? Featured
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketBrowseFeatured>?>("featured"); }
+            set { BackingStore?.Set("featured", value); }
+        }
 #nullable restore
 #else
-        public List<global::Repull.SDK.Models.MarketBrowseFeatured> Featured { get; set; }
+        public List<global::Repull.SDK.Models.MarketBrowseFeatured> Featured
+        {
+            get { return BackingStore?.Get<List<global::Repull.SDK.Models.MarketBrowseFeatured>>("featured"); }
+            set { BackingStore?.Set("featured", value); }
+        }
 #endif
         /// <summary>Total Atlas-tracked cities in the catalog.</summary>
-        public int? TotalAvailable { get; set; }
+        public int? TotalAvailable
+        {
+            get { return BackingStore?.Get<int?>("totalAvailable"); }
+            set { BackingStore?.Set("totalAvailable", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.MarketsOverviewResponse_browse"/> and sets the default values.
         /// </summary>
         public MarketsOverviewResponse_browse()
         {
+            BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
