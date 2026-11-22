@@ -8,10 +8,14 @@ using Repull.SDK.Models;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Amenities;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Availability;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Cancellation;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckoutGuide;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Descriptions;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Details;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Fees;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.HouseRules;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Location;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Permits;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Photos;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Pricing;
@@ -19,6 +23,7 @@ using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Quality;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Rooms;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.SafetyDisclosures;
 using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Settings;
+using Repull.SDK.V1.Channels.Airbnb.Listings.Item.Taxes;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -47,6 +52,11 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.BookingSettings.BookingSettingsRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The cancellation property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Cancellation.CancellationRequestBuilder Cancellation
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Cancellation.CancellationRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The checkinGuide property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.CheckinGuide.CheckinGuideRequestBuilder CheckinGuide
         {
@@ -66,6 +76,21 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Details.DetailsRequestBuilder Details
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Details.DetailsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The fees property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Fees.FeesRequestBuilder Fees
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Fees.FeesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The houseRules property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.HouseRules.HouseRulesRequestBuilder HouseRules
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.HouseRules.HouseRulesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The location property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Location.LocationRequestBuilder Location
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Location.LocationRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The permits property</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Permits.PermitsRequestBuilder Permits
@@ -101,6 +126,11 @@ namespace Repull.SDK.V1.Channels.Airbnb.Listings.Item
         public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Settings.SettingsRequestBuilder Settings
         {
             get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Settings.SettingsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The taxes property</summary>
+        public global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Taxes.TaxesRequestBuilder Taxes
+        {
+            get => new global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.Taxes.TaxesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Channels.Airbnb.Listings.Item.ListingsItemRequestBuilder"/> and sets the default values.

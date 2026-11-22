@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Listings.Item.Pull.Airbnb;
+using Repull.SDK.V1.Listings.Item.Pull.Vrbo;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace Repull.SDK.V1.Listings.Item.Pull
         public global::Repull.SDK.V1.Listings.Item.Pull.Airbnb.AirbnbRequestBuilder Airbnb
         {
             get => new global::Repull.SDK.V1.Listings.Item.Pull.Airbnb.AirbnbRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The vrbo property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Pull.Vrbo.VrboRequestBuilder Vrbo
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Pull.Vrbo.VrboRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Listings.Item.Pull.PullRequestBuilder"/> and sets the default values.

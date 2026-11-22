@@ -49,7 +49,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Map
             get { return BackingStore?.Get<bool?>("syncEnabled"); }
             set { BackingStore?.Set("syncEnabled", value); }
         }
-        /// <summary>The number in the Vrbo URL (vrbo.com/5506023).</summary>
+        /// <summary>The number in the Vrbo URL (vrbo.com/4512345).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? VrboListingNumber

@@ -493,7 +493,7 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item
             set { BackingStore?.Set("url", value); }
         }
 #endif
-        /// <summary>The number in the Vrbo URL (vrbo.com/5506023).</summary>
+        /// <summary>The number in the Vrbo URL (vrbo.com/4512345).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? VrboListingNumber

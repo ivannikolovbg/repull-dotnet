@@ -25,6 +25,7 @@ using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Protection;
 using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rates;
 using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Rooms;
 using Repull.SDK.V1.Channels.Vrbo.Listings.Item.SafetyDisclosures;
+using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Settings;
 using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story;
 using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Taxes;
 using Repull.SDK.V1.Channels.Vrbo.Listings.Item.Videos;
@@ -145,6 +146,11 @@ namespace Repull.SDK.V1.Channels.Vrbo.Listings.Item
         public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.SafetyDisclosures.SafetyDisclosuresRequestBuilder SafetyDisclosures
         {
             get => new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.SafetyDisclosures.SafetyDisclosuresRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The settings property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Settings.SettingsRequestBuilder Settings
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Settings.SettingsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The story property</summary>
         public global::Repull.SDK.V1.Channels.Vrbo.Listings.Item.Story.StoryRequestBuilder Story

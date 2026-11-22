@@ -5,7 +5,10 @@ using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Channels.Vrbo.Alterations;
 using Repull.SDK.V1.Channels.Vrbo.Connection;
 using Repull.SDK.V1.Channels.Vrbo.Listings;
+using Repull.SDK.V1.Channels.Vrbo.Messaging;
+using Repull.SDK.V1.Channels.Vrbo.Offers;
 using Repull.SDK.V1.Channels.Vrbo.Reservations;
+using Repull.SDK.V1.Channels.Vrbo.Reviews;
 using Repull.SDK.V1.Channels.Vrbo.Transactions;
 using System.Collections.Generic;
 using System.IO;
@@ -34,10 +37,25 @@ namespace Repull.SDK.V1.Channels.Vrbo
         {
             get => new global::Repull.SDK.V1.Channels.Vrbo.Listings.ListingsRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The messaging property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Messaging.MessagingRequestBuilder Messaging
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Messaging.MessagingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The offers property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Offers.OffersRequestBuilder Offers
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Offers.OffersRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The reservations property</summary>
         public global::Repull.SDK.V1.Channels.Vrbo.Reservations.ReservationsRequestBuilder Reservations
         {
             get => new global::Repull.SDK.V1.Channels.Vrbo.Reservations.ReservationsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The reviews property</summary>
+        public global::Repull.SDK.V1.Channels.Vrbo.Reviews.ReviewsRequestBuilder Reviews
+        {
+            get => new global::Repull.SDK.V1.Channels.Vrbo.Reviews.ReviewsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The transactions property</summary>
         public global::Repull.SDK.V1.Channels.Vrbo.Transactions.TransactionsRequestBuilder Transactions
