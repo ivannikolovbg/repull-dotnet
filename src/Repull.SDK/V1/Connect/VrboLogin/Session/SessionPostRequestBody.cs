@@ -87,6 +87,22 @@ namespace Repull.SDK.V1.Connect.VrboLogin.Session
             set { BackingStore?.Set("password", value); }
         }
 #endif
+        /// <summary>`action: phone` — the contact phone with its country code, e.g. `+373 69 123 456`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Phone
+        {
+            get { return BackingStore?.Get<string?>("phone"); }
+            set { BackingStore?.Set("phone", value); }
+        }
+#nullable restore
+#else
+        public string Phone
+        {
+            get { return BackingStore?.Get<string>("phone"); }
+            set { BackingStore?.Set("phone", value); }
+        }
+#endif
         /// <summary>The sessionId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -135,6 +151,7 @@ namespace Repull.SDK.V1.Connect.VrboLogin.Session
                 { "code", n => { Code = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "password", n => { Password = n.GetStringValue(); } },
+                { "phone", n => { Phone = n.GetStringValue(); } },
                 { "sessionId", n => { SessionId = n.GetStringValue(); } },
             };
         }
@@ -151,6 +168,7 @@ namespace Repull.SDK.V1.Connect.VrboLogin.Session
             writer.WriteStringValue("code", Code);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("password", Password);
+            writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("sessionId", SessionId);
             writer.WriteAdditionalData(AdditionalData);
         }

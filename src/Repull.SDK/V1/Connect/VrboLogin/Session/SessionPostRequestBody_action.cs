@@ -20,5 +20,9 @@ namespace Repull.SDK.V1.Connect.VrboLogin.Session
         #pragma warning disable CS1591
         Resend,
         #pragma warning restore CS1591
+        [EnumMember(Value = "phone")]
+        #pragma warning disable CS1591
+        Phone,
+        #pragma warning restore CS1591
     }
 }

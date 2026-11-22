@@ -16,6 +16,10 @@ namespace Repull.SDK.V1.Connect.VrboLogin.Session
         #pragma warning disable CS1591
         Otp_required,
         #pragma warning restore CS1591
+        [EnumMember(Value = "phone_required")]
+        #pragma warning disable CS1591
+        Phone_required,
+        #pragma warning restore CS1591
         [EnumMember(Value = "pending")]
         #pragma warning disable CS1591
         Pending,
