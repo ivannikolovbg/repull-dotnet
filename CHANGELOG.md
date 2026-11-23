@@ -5,6 +5,12 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.57 — 2026-11-23
+
+- New: `GET /v1/connect/pricelabs/session`
+- New: `POST /v1/connect/pricelabs/key`
+- Regenerated from the live spec (automated spec refresh).
+
 ## 0.2.56 — 2026-11-22
 
 - New: `DELETE /v1/channels/vrbo/offers`
