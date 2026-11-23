@@ -82,6 +82,22 @@ namespace Repull.SDK.V1.Connect.Item
             set { BackingStore?.Set("state", value); }
         }
 #endif
+        /// <summary>PriceLabs only: open a new sub-workspace for this host and connect PriceLabs there (its id is returned as `workspaceId`). Don&apos;t send it together with `X-Workspace-Id`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_workspace? Workspace
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_workspace?>("workspace"); }
+            set { BackingStore?.Set("workspace", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_workspace Workspace
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_workspace>("workspace"); }
+            set { BackingStore?.Set("workspace", value); }
+        }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody"/> and sets the default values.
         /// </summary>
@@ -114,6 +130,7 @@ namespace Repull.SDK.V1.Connect.Item
                 { "redirectUrl", n => { RedirectUrl = n.GetStringValue(); } },
                 { "reservationHistoryMonths", n => { ReservationHistoryMonths = n.GetIntValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
+                { "workspace", n => { Workspace = n.GetObjectValue<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_workspace>(global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_workspace.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -128,6 +145,7 @@ namespace Repull.SDK.V1.Connect.Item
             writer.WriteStringValue("redirectUrl", RedirectUrl);
             writer.WriteIntValue("reservationHistoryMonths", ReservationHistoryMonths);
             writer.WriteStringValue("state", State);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Connect.Item.WithProviderPostRequestBody_workspace>("workspace", Workspace);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

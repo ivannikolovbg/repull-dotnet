@@ -18,6 +18,7 @@ using Repull.SDK.V1.Connect.Item;
 using Repull.SDK.V1.Connect.Lodgify;
 using Repull.SDK.V1.Connect.Mews;
 using Repull.SDK.V1.Connect.Ownerrez;
+using Repull.SDK.V1.Connect.Pricelabs;
 using Repull.SDK.V1.Connect.Providers;
 using Repull.SDK.V1.Connect.Rentalready;
 using Repull.SDK.V1.Connect.Resume;
@@ -104,6 +105,11 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.Ownerrez.OwnerrezRequestBuilder Ownerrez
         {
             get => new global::Repull.SDK.V1.Connect.Ownerrez.OwnerrezRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The pricelabs property</summary>
+        public global::Repull.SDK.V1.Connect.Pricelabs.PricelabsRequestBuilder Pricelabs
+        {
+            get => new global::Repull.SDK.V1.Connect.Pricelabs.PricelabsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The providers property</summary>
         public global::Repull.SDK.V1.Connect.Providers.ProvidersRequestBuilder Providers

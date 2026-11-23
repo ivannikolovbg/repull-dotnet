@@ -49,6 +49,12 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
             set { BackingStore?.Set("createdAt", value); }
         }
+        /// <summary>Apps only: when the connection was revoked.</summary>
+        public DateTimeOffset? DisconnectedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("disconnectedAt"); }
+            set { BackingStore?.Set("disconnectedAt", value); }
+        }
         /// <summary>The platform&apos;s own account id: Airbnb host id; Booking.com hotel id (`booking`); the Booking.com account id behind the Extranet login (`booking_extranet`); Vrbo&apos;s account id (`vrbo`); the PMS&apos;s own account or company id. `null` when the platform id is not known yet (a Vrbo sign-in before its account id is captured, a PMS that does not expose one); never a Repull id. Use `id` for our record.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -79,6 +85,22 @@ namespace Repull.SDK.Models
         {
             get { return BackingStore?.Get<string>("fixUrl"); }
             set { BackingStore?.Set("fixUrl", value); }
+        }
+#endif
+        /// <summary>Apps only: how the app is doing on this connection. `null` once disconnected.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.AppConnectionHealth? Health
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AppConnectionHealth?>("health"); }
+            set { BackingStore?.Set("health", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.AppConnectionHealth Health
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.AppConnectionHealth>("health"); }
+            set { BackingStore?.Set("health", value); }
         }
 #endif
         /// <summary>Host metadata for the linked account. Currently populated for Airbnb only; null for other providers.</summary>
@@ -129,6 +151,60 @@ namespace Repull.SDK.Models
             set { BackingStore?.Set("import", value); }
         }
 #endif
+        /// <summary>Apps only: the key the app uses, masked. The key itself is shown once, when created.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? KeyMasked
+        {
+            get { return BackingStore?.Get<string?>("keyMasked"); }
+            set { BackingStore?.Set("keyMasked", value); }
+        }
+#nullable restore
+#else
+        public string KeyMasked
+        {
+            get { return BackingStore?.Get<string>("keyMasked"); }
+            set { BackingStore?.Set("keyMasked", value); }
+        }
+#endif
+        /// <summary>Apps only: the name given to the key.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Label
+        {
+            get { return BackingStore?.Get<string?>("label"); }
+            set { BackingStore?.Set("label", value); }
+        }
+#nullable restore
+#else
+        public string Label
+        {
+            get { return BackingStore?.Get<string>("label"); }
+            set { BackingStore?.Set("label", value); }
+        }
+#endif
+        /// <summary>Apps only: listings the connection covers now.</summary>
+        public int? ListingCount
+        {
+            get { return BackingStore?.Get<int?>("listingCount"); }
+            set { BackingStore?.Set("listingCount", value); }
+        }
+        /// <summary>Apps only: the listings a `listings`-scoped connection covers; `null` for `workspace`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? ListingIds
+        {
+            get { return BackingStore?.Get<List<string>?>("listingIds"); }
+            set { BackingStore?.Set("listingIds", value); }
+        }
+#nullable restore
+#else
+        public List<string> ListingIds
+        {
+            get { return BackingStore?.Get<List<string>>("listingIds"); }
+            set { BackingStore?.Set("listingIds", value); }
+        }
+#endif
         /// <summary>The provider property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -145,6 +221,12 @@ namespace Repull.SDK.Models
             set { BackingStore?.Set("provider", value); }
         }
 #endif
+        /// <summary>Apps (`pricelabs`) only. `workspace`: every listing of the workspace, including listings added later. `listings`: only `listingIds`.</summary>
+        public global::Repull.SDK.Models.Connection_scope? Scope
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Connection_scope?>("scope"); }
+            set { BackingStore?.Set("scope", value); }
+        }
         /// <summary>`active` — connected and working. `pending` — still settling. `needs_permissions` — connected but the host must grant more access before it works (see `action`/`fixUrl`). An `active` connection can also carry an `action` (e.g. a Smoobu legacy API key that must be replaced with a key + secret before October 31, 2026). `error` — the last operation failed. `disconnected` — revoked or superseded.</summary>
         public global::Repull.SDK.Models.Connection_status? Status
         {
@@ -180,12 +262,19 @@ namespace Repull.SDK.Models
                 { "accessType", n => { AccessType = n.GetEnumValue<global::Repull.SDK.Models.ConnectionAccessType>(); } },
                 { "action", n => { Action = n.GetObjectValue<global::Repull.SDK.Models.ConnectionAction>(global::Repull.SDK.Models.ConnectionAction.CreateFromDiscriminatorValue); } },
                 { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
+                { "disconnectedAt", n => { DisconnectedAt = n.GetDateTimeOffsetValue(); } },
                 { "externalAccountId", n => { ExternalAccountId = n.GetStringValue(); } },
                 { "fixUrl", n => { FixUrl = n.GetStringValue(); } },
+                { "health", n => { Health = n.GetObjectValue<global::Repull.SDK.Models.AppConnectionHealth>(global::Repull.SDK.Models.AppConnectionHealth.CreateFromDiscriminatorValue); } },
                 { "host", n => { Host = n.GetObjectValue<global::Repull.SDK.Models.ConnectHost>(global::Repull.SDK.Models.ConnectHost.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "import", n => { Import = n.GetObjectValue<global::Repull.SDK.Models.AccountImport>(global::Repull.SDK.Models.AccountImport.CreateFromDiscriminatorValue); } },
+                { "keyMasked", n => { KeyMasked = n.GetStringValue(); } },
+                { "label", n => { Label = n.GetStringValue(); } },
+                { "listingCount", n => { ListingCount = n.GetIntValue(); } },
+                { "listingIds", n => { ListingIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
+                { "scope", n => { Scope = n.GetEnumValue<global::Repull.SDK.Models.Connection_scope>(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Connection_status>(); } },
             };
         }
@@ -199,12 +288,19 @@ namespace Repull.SDK.Models
             writer.WriteEnumValue<global::Repull.SDK.Models.ConnectionAccessType>("accessType", AccessType);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectionAction>("action", Action);
             writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
+            writer.WriteDateTimeOffsetValue("disconnectedAt", DisconnectedAt);
             writer.WriteStringValue("externalAccountId", ExternalAccountId);
             writer.WriteStringValue("fixUrl", FixUrl);
+            writer.WriteObjectValue<global::Repull.SDK.Models.AppConnectionHealth>("health", Health);
             writer.WriteObjectValue<global::Repull.SDK.Models.ConnectHost>("host", Host);
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Repull.SDK.Models.AccountImport>("import", Import);
+            writer.WriteStringValue("keyMasked", KeyMasked);
+            writer.WriteStringValue("label", Label);
+            writer.WriteIntValue("listingCount", ListingCount);
+            writer.WriteCollectionOfPrimitiveValues<string>("listingIds", ListingIds);
             writer.WriteStringValue("provider", Provider);
+            writer.WriteEnumValue<global::Repull.SDK.Models.Connection_scope>("scope", Scope);
             writer.WriteEnumValue<global::Repull.SDK.Models.Connection_status>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }

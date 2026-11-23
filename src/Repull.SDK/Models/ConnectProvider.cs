@@ -38,13 +38,13 @@ namespace Repull.SDK.Models
 #endif
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
-        /// <summary>Channel category — OTAs are listing marketplaces; PMSes are property management systems.</summary>
+        /// <summary>Category — OTAs are listing marketplaces; PMSes are property management systems; apps are tools that work on the workspace&apos;s data (PriceLabs).</summary>
         public global::Repull.SDK.Models.ConnectProvider_category? Category
         {
             get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectProvider_category?>("category"); }
             set { BackingStore?.Set("category", value); }
         }
-        /// <summary>How the host is connected. `oauth`: provider-side consent screen. `credentials`: hosted form collects API keys. `activation`: push-only handshake. `claim`: connectivity-provider designation in the channel&apos;s Extranet (Booking.com). `extranet`: the host signs in with their Booking.com Extranet user.</summary>
+        /// <summary>How the host is connected. `oauth`: provider-side consent screen. `credentials`: hosted form collects API keys. `activation`: push-only handshake. `claim`: connectivity-provider designation in the channel&apos;s Extranet (Booking.com). `extranet`: the host signs in with their Booking.com Extranet user. `key`: an app — the hosted page shows a key the host pastes into the app, and the session completes on the app&apos;s first call.</summary>
         public global::Repull.SDK.Models.ConnectProvider_connectPattern? ConnectPattern
         {
             get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectProvider_connectPattern?>("connectPattern"); }

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>Channel category — OTAs are listing marketplaces; PMSes are property management systems.</summary>
+    /// <summary>Category — OTAs are listing marketplaces; PMSes are property management systems; apps are tools that work on the workspace&apos;s data (PriceLabs).</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ConnectProvider_category
     {
@@ -14,6 +14,10 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "pms")]
         #pragma warning disable CS1591
         Pms,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "app")]
+        #pragma warning disable CS1591
+        App,
         #pragma warning restore CS1591
     }
 }

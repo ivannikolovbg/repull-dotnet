@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>How the host is connected. `oauth`: provider-side consent screen. `credentials`: hosted form collects API keys. `activation`: push-only handshake. `claim`: connectivity-provider designation in the channel&apos;s Extranet (Booking.com). `extranet`: the host signs in with their Booking.com Extranet user.</summary>
+    /// <summary>How the host is connected. `oauth`: provider-side consent screen. `credentials`: hosted form collects API keys. `activation`: push-only handshake. `claim`: connectivity-provider designation in the channel&apos;s Extranet (Booking.com). `extranet`: the host signs in with their Booking.com Extranet user. `key`: an app — the hosted page shows a key the host pastes into the app, and the session completes on the app&apos;s first call.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ConnectProvider_connectPattern
     {
@@ -26,6 +26,10 @@ namespace Repull.SDK.Models
         [EnumMember(Value = "extranet")]
         #pragma warning disable CS1591
         Extranet,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "key")]
+        #pragma warning disable CS1591
+        Key,
         #pragma warning restore CS1591
     }
 }
