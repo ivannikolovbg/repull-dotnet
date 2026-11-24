@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Repull.SDK.V1.Listings.Item.Publish.Airbnb;
 using Repull.SDK.V1.Listings.Item.Publish.Booking;
+using Repull.SDK.V1.Listings.Item.Publish.Tiket;
 using Repull.SDK.V1.Listings.Item.Publish.Vrbo;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,11 @@ namespace Repull.SDK.V1.Listings.Item.Publish
         public global::Repull.SDK.V1.Listings.Item.Publish.Booking.BookingRequestBuilder Booking
         {
             get => new global::Repull.SDK.V1.Listings.Item.Publish.Booking.BookingRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The tiket property</summary>
+        public global::Repull.SDK.V1.Listings.Item.Publish.Tiket.TiketRequestBuilder Tiket
+        {
+            get => new global::Repull.SDK.V1.Listings.Item.Publish.Tiket.TiketRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The vrbo property</summary>
         public global::Repull.SDK.V1.Listings.Item.Publish.Vrbo.VrboRequestBuilder Vrbo

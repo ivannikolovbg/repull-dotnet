@@ -19,6 +19,10 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         Vrbo,
         #pragma warning restore CS1591
+        [EnumMember(Value = "tiket")]
+        #pragma warning disable CS1591
+        Tiket,
+        #pragma warning restore CS1591
         [EnumMember(Value = "direct")]
         #pragma warning disable CS1591
         Direct,

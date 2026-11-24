@@ -128,7 +128,7 @@ namespace Repull.SDK.V1.Properties
             [QueryParameter("account")]
             public string Account { get; set; }
 #endif
-            /// <summary>Filter to properties with an active link on the given OTA/channel (airbnb, booking, vrbo). Omit to include every channel. Each property also returns a `channels` array listing the OTAs it is published on.</summary>
+            /// <summary>Filter to properties with an active link on the given OTA/channel (airbnb, booking, vrbo, tiket). Omit to include every channel. Each property also returns a `channels` array listing the OTAs it is published on.</summary>
             [Obsolete("This property is deprecated, use ChannelAsGetChannelQueryParameterType instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -139,7 +139,7 @@ namespace Repull.SDK.V1.Properties
             [QueryParameter("channel")]
             public string Channel { get; set; }
 #endif
-            /// <summary>Filter to properties with an active link on the given OTA/channel (airbnb, booking, vrbo). Omit to include every channel. Each property also returns a `channels` array listing the OTAs it is published on.</summary>
+            /// <summary>Filter to properties with an active link on the given OTA/channel (airbnb, booking, vrbo, tiket). Omit to include every channel. Each property also returns a `channels` array listing the OTAs it is published on.</summary>
             [QueryParameter("channel")]
             public global::Repull.SDK.V1.Properties.GetChannelQueryParameterType? ChannelAsGetChannelQueryParameterType { get; set; }
             /// <summary>Opaque cursor returned in the previous response&apos;s `pagination.nextCursor`. Omit to fetch the first page.</summary>

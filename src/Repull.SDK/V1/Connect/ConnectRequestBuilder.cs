@@ -24,6 +24,7 @@ using Repull.SDK.V1.Connect.Rentalready;
 using Repull.SDK.V1.Connect.Resume;
 using Repull.SDK.V1.Connect.Sessions;
 using Repull.SDK.V1.Connect.Smoobu;
+using Repull.SDK.V1.Connect.Tiket;
 using Repull.SDK.V1.Connect.Track;
 using Repull.SDK.V1.Connect.Vrbo;
 using Repull.SDK.V1.Connect.VrboLogin;
@@ -135,6 +136,11 @@ namespace Repull.SDK.V1.Connect
         public global::Repull.SDK.V1.Connect.Smoobu.SmoobuRequestBuilder Smoobu
         {
             get => new global::Repull.SDK.V1.Connect.Smoobu.SmoobuRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The tiket property</summary>
+        public global::Repull.SDK.V1.Connect.Tiket.TiketRequestBuilder Tiket
+        {
+            get => new global::Repull.SDK.V1.Connect.Tiket.TiketRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The track property</summary>
         public global::Repull.SDK.V1.Connect.Track.TrackRequestBuilder Track
