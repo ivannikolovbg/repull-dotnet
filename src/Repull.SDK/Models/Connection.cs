@@ -233,6 +233,22 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<global::Repull.SDK.Models.Connection_status?>("status"); }
             set { BackingStore?.Set("status", value); }
         }
+        /// <summary>Hospitable only: the webhook URL the host pastes into Hospitable (Apps → Webhooks → + Add new) and whether deliveries are arriving. Show it in your own UI so the host can set it up. Absent for other providers.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.HospitableWebhook? Webhook
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.HospitableWebhook?>("webhook"); }
+            set { BackingStore?.Set("webhook", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.HospitableWebhook Webhook
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.HospitableWebhook>("webhook"); }
+            set { BackingStore?.Set("webhook", value); }
+        }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.Connection"/> and sets the default values.
         /// </summary>
@@ -276,6 +292,7 @@ namespace Repull.SDK.Models
                 { "provider", n => { Provider = n.GetStringValue(); } },
                 { "scope", n => { Scope = n.GetEnumValue<global::Repull.SDK.Models.Connection_scope>(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.Connection_status>(); } },
+                { "webhook", n => { Webhook = n.GetObjectValue<global::Repull.SDK.Models.HospitableWebhook>(global::Repull.SDK.Models.HospitableWebhook.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -302,6 +319,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("provider", Provider);
             writer.WriteEnumValue<global::Repull.SDK.Models.Connection_scope>("scope", Scope);
             writer.WriteEnumValue<global::Repull.SDK.Models.Connection_status>("status", Status);
+            writer.WriteObjectValue<global::Repull.SDK.Models.HospitableWebhook>("webhook", Webhook);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

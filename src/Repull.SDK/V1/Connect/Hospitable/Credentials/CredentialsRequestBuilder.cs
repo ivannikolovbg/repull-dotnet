@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Connect.Hospitable.Credentials
         {
         }
         /// <summary>
-        /// Completes a credentials-pattern connection for Hospitable. Personal access token from Hospitable → Settings → API.The credentials are validated against Hospitable before anything is persisted, so an invalid pair returns `invalid_credentials` rather than creating a dead connection. On success the `pms_connections` row is written and the Connect session moves to its terminal state.No API key required when called with a `sessionId` — the session is the capability token.
+        /// Completes a credentials-pattern connection for Hospitable. Personal access token from Hospitable → Apps → API access → Access tokens.The credentials are validated against Hospitable before anything is persisted, so an invalid pair returns `invalid_credentials` rather than creating a dead connection. On success the `pms_connections` row is written and the Connect session moves to its terminal state. The response carries the connection&apos;s `webhook` URL: Hospitable has no API to subscribe webhooks, so show it to the host, who adds it in Hospitable (Apps → Webhooks → + Add new) for instant updates.No API key required when called with a `sessionId` — the session is the capability token.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsPostResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Connect.Hospitable.Credentials
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsPostResponse>(requestInfo, global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Completes a credentials-pattern connection for Hospitable. Personal access token from Hospitable → Settings → API.The credentials are validated against Hospitable before anything is persisted, so an invalid pair returns `invalid_credentials` rather than creating a dead connection. On success the `pms_connections` row is written and the Connect session moves to its terminal state.No API key required when called with a `sessionId` — the session is the capability token.
+        /// Completes a credentials-pattern connection for Hospitable. Personal access token from Hospitable → Apps → API access → Access tokens.The credentials are validated against Hospitable before anything is persisted, so an invalid pair returns `invalid_credentials` rather than creating a dead connection. On success the `pms_connections` row is written and the Connect session moves to its terminal state. The response carries the connection&apos;s `webhook` URL: Hospitable has no API to subscribe webhooks, so show it to the host, who adds it in Hospitable (Apps → Webhooks → + Add new) for instant updates.No API key required when called with a `sessionId` — the session is the capability token.
         /// </summary>
         /// <returns>A <see cref="global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -97,7 +97,7 @@ namespace Repull.SDK.V1.Connect.Hospitable.Credentials
             return await RequestAdapter.SendAsync<global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsResponse>(requestInfo, global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Completes a credentials-pattern connection for Hospitable. Personal access token from Hospitable → Settings → API.The credentials are validated against Hospitable before anything is persisted, so an invalid pair returns `invalid_credentials` rather than creating a dead connection. On success the `pms_connections` row is written and the Connect session moves to its terminal state.No API key required when called with a `sessionId` — the session is the capability token.
+        /// Completes a credentials-pattern connection for Hospitable. Personal access token from Hospitable → Apps → API access → Access tokens.The credentials are validated against Hospitable before anything is persisted, so an invalid pair returns `invalid_credentials` rather than creating a dead connection. On success the `pms_connections` row is written and the Connect session moves to its terminal state. The response carries the connection&apos;s `webhook` URL: Hospitable has no API to subscribe webhooks, so show it to the host, who adds it in Hospitable (Apps → Webhooks → + Add new) for instant updates.No API key required when called with a `sessionId` — the session is the capability token.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

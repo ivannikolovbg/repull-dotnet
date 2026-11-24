@@ -206,6 +206,22 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<global::Repull.SDK.Models.ConnectStatus_status?>("status"); }
             set { BackingStore?.Set("status", value); }
         }
+        /// <summary>Hospitable only (`GET /v1/connect/hospitable`): the webhook URL the host pastes into Hospitable (Apps → Webhooks → + Add new) and whether deliveries are arriving.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.HospitableWebhook? Webhook
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.HospitableWebhook?>("webhook"); }
+            set { BackingStore?.Set("webhook", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.HospitableWebhook Webhook
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.HospitableWebhook>("webhook"); }
+            set { BackingStore?.Set("webhook", value); }
+        }
+#endif
         /// <summary>PMS connections only: what the app may change in the PMS. Change it with `PATCH /v1/connect/{provider}/write-policy`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -262,6 +278,7 @@ namespace Repull.SDK.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "provider", n => { Provider = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.ConnectStatus_status>(); } },
+                { "webhook", n => { Webhook = n.GetObjectValue<global::Repull.SDK.Models.HospitableWebhook>(global::Repull.SDK.Models.HospitableWebhook.CreateFromDiscriminatorValue); } },
                 { "writePolicy", n => { WritePolicy = n.GetObjectValue<global::Repull.SDK.Models.PmsWritePolicy>(global::Repull.SDK.Models.PmsWritePolicy.CreateFromDiscriminatorValue); } },
             };
         }
@@ -286,6 +303,7 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("provider", Provider);
             writer.WriteEnumValue<global::Repull.SDK.Models.ConnectStatus_status>("status", Status);
+            writer.WriteObjectValue<global::Repull.SDK.Models.HospitableWebhook>("webhook", Webhook);
             writer.WriteObjectValue<global::Repull.SDK.Models.PmsWritePolicy>("writePolicy", WritePolicy);
             writer.WriteAdditionalData(AdditionalData);
         }

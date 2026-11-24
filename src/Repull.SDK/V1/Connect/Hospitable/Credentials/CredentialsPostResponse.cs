@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions.Store;
+using Repull.SDK.Models;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -43,6 +44,22 @@ namespace Repull.SDK.V1.Connect.Hospitable.Credentials
             get { return BackingStore?.Get<bool?>("ok"); }
             set { BackingStore?.Set("ok", value); }
         }
+        /// <summary>The webhook URL to show the host: in Hospitable, Apps → Webhooks → + Add new, paste it, tick Reservations, Messages, Properties and Reviews. Optional — without it the connection is polled every minute. `null` if it could not be set up.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.HospitableWebhook? Webhook
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.HospitableWebhook?>("webhook"); }
+            set { BackingStore?.Set("webhook", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.HospitableWebhook Webhook
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.HospitableWebhook>("webhook"); }
+            set { BackingStore?.Set("webhook", value); }
+        }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsPostResponse"/> and sets the default values.
         /// </summary>
@@ -71,6 +88,7 @@ namespace Repull.SDK.V1.Connect.Hospitable.Credentials
             {
                 { "accountInfo", n => { AccountInfo = n.GetObjectValue<global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsPostResponse_accountInfo>(global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsPostResponse_accountInfo.CreateFromDiscriminatorValue); } },
                 { "ok", n => { Ok = n.GetBoolValue(); } },
+                { "webhook", n => { Webhook = n.GetObjectValue<global::Repull.SDK.Models.HospitableWebhook>(global::Repull.SDK.Models.HospitableWebhook.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -82,6 +100,7 @@ namespace Repull.SDK.V1.Connect.Hospitable.Credentials
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Repull.SDK.V1.Connect.Hospitable.Credentials.CredentialsPostResponse_accountInfo>("accountInfo", AccountInfo);
             writer.WriteBoolValue("ok", Ok);
+            writer.WriteObjectValue<global::Repull.SDK.Models.HospitableWebhook>("webhook", Webhook);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
