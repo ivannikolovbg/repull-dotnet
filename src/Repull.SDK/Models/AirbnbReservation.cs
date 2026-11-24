@@ -10,7 +10,7 @@ using System;
 namespace Repull.SDK.Models
 {
     /// <summary>
-    /// An Airbnb reservation as returned by the channel API. Use `confirmationCode` to address it in Airbnb operations.
+    /// An Airbnb reservation as returned by the channel API. Use `confirmationCode` to address it in Airbnb operations, and `reservationId` to open the same stay on `GET /v1/reservations/{id}`. The fields after `payoutCurrency` are the Airbnb record as stored (Airbnb&apos;s raw status, amounts as decimal strings, stay datetimes); they are kept for existing integrations.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AirbnbReservation : IAdditionalDataHolder, IBackedModel, IParsable
@@ -53,13 +53,106 @@ namespace Repull.SDK.Models
             get { return BackingStore.Get<IDictionary<string, object>>("AdditionalData") ?? new Dictionary<string, object>(); }
             set { BackingStore.Set("AdditionalData", value); }
         }
+        /// <summary>Airbnb&apos;s own listing id — the value `?listing_id=` takes.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AirbnbListingId
+        {
+            get { return BackingStore?.Get<string?>("airbnbListingId"); }
+            set { BackingStore?.Set("airbnbListingId", value); }
+        }
+#nullable restore
+#else
+        public string AirbnbListingId
+        {
+            get { return BackingStore?.Get<string>("airbnbListingId"); }
+            set { BackingStore?.Set("airbnbListingId", value); }
+        }
+#endif
+        /// <summary>Same as `confirmationCode`.</summary>
+        [Obsolete("")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AirbnbReservationId
+        {
+            get { return BackingStore?.Get<string?>("airbnbReservationId"); }
+            set { BackingStore?.Set("airbnbReservationId", value); }
+        }
+#nullable restore
+#else
+        public string AirbnbReservationId
+        {
+            get { return BackingStore?.Get<string>("airbnbReservationId"); }
+            set { BackingStore?.Set("airbnbReservationId", value); }
+        }
+#endif
+        /// <summary>Airbnb&apos;s raw status: `accept`, `pending`, `cancelled_by_guest`, `cancelled_by_host`, `cancelled_by_admin`, `deny`, `failed_verification`, `pending_voided`, `checkpoint_voided`, `timeout`, …</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AirbnbStatus
+        {
+            get { return BackingStore?.Get<string?>("airbnbStatus"); }
+            set { BackingStore?.Set("airbnbStatus", value); }
+        }
+#nullable restore
+#else
+        public string AirbnbStatus
+        {
+            get { return BackingStore?.Get<string>("airbnbStatus"); }
+            set { BackingStore?.Set("airbnbStatus", value); }
+        }
+#endif
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
+        /// <summary>The canceledAt property</summary>
+        public DateTimeOffset? CanceledAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("canceledAt"); }
+            set { BackingStore?.Set("canceledAt", value); }
+        }
+        /// <summary>The cancellationPolicy property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CancellationPolicy
+        {
+            get { return BackingStore?.Get<string?>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
+#nullable restore
+#else
+        public string CancellationPolicy
+        {
+            get { return BackingStore?.Get<string>("cancellationPolicy"); }
+            set { BackingStore?.Set("cancellationPolicy", value); }
+        }
+#endif
+        /// <summary>The cancellationReason property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CancellationReason
+        {
+            get { return BackingStore?.Get<string?>("cancellationReason"); }
+            set { BackingStore?.Set("cancellationReason", value); }
+        }
+#nullable restore
+#else
+        public string CancellationReason
+        {
+            get { return BackingStore?.Get<string>("cancellationReason"); }
+            set { BackingStore?.Set("cancellationReason", value); }
+        }
+#endif
         /// <summary>The checkIn property</summary>
         public Date? CheckIn
         {
             get { return BackingStore?.Get<Date?>("checkIn"); }
             set { BackingStore?.Set("checkIn", value); }
+        }
+        /// <summary>Check-in date at 00:00 UTC. Prefer `checkIn`.</summary>
+        public DateTimeOffset? CheckInDatetime
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("checkInDatetime"); }
+            set { BackingStore?.Set("checkInDatetime", value); }
         }
         /// <summary>The checkOut property</summary>
         public Date? CheckOut
@@ -67,7 +160,13 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<Date?>("checkOut"); }
             set { BackingStore?.Set("checkOut", value); }
         }
-        /// <summary>The confirmationCode property</summary>
+        /// <summary>Check-out date at 00:00 UTC. Prefer `checkOut`.</summary>
+        public DateTimeOffset? CheckOutDatetime
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("checkOutDatetime"); }
+            set { BackingStore?.Set("checkOutDatetime", value); }
+        }
+        /// <summary>Airbnb confirmation code.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ConfirmationCode
@@ -83,6 +182,12 @@ namespace Repull.SDK.Models
             set { BackingStore?.Set("confirmationCode", value); }
         }
 #endif
+        /// <summary>The createdAt property</summary>
+        public DateTimeOffset? CreatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("createdAt"); }
+            set { BackingStore?.Set("createdAt", value); }
+        }
         /// <summary>The currency property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -99,12 +204,124 @@ namespace Repull.SDK.Models
             set { BackingStore?.Set("currency", value); }
         }
 #endif
+        /// <summary>Your workspace id.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CustomerId
+        {
+            get { return BackingStore?.Get<string?>("customerId"); }
+            set { BackingStore?.Set("customerId", value); }
+        }
+#nullable restore
+#else
+        public string CustomerId
+        {
+            get { return BackingStore?.Get<string>("customerId"); }
+            set { BackingStore?.Set("customerId", value); }
+        }
+#endif
+        /// <summary>`payout` as a decimal string.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExpectedPayoutAmount
+        {
+            get { return BackingStore?.Get<string?>("expectedPayoutAmount"); }
+            set { BackingStore?.Set("expectedPayoutAmount", value); }
+        }
+#nullable restore
+#else
+        public string ExpectedPayoutAmount
+        {
+            get { return BackingStore?.Get<string>("expectedPayoutAmount"); }
+            set { BackingStore?.Set("expectedPayoutAmount", value); }
+        }
+#endif
+        /// <summary>The expectedPayoutCurrency property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExpectedPayoutCurrency
+        {
+            get { return BackingStore?.Get<string?>("expectedPayoutCurrency"); }
+            set { BackingStore?.Set("expectedPayoutCurrency", value); }
+        }
+#nullable restore
+#else
+        public string ExpectedPayoutCurrency
+        {
+            get { return BackingStore?.Get<string>("expectedPayoutCurrency"); }
+            set { BackingStore?.Set("expectedPayoutCurrency", value); }
+        }
+#endif
+        /// <summary>The guest&apos;s Airbnb user id.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestAirbnbId
+        {
+            get { return BackingStore?.Get<string?>("guestAirbnbId"); }
+            set { BackingStore?.Set("guestAirbnbId", value); }
+        }
+#nullable restore
+#else
+        public string GuestAirbnbId
+        {
+            get { return BackingStore?.Get<string>("guestAirbnbId"); }
+            set { BackingStore?.Set("guestAirbnbId", value); }
+        }
+#endif
         /// <summary>The guestCount property</summary>
         public int? GuestCount
         {
             get { return BackingStore?.Get<int?>("guestCount"); }
             set { BackingStore?.Set("guestCount", value); }
         }
+        /// <summary>The guestFirstName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestFirstName
+        {
+            get { return BackingStore?.Get<string?>("guestFirstName"); }
+            set { BackingStore?.Set("guestFirstName", value); }
+        }
+#nullable restore
+#else
+        public string GuestFirstName
+        {
+            get { return BackingStore?.Get<string>("guestFirstName"); }
+            set { BackingStore?.Set("guestFirstName", value); }
+        }
+#endif
+        /// <summary>The guest on `GET /v1/guests/{id}`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestId
+        {
+            get { return BackingStore?.Get<string?>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
+#nullable restore
+#else
+        public string GuestId
+        {
+            get { return BackingStore?.Get<string>("guestId"); }
+            set { BackingStore?.Set("guestId", value); }
+        }
+#endif
+        /// <summary>The guestLastName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestLastName
+        {
+            get { return BackingStore?.Get<string?>("guestLastName"); }
+            set { BackingStore?.Set("guestLastName", value); }
+        }
+#nullable restore
+#else
+        public string GuestLastName
+        {
+            get { return BackingStore?.Get<string>("guestLastName"); }
+            set { BackingStore?.Set("guestLastName", value); }
+        }
+#endif
         /// <summary>The guestName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -121,7 +338,73 @@ namespace Repull.SDK.Models
             set { BackingStore?.Set("guestName", value); }
         }
 #endif
-        /// <summary>The listingId property</summary>
+        /// <summary>The guestProfilePicture property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? GuestProfilePicture
+        {
+            get { return BackingStore?.Get<string?>("guestProfilePicture"); }
+            set { BackingStore?.Set("guestProfilePicture", value); }
+        }
+#nullable restore
+#else
+        public string GuestProfilePicture
+        {
+            get { return BackingStore?.Get<string>("guestProfilePicture"); }
+            set { BackingStore?.Set("guestProfilePicture", value); }
+        }
+#endif
+        /// <summary>Same as `accountId`.</summary>
+        [Obsolete("")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? HostId
+        {
+            get { return BackingStore?.Get<string?>("hostId"); }
+            set { BackingStore?.Set("hostId", value); }
+        }
+#nullable restore
+#else
+        public string HostId
+        {
+            get { return BackingStore?.Get<string>("hostId"); }
+            set { BackingStore?.Set("hostId", value); }
+        }
+#endif
+        /// <summary>This Airbnb record&apos;s id in Repull.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id
+        {
+            get { return BackingStore?.Get<string?>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
+#nullable restore
+#else
+        public string Id
+        {
+            get { return BackingStore?.Get<string>("id"); }
+            set { BackingStore?.Set("id", value); }
+        }
+#endif
+        /// <summary>Internal link id of the Airbnb listing. Use `airbnbListingId` or `listingId` instead.</summary>
+        [Obsolete("")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ListingAirbnbId
+        {
+            get { return BackingStore?.Get<string?>("listingAirbnbId"); }
+            set { BackingStore?.Set("listingAirbnbId", value); }
+        }
+#nullable restore
+#else
+        public string ListingAirbnbId
+        {
+            get { return BackingStore?.Get<string>("listingAirbnbId"); }
+            set { BackingStore?.Set("listingAirbnbId", value); }
+        }
+#endif
+        /// <summary>The Repull listing id (`GET /v1/listings/{id}`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ListingId
@@ -137,17 +420,109 @@ namespace Repull.SDK.Models
             set { BackingStore?.Set("listingId", value); }
         }
 #endif
-        /// <summary>The status property</summary>
+        /// <summary>What the host is expected to receive, in `payoutCurrency`.</summary>
+        public double? Payout
+        {
+            get { return BackingStore?.Get<double?>("payout"); }
+            set { BackingStore?.Set("payout", value); }
+        }
+        /// <summary>The payoutCurrency property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PayoutCurrency
+        {
+            get { return BackingStore?.Get<string?>("payoutCurrency"); }
+            set { BackingStore?.Set("payoutCurrency", value); }
+        }
+#nullable restore
+#else
+        public string PayoutCurrency
+        {
+            get { return BackingStore?.Get<string>("payoutCurrency"); }
+            set { BackingStore?.Set("payoutCurrency", value); }
+        }
+#endif
+        /// <summary>The same stay on the unified reservations API: `GET /v1/reservations/{id}`. Null only while that record is still being created.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ReservationId
+        {
+            get { return BackingStore?.Get<string?>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
+#nullable restore
+#else
+        public string ReservationId
+        {
+            get { return BackingStore?.Get<string>("reservationId"); }
+            set { BackingStore?.Set("reservationId", value); }
+        }
+#endif
+        /// <summary>Normalised status. Airbnb&apos;s own value is in `airbnbStatus`.</summary>
         public global::Repull.SDK.Models.AirbnbReservation_status? Status
         {
             get { return BackingStore?.Get<global::Repull.SDK.Models.AirbnbReservation_status?>("status"); }
             set { BackingStore?.Set("status", value); }
         }
-        /// <summary>The totalPrice property</summary>
+        /// <summary>The timeZone property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TimeZone
+        {
+            get { return BackingStore?.Get<string?>("timeZone"); }
+            set { BackingStore?.Set("timeZone", value); }
+        }
+#nullable restore
+#else
+        public string TimeZone
+        {
+            get { return BackingStore?.Get<string>("timeZone"); }
+            set { BackingStore?.Set("timeZone", value); }
+        }
+#endif
+        /// <summary>`totalPrice` as a decimal string.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TotalPaidAmount
+        {
+            get { return BackingStore?.Get<string?>("totalPaidAmount"); }
+            set { BackingStore?.Set("totalPaidAmount", value); }
+        }
+#nullable restore
+#else
+        public string TotalPaidAmount
+        {
+            get { return BackingStore?.Get<string>("totalPaidAmount"); }
+            set { BackingStore?.Set("totalPaidAmount", value); }
+        }
+#endif
+        /// <summary>The totalPaidCurrency property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TotalPaidCurrency
+        {
+            get { return BackingStore?.Get<string?>("totalPaidCurrency"); }
+            set { BackingStore?.Set("totalPaidCurrency", value); }
+        }
+#nullable restore
+#else
+        public string TotalPaidCurrency
+        {
+            get { return BackingStore?.Get<string>("totalPaidCurrency"); }
+            set { BackingStore?.Set("totalPaidCurrency", value); }
+        }
+#endif
+        /// <summary>What the guest paid, in `currency`.</summary>
         public double? TotalPrice
         {
             get { return BackingStore?.Get<double?>("totalPrice"); }
             set { BackingStore?.Set("totalPrice", value); }
+        }
+        /// <summary>The updatedAt property</summary>
+        public DateTimeOffset? UpdatedAt
+        {
+            get { return BackingStore?.Get<DateTimeOffset?>("updatedAt"); }
+            set { BackingStore?.Set("updatedAt", value); }
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.AirbnbReservation"/> and sets the default values.
@@ -177,15 +552,42 @@ namespace Repull.SDK.Models
             {
                 { "accountId", n => { AccountId = n.GetStringValue(); } },
                 { "accountName", n => { AccountName = n.GetStringValue(); } },
+                { "airbnbListingId", n => { AirbnbListingId = n.GetStringValue(); } },
+                { "airbnbReservationId", n => { AirbnbReservationId = n.GetStringValue(); } },
+                { "airbnbStatus", n => { AirbnbStatus = n.GetStringValue(); } },
+                { "canceledAt", n => { CanceledAt = n.GetDateTimeOffsetValue(); } },
+                { "cancellationPolicy", n => { CancellationPolicy = n.GetStringValue(); } },
+                { "cancellationReason", n => { CancellationReason = n.GetStringValue(); } },
                 { "checkIn", n => { CheckIn = n.GetDateValue(); } },
+                { "checkInDatetime", n => { CheckInDatetime = n.GetDateTimeOffsetValue(); } },
                 { "checkOut", n => { CheckOut = n.GetDateValue(); } },
+                { "checkOutDatetime", n => { CheckOutDatetime = n.GetDateTimeOffsetValue(); } },
                 { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
+                { "createdAt", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
+                { "customerId", n => { CustomerId = n.GetStringValue(); } },
+                { "expectedPayoutAmount", n => { ExpectedPayoutAmount = n.GetStringValue(); } },
+                { "expectedPayoutCurrency", n => { ExpectedPayoutCurrency = n.GetStringValue(); } },
+                { "guestAirbnbId", n => { GuestAirbnbId = n.GetStringValue(); } },
                 { "guestCount", n => { GuestCount = n.GetIntValue(); } },
+                { "guestFirstName", n => { GuestFirstName = n.GetStringValue(); } },
+                { "guestId", n => { GuestId = n.GetStringValue(); } },
+                { "guestLastName", n => { GuestLastName = n.GetStringValue(); } },
                 { "guestName", n => { GuestName = n.GetStringValue(); } },
+                { "guestProfilePicture", n => { GuestProfilePicture = n.GetStringValue(); } },
+                { "hostId", n => { HostId = n.GetStringValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "listingAirbnbId", n => { ListingAirbnbId = n.GetStringValue(); } },
                 { "listingId", n => { ListingId = n.GetStringValue(); } },
+                { "payout", n => { Payout = n.GetDoubleValue(); } },
+                { "payoutCurrency", n => { PayoutCurrency = n.GetStringValue(); } },
+                { "reservationId", n => { ReservationId = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.Models.AirbnbReservation_status>(); } },
+                { "timeZone", n => { TimeZone = n.GetStringValue(); } },
+                { "totalPaidAmount", n => { TotalPaidAmount = n.GetStringValue(); } },
+                { "totalPaidCurrency", n => { TotalPaidCurrency = n.GetStringValue(); } },
                 { "totalPrice", n => { TotalPrice = n.GetDoubleValue(); } },
+                { "updatedAt", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -197,15 +599,42 @@ namespace Repull.SDK.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("accountId", AccountId);
             writer.WriteStringValue("accountName", AccountName);
+            writer.WriteStringValue("airbnbListingId", AirbnbListingId);
+            writer.WriteStringValue("airbnbReservationId", AirbnbReservationId);
+            writer.WriteStringValue("airbnbStatus", AirbnbStatus);
+            writer.WriteDateTimeOffsetValue("canceledAt", CanceledAt);
+            writer.WriteStringValue("cancellationPolicy", CancellationPolicy);
+            writer.WriteStringValue("cancellationReason", CancellationReason);
             writer.WriteDateValue("checkIn", CheckIn);
+            writer.WriteDateTimeOffsetValue("checkInDatetime", CheckInDatetime);
             writer.WriteDateValue("checkOut", CheckOut);
+            writer.WriteDateTimeOffsetValue("checkOutDatetime", CheckOutDatetime);
             writer.WriteStringValue("confirmationCode", ConfirmationCode);
+            writer.WriteDateTimeOffsetValue("createdAt", CreatedAt);
             writer.WriteStringValue("currency", Currency);
+            writer.WriteStringValue("customerId", CustomerId);
+            writer.WriteStringValue("expectedPayoutAmount", ExpectedPayoutAmount);
+            writer.WriteStringValue("expectedPayoutCurrency", ExpectedPayoutCurrency);
+            writer.WriteStringValue("guestAirbnbId", GuestAirbnbId);
             writer.WriteIntValue("guestCount", GuestCount);
+            writer.WriteStringValue("guestFirstName", GuestFirstName);
+            writer.WriteStringValue("guestId", GuestId);
+            writer.WriteStringValue("guestLastName", GuestLastName);
             writer.WriteStringValue("guestName", GuestName);
+            writer.WriteStringValue("guestProfilePicture", GuestProfilePicture);
+            writer.WriteStringValue("hostId", HostId);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("listingAirbnbId", ListingAirbnbId);
             writer.WriteStringValue("listingId", ListingId);
+            writer.WriteDoubleValue("payout", Payout);
+            writer.WriteStringValue("payoutCurrency", PayoutCurrency);
+            writer.WriteStringValue("reservationId", ReservationId);
             writer.WriteEnumValue<global::Repull.SDK.Models.AirbnbReservation_status>("status", Status);
+            writer.WriteStringValue("timeZone", TimeZone);
+            writer.WriteStringValue("totalPaidAmount", TotalPaidAmount);
+            writer.WriteStringValue("totalPaidCurrency", TotalPaidCurrency);
             writer.WriteDoubleValue("totalPrice", TotalPrice);
+            writer.WriteDateTimeOffsetValue("updatedAt", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

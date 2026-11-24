@@ -37,12 +37,44 @@ namespace Repull.SDK.V1.Connections.Item.Imports
             set { BackingStore?.Set("connection", value); }
         }
 #endif
+        /// <summary>The import&apos;s id on `GET /v1/connections/{id}/imports` and in the `account.import.*` webhooks.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ImportId
+        {
+            get { return BackingStore?.Get<string?>("importId"); }
+            set { BackingStore?.Set("importId", value); }
+        }
+#nullable restore
+#else
+        public string ImportId
+        {
+            get { return BackingStore?.Get<string>("importId"); }
+            set { BackingStore?.Set("importId", value); }
+        }
+#endif
         /// <summary>The queuedAt property</summary>
         public DateTimeOffset? QueuedAt
         {
             get { return BackingStore?.Get<DateTimeOffset?>("queuedAt"); }
             set { BackingStore?.Set("queuedAt", value); }
         }
+        /// <summary>`full` only: an earlier import of this account that no worker had picked up, closed as `failed` (`did_not_start`) and replaced by this one.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ReplacedImportId
+        {
+            get { return BackingStore?.Get<string?>("replacedImportId"); }
+            set { BackingStore?.Set("replacedImportId", value); }
+        }
+#nullable restore
+#else
+        public string ReplacedImportId
+        {
+            get { return BackingStore?.Get<string>("replacedImportId"); }
+            set { BackingStore?.Set("replacedImportId", value); }
+        }
+#endif
         /// <summary>The scope property</summary>
         public global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse_data_scope? Scope
         {
@@ -82,7 +114,9 @@ namespace Repull.SDK.V1.Connections.Item.Imports
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "connection", n => { Connection = n.GetStringValue(); } },
+                { "importId", n => { ImportId = n.GetStringValue(); } },
                 { "queuedAt", n => { QueuedAt = n.GetDateTimeOffsetValue(); } },
+                { "replacedImportId", n => { ReplacedImportId = n.GetStringValue(); } },
                 { "scope", n => { Scope = n.GetEnumValue<global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse_data_scope>(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse_data_status>(); } },
             };
@@ -95,7 +129,9 @@ namespace Repull.SDK.V1.Connections.Item.Imports
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("connection", Connection);
+            writer.WriteStringValue("importId", ImportId);
             writer.WriteDateTimeOffsetValue("queuedAt", QueuedAt);
+            writer.WriteStringValue("replacedImportId", ReplacedImportId);
             writer.WriteEnumValue<global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse_data_scope>("scope", Scope);
             writer.WriteEnumValue<global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostResponse_data_status>("status", Status);
             writer.WriteAdditionalData(AdditionalData);

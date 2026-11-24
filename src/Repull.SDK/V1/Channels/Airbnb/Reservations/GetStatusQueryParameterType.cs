@@ -36,5 +36,13 @@ namespace Repull.SDK.V1.Channels.Airbnb.Reservations
         #pragma warning disable CS1591
         Request_voided,
         #pragma warning restore CS1591
+        [EnumMember(Value = "expired")]
+        #pragma warning disable CS1591
+        Expired,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "error")]
+        #pragma warning disable CS1591
+        Error,
+        #pragma warning restore CS1591
     }
 }

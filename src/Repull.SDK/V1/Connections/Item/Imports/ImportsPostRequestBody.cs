@@ -21,7 +21,7 @@ namespace Repull.SDK.V1.Connections.Item.Imports
         }
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
-        /// <summary>What to import. `listings` = the account&apos;s listings; new listings come in with their calendar (pricing and availability); on a full-access connection, calendars of listings already in Repull are not re-read. `reservations` = the account&apos;s reservations, stays from the last month and every future one. The full import runs when an account is connected.</summary>
+        /// <summary>What to import. `full` = the first-connect import again (listings, calendars, reservations, payouts, reviews, conversations), for an account that has never fully imported. `listings` = the account&apos;s listings with their calendars. Omit to let Repull choose: `full` for an account that has never fully imported, else `listings`.</summary>
         public global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody_scope? Scope
         {
             get { return BackingStore?.Get<global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody_scope?>("scope"); }
@@ -34,7 +34,6 @@ namespace Repull.SDK.V1.Connections.Item.Imports
         {
             BackingStore = global::Repull.SDK.RepullBackingStore.Create();
             AdditionalData = new Dictionary<string, object>();
-            Scope = global::Repull.SDK.V1.Connections.Item.Imports.ImportsPostRequestBody_scope.Listings;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

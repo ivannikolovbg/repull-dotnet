@@ -93,7 +93,7 @@ namespace Repull.SDK.V1.Connect
             get { return BackingStore?.Get<global::Repull.SDK.V1.Connect.ConnectPostRequestBody_purpose?>("purpose"); }
             set { BackingStore?.Set("purpose", value); }
         }
-        /// <summary>Where to send the user after they finish (or cancel). Status query params are appended.</summary>
+        /// <summary>Where to send the user after they finish (or cancel). Every return to it carries `status` (`connected`, `cancelled`, `error` with a `code`, `expired`, `pending` when the host chose to finish later, or `requested` for a request-only PMS), `sessionId` (the id this call returns) and `state` when you sent one; a connected return adds `connectionId` and `externalAccountId` (and `hostId` for Airbnb). Your existing query string is kept.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RedirectUrl
@@ -131,7 +131,7 @@ namespace Repull.SDK.V1.Connect
             set { BackingStore?.Set("scope", value); }
         }
 #endif
-        /// <summary>Your own correlation token, e.g. your user id (at most 500 characters). Echoed in this response, on the redirect back (`&amp;state=`), in the popup message, and in the `connect.session.completed` webhook.</summary>
+        /// <summary>Your own correlation token, e.g. your user id (at most 500 characters). Echoed in this response, on every redirect back (`&amp;state=`, whatever the outcome), in the popup message, and in the `connect.session.completed` webhook. Without it, match the return by `sessionId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? State

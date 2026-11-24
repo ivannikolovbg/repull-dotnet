@@ -3,10 +3,9 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
+    /// <summary>Normalised status. Airbnb&apos;s own value is in `airbnbStatus`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public enum AirbnbReservation_status
-    #pragma warning restore CS1591
     {
         [EnumMember(Value = "accepted")]
         #pragma warning disable CS1591
@@ -24,9 +23,21 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         Denied,
         #pragma warning restore CS1591
-        [EnumMember(Value = "inquiry")]
+        [EnumMember(Value = "failed_verification")]
         #pragma warning disable CS1591
-        Inquiry,
+        Failed_verification,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "request_voided")]
+        #pragma warning disable CS1591
+        Request_voided,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "expired")]
+        #pragma warning disable CS1591
+        Expired,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "error")]
+        #pragma warning disable CS1591
+        Error,
         #pragma warning restore CS1591
     }
 }

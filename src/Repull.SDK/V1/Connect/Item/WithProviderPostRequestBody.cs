@@ -44,7 +44,7 @@ namespace Repull.SDK.V1.Connect.Item
             set { BackingStore?.Set("locale", value); }
         }
 #endif
-        /// <summary>Airbnb + Booking.com — where to redirect the user after they finish the hosted connect flow.</summary>
+        /// <summary>Airbnb, Booking.com and PriceLabs — where to send the user after they finish (or cancel) the hosted connect flow. Every return to it carries `status` (`connected`, `cancelled`, `error` with a `code`, `expired`, `pending` when the host chose to finish later, or `requested` for a request-only PMS), `sessionId` (the id this call returns) and `state` when you sent one; a connected return adds `connectionId` and `externalAccountId` (and `hostId` for Airbnb). Your existing query string is kept.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RedirectUrl
@@ -66,7 +66,7 @@ namespace Repull.SDK.V1.Connect.Item
             get { return BackingStore?.Get<int?>("reservationHistoryMonths"); }
             set { BackingStore?.Set("reservationHistoryMonths", value); }
         }
-        /// <summary>Airbnb + Booking.com — your own correlation token, e.g. your user id (at most 500 characters). Echoed on the redirect back (`&amp;state=`) and in the `connect.session.completed` webhook.</summary>
+        /// <summary>Your own correlation token, e.g. your user id (at most 500 characters), for every hosted flow (Airbnb, Booking.com, PriceLabs). Echoed in this response, on every redirect back (`&amp;state=`, whatever the outcome), in the popup message, and in the `connect.session.completed` webhook. Without it, match the return by `sessionId`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? State

@@ -12,9 +12,9 @@ namespace Repull.SDK.V1.Connections.Item.Imports
         #pragma warning disable CS1591
         Listings,
         #pragma warning restore CS1591
-        [EnumMember(Value = "reservations")]
+        [EnumMember(Value = "full")]
         #pragma warning disable CS1591
-        Reservations,
+        Full,
         #pragma warning restore CS1591
     }
 }

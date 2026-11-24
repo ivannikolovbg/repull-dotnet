@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions.Store;
+using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -92,10 +93,10 @@ namespace Repull.SDK.Models
             set { BackingStore?.Set("email", value); }
         }
 #endif
-        /// <summary>The firstStayedAt property</summary>
-        public DateTimeOffset? FirstStayedAt
+        /// <summary>Check-in date of the guest&apos;s first stay (YYYY-MM-DD).</summary>
+        public Date? FirstStayedAt
         {
-            get { return BackingStore?.Get<DateTimeOffset?>("firstStayedAt"); }
+            get { return BackingStore?.Get<Date?>("firstStayedAt"); }
             set { BackingStore?.Set("firstStayedAt", value); }
         }
         /// <summary>The id property</summary>
@@ -130,10 +131,10 @@ namespace Repull.SDK.Models
             set { BackingStore?.Set("language", value); }
         }
 #endif
-        /// <summary>The lastStayedAt property</summary>
-        public DateTimeOffset? LastStayedAt
+        /// <summary>Check-out date of the guest&apos;s most recent stay (YYYY-MM-DD).</summary>
+        public Date? LastStayedAt
         {
-            get { return BackingStore?.Get<DateTimeOffset?>("lastStayedAt"); }
+            get { return BackingStore?.Get<Date?>("lastStayedAt"); }
             set { BackingStore?.Set("lastStayedAt", value); }
         }
         /// <summary>Primary phone contact (or first non-primary if no primary set). May be an Airbnb relay number — check `phoneType`.</summary>
@@ -211,10 +212,10 @@ namespace Repull.SDK.Models
                 { "displayName", n => { DisplayName = n.GetStringValue(); } },
                 { "displayNameLong", n => { DisplayNameLong = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
-                { "firstStayedAt", n => { FirstStayedAt = n.GetDateTimeOffsetValue(); } },
+                { "firstStayedAt", n => { FirstStayedAt = n.GetDateValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "language", n => { Language = n.GetStringValue(); } },
-                { "lastStayedAt", n => { LastStayedAt = n.GetDateTimeOffsetValue(); } },
+                { "lastStayedAt", n => { LastStayedAt = n.GetDateValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "phoneType", n => { PhoneType = n.GetEnumValue<global::Repull.SDK.Models.GuestPhoneType>(); } },
                 { "totalReservations", n => { TotalReservations = n.GetIntValue(); } },
@@ -233,10 +234,10 @@ namespace Repull.SDK.Models
             writer.WriteStringValue("displayName", DisplayName);
             writer.WriteStringValue("displayNameLong", DisplayNameLong);
             writer.WriteStringValue("email", Email);
-            writer.WriteDateTimeOffsetValue("firstStayedAt", FirstStayedAt);
+            writer.WriteDateValue("firstStayedAt", FirstStayedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("language", Language);
-            writer.WriteDateTimeOffsetValue("lastStayedAt", LastStayedAt);
+            writer.WriteDateValue("lastStayedAt", LastStayedAt);
             writer.WriteStringValue("phone", Phone);
             writer.WriteEnumValue<global::Repull.SDK.Models.GuestPhoneType>("phoneType", PhoneType);
             writer.WriteIntValue("totalReservations", TotalReservations);

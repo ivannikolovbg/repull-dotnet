@@ -62,7 +62,7 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<global::Repull.SDK.Models.AccountImport_outcome?>("outcome"); }
             set { BackingStore?.Set("outcome", value); }
         }
-        /// <summary>`failed` imports only: why it stopped — e.g. `needs_permissions`, `duplicate_account`, `stalled`.</summary>
+        /// <summary>`failed` imports only: why it stopped — e.g. `needs_permissions`, `duplicate_account`, `stalled` (stopped reporting progress), `did_not_start` (queued, but no worker picked it up within 10 minutes: start it again with `POST /v1/connections/{id}/imports`), `queue_failed` (could not be queued).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Reason
