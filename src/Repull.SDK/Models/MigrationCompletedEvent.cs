@@ -88,7 +88,7 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<DateTimeOffset?>("timestamp"); }
             set { BackingStore?.Set("timestamp", value); }
         }
-        /// <summary>The migration&apos;s workspace — pass it as `X-Workspace-Id`, or to `GET /v1/migrations/{workspaceId}`.</summary>
+        /// <summary>The migration&apos;s workspace — pass it as `X-Workspace-Id`, or to `GET /v1/migrations/{workspaceId}`. Always present on migration events. A JSON number here; `POST /v1/connect` and `GET /v1/workspaces` return the same id as a string, so compare as strings.</summary>
         public int? WorkspaceId
         {
             get { return BackingStore?.Get<int?>("workspaceId"); }

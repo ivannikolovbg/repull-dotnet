@@ -87,6 +87,12 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<DateTimeOffset?>("timestamp"); }
             set { BackingStore?.Set("timestamp", value); }
         }
+        /// <summary>The sub-workspace this event happened in. Present only on events from a sub-workspace your workspace opened (`POST /v1/connect` with `workspace`, or Repull Migrate); omitted on your own workspace&apos;s events. It is the same workspace as `workspaceId` on `POST /v1/connect` and `GET /v1/workspaces` and the `X-Workspace-Id` header, but those return it as a string (`&quot;2042&quot;`) while the event carries a JSON number (`2042`): compare as strings, e.g. `String(event.workspaceId) === workspace.workspaceId`. The UUID `data.workspaceId` on `account.created` / `account.disconnected` is a different identifier.</summary>
+        public int? WorkspaceId
+        {
+            get { return BackingStore?.Get<int?>("workspaceId"); }
+            set { BackingStore?.Set("workspaceId", value); }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Repull.SDK.Models.ReviewCreatedEvent"/> and sets the default values.
         /// </summary>
@@ -119,6 +125,7 @@ namespace Repull.SDK.Models
                 { "event", n => { Event = n.GetEnumValue<global::Repull.SDK.Models.ReviewCreatedEvent_event>(); } },
                 { "eventId", n => { EventId = n.GetGuidValue(); } },
                 { "timestamp", n => { Timestamp = n.GetDateTimeOffsetValue(); } },
+                { "workspaceId", n => { WorkspaceId = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -134,6 +141,7 @@ namespace Repull.SDK.Models
             writer.WriteEnumValue<global::Repull.SDK.Models.ReviewCreatedEvent_event>("event", Event);
             writer.WriteGuidValue("eventId", EventId);
             writer.WriteDateTimeOffsetValue("timestamp", Timestamp);
+            writer.WriteIntValue("workspaceId", WorkspaceId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
