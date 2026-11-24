@@ -20,5 +20,6 @@ var connection = await client.V1.Connect["airbnb"].PostAsync(new WithProviderPos
 });
 
 Console.WriteLine();
-Console.WriteLine($"Connection created: id={connection?.Id} status={connection?.Status}");
+Console.WriteLine($"Connect session created: sessionId={connection?.SessionId} expiresAt={connection?.ExpiresAt}");
+Console.WriteLine($"Send the user to: {connection?.Url}");
 Console.WriteLine($"Provider: {connection?.Provider}");
