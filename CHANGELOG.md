@@ -5,6 +5,10 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.60 — 2026-11-24
+
+- Regenerated from the live spec (automated spec refresh).
+
 ## 0.2.59 — 2026-11-24
 
 - New: `HospitableWebhook` schema and a `webhook` field on `Connection`, `ConnectStatus` and the `POST /v1/connect/hospitable/credentials` response: the URL the host adds in Hospitable for instant updates (vanio-repull-api#612).
