@@ -12,6 +12,10 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
         #pragma warning disable CS1591
         COMPLETED,
         #pragma warning restore CS1591
+        [EnumMember(Value = "RELEASED")]
+        #pragma warning disable CS1591
+        RELEASED,
+        #pragma warning restore CS1591
         [EnumMember(Value = "UPCOMING")]
         #pragma warning disable CS1591
         UPCOMING,

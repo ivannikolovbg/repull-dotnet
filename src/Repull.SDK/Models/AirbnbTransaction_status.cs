@@ -3,13 +3,17 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>`COMPLETED`: settled in a payout. `UPCOMING`: expected, not paid out yet.</summary>
+    /// <summary>`COMPLETED`: settled in a payout. `RELEASED`: Airbnb released it (its date has passed) but has not paid it out yet — the payout is held, or accumulating toward the host&apos;s next one; it becomes `COMPLETED` under its payout when paid. `UPCOMING`: expected, not released yet.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum AirbnbTransaction_status
     {
         [EnumMember(Value = "COMPLETED")]
         #pragma warning disable CS1591
         COMPLETED,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "RELEASED")]
+        #pragma warning disable CS1591
+        RELEASED,
         #pragma warning restore CS1591
         [EnumMember(Value = "UPCOMING")]
         #pragma warning disable CS1591

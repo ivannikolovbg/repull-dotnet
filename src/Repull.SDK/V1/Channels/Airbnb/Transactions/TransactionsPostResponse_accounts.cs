@@ -65,7 +65,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             get { return BackingStore?.Get<int?>("payouts"); }
             set { BackingStore?.Set("payouts", value); }
         }
-        /// <summary>UPCOMING lines Airbnb no longer lists (paid out or cancelled) and were removed.</summary>
+        /// <summary>Unpaid (RELEASED / UPCOMING) lines Airbnb no longer lists (paid out or cancelled) and were removed.</summary>
         public int? UpcomingRemoved
         {
             get { return BackingStore?.Get<int?>("upcomingRemoved"); }

@@ -34,7 +34,7 @@ namespace Repull.SDK.V1.Channels.Airbnb.Transactions
             get { return BackingStore?.Get<Date?>("start_date"); }
             set { BackingStore?.Set("start_date", value); }
         }
-        /// <summary>Refresh only settled or only upcoming lines. Both when omitted.</summary>
+        /// <summary>Airbnb&apos;s two buckets: `COMPLETED` refreshes paid-out lines only, `UPCOMING` every unpaid line (`RELEASED` and `UPCOMING`). Both when omitted.</summary>
         public global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody_transaction_type? TransactionType
         {
             get { return BackingStore?.Get<global::Repull.SDK.V1.Channels.Airbnb.Transactions.TransactionsPostRequestBody_transaction_type?>("transaction_type"); }

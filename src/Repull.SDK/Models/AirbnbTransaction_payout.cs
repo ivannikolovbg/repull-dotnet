@@ -22,7 +22,7 @@ namespace Repull.SDK.Models
         }
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
-        /// <summary>Position within the payout, from 1. `null` on the Payout row and on UPCOMING lines.</summary>
+        /// <summary>Position within the payout, from 1. `null` on the Payout row and on unpaid lines.</summary>
         public int? LineIndex
         {
             get { return BackingStore?.Get<int?>("lineIndex"); }
@@ -40,7 +40,7 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<Date?>("payoutDate"); }
             set { BackingStore?.Set("payoutDate", value); }
         }
-        /// <summary>The payout this line was settled in (its own id on a Payout row). `null` on an UPCOMING line.</summary>
+        /// <summary>The payout this line was settled in (its own id on a Payout row). `null` on an unpaid (`RELEASED` / `UPCOMING`) line.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? PayoutId

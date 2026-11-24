@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.V1.Channels.Airbnb.Transactions
 {
-    /// <summary>Refresh only settled or only upcoming lines. Both when omitted.</summary>
+    /// <summary>Airbnb&apos;s two buckets: `COMPLETED` refreshes paid-out lines only, `UPCOMING` every unpaid line (`RELEASED` and `UPCOMING`). Both when omitted.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum TransactionsPostRequestBody_transaction_type
     {
