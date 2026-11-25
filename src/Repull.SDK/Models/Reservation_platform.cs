@@ -12,9 +12,9 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         Airbnb,
         #pragma warning restore CS1591
-        [EnumMember(Value = "booking.com")]
+        [EnumMember(Value = "booking")]
         #pragma warning disable CS1591
-        BookingCom,
+        Booking,
         #pragma warning restore CS1591
         [EnumMember(Value = "vrbo")]
         #pragma warning disable CS1591

@@ -49,7 +49,7 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<int?>("numberOfRooms"); }
             set { BackingStore?.Set("numberOfRooms", value); }
         }
-        /// <summary>tiket.com room type id.</summary>
+        /// <summary>tiket.com room type code (`roomTypeCode` on `GET /v1/channels/tiket/properties/{id}/rooms`), exactly as tiket.com sends it. Free-form text such as `DLX-KING`, so always a string — never parse it as a number.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RoomBookingId

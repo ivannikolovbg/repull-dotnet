@@ -389,7 +389,7 @@ namespace Repull.SDK.Models
             get { return BackingStore?.Get<DateTimeOffset?>("respondBy"); }
             set { BackingStore?.Set("respondBy", value); }
         }
-        /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
+        /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Booking.com reservations are `booking`. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
         public global::Repull.SDK.Models.Reservation_source? Source
         {
             get { return BackingStore?.Get<global::Repull.SDK.Models.Reservation_source?>("source"); }

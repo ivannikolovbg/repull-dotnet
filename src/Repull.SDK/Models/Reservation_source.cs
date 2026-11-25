@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Repull.SDK.Models
 {
-    /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
+    /// <summary>Booking source / channel. Lowercase. May be null on legacy rows. Booking.com reservations are `booking`. Canonical name as of 2026-05; `platform` is kept as an alias.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum Reservation_source
     {
@@ -11,9 +11,9 @@ namespace Repull.SDK.Models
         #pragma warning disable CS1591
         Airbnb,
         #pragma warning restore CS1591
-        [EnumMember(Value = "booking.com")]
+        [EnumMember(Value = "booking")]
         #pragma warning disable CS1591
-        BookingCom,
+        Booking,
         #pragma warning restore CS1591
         [EnumMember(Value = "vrbo")]
         #pragma warning disable CS1591
