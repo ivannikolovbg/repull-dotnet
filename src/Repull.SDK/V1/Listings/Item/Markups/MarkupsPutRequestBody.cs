@@ -59,7 +59,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
             set { BackingStore?.Set("hotelId", value); }
         }
 #endif
-        /// <summary>15 = +15%. `null` removes the markup.</summary>
+        /// <summary>15 = +15%; -2 = 2% below the listing&apos;s price. Above -100 and below 100. `null` removes the markup.</summary>
         public double? MarkupPercent
         {
             get { return BackingStore?.Get<double?>("markupPercent"); }

@@ -37,7 +37,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
 #endif
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
-        /// <summary>Percent added to the listing&apos;s price on Airbnb. 35 = +35%. `null` = none.</summary>
+        /// <summary>Percent added to the listing&apos;s price on Airbnb. 35 = +35%; negative = below the listing&apos;s price. `null` = none.</summary>
         public double? MarkupPercent
         {
             get { return BackingStore?.Get<double?>("markupPercent"); }
