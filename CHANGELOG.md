@@ -5,6 +5,14 @@ All notable changes to `Repull.SDK` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.61 — 2026-11-24
+
+- New: tiket.com channel — 16 operations: properties and room types, rates / availability / restrictions read and write (by property or by listing, read back after every write), reservations as tiket.com sent them, content, room mapping, full calendar sync and property setup; `POST /v1/listings/{id}/publish/tiket`; and the tiket.com Connect steps (claim a Hotel ID, list rooms, map rooms). Request builders: `client.V1.Channels.Tiket` (`Properties`, `Availability`, `Listings`, `Reservations`, `Content`, `Sync`, `Setup`), `client.V1.Listings[id].Publish.Tiket`, `client.V1.Connect.Tiket` (`Verify`, `Rooms`, `MapRooms`); models `TiketProperty`, `TiketAriDay`, `TiketAriUpdate`, `TiketAriWriteResponse`, `TiketReservation`, … .
+- `Reservation.source` / `platform` and `GET /v1/properties?channel=` accept `tiket`.
+- tiket.com children rates are paused at tiket.com's request: a rates write that includes `childPrices` returns 422 and nothing is sent.
+- Fix: the `Reservation` source / platform value for Booking.com is `booking` (was `booking.com`, which the API never returns); the enum members are now `Reservation_source.Booking` / `Reservation_platform.Booking` (were `BookingCom`).
+- Docs: tiket.com room type codes (`RoomBookingId` from the tiket.com Connect rooms list) are free-form strings, kept exactly as tiket.com sends them.
+
 ## 0.2.60 — 2026-11-24
 
 - Regenerated from the live spec (automated spec refresh).
