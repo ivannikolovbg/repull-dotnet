@@ -85,6 +85,22 @@ namespace Repull.SDK.V1.Reviews.Item.GuestReview
             set { BackingStore?.Set("rating", value); }
         }
 #endif
+        /// <summary>Airbnb: the review as stored after the submission — the same object `GET /v1/reviews/{id}` returns, with `publicReview`, `rating`, `categories` and `submittedAt` set. It can stay `hidden` until the guest reviews too.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_review? Review
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_review?>("review"); }
+            set { BackingStore?.Set("review", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_review Review
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_review>("review"); }
+            set { BackingStore?.Set("review", value); }
+        }
+#endif
         /// <summary>The submitted property</summary>
         public bool? Submitted
         {
@@ -121,6 +137,7 @@ namespace Repull.SDK.V1.Reviews.Item.GuestReview
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "platform", n => { Platform = n.GetStringValue(); } },
                 { "rating", n => { Rating = n.GetObjectValue<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating>(global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating.CreateFromDiscriminatorValue); } },
+                { "review", n => { Review = n.GetObjectValue<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_review>(global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_review.CreateFromDiscriminatorValue); } },
                 { "submitted", n => { Submitted = n.GetBoolValue(); } },
             };
         }
@@ -135,6 +152,7 @@ namespace Repull.SDK.V1.Reviews.Item.GuestReview
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("platform", Platform);
             writer.WriteObjectValue<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_rating>("rating", Rating);
+            writer.WriteObjectValue<global::Repull.SDK.V1.Reviews.Item.GuestReview.GuestReviewPostResponse_review>("review", Review);
             writer.WriteBoolValue("submitted", Submitted);
             writer.WriteAdditionalData(AdditionalData);
         }
