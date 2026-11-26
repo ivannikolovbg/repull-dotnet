@@ -13,7 +13,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
     public partial class MarkupsGetResponse_vrbo : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>The Vrbo account, as its handle `vrbo:{Vrbo account id}`. `null` until Vrbo&apos;s account id is captured for the sign-in.</summary>
+        /// <summary>The Vrbo account this listing&apos;s Vrbo unit is on, as its handle `vrbo:{Vrbo account id}`. `null` until Vrbo&apos;s account id is captured for the sign-in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AccountId
@@ -37,7 +37,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
         }
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
-        /// <summary>Listings in this workspace linked on this Vrbo account — all share this markup.</summary>
+        /// <summary>The listing this markup applies to — always just this listing, since a Vrbo markup is per listing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? ListingIds
@@ -53,7 +53,7 @@ namespace Repull.SDK.V1.Listings.Item.Markups
             set { BackingStore?.Set("listingIds", value); }
         }
 #endif
-        /// <summary>Percent added on Vrbo, for every listing linked on this account.</summary>
+        /// <summary>Percent added to this listing&apos;s price on Vrbo. 5 = +5%; negative = below the listing&apos;s price. `null` = none. Other listings on the same Vrbo account have their own.</summary>
         public double? MarkupPercent
         {
             get { return BackingStore?.Get<double?>("markupPercent"); }

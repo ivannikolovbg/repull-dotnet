@@ -13,7 +13,8 @@ namespace Repull.SDK.V1.Listings.Item.Markups
     public partial class MarkupsPutRequestBody : IAdditionalDataHolder, IBackedModel, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>Vrbo account (`vrbo:7001234`, Vrbo&apos;s own account id) — required when the listing is linked on more than one. The old sign-in ids (`vrbo:13`) still resolve until 2027-02-12.</summary>
+        /// <summary>Ignored. The Vrbo markup is per listing, so there is no account to name; accepted so existing calls keep working.</summary>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AccountId
