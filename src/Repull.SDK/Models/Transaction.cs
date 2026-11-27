@@ -28,6 +28,22 @@ namespace Repull.SDK.Models
         }
         /// <summary>Stores model information.</summary>
         public IBackingStore BackingStore { get; private set; }
+        /// <summary>Booking.com only: the booking&apos;s payout and price breakdown as Booking.com&apos;s Payments API reports it (read when Booking.com notifies a payout change). Null on other channels and for bookings not read yet. Money is in `currency`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Repull.SDK.Models.Transaction_bookingPaymentsApi? BookingPaymentsApi
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Transaction_bookingPaymentsApi?>("bookingPaymentsApi"); }
+            set { BackingStore?.Set("bookingPaymentsApi", value); }
+        }
+#nullable restore
+#else
+        public global::Repull.SDK.Models.Transaction_bookingPaymentsApi BookingPaymentsApi
+        {
+            get { return BackingStore?.Get<global::Repull.SDK.Models.Transaction_bookingPaymentsApi>("bookingPaymentsApi"); }
+            set { BackingStore?.Set("bookingPaymentsApi", value); }
+        }
+#endif
         /// <summary>The confirmationCode property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -229,6 +245,7 @@ namespace Repull.SDK.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "amount", n => { Amount = n.GetDoubleValue(); } },
+                { "bookingPaymentsApi", n => { BookingPaymentsApi = n.GetObjectValue<global::Repull.SDK.Models.Transaction_bookingPaymentsApi>(global::Repull.SDK.Models.Transaction_bookingPaymentsApi.CreateFromDiscriminatorValue); } },
                 { "confirmationCode", n => { ConfirmationCode = n.GetStringValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
                 { "date", n => { Date = n.GetStringValue(); } },
@@ -253,6 +270,7 @@ namespace Repull.SDK.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteDoubleValue("amount", Amount);
+            writer.WriteObjectValue<global::Repull.SDK.Models.Transaction_bookingPaymentsApi>("bookingPaymentsApi", BookingPaymentsApi);
             writer.WriteStringValue("confirmationCode", ConfirmationCode);
             writer.WriteStringValue("currency", Currency);
             writer.WriteStringValue("date", Date);
